@@ -1,0 +1,11 @@
+asset.require("./colorlayers/venus_texture", false)
+
+
+
+asset.meta = {
+  Name = "Capas Base de Venus",
+  Description = "Las capas base de Venus son: Textura de Venus",
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "Licencia MIT"
+}

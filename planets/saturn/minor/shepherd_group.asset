@@ -1,0 +1,736 @@
+local transforms = asset.require("../transforms")
+local kernels415 = asset.require("../kernels415")
+local coreKernels = asset.require("spice/core")
+
+
+
+local syncedKernels = asset.resource({
+  Name = "Saturn Shepherd Moons Spice Kernels",
+  Type = "HttpSynchronization",
+  Identifier = "saturn_shepherd_kernels",
+  Version = 1
+})
+
+
+local kernels = {
+  syncedKernels .. "sat415.bsp",
+  syncedKernels .. "sat393_daphnis.bsp"
+}
+
+
+local Prometheus = {
+  Identifier = "Prometheus",
+  Parent = transforms.SaturnBarycenter.Identifier,
+  Transform = {
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels415.ID.Prometheus,
+      Observer = coreKernels.ID.SaturnBarycenter
+    }
+  },
+  Renderable = {
+    Type = "RenderableGlobe",
+    Radii = { 135600, 79400, 59400 }
+  },
+  Tag = {
+    "moon_solarSystem",
+    "moon_giants",
+    "moon_saturn",
+    "moon_shepherd",
+    "moon_minor",
+    "moon_minor_saturn"
+  },
+  GUI = {
+    Name = "Prometeo",
+    Path = "/Sistema Solar/Planetas/Saturno/Lunas Menores/Lunas Pastoras/Prometeo"
+  }
+}
+
+local PrometheusTrail = {
+  Identifier = "PrometheusTrail",
+  Parent = transforms.SaturnBarycenter.Identifier,
+  Renderable = {
+    Type = "RenderableTrailOrbit",
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels415.ID.Prometheus,
+      Observer = coreKernels.ID.SaturnBarycenter
+    },
+    Color = { 0.5, 0.3, 0.3 },
+    Period = 0.612990038,
+    Resolution = 1000
+  },
+  Tag = {
+    "moonTrail_solarSystem",
+    "moonTrail_giants",
+    "moonTrail_saturn",
+    "moonTrail_shepherd",
+    "moonTrail_minor",
+    "moonTrail_minor_saturn"
+  },
+  GUI = {
+    Name = "Rastro de Prometeo",
+    Path = "/Sistema Solar/Planetas/Saturno/Lunas Menores/Lunas Pastoras/Prometeo"
+  }
+}
+
+local PrometheusLabel = {
+  Identifier = "PrometheusLabel",
+  Parent = Prometheus.Identifier,
+  Renderable = {
+    Type = "RenderableLabel",
+    Enabled = false,
+    Text = "Prometeo",
+    FontSize = 70.0,
+    Size = 5.5,
+    MinMaxSize = { 1, 20 },
+    OrientationOption = "Camera View Direction",
+    BlendMode = "Additive",
+    EnableFading = true,
+    FadeUnit = "Mm",
+    FadeDistances = { 75.0, 1000.0 },
+    FadeWidths = { 25.0, 800.0 }
+  },
+  Tag = {
+    "solarsystem_labels",
+    "moon_labels",
+    "minor_moon_labels",
+    "minor_moon_labels_saturn",
+    "minor_moon_labels_shepherd"
+  },
+  GUI = {
+    Name = "Etiqueta de Prometeo",
+    Path = "/Sistema Solar/Planetas/Saturno/Lunas Menores/Lunas Pastoras/Prometeo",
+    Description = "Etiqueta para la luna de Saturno Prometeo (Lunas Pastoras)"
+  }
+}
+
+local Pandora = {
+  Identifier = "Pandora",
+  Parent = transforms.SaturnBarycenter.Identifier,
+  Transform = {
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels415.ID.Pandora,
+      Observer = coreKernels.ID.SaturnBarycenter
+    }
+  },
+  Renderable = {
+    Type = "RenderableGlobe",
+    Radii = { 104000, 81000, 64000 }
+  },
+  Tag = {
+    "moon_solarSystem",
+    "moon_giants",
+    "moon_saturn",
+    "moon_shepherd",
+    "moon_minor",
+    "moon_minor_saturn"
+  },
+  GUI = {
+    Name = "Pandora",
+    Path = "/Sistema Solar/Planetas/Saturno/Lunas Menores/Lunas Pastoras/Pandora"
+  }
+}
+
+local PandoraTrail = {
+  Identifier = "PandoraTrail",
+  Parent = transforms.SaturnBarycenter.Identifier,
+  Renderable = {
+    Type = "RenderableTrailOrbit",
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels415.ID.Pandora,
+      Observer = coreKernels.ID.SaturnBarycenter
+    },
+    Color = { 0.5, 0.3, 0.3 },
+    Period = 0.628504213,
+    Resolution = 1000
+  },
+  Tag = {
+    "moonTrail_solarSystem",
+    "moonTrail_giants",
+    "moonTrail_saturn",
+    "moonTrail_shepherd",
+    "moonTrail_minor",
+    "moonTrail_minor_saturn"
+  },
+  GUI = {
+    Name = "Rastro de Pandora",
+    Path = "/Sistema Solar/Planetas/Saturno/Lunas Menores/Lunas Pastoras/Pandora"
+  }
+}
+
+local PandoraLabel = {
+  Identifier = "PandoraLabel",
+  Parent = Pandora.Identifier,
+  Renderable = {
+    Type = "RenderableLabel",
+    Enabled = false,
+    Text = "Pandora",
+    FontSize = 70.0,
+    Size = 5.5,
+    MinMaxSize = { 1, 20 },
+    OrientationOption = "Camera View Direction",
+    BlendMode = "Additive",
+    EnableFading = true,
+    FadeUnit = "Mm",
+    FadeDistances = { 75.0, 1000.0 },
+    FadeWidths = { 25.0, 800.0 }
+  },
+  Tag = {
+    "solarsystem_labels",
+    "moon_labels",
+    "minor_moon_labels",
+    "minor_moon_labels_saturn",
+    "minor_moon_labels_shepherd"
+  },
+  GUI = {
+    Name = "Etiqueta de Pandora",
+    Path = "/Sistema Solar/Planetas/Saturno/Lunas Menores/Lunas Pastoras/Pandora",
+    Description = "Etiqueta para la luna de Saturno Pandora (Lunas Pastoras)"
+  }
+}
+
+local Atlas = {
+  Identifier = "Atlas",
+  Parent = transforms.SaturnBarycenter.Identifier,
+  Transform = {
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels415.ID.Atlas,
+      Observer = coreKernels.ID.SaturnBarycenter
+    }
+  },
+  Renderable = {
+    Type = "RenderableGlobe",
+    Radii = { 40800, 35400, 18800 }
+  },
+  Tag = {
+    "moon_solarSystem",
+    "moon_giants",
+    "moon_saturn",
+    "moon_shepherd",
+    "moon_minor",
+    "moon_minor_saturn"
+  },
+  GUI = {
+    Name = "Atlas",
+    Path = "/Sistema Solar/Planetas/Saturno/Lunas Menores/Lunas Pastoras/Atlas"
+  }
+}
+
+local AtlasTrail = {
+  Identifier = "AtlasTrail",
+  Parent = transforms.SaturnBarycenter.Identifier,
+  Renderable = {
+    Type = "RenderableTrailOrbit",
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels415.ID.Atlas,
+      Observer = coreKernels.ID.SaturnBarycenter
+    },
+    Color = { 0.5, 0.3, 0.3 },
+    Period = 0.6016947883,
+    Resolution = 1000
+  },
+  Tag = {
+    "moonTrail_solarSystem",
+    "moonTrail_giants",
+    "moonTrail_saturn",
+    "moonTrail_shepherd",
+    "moonTrail_minor",
+    "moonTrail_minor_saturn"
+  },
+  GUI = {
+    Name = "Rastro de Atlas",
+    Path = "/Sistema Solar/Planetas/Saturno/Lunas Menores/Lunas Pastoras/Atlas"
+  }
+}
+
+local AtlasLabel = {
+  Identifier = "AtlasLabel",
+  Parent = Atlas.Identifier,
+  Renderable = {
+    Type = "RenderableLabel",
+    Enabled = false,
+    Text = "Atlas",
+    FontSize = 70.0,
+    Size = 5.5,
+    MinMaxSize = { 1, 20 },
+    OrientationOption = "Camera View Direction",
+    BlendMode = "Additive",
+    EnableFading = true,
+    FadeUnit = "Mm",
+    FadeDistances = { 75.0, 1000.0 },
+    FadeWidths = { 25.0, 800.0 }
+  },
+  Tag = {
+    "solarsystem_labels",
+    "moon_labels",
+    "minor_moon_labels",
+    "minor_moon_labels_saturn",
+    "minor_moon_labels_shepherd"
+  },
+  GUI = {
+    Name = "Etiqueta de Atlas",
+    Path = "/Sistema Solar/Planetas/Saturno/Lunas Menores/Lunas Pastoras/Atlas",
+    Description = "Etiqueta para la luna de Saturno Atlas (Lunas Pastoras)"
+  }
+}
+
+local Janus = {
+  Identifier = "Janus",
+  Parent = transforms.SaturnBarycenter.Identifier,
+  Transform = {
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels415.ID.Janus,
+      Observer = coreKernels.ID.SaturnBarycenter
+    }
+  },
+  Renderable = {
+    Type = "RenderableGlobe",
+    Radii = { 203000, 185000, 152600 }
+  },
+  Tag = {
+    "moon_solarSystem",
+    "moon_giants",
+    "moon_saturn",
+    "moon_shepherd",
+    "moon_minor",
+    "moon_minor_saturn"
+  },
+  GUI = {
+    Name = "Jano",
+    Path = "/Sistema Solar/Planetas/Saturno/Lunas Menores/Lunas Pastoras/Jano"
+  }
+}
+
+local JanusTrail = {
+  Identifier = "JanusTrail",
+  Parent = transforms.SaturnBarycenter.Identifier,
+  Renderable = {
+    Type = "RenderableTrailOrbit",
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels415.ID.Janus,
+      Observer = coreKernels.ID.SaturnBarycenter
+    },
+    Color = { 0.5, 0.3, 0.3 },
+    Period = 0.694660342,
+    Resolution = 1000
+  },
+  Tag = {
+    "moonTrail_solarSystem",
+    "moonTrail_giants",
+    "moonTrail_saturn",
+    "moonTrail_shepherd",
+    "moonTrail_minor",
+    "moonTrail_minor_saturn"
+  },
+  GUI = {
+    Name = "Rastro de Jano",
+    Path = "/Sistema Solar/Planetas/Saturno/Lunas Menores/Lunas Pastoras/Jano"
+  }
+}
+
+local JanusLabel = {
+  Identifier = "JanusLabel",
+  Parent = Janus.Identifier,
+  Renderable = {
+    Type = "RenderableLabel",
+    Enabled = false,
+    Text = "Jano",
+    FontSize = 70.0,
+    Size = 5.5,
+    MinMaxSize = { 1, 20 },
+    OrientationOption = "Camera View Direction",
+    BlendMode = "Additive",
+    EnableFading = true,
+    FadeUnit = "Mm",
+    FadeDistances = { 75.0, 1000.0 },
+    FadeWidths = { 25.0, 800.0 }
+  },
+  Tag = {
+    "solarsystem_labels",
+    "moon_labels",
+    "minor_moon_labels",
+    "minor_moon_labels_saturn",
+    "minor_moon_labels_shepherd"
+  },
+  GUI = {
+    Name = "Etiqueta de Jano",
+    Path = "/Sistema Solar/Planetas/Saturno/Lunas Menores/Lunas Pastoras/Jano",
+    Description = "Etiqueta para la luna de Saturno Jano (Lunas Pastoras)"
+  }
+}
+
+local Epimetheus = {
+  Identifier = "Epimetheus",
+  Parent = transforms.SaturnBarycenter.Identifier,
+  Transform = {
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels415.ID.Epimetheus,
+      Observer = coreKernels.ID.SaturnBarycenter
+    }
+  },
+  Renderable = {
+    Type = "RenderableGlobe",
+    Radii = { 129800, 114000, 106200 }
+  },
+  Tag = {
+    "moon_solarSystem",
+    "moon_giants",
+    "moon_saturn",
+    "moon_shepherd",
+    "moon_minor",
+    "moon_minor_saturn"
+  },
+  GUI = {
+    Name = "Epimeteo",
+    Path = "/Sistema Solar/Planetas/Saturno/Lunas Menores/Lunas Pastoras/Epimeteo"
+  }
+}
+
+local EpimetheusTrail = {
+  Identifier = "EpimetheusTrail",
+  Parent = transforms.SaturnBarycenter.Identifier,
+  Renderable = {
+    Type = "RenderableTrailOrbit",
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels415.ID.Epimetheus,
+      Observer = coreKernels.ID.SaturnBarycenter
+    },
+    Color = { 0.5, 0.3, 0.3 },
+    Period = 0.694333517,
+    Resolution = 1000
+  },
+  Tag = {
+    "moonTrail_solarSystem",
+    "moonTrail_giants",
+    "moonTrail_saturn",
+    "moonTrail_shepherd",
+    "moonTrail_minor",
+    "moonTrail_minor_saturn"
+  },
+  GUI = {
+    Name = "Rastro de Epimeteo",
+    Path = "/Sistema Solar/Planetas/Saturno/Lunas Menores/Lunas Pastoras/Epimeteo"
+  }
+}
+
+local EpimetheusLabel = {
+  Identifier = "EpimetheusLabel",
+  Parent = Epimetheus.Identifier,
+  Renderable = {
+    Type = "RenderableLabel",
+    Enabled = false,
+    Text = "Epimeteo",
+    FontSize = 70.0,
+    Size = 5.5,
+    MinMaxSize = { 1, 20 },
+    OrientationOption = "Camera View Direction",
+    BlendMode = "Additive",
+    EnableFading = true,
+    FadeUnit = "Mm",
+    FadeDistances = { 75.0, 1000.0 },
+    FadeWidths = { 25.0, 800.0 }
+  },
+  Tag = {
+    "solarsystem_labels",
+    "moon_labels",
+    "minor_moon_labels",
+    "minor_moon_labels_saturn",
+    "minor_moon_labels_shepherd"
+  },
+  GUI = {
+    Name = "Etiqueta de Epimeteo",
+    Path = "/Sistema Solar/Planetas/Saturno/Lunas Menores/Lunas Pastoras/Epimeteo",
+    Description = "Etiqueta para la luna de Saturno Epimeteo (Lunas Pastoras)"
+  }
+}
+
+local Daphnis = {
+  Identifier = "Daphnis",
+  Parent = transforms.SaturnBarycenter.Identifier,
+  Transform = {
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels415.ID.Daphnis,
+      Observer = coreKernels.ID.SaturnBarycenter
+    }
+  },
+  Renderable = {
+    Type = "RenderableGlobe",
+    Radii = { 8600, 8200, 6400 }
+  },
+  Tag = {
+    "moon_solarSystem",
+    "moon_giants",
+    "moon_saturn",
+    "moon_shepherd",
+    "moon_minor",
+    "moon_minor_saturn"
+  },
+  GUI = {
+    Name = "Dafnis",
+    Path = "/Sistema Solar/Planetas/Saturno/Lunas Menores/Lunas Pastoras/Dafnis"
+  }
+}
+
+local DaphnisTrail = {
+  Identifier = "DaphnisTrail",
+  Parent = transforms.SaturnBarycenter.Identifier,
+  Renderable = {
+    Type = "RenderableTrailOrbit",
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels415.ID.Daphnis,
+      Observer = coreKernels.ID.SaturnBarycenter
+    },
+    Color = { 0.5, 0.3, 0.3 },
+    Period = 0.5940798,
+    Resolution = 1000
+  },
+  Tag = {
+    "moonTrail_solarSystem",
+    "moonTrail_giants",
+    "moonTrail_saturn",
+    "moonTrail_shepherd",
+    "moonTrail_minor",
+    "moonTrail_minor_saturn"
+  },
+  GUI = {
+    Name = "Rastro de Dafnis",
+    Path = "/Sistema Solar/Planetas/Saturno/Lunas Menores/Lunas Pastoras/Dafnis"
+  }
+}
+
+local DaphnisLabel = {
+  Identifier = "DaphnisLabel",
+  Parent = Daphnis.Identifier,
+  Renderable = {
+    Type = "RenderableLabel",
+    Enabled = false,
+    Text = "Dafnis",
+    FontSize = 70.0,
+    Size = 5.5,
+    MinMaxSize = { 1, 20 },
+    OrientationOption = "Camera View Direction",
+    BlendMode = "Additive",
+    EnableFading = true,
+    FadeUnit = "Mm",
+    FadeDistances = { 75.0, 1000.0 },
+    FadeWidths = { 25.0, 800.0 }
+  },
+  Tag = {
+    "solarsystem_labels",
+    "moon_labels",
+    "minor_moon_labels",
+    "minor_moon_labels_saturn",
+    "minor_moon_labels_shepherd"
+  },
+  GUI = {
+    Name = "Etiqueta de Dafnis",
+    Path = "/Sistema Solar/Planetas/Saturno/Lunas Menores/Lunas Pastoras/Dafnis",
+    Description = "Etiqueta para la luna de Saturno Dafnis (Lunas Pastoras)"
+  }
+}
+
+local Pan = {
+  Identifier = "Pan",
+  Parent = transforms.SaturnBarycenter.Identifier,
+  Transform = {
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels415.ID.Pan,
+      Observer = coreKernels.ID.SaturnBarycenter
+    }
+  },
+  Renderable = {
+    Type = "RenderableGlobe",
+    Radii = { 34400, 31400, 20800 }
+  },
+  Tag = {
+    "moon_solarSystem",
+    "moon_giants",
+    "moon_saturn",
+    "moon_shepherd",
+    "moon_minor",
+    "moon_minor_saturn"
+  },
+  GUI = {
+    Name = "Pan",
+    Path = "/Sistema Solar/Planetas/Saturno/Lunas Menores/Lunas Pastoras/Pan"
+  }
+}
+
+local PanTrail = {
+  Identifier = "PanTrail",
+  Parent = transforms.SaturnBarycenter.Identifier,
+  Renderable = {
+    Type = "RenderableTrailOrbit",
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels415.ID.Pan,
+      Observer = coreKernels.ID.SaturnBarycenter
+    },
+    Color = { 0.5, 0.3, 0.3 },
+    Period = 0.575050718,
+    Resolution = 1000
+  },
+  Tag = {
+    "moonTrail_solarSystem",
+    "moonTrail_giants",
+    "moonTrail_saturn",
+    "moonTrail_shepherd",
+    "moonTrail_minor",
+    "moonTrail_minor_saturn"
+  },
+  GUI = {
+    Name = "Rastro de Pan",
+    Path = "/Sistema Solar/Planetas/Saturno/Lunas Menores/Lunas Pastoras/Pan"
+  }
+}
+
+local PanLabel = {
+  Identifier = "PanLabel",
+  Parent = Pan.Identifier,
+  Renderable = {
+    Type = "RenderableLabel",
+    Enabled = false,
+    Text = "Pan",
+    FontSize = 70.0,
+    Size = 5.5,
+    MinMaxSize = { 1, 20 },
+    OrientationOption = "Camera View Direction",
+    BlendMode = "Additive",
+    EnableFading = true,
+    FadeUnit = "Mm",
+    FadeDistances = { 75.0, 1000.0 },
+    FadeWidths = { 25.0, 800.0 }
+  },
+  Tag = {
+    "solarsystem_labels",
+    "moon_labels",
+    "minor_moon_labels",
+    "minor_moon_labels_saturn",
+    "minor_moon_labels_shepherd"
+  },
+  GUI = {
+    Name = "Etiqueta de Pan",
+    Path = "/Sistema Solar/Planetas/Saturno/Lunas Menores/Lunas Pastoras/Pan",
+    Description = "Etiqueta para la luna de Saturno Pan (Lunas Pastoras)"
+  }
+}
+
+asset.onInitialize(function()
+  openspace.spice.loadKernel(syncedKernels .. "sat393_daphnis.bsp")
+  openspace.spice.loadKernel(syncedKernels .. "sat415.bsp")
+
+
+  openspace.addSceneGraphNode(Prometheus)
+  openspace.addSceneGraphNode(PrometheusTrail)
+  openspace.addSceneGraphNode(PrometheusLabel)
+
+  openspace.addSceneGraphNode(Pandora)
+  openspace.addSceneGraphNode(PandoraTrail)
+  openspace.addSceneGraphNode(PandoraLabel)
+
+  openspace.addSceneGraphNode(Atlas)
+  openspace.addSceneGraphNode(AtlasTrail)
+  openspace.addSceneGraphNode(AtlasLabel)
+
+  openspace.addSceneGraphNode(Janus)
+  openspace.addSceneGraphNode(JanusTrail)
+  openspace.addSceneGraphNode(JanusLabel)
+
+  openspace.addSceneGraphNode(Epimetheus)
+  openspace.addSceneGraphNode(EpimetheusTrail)
+  openspace.addSceneGraphNode(EpimetheusLabel)
+
+  openspace.addSceneGraphNode(Daphnis)
+  openspace.addSceneGraphNode(DaphnisTrail)
+  openspace.addSceneGraphNode(DaphnisLabel)
+
+  openspace.addSceneGraphNode(Pan)
+  openspace.addSceneGraphNode(PanTrail)
+  openspace.addSceneGraphNode(PanLabel)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(PrometheusLabel)
+  openspace.removeSceneGraphNode(PrometheusTrail)
+  openspace.removeSceneGraphNode(Prometheus)
+
+  openspace.removeSceneGraphNode(PandoraLabel)
+  openspace.removeSceneGraphNode(PandoraTrail)
+  openspace.removeSceneGraphNode(Pandora)
+
+  openspace.removeSceneGraphNode(AtlasLabel)
+  openspace.removeSceneGraphNode(AtlasTrail)
+  openspace.removeSceneGraphNode(Atlas)
+
+  openspace.removeSceneGraphNode(JanusLabel)
+  openspace.removeSceneGraphNode(JanusTrail)
+  openspace.removeSceneGraphNode(Janus)
+
+  openspace.removeSceneGraphNode(EpimetheusLabel)
+  openspace.removeSceneGraphNode(EpimetheusTrail)
+  openspace.removeSceneGraphNode(Epimetheus)
+
+  openspace.removeSceneGraphNode(DaphnisLabel)
+  openspace.removeSceneGraphNode(DaphnisTrail)
+  openspace.removeSceneGraphNode(Daphnis)
+
+  openspace.removeSceneGraphNode(PanLabel)
+  openspace.removeSceneGraphNode(PanTrail)
+  openspace.removeSceneGraphNode(Pan)
+
+
+  openspace.spice.unloadKernel(syncedKernels .. "sat415.bsp")
+  openspace.spice.unloadKernel(syncedKernels .. "sat393_daphnis.bsp")
+end)
+
+asset.export(Prometheus)
+asset.export(PrometheusTrail)
+asset.export(PrometheusLabel)
+
+asset.export(Pandora)
+asset.export(PandoraTrail)
+asset.export(PandoraLabel)
+
+asset.export(Atlas)
+asset.export(AtlasTrail)
+asset.export(AtlasLabel)
+
+asset.export(Janus)
+asset.export(JanusTrail)
+asset.export(JanusLabel)
+
+asset.export(Epimetheus)
+asset.export(EpimetheusTrail)
+asset.export(EpimetheusLabel)
+
+asset.export(Daphnis)
+asset.export(DaphnisTrail)
+asset.export(DaphnisLabel)
+
+asset.export(Pan)
+asset.export(PanTrail)
+asset.export(PanLabel)
+
+
+
+asset.meta = {
+  Name = "Lunas Pastoras de Saturno",
+  Description = [[Procedural Globe asset que contiene las lunas pastoras de Saturno: Prometeo,
+    Pandora, Atlas, Jano, Epimeteo, Dafnis y Pan. Globos en blanco y rastros SPICE son
+    generados para cada luna]],
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "MIT license"
+}

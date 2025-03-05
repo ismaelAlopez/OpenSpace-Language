@@ -1,0 +1,18 @@
+asset.require("./base_layers")
+asset.require("./colorlayers/magellan_mosaic_utah", false)
+asset.require("./colorlayers/clouds_magellan_combo_utah", asset.enabled)
+
+asset.require("./heightlayers/magellan_utah", asset.enabled)
+
+asset.meta = {
+  Name = "Capas Predeterminadas de Venus (Utah)",
+  Description = [[Las capas predeterminadas de Venus son: Textura de Venus, Mosaico de Magallanes,
+    Combo de Nubes Magallanes, y Elevación de Magallanes (3D).
+
+
+    Capas cargadas solo desde el servidor de Utah
+  ]],
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "Licencia MIT"
+}

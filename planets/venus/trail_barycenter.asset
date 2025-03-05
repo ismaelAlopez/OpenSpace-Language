@@ -1,0 +1,43 @@
+local transforms = asset.require("scene/solarsystem/sun/transforms")
+local coreKernels = asset.require("spice/core")
+
+local VenusBarycenterTrail = {
+  Identifier = "VenusBarycenterTrail",
+  Parent = transforms.SolarSystemBarycenter.Identifier,
+  Renderable = {
+    Type = "RenderableTrailOrbit",
+    Enabled = false,
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = coreKernels.ID.VenusBarycenter,
+      Observer = coreKernels.ID.SolarSystemBarycenter
+    },
+    Color = { 1.0, 0.5, 0.2 },
+    Period = 224.695,
+    Resolution = 1000
+  },
+  Tag = { "planetTrail_solarSystem", "planetTrail_terrestrial" },
+  GUI = {
+    Name = "Rastro del Baricentro de Venus",
+    Path = "/Sistema Solar/Planetas/Venus",
+    Description = "Rastro del baricentro de Venus"
+  }
+}
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(VenusBarycenterTrail)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(VenusBarycenterTrail)
+end)
+
+asset.export(VenusBarycenterTrail)
+
+asset.meta = {
+  Name = "Rastro de Venus",
+  Description = "Rastro del Baricentro de Venus observado por el Sol",
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "MIT license"
+}

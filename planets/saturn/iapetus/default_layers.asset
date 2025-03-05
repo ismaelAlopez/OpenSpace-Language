@@ -1,0 +1,9 @@
+asset.require("./layers/colorlayers/iapetus_texture", true)
+
+asset.meta = {
+  Name = "Capas Predeterminadas de Iapetus",
+  Description = "Las capas predeterminadas de Iapetus son: Textura de Iapetus",
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "MIT license"
+}

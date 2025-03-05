@@ -1,0 +1,43 @@
+local transforms = asset.require("../transforms")
+local kernels = asset.require("../kernels")
+local coreKernels = asset.require("spice/core")
+
+local DioneTrail = {
+  Identifier = "DioneTrail",
+  Parent = transforms.SaturnBarycenter.Identifier,
+  Renderable = {
+    Type = "RenderableTrailOrbit",
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels.ID.Dione,
+      Observer = coreKernels.ID.SaturnBarycenter
+    },
+    Color = { 0.5, 0.3, 0.3 },
+    Period = 66.0 / 24.0,
+    Resolution = 1000
+  },
+  Tag = { "moonTrail_solarSystem", "moonTrail_giants", "moonTrail_saturn", "moonTrail_major_saturn" },
+  GUI = {
+    Name = "Rastro de Dione",
+    Path = "/Sistema Solar/Planetas/Saturno/Lunas Principales/Dione",
+    Description = "Rastro de la luna Dione de Saturno observado por Saturno"
+  }
+}
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(DioneTrail)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(DioneTrail)
+end)
+
+asset.export(DioneTrail)
+
+asset.meta = {
+  Name = "Rastro de Dione",
+  Description = "Rastro para Dione",
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "MIT license"
+}

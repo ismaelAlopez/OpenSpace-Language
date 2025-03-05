@@ -1,0 +1,18 @@
+asset.require("./layers/base_layers", false)
+asset.require("./layers/sweden_layers", false)
+asset.require("./layers/newyork_layers", true)
+
+
+
+asset.meta = {
+  Name = "Capas Predeterminadas de Encelado",
+  Description = [[Las capas predeterminadas de Encelado son: Textura de Encelado,
+    y Mosaico Global Cassini 100m HPF.
+
+
+    Capas cargadas desde todos los servidores disponibles
+  ]],
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "MIT license"
+}

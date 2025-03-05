@@ -1,0 +1,44 @@
+local transforms = asset.require("scene/solarsystem/sun/transforms")
+local earthTransforms = asset.require("scene/solarsystem/planets/earth/transforms")
+local coreKernels = asset.require("spice/core")
+
+local VenusTrailEarth = {
+  Identifier = "VenusTrailEarth",
+  Parent = earthTransforms.EarthBarycenter.Identifier,
+  Renderable = {
+    Type = "RenderableTrailOrbit",
+    Enabled = false,
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = coreKernels.ID.Venus,
+      Observer = coreKernels.ID.Earth
+    },
+    Color = { 1.0, 0.5, 0.2 },
+    Period = 2900.0,
+    Resolution = 1000
+  },
+  Tag = { "planetTrail_solarSystem_alt", "planetTrail_terrestrial_alt" },
+  GUI = {
+    Name = "Rastro de Venus desde la Tierra",
+    Path = "/Sistema Solar/Planetas/Venus",
+    Description = "Rastro alternativa de Venus, mostrando Venus observado desde la Tierra"
+  }
+}
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(VenusTrailEarth)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(VenusTrailEarth)
+end)
+
+asset.export(VenusTrailEarth)
+
+asset.meta = {
+  Name = "Rastro de Venus desde la Tierra",
+  Description = "Rastro de Venus observada desde la Tierra",
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "MIT license"
+}

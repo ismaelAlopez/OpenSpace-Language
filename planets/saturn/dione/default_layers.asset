@@ -1,0 +1,10 @@
+asset.require("./layers/colorlayers/dione_texture", true)
+
+
+asset.meta = {
+  Name = "Capas Predeterminadas de Dione",
+  Description = "Las capas predeterminadas de Dione son: Textura de Dione",
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "MIT license"
+}

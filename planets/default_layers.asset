@@ -1,0 +1,19 @@
+asset.require("./base_layers")
+asset.require("./utah_layers")
+asset.require("./sweden_layers")
+asset.require("./newyork_layers")
+
+
+
+asset.meta = {
+  Name = "Capas Predeterminadas del Sistema Solar",
+  Description = [[Agrega capas predeterminadas para todos los planetas. Elimina este asset e incluye
+    capas individuales para planetas para personalizar las capas de los planetas
+
+
+    Capas cargadas desde todos los servidores
+  ]],
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "MIT license"
+}

@@ -1,0 +1,11 @@
+asset.require("./layers/colorlayers/uranus_texture", true)
+
+
+
+asset.meta = {
+  Name = "Capas Predeterminadas de Urano",
+  Description = "Las capas predeterminadas de Urano son: Textura de Urano",
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "MIT license"
+}

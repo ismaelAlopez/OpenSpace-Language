@@ -1,0 +1,110 @@
+asset.require("./trail")
+local transforms = asset.require("./transforms")
+local coreKernels = asset.require("spice/core")
+
+
+
+local texturesPath = asset.resource({
+  Type = "HttpSynchronization",
+  Name = "Saturn textures",
+  Identifier = "saturn_textures",
+  Version = 4
+})
+
+
+local Saturn = {
+  Identifier = "Saturn",
+  Parent = transforms.SaturnBarycenter.Identifier,
+  Transform = {
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = coreKernels.ID.Saturn,
+      Observer = coreKernels.ID.SaturnBarycenter
+    },
+    Rotation = {
+      Type = "SpiceRotation",
+      SourceFrame = coreKernels.Frame.Saturn,
+      DestinationFrame = coreKernels.Frame.Galactic
+    }
+  },
+  Renderable = {
+    Type = "RenderableGlobe",
+    Radii = { 60268000, 60268000, 54364000 },
+    Rings = {
+      -- Single Texture Values:
+      --Texture = texturesPath .. "/saturn_rings.png",
+      --ColorFilter = 0.15,
+
+      -- MultiTexture Valeus:
+      TextureFwrd = texturesPath .. "forward_original_single.png",
+      TextureBckwrd = texturesPath .. "back_original_single.png",
+      TextureUnlit = texturesPath .. "unlit_original_single.png",
+      TextureColor = texturesPath .. "color_original_single.png",
+      TextureTransparency = texturesPath .. "trans_original_single.png",
+      ColorFilter = 0.8,
+
+      NightFactor = 1.0,
+      Size = 140445000,
+      Offset = { 74500 / 140445.100671159, 1.0 }, -- min / max extend
+    },
+    Shadows = {
+      Enabled = true,
+      DistanceFraction = 40.0
+    }
+  },
+  Tag = { "planet_solarSystem", "planet_giants" },
+  GUI = {
+    Name = "Saturno",
+    Path = "/Sistema Solar/Planetas/Saturno",
+    Description = "Globo de Saturno"
+  }
+}
+
+local SaturnLabel = {
+  Identifier = "SaturnLabel",
+  Parent = Saturn.Identifier,
+  Renderable = {
+    Type = "RenderableLabel",
+    Enabled = false,
+    Text = "Saturno",
+    FontSize = 70.0,
+    Size = 8.9,
+    MinMaxSize = { 1, 60 },
+    BlendMode = "Additive",
+    OrientationOption = "Camera View Direction",
+    EnableFading = true,
+    FadeUnit = "au",
+    FadeDistances = { 2.5, 80.0 },
+    FadeWidths = { 1.0, 100.0 }
+  },
+  Tag = { "solarsystem_labels" },
+  GUI = {
+    Name = "Etiqueta de Saturno",
+    Path = "/Sistema Solar/Planetas/Saturno",
+    Description = "Etiqueta principal del planeta Saturno"
+  }
+}
+
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(Saturn)
+  openspace.addSceneGraphNode(SaturnLabel)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(SaturnLabel)
+  openspace.removeSceneGraphNode(Saturn)
+end)
+
+asset.export(Saturn)
+asset.export(SaturnLabel)
+
+
+
+asset.meta = {
+  Name = "Saturno",
+  Description = "Globo de Saturno, y etiqueta principal del planeta",
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "MIT license"
+}

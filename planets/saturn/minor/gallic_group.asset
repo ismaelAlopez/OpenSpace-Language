@@ -1,0 +1,418 @@
+local transforms = asset.require("../transforms")
+local kernels452 = asset.require("../kernels452")
+local coreKernels = asset.require("spice/core")
+
+
+
+local Albiorix = {
+  Identifier = "Albiorix",
+  Parent = transforms.SaturnBarycenter.Identifier,
+  Transform = {
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels452.ID.Albiorix,
+      Observer = coreKernels.ID.SaturnBarycenter
+    }
+  },
+  Renderable = {
+    Type = "RenderableGlobe",
+    Radii = { 32000, 32000, 32000 }
+  },
+  Tag = {
+    "moon_solarSystem",
+    "moon_giants",
+    "moon_saturn",
+    "moon_gallic",
+    "moon_minor",
+    "moon_minor_saturn"
+  },
+  GUI = {
+    Name = "Albiorix",
+    Path = "/Sistema Solar/Planetas/Saturno/Lunas Menores/Grupo Gálico/Albiorix"
+  }
+}
+
+local AlbiorixTrail = {
+  Identifier = "AlbiorixTrail",
+  Parent = transforms.SaturnBarycenter.Identifier,
+  Renderable = {
+    Type = "RenderableTrailOrbit",
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels452.ID.Albiorix,
+      Observer = coreKernels.ID.SaturnBarycenter
+    },
+    Color = { 0.5, 0.3, 0.3 },
+    Period = 774.58,
+    Resolution = 1000
+  },
+  Tag = {
+    "moonTrail_solarSystem",
+    "moonTrail_giants",
+    "moonTrail_saturn",
+    "moonTrail_gallic",
+    "moonTrail_minor",
+    "moonTrail_minor_saturn"
+  },
+  GUI = {
+    Name = "Rastro de Albiorix",
+    Path = "/Sistema Solar/Planetas/Saturno/Lunas Menores/Grupo Gálico/Albiorix"
+  }
+}
+
+local AlbiorixLabel = {
+  Identifier = "AlbiorixLabel",
+  Parent = Albiorix.Identifier,
+  Renderable = {
+    Type = "RenderableLabel",
+    Enabled = false,
+    Text = "Albiorix",
+    FontSize = 70.0,
+    Size = 7.1,
+    MinMaxSize = { 1, 25 },
+    OrientationOption = "Camera View Direction",
+    BlendMode = "Additive",
+    EnableFading = true,
+    FadeUnit = "Gm",
+    FadeDistances = { 1.25, 90.0 },
+    FadeWidths = { 0.25, 90.0 }
+  },
+  Tag = {
+    "solarsystem_labels",
+    "moon_labels",
+    "minor_moon_labels",
+    "minor_moon_labels_saturn",
+    "minor_moon_labels_gallic"
+  },
+  GUI = {
+    Name = "Etiqueta de Albiorix",
+    Path = "/Sistema Solar/Planetas/Saturno/Lunas Menores/Grupo Gálico/Albiorix",
+    Description = "Etiqueta para la luna de Saturno Albiorix (grupo Gálico)"
+  }
+}
+
+local Bebhionn = {
+  Identifier = "Bebhionn",
+  Parent = transforms.SaturnBarycenter.Identifier,
+  Transform = {
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels452.ID.Bebhionn,
+      Observer = coreKernels.ID.SaturnBarycenter
+    }
+  },
+  Renderable = {
+    Type = "RenderableGlobe",
+    Radii = { 6000, 6000, 6000 }
+  },
+  Tag = {
+    "moon_solarSystem",
+    "moon_giants",
+    "moon_saturn",
+    "moon_gallic",
+    "moon_minor",
+    "moon_minor_saturn"
+  },
+  GUI = {
+    Name = "Bebhionn",
+    Path = "/Sistema Solar/Planetas/Saturno/Lunas Menores/Grupo Gálico/Bebhionn"
+  }
+}
+
+local BebhionnTrail = {
+  Identifier = "BebhionnTrail",
+  Parent = transforms.SaturnBarycenter.Identifier,
+  Renderable = {
+    Type = "RenderableTrailOrbit",
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels452.ID.Bebhionn,
+      Observer = coreKernels.ID.SaturnBarycenter
+    },
+    Color = { 0.5, 0.3, 0.3 },
+    Period = 838.77,
+    Resolution = 1000
+  },
+  Tag = {
+    "moonTrail_solarSystem",
+    "moonTrail_giants",
+    "moonTrail_saturn",
+    "moonTrail_gallic",
+    "moonTrail_minor",
+    "moonTrail_minor_saturn"
+  },
+  GUI = {
+    Name = "Rastro de Bebhionn",
+    Path = "/Sistema Solar/Planetas/Saturno/Lunas Menores/Grupo Gálico/Bebhionn"
+  }
+}
+
+local BebhionnLabel = {
+  Identifier = "BebhionnLabel",
+  Parent = Bebhionn.Identifier,
+  Renderable = {
+    Type = "RenderableLabel",
+    Enabled = false,
+    Text = "Bebhionn",
+    FontSize = 70.0,
+    Size = 7.1,
+    MinMaxSize = { 1, 25 },
+    OrientationOption = "Camera View Direction",
+    BlendMode = "Additive",
+    EnableFading = true,
+    FadeUnit = "Gm",
+    FadeDistances = { 1.25, 90.0 },
+    FadeWidths = { 0.25, 90.0 }
+  },
+  Tag = {
+    "solarsystem_labels",
+    "moon_labels",
+    "minor_moon_labels",
+    "minor_moon_labels_saturn",
+    "minor_moon_labels_gallic"
+  },
+  GUI = {
+    Name = "Etiqueta de Bebhionn",
+    Path = "/Sistema Solar/Planetas/Saturno/Lunas Menores/Grupo Gálico/Bebhionn",
+    Description = "Etiqueta para la luna de Saturno Bebhionn (grupo Gálico)"
+  }
+}
+
+local Erriapus = {
+  Identifier = "Erriapus",
+  Parent = transforms.SaturnBarycenter.Identifier,
+  Transform = {
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels452.ID.Erriapus,
+      Observer = coreKernels.ID.SaturnBarycenter
+    }
+  },
+  Renderable = {
+    Type = "RenderableGlobe",
+    Radii = { 10000, 10000, 10000 }
+  },
+  Tag = {
+    "moon_solarSystem",
+    "moon_giants",
+    "moon_saturn",
+    "moon_gallic",
+    "moon_minor",
+    "moon_minor_saturn"
+  },
+  GUI = {
+    Name = "Erriapus",
+    Path = "/Sistema Solar/Planetas/Saturno/Lunas Menores/Grupo Gálico/Erriapus"
+  }
+}
+
+local ErriapusTrail = {
+  Identifier = "ErriapusTrail",
+  Parent = transforms.SaturnBarycenter.Identifier,
+  Renderable = {
+    Type = "RenderableTrailOrbit",
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels452.ID.Erriapus,
+      Observer = coreKernels.ID.SaturnBarycenter
+    },
+    Color = { 0.5, 0.3, 0.3 },
+    Period = 844.89,
+    Resolution = 1000
+  },
+  Tag = {
+    "moonTrail_solarSystem",
+    "moonTrail_giants",
+    "moonTrail_saturn",
+    "moonTrail_gallic",
+    "moonTrail_minor",
+    "moonTrail_minor_saturn"
+  },
+  GUI = {
+    Name = "Rastro de Erriapus",
+    Path = "/Sistema Solar/Planetas/Saturno/Lunas Menores/Grupo Gálico/Erriapus"
+  }
+}
+
+local ErriapusLabel = {
+  Identifier = "ErriapusLabel",
+  Parent = Erriapus.Identifier,
+  Renderable = {
+    Type = "RenderableLabel",
+    Enabled = false,
+    Text = "Erriapus",
+    FontSize = 70.0,
+    Size = 7.1,
+    MinMaxSize = { 1, 25 },
+    OrientationOption = "Camera View Direction",
+    BlendMode = "Additive",
+    EnableFading = true,
+    FadeUnit = "Gm",
+    FadeDistances = { 1.25, 90.0 },
+    FadeWidths = { 0.25, 90.0 }
+  },
+  Tag = {
+    "solarsystem_labels",
+    "moon_labels",
+    "minor_moon_labels",
+    "minor_moon_labels_saturn",
+    "minor_moon_labels_gallic"
+  },
+  GUI = {
+    Name = "Etiqueta de Erriapus",
+    Path = "/Sistema Solar/Planetas/Saturno/Lunas Menores/Grupo Gálico/Erriapus",
+    Description = "Etiqueta para la luna de Saturno Erriapus (grupo Gálico)"
+  }
+}
+
+local Tarvos = {
+  Identifier = "Tarvos",
+  Parent = transforms.SaturnBarycenter.Identifier,
+  Transform = {
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels452.ID.Tarvos,
+      Observer = coreKernels.ID.SaturnBarycenter
+    }
+  },
+  Renderable = {
+    Type = "RenderableGlobe",
+    Radii = { 15000, 15000, 15000 }
+  },
+  Tag = {
+    "moon_solarSystem",
+    "moon_giants",
+    "moon_saturn",
+    "moon_gallic",
+    "moon_minor",
+    "moon_minor_saturn"
+  },
+  GUI = {
+    Name = "Tarvos",
+    Path = "/Sistema Solar/Planetas/Saturno/Lunas Menores/Grupo Gálico/Tarvos"
+  }
+}
+
+local TarvosTrail = {
+  Identifier = "TarvosTrail",
+  Parent = transforms.SaturnBarycenter.Identifier,
+  Renderable = {
+    Type = "RenderableTrailOrbit",
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels452.ID.Tarvos,
+      Observer = coreKernels.ID.SaturnBarycenter
+    },
+    Color = { 0.5, 0.3, 0.3 },
+    Period = 944.23,
+    Resolution = 1000
+  },
+  Tag = {
+    "moonTrail_solarSystem",
+    "moonTrail_giants",
+    "moonTrail_saturn",
+    "moonTrail_gallic",
+    "moonTrail_minor",
+    "moonTrail_minor_saturn"
+  },
+  GUI = {
+    Name = "Rastro de Tarvos",
+    Path = "/Sistema Solar/Planetas/Saturno/Lunas Menores/Grupo Gálico/Tarvos"
+  }
+}
+
+local TarvosLabel = {
+  Identifier = "TarvosLabel",
+  Parent = Tarvos.Identifier,
+  Renderable = {
+    Type = "RenderableLabel",
+    Enabled = false,
+    Text = "Tarvos",
+    FontSize = 70.0,
+    Size = 7.1,
+    MinMaxSize = { 1, 25 },
+    OrientationOption = "Camera View Direction",
+    BlendMode = "Additive",
+    EnableFading = true,
+    FadeUnit = "Gm",
+    FadeDistances = { 1.25, 90.0 },
+    FadeWidths = { 0.25, 90.0 }
+  },
+  Tag = {
+    "solarsystem_labels",
+    "moon_labels",
+    "minor_moon_labels",
+    "minor_moon_labels_saturn",
+    "minor_moon_labels_gallic"
+  },
+  GUI = {
+    Name = "Etiqueta de Tarvos",
+    Path = "/Sistema Solar/Planetas/Saturno/Lunas Menores/Grupo Gálico/Tarvos",
+    Description = "Etiqueta para la luna de Saturno Tarvos (grupo Gálico)"
+  }
+}
+
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(Albiorix)
+  openspace.addSceneGraphNode(AlbiorixTrail)
+  openspace.addSceneGraphNode(AlbiorixLabel)
+
+  openspace.addSceneGraphNode(Bebhionn)
+  openspace.addSceneGraphNode(BebhionnTrail)
+  openspace.addSceneGraphNode(BebhionnLabel)
+
+  openspace.addSceneGraphNode(Erriapus)
+  openspace.addSceneGraphNode(ErriapusTrail)
+  openspace.addSceneGraphNode(ErriapusLabel)
+
+  openspace.addSceneGraphNode(Tarvos)
+  openspace.addSceneGraphNode(TarvosTrail)
+  openspace.addSceneGraphNode(TarvosLabel)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(TarvosLabel)
+  openspace.removeSceneGraphNode(TarvosTrail)
+  openspace.removeSceneGraphNode(Tarvos)
+
+  openspace.removeSceneGraphNode(ErriapusLabel)
+  openspace.removeSceneGraphNode(ErriapusTrail)
+  openspace.removeSceneGraphNode(Erriapus)
+
+  openspace.removeSceneGraphNode(BebhionnLabel)
+  openspace.removeSceneGraphNode(BebhionnTrail)
+  openspace.removeSceneGraphNode(Bebhionn)
+
+  openspace.removeSceneGraphNode(AlbiorixLabel)
+  openspace.removeSceneGraphNode(AlbiorixTrail)
+  openspace.removeSceneGraphNode(Albiorix)
+end)
+
+asset.export(Albiorix)
+asset.export(AlbiorixTrail)
+asset.export(AlbiorixLabel)
+
+asset.export(Bebhionn)
+asset.export(BebhionnTrail)
+asset.export(BebhionnLabel)
+
+asset.export(Erriapus)
+asset.export(ErriapusTrail)
+asset.export(ErriapusLabel)
+
+asset.export(Tarvos)
+asset.export(TarvosTrail)
+asset.export(TarvosLabel)
+
+
+
+asset.meta = {
+  Name = "Lunas del Grupo Gálico de Saturno",
+  Description = [[Procedural Globe asset que contiene las lunas del Grupo Gálico de Saturno: Albiorix,
+    Bebhionn, Erriapus y Tarvos. Se generan globos en blanco y Rastros SPICE para cada
+    luna]],
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "MIT license"
+}

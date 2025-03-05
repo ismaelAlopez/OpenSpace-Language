@@ -1,0 +1,42 @@
+local transforms = asset.require("scene/solarsystem/sun/transforms")
+local coreKernels = asset.require("spice/core")
+
+local VenusTrail = {
+  Identifier = "VenusTrail",
+  Parent = transforms.SolarSystemBarycenter.Identifier,
+  Renderable = {
+    Type = "RenderableTrailOrbit",
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = coreKernels.ID.Venus,
+      Observer = coreKernels.ID.SolarSystemBarycenter
+    },
+    Color = { 1.0, 0.5, 0.2 },
+    Period = 224.695,
+    Resolution = 1000
+  },
+  Tag = { "planetTrail_solarSystem", "planetTrail_terrestrial" },
+  GUI = {
+    Name = "Rastro de Venus",
+    Path = "/Sistema Solar/Planetas/Venus",
+    Description = "Rastro principal de Venus"
+  }
+}
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(VenusTrail)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(VenusTrail)
+end)
+
+asset.export(VenusTrail)
+
+asset.meta = {
+  Name = "Rastro de Venus",
+  Description = "Rastro de Venus observado por el Sol",
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "Licencia MIT"
+}

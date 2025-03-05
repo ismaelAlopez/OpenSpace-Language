@@ -1,0 +1,42 @@
+local globe = asset.require("../../titan")
+
+local texturesPath = asset.resource({
+  Type = "HttpSynchronization",
+  Name = "Texturas de Titán",
+  Identifier = "titan_textures",
+  Version = 2
+})
+
+local Layer = {
+  Identifier = "Cassini_ISS_Global_Mosaic_4km_Local",
+  Name = "Mosaico Global Cassini ISS 4km",
+  Enabled = asset.enabled,
+  ZIndex = 10,
+  FilePath = texturesPath .. "Titan_ISS_P19658_Mosaic_Global_4km_os.tif",
+  Description = [[Este mapa digital global de la luna Titán de Saturno fue creado usando
+    imágenes tomadas por el Sistema de Ciencia de Imágenes (ISS) de la nave espacial Cassini. El mapa
+    fue producido en junio de 2015 utilizando datos recopilados durante el sobrevuelo de Cassini el 7 de abril
+    de 2014, conocido como "T100". El radio medio de Titán utilizado para la proyección de este mapa es
+    1,600 millas (2,575 kilómetros). La resolución de píxeles es de 4005 metros por píxel (m).
+    Se asume que Titán es esférico hasta que se cree una red de control, un modelo de la forma de la luna
+    basado en múltiples imágenes unidas en puntos definidos en la superficie, en algún momento en el futuro. (Descripción de URL)]]
+}
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Titan.Identifier, "ColorLayers", Layer)
+end)
+
+asset.onDeinitialize(function()
+  openspace.globebrowsing.deleteLayer(globe.Titan.Identifier, "ColorLayers", Layer)
+end)
+
+asset.export("layer", Layer)
+
+asset.meta = {
+  Name = "Mosaico Global Cassini ISS",
+  Description = "Capa de imagen global de Cassini para Titán",
+  Author = "USGS",
+  URL = "https://astrogeology.usgs.gov/search/map/Titan/Cassini/Global-Mosaic/" ..
+    "Titan_ISS_P19658_Mosaic_Global_4km",
+  License = "NASA/PDS"
+}

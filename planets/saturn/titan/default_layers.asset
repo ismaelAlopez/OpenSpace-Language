@@ -1,0 +1,11 @@
+asset.require("./layers/colorlayers/cassini_iss_global_mosaic_4km_local", true)
+
+
+
+asset.meta = {
+  Name = "Capas Predeterminadas de Titán",
+  Description = "Las capas predeterminadas de Titán son: Mosaico Global Cassini ISS",
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "MIT license"
+}

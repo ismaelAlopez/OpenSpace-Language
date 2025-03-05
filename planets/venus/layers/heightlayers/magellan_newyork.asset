@@ -1,0 +1,44 @@
+local globe = asset.require("../../venus")
+
+local Layer = {
+  Identifier = "MagellanElevation_NewYork",
+  Name = "Elevación Magellan [Nueva York]",
+  Enabled = asset.enabled,
+  ZIndex = 10,
+  FilePath = asset.resource("magellan_newyork.wms"),
+  TilePixelSize = 129,
+  Settings = {
+    Gamma = 1.72,
+    Multiplier = 1.1
+  },
+  Description = [[Capa de elevación para Venus. Representa la versión 2
+    (lanzamiento de 1997) del Registro de Datos Topográficos Globales (GTDR-SINUS.3;2).
+    El rango a la superficie se deriva ajustando los ecos del altímetro de la antena
+    de altimetría de haz de abanico en función del tiempo a los modelos de dispersión
+    de radar de Hagfors. Los rangos se restan de la coordenada radial de la nave
+    espacial (derivada del seguimiento Doppler), obteniendo mediciones del radio
+    planetario. Los datos se filtran para eliminar errores de baja frecuencia en los
+    elementos en el plano de cada órbita de la nave espacial, y luego se re-muestrean
+    originalmente en proyecciones sinusoidales, Mercator y estereográficas polares
+    norte y sur a una resolución de 5 kilómetros por píxel (4641 metros por píxel [m])]]
+}
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Venus.Identifier, "HeightLayers", Layer)
+end)
+
+asset.onDeinitialize(function()
+  openspace.globebrowsing.deleteLayer(globe.Venus.Identifier, "HeightLayers", Layer)
+end)
+
+asset.export("layer", Layer)
+
+asset.meta = {
+  Name = "DEM Magellan de Venus",
+  Description = [[Capa de mapa para Venus que contiene el DEM Magellan de Venus del USGS.
+    Alojado en los servidores de OpenSpace en Nueva York]],
+  Author = "USGS",
+  URL = "https://astrogeology.usgs.gov/search/map/Venus/Magellan/RadarProperties" ..
+    "/Venus_Magellan_Topography_Global_4641m_v02",
+  License = "NASA/PDS"
+}

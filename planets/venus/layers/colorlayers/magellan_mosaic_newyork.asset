@@ -1,0 +1,49 @@
+local globe = asset.require("../../venus")
+
+local Layer = {
+  Identifier = "Magellan_Mosaic_NewYork",
+  Name = "Mosaico Magellan [Nueva York]",
+  Enabled = asset.enabled,
+  ZIndex = 10,
+  FilePath = asset.resource("magellan_mosaic_newyork.vrt"),
+  BlendMode = "Color",
+  Settings = { Gamma = 2.0 },
+  Description = [[Capa de color para Venus. Este mosaico fue creado a partir de los
+    F-BIDRs de Magellan (Registros de Datos de Imagen Básica de resolución completa),
+    las imágenes de radar de mayor resolución de la superficie de Venus (~75 m/píxel).
+    Debido a que Venus está envuelta por una atmósfera densa y opaca, no se pueden
+    usar cámaras ópticas convencionales para capturar imágenes de su superficie. En
+    su lugar, el radar de imágenes de Magellan utiliza ráfagas de energía de microondas
+    de manera similar a un flash de cámara para iluminar la superficie del planeta.
+    Los pulsos de radar no se envían directamente hacia abajo, sino en un ángulo
+    ligeramente hacia el lado de la nave espacial; por lo tanto, el radar se llama
+    "radar de visión lateral". Además, se utilizan técnicas de procesamiento
+    especiales en los datos de radar para obtener una resolución más alta, como si
+    el radar tuviera una antena más grande, o "apertura"; la técnica se llama a menudo
+    "radar de apertura sintética" o SAR. El SAR de Magellan es un sistema de radar
+    de visión lateral. Los pulsos de radar no se envían directamente hacia abajo,
+    sino en un ángulo ligeramente hacia el lado de la nave espacial. En el caso de
+    los datos SAR de Magellan de visión izquierda, el sistema de radar enviaba señales
+    a la izquierda de la nave espacial. El SAR operó en este modo de visión izquierda
+    durante los ciclos 1 y 3 de la misión. (Descripción de USGS)]]
+}
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Venus.Identifier, "ColorLayers", Layer)
+end)
+
+asset.onDeinitialize(function()
+  openspace.globebrowsing.deleteLayer(globe.Venus.Identifier, "ColorLayers", Layer)
+end)
+
+asset.export("layer", Layer)
+
+asset.meta = {
+  Name = "Mosaico Magellan de Venus",
+  Description = [[Capa de mapa para Venus que contiene el Mosaico Magellan de Venus
+    del USGS. Alojado en los servidores de OpenSpace en Nueva York]],
+  Author = "USGS",
+  URL = "https://astrogeology.usgs.gov/search/map/Venus/Magellan/" ..
+    "Venus_Magellan_LeftLook_mosaic_global_75m",
+  License = "NASA/PDS"
+}

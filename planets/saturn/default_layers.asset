@@ -1,0 +1,11 @@
+asset.require("./layers/colorlayers/saturn_texture", true)
+
+
+
+asset.meta = {
+  Name = "Capas Predeterminadas de Saturno",
+  Description = "Las capas predeterminadas de Saturno son: Textura de Saturno",
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "MIT license"
+}

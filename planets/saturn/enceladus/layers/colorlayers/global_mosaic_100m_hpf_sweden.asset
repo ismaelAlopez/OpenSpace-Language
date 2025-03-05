@@ -1,0 +1,35 @@
+local globe = asset.require("../../enceladus")
+
+local Layer = {
+  Identifier = "Global_Mosaic_100m_HPF_Sweden",
+  Name = "Mosaico Global Cassini 100m HPF [Suecia]",
+  Enabled = asset.enabled,
+  ZIndex = 10,
+  FilePath = asset.resource("global_mosaic_100m_hpf_sweden.wms"),
+  Description = [[Este mosaico representa la finalización de una red de control global de
+    Encélado que contiene imágenes del Sistema de Ciencia de Imágenes (ISS) de Cassini. Un total de
+    586 imágenes en filtros CLR, GRN, UV3 e IR3 fueron seleccionadas para la red de control.
+    Los criterios de selección de imágenes se basaron en la cobertura, calidad y una
+    resolución espacial entre 50 y 500 metros por píxel (m) con ángulos de fase menores
+    a 120 grados. (Descripción de URL)]]
+}
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Enceladus.Identifier, "ColorLayers", Layer)
+end)
+
+asset.onDeinitialize(function()
+  openspace.globebrowsing.deleteLayer(globe.Enceladus.Identifier, "ColorLayers", Layer)
+end)
+
+asset.export("layer", Layer)
+
+asset.meta = {
+  Name = "Mosaico Global Cassini 100m HPF [Suecia]",
+  Description = [[Mosaico global Cassini para Encélado. Este mapa está alojado en el servidor de OpenSpace
+    en Suecia]],
+  Author = "USGS",
+  URL = "https://astrogeology.usgs.gov/search/map/Enceladus/Cassini/" ..
+    "Enceladus_Cassini_ISS_Global_Mosaic_100m_HPF",
+  License = "NASA/PDS"
+}

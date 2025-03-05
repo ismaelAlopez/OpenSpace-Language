@@ -1,0 +1,94 @@
+asset.require("./trail")
+local transforms = asset.require("../transforms")
+local kernels = asset.require("../kernels")
+local coreKernels = asset.require("spice/core")
+
+local labelsPath = asset.resource({
+  Name = "Saturn Labels",
+  Type = "HttpSynchronization",
+  Identifier = "saturn_labels",
+  Version = 1
+})
+
+local Dione = {
+  Identifier = "Dione",
+  Parent = transforms.SaturnBarycenter.Identifier,
+  Transform = {
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels.ID.Dione,
+      Observer = coreKernels.ID.SaturnBarycenter
+    },
+    Rotation = {
+      Type = "SpiceRotation",
+      SourceFrame = coreKernels.Frame.Dione,
+      DestinationFrame = coreKernels.Frame.Galactic
+    }
+  },
+  Renderable = {
+    Type = "RenderableGlobe",
+    Radii = 561400,
+    Labels = {
+      Enabled = false,
+      FileName = labelsPath .. "dione.labels",
+      AlignmentOption = "Horizontally", -- or Circularly
+      FontSize = 20.0,
+      Size = 8.7,
+      FadeInEnabled = true,
+      FadeOutEnabled = true,
+      FadeDistances = { 500000.0, 3500000.0 },
+      DistanceEPS = 200000.0,
+      Color = { 1.0, 1.0, 0.0 }
+    }
+  },
+  Tag = { "moon_solarSystem", "moon_giants", "moon_saturn", "moon_major_saturn" },
+  GUI = {
+    Path = "/Sistema Solar/Planetas/Saturno/Lunas Principales/Dione"
+  }
+}
+
+local DioneLabel = {
+  Identifier = "DioneLabel",
+  Parent = Dione.Identifier,
+  Renderable = {
+    Type = "RenderableLabel",
+    Enabled = false,
+    Text = "Dione",
+    FontSize = 70.0,
+    Size = 6.0,
+    MinMaxSize = { 1, 25 },
+    OrientationOption = "Camera View Direction",
+    BlendMode = "Normal",
+    EnableFading = true,
+    FadeUnit = "Gm",
+    FadeDistances = { 0.3, 10.0 },
+    FadeWidths = { 0.15, 10.0 }
+  },
+  Tag = { "solarsystem_labels", "moon_labels", "major_moon_labels" },
+  GUI = {
+    Name = "Etiqueta de Dione",
+    Path = "/Sistema Solar/Planetas/Saturno/Lunas Principales/Dione",
+    Description = "Etiqueta para la luna Dione de Saturno"
+  }
+}
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(Dione)
+  openspace.addSceneGraphNode(DioneLabel)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(DioneLabel)
+  openspace.removeSceneGraphNode(Dione)
+end)
+
+asset.export(Dione)
+asset.export(DioneLabel)
+
+asset.meta = {
+  Name = "Dione",
+  Description = "Globo de Dione con etiquetas",
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "MIT license"
+}

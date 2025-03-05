@@ -1,0 +1,34 @@
+local globe = asset.require("../../tethys")
+
+local texturesPath = asset.resource({
+  Name = "Tethys textures",
+  Type = "HttpSynchronization",
+  Identifier = "tethys_textures",
+  Version = 1
+})
+
+local Layer = {
+  Identifier = "Texture",
+  FilePath = texturesPath .. "tethys.jpg",
+  Enabled = asset.enabled,
+  ZIndex = 5,
+  CacheSettings = { Enabled = false }
+}
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Tethys.Identifier, "ColorLayers", Layer)
+end)
+
+asset.onDeinitialize(function()
+  openspace.globebrowsing.deleteLayer(globe.Tethys.Identifier, "ColorLayers", Layer)
+end)
+
+asset.export("layer", Layer)
+
+asset.meta = {
+  Name = "Textura de Tethys",
+  Description = "Textura jpg predeterminada para Tethys",
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "MIT license"
+}
