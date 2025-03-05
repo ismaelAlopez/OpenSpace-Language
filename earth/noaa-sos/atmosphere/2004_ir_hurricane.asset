@@ -1,0 +1,55 @@
+local globe = asset.require("../../earth")
+
+local Name = "Temporada de Huracanes - 2004"
+local Identifier = "noaa-sos-atmosphere-2004_ir_hurricane"
+local Description = [[La temporada de huracanes de 2004 comenzó el 31 de julio con el Huracán Alex
+y continuó hasta el 2 de diciembre con la Tormenta Tropical Otto. La temporada
+presentó 15 tormentas tropicales, 9 de las cuales se convirtieron en huracanes, y 6 de ellos fueron clasificados
+como huracanes mayores. Esta temporada de huracanes sobre-activa acumuló una factura de $42 mil millones
+en daños, que en ese momento fue un récord. Florida sufrió la mayor parte del daño con
+4 huracanes mayores tocando tierra en el estado. Dos de los huracanes, Frances y
+Jeanne, aterrizaron en casi la misma ubicación en la costa este de Florida con solo 3 semanas
+de diferencia. Se estima que una de cada cinco casas en Florida fue dañada en la temporada de huracanes de 2004]]
+local URL = "https://sos.noaa.gov/catalog/datasets/hurricane-season-2004/"
+
+local syncedDirectory = asset.resource({
+  Name = Name,
+  Type = "HttpSynchronization",
+  Identifier = Identifier,
+  Version = 1,
+  UnzipFiles = true
+})
+
+local Layer = {
+  Identifier = Identifier,
+  Name = Name,
+  Enabled = asset.enabled,
+  ZIndex = 100,
+  Type = "TemporalTileProvider",
+  Mode = "Folder",
+  Folder = {
+    Folder = syncedDirectory .. "2048",
+    -- See https://en.cppreference.com/w/cpp/io/manip/get_time for an explanation of the
+    -- time formatting string
+    Format = "cylir_%Y%m%d_%H%M.jpg"
+  },
+  Description = Description
+}
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.onDeinitialize(function()
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.export(Layer)
+
+asset.meta = {
+  Name = Name,
+  Description = Description .. "Datos proporcionados por la Administración Nacional Oceánica y Atmosférica",
+  Author = "Administración Nacional Oceánica y Atmosférica",
+  URL = URL,
+  License = "https://sos.noaa.gov/copyright/"
+}

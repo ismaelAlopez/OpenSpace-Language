@@ -1,0 +1,27 @@
+local globe = asset.require("../../mercury")
+
+local Layer = {
+  Identifier = "Messenger_HIE_NewYork",
+  Name = "Mensajero HIE [Nueva York]",
+  Enabled = asset.enabled,
+  ZIndex = 10,
+  FilePath = asset.resource("messenger_hie_newyork.wms")
+}
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Mercury.Identifier, "ColorLayers", Layer)
+end)
+
+asset.onDeinitialize(function()
+  openspace.globebrowsing.deleteLayer(globe.Mercury.Identifier, "ColorLayers", Layer)
+end)
+
+asset.export("layer", Layer)
+
+asset.meta = {
+  Name = "Mensajero HIE [Nueva York]",
+  Description = [[Capa HIE de Mercurio para el globo de Mercurio. Este mapa está alojado en el servidor de OpenSpace en Nueva York]],
+  Author = "USGS",
+  URL = "",
+  License = "NASA/PDS"
+}

@@ -1,0 +1,75 @@
+local globe = asset.require("../../earth")
+
+local Name = "Combustible fósil: Liberación de CO2 - 2011-2012"
+local Identifier = "noaa-sos-atmosphere-fossil_fuel"
+local Description = [[Este conjunto de datos muestra el resultado de emitir dióxido de carbono
+por la quema de combustibles fósiles en la atmósfera durante dos años. Se utilizó un modelo
+informático de la atmósfera llamado TM5 para crear esta poderosa visualización. TM5 simula el
+movimiento de gases atmosféricos a nivel global, utilizando vientos y mezcla atmosférica derivados
+del pronóstico meteorológico global. El modelo se ha utilizado para los principales gases de efecto
+invernadero como el dióxido de carbono (CO2), metano (CH4) y óxido nitroso (N2O), especies químicamente
+activas como el ozono (O3) y varios aerosoles. Al igual que CarbonTracker, un sistema de medición y
+modelado para rastrear las fuentes y sumideros de carbono en todo el mundo, este conjunto de datos fue
+desarrollado por el grupo de Gases de Efecto Invernadero del Ciclo del Carbono en el Laboratorio de
+Investigación del Sistema Terrestre de NOAA. A diferencia de CarbonTracker, esta simulación no utiliza
+información de observaciones reales y en su lugar visualiza el transporte de emisiones de combustibles
+fósiles. Visualizaciones como este conjunto de datos y CarbonTracker, tienen como objetivo mejorar
+nuestra comprensión del carbono atmosférico y cómo diversas fuentes y sumideros pueden responder al
+cambio climático, niveles crecientes de CO2 atmosférico (a través del efecto de fertilización por CO2)
+y la gestión humana de los recursos globales]]
+local URL = "https://sos.noaa.gov/catalog/datasets/fossil-fuel-co2-release-2011-2012/"
+
+local syncedDirectory = asset.resource({
+  Name = Name,
+  Type = "HttpSynchronization",
+  Identifier = Identifier,
+  Version = 1,
+  UnzipFiles = true
+})
+
+local Layer = {
+  Identifier = Identifier,
+  Name = Name,
+  Enabled = asset.enabled,
+  ZIndex = 100,
+  Type = "TemporalTileProvider",
+  Mode = "Folder",
+  Folder = {
+    Folder = syncedDirectory .. "3100",
+    -- See https://en.cppreference.com/w/cpp/io/manip/get_time for an explanation of the
+    -- time formatting string
+    Format = "%Y%m%d_fossil.png"
+  },
+  Description = Description
+}
+
+local Colorbar = {
+  Identifier = Identifier,
+  Name = Name,
+  Enabled = asset.enabled,
+  Type = "ScreenSpaceImageLocal",
+  TexturePath = syncedDirectory .. "colorbar.png",
+  FaceCamera = false,
+  CartesianPosition = { 0.0, -0.5, -2.0 }
+}
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+  openspace.addScreenSpaceRenderable(Colorbar)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeScreenSpaceRenderable(Colorbar)
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.export(Layer)
+asset.export(Colorbar)
+
+asset.meta = {
+  Name = Name,
+  Description = Description .. "Datos proporcionados por la Administración Nacional Oceánica y Atmosférica",
+  Author = "Administración Nacional Oceánica y Atmosférica",
+  URL = URL,
+  License = "https://sos.noaa.gov/copyright/"
+}

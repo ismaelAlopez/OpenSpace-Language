@@ -1,0 +1,24 @@
+local Item = {
+  Type = "DashboardItemVelocity",
+  Identifier = "CameraVelocity",
+  Simplification = true,
+  GuiName = "Velocidad de la Cámara"
+}
+
+asset.onInitialize(function()
+  openspace.dashboard.addDashboardItem(Item)
+end)
+
+asset.onDeinitialize(function()
+  openspace.dashboard.removeDashboardItem(Item)
+end)
+
+asset.export(Item)
+
+asset.meta = {
+  Name = "Tablero - Velocidad",
+  Description = "Este recurso proporciona un elemento del tablero que muestra la velocidad de la cámara",
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "Licencia MIT"
+}

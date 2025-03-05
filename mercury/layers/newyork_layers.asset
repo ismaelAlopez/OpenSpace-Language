@@ -1,0 +1,27 @@
+asset.require("./base_layers")
+asset.require("./colorlayers/messenger_mdis_newyork", false)
+asset.require("./colorlayers/messenger_mosaic_newyork", false)
+asset.require("./colorlayers/messenger_mosaic2_newyork", false)
+asset.require("./colorlayers/messenger_bdr_newyork", asset.enabled)
+asset.require("./colorlayers/messenger_hie_newyork", false)
+asset.require("./colorlayers/messenger_hiw_newyork", false)
+asset.require("./colorlayers/messenger_loi_newyork", false)
+asset.require("./colorlayers/messenger_shade_newyork", false)
+
+-- The New York server does not have these maps, use the Utah server for now
+asset.require("./colorlayers/messenger_mdr_utah", false)
+asset.require("./colorlayers/messenger_mp3_utah", false)
+
+asset.meta = {
+  Name = "Capas predeterminadas de Mercurio (Nueva York)",
+  Description = [[Las capas predeterminadas de Mercurio son: Abundancia de Aluminio, Abundancia de Calcio,
+    Abundancia de Hierro, Abundancia de Magnesio, Abundancia de Silicio, Mensajero MDIS,
+    Mosaico de Messenger, Mosaico2 de Messenger, BDR de Messenger, HIE de Messenger, HIW de Messenger,
+    LOI de Messenger, Sombra de Messenger, MDR de Mensajero, MP3 de Mensajero y DEM de Mensajero (3D).
+
+    Capas cargadas solo desde el servidor de Nueva York
+  ]],
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "MIT license"
+}

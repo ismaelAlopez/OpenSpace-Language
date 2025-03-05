@@ -1,0 +1,61 @@
+local globe = asset.require("../../earth")
+
+local Name = "Aerosoles: Modelo FIM Chem"
+local Identifier = "noaa-sos-atmosphere-fim_chem"
+local Description = [[El Modelo Icosaédrico de Volumen Finito de Flujo Seguimiento (FIM) fue
+desarrollado por NOAA para producir pronósticos meteorológicos. De hecho, los pronósticos meteorológicos del modelo FIM
+están disponibles para SOS aquí. Basándose en el éxito del modelo FIM, se creó el
+modelo FIM-Chem. El FIM-Chem es el modelo FIM con módulos de química y aerosoles añadidos. Los aerosoles son una de las mayores incertidumbres en los modelos climáticos debido a
+sus variados efectos sobre la radiación y la física de las nubes. El FIM-Chem permite a los investigadores
+pronosticar y estudiar el comportamiento de los aerosoles en la atmósfera, lo que lleva a la posibilidad
+de una mejor modelización del sistema terrestre para la predicción climática]]
+local URL = "https://sos.noaa.gov/catalog/datasets/aerosols-fim-chem-model/"
+
+local syncedDirectory = asset.resource({
+  Name = Name,
+  Type = "HttpSynchronization",
+  Identifier = Identifier,
+  Version = 1,
+  UnzipFiles = true
+})
+
+local Layer = {
+  Identifier = Identifier,
+  Name = Name,
+  Enabled = asset.enabled,
+  ZIndex = 100,
+  Type = "ImageSequenceTileProvider",
+  FolderPath = syncedDirectory .. "composite",
+  Description = Description
+}
+
+local Colorbar = {
+  Identifier = Identifier,
+  Name = Name,
+  Enabled = asset.enabled,
+  Type = "ScreenSpaceImageLocal",
+  TexturePath = syncedDirectory .. "colorbar.png",
+  FaceCamera = false,
+  CartesianPosition = { 0.0, -0.5, -2.0 }
+}
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+  openspace.addScreenSpaceRenderable(Colorbar)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeScreenSpaceRenderable(Colorbar)
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.export(Layer)
+asset.export(Colorbar)
+
+asset.meta = {
+  Name = Name,
+  Description = Description .. "Datos proporcionados por la Administración Nacional Oceánica y Atmosférica",
+  Author = "Administración Nacional Oceánica y Atmosférica",
+  URL = URL,
+  License = "https://sos.noaa.gov/copyright/"
+}

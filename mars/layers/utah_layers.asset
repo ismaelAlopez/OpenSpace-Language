@@ -1,0 +1,24 @@
+asset.require("./base_layers")
+asset.require("./colorlayers/moc_wa_color_utah", asset.enabled)
+asset.require("./colorlayers/viking_mdim_utah", false)
+asset.require("./colorlayers/mola_pseudo_color_utah", false)
+asset.require("./colorlayers/mola_hrsc_utah", false)
+asset.require("./colorlayers/themis_ir_day_utah", false)
+asset.require("./colorlayers/themis_ir_night_utah", false)
+asset.require("./colorlayers/ctx_mosaic_utah", false)
+
+asset.require("./heightlayers/mola_utah", false)
+
+asset.meta = {
+  Name = "Capas Predeterminadas de Marte (Utah)",
+  Description = [[Las capas predeterminadas de Marte son: textura de Marte, CTX Blended, HiRISE,
+    Conjunto Local de HiRISE, MOC WA Color, Viking MDIM, MOLA Pseudo Color, MOLA HRSC,
+    Themis IR Día, Themis IR Noche, CTX Mosaic, MDEM200M (3D), Conjunto Local de HiRISE DEM (3D),
+    Elevación Mola (3D), Índices de Mosaico y Referencia de Tamaño.
+
+    Capas cargadas solo desde el servidor de Utah
+  ]],
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "MIT license"
+}

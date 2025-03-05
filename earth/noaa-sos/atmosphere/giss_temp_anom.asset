@@ -1,0 +1,55 @@
+local globe = asset.require("../../earth")
+
+local Name = "Anomalía de Temperatura: (NASA) - 1884 - 2012"
+local Identifier = "noaa-sos-atmosphere-giss_temp_anom"
+local Description = [[Estos mapas, desarrollados por el Instituto Goddard de Estudios Espaciales (GISS) de la NASA, muestran cuánto se han calentado o enfriado varias regiones del mundo en comparación con un período base de 1951-1980. Muestran anomalías de temperatura, o cambios, no temperatura absoluta]]
+local URL = "https://sos.noaa.gov/catalog/datasets/temperature-anomaly-nasa-1884-2012/"
+
+local syncedDirectory = asset.resource({
+  Name = Name,
+  Type = "HttpSynchronization",
+  Identifier = Identifier,
+  Version = 1,
+  UnzipFiles = true
+})
+
+local Layer = {
+  Identifier = Identifier,
+  Name = Name,
+  Enabled = asset.enabled,
+  ZIndex = 100,
+  Type = "ImageSequenceTileProvider",
+  FolderPath = syncedDirectory .. "2012",
+  Description = Description
+}
+
+local Colorbar = {
+  Identifier = Identifier,
+  Name = Name,
+  Enabled = asset.enabled,
+  Type = "ScreenSpaceImageLocal",
+  TexturePath = syncedDirectory .. "colorbar.png",
+  FaceCamera = false,
+  CartesianPosition = { 0.0, -0.5, -2.0 }
+}
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+  openspace.addScreenSpaceRenderable(Colorbar)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeScreenSpaceRenderable(Colorbar)
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.export(Layer)
+asset.export(Colorbar)
+
+asset.meta = {
+  Name = Name,
+  Description = Description .. "Datos proporcionados por la Administración Nacional Oceánica y Atmosférica",
+  Author = "Administración Nacional Oceánica y Atmosférica",
+  URL = URL,
+  License = "https://sos.noaa.gov/copyright/"
+}

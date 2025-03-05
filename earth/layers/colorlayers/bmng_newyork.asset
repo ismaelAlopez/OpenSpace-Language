@@ -1,0 +1,33 @@
+local globe = asset.require("../../earth")
+
+
+
+local Layer = {
+  Identifier = "BMNG_NewYork",
+  Name = "BMNG [Nueva York]",
+  Enabled = asset.enabled,
+  ZIndex = 10,
+  FilePath = asset.resource("bmng_newyork.wms"),
+  Description = [[Mapa de Blue Marble Next Generation a resolución completa cargado en la web. Este mapa está alojado en los servidores de OpenSpace en Nueva York.]]
+}
+
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.onDeinitialize(function()
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.export("layer", Layer)
+
+
+
+asset.meta = {
+  Name = "Blue Marble Next Generation (Nueva York)",
+  Description = [[Mapa de Blue Marble Next Generation a resolución completa cargado en la web. Este mapa está alojado en los servidores de OpenSpace en Nueva York.]],
+  Author = "Equipo de OpenSpace",
+  URL = "https://visibleearth.nasa.gov/collection/1484/blue-marble",
+  License = "NASA"
+}

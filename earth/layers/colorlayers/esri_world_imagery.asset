@@ -1,0 +1,37 @@
+local globe = asset.require("../../earth")
+
+
+
+local Layer = {
+  Identifier = "ESRI_World_Imagery",
+  Name = "ESRI World Imagery",
+  Enabled = asset.enabled,
+  ZIndex = 10,
+  FilePath = asset.resource("esri_world_imagery.wms"),
+  Description = [[World Imagery proporciona imágenes satelitales y aéreas con una resolución de un metro o mejor en muchas partes del mundo, y imágenes satelitales de menor 
+  resolución a nivel global. El mapa incluye imágenes TerraColor de 15 m en escalas pequeñas y medias (~1:591M a ~1:72k) y imágenes SPOT de 2.5 m (~1:288k a ~1:72k) para todo el mundo.
+  resenta imágenes de resolución de 0.5 m en los Estados Unidos continentales y partes de Europa Occidental de Maxar. Además, se incluyen imágenes de submetro Maxar en muchas partes 
+  del mundo. En otras áreas, las imágenes a diferentes resoluciones han sido proporcionadas por la comunidad de usuarios de GIS. En comunidades seleccionadas, se encuentran imágenes 
+  de muy alta resolución (hasta 0.03 m) disponibles hasta una escala de ~1:280. (Descripción de la URL)]]
+}
+
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.onDeinitialize(function()
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.export("layer", Layer)
+
+
+
+asset.meta = {
+  Name = "ESRI World Imagery",
+  Description = "Capa principal del mapa cargado en la web para la Tierra. Esta capa está alojada por ESRI",
+  Author = "ESRI",
+  URL = "https://www.arcgis.com/home/item.html?id=10df2279f9684e4a9f6a7f08febac2a9",
+  License = "Esri Master License Agreement"
+}

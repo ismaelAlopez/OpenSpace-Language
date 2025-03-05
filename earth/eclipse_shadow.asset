@@ -1,0 +1,41 @@
+local transforms = asset.require("scene/solarsystem/planets/earth/moon/moon")
+local coreKernels = asset.require("spice/core")
+
+local EarthMoonShadow = {
+    Identifier = "EarthMoonShadow",
+    Parent = transforms.Moon.Identifier,
+    Renderable = {
+        Type = "RenderableEclipseCone",
+        Opacity = 1.0,
+        ShadowLength = 1.0,
+        UmbralShadowColor = {0.85, 1.0, 1.0, 0.20},
+        PenumbralShadowColor = {0.35, 0.35, 0.35, 0.29},
+        LightSource = coreKernels.ID.Sun,
+        LightSourceFrame = coreKernels.Frame.Sun,
+        Shadower = coreKernels.ID.Moon,
+        ShadowerFrame = coreKernels.Frame.Moon,
+        Shadowee = coreKernels.ID.Earth
+    },
+    GUI = {
+        Name = "Sombra de la Luna/Tierra",
+        Path = "/Sistema Solar/Planetas/Tierra",
+    }
+}
+
+asset.onInitialize(function()
+    openspace.addSceneGraphNode(EarthMoonShadow)
+end)
+
+asset.onDeinitialize(function()
+    openspace.removeSceneGraphNode(EarthMoonShadow)
+end)
+
+asset.export(EarthMoonShadow)
+
+asset.meta = {
+    Name = "Sombras de la Luna",
+    Description = "Los eclipses de sombra penumbral y umbral del sistema Tierra-Luna",
+    Author = "Equipo de OpenSpace",
+    URL = "http://openspaceproject.com",
+    License = "MIT license"
+}

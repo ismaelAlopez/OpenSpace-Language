@@ -1,0 +1,28 @@
+local globe = asset.require("../../mercury")
+
+local Layer = {
+  Identifier = "Messenger_HIW_Sweden",
+  Name = "Mensajero HIW [Suecia]",
+  Enabled = asset.enabled,
+  ZIndex = 10,
+  FilePath = asset.resource("messenger_hiw_sweden.wms")
+}
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Mercury.Identifier, "ColorLayers", Layer)
+end)
+
+asset.onDeinitialize(function()
+  openspace.globebrowsing.deleteLayer(globe.Mercury.Identifier, "ColorLayers", Layer)
+end)
+
+asset.export("layer", Layer)
+
+asset.meta = {
+  Name = "Mensajero HIW [Suecia]",
+  Description = [[Capa Mensajero HIW para el globo de Mercurio. Este mapa está alojado en el
+    servidor OpenSpace en Suecia]],
+  Author = "USGS",
+  URL = "",
+  License = "NASA/PDS"
+}

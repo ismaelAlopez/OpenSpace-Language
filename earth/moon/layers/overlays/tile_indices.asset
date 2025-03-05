@@ -1,0 +1,26 @@
+local globe = asset.require("../../moon")
+
+local Layer = {
+  Identifier = "Tile_Indices",
+  Name = "Índices de Teselas",
+  Enabled = asset.enabled,
+  Type = "TileIndexTileProvider"
+}
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Moon.Identifier, "Overlays", Layer)
+end)
+
+asset.onDeinitialize(function()
+  openspace.globebrowsing.deleteLayer(globe.Moon.Identifier, "Overlays", Layer)
+end)
+
+asset.export("layer", Layer)
+
+asset.meta = {
+  Name = "Índices de Teselas de la Luna",
+  Description = "Capa de índice de teselas para el globo lunar",
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "MIT license"
+}

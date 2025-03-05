@@ -1,0 +1,55 @@
+local transforms = asset.require("scene/solarsystem/planets/earth/transforms")
+
+
+
+local omm = asset.resource({
+  Name = "Satellite OMM Data (Tracking and Data Relay Satellite System (TDRSS))",
+  Type = "UrlSynchronization",
+  Identifier = "satellite_omm_data_tdrss",
+  Url = "https://www.celestrak.com/NORAD/elements/gp.php?GROUP=tdrss&FORMAT=kvn",
+  Filename = "tdrss.txt",
+  SecondsUntilResync = openspace.time.secondsPerDay()
+})
+
+
+local TrackingDataRelaySatellites = {
+  Identifier = "TrackingDataRelaySatellites",
+  Parent = transforms.EarthInertial.Identifier,
+  Renderable = {
+    Type = "RenderableOrbitalKepler",
+    Path = omm .. "tdrss.txt",
+    Format = "OMM",
+    SegmentQuality = 3,
+    Color = { 0.75, 0.75, 0.35 },
+    TrailFade = 17,
+    PointSizeExponent = 5.0,
+    RenderBinMode = "PostDeferredTransparent"
+  },
+  Tag = { "earth_satellites" },
+  GUI = {
+    Name = "Tracking and Data Relay Satellite System (TDRSS)",
+    Path = "/Solar System/Planets/Earth/Satellites"
+  }
+}
+
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(TrackingDataRelaySatellites)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(TrackingDataRelaySatellites)
+end)
+
+asset.export(TrackingDataRelaySatellites)
+
+
+
+asset.meta = {
+  Name = "Satellites Weather - Tracking and Data Relay Satellite System (TDRSS)",
+  Description = [[Satellites asset for Weather - Tracking and Data Relay Satellite
+    System (TDRSS). Data from Celestrak]],
+  Author = "Equipo de OpenSpace",
+  URL = "https://celestrak.com/NORAD/elements/",
+  License = "Celestrak"
+}

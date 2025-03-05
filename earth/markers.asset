@@ -1,0 +1,50 @@
+local transforms = asset.require("./transforms")
+
+
+
+local texturesPath = asset.resource({
+  Name = "Earth Textures",
+  Type = "HttpSynchronization",
+  Identifier = "earth_textures",
+  Version = 2
+})
+
+
+local EarthMarker = {
+  Identifier = "EarthMarker",
+  Parent = transforms.EarthIAU.Identifier,
+  Renderable = {
+    Type = "RenderablePlaneImageLocal",
+    Enabled = false,
+    Size = 3.0E11,
+    Origin = "Center",
+    Billboard = true,
+    Texture = texturesPath .. "marker.png",
+    BlendMode = "Additive"
+  },
+  GUI = {
+    Name = "Marcador de la Tierra",
+    Path = "/Sistema Solar/Planetas/Tierra"
+  }
+}
+
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(EarthMarker)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(EarthMarker)
+end)
+
+asset.export(EarthMarker)
+
+
+
+asset.meta = {
+  Name = "Marcador de la Tierra",
+  Description = "Marcador de la Tierra con nombre, dimensionado para la vista del Sistema Solar",
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "MIT license"
+}

@@ -1,0 +1,73 @@
+local globe = asset.require("../../earth")
+
+local Name = "Monóxido de Carbono - 2008 - 2011"
+local Identifier = "noaa-sos-atmosphere-co_gmd"
+local Description = [[El Monóxido de Carbono (CO) es un gas incoloro e inodoro que existe en la
+atmósfera en niveles entre 40 y 150 partes por mil millones (ppb). Aproximadamente el 40% de eso es
+producido por la quema (combustión) de combustibles fósiles (carbón, petróleo y gas natural) y biomasa
+(por ejemplo, madera en incendios forestales). El CO es el principal consumidor del oxidante OH, el
+"agente limpiador" de la atmósfera. Por ejemplo, el OH "limpia el aire" convirtiendo
+metano atmosférico (CH4) en CO2, lo que reduce su potencial de calentamiento global porque
+el metano es un gas de efecto invernadero más fuerte. El OH también descompone una gran cantidad de otros compuestos
+como benceno, isopreno y halocarbonos, que de otro modo darían lugar a smog y
+reducirían la calidad del aire. Por lo tanto, un exceso de CO atmosférico conduce a una reducción de la capacidad de limpieza del OH. Otra razón para medir las concentraciones de CO es que es un
+indicador de combustión, como incendios forestales y emisiones urbanas. Un gran incendio forestal o
+emisiones de tráfico pesado pueden producir concentraciones de CO de 200 - 5000 ppb]]
+local URL = "https://sos.noaa.gov/catalog/datasets/carbon-monoxide-2008-2011/"
+
+local syncedDirectory = asset.resource({
+  Name = Name,
+  Type = "HttpSynchronization",
+  Identifier = Identifier,
+  Version = 1,
+  UnzipFiles = true,
+  UnzipFilesDestination = "images"
+})
+
+local Layer = {
+  Identifier = Identifier,
+  Name = Name,
+  Enabled = asset.enabled,
+  ZIndex = 100,
+  Type = "TemporalTileProvider",
+  Mode = "Folder",
+  Folder = {
+    Folder = syncedDirectory .. "images",
+    -- See https://en.cppreference.com/w/cpp/io/manip/get_time for an explanation of the
+    -- time formatting string
+    Format = "co_field_extended_%Y%m%d%H%M.png"
+  },
+  Description = Description
+}
+
+local Colorbar = {
+  Identifier = Identifier,
+  Name = Name,
+  Enabled = asset.enabled,
+  Type = "ScreenSpaceImageLocal",
+  TexturePath = syncedDirectory .. "colorbar.png",
+  FaceCamera = false,
+  BackgroundColor = { 1.0, 1.0, 1.0, 1.0 },
+  CartesianPosition = { 0.0, -0.5, -2.0 }
+}
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+  openspace.addScreenSpaceRenderable(Colorbar)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeScreenSpaceRenderable(Colorbar)
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.export(Layer)
+asset.export(Colorbar)
+
+asset.meta = {
+  Name = Name,
+  Description = Description .. "Datos proporcionados por la Administración Nacional Oceánica y Atmosférica",
+  Author = "Administración Nacional Oceánica y Atmosférica",
+  URL = URL,
+  License = "https://sos.noaa.gov/copyright/"
+}

@@ -1,0 +1,28 @@
+local globe = asset.require("../../mercury")
+
+local Layer = {
+  Identifier = "Messenger_Mosaic_NewYork",
+  Name = "Mosaico del Mensajero [Nueva York]",
+  Enabled = asset.enabled,
+  ZIndex = 20,
+  FilePath = asset.resource("messenger_mosaic_newyork.wms")
+}
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Mercury.Identifier, "ColorLayers", Layer)
+end)
+
+asset.onDeinitialize(function()
+  openspace.globebrowsing.deleteLayer(globe.Mercury.Identifier, "ColorLayers", Layer)
+end)
+
+asset.export("layer", Layer)
+
+asset.meta = {
+  Name = "Mosaico del Mensajero [Nueva York]",
+  Description = [[Capa de Mosaico del Mensajero para el globo de Mercurio. Este mapa está alojado en
+    el servidor de OpenSpace en Nueva York]],
+  Author = "USGS",
+  URL = "",
+  License = "NASA/PDS"
+}

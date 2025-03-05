@@ -1,0 +1,13 @@
+asset.require("./base_layers", false)
+asset.require("./colorlayers/voyager_global_mosaic_sweden", asset.enabled)
+
+asset.meta = {
+  Name = "Capas Predeterminadas de Europa (Suecia)",
+  Description = [[Las capas predeterminadas de Europa son: Textura de Europa y Mosaico Global de Voyager.
+
+    Capas cargadas solo desde el servidor de Suecia
+  ]],
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "MIT license"
+}

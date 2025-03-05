@@ -1,0 +1,126 @@
+local transforms = asset.require("./transforms")
+local labelsPath = asset.resource({
+    Name = "Earth Labels",
+    Type = "HttpSynchronization",
+    Identifier = "earth_labels",
+    Version = 1
+})
+
+-- local EarthEllipsoid = { 6378137.0, 6378137.0, 6356752.314245 }
+local EarthEllipsoid = {6378137.0, 6378137.0, 6378137.0}
+
+local Earth = {
+    Identifier = "Earth",
+    Parent = transforms.EarthIAU.Identifier,
+    Renderable = {
+        Type = "RenderableGlobe",
+        Radii = EarthEllipsoid,
+        PerformShading = false,
+        ShadowGroup = {
+            Sources = {{
+                Name = "Sol",
+                Radius = 696300000
+            }},
+            Casters = {{
+                Name = "Luna",
+                Radius = 1737000
+            }}
+        },
+        Labels = {
+            Enabled = false,
+            FileName = labelsPath .. "Earth.labels",
+            AlignmentOption = "Horizontally", -- or Circularly
+            FontSize = 20.0,
+            Size = 5.0,
+            FadeInEnabled = true,
+            FadeOutEnabled = true,
+            FadeDistances = {10000.0, 300000.0},
+            DistanceEPS = 1500000.0,
+            Color = {1.0, 0.0, 0.0}
+        }
+    },
+    Tag = {"planet_solarSystem", "planet_terrestrial"},
+    GUI = {
+        Name = "Tierra",
+        Path = "/Sistema Solar/Planetas/Tierra",
+        Description = "Tercera roca del Sol"
+    }
+}
+
+local EarthLabel = {
+    Identifier = "EarthLabel",
+    Parent = Earth.Identifier,
+    Renderable = {
+        Type = "RenderableLabel",
+        Enabled = false,
+        Text = "Tierra",
+        FontSize = 70.0,
+        Size = 8.50,
+        MinMaxSize = {1, 50},
+        OrientationOption = "Camera View Direction",
+        BlendMode = "Additive",
+        EnableFading = true,
+        FadeUnit = "au",
+        FadeDistances = {1.5, 30.0},
+        FadeWidths = {1.0, 40.0}
+    },
+    Tag = {"solarsystem_labels"},
+    GUI = {
+        Name = "Etiqueta de la Tierra",
+        Path = "/Sistema Solar/Planetas/Tierra",
+        Description = "Etiqueta principal para la Tierra"
+    }
+}
+
+local FocusEarth = {
+    Identifier = "os.solarsystem.FocusEarth",
+    Name = "Enfoque en la Tierra",
+    Command = [[
+    openspace.setPropertyValueSingle("NavigationHandler.OrbitalNavigator.Aim", "")
+    openspace.setPropertyValueSingle("NavigationHandler.OrbitalNavigator.Anchor", "Earth")
+    openspace.setPropertyValueSingle("NavigationHandler.OrbitalNavigator.RetargetAnchor", nil)
+  ]],
+    Documentation = "Enfoca la cámara en la Tierra",
+    GuiPath = "/Sistema Solar/Tierra",
+    IsLocal = false
+}
+
+local ToggleSatelliteTrails = {
+    Identifier = "os.solarsystem.ToggleSatelliteTrails",
+    Name = "Toggle satellite trails",
+    Command = [[
+    local list = openspace.property("{earth_satellites}.Renderable.Enabled")
+    for _,v in pairs(list) do
+      openspace.setPropertyValueSingle(v, not openspace.propertyValue(v))
+    end
+  ]],
+    Documentation = "Elegir si se muestran o no las estelas de los satélites",
+    GuiPath = "/Sistema Solar/Tierra",
+    IsLocal = false
+}
+asset.onInitialize(function()
+    openspace.addSceneGraphNode(Earth)
+    openspace.addSceneGraphNode(EarthLabel)
+
+    openspace.action.registerAction(FocusEarth)
+    openspace.action.registerAction(ToggleSatelliteTrails)
+end)
+
+asset.onDeinitialize(function()
+    openspace.action.removeAction(ToggleSatelliteTrails)
+    openspace.action.removeAction(FocusEarth)
+
+    openspace.removeSceneGraphNode(EarthLabel)
+    openspace.removeSceneGraphNode(Earth)
+end)
+
+asset.export(Earth)
+asset.export(EarthLabel)
+
+asset.meta = {
+    Name = "Tierra",
+    Description = "El planeta Tierra es uno special que necesita cuidado especial",
+    Author = "Equipo de OpenSpace",
+    URL = "http://openspaceproject.com",
+    License = "MIT license"
+}

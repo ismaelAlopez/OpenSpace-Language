@@ -1,0 +1,48 @@
+local moon = asset.require("scene/solarsystem/planets/earth/moon/moon")
+
+
+
+local orbitalPlaneGrid = {
+  Identifier = "MoonOrbitalPlaneRadialGrid",
+  Parent = "Moon",
+  Transform = {
+    Scale = {
+      Type = "StaticScale",
+      Scale = 430000000
+    },
+  },
+  Renderable = {
+    Type = "RenderableRadialGrid",
+    Color = { 0.502, 0.502, 0.502 },
+    LineWidth = 2.0,
+    GridSegments = { 8, 8 },
+    CircleSegments = 64,
+    Radii = { 0.0, 1.0 }
+  },
+  GUI = {
+    Name = "Cuadrícula Eclíptica de la Luna",
+    Path = "/Solar System/Planets/Earth/Moon",
+  }
+}
+
+
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(orbitalPlaneGrid)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(orbitalPlaneGrid)
+end)
+
+asset.export(orbitalPlaneGrid)
+
+
+
+asset.meta = {
+  Name = "Plano Orbital de la Luna",
+  Description = "Una cuadrícula que muestra el plano orbital de la Luna.",
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "MIT license"
+}

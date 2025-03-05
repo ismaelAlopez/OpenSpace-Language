@@ -1,0 +1,37 @@
+local transforms = asset.require("scene/solarsystem/sun/transforms")
+local coreKernels = asset.require("spice/core")
+
+local NeptuneBarycenter = {
+  Identifier = "NeptuneBarycenter",
+  Parent = transforms.SolarSystemBarycenter.Identifier,
+  Transform = {
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = coreKernels.ID.NeptuneBarycenter,
+      Observer = coreKernels.ID.SolarSystemBarycenter
+    }
+  },
+  GUI = {
+    Name = "Baricentro de Neptuno",
+    Path = "/Sistema Solar/Planetas/Neptuno",
+    Hidden = true
+  }
+}
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(NeptuneBarycenter)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(NeptuneBarycenter)
+end)
+
+asset.export(NeptuneBarycenter)
+
+asset.meta = {
+  Name = "Transformaciones de Neptuno",
+  Description = "Transformación del Baricentro de Neptuno",
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "MIT license"
+}

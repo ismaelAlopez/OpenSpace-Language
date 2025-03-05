@@ -1,0 +1,48 @@
+local globe = asset.require("../../earth")
+
+
+
+local Layer = {
+  Identifier = "Terra_Modis_Temporal",
+  Name = "Terra Modis (Temporal)",
+  Enabled = asset.enabled,
+  ZIndex = 20,
+  Type = "TemporalTileProvider",
+  Mode = "Prototyped",
+  Prototyped = {
+    Time = {
+      Start = "2000-02-24",
+      End = "Yesterday"
+    },
+    TemporalResolution = "1d",
+    TimeFormat = "YYYY-MM-DD",
+    Prototype = openspace.globebrowsing.createTemporalGibsGdalXml(
+      "MODIS_Terra_CorrectedReflectance_TrueColor",
+      "250m",
+      "jpg"
+    )
+  },
+  Description = [[Cobertura temporal: 2 de julio de 2013 - Presente. 
+                  La resolución de la imagen es de 1 km y la resolución temporal es diaria.]]
+}
+
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.onDeinitialize(function()
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.export("layer", Layer)
+
+
+
+asset.meta = {
+  Name = "Terra Modis (Temporal)",
+  Description = "Capa alojada en GIBS",
+  Author = "Servicios Globales de Exploración de Imágenes EOSDIS de la NASA",
+  URL = "https://earthdata.nasa.gov/eosdis/science-system-description/eosdis-components/gibs",
+  License = "NASA"
+}

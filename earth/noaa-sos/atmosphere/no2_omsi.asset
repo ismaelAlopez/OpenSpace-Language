@@ -1,0 +1,68 @@
+local globe = asset.require("../../earth")
+
+local Name = "Dióxido de Nitrógeno"
+local Identifier = "noaa-sos-atmosphere-no2_omsi"
+local Description = [[El dióxido de nitrógeno (NO2) es un componente clave de la contaminación del aire urbano.
+  Los óxidos de nitrógeno ("NOx" de los cuales el NO2 es un componente) se emiten de cualquier
+  proceso de combustión. Las plantas de energía a carbón y gas y los vehículos constituyen las principales
+  fuentes antropogénicas (producidas por el hombre). Los incendios forestales y los rayos son fuentes naturales
+  de NO2, pero a nivel mundial está claro que las fuentes antropogénicas dominan. Los altos niveles de NO2
+  son significativos ya que están asociados con: 1) neblina que reduce la visibilidad; 2)
+  irritación de los ojos, nariz, garganta y pulmones; 3) lluvia ácida; 4) reducción del crecimiento
+  de plantas terrestres; 5) floraciones de algas que agotan el oxígeno; y 6) corrosión de materiales de construcción]]
+local URL = "https://sos.noaa.gov/catalog/datasets/nitrogen-dioxide/"
+
+local syncedDirectory = asset.resource({
+  Name = Name,
+  Type = "HttpSynchronization",
+  Identifier = Identifier,
+  Version = 1,
+  UnzipFiles = true
+})
+
+local Layer = {
+  Identifier = Identifier,
+  Name = Name,
+  Enabled = asset.enabled,
+  ZIndex = 100,
+  Type = "TemporalTileProvider",
+  Mode = "Folder",
+  Folder = {
+    Folder = syncedDirectory .. "2880",
+    -- See https://en.cppreference.com/w/cpp/io/manip/get_time for an explanation of the
+    -- time formatting string
+    Format = "NO2monthlymean_%Y%m.png"
+  },
+  Description = Description
+}
+
+local Colorbar = {
+  Identifier = Identifier,
+  Name = Name,
+  Enabled = asset.enabled,
+  Type = "ScreenSpaceImageLocal",
+  TexturePath = syncedDirectory .. "color_bar.jpg",
+  FaceCamera = false,
+  CartesianPosition = { 0.0, -0.5, -2.0 }
+}
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+  openspace.addScreenSpaceRenderable(Colorbar)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeScreenSpaceRenderable(Colorbar)
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.export(Layer)
+asset.export(Colorbar)
+
+asset.meta = {
+  Name = Name,
+  Description = Description .. "Datos proporcionados por la Administración Nacional Oceánica y Atmosférica",
+  Author = "Administración Nacional Oceánica y Atmosférica",
+  URL = URL,
+  License = "https://sos.noaa.gov/copyright/"
+}

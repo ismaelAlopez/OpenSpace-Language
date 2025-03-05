@@ -1,0 +1,46 @@
+local globe = asset.require("../../mars")
+
+local Layer = {
+  Identifier = "HiRISE-PSP",
+  Name = "HiRISE",
+  Enabled = asset.enabled,
+  ZIndex = 70,
+  FilePath = asset.resource("hirise.vrt"),
+  BlendMode = "Color",
+  Settings = {
+    Gamma = 1.0,
+    Multiplier = 1.0
+  },
+  Description = [[Esta capa es un mosaico compuesto ecuatorial no controlado de las
+    imágenes de HiRISE, utilizando todas las imágenes de la banda roja disponibles
+    lanzadas hasta 2018. El instrumento HiRISE, operado por la Universidad de Arizona,
+    está a bordo del Orbitador de Reconocimiento de Marte (MRO) de la NASA de 2005.
+    Aunque la resolución de las imágenes es muy alta, la extensión espacial de las
+    imágenes es algo limitada, cubriendo solo alrededor del 3% de la superficie del
+    planeta. Las imágenes en esta capa están ubicadas espacialmente utilizando solo
+    la información inicial de apuntado de la nave espacial. Todas las imágenes fuente
+    utilizadas en la construcción de esta capa fueron producidas por el equipo de la
+    Universidad de Arizona. Este servicio web en mosaico, alojado por Esri, está
+    disponible utilizando compresión Jpeg con pérdida utilizando un rango de datos de
+    8 bits, utilizando un estiramiento lineal desde el rango original de 10 bits.
+    (Descripción de la URL)]]
+}
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Mars.Identifier, "ColorLayers", Layer)
+end)
+
+asset.onDeinitialize(function()
+  openspace.globebrowsing.deleteLayer(globe.Mars.Identifier, "ColorLayers", Layer)
+end)
+
+asset.export("layer", Layer)
+
+asset.meta = {
+  Name = "HiRISE",
+  Description = [[Capa HiRISE actualizada para Marte con imágenes sin seleccionar en bruto.
+    Este mapa está alojado por ESRI]],
+  Author = "esri_astro",
+  URL = "https://www.arcgis.com/home/item.html?id=c1c4c750a2154842ae523c984cc14fa5",
+  License = "Esri Master License Agreement"
+}

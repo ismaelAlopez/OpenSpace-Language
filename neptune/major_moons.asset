@@ -1,0 +1,89 @@
+asset.require("./triton/triton")
+asset.require("./triton/default_layers")
+asset.require("./nereid/nereid")
+
+
+
+local NeptuneMajorMoonsOn = {
+  Identifier = "os.solarsystem.NeptuneMajorMoonsOn",
+  Name = "Encender lunas mayores y rastros",
+  Command = [[
+    local trails = openspace.property("{moonTrail_major_neptune}.Renderable.Enabled")
+    local trails_fade = openspace.property("{moonTrail_major_neptune}.Renderable.Fade")
+
+    local moons = openspace.property("{moon_major_neptune}.Renderable.Enabled")
+    local moons_fade = openspace.property("{moon_major_neptune}.Renderable.Fade")
+
+    for i, v in pairs(trails_fade) do
+      openspace.setPropertyValueSingle(trails[i], true)
+      openspace.setPropertyValueSingle(v, 1, 2, "Linear")
+    end
+
+    for i, v in pairs(moons_fade) do
+      openspace.setPropertyValueSingle(moons[i], true)
+      openspace.setPropertyValueSingle(v, 1, 2, "Linear")
+    end
+  ]],
+  Documentation = "Encender las lunas mayores de Neptuno y sus rastros",
+  GuiPath = "/Sistema Solar/Neptuno",
+  IsLocal = false
+}
+
+local NeptuneMajorMoonsOff = {
+  Identifier = "os.solarsystem.NeptuneMajorMoonsOff",
+  Name = "Apagar lunas mayores y rastros",
+  Command = [[
+    local trails = openspace.property("{moonTrail_major_neptune}.Renderable.Enabled")
+    local trails_fade = openspace.property("{moonTrail_major_neptune}.Renderable.Fade")
+
+    local moons = openspace.property("{moon_major_neptune}.Renderable.Enabled")
+    local moons_fade = openspace.property("{moon_major_neptune}.Renderable.Fade")
+
+    for i, v in pairs(trails_fade) do
+      openspace.setPropertyValueSingle(
+        v,
+        0,
+        2,
+        "Linear",
+        "openspace.setPropertyValueSingle('" .. trails[i] .. "', false)"
+      )
+    end
+
+    for i, v in pairs(moons_fade) do
+      openspace.setPropertyValueSingle(
+        v,
+        0,
+        2,
+        "Linear",
+        "openspace.setPropertyValueSingle('" .. moons[i] .. "', false)"
+      )
+    end
+  ]],
+  Documentation = "Apagar las lunas mayores de Neptuno y sus rastros",
+  GuiPath = "/Sistema Solar/Neptuno",
+  IsLocal = false
+}
+
+
+asset.onInitialize(function()
+  openspace.action.registerAction(NeptuneMajorMoonsOn)
+  openspace.action.registerAction(NeptuneMajorMoonsOff)
+end)
+
+asset.onDeinitialize(function()
+  openspace.action.removeAction(NeptuneMajorMoonsOff)
+  openspace.action.removeAction(NeptuneMajorMoonsOn)
+end)
+
+asset.export("NeptuneMajorMoonsOn", NeptuneMajorMoonsOn.Identifier)
+asset.export("NeptuneMajorMoonsOff", NeptuneMajorMoonsOff.Identifier)
+
+
+
+asset.meta = {
+  Name = "Lunas Mayores de Neptuno",
+  Description = "Meta asset que contiene las lunas mayores de Neptuno: Tritón y Nereida",
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "MIT license"
+}

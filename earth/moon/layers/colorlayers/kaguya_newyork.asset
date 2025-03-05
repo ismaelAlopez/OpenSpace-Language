@@ -1,0 +1,36 @@
+local globe = asset.require("../../moon")
+
+local Layer = {
+  Identifier = "Kaguya_NewYork",
+  Name = "Kaguya [Nueva York]",
+  Enabled = asset.enabled,
+  ZIndex = 20,
+  FilePath = asset.resource("kaguya_newyork.vrt"),
+  Settings = {
+    Gamma = 1.0,
+    Multiplier = 1.23
+  },
+  Description = [[Este mosaico casi global fue generado utilizando datos del Explorador
+    Selenológico e Ingenieril (SELENE) "Kaguya" de la cámara de terreno (TC). Los datos
+    de origen de TC se originaron como mosaicos proyectados en mapas a una resolución
+    espacial de ~10 metros por píxel (m)]]
+}
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Moon.Identifier, "ColorLayers", Layer)
+end)
+
+asset.onDeinitialize(function()
+  openspace.globebrowsing.deleteLayer(globe.Moon.Identifier, "ColorLayers", Layer)
+end)
+
+asset.export("layer", Layer)
+
+asset.meta = {
+  Name = "Kaguya [Nueva York]",
+  Description = [[Capa de ortomosaico global SELENE Kaguya TC 474m v2 para el globo lunar.
+    Este mapa está alojado en el servidor de OpenSpace en Nueva York]],
+  Author = "USGS",
+  URL = "https://astrogeology.usgs.gov/search/map/Moon/Kaguya/TC/Ortho/v02/Lunar_Kaguya_TC_Ortho_Global_64ppd_v02",
+  License = "NASA/PDS"
+}

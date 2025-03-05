@@ -1,0 +1,28 @@
+local globe = asset.require("../../mercury")
+
+local Layer = {
+  Identifier = "Messenger_Mosaic_Utah",
+  Name = "Mosaico Mensajero [Utah]",
+  Enabled = asset.enabled,
+  ZIndex = 20,
+  FilePath = asset.resource("messenger_mosaic_utah.wms")
+}
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Mercury.Identifier, "ColorLayers", Layer)
+end)
+
+asset.onDeinitialize(function()
+  openspace.globebrowsing.deleteLayer(globe.Mercury.Identifier, "ColorLayers", Layer)
+end)
+
+asset.export("layer", Layer)
+
+asset.meta = {
+  Name = "Mosaico Mensajero [Utah]",
+  Description = [[Capa de Mosaico Mensajero de Mercurio para el globo de Mercurio. Este mapa está alojado en
+    el servidor de OpenSpace en Utah]],
+  Author = "USGS",
+  URL = "",
+  License = "NASA/PDS"
+}

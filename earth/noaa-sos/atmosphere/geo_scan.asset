@@ -1,0 +1,51 @@
+local globe = asset.require("../../earth")
+
+local Name = "Satélites Geoestacionarios: Patrón de Escaneo"
+local Identifier = "noaa-sos-atmosphere-geo_scan"
+local Description = [[Los satélites geoestacionarios son una herramienta clave para que los científicos monitoreen
+y observen la atmósfera de la Tierra. Se les llama geoestacionarios debido a su movimiento.
+Los satélites geoestacionarios orbitan alrededor de la Tierra a la misma velocidad que la Tierra rota, por lo que
+los satélites están sobre el mismo punto en la Tierra todo el tiempo. Esto les permite
+recopilar un flujo continuo de datos para una ubicación, de modo que se puedan
+hacer "películas" de los datos. Los satélites están posicionados a 22,300 millas sobre la superficie de la Tierra para
+ver el disco completo de la Tierra y mantener su órbita geoestacionaria. Los satélites geoestacionarios
+viajan a aproximadamente 7000 mph para mantener su órbita geoestacionaria. Sobre
+los Estados Unidos hay dos de estos satélites, el GOES (Satélite Ambiental Operacional Geoestacionario) - Este y GOES-Oeste. Hay muchos de estos satélites
+en todo el mundo]]
+local URL = "https://sos.noaa.gov/catalog/datasets/geostationary-satellites-scanning-pattern/"
+
+local syncedDirectory = asset.resource({
+  Name = Name,
+  Type = "HttpSynchronization",
+  Identifier = Identifier,
+  Version = 1,
+  UnzipFiles = true
+})
+
+local Layer = {
+  Identifier = Identifier,
+  Name = Name,
+  Enabled = asset.enabled,
+  ZIndex = 100,
+  Type = "ImageSequenceTileProvider",
+  FolderPath = syncedDirectory .. "2048",
+  Description = Description
+}
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.onDeinitialize(function()
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.export(Layer)
+
+asset.meta = {
+  Name = Name,
+  Description = Description .. "Datos proporcionados por la Administración Nacional Oceánica y Atmosférica",
+  Author = "Administración Nacional Oceánica y Atmosférica",
+  URL = URL,
+  License = "https://sos.noaa.gov/copyright/"
+}

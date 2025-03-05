@@ -1,0 +1,27 @@
+local globe = asset.require("../../phobos_globe")
+
+local Layer = {
+  Identifier = "Phobos_Global_Shaded_Relief_USGS",
+  Name = "Relieve Sombreado Global de Fobos [USGS]",
+  Enabled = asset.enabled,
+  ZIndex = 10,
+  FilePath = "WMS:https://wms.wr.usgs.gov/cgi-bin/mapserv?map=/maps/mars/phobos_simp_cyl.map&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&LAYERS=Phobos_Simple_Cylindrical_Rasters&SRS=EPSG:4326&BBOX=-180,-90,360,90",
+  Description = "Relieve sombreado de Fobos basado en Viking creado por USGS"
+}
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Phobos_Globe.Identifier, "ColorLayers", Layer)
+end)
+
+asset.onDeinitialize(function()
+  openspace.globebrowsing.deleteLayer(globe.Phobos_Globe.Identifier, "ColorLayers", Layer)
+end)
+
+asset.export("layer", Layer)
+
+asset.meta = {
+  Name = "Relieve Sombreado Global de Fobos [USGS]",
+  Author = "USGS/NASA",
+  URL = "https://astrowebmaps.wr.usgs.gov/webmapatlas/Layers/maps.html",
+  License = "NASA/PDS"
+}

@@ -1,0 +1,43 @@
+local transforms = asset.require("scene/solarsystem/planets/earth/transforms")
+local coreKernels = asset.require("spice/core")
+
+local MarsTrailEarth = {
+  Identifier = "MarsTrailEarth",
+  Parent = transforms.EarthBarycenter.Identifier,
+  Renderable = {
+    Type = "RenderableTrailOrbit",
+    Enabled = false,
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = coreKernels.ID.Mars,
+      Observer = coreKernels.ID.Earth
+    },
+    Color = { 0.814, 0.305, 0.220 },
+    Period = 5990.0,
+    Resolution = 1000
+  },
+  Tag = { "planetTrail_solarSystem_alt", "planetTrail_terrestrial_alt" },
+  GUI = {
+    Name = "Rastro de Marte desde la Tierra",
+    Path = "/Sistema Solar/Planetas/Marte",
+    Description = "Rastro de Marte observado desde la Tierra"
+  }
+}
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(MarsTrailEarth)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(MarsTrailEarth)
+end)
+
+asset.export(MarsTrailEarth)
+
+asset.meta = {
+  Name = "Rastro de Marte desde la Tierra",
+  Description = "Rastro de Marte, con la Tierra como observador SPICE",
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "MIT license"
+}

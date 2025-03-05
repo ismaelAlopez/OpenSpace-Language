@@ -1,0 +1,36 @@
+local globe = asset.require("../../moon")
+
+local Layer = {
+  Identifier = "ClemUvvis_Sweden",
+  Name = "Clem Uvvis [Suecia]",
+  Enabled = asset.enabled,
+  ZIndex = 20,
+  FilePath = asset.resource("clemuvvis_sweden.wms"),
+  Settings = {
+    Gamma = 1.14,
+    Multiplier = 1.4
+  },
+  Description = [[El mosaico de Clementine Ultravioleta/Visible (UVVIS) Versión 2 es un
+    conjunto de datos en escala de grises que representa el albedo (brillo de la superficie lunar) como
+    medido a la longitud de onda de 750 nanómetros (nm) por la cámara UVVIS (Lee, et al., 2009).
+    La resolución de este mosaico es de 118 metros por píxel (m)]]
+}
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Moon.Identifier, "ColorLayers", Layer)
+end)
+
+asset.onDeinitialize(function()
+  openspace.globebrowsing.deleteLayer(globe.Moon.Identifier, "ColorLayers", Layer)
+end)
+
+asset.export("layer", Layer)
+
+asset.meta = {
+  Name = "Clem Uvvis [Suecia]",
+  Description = [[Mapa global de la Luna Clementine UVVIS 118m v2. Este mapa
+    está alojado en el servidor de OpenSpace en Suecia]],
+  Author = "USGS",
+  URL = "https://astrogeology.usgs.gov/search/map/Moon/Clementine/UVVIS/Lunar_Clementine_UVVIS_750nm_Global_Mosaic_118m_v2",
+  License = "NASA/PDS"
+}

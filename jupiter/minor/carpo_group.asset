@@ -1,0 +1,282 @@
+local transforms = asset.require("../transforms")
+local kernels344 = asset.require("../kernels344")
+local kernels346 = asset.require("../kernels346")
+local coreKernels = asset.require("spice/core")
+
+
+
+local Carpo = {
+  Identifier = "Carpo",
+  Parent = transforms.JupiterBarycenter.Identifier,
+  Transform = {
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels344.ID.Carpo,
+      Observer = coreKernels.ID.JupiterBarycenter
+    }
+  },
+  Renderable = {
+    Type = "RenderableGlobe",
+    Radii = { 3000, 3000, 3000 }
+  },
+  Tag = {
+    "moon_solarSystem",
+    "moon_giants",
+    "moon_jupiter",
+    "moon_carpo",
+    "moon_minor",
+    "moon_minor_jupiter"
+  },
+  GUI = {
+    Name = "Carpo",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Carpo/Carpo"
+  }
+}
+
+local CarpoTrail = {
+  Identifier = "CarpoTrail",
+  Parent = transforms.JupiterBarycenter.Identifier,
+  Renderable = {
+    Type = "RenderableTrailOrbit",
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels344.ID.Carpo,
+      Observer = coreKernels.ID.JupiterBarycenter
+    },
+    Color = { 0.4, 0.3, 0.01 },
+    Period = 458.62,
+    Resolution = 1000
+  },
+  Tag = {
+    "moonTrail_solarSystem",
+    "moonTrail_giants",
+    "moonTrail_jupiter",
+    "moonTrail_carpo",
+    "moonTrail_minor",
+    "moonTrail_minor_jupiter"
+  },
+  GUI = {
+    Name = "Rastro de Carpo",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Carpo/Carpo"
+  }
+}
+
+local CarpoLabel = {
+  Identifier = "CarpoLabel",
+  Parent = Carpo.Identifier,
+  Renderable = {
+    Type = "RenderableLabel",
+    Enabled = false,
+    Text = "Carpo",
+    FontSize = 70.0,
+    Size = 7.1,
+    MinMaxSize = { 1, 25 },
+    OrientationOption = "Camera View Direction",
+    BlendMode = "Additive",
+    EnableFading = true,
+    FadeUnit = "Gm",
+    FadeDistances = { 1.0, 100.0 },
+    FadeWidths = { 0.0, 100.0 }
+  },
+  Tag = {
+    "solarsystem_labels",
+    "moon_labels",
+    "minor_moon_labels",
+    "minor_moon_labels_jupiter",
+    "minor_moon_labels_carpo"
+  },
+  GUI = {
+    Name = "Etiqueta de Carpo",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Carpo/Carpo",
+    Description = "Etiqueta para la luna de Júpiter Carpo (grupo Carpo)"
+  }
+}
+
+local CarpoLabelNear = {
+  Identifier = "CarpoLabelNear",
+  Parent = Carpo.Identifier,
+  Renderable = {
+    Type = "RenderableLabel",
+    Enabled = false,
+    Text = "Carpo",
+    FontSize = 70.0,
+    Size = 5.5,
+    MinMaxSize = { 1, 25 },
+    OrientationOption = "Camera View Direction",
+    BlendMode = "Additive",
+    EnableFading = true,
+    FadeUnit = "Gm",
+    FadeDistances = { 0.2, 1.0 },
+    FadeWidths = { 0.1, 0.0 }
+  },
+  Tag = {
+    "solarsystem_labels",
+    "moon_labels",
+    "minor_moon_labels",
+    "minor_moon_labels_jupiter",
+    "minor_moon_labels_carpo"
+  },
+  GUI = {
+    Name = "Etiqueta de Carpo (Cerca)",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Carpo/Carpo",
+    Description = "Etiqueta transicional para la visualización de cerca de Carpo (grupo Carpo)"
+  }
+}
+
+local S2018J4 = {
+  Identifier = "S2018J4",
+  Parent = transforms.JupiterBarycenter.Identifier,
+  Transform = {
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels346.ID.S2018J4,
+      Observer = coreKernels.ID.JupiterBarycenter
+    }
+  },
+  Renderable = {
+    Type = "RenderableGlobe",
+    Radii = { 2000, 2000, 2000 }
+  },
+  Tag = {
+    "moon_solarSystem",
+    "moon_giants",
+    "moon_jupiter",
+    "moon_carpo",
+    "moon_minor",
+    "moon_minor_jupiter"
+  },
+  GUI = {
+    Name = "S/2018 J 4",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Carpo/S2018J4"
+  }
+}
+
+local S2018J4Trail = {
+  Identifier = "S2018J4Trail",
+  Parent = transforms.JupiterBarycenter.Identifier,
+  Renderable = {
+    Type = "RenderableTrailOrbit",
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels346.ID.S2018J4,
+      Observer = coreKernels.ID.JupiterBarycenter
+    },
+    Color = { 0.4, 0.3, 0.01 },
+    Period = 458.62,
+    Resolution = 1000
+  },
+  Tag = {
+    "moonTrail_solarSystem",
+    "moonTrail_giants",
+    "moonTrail_jupiter",
+    "moonTrail_carpo",
+    "moonTrail_minor",
+    "moonTrail_minor_jupiter"
+  },
+  GUI = {
+    Name = "Rastro de S/2018 J 4",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Carpo/S2018J4"
+  }
+}
+
+local S2018J4Label = {
+  Identifier = "S2018J4Label",
+  Parent = S2018J4.Identifier,
+  Renderable = {
+    Type = "RenderableLabel",
+    Enabled = false,
+    Text = "S/2018 J 4",
+    FontSize = 70.0,
+    Size = 7.1,
+    MinMaxSize = { 1, 25 },
+    OrientationOption = "Camera View Direction",
+    BlendMode = "Additive",
+    EnableFading = true,
+    FadeUnit = "Gm",
+    FadeDistances = { 1.5, 90.0 },
+    FadeWidths = { 0.5, 90.0 }
+  },
+  Tag = {
+    "solarsystem_labels",
+    "moon_labels",
+    "minor_moon_labels",
+    "minor_moon_labels_jupiter",
+    "minor_moon_labels_carpo"
+  },
+  GUI = {
+    Name = "Etiqueta de S/2018 J 4",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Carpo/S2018J4",
+    Description = "Etiqueta para la luna de Júpiter S2018J4 (grupo Carpo)"
+  }
+}
+
+local S2018J4LabelNear = {
+  Identifier = "S2018J4LabelNear",
+  Parent = S2018J4.Identifier,
+  Renderable = {
+    Type = "RenderableLabel",
+    Enabled = false,
+    Text = "S2018J4",
+    FontSize = 70.0,
+    Size = 5.5,
+    MinMaxSize = { 1, 25 },
+    OrientationOption = "Camera View Direction",
+    BlendMode = "Additive",
+    EnableFading = true,
+    FadeUnit = "Gm",
+    FadeDistances = { 0.2, 1.0 },
+    FadeWidths = { 0.1, 0.0 }
+  },
+  Tag = {
+    "solarsystem_labels",
+    "moon_labels",
+    "minor_moon_labels",
+    "minor_moon_labels_jupiter",
+    "minor_moon_labels_carpo"
+  },
+  GUI = {
+    Name = "Etiqueta de S2018J4 (Cerca)",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Carpo/S2018J4",
+    Description = "Etiqueta transicional para la visualización de cerca de S2018J4 (grupo Carpo)"
+  }
+}
+
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(Carpo)
+  openspace.addSceneGraphNode(CarpoTrail)
+  openspace.addSceneGraphNode(CarpoLabel)
+  openspace.addSceneGraphNode(CarpoLabelNear)
+  openspace.addSceneGraphNode(S2018J4)
+  openspace.addSceneGraphNode(S2018J4Trail)
+  openspace.addSceneGraphNode(S2018J4Label)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(S2018J4Label)
+  openspace.removeSceneGraphNode(S2018J4Trail)
+  openspace.removeSceneGraphNode(S2018J4)
+  openspace.removeSceneGraphNode(CarpoLabelNear)
+  openspace.removeSceneGraphNode(CarpoLabel)
+  openspace.removeSceneGraphNode(CarpoTrail)
+  openspace.removeSceneGraphNode(Carpo)
+end)
+
+asset.export(Carpo)
+asset.export(CarpoTrail)
+asset.export(CarpoLabel)
+asset.export(CarpoLabelNear)
+asset.export(S2018J4)
+asset.export(S2018J4Trail)
+asset.export(S2018J4Label)
+
+
+
+asset.meta = {
+  Name = "Lunas del Grupo Carpo de Júpiter",
+  Description = [[Activo de Globo Procedural que contiene las lunas del Grupo Carpo de Júpiter: Carpo.
+    Se generan globos en blanco y rastros SPICE para cada luna]],
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "MIT license"
+}

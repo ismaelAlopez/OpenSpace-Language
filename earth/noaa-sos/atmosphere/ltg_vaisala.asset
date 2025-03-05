@@ -1,0 +1,62 @@
+local globe = asset.require("../../earth")
+
+local Name = "Detección de Rayos - Jun 2011 - Ago 2012"
+local Identifier = "noaa-sos-atmosphere-ltg_vaisala"
+local Description = [[El conjunto de datos globales de rayos GLD360 detecta entre 1 y 3 millones de eventos de rayos en todo el mundo cada día del año. La actividad de rayos no se distribuye uniformemente en todo el globo. Aproximadamente diez veces más destellos ocurren sobre tierra que sobre los océanos, y la mayoría de los rayos globales se concentran en los trópicos. A lo largo de un año, las regiones con mayor tasa de destellos siguen la inclinación del sol. El hemisferio norte ve más actividad durante junio a agosto; el hemisferio sur tiene tasas de destellos más altas en enero a marzo. Estos patrones estacionales se pueden ver claramente en estas imágenes, que muestran el número total de eventos detectados en cada mes por kilómetro cuadrado. La escala de colores varía desde menos de 0.01 pulsos de rayos por kilómetro cuadrado en el mes correspondiente hasta más de 20 pulsos por kilómetro cuadrado. Cada rango de color corresponde a un factor de dos de aumento en el número de eventos. Este conjunto de datos abarca desde junio de 2011 hasta agosto de 2012]]
+local URL = "c"
+
+local syncedDirectory = asset.resource({
+  Name = Name,
+  Type = "HttpSynchronization",
+  Identifier = Identifier,
+  Version = 1,
+  UnzipFiles = true
+})
+
+local Layer = {
+  Identifier = Identifier,
+  Name = Name,
+  Enabled = asset.enabled,
+  Type = "TemporalTileProvider",
+  ZIndex = 100,
+  Mode = "Folder",
+  Folder = {
+    Folder = syncedDirectory .. "2160",
+    -- See https://en.cppreference.com/w/cpp/io/manip/get_time for an explanation of the
+    -- time formatting string
+    Format = "%Y_%m-1.png"
+  },
+  Description = Description
+}
+
+local Colorbar = {
+  Identifier = Identifier,
+  Name = Name,
+  Enabled = asset.enabled,
+  Type = "ScreenSpaceImageLocal",
+  TexturePath = syncedDirectory .. "colorbar.png",
+  FaceCamera = false,
+  Scale = 0.1,
+  CartesianPosition = { 0.75, 0.0, -2.0 }
+}
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+  openspace.addScreenSpaceRenderable(Colorbar)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeScreenSpaceRenderable(Colorbar)
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.export(Layer)
+asset.export(Colorbar)
+
+asset.meta = {
+  Name = Name,
+  Description = Description .. "Datos proporcionados por la Administración Nacional Oceánica y Atmosférica",
+  Author = "Administración Nacional Oceánica y Atmosférica",
+  URL = URL,
+  License = "https://sos.noaa.gov/copyright/"
+}

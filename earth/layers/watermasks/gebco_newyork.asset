@@ -1,0 +1,27 @@
+local globe = asset.require("../../earth")
+
+local Layer = {
+  Name = "Gebco [Nueva York]",
+  Identifier = "Gebco_NewYork",
+  Enabled = asset.enabled,
+  ZIndex = 10,
+  FilePath = asset.resource("gebco_newyork.wms")
+}
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "WaterMasks", Layer)
+end)
+
+asset.onDeinitialize(function()
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "WaterMasks", Layer)
+end)
+
+asset.export("layer", Layer)
+
+asset.meta = {
+  Name = "Capa de Máscara de Agua Gebco (Nueva York)",
+  Description = "Capa de Máscara de Agua para el globo terráqueo",
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "MIT license"
+}

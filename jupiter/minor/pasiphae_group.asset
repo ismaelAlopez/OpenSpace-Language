@@ -1,0 +1,2300 @@
+local transforms = asset.require("../transforms")
+local kernels344 = asset.require("../kernels344")
+local kernels346 = asset.require("../kernels346")
+local coreKernels = asset.require("spice/core")
+
+
+
+local Euporie = {
+  Identifier = "Euporie",
+  Parent = transforms.JupiterBarycenter.Identifier,
+  Transform = {
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels344.ID.Euporie,
+      Observer = coreKernels.ID.JupiterBarycenter
+    }
+  },
+  Renderable = {
+    Type = "RenderableGlobe",
+    Radii = { 2000, 2000, 2000 }
+  },
+  Tag = {
+    "moon_solarSystem",
+    "moon_giants",
+    "moon_jupiter",
+    "moon_pasiphae",
+    "moon_minor",
+    "moon_minor_jupiter"
+  },
+  GUI = {
+    Name = "Euporie",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Pasífae/Euporie"
+  }
+}
+
+local EuporieTrail = {
+  Identifier = "EuporieTrail",
+  Parent = transforms.JupiterBarycenter.Identifier,
+  Renderable = {
+    Type = "RenderableTrailOrbit",
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels344.ID.Euporie,
+      Observer = coreKernels.ID.JupiterBarycenter
+    },
+    Color = { 0.4, 0.3, 0.01 },
+    Period = 538.78,
+    Resolution = 1000
+  },
+  Tag = {
+    "moonTrail_solarSystem",
+    "moonTrail_giants",
+    "moonTrail_jupiter",
+    "moonTrail_pasiphae",
+    "moonTrail_minor",
+    "moonTrail_minor_jupiter"
+  },
+  GUI = {
+    Name = "Rastro de Euporie",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Pasífae/Euporie"
+  }
+}
+
+local EuporieLabel = {
+  Identifier = "EuporieLabel",
+  Parent = Euporie.Identifier,
+  Renderable = {
+    Type = "RenderableLabel",
+    Enabled = false,
+    Text = "Euporie",
+    FontSize = 70.0,
+    Size = 7.1,
+    MinMaxSize = { 1, 25 },
+    OrientationOption = "Camera View Direction",
+    BlendMode = "Additive",
+    EnableFading = true,
+    FadeUnit = "Gm",
+    FadeDistances = { 1.5, 140.0 },
+    FadeWidths = { 0.5, 50.0 }
+  },
+  Tag = {
+    "solarsystem_labels",
+    "moon_labels",
+    "minor_moon_labels",
+    "minor_moon_labels_jupiter",
+    "minor_moon_labels_pasiphae"
+  },
+  GUI = {
+    Name = "Etiqueta de Euporie",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Pasífae/Euporie",
+    Description = "Etiqueta para la luna de Júpiter Euporie (grupo Pasífae)"
+  }
+}
+
+local S2003J18 = {
+  Identifier = "S2003J18",
+  Parent = transforms.JupiterBarycenter.Identifier,
+  Transform = {
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels344.ID.S2003J18,
+      Observer = coreKernels.ID.JupiterBarycenter
+    }
+  },
+  Renderable = {
+    Type = "RenderableGlobe",
+    Radii = { 2000, 2000, 2000 }
+  },
+  Tag = {
+    "moon_solarSystem",
+    "moon_giants",
+    "moon_jupiter",
+    "moon_pasiphae",
+    "moon_minor",
+    "moon_minor_jupiter"
+  },
+  GUI = {
+    Name = "S/2003 J 18",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Pasífae/S2003J18"
+  }
+}
+
+local S2003J18Trail = {
+  Identifier = "S2003J18Trail",
+  Parent = transforms.JupiterBarycenter.Identifier,
+  Renderable = {
+    Type = "RenderableTrailOrbit",
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels344.ID.S2003J18,
+      Observer = coreKernels.ID.JupiterBarycenter
+    },
+    Color = { 0.4, 0.3, 0.01 },
+    Period = 587.38,
+    Resolution = 1000
+  },
+  Tag = {
+    "moonTrail_solarSystem",
+    "moonTrail_giants",
+    "moonTrail_jupiter",
+    "moonTrail_pasiphae",
+    "moonTrail_minor",
+    "moonTrail_minor_jupiter"
+  },
+  GUI = {
+    Name = "Rastro de S/2003 J 18",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Pasífae/S2003J18"
+  }
+}
+
+local S2003J18Label = {
+  Identifier = "S2003J18Label",
+  Parent = S2003J18.Identifier,
+  Renderable = {
+    Type = "RenderableLabel",
+    Enabled = false,
+    Text = "S/2003 J 18",
+    FontSize = 70.0,
+    Size = 7.1,
+    MinMaxSize = { 1, 25 },
+    OrientationOption = "Camera View Direction",
+    BlendMode = "Additive",
+    EnableFading = true,
+    FadeUnit = "Gm",
+    FadeDistances = { 1.5, 140.0 },
+    FadeWidths = { 0.5, 50.0 }
+  },
+  Tag = {
+    "solarsystem_labels",
+    "moon_labels",
+    "minor_moon_labels",
+    "minor_moon_labels_jupiter",
+    "minor_moon_labels_pasiphae"
+  },
+  GUI = {
+    Name = "Etiqueta de S/2003 J 18",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Pasífae/S2003J18",
+    Description = "Etiqueta para la luna de Júpiter S/2003 J 18 (grupo Pasífae)"
+  }
+}
+
+local Helike = {
+  Identifier = "Helike",
+  Parent = transforms.JupiterBarycenter.Identifier,
+  Transform = {
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels344.ID.Helike,
+      Observer = coreKernels.ID.JupiterBarycenter
+    }
+  },
+  Renderable = {
+    Type = "RenderableGlobe",
+    Radii = { 4000, 4000, 4000 }
+  },
+  Tag = {
+    "moon_solarSystem",
+    "moon_giants",
+    "moon_jupiter",
+    "moon_pasiphae",
+    "moon_minor",
+    "moon_minor_jupiter"
+  },
+  GUI = {
+    Name = "Helike",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Pasífae/Helike"
+  }
+}
+
+local HelikeTrail = {
+  Identifier = "HelikeTrail",
+  Parent = transforms.JupiterBarycenter.Identifier,
+  Renderable = {
+    Type = "RenderableTrailOrbit",
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels344.ID.Helike,
+      Observer = coreKernels.ID.JupiterBarycenter
+    },
+    Color = { 0.4, 0.3, 0.01 },
+    Period = 601.40,
+    Resolution = 1000
+  },
+  Tag = {
+    "moonTrail_solarSystem",
+    "moonTrail_giants",
+    "moonTrail_jupiter",
+    "moonTrail_pasiphae",
+    "moonTrail_minor",
+    "moonTrail_minor_jupiter"
+  },
+  GUI = {
+    Name = "Rastro de Helike",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Pasífae/Helike"
+  }
+}
+
+local HelikeLabel = {
+  Identifier = "HelikeLabel",
+  Parent = Helike.Identifier,
+  Renderable = {
+    Type = "RenderableLabel",
+    Enabled = false,
+    Text = "Helike",
+    FontSize = 70.0,
+    Size = 7.1,
+    MinMaxSize = { 1, 25 },
+    OrientationOption = "Camera View Direction",
+    BlendMode = "Additive",
+    EnableFading = true,
+    FadeUnit = "Gm",
+    FadeDistances = { 1.5, 140.0 },
+    FadeWidths = { 0.5, 50.0 }
+  },
+  Tag = {
+    "solarsystem_labels",
+    "moon_labels",
+    "minor_moon_labels",
+    "minor_moon_labels_jupiter",
+    "minor_moon_labels_pasiphae"
+  },
+  GUI = {
+    Name = "Etiqueta de Helike",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Pasífae/Helike",
+    Description = "Etiqueta para la luna de Júpiter Helike (grupo Pasífae)"
+  }
+}
+
+local Orthosie = {
+  Identifier = "Orthosie",
+  Parent = transforms.JupiterBarycenter.Identifier,
+  Transform = {
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels344.ID.Orthosie,
+      Observer = coreKernels.ID.JupiterBarycenter
+    }
+  },
+  Renderable = {
+    Type = "RenderableGlobe",
+    Radii = { 2000, 2000, 2000 }
+  },
+  Tag = {
+    "moon_solarSystem",
+    "moon_giants",
+    "moon_jupiter",
+    "moon_pasiphae",
+    "moon_minor",
+    "moon_minor_jupiter"
+  },
+  GUI = {
+    Name = "Orthosie",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Pasífae/Orthosie"
+  }
+}
+
+local OrthosieTrail = {
+  Identifier = "OrthosieTrail",
+  Parent = transforms.JupiterBarycenter.Identifier,
+  Renderable = {
+    Type = "RenderableTrailOrbit",
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels344.ID.Orthosie,
+      Observer = coreKernels.ID.JupiterBarycenter
+    },
+    Color = { 0.4, 0.3, 0.01 },
+    Period = 602.62,
+    Resolution = 1000
+  },
+  Tag = {
+    "moonTrail_solarSystem",
+    "moonTrail_giants",
+    "moonTrail_jupiter",
+    "moonTrail_pasiphae",
+    "moonTrail_minor",
+    "moonTrail_minor_jupiter"
+  },
+  GUI = {
+    Name = "Rastro de Orthosie",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Pasífae/Orthosie"
+  }
+}
+
+local OrthosieLabel = {
+  Identifier = "OrthosieLabel",
+  Parent = Orthosie.Identifier,
+  Renderable = {
+    Type = "RenderableLabel",
+    Enabled = false,
+    Text = "Orthosie",
+    FontSize = 70.0,
+    Size = 7.1,
+    MinMaxSize = { 1, 25 },
+    OrientationOption = "Camera View Direction",
+    BlendMode = "Additive",
+    EnableFading = true,
+    FadeUnit = "Gm",
+    FadeDistances = { 1.5, 140.0 },
+    FadeWidths = { 0.5, 50.0 }
+  },
+  Tag = {
+    "solarsystem_labels",
+    "moon_labels",
+    "minor_moon_labels",
+    "minor_moon_labels_jupiter",
+    "minor_moon_labels_pasiphae"
+  },
+  GUI = {
+    Name = "Etiqueta de Orthosie",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Pasífae/Orthosie",
+    Description = "Etiqueta para la luna de Júpiter Orthosie (grupo Pasífae)"
+  }
+}
+
+local S2016J1 = {
+  Identifier = "S2016J1",
+  Parent = transforms.JupiterBarycenter.Identifier,
+  Transform = {
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels344.ID.S2016J1,
+      Observer = coreKernels.ID.JupiterBarycenter
+    }
+  },
+  Renderable = {
+    Type = "RenderableGlobe",
+    Radii = { 3000, 3000, 3000 }
+  },
+  Tag = {
+    "moon_solarSystem",
+    "moon_giants",
+    "moon_jupiter",
+    "moon_pasiphae",
+    "moon_minor",
+    "moon_minor_jupiter"
+  },
+  GUI = {
+    Name = "S/2016 J 1",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Pasífae/S2016J1"
+  }
+}
+
+local S2016J1Trail = {
+  Identifier = "S2016J1Trail",
+  Parent = transforms.JupiterBarycenter.Identifier,
+  Renderable = {
+    Type = "RenderableTrailOrbit",
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels344.ID.S2016J1,
+      Observer = coreKernels.ID.JupiterBarycenter
+    },
+    Color = { 0.4, 0.3, 0.01 },
+    Period = 603.83,
+    Resolution = 1000
+  },
+  Tag = {
+    "moonTrail_solarSystem",
+    "moonTrail_giants",
+    "moonTrail_jupiter",
+    "moonTrail_pasiphae",
+    "moonTrail_minor",
+    "moonTrail_minor_jupiter"
+  },
+  GUI = {
+    Name = "Rastro de S/2016 J 1",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Pasífae/S2016J1"
+  }
+}
+
+local S2016J1Label = {
+  Identifier = "S2016J1Label",
+  Parent = S2016J1.Identifier,
+  Renderable = {
+    Type = "RenderableLabel",
+    Enabled = false,
+    Text = "S/2016 J 1",
+    FontSize = 70.0,
+    Size = 7.1,
+    MinMaxSize = { 1, 25 },
+    OrientationOption = "Camera View Direction",
+    BlendMode = "Additive",
+    EnableFading = true,
+    FadeUnit = "Gm",
+    FadeDistances = { 1.5, 140.0 },
+    FadeWidths = { 0.5, 50.0 }
+  },
+  Tag = {
+    "solarsystem_labels",
+    "moon_labels",
+    "minor_moon_labels",
+    "minor_moon_labels_jupiter",
+    "minor_moon_labels_pasiphae"
+  },
+  GUI = {
+    Name = "Etiqueta de S/2016 J 1",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Pasífae/S2016J1",
+    Description = "Etiqueta para la luna de Júpiter S/2016 J 1 (grupo Pasífae)"
+  }
+}
+
+local S2003J15 = {
+  Identifier = "S2003J15",
+  Parent = transforms.JupiterBarycenter.Identifier,
+  Transform = {
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels344.ID.S2003J15,
+      Observer = coreKernels.ID.JupiterBarycenter
+    }
+  },
+  Renderable = {
+    Type = "RenderableGlobe",
+    Radii = { 2000, 2000, 2000 }
+  },
+  Tag = {
+    "moon_solarSystem",
+    "moon_giants",
+    "moon_jupiter",
+    "moon_pasiphae",
+    "moon_minor",
+    "moon_minor_jupiter"
+  },
+  GUI = {
+    Name = "S/2003 J 15",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Pasífae/S2003J15"
+  }
+}
+
+local S2003J15Trail = {
+  Identifier = "S2003J15Trail",
+  Parent = transforms.JupiterBarycenter.Identifier,
+  Renderable = {
+    Type = "RenderableTrailOrbit",
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels344.ID.S2003J15,
+      Observer = coreKernels.ID.JupiterBarycenter
+    },
+    Color = { 0.4, 0.3, 0.01 },
+    Period = 699.68,
+    Resolution = 1000
+  },
+  Tag = {
+    "moonTrail_solarSystem",
+    "moonTrail_giants",
+    "moonTrail_jupiter",
+    "moonTrail_pasiphae",
+    "moonTrail_minor",
+    "moonTrail_minor_jupiter"
+  },
+  GUI = {
+    Name = "Rastro de S/2003 J 15",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Pasífae/S2003J15"
+  }
+}
+
+local S2003J15Label = {
+  Identifier = "S2003J15Label",
+  Parent = S2003J15.Identifier,
+  Renderable = {
+    Type = "RenderableLabel",
+    Enabled = false,
+    Text = "S/2003 J 15",
+    FontSize = 70.0,
+    Size = 7.1,
+    MinMaxSize = { 1, 25 },
+    OrientationOption = "Camera View Direction",
+    BlendMode = "Additive",
+    EnableFading = true,
+    FadeUnit = "Gm",
+    FadeDistances = { 1.5, 140.0 },
+    FadeWidths = { 0.5, 50.0 }
+  },
+  Tag = {
+    "solarsystem_labels",
+    "moon_labels",
+    "minor_moon_labels",
+    "minor_moon_labels_jupiter",
+    "minor_moon_labels_pasiphae"
+  },
+  GUI = {
+    Name = "Etiqueta de S/2003 J 15",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Pasífae/S2003J15",
+    Description = "Etiqueta para la luna de Júpiter S/2003 J 15 (grupo Pasífae)"
+  }
+}
+
+local Aoede = {
+  Identifier = "Aoede",
+  Parent = transforms.JupiterBarycenter.Identifier,
+  Transform = {
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels344.ID.Aoede,
+      Observer = coreKernels.ID.JupiterBarycenter
+    }
+  },
+  Renderable = {
+    Type = "RenderableGlobe",
+    Radii = { 4000, 4000, 4000 }
+  },
+  Tag = {
+    "moon_solarSystem",
+    "moon_giants",
+    "moon_jupiter",
+    "moon_pasiphae",
+    "moon_minor",
+    "moon_minor_jupiter"
+  },
+  GUI = {
+    Name = "Aoede",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Pasífae/Aoede"
+  }
+}
+
+local AoedeTrail = {
+  Identifier = "AoedeTrail",
+  Parent = transforms.JupiterBarycenter.Identifier,
+  Renderable = {
+    Type = "RenderableTrailOrbit",
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels344.ID.Aoede,
+      Observer = coreKernels.ID.JupiterBarycenter
+    },
+    Color = { 0.4, 0.3, 0.01 },
+    Period = 714.66,
+    Resolution = 1000
+  },
+  Tag = {
+    "moonTrail_solarSystem",
+    "moonTrail_giants",
+    "moonTrail_jupiter",
+    "moonTrail_pasiphae",
+    "moonTrail_minor",
+    "moonTrail_minor_jupiter"
+  },
+  GUI = {
+    Name = "Rastro de Aoede",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Pasífae/Aoede"
+  }
+}
+
+local AoedeLabel = {
+  Identifier = "AoedeLabel",
+  Parent = Aoede.Identifier,
+  Renderable = {
+    Type = "RenderableLabel",
+    Enabled = false,
+    Text = "Aoede",
+    FontSize = 70.0,
+    Size = 7.1,
+    MinMaxSize = { 1, 25 },
+    OrientationOption = "Camera View Direction",
+    BlendMode = "Additive",
+    EnableFading = true,
+    FadeUnit = "Gm",
+    FadeDistances = { 1.5, 140.0 },
+    FadeWidths = { 0.5, 50.0 }
+  },
+  Tag = {
+    "solarsystem_labels",
+    "moon_labels",
+    "minor_moon_labels",
+    "minor_moon_labels_jupiter",
+    "minor_moon_labels_pasiphae"
+  },
+  GUI = {
+    Name = "Etiqueta de Aoede",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Pasífae/Aoede",
+    Description = "Etiqueta para la luna de Júpiter Aoede (grupo Pasífae)"
+  }
+}
+
+local Callirrhoe = {
+  Identifier = "Callirrhoe",
+  Parent = transforms.JupiterBarycenter.Identifier,
+  Transform = {
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels344.ID.Callirrhoe,
+      Observer = coreKernels.ID.JupiterBarycenter
+    }
+  },
+  Renderable = {
+    Type = "RenderableGlobe",
+    Radii = { 9000, 9000, 9000 }
+  },
+  Tag = {
+    "moon_solarSystem",
+    "moon_giants",
+    "moon_jupiter",
+    "moon_pasiphae",
+    "moon_minor",
+    "moon_minor_jupiter"
+  },
+  GUI = {
+    Name = "Callirrhoe",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Pasífae/Callirrhoe"
+  }
+}
+
+local CallirrhoeTrail = {
+  Identifier = "CallirrhoeTrail",
+  Parent = transforms.JupiterBarycenter.Identifier,
+  Renderable = {
+    Type = "RenderableTrailOrbit",
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels344.ID.Callirrhoe,
+      Observer = coreKernels.ID.JupiterBarycenter
+    },
+    Color = { 0.4, 0.3, 0.01 },
+    Period = 727.11,
+    Resolution = 1000
+  },
+  Tag = {
+    "moonTrail_solarSystem",
+    "moonTrail_giants",
+    "moonTrail_jupiter",
+    "moonTrail_pasiphae",
+    "moonTrail_minor",
+    "moonTrail_minor_jupiter"
+  },
+  GUI = {
+    Name = "Rastro de Callirrhoe",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Pasífae/Callirrhoe"
+  }
+}
+
+local CallirrhoeLabel = {
+  Identifier = "CallirrhoeLabel",
+  Parent = Callirrhoe.Identifier,
+  Renderable = {
+    Type = "RenderableLabel",
+    Enabled = false,
+    Text = "Callirrhoe",
+    FontSize = 70.0,
+    Size = 7.1,
+    MinMaxSize = { 1, 25 },
+    OrientationOption = "Camera View Direction",
+    BlendMode = "Additive",
+    EnableFading = true,
+    FadeUnit = "Gm",
+    FadeDistances = { 1.5, 140.0 },
+    FadeWidths = { 0.5, 50.0 }
+  },
+  Tag = {
+    "solarsystem_labels",
+    "moon_labels",
+    "minor_moon_labels",
+    "minor_moon_labels_jupiter",
+    "minor_moon_labels_pasiphae"
+  },
+  GUI = {
+    Name = "Etiqueta de Callirrhoe",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Pasífae/Callirrhoe",
+    Description = "Etiqueta para la luna de Júpiter Callirrhoe (grupo Pasífae)"
+  }
+}
+
+local Eurydome = {
+  Identifier = "Eurydome",
+  Parent = transforms.JupiterBarycenter.Identifier,
+  Transform = {
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels344.ID.Eurydome,
+      Observer = coreKernels.ID.JupiterBarycenter
+    }
+  },
+  Renderable = {
+    Type = "RenderableGlobe",
+    Radii = { 3000, 3000, 3000 }
+  },
+  Tag = {
+    "moon_solarSystem",
+    "moon_giants",
+    "moon_jupiter",
+    "moon_pasiphae",
+    "moon_minor",
+    "moon_minor_jupiter"
+  },
+  GUI = {
+    Name = "Eurydome",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Pasífae/Eurydome"
+  }
+}
+
+local EurydomeTrail = {
+  Identifier = "EurydomeTrail",
+  Parent = transforms.JupiterBarycenter.Identifier,
+  Renderable = {
+    Type = "RenderableTrailOrbit",
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels344.ID.Eurydome,
+      Observer = coreKernels.ID.JupiterBarycenter
+    },
+    Color = { 0.4, 0.3, 0.01 },
+    Period = 723.36,
+    Resolution = 1000
+  },
+  Tag = {
+    "moonTrail_solarSystem",
+    "moonTrail_giants",
+    "moonTrail_jupiter",
+    "moonTrail_pasiphae",
+    "moonTrail_minor",
+    "moonTrail_minor_jupiter"
+  },
+  GUI = {
+    Name = "Rastro de Eurydome",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Pasífae/Eurydome"
+  }
+}
+
+local EurydomeLabel = {
+  Identifier = "EurydomeLabel",
+  Parent = Eurydome.Identifier,
+  Renderable = {
+    Type = "RenderableLabel",
+    Enabled = false,
+    Text = "Eurydome",
+    FontSize = 70.0,
+    Size = 7.1,
+    MinMaxSize = { 1, 25 },
+    OrientationOption = "Camera View Direction",
+    BlendMode = "Additive",
+    EnableFading = true,
+    FadeUnit = "Gm",
+    FadeDistances = { 1.5, 140.0 },
+    FadeWidths = { 0.5, 50.0 }
+  },
+  Tag = {
+    "solarsystem_labels",
+    "moon_labels",
+    "minor_moon_labels",
+    "minor_moon_labels_jupiter",
+    "minor_moon_labels_pasiphae"
+  },
+  GUI = {
+    Name = "Etiqueta de Eurydome",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Pasífae/Eurydome",
+    Description = "Etiqueta para la luna de Júpiter Eurydome (grupo Pasífae)"
+  }
+}
+
+local Kore = {
+  Identifier = "Kore",
+  Parent = transforms.JupiterBarycenter.Identifier,
+  Transform = {
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels344.ID.Kore,
+      Observer = coreKernels.ID.JupiterBarycenter
+    }
+  },
+  Renderable = {
+    Type = "RenderableGlobe",
+    Radii = { 2000, 2000, 2000 }
+  },
+  Tag = {
+    "moon_solarSystem",
+    "moon_giants",
+    "moon_jupiter",
+    "moon_pasiphae",
+    "moon_minor",
+    "moon_minor_jupiter"
+  },
+  GUI = {
+    Name = "Kore",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Pasífae/Kore"
+  }
+}
+
+local KoreTrail = {
+  Identifier = "KoreTrail",
+  Parent = transforms.JupiterBarycenter.Identifier,
+  Renderable = {
+    Type = "RenderableTrailOrbit",
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels344.ID.Kore,
+      Observer = coreKernels.ID.JupiterBarycenter
+    },
+    Color = { 0.4, 0.3, 0.01 },
+    Period = 776.02,
+    Resolution = 1000
+  },
+  Tag = {
+    "moonTrail_solarSystem",
+    "moonTrail_giants",
+    "moonTrail_jupiter",
+    "moonTrail_pasiphae",
+    "moonTrail_minor",
+    "moonTrail_minor_jupiter"
+  },
+  GUI = {
+    Name = "Rastro de Kore",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Pasífae/Kore"
+  }
+}
+
+local KoreLabel = {
+  Identifier = "KoreLabel",
+  Parent = Kore.Identifier,
+  Renderable = {
+    Type = "RenderableLabel",
+    Enabled = false,
+    Text = "Kore",
+    FontSize = 70.0,
+    Size = 7.1,
+    MinMaxSize = { 1, 25 },
+    OrientationOption = "Camera View Direction",
+    BlendMode = "Additive",
+    EnableFading = true,
+    FadeUnit = "Gm",
+    FadeDistances = { 1.5, 140.0 },
+    FadeWidths = { 0.5, 50.0 }
+  },
+  Tag = {
+    "solarsystem_labels",
+    "moon_labels",
+    "minor_moon_labels",
+    "minor_moon_labels_jupiter",
+    "minor_moon_labels_pasiphae"
+  },
+  GUI = {
+    Name = "Etiqueta de Kore",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Pasífae/Kore",
+    Description = "Etiqueta para la luna de Júpiter Kore (grupo Pasífae)"
+  }
+}
+
+local Cyllene = {
+  Identifier = "Cyllene",
+  Parent = transforms.JupiterBarycenter.Identifier,
+  Transform = {
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels344.ID.Cyllene,
+      Observer = coreKernels.ID.JupiterBarycenter
+    }
+  },
+  Renderable = {
+    Type = "RenderableGlobe",
+    Radii = { 2000, 2000, 2000 }
+  },
+  Tag = {
+    "moon_solarSystem",
+    "moon_giants",
+    "moon_jupiter",
+    "moon_pasiphae",
+    "moon_minor",
+    "moon_minor_jupiter"
+  },
+  GUI = {
+    Name = "Cyllene",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Pasífae/Cyllene"
+  }
+}
+
+local CylleneTrail = {
+  Identifier = "CylleneTrail",
+  Parent = transforms.JupiterBarycenter.Identifier,
+  Renderable = {
+    Type = "RenderableTrailOrbit",
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels344.ID.Cyllene,
+      Observer = coreKernels.ID.JupiterBarycenter
+    },
+    Color = { 0.4, 0.3, 0.01 },
+    Period = 731.10,
+    Resolution = 1000
+  },
+  Tag = {
+    "moonTrail_solarSystem",
+    "moonTrail_giants",
+    "moonTrail_jupiter",
+    "moonTrail_pasiphae",
+    "moonTrail_minor",
+    "moonTrail_minor_jupiter"
+  },
+  GUI = {
+    Name = "Rastro de Cyllene",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Pasífae/Cyllene"
+  }
+}
+
+local CylleneLabel = {
+  Identifier = "CylleneLabel",
+  Parent = Cyllene.Identifier,
+  Renderable = {
+    Type = "RenderableLabel",
+    Enabled = false,
+    Text = "Cyllene",
+    FontSize = 70.0,
+    Size = 7.1,
+    MinMaxSize = { 1, 25 },
+    OrientationOption = "Camera View Direction",
+    BlendMode = "Additive",
+    EnableFading = true,
+    FadeUnit = "Gm",
+    FadeDistances = { 1.5, 140.0 },
+    FadeWidths = { 0.5, 50.0 }
+  },
+  Tag = {
+    "solarsystem_labels",
+    "moon_labels",
+    "minor_moon_labels",
+    "minor_moon_labels_jupiter",
+    "minor_moon_labels_pasiphae"
+  },
+  GUI = {
+    Name = "Etiqueta de Cyllene",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Pasífae/Cyllene",
+    Description = "Etiqueta para la luna de Júpiter Cyllene (grupo Pasífae)"
+  }
+}
+
+local S2011J2 = {
+  Identifier = "S2011J2",
+  Parent = transforms.JupiterBarycenter.Identifier,
+  Transform = {
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels344.ID.S2011J2,
+      Observer = coreKernels.ID.JupiterBarycenter
+    }
+  },
+  Renderable = {
+    Type = "RenderableGlobe",
+    Radii = { 1000, 1000, 1000 }
+  },
+  Tag = {
+    "moon_solarSystem",
+    "moon_giants",
+    "moon_jupiter",
+    "moon_pasiphae",
+    "moon_minor",
+    "moon_minor_jupiter"
+  },
+  GUI = {
+    Name = "S/2011 J 2",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Pasífae/S2011J2"
+  }
+}
+
+local S2011J2Trail = {
+  Identifier = "S2011J2Trail",
+  Parent = transforms.JupiterBarycenter.Identifier,
+  Renderable = {
+    Type = "RenderableTrailOrbit",
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels344.ID.S2011J2,
+      Observer = coreKernels.ID.JupiterBarycenter
+    },
+    Color = { 0.4, 0.3, 0.01 },
+    Period = 731.32,
+    Resolution = 1000
+  },
+  Tag = {
+    "moonTrail_solarSystem",
+    "moonTrail_giants",
+    "moonTrail_jupiter",
+    "moonTrail_pasiphae",
+    "moonTrail_minor",
+    "moonTrail_minor_jupiter"
+  },
+  GUI = {
+    Name = "Rastro de S/2011 J 2",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Pasífae/S2011J2"
+  }
+}
+
+local S2011J2Label = {
+  Identifier = "S2011J2Label",
+  Parent = S2011J2.Identifier,
+  Renderable = {
+    Type = "RenderableLabel",
+    Enabled = false,
+    Text = "S/2011 J 2",
+    FontSize = 70.0,
+    Size = 7.1,
+    MinMaxSize = { 1, 25 },
+    OrientationOption = "Camera View Direction",
+    BlendMode = "Additive",
+    EnableFading = true,
+    FadeUnit = "Gm",
+    FadeDistances = { 1.5, 140.0 },
+    FadeWidths = { 0.5, 50.0 }
+  },
+  Tag = {
+    "solarsystem_labels",
+    "moon_labels",
+    "minor_moon_labels",
+    "minor_moon_labels_jupiter",
+    "minor_moon_labels_pasiphae"
+  },
+  GUI = {
+    Name = "Etiqueta de S/2011 J 2",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Pasífae/S2011J2",
+    Description = "Etiqueta para la luna de Júpiter S/2011 J 2 (grupo Pasífae)"
+  }
+}
+
+local S2017J1 = {
+  Identifier = "S2017J1",
+  Parent = transforms.JupiterBarycenter.Identifier,
+  Transform = {
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels344.ID.S2017J1,
+      Observer = coreKernels.ID.JupiterBarycenter
+    }
+  },
+  Renderable = {
+    Type = "RenderableGlobe",
+    Radii = { 2000, 2000, 2000 }
+  },
+  Tag = {
+    "moon_solarSystem",
+    "moon_giants",
+    "moon_jupiter",
+    "moon_pasiphae",
+    "moon_minor",
+    "moon_minor_jupiter"
+  },
+  GUI = {
+    Name = "S/2017 J 1",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Pasífae/S2017J1"
+  }
+}
+
+local S2017J1Trail = {
+  Identifier = "S2017J1Trail",
+  Parent = transforms.JupiterBarycenter.Identifier,
+  Renderable = {
+    Type = "RenderableTrailOrbit",
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels344.ID.S2017J1,
+      Observer = coreKernels.ID.JupiterBarycenter
+    },
+    Color = { 0.4, 0.3, 0.01 },
+    Period = 734.15,
+    Resolution = 1000
+  },
+  Tag = {
+    "moonTrail_solarSystem",
+    "moonTrail_giants",
+    "moonTrail_jupiter",
+    "moonTrail_pasiphae",
+    "moonTrail_minor",
+    "moonTrail_minor_jupiter"
+  },
+  GUI = {
+    Name = "Rastro de S/2017 J 1",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Pasífae/S2017J1"
+  }
+}
+
+local S2017J1Label = {
+  Identifier = "S2017J1Label",
+  Parent = S2017J1.Identifier,
+  Renderable = {
+    Type = "RenderableLabel",
+    Enabled = false,
+    Text = "S/2017 J 1",
+    FontSize = 70.0,
+    Size = 7.1,
+    MinMaxSize = { 1, 25 },
+    OrientationOption = "Camera View Direction",
+    BlendMode = "Additive",
+    EnableFading = true,
+    FadeUnit = "Gm",
+    FadeDistances = { 1.5, 140.0 },
+    FadeWidths = { 0.5, 50.0 }
+  },
+  Tag = {
+    "solarsystem_labels",
+    "moon_labels",
+    "minor_moon_labels",
+    "minor_moon_labels_jupiter",
+    "minor_moon_labels_pasiphae"
+  },
+  GUI = {
+    Name = "Etiqueta de S/2017 J 1",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Pasífae/S2017J1",
+    Description = "Etiqueta para la luna de Júpiter S/2017 J 1 (grupo Pasífae)"
+  }
+}
+
+local S2003J4 = {
+  Identifier = "S2003J4",
+  Parent = transforms.JupiterBarycenter.Identifier,
+  Transform = {
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels344.ID.S2003J4,
+      Observer = coreKernels.ID.JupiterBarycenter
+    }
+  },
+  Renderable = {
+    Type = "RenderableGlobe",
+    Radii = { 2000, 2000, 2000 }
+  },
+  Tag = {
+    "moon_solarSystem",
+    "moon_giants",
+    "moon_jupiter",
+    "moon_pasiphae",
+    "moon_minor",
+    "moon_minor_jupiter"
+  },
+  GUI = {
+    Name = "S/2003 J 4",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Pasífae/S2003J4"
+  }
+}
+
+local S2003J4Trail = {
+  Identifier = "S2003J4Trail",
+  Parent = transforms.JupiterBarycenter.Identifier,
+  Renderable = {
+    Type = "RenderableTrailOrbit",
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels344.ID.S2003J4,
+      Observer = coreKernels.ID.JupiterBarycenter
+    },
+    Color = { 0.4, 0.3, 0.01 },
+    Period = 739.29,
+    Resolution = 1000
+  },
+  Tag = {
+    "moonTrail_solarSystem",
+    "moonTrail_giants",
+    "moonTrail_jupiter",
+    "moonTrail_pasiphae",
+    "moonTrail_minor",
+    "moonTrail_minor_jupiter"
+  },
+  GUI = {
+    Name = "Rastro de S/2003 J 4",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Pasífae/S2003J4"
+  }
+}
+
+local S2003J4Label = {
+  Identifier = "S2003J4Label",
+  Parent = S2003J4.Identifier,
+  Renderable = {
+    Type = "RenderableLabel",
+    Enabled = false,
+    Text = "S/2003 J 4",
+    FontSize = 70.0,
+    Size = 7.1,
+    MinMaxSize = { 1, 25 },
+    OrientationOption = "Camera View Direction",
+    BlendMode = "Additive",
+    EnableFading = true,
+    FadeUnit = "Gm",
+    FadeDistances = { 1.5, 140.0 },
+    FadeWidths = { 0.5, 50.0 }
+  },
+  Tag = {
+    "solarsystem_labels",
+    "moon_labels",
+    "minor_moon_labels",
+    "minor_moon_labels_jupiter",
+    "minor_moon_labels_pasiphae"
+  },
+  GUI = {
+    Name = "Etiqueta de S/2003 J 4",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Pasífae/S2003J4",
+    Description = "Etiqueta para la luna de Júpiter S/2003 J 4 (grupo Pasífae)"
+  }
+}
+
+local Pasiphae = {
+  Identifier = "Pasiphae",
+  Parent = transforms.JupiterBarycenter.Identifier,
+  Transform = {
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels344.ID.Pasiphae,
+      Observer = coreKernels.ID.JupiterBarycenter
+    }
+  },
+  Renderable = {
+    Type = "RenderableGlobe",
+    Radii = { 60000, 60000, 60000 }
+  },
+  Tag = {
+    "moon_solarSystem",
+    "moon_giants",
+    "moon_jupiter",
+    "moon_pasiphae",
+    "moon_minor",
+    "moon_minor_jupiter"
+  },
+  GUI = {
+    Name = "Pasífae",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Pasífae/Pasiphae"
+  }
+}
+
+local PasiphaeTrail = {
+  Identifier = "PasiphaeTrail",
+  Parent = transforms.JupiterBarycenter.Identifier,
+  Renderable = {
+    Type = "RenderableTrailOrbit",
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels344.ID.Pasiphae,
+      Observer = coreKernels.ID.JupiterBarycenter
+    },
+    Color = { 0.4, 0.3, 0.01 },
+    Period = 731.10,
+    Resolution = 1000
+  },
+  Tag = {
+    "moonTrail_solarSystem",
+    "moonTrail_giants",
+    "moonTrail_jupiter",
+    "moonTrail_pasiphae",
+    "moonTrail_minor",
+    "moonTrail_minor_jupiter"
+  },
+  GUI = {
+    Name = "Rastro de Pasífae",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Pasífae/Pasiphae"
+  }
+}
+
+local PasiphaeLabel = {
+  Identifier = "PasiphaeLabel",
+  Parent = Pasiphae.Identifier,
+  Renderable = {
+    Type = "RenderableLabel",
+    Enabled = false,
+    Text = "Pasífae",
+    FontSize = 70.0,
+    Size = 7.1,
+    MinMaxSize = { 1, 25 },
+    OrientationOption = "Camera View Direction",
+    BlendMode = "Additive",
+    EnableFading = true,
+    FadeUnit = "Gm",
+    FadeDistances = { 1.5, 140.0 },
+    FadeWidths = { 0.5, 50.0 }
+  },
+  Tag = {
+    "solarsystem_labels",
+    "moon_labels",
+    "minor_moon_labels",
+    "minor_moon_labels_jupiter",
+    "minor_moon_labels_pasiphae"
+  },
+  GUI = {
+    Name = "Etiqueta de Pasífae",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Pasífae/Pasiphae",
+    Description = "Etiqueta para la luna de Júpiter Pasífae (grupo Pasífae)"
+  }
+}
+
+local Hegemone = {
+  Identifier = "Hegemone",
+  Parent = transforms.JupiterBarycenter.Identifier,
+  Transform = {
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels344.ID.Hegemone,
+      Observer = coreKernels.ID.JupiterBarycenter
+    }
+  },
+  Renderable = {
+    Type = "RenderableGlobe",
+    Radii = { 3000, 3000, 3000 }
+  },
+  Tag = {
+    "moon_solarSystem",
+    "moon_giants",
+    "moon_jupiter",
+    "moon_pasiphae",
+    "moon_minor",
+    "moon_minor_jupiter"
+  },
+  GUI = {
+    Name = "Hegemone",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Pasífae/Hegemone"
+  }
+}
+
+local HegemoneTrail = {
+  Identifier = "HegemoneTrail",
+  Parent = transforms.JupiterBarycenter.Identifier,
+  Renderable = {
+    Type = "RenderableTrailOrbit",
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels344.ID.Hegemone,
+      Observer = coreKernels.ID.JupiterBarycenter
+    },
+    Color = { 0.4, 0.3, 0.01 },
+    Period = 745.50,
+    Resolution = 1000
+  },
+  Tag = {
+    "moonTrail_solarSystem",
+    "moonTrail_giants",
+    "moonTrail_jupiter",
+    "moonTrail_pasiphae",
+    "moonTrail_minor",
+    "moonTrail_minor_jupiter"
+  },
+  GUI = {
+    Name = "Rastro de Hegemone",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Pasífae/Hegemone"
+  }
+}
+
+local HegemoneLabel = {
+  Identifier = "HegemoneLabel",
+  Parent = Hegemone.Identifier,
+  Renderable = {
+    Type = "RenderableLabel",
+    Enabled = false,
+    Text = "Hegemone",
+    FontSize = 70.0,
+    Size = 7.1,
+    MinMaxSize = { 1, 25 },
+    OrientationOption = "Camera View Direction",
+    BlendMode = "Additive",
+    EnableFading = true,
+    FadeUnit = "Gm",
+    FadeDistances = { 1.5, 140.0 },
+    FadeWidths = { 0.5, 50.0 }
+  },
+  Tag = {
+    "solarsystem_labels",
+    "moon_labels",
+    "minor_moon_labels",
+    "minor_moon_labels_jupiter",
+    "minor_moon_labels_pasiphae"
+  },
+  GUI = {
+    Name = "Etiqueta de Hegemone",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Pasífae/Hegemone",
+    Description = "Etiqueta para la luna de Júpiter Hegemone (grupo Pasífae)"
+  }
+}
+
+local Sinope = {
+  Identifier = "Sinope",
+  Parent = transforms.JupiterBarycenter.Identifier,
+  Transform = {
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels344.ID.Sinope,
+      Observer = coreKernels.ID.JupiterBarycenter
+    }
+  },
+  Renderable = {
+    Type = "RenderableGlobe",
+    Radii = { 38000, 38000, 38000 }
+  },
+  Tag = {
+    "moon_solarSystem",
+    "moon_giants",
+    "moon_jupiter",
+    "moon_pasiphae",
+    "moon_minor",
+    "moon_minor_jupiter"
+  },
+  GUI = {
+    Name = "Sinope",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Pasífae/Sinope"
+  }
+}
+
+local SinopeTrail = {
+  Identifier = "SinopeTrail",
+  Parent = transforms.JupiterBarycenter.Identifier,
+  Renderable = {
+    Type = "RenderableTrailOrbit",
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels344.ID.Sinope,
+      Observer = coreKernels.ID.JupiterBarycenter
+    },
+    Color = { 0.4, 0.3, 0.01 },
+    Period = 739.33,
+    Resolution = 1000
+  },
+  Tag = {
+    "moonTrail_solarSystem",
+    "moonTrail_giants",
+    "moonTrail_jupiter",
+    "moonTrail_pasiphae",
+    "moonTrail_minor",
+    "moonTrail_minor_jupiter"
+  },
+  GUI = {
+    Name = "Rastro de Sinope",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Pasífae/Sinope"
+  }
+}
+
+local SinopeLabel = {
+  Identifier = "SinopeLabel",
+  Parent = Sinope.Identifier,
+  Renderable = {
+    Type = "RenderableLabel",
+    Enabled = false,
+    Text = "Sinope",
+    FontSize = 70.0,
+    Size = 7.1,
+    MinMaxSize = { 1, 25 },
+    OrientationOption = "Camera View Direction",
+    BlendMode = "Additive",
+    EnableFading = true,
+    FadeUnit = "Gm",
+    FadeDistances = { 1.5, 140.0 },
+    FadeWidths = { 0.5, 50.0 }
+  },
+  Tag = {
+    "solarsystem_labels",
+    "moon_labels",
+    "minor_moon_labels",
+    "minor_moon_labels_jupiter",
+    "minor_moon_labels_pasiphae"
+  },
+  GUI = {
+    Name = "Etiqueta de Sinope",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Pasífae/Sinope",
+    Description = "Etiqueta para la luna de Júpiter Sinope (grupo Pasífae)"
+  }
+}
+
+local Sponde = {
+  Identifier = "Sponde",
+  Parent = transforms.JupiterBarycenter.Identifier,
+  Transform = {
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels344.ID.Sponde,
+      Observer = coreKernels.ID.JupiterBarycenter
+    }
+  },
+  Renderable = {
+    Type = "RenderableGlobe",
+    Radii = { 2000, 2000, 2000 }
+  },
+  Tag = {
+    "moon_solarSystem",
+    "moon_giants",
+    "moon_jupiter",
+    "moon_pasiphae",
+    "moon_minor",
+    "moon_minor_jupiter"
+  },
+  GUI = {
+    Name = "Sponde",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Pasífae/Sponde"
+  }
+}
+
+local SpondeTrail = {
+  Identifier = "SpondeTrail",
+  Parent = transforms.JupiterBarycenter.Identifier,
+  Renderable = {
+    Type = "RenderableTrailOrbit",
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels344.ID.Sponde,
+      Observer = coreKernels.ID.JupiterBarycenter
+    },
+    Color = { 0.4, 0.3, 0.01 },
+    Period = 771.60,
+    Resolution = 1000
+  },
+  Tag = {
+    "moonTrail_solarSystem",
+    "moonTrail_giants",
+    "moonTrail_jupiter",
+    "moonTrail_pasiphae",
+    "moonTrail_minor",
+    "moonTrail_minor_jupiter"
+  },
+  GUI = {
+    Name = "Rastro de Sponde",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Pasífae/Sponde"
+  }
+}
+
+local SpondeLabel = {
+  Identifier = "SpondeLabel",
+  Parent = Sponde.Identifier,
+  Renderable = {
+    Type = "RenderableLabel",
+    Enabled = false,
+    Text = "Sponde",
+    FontSize = 70.0,
+    Size = 7.1,
+    MinMaxSize = { 1, 25 },
+    OrientationOption = "Camera View Direction",
+    BlendMode = "Additive",
+    EnableFading = true,
+    FadeUnit = "Gm",
+    FadeDistances = { 1.5, 140.0 },
+    FadeWidths = { 0.5, 50.0 }
+  },
+  Tag = {
+    "solarsystem_labels",
+    "moon_labels",
+    "minor_moon_labels",
+    "minor_moon_labels_jupiter",
+    "minor_moon_labels_pasiphae"
+  },
+  GUI = {
+    Name = "Etiqueta de Sponde",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Pasífae/Sponde",
+    Description = "Etiqueta para la luna de Júpiter Sponde (grupo Pasífae)"
+  }
+}
+
+local Autonoe = {
+  Identifier = "Autonoe",
+  Parent = transforms.JupiterBarycenter.Identifier,
+  Transform = {
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels344.ID.Autonoe,
+      Observer = coreKernels.ID.JupiterBarycenter
+    }
+  },
+  Renderable = {
+    Type = "RenderableGlobe",
+    Radii = { 4000, 4000, 4000 }
+  },
+  Tag = {
+    "moon_solarSystem",
+    "moon_giants",
+    "moon_jupiter",
+    "moon_pasiphae",
+    "moon_minor",
+    "moon_minor_jupiter"
+  },
+  GUI = {
+    Name = "Autonoe",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Pasífae/Autonoe"
+  }
+}
+
+local AutonoeTrail = {
+  Identifier = "AutonoeTrail",
+  Parent = transforms.JupiterBarycenter.Identifier,
+  Renderable = {
+    Type = "RenderableTrailOrbit",
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels344.ID.Autonoe,
+      Observer = coreKernels.ID.JupiterBarycenter
+    },
+    Color = { 0.4, 0.3, 0.01 },
+    Period = 772.17,
+    Resolution = 1000
+  },
+  Tag = {
+    "moonTrail_solarSystem",
+    "moonTrail_giants",
+    "moonTrail_jupiter",
+    "moonTrail_pasiphae",
+    "moonTrail_minor",
+    "moonTrail_minor_jupiter"
+  },
+  GUI = {
+    Name = "Rastro de Autonoe",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Pasífae/Autonoe"
+  }
+}
+
+local AutonoeLabel = {
+  Identifier = "AutonoeLabel",
+  Parent = Autonoe.Identifier,
+  Renderable = {
+    Type = "RenderableLabel",
+    Enabled = false,
+    Text = "Autonoe",
+    FontSize = 70.0,
+    Size = 7.1,
+    MinMaxSize = { 1, 25 },
+    OrientationOption = "Camera View Direction",
+    BlendMode = "Additive",
+    EnableFading = true,
+    FadeUnit = "Gm",
+    FadeDistances = { 1.5, 140.0 },
+    FadeWidths = { 0.5, 50.0 }
+  },
+  Tag = {
+    "solarsystem_labels",
+    "moon_labels",
+    "minor_moon_labels",
+    "minor_moon_labels_jupiter",
+    "minor_moon_labels_pasiphae"
+  },
+  GUI = {
+    Name = "Etiqueta de Autonoe",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Pasífae/Autonoe",
+    Description = "Etiqueta para la luna de Júpiter Autonoe (grupo Pasífae)"
+  }
+}
+
+local Megaclite = {
+  Identifier = "Megaclite",
+  Parent = transforms.JupiterBarycenter.Identifier,
+  Transform = {
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels344.ID.Megaclite,
+      Observer = coreKernels.ID.JupiterBarycenter
+    }
+  },
+  Renderable = {
+    Type = "RenderableGlobe",
+    Radii = { 5000, 5000, 5000 }
+  },
+  Tag = {
+    "moon_solarSystem",
+    "moon_giants",
+    "moon_jupiter",
+    "moon_pasiphae",
+    "moon_minor",
+    "moon_minor_jupiter"
+  },
+  GUI = {
+    Name = "Megaclite",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Pasífae/Megaclite"
+  }
+}
+
+local MegacliteTrail = {
+  Identifier = "MegacliteTrail",
+  Parent = transforms.JupiterBarycenter.Identifier,
+  Renderable = {
+    Type = "RenderableTrailOrbit",
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels344.ID.Megaclite,
+      Observer = coreKernels.ID.JupiterBarycenter
+    },
+    Color = { 0.4, 0.3, 0.01 },
+    Period = 792.44,
+    Resolution = 1000
+  },
+  Tag = {
+    "moonTrail_solarSystem",
+    "moonTrail_giants",
+    "moonTrail_jupiter",
+    "moonTrail_pasiphae",
+    "moonTrail_minor",
+    "moonTrail_minor_jupiter"
+  },
+  GUI = {
+    Name = "Rastro de Megaclite",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Pasífae/Megaclite"
+  }
+}
+
+local MegacliteLabel = {
+  Identifier = "MegacliteLabel",
+  Parent = Megaclite.Identifier,
+  Renderable = {
+    Type = "RenderableLabel",
+    Enabled = false,
+    Text = "Megaclite",
+    FontSize = 70.0,
+    Size = 7.1,
+    MinMaxSize = { 1, 25 },
+    OrientationOption = "Camera View Direction",
+    BlendMode = "Additive",
+    EnableFading = true,
+    FadeUnit = "Gm",
+    FadeDistances = { 1.5, 140.0 },
+    FadeWidths = { 0.5, 50.0 }
+  },
+  Tag = {
+    "solarsystem_labels",
+    "moon_labels",
+    "minor_moon_labels",
+    "minor_moon_labels_jupiter",
+    "minor_moon_labels_pasiphae"
+  },
+  GUI = {
+    Name = "Etiqueta de Megaclite",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Pasífae/Megaclite",
+    Description = "Etiqueta para la luna de Júpiter Megaclite (grupo Pasífae)"
+  }
+}
+
+local S2016J4 = {
+  Identifier = "S2016J4",
+  Parent = transforms.JupiterBarycenter.Identifier,
+  Transform = {
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels346.ID.S2016J4,
+      Observer = coreKernels.ID.JupiterBarycenter
+    }
+  },
+  Renderable = {
+    Type = "RenderableGlobe",
+    Radii = { 1000, 1000, 1000 }
+  },
+  Tag = {
+    "moon_solarSystem",
+    "moon_giants",
+    "moon_jupiter",
+    "moon_pasiphae",
+    "moon_minor",
+    "moon_minor_jupiter"
+  },
+  GUI = {
+    Name = "S/2016 J 4",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Pasífae/S2016J4"
+  }
+}
+
+local S2016J4Trail = {
+  Identifier = "S2016J4Trail",
+  Parent = transforms.JupiterBarycenter.Identifier,
+  Renderable = {
+    Type = "RenderableTrailOrbit",
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels346.ID.S2016J4,
+      Observer = coreKernels.ID.JupiterBarycenter
+    },
+    Color = { 0.4, 0.3, 0.01 },
+    Period = 743.69,
+    Resolution = 1000
+  },
+  Tag = {
+    "moonTrail_solarSystem",
+    "moonTrail_giants",
+    "moonTrail_jupiter",
+    "moonTrail_pasiphae",
+    "moonTrail_minor",
+    "moonTrail_minor_jupiter"
+  },
+  GUI = {
+    Name = "Rastro de S/2016 J 4",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Pasífae/S2016J4"
+  }
+}
+
+local S2016J4Label = {
+  Identifier = "S2016J4Label",
+  Parent = S2016J4.Identifier,
+  Renderable = {
+    Type = "RenderableLabel",
+    Enabled = false,
+    Text = "S/2016 J 4",
+    FontSize = 70.0,
+    Size = 7.1,
+    MinMaxSize = { 1, 25 },
+    OrientationOption = "Camera View Direction",
+    BlendMode = "Additive",
+    EnableFading = true,
+    FadeUnit = "Gm",
+    FadeDistances = { 1.5, 140.0 },
+    FadeWidths = { 0.5, 50.0 }
+  },
+  Tag = {
+    "solarsystem_labels",
+    "moon_labels",
+    "minor_moon_labels",
+    "minor_moon_labels_jupiter",
+    "minor_moon_labels_pasiphae"
+  },
+  GUI = {
+    Name = "Etiqueta de S/2016 J 4",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Pasífae/S2016J4",
+    Description = "Etiqueta para la luna de Júpiter S/2016 J 4 (grupo Pasífae)"
+  }
+}
+
+local S2017J6 = {
+  Identifier = "S2017J6",
+  Parent = transforms.JupiterBarycenter.Identifier,
+  Transform = {
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels344.ID.S2017J6,
+      Observer = coreKernels.ID.JupiterBarycenter
+    }
+  },
+  Renderable = {
+    Type = "RenderableGlobe",
+    Radii = { 2000, 2000, 2000 }
+  },
+  Tag = {
+    "moon_solarSystem",
+    "moon_giants",
+    "moon_jupiter",
+    "moon_pasiphae",
+    "moon_minor",
+    "moon_minor_jupiter"
+  },
+  GUI = {
+    Name = "S/2017 J 6",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Pasífae/S2017J6"
+  }
+}
+
+local S2017J6Trail = {
+  Identifier = "S2017J6Trail",
+  Parent = transforms.JupiterBarycenter.Identifier,
+  Renderable = {
+    Type = "RenderableTrailOrbit",
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels344.ID.S2017J6,
+      Observer = coreKernels.ID.JupiterBarycenter
+    },
+    Color = { 0.4, 0.3, 0.01 },
+    Period = 683.0,
+    Resolution = 1000
+  },
+  Tag = {
+    "moonTrail_solarSystem",
+    "moonTrail_giants",
+    "moonTrail_jupiter",
+    "moonTrail_pasiphae",
+    "moonTrail_minor",
+    "moonTrail_minor_jupiter"
+  },
+  GUI = {
+    Name = "Rastro de S/2017 J 6",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Pasífae/S2017J6"
+  }
+}
+
+local S2017J6Label = {
+  Identifier = "S2017J6Label",
+  Parent = S2017J6.Identifier,
+  Renderable = {
+    Type = "RenderableLabel",
+    Enabled = false,
+    Text = "S/2017 J 6",
+    FontSize = 70.0,
+    Size = 7.1,
+    MinMaxSize = { 1, 25 },
+    OrientationOption = "Camera View Direction",
+    BlendMode = "Additive",
+    EnableFading = true,
+    FadeUnit = "Gm",
+    FadeDistances = { 1.5, 140.0 },
+    FadeWidths = { 0.5, 50.0 }
+  },
+  Tag = {
+    "solarsystem_labels",
+    "moon_labels",
+    "minor_moon_labels",
+    "minor_moon_labels_jupiter",
+    "minor_moon_labels_pasiphae"
+  },
+  GUI = {
+    Name = "Etiqueta de S/2017 J 6",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Pasífae/S2017J6",
+    Description = "Etiqueta para la luna de Júpiter S/2017 J 6 (grupo Pasífae)"
+  }
+}
+
+local S2003J23 = {
+  Identifier = "S2003J23",
+  Parent = transforms.JupiterBarycenter.Identifier,
+  Transform = {
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels344.ID.S2003J23,
+      Observer = coreKernels.ID.JupiterBarycenter
+    }
+  },
+  Renderable = {
+    Type = "RenderableGlobe",
+    Radii = { 2000, 2000, 2000 }
+  },
+  Tag = {
+    "moon_solarSystem",
+    "moon_giants",
+    "moon_jupiter",
+    "moon_pasiphae",
+    "moon_minor",
+    "moon_minor_jupiter"
+  },
+  GUI = {
+    Name = "S/2003 J 23",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Pasífae/S2003J23"
+  }
+}
+
+local S2003J23Trail = {
+  Identifier = "S2003J23Trail",
+  Parent = transforms.JupiterBarycenter.Identifier,
+  Renderable = {
+    Type = "RenderableTrailOrbit",
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels344.ID.S2003J23,
+      Observer = coreKernels.ID.JupiterBarycenter
+    },
+    Color = { 0.4, 0.3, 0.01 },
+    Period = 792.00,
+    Resolution = 1000
+  },
+  Tag = {
+    "moonTrail_solarSystem",
+    "moonTrail_giants",
+    "moonTrail_jupiter",
+    "moonTrail_pasiphae",
+    "moonTrail_minor",
+    "moonTrail_minor_jupiter"
+  },
+  GUI = {
+    Name = "Rastro de S/2003 J 23",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Pasífae/S2003J23"
+  }
+}
+
+local S2003J23Label = {
+  Identifier = "S2003J23Label",
+  Parent = S2003J23.Identifier,
+  Renderable = {
+    Type = "RenderableLabel",
+    Enabled = false,
+    Text = "S/2003 J 23",
+    FontSize = 70.0,
+    Size = 7.1,
+    MinMaxSize = { 1, 25 },
+    OrientationOption = "Camera View Direction",
+    BlendMode = "Additive",
+    EnableFading = true,
+    FadeUnit = "Gm",
+    FadeDistances = { 1.5, 140.0 },
+    FadeWidths = { 0.5, 50.0 }
+  },
+  Tag = {
+    "solarsystem_labels",
+    "moon_labels",
+    "minor_moon_labels",
+    "minor_moon_labels_jupiter",
+    "minor_moon_labels_pasiphae"
+  },
+  GUI = {
+    Name = "Etiqueta de S/2003 J 23",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Pasífae/S2003J23",
+    Description = "Etiqueta para la luna de Júpiter S/2003 J 23 (grupo Pasífae)"
+  }
+}
+
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(Euporie)
+  openspace.addSceneGraphNode(EuporieTrail)
+  openspace.addSceneGraphNode(EuporieLabel)
+
+  openspace.addSceneGraphNode(S2003J18)
+  openspace.addSceneGraphNode(S2003J18Trail)
+  openspace.addSceneGraphNode(S2003J18Label)
+
+  openspace.addSceneGraphNode(Helike)
+  openspace.addSceneGraphNode(HelikeTrail)
+  openspace.addSceneGraphNode(HelikeLabel)
+
+  openspace.addSceneGraphNode(Orthosie)
+  openspace.addSceneGraphNode(OrthosieTrail)
+  openspace.addSceneGraphNode(OrthosieLabel)
+
+  openspace.addSceneGraphNode(S2016J1)
+  openspace.addSceneGraphNode(S2016J1Trail)
+  openspace.addSceneGraphNode(S2016J1Label)
+
+  openspace.addSceneGraphNode(S2003J15)
+  openspace.addSceneGraphNode(S2003J15Trail)
+  openspace.addSceneGraphNode(S2003J15Label)
+
+  openspace.addSceneGraphNode(Aoede)
+  openspace.addSceneGraphNode(AoedeTrail)
+  openspace.addSceneGraphNode(AoedeLabel)
+
+  openspace.addSceneGraphNode(Callirrhoe)
+  openspace.addSceneGraphNode(CallirrhoeTrail)
+  openspace.addSceneGraphNode(CallirrhoeLabel)
+
+  openspace.addSceneGraphNode(Eurydome)
+  openspace.addSceneGraphNode(EurydomeTrail)
+  openspace.addSceneGraphNode(EurydomeLabel)
+
+  openspace.addSceneGraphNode(Kore)
+  openspace.addSceneGraphNode(KoreTrail)
+  openspace.addSceneGraphNode(KoreLabel)
+
+  openspace.addSceneGraphNode(Cyllene)
+  openspace.addSceneGraphNode(CylleneTrail)
+  openspace.addSceneGraphNode(CylleneLabel)
+
+  openspace.addSceneGraphNode(S2011J2)
+  openspace.addSceneGraphNode(S2011J2Trail)
+  openspace.addSceneGraphNode(S2011J2Label)
+
+  openspace.addSceneGraphNode(S2017J1)
+  openspace.addSceneGraphNode(S2017J1Trail)
+  openspace.addSceneGraphNode(S2017J1Label)
+
+  openspace.addSceneGraphNode(S2003J4)
+  openspace.addSceneGraphNode(S2003J4Trail)
+  openspace.addSceneGraphNode(S2003J4Label)
+
+  openspace.addSceneGraphNode(Pasiphae)
+  openspace.addSceneGraphNode(PasiphaeTrail)
+  openspace.addSceneGraphNode(PasiphaeLabel)
+
+  openspace.addSceneGraphNode(Hegemone)
+  openspace.addSceneGraphNode(HegemoneTrail)
+  openspace.addSceneGraphNode(HegemoneLabel)
+
+  openspace.addSceneGraphNode(Sinope)
+  openspace.addSceneGraphNode(SinopeTrail)
+  openspace.addSceneGraphNode(SinopeLabel)
+
+  openspace.addSceneGraphNode(Sponde)
+  openspace.addSceneGraphNode(SpondeTrail)
+  openspace.addSceneGraphNode(SpondeLabel)
+
+  openspace.addSceneGraphNode(Autonoe)
+  openspace.addSceneGraphNode(AutonoeTrail)
+  openspace.addSceneGraphNode(AutonoeLabel)
+
+  openspace.addSceneGraphNode(Megaclite)
+  openspace.addSceneGraphNode(MegacliteTrail)
+  openspace.addSceneGraphNode(MegacliteLabel)
+
+  openspace.addSceneGraphNode(S2016J4)
+  openspace.addSceneGraphNode(S2016J4Trail)
+  openspace.addSceneGraphNode(S2016J4Label)
+
+  openspace.addSceneGraphNode(S2017J6)
+  openspace.addSceneGraphNode(S2017J6Trail)
+  openspace.addSceneGraphNode(S2017J6Label)
+
+  openspace.addSceneGraphNode(S2003J23)
+  openspace.addSceneGraphNode(S2003J23Trail)
+  openspace.addSceneGraphNode(S2003J23Label)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(S2003J23Label)
+  openspace.removeSceneGraphNode(S2003J23Trail)
+  openspace.removeSceneGraphNode(S2003J23)
+
+  openspace.removeSceneGraphNode(S2017J6Label)
+  openspace.removeSceneGraphNode(S2017J6Trail)
+  openspace.removeSceneGraphNode(S2017J6)
+
+  openspace.removeSceneGraphNode(S2016J4Label)
+  openspace.removeSceneGraphNode(S2016J4Trail)
+  openspace.removeSceneGraphNode(S2016J4)
+
+  openspace.removeSceneGraphNode(MegacliteLabel)
+  openspace.removeSceneGraphNode(MegacliteTrail)
+  openspace.removeSceneGraphNode(Megaclite)
+
+  openspace.removeSceneGraphNode(AutonoeLabel)
+  openspace.removeSceneGraphNode(AutonoeTrail)
+  openspace.removeSceneGraphNode(Autonoe)
+
+  openspace.removeSceneGraphNode(SpondeLabel)
+  openspace.removeSceneGraphNode(SpondeTrail)
+  openspace.removeSceneGraphNode(Sponde)
+
+  openspace.removeSceneGraphNode(SinopeLabel)
+  openspace.removeSceneGraphNode(SinopeTrail)
+  openspace.removeSceneGraphNode(Sinope)
+
+  openspace.removeSceneGraphNode(HegemoneLabel)
+  openspace.removeSceneGraphNode(HegemoneTrail)
+  openspace.removeSceneGraphNode(Hegemone)
+
+  openspace.removeSceneGraphNode(PasiphaeLabel)
+  openspace.removeSceneGraphNode(PasiphaeTrail)
+  openspace.removeSceneGraphNode(Pasiphae)
+
+  openspace.removeSceneGraphNode(S2003J4Label)
+  openspace.removeSceneGraphNode(S2003J4Trail)
+  openspace.removeSceneGraphNode(S2003J4)
+
+  openspace.removeSceneGraphNode(S2017J1Label)
+  openspace.removeSceneGraphNode(S2017J1Trail)
+  openspace.removeSceneGraphNode(S2017J1)
+
+  openspace.removeSceneGraphNode(S2011J2Label)
+  openspace.removeSceneGraphNode(S2011J2Trail)
+  openspace.removeSceneGraphNode(S2011J2)
+
+  openspace.removeSceneGraphNode(CylleneLabel)
+  openspace.removeSceneGraphNode(CylleneTrail)
+  openspace.removeSceneGraphNode(Cyllene)
+
+  openspace.removeSceneGraphNode(KoreLabel)
+  openspace.removeSceneGraphNode(KoreTrail)
+  openspace.removeSceneGraphNode(Kore)
+
+  openspace.removeSceneGraphNode(EurydomeLabel)
+  openspace.removeSceneGraphNode(EurydomeTrail)
+  openspace.removeSceneGraphNode(Eurydome)
+
+  openspace.removeSceneGraphNode(CallirrhoeLabel)
+  openspace.removeSceneGraphNode(CallirrhoeTrail)
+  openspace.removeSceneGraphNode(Callirrhoe)
+
+  openspace.removeSceneGraphNode(AoedeLabel)
+  openspace.removeSceneGraphNode(AoedeTrail)
+  openspace.removeSceneGraphNode(Aoede)
+
+  openspace.removeSceneGraphNode(S2003J15Label)
+  openspace.removeSceneGraphNode(S2003J15Trail)
+  openspace.removeSceneGraphNode(S2003J15)
+
+  openspace.removeSceneGraphNode(S2016J1Label)
+  openspace.removeSceneGraphNode(S2016J1Trail)
+  openspace.removeSceneGraphNode(S2016J1)
+
+  openspace.removeSceneGraphNode(OrthosieLabel)
+  openspace.removeSceneGraphNode(OrthosieTrail)
+  openspace.removeSceneGraphNode(Orthosie)
+
+  openspace.removeSceneGraphNode(HelikeLabel)
+  openspace.removeSceneGraphNode(HelikeTrail)
+  openspace.removeSceneGraphNode(Helike)
+
+  openspace.removeSceneGraphNode(S2003J18Label)
+  openspace.removeSceneGraphNode(S2003J18Trail)
+  openspace.removeSceneGraphNode(S2003J18)
+
+  openspace.removeSceneGraphNode(EuporieLabel)
+  openspace.removeSceneGraphNode(EuporieTrail)
+  openspace.removeSceneGraphNode(Euporie)
+end)
+
+asset.export(Euporie)
+asset.export(EuporieTrail)
+asset.export(EuporieLabel)
+
+asset.export(S2003J18)
+asset.export(S2003J18Trail)
+asset.export(S2003J18Label)
+
+asset.export(Helike)
+asset.export(HelikeTrail)
+asset.export(HelikeLabel)
+
+asset.export(Orthosie)
+asset.export(OrthosieTrail)
+asset.export(OrthosieLabel)
+
+asset.export(S2016J1)
+asset.export(S2016J1Trail)
+asset.export(S2016J1Label)
+
+asset.export(S2003J15)
+asset.export(S2003J15Trail)
+asset.export(S2003J15Label)
+
+asset.export(Aoede)
+asset.export(AoedeTrail)
+asset.export(AoedeLabel)
+
+asset.export(Callirrhoe)
+asset.export(CallirrhoeTrail)
+asset.export(CallirrhoeLabel)
+
+asset.export(Eurydome)
+asset.export(EurydomeTrail)
+asset.export(EurydomeLabel)
+
+asset.export(Kore)
+asset.export(KoreTrail)
+asset.export(KoreLabel)
+
+asset.export(Cyllene)
+asset.export(CylleneTrail)
+asset.export(CylleneLabel)
+
+asset.export(S2011J2)
+asset.export(S2011J2Trail)
+asset.export(S2011J2Label)
+
+asset.export(S2017J1)
+asset.export(S2017J1Trail)
+asset.export(S2017J1Label)
+
+asset.export(S2003J4)
+asset.export(S2003J4Trail)
+asset.export(S2003J4Label)
+
+asset.export(Pasiphae)
+asset.export(PasiphaeTrail)
+asset.export(PasiphaeLabel)
+
+asset.export(Hegemone)
+asset.export(HegemoneTrail)
+asset.export(HegemoneLabel)
+
+asset.export(Sinope)
+asset.export(SinopeTrail)
+asset.export(SinopeLabel)
+
+asset.export(Sponde)
+asset.export(SpondeTrail)
+asset.export(SpondeLabel)
+
+asset.export(Autonoe)
+asset.export(AutonoeTrail)
+asset.export(AutonoeLabel)
+
+asset.export(Megaclite)
+asset.export(MegacliteTrail)
+asset.export(MegacliteLabel)
+
+asset.export(S2016J4)
+asset.export(S2016J4Trail)
+asset.export(S2016J4Label)
+
+asset.export(S2017J6)
+asset.export(S2017J6Trail)
+asset.export(S2017J6Label)
+
+asset.export(S2003J23)
+asset.export(S2003J23Trail)
+asset.export(S2003J23Label)
+
+
+asset.meta = {
+  Name = "Lunas del Grupo Pasífae de Júpiter",
+  Description = [[Activo de Globo Procedural que contiene las lunas del Grupo Pasífae de Júpiter:
+    Euporie, S2003J18, Helike, Orthosie, S2016J1, S2003J15, Aoede, Callirrhoe, Eurydome,
+    Kore, Cyllene, S2011J2, S2017J1, S2003J4, Pasiphae, Hegemone, Sinope, Sponde,
+    Autonoe y Megaclite. Se generan globos en blanco y rastros SPICE para cada luna]],
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "Licencia MIT"
+}

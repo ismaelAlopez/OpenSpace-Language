@@ -1,0 +1,37 @@
+local transforms = asset.require("scene/solarsystem/sun/transforms")
+local coreKernels = asset.require("spice/core")
+
+local MarsBarycenter = {
+  Identifier = "MarsBarycenter",
+  Parent = transforms.SolarSystemBarycenter.Identifier,
+  Transform = {
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = coreKernels.ID.MarsBarycenter,
+      Observer = coreKernels.ID.SolarSystemBarycenter
+    }
+  },
+  GUI = {
+    Name = "Centro de Masa de Marte",
+    Path = "/Sistema Solar/Planetas/Marte",
+    Hidden = true
+  }
+}
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(MarsBarycenter)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(MarsBarycenter)
+end)
+
+asset.export(MarsBarycenter)
+
+asset.meta = {
+  Name = "Transformaciones de Marte",
+  Description = "Transformación con posición para Marte",
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "MIT license"
+}

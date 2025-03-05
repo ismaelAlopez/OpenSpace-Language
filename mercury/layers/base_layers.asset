@@ -1,0 +1,18 @@
+asset.require("./colorlayers/alsimap_02122015", false)
+asset.require("./colorlayers/casimap_02122015", false)
+asset.require("./colorlayers/fesimap_02122015", false)
+asset.require("./colorlayers/mgsimap_02122015", false)
+asset.require("./colorlayers/ssimap_02122015", false)
+
+-- Only the Utah server have this map, use it for now
+asset.require("./heightlayers/messenger_dem_utah", asset.enabled)
+
+asset.meta = {
+  Name = "Capas Base de Mercurio",
+  Description = [[Las capas base de Mercurio son: Abundancia de Aluminio, Abundancia de Calcio,
+    Abundancia de Hierro, Abundancia de Magnesio, Abundancia de Silicio, y Messenger DEM (3D).
+  ]],
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "MIT license"
+}

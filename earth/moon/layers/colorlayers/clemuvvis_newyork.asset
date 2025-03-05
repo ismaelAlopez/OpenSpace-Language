@@ -1,0 +1,35 @@
+local globe = asset.require("../../moon")
+
+local Layer = {
+  Identifier = "ClemUvvis_NewYork",
+  Name = "Clem Uvvis [Nueva York]",
+  Enabled = asset.enabled,
+  ZIndex = 20,
+  FilePath = asset.resource("clemuvvis_newyork.wms"),
+  Settings = {
+    Gamma = 1.14,
+    Multiplier = 1.4
+  },
+  Description = [[El mosaico Clementine Ultravioleta/Visible (UVVIS) Versión 2 es un
+    conjunto de datos en escala de grises que representa el albedo (brillo de la superficie lunar) medido a la longitud de onda de 750 nanómetros (nm) por la cámara UVVIS (Lee, et al., 2009).
+    La resolución de este mosaico es de 118 metros por píxel (m)]]
+}
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Moon.Identifier, "ColorLayers", Layer)
+end)
+
+asset.onDeinitialize(function()
+  openspace.globebrowsing.deleteLayer(globe.Moon.Identifier, "ColorLayers", Layer)
+end)
+
+asset.export("layer", Layer)
+
+asset.meta = {
+  Name = "Clem Uvvis [Nueva York]",
+  Description = [[Mapa global del mosaico UVVIS Clementine de la Luna con una resolución de 118m v2. Este mapa
+    está alojado en el servidor de OpenSpace en Nueva York]],
+  Author = "USGS",
+  URL = "https://astrogeology.usgs.gov/search/map/Moon/Clementine/UVVIS/Lunar_Clementine_UVVIS_750nm_Global_Mosaic_118m_v2",
+  License = "NASA/PDS"
+}

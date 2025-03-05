@@ -1,0 +1,29 @@
+local globe = asset.require("../../mars")
+
+local Layer = {
+  Identifier = "CTX_Mosaic_NewYork",
+  Name = "CTX Mosaico [Nueva York]",
+  Enabled = asset.enabled,
+  ZIndex = 60,
+  FilePath = asset.resource("ctx_mosaic_newyork.wms"),
+  BlendMode = "Color"
+}
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Mars.Identifier, "ColorLayers", Layer)
+end)
+
+asset.onDeinitialize(function()
+  openspace.globebrowsing.deleteLayer(globe.Mars.Identifier, "ColorLayers", Layer)
+end)
+
+asset.export("layer", Layer)
+
+asset.meta = {
+  Name = "CTX Mosaico [Nueva York]",
+  Description = [[Capa de mosaico CTX para el globo de Marte. Esta capa es servida desde los
+    servidores de OpenSpace en Nueva York]],
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "MIT license"
+}

@@ -1,0 +1,48 @@
+local globe = asset.require("../../earth")
+
+
+
+local texturesPath = asset.resource({
+  Name = "Texturas de la Tierra",
+  Type = "HttpSynchronization",
+  Identifier = "earth_textures",
+  Version = 2
+})
+
+
+local Layer = {
+  Name = "Altura de Blue Marble de la Tierra",
+  Identifier = "Earth_Bluemarble_Height",
+  Enabled = asset.enabled,
+  ZIndex = 5,
+  FilePath = texturesPath .. "earth_bluemarble_height.jpg",
+  Description = "Capa topográfica de Blue Marble Next Generation",
+  --note these values were just chosen to try to closly match the look of the ESRI Terrain layer
+  Settings = {
+    Multiplier = 40,
+    Offset = -600
+  },
+  CacheSettings = { Enabled = false }
+}
+
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "HeightLayers", Layer)
+end)
+
+asset.onDeinitialize(function()
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "HeightLayers", Layer)
+end)
+
+asset.export("layer", Layer)
+
+
+
+asset.meta = {
+  Name = "Altura de Blue Marble de la Tierra",
+  Description = [[Capa de respaldo para la altura de la Tierra en caso de que no haya conexión a Internet. 
+                  Contiene la capa topográfica de Blue Marble Next Generation.]],
+  Author = "NASA",
+  URL = "https://visibleearth.nasa.gov/collection/1484/blue-marble",
+  License = "NASA"
+}

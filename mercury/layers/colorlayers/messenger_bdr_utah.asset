@@ -1,0 +1,38 @@
+local globe = asset.require("../../mercury")
+
+local Layer = {
+  Identifier = "Messenger_BDR_Utah",
+  Name = "Mensajero BDR [Utah]",
+  Enabled = asset.enabled,
+  ZIndex = 10,
+  FilePath = asset.resource("messenger_bdr_utah.wms"),
+  TilePixelSize = 360,
+  Description = [[El conjunto de datos del mapa base proyectado (BDR) consiste en un mapa
+  monocromático global de reflectancia a una resolución de 256 píxeles por grado (~166 m/p).
+  Esta edición, versión 1, fue lanzada el 6 de mayo de 2016 al archivo del Sistema de Datos
+  Planetarios (PDS) de MESSENGER. Se compila utilizando imágenes NAC o WAC de 750 nm de cualquier
+  campaña que mejor se ajuste a la geometría de iluminación prevista o ángulo de emisión bajo y
+  ángulo de incidencia cercano a 74 grados. Está controlado y proyectado sobre un modelo digital
+  de elevación global. Utiliza un modelo fotométrico de Kasseleinin-Shkuratov, cuyos parámetros
+  son los mismos para cualquier banda de longitud de onda dada en todos los productos de datos
+  de mapas de fin de misión de MESSENGER]]
+}
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Mercury.Identifier, "ColorLayers", Layer)
+end)
+
+asset.onDeinitialize(function()
+  openspace.globebrowsing.deleteLayer(globe.Mercury.Identifier, "ColorLayers", Layer)
+end)
+
+asset.export("layer", Layer)
+
+asset.meta = {
+  Name = "Mensajero BDR [Utah]",
+  Description = [[Capa de mapa base global BDR de Mensajero MDIS de Mercurio a 166m para el globo de Mercurio.
+    Este mapa está alojado en el servidor de OpenSpace en Utah]],
+  Author = "USGS",
+  URL = "https://astrogeology.usgs.gov/search/map/Mercury/Messenger/Global/Mercury_MESSENGER_MDIS_Basemap_BDR_Mosaic_Global_166m",
+  License = "NASA/PDS"
+}

@@ -1,0 +1,43 @@
+local globe = asset.require("../../earth")
+
+local Name = "Órbita Polar: Satélite Aqua y Barrido MODIS"
+local Identifier = "noaa-sos-atmosphere-aqua_swath"
+local Description = [[Los satélites son importantes para los científicos porque los instrumentos a bordo pueden proporcionar una cobertura global casi diaria de la Tierra que de otro modo no estaría disponible. Hay seis instrumentos a bordo del satélite Aqua de la NASA. Uno de ellos es MODIS, el Espectrorradiómetro de Imágenes de Resolución Moderada. MODIS mide 36 frecuencias espectrales de luz, que proporcionan una gran cantidad de información sobre las propiedades físicas de la atmósfera y las propiedades biológicas y físicas de los océanos y la tierra. El satélite Aqua con MODIS adjunto fue lanzado el 4 de mayo de 2002. Desde entonces, Aqua ha estado orbitando la Tierra a una altitud de 438 millas (705 kilómetros) cada 99 minutos en una órbita polar pasando dentro de 10 grados de cada polo en cada órbita. La órbita es sincrónica con el sol, lo que significa que el satélite pasa sobre el mismo punto de la Tierra a aproximadamente la misma hora local todos los días. Aqua cruza el ecuador de sur a norte a aproximadamente la 1:30 pm hora local]]
+local URL = "https://sos.noaa.gov/catalog/datasets/polar-orbiting-aqua-satellite-and-modis-swath/"
+
+local syncedDirectory = asset.resource({
+  Name = Name,
+  Type = "HttpSynchronization",
+  Identifier = Identifier,
+  Version = 1,
+  UnzipFiles = true,
+  UnzipFilesDestination = "images"
+})
+
+local Layer = {
+  Identifier = Identifier,
+  Name = Name,
+  Enabled = asset.enabled,
+  ZIndex = 100,
+  Type = "ImageSequenceTileProvider",
+  FolderPath = syncedDirectory .. "images",
+  Description = Description
+}
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.onDeinitialize(function()
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.export(Layer)
+
+asset.meta = {
+  Name = Name,
+  Description = Description .. "Datos proporcionados por la Administración Nacional Oceánica y Atmosférica",
+  Author = "Administración Nacional Oceánica y Atmosférica",
+  URL = URL,
+  License = "https://sos.noaa.gov/copyright/"
+}

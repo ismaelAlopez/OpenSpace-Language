@@ -1,0 +1,42 @@
+local transforms = asset.require("../transforms")
+local kernels = asset.require("../kernels")
+local coreKernels = asset.require("spice/core")
+
+local IoTrail = {
+  Identifier = "IoTrail",
+  Parent = transforms.JupiterBarycenter.Identifier,
+  Renderable = {
+    Type = "RenderableTrailOrbit",
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels.ID.Io,
+      Observer = coreKernels.ID.JupiterBarycenter
+    },
+    Color = { 0.4, 0.4, 0.2 },
+    Period = 42.0 / 24.0,
+    Resolution = 1000
+  },
+  Tag = { "moonTrail_solarSystem", "moonTrail_giants", "moonTrail_jupiter", "moonTrail_major_jupiter" },
+  GUI = {
+    Name = "Io Trail",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Principales/Io"
+  }
+}
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(IoTrail)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(IoTrail)
+end)
+
+asset.export(IoTrail)
+
+asset.meta = {
+  Name = "Rastro de Io",
+  Description = "Rastro de Io observado por Júpiter",
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "MIT license"
+}

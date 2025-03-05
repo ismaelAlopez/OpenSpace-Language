@@ -1,0 +1,63 @@
+local globe = asset.require("../../earth")
+
+local Name = "Monóxido de Carbono - 2000"
+local Identifier = "noaa-sos-atmosphere-carbon_monoxide"
+local Description = [[El monóxido de carbono es conocido como "El Asesino Silencioso" porque es un
+gas incoloro, inodoro e insípido que es venenoso para los humanos y otros organismos que respiran oxígeno.
+También se produce de forma natural en la atmósfera. Solo en altas concentraciones el monóxido de carbono es mortal.
+En la superficie de la Tierra, la concentración de monóxido de carbono es de 100 ppb (partes por mil millones),
+sin embargo, en áreas urbanas puede llegar a 10 ppm (partes por millón) o 100 veces más alto.
+Una de las principales fuentes antropogénicas de monóxido de carbono en la atmósfera son las emisiones de los automóviles.
+En áreas con mucho tráfico, el monóxido de carbono puede medirse en 50 ppm.
+Las fuentes naturales de monóxido de carbono incluyen volcanes y quema de maleza.
+Entre las fuentes antropogénicas y naturales, los científicos estiman que la producción anual de monóxido de carbono es de 2-5 gigatoneladas]]
+local URL = "https://sos.noaa.gov/catalog/datasets/carbon-monoxide-2000/"
+
+local syncedDirectory = asset.resource({
+  Name = Name,
+  Type = "HttpSynchronization",
+  Identifier = Identifier,
+  Version = 1,
+  UnzipFiles = true
+})
+
+local Layer = {
+  Identifier = Identifier,
+  Name = Name,
+  Enabled = asset.enabled,
+  ZIndex = 100,
+  Type = "ImageSequenceTileProvider",
+  FolderPath = syncedDirectory .. "1024",
+  Description = Description
+}
+
+local Colorbar = {
+  Identifier = Identifier,
+  Name = Name,
+  Enabled = asset.enabled,
+  Type = "ScreenSpaceImageLocal",
+  TexturePath = syncedDirectory .. "colorbar.png",
+  FaceCamera = false,
+  CartesianPosition = { 0.0, -0.5, -2.0 }
+}
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+  openspace.addScreenSpaceRenderable(Colorbar)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeScreenSpaceRenderable(Colorbar)
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.export(Layer)
+asset.export(Colorbar)
+
+asset.meta = {
+  Name = Name,
+  Description = Description .. "Datos proporcionados por la Administración Nacional Oceánica y Atmosférica",
+  Author = "Administración Nacional Oceánica y Atmosférica",
+  URL = URL,
+  License = "https://sos.noaa.gov/copyright/"
+}

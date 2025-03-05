@@ -1,0 +1,86 @@
+asset.require("./callisto/callisto")
+asset.require("./europa/europa")
+asset.require("./ganymede/ganymede")
+asset.require("./io/io")
+
+local JupiterMajorMoonsOn = {
+  Identifier = "os.solarsystem.JupiterMajorMoonsOn",
+  Name = "Encender lunas mayores y rastros",
+  Command = [[
+    local trails = openspace.property("{moonTrail_major_jupiter}.Renderable.Enabled")
+    local trails_fade = openspace.property("{moonTrail_major_jupiter}.Renderable.Fade")
+
+    local moons = openspace.property("{moon_major_jupiter}.Renderable.Enabled")
+    local moons_fade = openspace.property("{moon_major_jupiter}.Renderable.Fade")
+
+    for i, v in pairs(trails_fade) do
+      openspace.setPropertyValueSingle(trails[i], true)
+      openspace.setPropertyValueSingle(v, 1, 2, "Linear")
+    end
+
+    for i, v in pairs(moons_fade) do
+      openspace.setPropertyValueSingle(moons[i], true)
+      openspace.setPropertyValueSingle(v, 1, 2, "Linear")
+    end
+  ]],
+  Documentation = "Encender las lunas mayores de Júpiter y sus rastros",
+  GuiPath = "/Sistema Solar/Júpiter",
+  IsLocal = false
+}
+
+local JupiterMajorMoonsOff = {
+  Identifier = "os.solarsystem.JupiterMajorMoonsOff",
+  Name = "Apagar lunas mayores y rastros",
+  Command = [[
+    local trails = openspace.property("{moonTrail_major_jupiter}.Renderable.Enabled")
+    local trails_fade = openspace.property("{moonTrail_major_jupiter}.Renderable.Fade")
+
+    local moons = openspace.property("{moon_major_jupiter}.Renderable.Enabled")
+    local moons_fade = openspace.property("{moon_major_jupiter}.Renderable.Fade")
+
+    for i, v in pairs(trails_fade) do
+      openspace.setPropertyValueSingle(
+        v,
+        0,
+        2,
+        "Linear",
+        "openspace.setPropertyValueSingle('" .. trails[i] .. "', false)"
+      )
+    end
+
+    for i, v in pairs(moons_fade) do
+      openspace.setPropertyValueSingle(
+        v,
+        0,
+        2,
+        "Linear",
+        "openspace.setPropertyValueSingle('" .. moons[i] .. "', false)"
+      )
+    end
+  ]],
+  Documentation = "Apagar las lunas mayores de Júpiter y sus rastros",
+  GuiPath = "/Sistema Solar/Júpiter",
+  IsLocal = false
+}
+
+asset.onInitialize(function()
+  openspace.action.registerAction(JupiterMajorMoonsOn)
+  openspace.action.registerAction(JupiterMajorMoonsOff)
+end)
+
+asset.onDeinitialize(function()
+  openspace.action.removeAction(JupiterMajorMoonsOff)
+  openspace.action.removeAction(JupiterMajorMoonsOn)
+end)
+
+asset.export("JupiterMajorMoonsOn", JupiterMajorMoonsOn.Identifier)
+asset.export("JupiterMajorMoonsOff", JupiterMajorMoonsOff.Identifier)
+
+asset.meta = {
+  Name = "Lunas Mayores de Júpiter",
+  Description = [[Meta asset que contiene las lunas mayores de Júpiter: Calisto, Europa,
+    Ganimedes e Io]],
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "MIT license"
+}

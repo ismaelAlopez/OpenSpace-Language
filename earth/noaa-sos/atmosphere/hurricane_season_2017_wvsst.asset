@@ -1,0 +1,56 @@
+local globe = asset.require("../../earth")
+
+local Name = "Temporada de Huracanes: Vapor de Agua y SST - 2017"
+local Identifier = "noaa-sos-atmosphere-hurricane_season_2017_wvsst"
+local Description = [[Después de una larga pausa en huracanes mayores que golpearon a los EE.UU.
+  (2005 - 2017), la temporada 2017 fue una temporada extremadamente destructiva, con 17 tormentas
+  nombradas solo en el Océano Atlántico, empatando con 1936 como la quinta temporada más activa
+  desde que comenzaron los registros en 1851. Los diez huracanes del Atlántico ocurrieron en fila,
+  el mayor número de huracanes consecutivos en la era satelital. Además, es con mucho la temporada
+  más costosa registrada, con un total preliminar de más de $368.66 mil millones (USD) en daños,
+  que es más del doble del costo total de 2005, y casi todo debido a tres de los huracanes mayores
+  de la temporada: Harvey, Irma y María. Los tres ocurrieron dentro de un mes en agosto - septiembre,
+  enviando los esfuerzos de ayuda en desastres a tambalearse y llamando a voluntarios para ayudar]]
+local URL = "https://sos.noaa.gov/catalog/datasets/hurricane-season-water-vapor-and-sst-2017/"
+
+local syncedDirectory = asset.resource({
+  Name = Name,
+  Type = "HttpSynchronization",
+  Identifier = Identifier,
+  Version = 1,
+  UnzipFiles = true
+})
+
+local Layer = {
+  Identifier = Identifier,
+  Name = Name,
+  Enabled = asset.enabled,
+  ZIndex = 100,
+  Type = "TemporalTileProvider",
+  Mode = "Folder",
+  Folder = {
+    Folder = syncedDirectory .. "2048",
+    -- See https://en.cppreference.com/w/cpp/io/manip/get_time for an explanation of the
+    -- time formatting string
+    Format = "wvsst-%y%j-%H.jpg"
+  },
+  Description = Description
+}
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.onDeinitialize(function()
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.export(Layer)
+
+asset.meta = {
+  Name = Name,
+  Description = Description .. "Datos proporcionados por la Administración Nacional Oceánica y Atmosférica",
+  Author = "Administración Nacional Oceánica y Atmosférica",
+  URL = URL,
+  License = "https://sos.noaa.gov/copyright/"
+}

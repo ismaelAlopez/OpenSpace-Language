@@ -1,0 +1,51 @@
+local globe = asset.require("../../earth")
+
+local Name = "Erupción de Ceniza Volcánica: Islandia"
+local Identifier = "noaa-sos-atmosphere-volcano_ash"
+local Description = [[Eyjafjallajokull, un volcán cubierto de glaciares en el sur de Islandia,
+entró en erupción explosivamente el 14 de abril de 2010. El nombre Eyjafjallajokull es islandés para
+glaciar de montaña-isla. El volcán inicialmente entró en erupción el 20 de marzo, pero esta erupción original
+fue mucho más pequeña y solo causó una breve evacuación del área local. El evento del 14 de abril fue de 10 a 20 veces más poderoso y tuvo impactos internacionales. Localmente, la
+erupción y la lava resultante derritieron el glaciar circundante, causando grandes inundaciones.
+A nivel internacional, el tráfico aéreo se vio afectado durante varios días después de la erupción. El
+volcán expulsó ceniza a más de 30,000 pies en la atmósfera, causando interrupciones significativas en
+el tráfico aéreo europeo y transatlántico. El espacio aéreo sobre gran parte del norte de Europa estuvo
+cerrado del 15 al 23 de abril por preocupaciones sobre la ceniza volcánica abrasiva que podría causar
+fallos en los motores]]
+local URL = "https://sos.noaa.gov/catalog/datasets/volcanic-ash-eruption-iceland/"
+
+local syncedDirectory = asset.resource({
+  Name = Name,
+  Type = "HttpSynchronization",
+  Identifier = Identifier,
+  Version = 1,
+  UnzipFiles = true
+})
+
+local Layer = {
+  Identifier = Identifier,
+  Name = Name,
+  Enabled = asset.enabled,
+  ZIndex = 100,
+  Type = "ImageSequenceTileProvider",
+  FolderPath = syncedDirectory .. "2992",
+  Description = Description
+}
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.onDeinitialize(function()
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.export(Layer)
+
+asset.meta = {
+  Name = Name,
+  Description = Description .. "Datos proporcionados por la Administración Nacional Oceánica y Atmosférica",
+  Author = "Administración Nacional Oceánica y Atmosférica",
+  URL = URL,
+  License = "https://sos.noaa.gov/copyright/"
+}

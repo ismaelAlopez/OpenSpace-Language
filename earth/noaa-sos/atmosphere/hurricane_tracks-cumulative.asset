@@ -1,0 +1,40 @@
+local globe = asset.require("../../earth")
+
+local Name = "Rutas de Huracanes: Acumulativo - 1950 - 2020"
+local Identifier = "noaa-sos-atmosphere-hurricane_tracks-cumulative"
+local Description = [[Rastrear huracanes históricos es una forma importante para que los investigadores de huracanes aprendan sobre las trayectorias de futuros huracanes. Debido a esto, los registros de las trayectorias de huracanes se archivan y estudian. No todos los huracanes siguen el mismo camino, pero ciertamente hay tendencias notables en las trayectorias de los huracanes. Muchos modelos informáticos que se han creado para predecir las trayectorias de los huracanes incluyen los datos históricos en sus modelos]]
+local URL = "https://sos.noaa.gov/catalog/datasets/hurricane-tracks-cumulative-1950-2005/"
+
+local syncedDirectory = asset.resource({
+  Name = Name,
+  Type = "HttpSynchronization",
+  Identifier = Identifier,
+  Version = 1
+})
+
+local Layer = {
+  Identifier = Identifier,
+  Name = Name,
+  Enabled = asset.enabled,
+  ZIndex = 100,
+  FilePath = syncedDirectory .. "4096.png",
+  Description = Description
+}
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.onDeinitialize(function()
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.export(Layer)
+
+asset.meta = {
+  Name = Name,
+  Description = Description .. "Datos proporcionados por la Administración Nacional Oceánica y Atmosférica",
+  Author = "Administración Nacional Oceánica y Atmosférica",
+  URL = URL,
+  License = "https://sos.noaa.gov/copyright/"
+}

@@ -1,0 +1,54 @@
+local globe = asset.require("../../earth")
+
+local Name = "Flujo de Carbono"
+local Identifier = "noaa-sos-atmosphere-carbonflux"
+local Description = [[La División de Monitoreo Global de NOAA monitorea diligentemente el
+dióxido de carbono y otros gases traza en la atmósfera. Uno de los métodos que utilizan
+para muestrear gases traza es recolectar frascos de aire de todo el mundo que pueden ser
+probados. También tienen varios otros medios para recolectar muestras. En este conjunto
+de datos, se representa la red de muestreo de NOAA GMD a partir de 2005. Los círculos son
+ubicaciones de muestreo de frascos, las estrellas son sitios de aeronaves (se llenan 12
+frascos por vuelo) y los barcos, que solo son visibles mientras corren desde Australia y
+Nueva Zelanda hasta la costa oeste de EE. UU. o Japón, o desde Ciudad del Cabo hasta la
+costa este de EE. UU. La coloración en el conjunto de datos representa los flujos
+construidos por los módulos de océano, biosfera y combustibles fósiles del sistema de
+asimilación de datos de NOAA ESRL para CO2 y gases traza relacionados. El conjunto de
+datos muestra flujos promedio diarios construidos a partir de la salida del modelo de 3
+horas]]
+local URL = "https://sos.noaa.gov/catalog/datasets/polar-orbiting-aqua-satellite-and-modis-swath/"
+
+local syncedDirectory = asset.resource({
+  Name = Name,
+  Type = "HttpSynchronization",
+  Identifier = Identifier,
+  Version = 1,
+  UnzipFiles = true
+})
+
+local Layer = {
+  Identifier = Identifier,
+  Name = Name,
+  Enabled = asset.enabled,
+  ZIndex = 100,
+  Type = "ImageSequenceTileProvider",
+  FolderPath = syncedDirectory .. "2160",
+  Description = Description
+}
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.onDeinitialize(function()
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.export(Layer)
+
+asset.meta = {
+  Name = Name,
+  Description = Description .. "Datos proporcionados por la Administración Nacional Oceánica y Atmosférica",
+  Author = "Administración Nacional Oceánica y Atmosférica",
+  URL = URL,
+  License = "https://sos.noaa.gov/copyright/"
+}

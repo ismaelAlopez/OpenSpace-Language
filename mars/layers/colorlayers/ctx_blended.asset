@@ -1,0 +1,41 @@
+local globe = asset.require("../../mars")
+
+local Layer = {
+  Identifier = "CTX_blended",
+  Name = "CTX Mezclado",
+  Enabled = asset.enabled,
+  ZIndex = 60,
+  FilePath = asset.resource("ctx_blended.vrt"),
+  BlendMode = "Color",
+  Description = [[El Laboratorio Bruce Murray para la Visualización Planetaria ha completado un
+    mosaico de 5.7 terapíxeles de la superficie de Marte renderizado a 5.0 m/px. Cada píxel en el
+    mosaico es del tamaño de un espacio de estacionamiento típico, proporcionando una resolución
+    sin precedentes de la superficie marciana a escala global.
+
+    El mosaico cubre el 99.5% de Marte desde 88°S hasta 88°N. Los píxeles que componen el mosaico
+    pueden ser rastreados hasta sus datos de origen, proporcionando trazabilidad completa para todo
+    el mosaico. El mosaico está disponible para transmisión por internet y para descarga, como se
+    describe a continuación.
+
+    Todos los datos en el mosaico provienen de la Cámara de Contexto (CTX) a bordo del Orbitador de
+    Reconocimiento de Marte (MRO). (Descripción de URL)]]
+}
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Mars.Identifier, "ColorLayers", Layer)
+end)
+
+asset.onDeinitialize(function()
+  openspace.globebrowsing.deleteLayer(globe.Mars.Identifier, "ColorLayers", Layer)
+end)
+
+asset.export("layer", Layer)
+
+asset.meta = {
+  Name = "CTX Mezclado",
+  Description = [[Nuevo mapa CTX mezclado para Marte del laboratorio Murray de CalTech. Este mapa es
+    alojado por ESRI]],
+  Author = "Laboratorio Murray de Caltech",
+  URL = "http://murray-lab.caltech.edu/CTX/",
+  License = "Acuerdo de Licencia Maestro de Esri"
+}

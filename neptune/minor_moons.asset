@@ -1,0 +1,89 @@
+asset.require("./inner_moons")
+asset.require("./irregular_moons")
+
+
+
+local NeptuneMinorMoonsOn = {
+  Identifier = "os.solarsystem.NeptuneMinorMoonsOn",
+  Name = "Encender lunas menores y rastros",
+  Command = [[
+    local trails = openspace.property("{moonTrail_minor_neptune}.Renderable.Enabled")
+    local trails_fade = openspace.property("{moonTrail_minor_neptune}.Renderable.Fade")
+
+    local moons = openspace.property("{moon_minor_neptune}.Renderable.Enabled")
+    local moons_fade = openspace.property("{moon_minor_neptune}.Renderable.Fade")
+
+    for i, v in pairs(trails_fade) do
+      openspace.setPropertyValueSingle(trails[i], true)
+      openspace.setPropertyValueSingle(v, 1, 2, "Linear")
+    end
+
+    for i, v in pairs(moons_fade) do
+      openspace.setPropertyValueSingle(moons[i], true)
+      openspace.setPropertyValueSingle(v, 1, 2, "Linear")
+    end
+  ]],
+  Documentation = "Encender las lunas menores de Neptuno y sus rastros",
+  GuiPath = "/Sistema Solar/Neptuno",
+  IsLocal = false
+}
+
+local NeptuneMinorMoonsOff = {
+  Identifier = "os.solarsystem.NeptuneMinorMoonsOff",
+  Name = "Apagar lunas menores y rastros",
+  Command = [[
+    local trails = openspace.property("{moonTrail_minor_neptune}.Renderable.Enabled")
+    local trails_fade = openspace.property("{moonTrail_minor_neptune}.Renderable.Fade")
+
+    local moons = openspace.property("{moon_minor_neptune}.Renderable.Enabled")
+    local moons_fade = openspace.property("{moon_minor_neptune}.Renderable.Fade")
+
+    for i, v in pairs(trails_fade) do
+      openspace.setPropertyValueSingle(
+        v,
+        0,
+        2,
+        "Linear",
+        "openspace.setPropertyValueSingle('" .. trails[i] .. "', false)"
+      )
+    end
+
+    for i, v in pairs(moons_fade) do
+      openspace.setPropertyValueSingle(
+        v,
+        0,
+        2,
+        "Linear",
+        "openspace.setPropertyValueSingle('" .. moons[i] .. "', false)"
+      )
+    end
+  ]],
+  Documentation = "Apagar las lunas menores de Neptuno y sus rastros",
+  GuiPath = "/Sistema Solar/Neptuno",
+  IsLocal = false
+}
+
+
+asset.onInitialize(function()
+  openspace.action.registerAction(NeptuneMinorMoonsOn)
+  openspace.action.registerAction(NeptuneMinorMoonsOff)
+end)
+
+asset.onDeinitialize(function()
+  openspace.action.removeAction(NeptuneMinorMoonsOff)
+  openspace.action.removeAction(NeptuneMinorMoonsOn)
+end)
+
+asset.export("NeptuneMinorMoonsOn", NeptuneMinorMoonsOn.Identifier)
+asset.export("NeptuneMinorMoonsOff", NeptuneMinorMoonsOff.Identifier)
+
+
+
+asset.meta = {
+  Name = "Lunas Menores de Neptuno",
+  Description = [[Meta asset que contiene dos grupos de lunas: lunas interiores y
+    lunas irregulares]],
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "MIT license"
+}

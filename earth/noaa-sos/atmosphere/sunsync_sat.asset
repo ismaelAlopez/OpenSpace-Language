@@ -1,0 +1,55 @@
+local globe = asset.require("../../earth")
+
+local Name = "Órbita Polar: NOAA-17 y NOAA-18"
+local Identifier = "noaa-sos-atmosphere-sunsync_sat"
+local Description = [[Los satélites permiten a los científicos observar la Tierra desde arriba de la
+atmósfera. La Administración Nacional Oceánica y Atmosférica, NOAA, tiene varios
+tipos diferentes de satélites, incluidos satélites geoestacionarios y de órbita polar.
+Estos conjuntos de datos muestran la trayectoria de los Satélites Operacionales Ambientales de Órbita Polar, o
+POES por sus siglas en inglés. NOAA tiene actualmente dos POES en operación, un satélite matutino y uno vespertino.
+El satélite matutino cruza el ecuador en el lado iluminado por el sol de la Tierra
+por la mañana, y el satélite vespertino cruza por la tarde. Ambos satélites
+orbitan la Tierra 14.1 veces al día]]
+local URL = "https://sos.noaa.gov/catalog/datasets/polar-orbiting-noaa-17-and-noaa-18/"
+
+local syncedDirectory = asset.resource({
+  Name = Name,
+  Type = "HttpSynchronization",
+  Identifier = Identifier,
+  Version = 1,
+  UnzipFiles = true
+})
+
+local Layer = {
+  Identifier = Identifier,
+  Name = Name,
+  Enabled = asset.enabled,
+  ZIndex = 100,
+  Type = "TemporalTileProvider",
+  Mode = "Folder",
+  Folder = {
+    Folder = syncedDirectory .. "2048",
+    -- See https://en.cppreference.com/w/cpp/io/manip/get_time for an explanation of the
+    -- time formatting string
+    Format = "sunsync_%Y%j%H%M.jpg"
+  },
+  Description = Description
+}
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.onDeinitialize(function()
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.export(Layer)
+
+asset.meta = {
+  Name = Name,
+  Description = Description .. "Datos proporcionados por la Administración Nacional Oceánica y Atmosférica",
+  Author = "Administración Nacional Oceánica y Atmosférica",
+  URL = URL,
+  License = "https://sos.noaa.gov/copyright/"
+}

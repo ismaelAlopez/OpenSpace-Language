@@ -1,0 +1,42 @@
+local transforms = asset.require("../transforms")
+local kernels = asset.require("../kernels")
+local coreKernels = asset.require("spice/core")
+
+local GanymedeTrail = {
+  Identifier = "GanymedeTrail",
+  Parent = transforms.JupiterBarycenter.Identifier,
+  Renderable = {
+    Type = "RenderableTrailOrbit",
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels.ID.Ganymede,
+      Observer = coreKernels.ID.JupiterBarycenter
+    },
+    Color = { 0.4, 0.3, 0.3 },
+    Period = 172.0 / 24.0,
+    Resolution = 1000
+  },
+  Tag = { "moonTrail_solarSystem", "moonTrail_giants", "moonTrail_jupiter", "moonTrail_major_jupiter" },
+  GUI = {
+    Name = "Rastro de Ganímedes",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Principales/Ganímedes"
+  }
+}
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(GanymedeTrail)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(GanymedeTrail)
+end)
+
+asset.export(GanymedeTrail)
+
+asset.meta = {
+  Name = "Rastro de Ganímedes",
+  Description = "Rastro de Ganímedes observado por Júpiter",
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "MIT license"
+}

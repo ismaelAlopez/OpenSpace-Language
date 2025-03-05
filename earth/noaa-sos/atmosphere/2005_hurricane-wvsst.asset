@@ -1,0 +1,52 @@
+local globe = asset.require("../../earth")
+
+local Name = "Temporada de Huracanes: Vapor de Agua y SST - 2005"
+local Identifier = "noaa-sos-atmosphere-2005_hurricane-wvsst"
+local Description = [["Esta temporada de huracanes rompió récords que han permanecido
+durante décadas - más tormentas con nombre, más huracanes y más tormentas de categoría cinco. 
+Se podría decir que fue la temporada de huracanes más devastadora que el país ha experimentado en tiempos modernos,"
+dijo el vicealmirante retirado de la Marina Conrad C. Lautenbacher, Jr., Ph.D., subsecretario de
+comercio para océanos y atmósfera y administrador de NOAA]]
+local URL = "https://sos.noaa.gov/catalog/datasets/hurricane-season-water-vapor-and-sst-2005/"
+
+local syncedDirectory = asset.resource({
+  Name = Name,
+  Type = "HttpSynchronization",
+  Identifier = Identifier,
+  Version = 1,
+  UnzipFiles = true
+})
+
+local Layer = {
+  Identifier = Identifier,
+  Name = Name,
+  Enabled = asset.enabled,
+  ZIndex = 100,
+  Type = "TemporalTileProvider",
+  Mode = "Folder",
+  Folder = {
+    Folder = syncedDirectory .. "2048",
+    -- See https://en.cppreference.com/w/cpp/io/manip/get_time for an explanation of the
+    -- time formatting string
+    Format = "GI-WV-%y%j-%H%M.jpg"
+  },
+  Description = Description
+}
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.onDeinitialize(function()
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.export(Layer)
+
+asset.meta = {
+  Name = Name,
+  Description = Description .. "Datos proporcionados por la Administración Nacional Oceánica y Atmosférica",
+  Author = "Administración Nacional Oceánica y Atmosférica",
+  URL = URL,
+  License = "https://sos.noaa.gov/copyright/"
+}

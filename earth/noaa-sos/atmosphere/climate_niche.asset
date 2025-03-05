@@ -1,0 +1,93 @@
+local globe = asset.require("../../earth")
+
+local Name = "Nicho Climático Humano - 2020 y 2070"
+local Identifier = "noaa-sos-atmosphere-climate_niche"
+local Description = [[El nicho climático humano son áreas en la Tierra donde los humanos han
+vivido históricamente debido a condiciones climáticas favorables relacionadas con la temperatura y
+precipitación. Durante los últimos 6000 años, los humanos han vivido mayormente en las mismas condiciones climáticas
+que ahora. Además de los humanos, este nicho climático es también donde típicamente se lleva a cabo la
+producción de cultivos y ganado. La temperatura media anual óptima de este nicho identificado es alrededor de 52 °F a 59 °F (~11 °C a 15 °C). Pero a medida que
+el clima cambia, las áreas que encajan dentro del nicho climático humano cambiarán también. Este conjunto de datos identifica el nicho climático humano actual, con la tierra sombreada para mostrar
+qué áreas son más o menos adecuadas para las personas, y luego proyecta el futuro nicho climático humano en 2070 basado en el escenario de proyección climática de RCP 8.5. También se incluye
+como una capa adicional que se puede activar y desactivar un mapa que muestra las áreas donde
+la temperatura media anual es mayor a 84 °F (29 °C). Actualmente, solo el 0.8% de la superficie terrestre global tiene una temperatura media anual mayor a 84 °F, pero en 2070 se proyecta que cubra el 19% de la superficie terrestre global y afecte a un estimado de 3.5 mil millones de personas]]
+local URL = "https://sos.noaa.gov/catalog/datasets/human-climate-niche-2020-and-2070/"
+
+local syncedDirectory = asset.resource({
+  Name = Name,
+  Type = "HttpSynchronization",
+  Identifier = Identifier,
+  Version = 1
+})
+
+local LayerPrecip2020 = {
+  Identifier = Identifier .. "-2020",
+  Name = Name .. " (2020)",
+  ZIndex = 100,
+  FilePath = syncedDirectory .. "temp-precip-2020-current-4096.png",
+  Description = Description
+}
+
+local LayerPrecip2070 = {
+  Identifier = Identifier .. "-2070",
+  Name = Name .. " (2070)",
+  ZIndex = 100,
+  FilePath = syncedDirectory .. "temp-precip-2070-rcp85-4096.png",
+  Description = Description
+}
+
+local LayerMat2020 = {
+  Identifier = Identifier .. "-mat2020",
+  Name = Name .. " (MAT 2020)",
+  ZIndex = 100,
+  FilePath = syncedDirectory .. "MAT-29-2020-4096.png",
+  Description = Description
+}
+
+local LayerMat2070 = {
+  Identifier = Identifier .. "-mat2070",
+  Name = Name .. " (MAT 2070)",
+  ZIndex = 100,
+  FilePath = syncedDirectory .. "MAT-29-2070-4096.png",
+  Description = Description
+}
+
+local Colorbar = {
+  Identifier = Identifier,
+  Name = Name,
+  Type = "ScreenSpaceImageLocal",
+  ZIndex = 100,
+  TexturePath = syncedDirectory .. "niche-scale.png",
+  FaceCamera = false,
+  CartesianPosition = { 0.0, -0.5, -2.0 }
+}
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", LayerPrecip2020)
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", LayerPrecip2070)
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", LayerMat2020)
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", LayerMat2070)
+  openspace.addScreenSpaceRenderable(Colorbar)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeScreenSpaceRenderable(Colorbar)
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", LayerMat2070)
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", LayerMat2020)
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", LayerPrecip2070)
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", LayerPrecip2020)
+end)
+
+asset.export(LayerPrecip2020)
+asset.export(LayerPrecip2070)
+asset.export(LayerMat2020)
+asset.export(LayerMat2070)
+asset.export(Colorbar)
+
+asset.meta = {
+  Name = Name,
+  Description = Description .. "Datos proporcionados por la Administración Nacional Oceánica y Atmosférica",
+  Author = "Administración Nacional Oceánica y Atmosférica",
+  URL = URL,
+  License = "https://sos.noaa.gov/copyright/"
+}

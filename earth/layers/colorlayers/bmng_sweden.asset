@@ -1,0 +1,35 @@
+local globe = asset.require("../../earth")
+
+
+
+local Layer = {
+  Identifier = "BMNG_Sweden",
+  Name = "BMNG [Suecia]",
+  Enabled = asset.enabled,
+  ZIndex = 10,
+  FilePath = asset.resource("bmng_sweden.wms"),
+  Description = [[Mapa de Blue Marble Next Generation cargado en su resolución completa en la web. 
+                  Este mapa está alojado en los servidores de OpenSpace en Suecia.]]
+}
+
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.onDeinitialize(function()
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.export("layer", Layer)
+
+
+
+asset.meta = {
+  Name = "Blue Marble Next Generation (Suecia)",
+  Description = [[Mapa de Blue Marble Next Generation cargado en su resolución completa en la web. 
+                  Este mapa está alojado en los servidores de OpenSpace en Suecia.]],
+  Author = "Equipo de OpenSpace",
+  URL = "https://visibleearth.nasa.gov/collection/1484/blue-marble",
+  License = "NASA"
+}

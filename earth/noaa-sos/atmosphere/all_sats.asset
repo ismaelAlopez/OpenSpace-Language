@@ -1,0 +1,53 @@
+local globe = asset.require("../../earth")
+
+local Name = "Satélites: Trayectorias y Posiciones"
+local Identifier = "noaa-sos-atmosphere-all_sats"
+local Description = [[Los satélites son una herramienta clave para que los científicos monitoreen y observen
+la atmósfera de la Tierra desde el espacio. Los satélites geoestacionarios orbitan alrededor de la Tierra a la
+misma velocidad que la Tierra rota, de modo que los satélites están sobre el mismo punto de la Tierra todo
+el tiempo. Esto les permite recopilar un flujo continuo de datos para un lugar, de modo que se puedan hacer
+"películas" de los datos. Los satélites están posicionados a 22,300 millas sobre la superficie de la Tierra para
+poder ver el disco completo de la Tierra y mantener su órbita geoestacionaria. Los satélites geoestacionarios
+viajan a aproximadamente 7000 mph para mantener su órbita geoestacionaria. Además de los satélites
+geoestacionarios, los científicos también usan satélites de órbita polar. Estos satélites circundan la Tierra,
+cruzando los polos en cada órbita. Típicamente, los satélites de órbita polar están a aproximadamente 500
+millas sobre la superficie de la Tierra. Los satélites viajan a casi 17,000 mph, lo que les permite orbitar la
+Tierra en aproximadamente 100 minutos. Un satélite de órbita polar puede cubrir toda la Tierra en menos
+de un día]]
+local URL = "https://sos.noaa.gov/catalog/datasets/satellites-paths-and-positions/"
+
+local syncedDirectory = asset.resource({
+  Name = Name,
+  Type = "HttpSynchronization",
+  Identifier = Identifier,
+  Version = 1,
+  UnzipFiles = true
+})
+
+local Layer = {
+  Identifier = Identifier,
+  Name = Name,
+  Enabled = asset.enabled,
+  ZIndex = 100,
+  Type = "ImageSequenceTileProvider",
+  FolderPath = syncedDirectory .. "2048",
+  Description = Description
+}
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.onDeinitialize(function()
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.export(Layer)
+
+asset.meta = {
+  Name = Name,
+  Description = Description .. "Datos proporcionados por la Administración Nacional Oceánica y Atmosférica",
+  Author = "Administración Nacional Oceánica y Atmosférica",
+  URL = URL,
+  License = "https://sos.noaa.gov/copyright/"
+}

@@ -1,0 +1,54 @@
+local globe = asset.require("../../earth")
+
+local Name = "Tasa de Destellos de Relámpagos"
+local Identifier = "noaa-sos-atmosphere-lightning"
+local Description = [[Típicamente, más de 2,000 tormentas están activas en todo el mundo en un momento dado, produciendo del orden de 100 destellos por segundo. La NASA tiene dos sensores diferentes en satélites que miden la frecuencia de los destellos, el Detector Óptico Transitorio (OTD) y el Sensor de Imágenes de Relámpagos (LIS). Los datos del OTD de 1995 a 2000 y del LIS de 1998 a 2005 se han combinado y promediado para crear un mapa de la tasa promedio anual de destellos de relámpagos. Se incluyen 11 años de datos para eliminar cualquier anomalía que pueda estar presente en solo un año. Las variaciones de color en el mapa muestran el número promedio anual de destellos de relámpagos por kilómetro cuadrado]]
+local URL = "https://sos.noaa.gov/catalog/datasets/lightning-flash-rate/"
+
+local syncedDirectory = asset.resource({
+  Name = Name,
+  Type = "HttpSynchronization",
+  Identifier = Identifier,
+  Version = 1
+})
+
+local Layer = {
+  Identifier = Identifier,
+  Name = Name,
+  Enabled = asset.enabled,
+  ZIndex = 100,
+  FilePath = syncedDirectory .. "2048.jpg",
+  Description = Description
+}
+
+local Colorbar = {
+  Identifier = Identifier,
+  Name = Name,
+  Enabled = asset.enabled,
+  Type = "ScreenSpaceImageLocal",
+  TexturePath = syncedDirectory .. "colorbar.jpg",
+  FaceCamera = false,
+  Scale = 0.05,
+  CartesianPosition = { 0.75, 0.0, -2.0 }
+}
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+  openspace.addScreenSpaceRenderable(Colorbar)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeScreenSpaceRenderable(Colorbar)
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.export(Layer)
+asset.export(Colorbar)
+
+asset.meta = {
+  Name = Name,
+  Description = Description .. "Datos proporcionados por la Administración Nacional Oceánica y Atmosférica",
+  Author = "Administración Nacional Oceánica y Atmosférica",
+  URL = URL,
+  License = "https://sos.noaa.gov/copyright/"
+}

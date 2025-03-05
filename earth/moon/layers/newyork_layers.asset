@@ -1,0 +1,20 @@
+asset.require("./colorlayers/wac_newyork", asset.enabled)
+asset.require("./colorlayers/clemuvvis_newyork", false)
+asset.require("./colorlayers/uvvishybrid_newyork", false)
+asset.require("./colorlayers/kaguya_newyork", false)
+asset.require("./colorlayers/lola_clr_shade_newyork", false)
+asset.require("./colorlayers/lola_shade_newyork", false)
+
+asset.require("./heightlayers/loladem_newyork", asset.enabled)
+
+asset.meta = {
+  Name = "Capas predeterminadas de la Luna (Nueva York)",
+  Description = [[Las capas predeterminadas de la Luna son: WAC, Clem Uvvis, Uvvis Hybrid, Kaguya,
+    LRO LOLA Color Shaded Relief 388m v4, Lola Shade, y Lola DEM (3D).
+
+    Capas cargadas solo desde el servidor de Nueva York
+  ]],
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "MIT license"
+}

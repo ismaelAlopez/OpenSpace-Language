@@ -1,0 +1,18 @@
+asset.require("./layers/base_layers", false)
+asset.require("./layers/local_layers", true)
+asset.require("./layers/sweden_layers", false)
+asset.require("./layers/newyork_layers", false)
+
+
+
+asset.meta = {
+  Name = "Capas Predeterminadas de Europa",
+  Description = [[Las capas predeterminadas de Europa son: Textura de Europa y Mosaico Global de Voyager.
+
+
+    Capas cargadas desde todos los servidores disponibles
+  ]],
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "MIT license"
+}

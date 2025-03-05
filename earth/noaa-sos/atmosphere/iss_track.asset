@@ -1,0 +1,49 @@
+local globe = asset.require("../../earth")
+
+local Name = "Rastreo de la Estación Espacial Internacional"
+local Identifier = "noaa-sos-atmosphere-iss_track"
+local Description = [[La primera pieza de la Estación Espacial Internacional fue enviada
+  a órbita en 1998. Después de dos piezas más, los astronautas ingresaron por primera vez a la estación espacial en
+  noviembre de 2000. Desde entonces, la estación espacial ha estado habitada continuamente por al
+  menos 2 personas. Actualmente, la estación está diseñada para albergar a 3 miembros de la tripulación. La
+  Estación Espacial Internacional es una instalación de investigación espacial cooperativa que se está construyendo
+  cooperativamente por muchas naciones. Varias organizaciones espaciales habían planeado sus propias estaciones
+  espaciales y los grupos decidieron fusionarse y trabajar juntos. La estación espacial original
+  fue una combinación de la Estación Espacial Freedom de la NASA, el Mir-2 de Rusia y el Columbus de la Agencia
+  Espacial Europea. El proyecto ahora involucra a la NASA, la agencia espacial rusa, RKA;
+  la Agencia Espacial Europea, ESA; la agencia espacial japonesa, JAXA; y la agencia espacial canadiense, CSA]]
+local URL = "https://sos.noaa.gov/catalog/datasets/international-space-station-track/"
+
+local syncedDirectory = asset.resource({
+  Name = Name,
+  Type = "HttpSynchronization",
+  Identifier = Identifier,
+  Version = 1
+})
+
+local Layer = {
+  Identifier = Identifier,
+  Name = Name,
+  Enabled = asset.enabled,
+  ZIndex = 100,
+  FilePath = syncedDirectory .. "4096.jpg",
+  Description = Description
+}
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.onDeinitialize(function()
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.export(Layer)
+
+asset.meta = {
+  Name = Name,
+  Description = Description .. "Datos proporcionados por la Administración Nacional Oceánica y Atmosférica",
+  Author = "Administración Nacional Oceánica y Atmosférica",
+  URL = URL,
+  License = "https://sos.noaa.gov/copyright/"
+}

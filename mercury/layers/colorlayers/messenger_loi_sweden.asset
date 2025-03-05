@@ -1,0 +1,27 @@
+local globe = asset.require("../../mercury")
+
+local Layer = {
+  Identifier = "Messenger_LOI_Sweden",
+  Name = "Mensajero LOI [Suecia]",
+  Enabled = asset.enabled,
+  ZIndex = 10,
+  FilePath = asset.resource("messenger_loi_sweden.wms")
+}
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Mercury.Identifier, "ColorLayers", Layer)
+end)
+
+asset.onDeinitialize(function()
+  openspace.globebrowsing.deleteLayer(globe.Mercury.Identifier, "ColorLayers", Layer)
+end)
+
+asset.export("layer", Layer)
+
+asset.meta = {
+  Name = "Mensajero LOI [Suecia]",
+  Description = [[Capa LOI de Mercurio para el globo de Mercurio. Este mapa está alojado en el servidor de OpenSpace en Suecia]],
+  Author = "USGS",
+  URL = "https://astrogeology.usgs.gov/search/map/Mercury/Messenger/Global/Mercury_MESSENGER_MDIS_Basemap_LOI_Mosaic_Global_166m",
+  License = "NASA/PDS"
+}

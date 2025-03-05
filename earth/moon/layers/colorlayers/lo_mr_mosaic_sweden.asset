@@ -1,0 +1,46 @@
+local globe = asset.require("../../moon")
+
+local Layer = {
+  Identifier = "LO_MR_Mosaic_Sweden",
+  Name = "Mosaico Fotográfico Digital Orbital Lunar 59m v1 [Suecia]",
+  Enabled = asset.enabled,
+  ZIndex = 20,
+  FilePath = asset.resource("lo_mr_mosaic_sweden.wms"),
+  Description = [[
+    Este mosaico del Orbitador Lunar (LO) de la Luna fue construido utilizando fotografías
+    adquiridas por LO III, IV y V. El trabajo para construir el mosaico global abarcó más
+    de siete años. El trabajo anterior involucró escanear y procesar más de 30000 tiras de
+    película de 35 mm de las cámaras de alta y media resolución del LO (HR y MR,
+    respectivamente).
+
+    Las tiras de película digital fueron procesadas cartográficamente para construir más
+    de 200 cuadros individuales y luego corregidas geodéticamente utilizando la red de
+    control lunar y el modelo topográfico más recientes (Gaddis et al., 2001). El resultado
+    de este trabajo es un mosaico digital de resolución moderada, casi global, controlado
+    cartográficamente de la Luna (Becker et al., 2008). La resolución nominal del mosaico
+    es de ~60 metros por píxel (m).
+
+    Esto representa un nuevo mosaico Jpeg2000 que incluye un par de mosaicos actualizados
+    que faltaban en el lanzamiento original de marzo de 2008. Para esta imagen se utilizó
+    una compresión con pérdida usando una bandera de calidad de 10. No debería haber
+    casi ninguna pérdida de datos perceptible. ]]
+}
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Moon.Identifier, "ColorLayers", Layer)
+end)
+
+asset.onDeinitialize(function()
+  openspace.globebrowsing.deleteLayer(globe.Moon.Identifier, "ColorLayers", Layer)
+end)
+
+asset.export("layer", Layer)
+
+asset.meta = {
+  Name = "Mosaico Fotográfico Digital Orbital Lunar [Suecia]",
+  Description = [[Mosaico Fotográfico Digital Orbital Lunar 59m v1. Este mapa está
+    alojado en el servidor de OpenSpace en Suecia]],
+  Author = "USGS",
+  URL = "https://astrogeology.usgs.gov/search/map/Moon/LMMP/LOLA-derived/Lunar_LRO_LOLA_ClrShade_Global_128ppd_v04",
+  License = "NASA/PDS"
+}

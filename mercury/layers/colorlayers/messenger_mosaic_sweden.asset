@@ -1,0 +1,28 @@
+local globe = asset.require("../../mercury")
+
+local Layer = {
+  Identifier = "Messenger_Mosaic_Sweden",
+  Name = "Mosaico de Mensajero [Suecia]",
+  Enabled = asset.enabled,
+  ZIndex = 20,
+  FilePath = asset.resource("messenger_mosaic_sweden.wms")
+}
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Mercury.Identifier, "ColorLayers", Layer)
+end)
+
+asset.onDeinitialize(function()
+  openspace.globebrowsing.deleteLayer(globe.Mercury.Identifier, "ColorLayers", Layer)
+end)
+
+asset.export("layer", Layer)
+
+asset.meta = {
+  Name = "Mosaico de Mensajero [Suecia]",
+  Description = [[Capa de Mosaico de Mensajero para el globo de Mercurio. Este mapa está alojado en
+    el servidor de OpenSpace en Suecia]],
+  Author = "USGS",
+  URL = "",
+  License = "NASA/PDS"
+}

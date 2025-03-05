@@ -1,0 +1,2792 @@
+local transforms = asset.require("../transforms")
+local kernels344 = asset.require("../kernels344")
+local kernels346 = asset.require("../kernels346")
+local coreKernels = asset.require("spice/core")
+
+
+
+local Herse = {
+  Identifier = "Herse",
+  Parent = transforms.JupiterBarycenter.Identifier,
+  Transform = {
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels344.ID.Herse,
+      Observer = coreKernels.ID.JupiterBarycenter
+    }
+  },
+  Renderable = {
+    Type = "RenderableGlobe",
+    Radii = { 2000, 2000, 2000 }
+  },
+  Tag = {
+    "moon_solarSystem",
+    "moon_giants",
+    "moon_jupiter",
+    "moon_carme",
+    "moon_minor",
+    "moon_minor_jupiter"
+  },
+  GUI = {
+    Name = "Herse",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Carme/Herse"
+  }
+}
+
+local HerseTrail = {
+  Identifier = "HerseTrail",
+  Parent = transforms.JupiterBarycenter.Identifier,
+  Renderable = {
+    Type = "RenderableTrailOrbit",
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels344.ID.Herse,
+      Observer = coreKernels.ID.JupiterBarycenter
+    },
+    Color = { 0.4, 0.3, 0.01 },
+    Period = 672.75,
+    Resolution = 1000
+  },
+  Tag = {
+    "moonTrail_solarSystem",
+    "moonTrail_giants",
+    "moonTrail_jupiter",
+    "moonTrail_carme",
+    "moonTrail_minor",
+    "moonTrail_minor_jupiter"
+  },
+  GUI = {
+    Name = "Rastro de Herse",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Carme/Herse"
+  }
+}
+
+local HerseLabel = {
+  Identifier = "HerseLabel",
+  Parent = Herse.Identifier,
+  Renderable = {
+    Type = "RenderableLabel",
+    Enabled = false,
+    Text = "Herse",
+    FontSize = 70.0,
+    Size = 7.1,
+    MinMaxSize = { 1, 25 },
+    OrientationOption = "Camera View Direction",
+    BlendMode = "Additive",
+    EnableFading = true,
+    FadeUnit = "Gm",
+    FadeDistances = { 2.0, 125.0 },
+    FadeWidths = { 0.5, 50.0 }
+  },
+  Tag = {
+    "solarsystem_labels",
+    "moon_labels",
+    "minor_moon_labels",
+    "minor_moon_labels_jupiter",
+    "minor_moon_labels_carme"
+  },
+  GUI = {
+    Name = "Etiqueta de Herse",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Carme/Herse",
+    Description = "Etiqueta para la luna de Júpiter Herse (grupo Carme)"
+  }
+}
+
+local Aitne = {
+  Identifier = "Aitne",
+  Parent = transforms.JupiterBarycenter.Identifier,
+  Transform = {
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels344.ID.Aitne,
+      Observer = coreKernels.ID.JupiterBarycenter
+    }
+  },
+  Renderable = {
+    Type = "RenderableGlobe",
+    Radii = { 3000, 3000, 3000 }
+  },
+  Tag = {
+    "moon_solarSystem",
+    "moon_giants",
+    "moon_jupiter",
+    "moon_carme",
+    "moon_minor",
+    "moon_minor_jupiter"
+  },
+  GUI = {
+    Name = "Aitne",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Carme/Aitne"
+  }
+}
+
+local AitneTrail = {
+  Identifier = "AitneTrail",
+  Parent = transforms.JupiterBarycenter.Identifier,
+  Renderable = {
+    Type = "RenderableTrailOrbit",
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels344.ID.Aitne,
+      Observer = coreKernels.ID.JupiterBarycenter
+    },
+    Color = { 0.4, 0.3, 0.01 },
+    Period = 679.64,
+    Resolution = 1000
+  },
+  Tag = {
+    "moonTrail_solarSystem",
+    "moonTrail_giants",
+    "moonTrail_jupiter",
+    "moonTrail_carme",
+    "moonTrail_minor",
+    "moonTrail_minor_jupiter"
+  },
+  GUI = {
+    Name = "Rastro de Aitne",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Carme/Aitne"
+  }
+}
+
+local AitneLabel = {
+  Identifier = "AitneLabel",
+  Parent = Aitne.Identifier,
+  Renderable = {
+    Type = "RenderableLabel",
+    Enabled = false,
+    Text = "Aitne",
+    FontSize = 70.0,
+    Size = 7.1,
+    MinMaxSize = { 1, 25 },
+    OrientationOption = "Camera View Direction",
+    BlendMode = "Additive",
+    EnableFading = true,
+    FadeUnit = "Gm",
+    FadeDistances = { 2.0, 125.0 },
+    FadeWidths = { 0.5, 50.0 }
+  },
+  Tag = {
+    "solarsystem_labels",
+    "moon_labels",
+    "minor_moon_labels",
+    "minor_moon_labels_jupiter",
+    "minor_moon_labels_carme"
+  },
+  GUI = {
+    Name = "Etiqueta de Aitne",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Carme/Aitne",
+    Description = "Etiqueta para la luna de Júpiter Aitne (grupo Carme)"
+  }
+}
+
+local Kale = {
+  Identifier = "Kale",
+  Parent = transforms.JupiterBarycenter.Identifier,
+  Transform = {
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels344.ID.Kale,
+      Observer = coreKernels.ID.JupiterBarycenter
+    }
+  },
+  Renderable = {
+    Type = "RenderableGlobe",
+    Radii = { 2000, 2000, 2000 }
+  },
+  Tag = {
+    "moon_solarSystem",
+    "moon_giants",
+    "moon_jupiter",
+    "moon_carme",
+    "moon_minor",
+    "moon_minor_jupiter"
+  },
+  GUI = {
+    Name = "Kale",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Carme/Kale"
+  }
+}
+
+local KaleTrail = {
+  Identifier = "KaleTrail",
+  Parent = transforms.JupiterBarycenter.Identifier,
+  Renderable = {
+    Type = "RenderableTrailOrbit",
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels344.ID.Kale,
+      Observer = coreKernels.ID.JupiterBarycenter
+    },
+    Color = { 0.4, 0.3, 0.01 },
+    Period = 685.32,
+    Resolution = 1000
+  },
+  Tag = {
+    "moonTrail_solarSystem",
+    "moonTrail_giants",
+    "moonTrail_jupiter",
+    "moonTrail_carme",
+    "moonTrail_minor",
+    "moonTrail_minor_jupiter"
+  },
+  GUI = {
+    Name = "Rastro de Kale",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Carme/Kale"
+  }
+}
+
+local KaleLabel = {
+  Identifier = "KaleLabel",
+  Parent = Kale.Identifier,
+  Renderable = {
+    Type = "RenderableLabel",
+    Enabled = false,
+    Text = "Kale",
+    FontSize = 70.0,
+    Size = 7.1,
+    MinMaxSize = { 1, 25 },
+    OrientationOption = "Camera View Direction",
+    BlendMode = "Additive",
+    EnableFading = true,
+    FadeUnit = "Gm",
+    FadeDistances = { 2.0, 125.0 },
+    FadeWidths = { 0.5, 50.0 }
+  },
+  Tag = {
+    "solarsystem_labels",
+    "moon_labels",
+    "minor_moon_labels",
+    "minor_moon_labels_jupiter",
+    "minor_moon_labels_carme"
+  },
+  GUI = {
+    Name = "Etiqueta de Kale",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Carme/Kale",
+    Description = "Etiqueta para la luna de Júpiter Kale (grupo Carme)"
+  }
+}
+ -- falta de traducir 
+local Taygete = {
+  Identifier = "Taygete",
+  Parent = transforms.JupiterBarycenter.Identifier,
+  Transform = {
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels344.ID.Taygete,
+      Observer = coreKernels.ID.JupiterBarycenter
+    }
+  },
+  Renderable = {
+    Type = "RenderableGlobe",
+    Radii = { 5000, 5000, 5000 }
+  },
+  Tag = {
+    "moon_solarSystem",
+    "moon_giants",
+    "moon_jupiter",
+    "moon_carme",
+    "moon_minor",
+    "moon_minor_jupiter"
+  },
+  GUI = {
+    Name = "Taygete",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Carme/Taygete"
+  }
+}
+
+local TaygeteTrail = {
+  Identifier = "TaygeteTrail",
+  Parent = transforms.JupiterBarycenter.Identifier,
+  Renderable = {
+    Type = "RenderableTrailOrbit",
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels344.ID.Taygete,
+      Observer = coreKernels.ID.JupiterBarycenter
+    },
+    Color = { 0.4, 0.3, 0.01 },
+    Period = 686.67,
+    Resolution = 1000
+  },
+  Tag = {
+    "moonTrail_solarSystem",
+    "moonTrail_giants",
+    "moonTrail_jupiter",
+    "moonTrail_carme",
+    "moonTrail_minor",
+    "moonTrail_minor_jupiter"
+  },
+  GUI = {
+    Name = "Rastro de Taygete",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Carme/Taygete"
+  }
+}
+
+local TaygeteLabel = {
+  Identifier = "TaygeteLabel",
+  Parent = Taygete.Identifier,
+  Renderable = {
+    Type = "RenderableLabel",
+    Enabled = false,
+    Text = "Taygete",
+    FontSize = 70.0,
+    Size = 7.1,
+    MinMaxSize = { 1, 25 },
+    OrientationOption = "Camera View Direction",
+    BlendMode = "Additive",
+    EnableFading = true,
+    FadeUnit = "Gm",
+    FadeDistances = { 2.0, 125.0 },
+    FadeWidths = { 0.5, 50.0 }
+  },
+  Tag = {
+    "solarsystem_labels",
+    "moon_labels",
+    "minor_moon_labels",
+    "minor_moon_labels_jupiter",
+    "minor_moon_labels_carme"
+  },
+  GUI = {
+    Name = "Etiqueta de Taygete",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Carme/Taygete",
+    Description = "Etiqueta para la luna de Júpiter Taygete (grupo Carme)"
+  }
+}
+
+local Chaldene = {
+  Identifier = "Chaldene",
+  Parent = transforms.JupiterBarycenter.Identifier,
+  Transform = {
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels344.ID.Chaldene,
+      Observer = coreKernels.ID.JupiterBarycenter
+    }
+  },
+  Renderable = {
+    Type = "RenderableGlobe",
+    Radii = { 4000, 4000, 4000 }
+  },
+  Tag = {
+    "moon_solarSystem",
+    "moon_giants",
+    "moon_jupiter",
+    "moon_carme",
+    "moon_minor",
+    "moon_minor_jupiter"
+  },
+  GUI = {
+    Name = "Chaldene",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Carme/Chaldene"
+  }
+}
+
+local ChaldeneTrail = {
+  Identifier = "ChaldeneTrail",
+  Parent = transforms.JupiterBarycenter.Identifier,
+  Renderable = {
+    Type = "RenderableTrailOrbit",
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels344.ID.Chaldene,
+      Observer = coreKernels.ID.JupiterBarycenter
+    },
+    Color = { 0.4, 0.3, 0.01 },
+    Period = 699.33,
+    Resolution = 1000
+  },
+  Tag = {
+    "moonTrail_solarSystem",
+    "moonTrail_giants",
+    "moonTrail_jupiter",
+    "moonTrail_carme",
+    "moonTrail_minor",
+    "moonTrail_minor_jupiter"
+  },
+  GUI = {
+    Name = "Rastro de Chaldene",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Carme/Chaldene"
+  }
+}
+
+local ChaldeneLabel = {
+  Identifier = "ChaldeneLabel",
+  Parent = Chaldene.Identifier,
+  Renderable = {
+    Type = "RenderableLabel",
+    Enabled = false,
+    Text = "Chaldene",
+    FontSize = 70.0,
+    Size = 7.1,
+    MinMaxSize = { 1, 25 },
+    OrientationOption = "Camera View Direction",
+    BlendMode = "Additive",
+    EnableFading = true,
+    FadeUnit = "Gm",
+    FadeDistances = { 2.0, 125.0 },
+    FadeWidths = { 0.5, 50.0 }
+  },
+  Tag = {
+    "solarsystem_labels",
+    "moon_labels",
+    "minor_moon_labels",
+    "minor_moon_labels_jupiter",
+    "minor_moon_labels_carme"
+  },
+  GUI = {
+    Name = "Etiqueta de Chaldene",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Carme/Chaldene",
+    Description = "Etiqueta para la luna de Júpiter Chaldene (grupo Carme)"
+  }
+}
+
+local Erinome = {
+  Identifier = "Erinome",
+  Parent = transforms.JupiterBarycenter.Identifier,
+  Transform = {
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels344.ID.Erinome,
+      Observer = coreKernels.ID.JupiterBarycenter
+    }
+  },
+  Renderable = {
+    Type = "RenderableGlobe",
+    Radii = { 3000, 3000, 3000 }
+  },
+  Tag = {
+    "moon_solarSystem",
+    "moon_giants",
+    "moon_jupiter",
+    "moon_carme",
+    "moon_minor",
+    "moon_minor_jupiter"
+  },
+  GUI = {
+    Name = "Erinome",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Carme/Erinome"
+  }
+}
+
+local ErinomeTrail = {
+  Identifier = "ErinomeTrail",
+  Parent = transforms.JupiterBarycenter.Identifier,
+  Renderable = {
+    Type = "RenderableTrailOrbit",
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels344.ID.Erinome,
+      Observer = coreKernels.ID.JupiterBarycenter
+    },
+    Color = { 0.4, 0.3, 0.01 },
+    Period = 711.96,
+    Resolution = 1000
+  },
+  Tag = {
+    "moonTrail_solarSystem",
+    "moonTrail_giants",
+    "moonTrail_jupiter",
+    "moonTrail_carme",
+    "moonTrail_minor",
+    "moonTrail_minor_jupiter"
+  },
+  GUI = {
+    Name = "Rastro de Erinome",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Carme/Erinome"
+  }
+}
+
+local ErinomeLabel = {
+  Identifier = "ErinomeLabel",
+  Parent = Erinome.Identifier,
+  Renderable = {
+    Type = "RenderableLabel",
+    Enabled = false,
+    Text = "Erinome",
+    FontSize = 70.0,
+    Size = 7.1,
+    MinMaxSize = { 1, 25 },
+    OrientationOption = "Camera View Direction",
+    BlendMode = "Additive",
+    EnableFading = true,
+    FadeUnit = "Gm",
+    FadeDistances = { 2.0, 125.0 },
+    FadeWidths = { 0.5, 50.0 }
+  },
+  Tag = {
+    "solarsystem_labels",
+    "moon_labels",
+    "minor_moon_labels",
+    "minor_moon_labels_jupiter",
+    "minor_moon_labels_carme"
+  },
+  GUI = {
+    Name = "Etiqueta de Erinome",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Carme/Erinome",
+    Description = "Etiqueta para la luna de Júpiter Erinome (grupo Carme)"
+  }
+}
+
+local Kallichore = {
+  Identifier = "Kallichore",
+  Parent = transforms.JupiterBarycenter.Identifier,
+  Transform = {
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels344.ID.Kallichore,
+      Observer = coreKernels.ID.JupiterBarycenter
+    }
+  },
+  Renderable = {
+    Type = "RenderableGlobe",
+    Radii = { 2000, 2000, 2000 }
+  },
+  Tag = {
+    "moon_solarSystem",
+    "moon_giants",
+    "moon_jupiter",
+    "moon_carme",
+    "moon_minor",
+    "moon_minor_jupiter"
+  },
+  GUI = {
+    Name = "Kallichore",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Carme/Kallichore"
+  }
+}
+
+local KallichoreTrail = {
+  Identifier = "KallichoreTrail",
+  Parent = transforms.JupiterBarycenter.Identifier,
+  Renderable = {
+    Type = "RenderableTrailOrbit",
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels344.ID.Kallichore,
+      Observer = coreKernels.ID.JupiterBarycenter
+    },
+    Color = { 0.4, 0.3, 0.01 },
+    Period = 717.81,
+    Resolution = 1000
+  },
+  Tag = {
+    "moonTrail_solarSystem",
+    "moonTrail_giants",
+    "moonTrail_jupiter",
+    "moonTrail_carme",
+    "moonTrail_minor",
+    "moonTrail_minor_jupiter"
+  },
+  GUI = {
+    Name = "Rastro de Kallichore",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Carme/Kallichore"
+  }
+}
+
+local KallichoreLabel = {
+  Identifier = "KallichoreLabel",
+  Parent = Kallichore.Identifier,
+  Renderable = {
+    Type = "RenderableLabel",
+    Enabled = false,
+    Text = "Kallichore",
+    FontSize = 70.0,
+    Size = 7.1,
+    MinMaxSize = { 1, 25 },
+    OrientationOption = "Camera View Direction",
+    BlendMode = "Additive",
+    EnableFading = true,
+    FadeUnit = "Gm",
+    FadeDistances = { 2.0, 125.0 },
+    FadeWidths = { 0.5, 50.0 }
+  },
+  Tag = {
+    "solarsystem_labels",
+    "moon_labels",
+    "minor_moon_labels",
+    "minor_moon_labels_jupiter",
+    "minor_moon_labels_carme"
+  },
+  GUI = {
+    Name = "Etiqueta de Kallichore",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Carme/Kallichore",
+    Description = "Etiqueta para la luna de Júpiter Kallichore (grupo Carme)"
+  }
+}
+
+local Kalyke = {
+  Identifier = "Kalyke",
+  Parent = transforms.JupiterBarycenter.Identifier,
+  Transform = {
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels344.ID.Kalyke,
+      Observer = coreKernels.ID.JupiterBarycenter
+    }
+  },
+  Renderable = {
+    Type = "RenderableGlobe",
+    Radii = { 5000, 5000, 5000 }
+  },
+  Tag = {
+    "moon_solarSystem",
+    "moon_giants",
+    "moon_jupiter",
+    "moon_carme",
+    "moon_minor",
+    "moon_minor_jupiter"
+  },
+  GUI = {
+    Name = "Kalyke",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Carme/Kalyke"
+  }
+}
+
+local KalykeTrail = {
+  Identifier = "KalykeTrail",
+  Parent = transforms.JupiterBarycenter.Identifier,
+  Renderable = {
+    Type = "RenderableTrailOrbit",
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels344.ID.Kalyke,
+      Observer = coreKernels.ID.JupiterBarycenter
+    },
+    Color = { 0.4, 0.3, 0.01 },
+    Period = 721.02,
+    Resolution = 1000
+  },
+  Tag = {
+    "moonTrail_solarSystem",
+    "moonTrail_giants",
+    "moonTrail_jupiter",
+    "moonTrail_carme",
+    "moonTrail_minor",
+    "moonTrail_minor_jupiter"
+  },
+  GUI = {
+    Name = "Rastro de Kalyke",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Carme/Kalyke"
+  }
+}
+
+local KalykeLabel = {
+  Identifier = "KalykeLabel",
+  Parent = Kalyke.Identifier,
+  Renderable = {
+    Type = "RenderableLabel",
+    Enabled = false,
+    Text = "Kalyke",
+    FontSize = 70.0,
+    Size = 7.1,
+    MinMaxSize = { 1, 25 },
+    OrientationOption = "Camera View Direction",
+    BlendMode = "Additive",
+    EnableFading = true,
+    FadeUnit = "Gm",
+    FadeDistances = { 2.0, 125.0 },
+    FadeWidths = { 0.5, 50.0 }
+  },
+  Tag = {
+    "solarsystem_labels",
+    "moon_labels",
+    "minor_moon_labels",
+    "minor_moon_labels_jupiter",
+    "minor_moon_labels_carme"
+  },
+  GUI = {
+    Name = "Etiqueta de Kalyke",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Carme/Kalyke",
+    Description = "Etiqueta para la luna de Júpiter Kalyke (grupo Carme)"
+  }
+}
+local Pasithee = {
+  Identifier = "Pasithee",
+  Parent = transforms.JupiterBarycenter.Identifier,
+  Transform = {
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels344.ID.Pasithee,
+      Observer = coreKernels.ID.JupiterBarycenter
+    }
+  },
+  Renderable = {
+    Type = "RenderableGlobe",
+    Radii = { 2000, 2000, 2000 }
+  },
+  Tag = {
+    "moon_solarSystem",
+    "moon_giants",
+    "moon_jupiter",
+    "moon_carme",
+    "moon_minor",
+    "moon_minor_jupiter"
+  },
+  GUI = {
+    Name = "Pasithee",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Carme/Pasithee"
+  }
+}
+
+local PasitheeTrail = {
+  Identifier = "PasitheeTrail",
+  Parent = transforms.JupiterBarycenter.Identifier,
+  Renderable = {
+    Type = "RenderableTrailOrbit",
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels344.ID.Pasithee,
+      Observer = coreKernels.ID.JupiterBarycenter
+    },
+    Color = { 0.4, 0.3, 0.01 },
+    Period = 726.93,
+    Resolution = 1000
+  },
+  Tag = {
+    "moonTrail_solarSystem",
+    "moonTrail_giants",
+    "moonTrail_jupiter",
+    "moonTrail_carme",
+    "moonTrail_minor",
+    "moonTrail_minor_jupiter"
+  },
+  GUI = {
+    Name = "Rastro de Pasithee",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Carme/Pasithee"
+  }
+}
+
+local PasitheeLabel = {
+  Identifier = "PasitheeLabel",
+  Parent = Pasithee.Identifier,
+  Renderable = {
+    Type = "RenderableLabel",
+    Enabled = false,
+    Text = "Pasithee",
+    FontSize = 70.0,
+    Size = 7.1,
+    MinMaxSize = { 1, 25 },
+    OrientationOption = "Camera View Direction",
+    BlendMode = "Additive",
+    EnableFading = true,
+    FadeUnit = "Gm",
+    FadeDistances = { 2.0, 125.0 },
+    FadeWidths = { 0.5, 50.0 }
+  },
+  Tag = {
+    "solarsystem_labels",
+    "moon_labels",
+    "minor_moon_labels",
+    "minor_moon_labels_jupiter",
+    "minor_moon_labels_carme"
+  },
+  GUI = {
+    Name = "Etiqueta de Pasithee",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Carme/Pasithee",
+    Description = "Etiqueta para la luna de Júpiter Pasithee (grupo Carme)"
+  }
+}
+
+local S2010J1 = {
+  Identifier = "S2010J1",
+  Parent = transforms.JupiterBarycenter.Identifier,
+  Transform = {
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels344.ID.S2010J1,
+      Observer = coreKernels.ID.JupiterBarycenter
+    }
+  },
+  Renderable = {
+    Type = "RenderableGlobe",
+    Radii = { 2000, 2000, 2000 }
+  },
+  Tag = {
+    "moon_solarSystem",
+    "moon_giants",
+    "moon_jupiter",
+    "moon_carme",
+    "moon_minor",
+    "moon_minor_jupiter"
+  },
+  GUI = {
+    Name = "S/2010 J 1",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Carme/S2010J1"
+  }
+}
+
+local S2010J1Trail = {
+  Identifier = "S2010J1Trail",
+  Parent = transforms.JupiterBarycenter.Identifier,
+  Renderable = {
+    Type = "RenderableTrailOrbit",
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels344.ID.S2010J1,
+      Observer = coreKernels.ID.JupiterBarycenter
+    },
+    Color = { 0.4, 0.3, 0.01 },
+    Period = 722.83,
+    Resolution = 1000
+  },
+  Tag = {
+    "moonTrail_solarSystem",
+    "moonTrail_giants",
+    "moonTrail_jupiter",
+    "moonTrail_carme",
+    "moonTrail_minor",
+    "moonTrail_minor_jupiter"
+  },
+  GUI = {
+    Name = "Rastro de S/2010 J 1",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Carme/S2010J1"
+  }
+}
+
+local S2010J1Label = {
+  Identifier = "S2010J1Label",
+  Parent = S2010J1.Identifier,
+  Renderable = {
+    Type = "RenderableLabel",
+    Enabled = false,
+    Text = "S/2010 J 1",
+    FontSize = 70.0,
+    Size = 7.1,
+    MinMaxSize = { 1, 25 },
+    OrientationOption = "Camera View Direction",
+    BlendMode = "Additive",
+    EnableFading = true,
+    FadeUnit = "Gm",
+    FadeDistances = { 2.0, 125.0 },
+    FadeWidths = { 0.5, 50.0 }
+  },
+  Tag = {
+    "solarsystem_labels",
+    "moon_labels",
+    "minor_moon_labels",
+    "minor_moon_labels_jupiter",
+    "minor_moon_labels_carme"
+  },
+  GUI = {
+    Name = "Etiqueta de S/2010 J 1",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Carme/S2010J1",
+    Description = "Etiqueta para la luna de Júpiter S2010J1 (grupo Carme)"
+  }
+}
+
+local Eukelade = {
+  Identifier = "Eukelade",
+  Parent = transforms.JupiterBarycenter.Identifier,
+  Transform = {
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels344.ID.Eukelade,
+      Observer = coreKernels.ID.JupiterBarycenter
+    }
+  },
+  Renderable = {
+    Type = "RenderableGlobe",
+    Radii = { 4000, 4000, 4000 }
+  },
+  Tag = {
+    "moon_solarSystem",
+    "moon_giants",
+    "moon_jupiter",
+    "moon_carme",
+    "moon_minor",
+    "moon_minor_jupiter"
+  },
+  GUI = {
+    Name = "Eukelade",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Carme/Eukelade"
+  }
+}
+
+local EukeladeTrail = {
+  Identifier = "EukeladeTrail",
+  Parent = transforms.JupiterBarycenter.Identifier,
+  Renderable = {
+    Type = "RenderableTrailOrbit",
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels344.ID.Eukelade,
+      Observer = coreKernels.ID.JupiterBarycenter
+    },
+    Color = { 0.4, 0.3, 0.01 },
+    Period = 735.20,
+    Resolution = 1000
+  },
+  Tag = {
+    "moonTrail_solarSystem",
+    "moonTrail_giants",
+    "moonTrail_jupiter",
+    "moonTrail_carme",
+    "moonTrail_minor",
+    "moonTrail_minor_jupiter"
+  },
+  GUI = {
+    Name = "Rastro de Eukelade",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Carme/Eukelade"
+  }
+}
+
+local EukeladeLabel = {
+  Identifier = "EukeladeLabel",
+  Parent = Eukelade.Identifier,
+  Renderable = {
+    Type = "RenderableLabel",
+    Enabled = false,
+    Text = "Eukelade",
+    FontSize = 70.0,
+    Size = 7.1,
+    MinMaxSize = { 1, 25 },
+    OrientationOption = "Camera View Direction",
+    BlendMode = "Additive",
+    EnableFading = true,
+    FadeUnit = "Gm",
+    FadeDistances = { 2.0, 125.0 },
+    FadeWidths = { 0.5, 50.0 }
+  },
+  Tag = {
+    "solarsystem_labels",
+    "moon_labels",
+    "minor_moon_labels",
+    "minor_moon_labels_jupiter",
+    "minor_moon_labels_carme"
+  },
+  GUI = {
+    Name = "Etiqueta de Eukelade",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Carme/Eukelade",
+    Description = "Etiqueta para la luna de Júpiter Eukelade (grupo Carme)"
+  }
+}
+
+local Arche = {
+  Identifier = "Arche",
+  Parent = transforms.JupiterBarycenter.Identifier,
+  Transform = {
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels344.ID.Arche,
+      Observer = coreKernels.ID.JupiterBarycenter
+    }
+  },
+  Renderable = {
+    Type = "RenderableGlobe",
+    Radii = { 3000, 3000, 3000 }
+  },
+  Tag = {
+    "moon_solarSystem",
+    "moon_giants",
+    "moon_jupiter",
+    "moon_carme",
+    "moon_minor",
+    "moon_minor_jupiter"
+  },
+  GUI = {
+    Name = "Arche",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Carme/Arche"
+  }
+}
+
+local ArcheTrail = {
+  Identifier = "ArcheTrail",
+  Parent = transforms.JupiterBarycenter.Identifier,
+  Renderable = {
+    Type = "RenderableTrailOrbit",
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels344.ID.Arche,
+      Observer = coreKernels.ID.JupiterBarycenter
+    },
+    Color = { 0.4, 0.3, 0.01 },
+    Period = 746.19,
+    Resolution = 1000
+  },
+  Tag = {
+    "moonTrail_solarSystem",
+    "moonTrail_giants",
+    "moonTrail_jupiter",
+    "moonTrail_carme",
+    "moonTrail_minor",
+    "moonTrail_minor_jupiter"
+  },
+  GUI = {
+    Name = "Rastro de Arche",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Carme/Arche"
+  }
+}
+
+local ArcheLabel = {
+  Identifier = "ArcheLabel",
+  Parent = Arche.Identifier,
+  Renderable = {
+    Type = "RenderableLabel",
+    Enabled = false,
+    Text = "Arche",
+    FontSize = 70.0,
+    Size = 7.1,
+    MinMaxSize = { 1, 25 },
+    OrientationOption = "Camera View Direction",
+    BlendMode = "Additive",
+    EnableFading = true,
+    FadeUnit = "Gm",
+    FadeDistances = { 2.0, 125.0 },
+    FadeWidths = { 0.5, 50.0 }
+  },
+  Tag = {
+    "solarsystem_labels",
+    "moon_labels",
+    "minor_moon_labels",
+    "minor_moon_labels_jupiter",
+    "minor_moon_labels_carme"
+  },
+  GUI = {
+    Name = "Etiqueta de Arche",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Carme/Arche",
+    Description = "Etiqueta para la luna de Júpiter Arche (grupo Carme)"
+  }
+}
+
+local Isonoe = {
+  Identifier = "Isonoe",
+  Parent = transforms.JupiterBarycenter.Identifier,
+  Transform = {
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels344.ID.Isonoe,
+      Observer = coreKernels.ID.JupiterBarycenter
+    }
+  },
+  Renderable = {
+    Type = "RenderableGlobe",
+    Radii = { 4000, 4000, 4000 }
+  },
+  Tag = {
+    "moon_solarSystem",
+    "moon_giants",
+    "moon_jupiter",
+    "moon_carme",
+    "moon_minor",
+    "moon_minor_jupiter"
+  },
+  GUI = {
+    Name = "Isonoe",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Carme/Isonoe"
+  }
+}
+
+local IsonoeTrail = {
+  Identifier = "IsonoeTrail",
+  Parent = transforms.JupiterBarycenter.Identifier,
+  Renderable = {
+    Type = "RenderableTrailOrbit",
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels344.ID.Isonoe,
+      Observer = coreKernels.ID.JupiterBarycenter
+    },
+    Color = { 0.4, 0.3, 0.01 },
+    Period = 750.13,
+    Resolution = 1000
+  },
+  Tag = {
+    "moonTrail_solarSystem",
+    "moonTrail_giants",
+    "moonTrail_jupiter",
+    "moonTrail_carme",
+    "moonTrail_minor",
+    "moonTrail_minor_jupiter"
+  },
+  GUI = {
+    Name = "Rastro de Isonoe",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Carme/Isonoe"
+  }
+}
+
+local IsonoeLabel = {
+  Identifier = "IsonoeLabel",
+  Parent = Isonoe.Identifier,
+  Renderable = {
+    Type = "RenderableLabel",
+    Enabled = false,
+    Text = "Isonoe",
+    FontSize = 70.0,
+    Size = 7.1,
+    MinMaxSize = { 1, 25 },
+    OrientationOption = "Camera View Direction",
+    BlendMode = "Additive",
+    EnableFading = true,
+    FadeUnit = "Gm",
+    FadeDistances = { 2.0, 125.0 },
+    FadeWidths = { 0.5, 50.0 }
+  },
+  Tag = {
+    "solarsystem_labels",
+    "moon_labels",
+    "minor_moon_labels",
+    "minor_moon_labels_jupiter",
+    "minor_moon_labels_carme"
+  },
+  GUI = {
+    Name = "Etiqueta de Isonoe",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Carme/Isonoe",
+    Description = "Etiqueta para la luna de Júpiter Isonoe (grupo Carme)"
+  }
+}
+
+local Carme = {
+  Identifier = "Carme",
+  Parent = transforms.JupiterBarycenter.Identifier,
+  Transform = {
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels344.ID.Carme,
+      Observer = coreKernels.ID.JupiterBarycenter
+    }
+  },
+  Renderable = {
+    Type = "RenderableGlobe",
+    Radii = { 46000, 46000, 46000 }
+  },
+  Tag = {
+    "moon_solarSystem",
+    "moon_giants",
+    "moon_jupiter",
+    "moon_carme",
+    "moon_minor",
+    "moon_minor_jupiter"
+  },
+  GUI = {
+    Name = "Carme",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Carme/Carme"
+  }
+}
+
+local CarmeTrail = {
+  Identifier = "CarmeTrail",
+  Parent = transforms.JupiterBarycenter.Identifier,
+  Renderable = {
+    Type = "RenderableTrailOrbit",
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels344.ID.Carme,
+      Observer = coreKernels.ID.JupiterBarycenter
+    },
+    Color = { 0.4, 0.3, 0.01 },
+    Period = 763.95,
+    Resolution = 1000
+  },
+  Tag = {
+    "moonTrail_solarSystem",
+    "moonTrail_giants",
+    "moonTrail_jupiter",
+    "moonTrail_carme",
+    "moonTrail_minor",
+    "moonTrail_minor_jupiter"
+  },
+  GUI = {
+    Name = "Rastro de Carme",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Carme/Carme"
+  }
+}
+
+local CarmeLabel = {
+  Identifier = "CarmeLabel",
+  Parent = Carme.Identifier,
+  Renderable = {
+    Type = "RenderableLabel",
+    Enabled = false,
+    Text = "Carme",
+    FontSize = 70.0,
+    Size = 7.1,
+    MinMaxSize = { 1, 25 },
+    OrientationOption = "Camera View Direction",
+    BlendMode = "Additive",
+    EnableFading = true,
+    FadeUnit = "Gm",
+    FadeDistances = { 2.0, 125.0 },
+    FadeWidths = { 0.5, 50.0 }
+  },
+  Tag = {
+    "solarsystem_labels",
+    "moon_labels",
+    "minor_moon_labels",
+    "minor_moon_labels_jupiter",
+    "minor_moon_labels_carme"
+  },
+  GUI = {
+    Name = "Etiqueta de Carme",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Carme/Carme",
+    Description = "Etiqueta para la luna de Júpiter Carme (grupo Carme)"
+  }
+}
+
+local S2003J5 = {
+  Identifier = "S2003J5",
+  Parent = transforms.JupiterBarycenter.Identifier,
+  Transform = {
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels344.ID.S2003J5,
+      Observer = coreKernels.ID.JupiterBarycenter
+    }
+  },
+  Renderable = {
+    Type = "RenderableGlobe",
+    Radii = { 4000, 4000, 4000 }
+  },
+  Tag = {
+    "moon_solarSystem",
+    "moon_giants",
+    "moon_jupiter",
+    "moon_carme",
+    "moon_minor",
+    "moon_minor_jupiter"
+  },
+  GUI = {
+    Name = "S/2003 J 5",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Carme/S2003J5"
+  }
+}
+
+local S2003J5Trail = {
+  Identifier = "S2003J5Trail",
+  Parent = transforms.JupiterBarycenter.Identifier,
+  Renderable = {
+    Type = "RenderableTrailOrbit",
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels344.ID.S2003J5,
+      Observer = coreKernels.ID.JupiterBarycenter
+    },
+    Color = { 0.4, 0.3, 0.01 },
+    Period = 758.34,
+    Resolution = 1000
+  },
+  Tag = {
+    "moonTrail_solarSystem",
+    "moonTrail_giants",
+    "moonTrail_jupiter",
+    "moonTrail_carme",
+    "moonTrail_minor",
+    "moonTrail_minor_jupiter"
+  },
+  GUI = {
+    Name = "Rastro de S/2003 J 5",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Carme/S2003J5"
+  }
+}
+
+local S2003J5Label = {
+  Identifier = "S2003J5Label",
+  Parent = S2003J5.Identifier,
+  Renderable = {
+    Type = "RenderableLabel",
+    Enabled = false,
+    Text = "S/2003 J 5",
+    FontSize = 70.0,
+    Size = 7.1,
+    MinMaxSize = { 1, 25 },
+    OrientationOption = "Camera View Direction",
+    BlendMode = "Additive",
+    EnableFading = true,
+    FadeUnit = "Gm",
+    FadeDistances = { 2.0, 125.0 },
+    FadeWidths = { 0.5, 50.0 }
+  },
+  Tag = {
+    "solarsystem_labels",
+    "moon_labels",
+    "minor_moon_labels",
+    "minor_moon_labels_jupiter",
+    "minor_moon_labels_carme"
+  },
+  GUI = {
+    Name = "Etiqueta de S/2003 J 5",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Carme/S2003J5",
+    Description = "Etiqueta para la luna de Júpiter S2003J5 (grupo Carme)"
+  }
+}
+
+local S2018J3 = {
+  Identifier = "S2018J3",
+  Parent = transforms.JupiterBarycenter.Identifier,
+  Transform = {
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels346.ID.S2018J3,
+      Observer = coreKernels.ID.JupiterBarycenter
+    }
+  },
+  Renderable = {
+    Type = "RenderableGlobe",
+    Radii = { 1000, 1000, 1000 }
+  },
+  Tag = {
+    "moon_solarSystem",
+    "moon_giants",
+    "moon_jupiter",
+    "moon_carme",
+    "moon_minor",
+    "moon_minor_jupiter"
+  },
+  GUI = {
+    Name = "S/2018 J 3",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Carme/S2018J3"
+  }
+}
+
+local S2018J3Trail = {
+  Identifier = "S2018J3Trail",
+  Parent = transforms.JupiterBarycenter.Identifier,
+  Renderable = {
+    Type = "RenderableTrailOrbit",
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels346.ID.S2018J3,
+      Observer = coreKernels.ID.JupiterBarycenter
+    },
+    Color = { 0.4, 0.3, 0.01 },
+    Period = 704.56,
+    Resolution = 1000
+  },
+  Tag = {
+    "moonTrail_solarSystem",
+    "moonTrail_giants",
+    "moonTrail_jupiter",
+    "moonTrail_carme",
+    "moonTrail_minor",
+    "moonTrail_minor_jupiter"
+  },
+  GUI = {
+    Name = "Rastro de S/2018 J 3",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Carme/S2018J3"
+  }
+}
+
+local S2018J3Label = {
+  Identifier = "S2018J3Label",
+  Parent = S2018J3.Identifier,
+  Renderable = {
+    Type = "RenderableLabel",
+    Enabled = false,
+    Text = "S/2018 J 3",
+    FontSize = 70.0,
+    Size = 7.1,
+    MinMaxSize = { 1, 25 },
+    OrientationOption = "Camera View Direction",
+    BlendMode = "Additive",
+    EnableFading = true,
+    FadeUnit = "Gm",
+    FadeDistances = { 2.0, 125.0 },
+    FadeWidths = { 0.5, 50.0 }
+  },
+  Tag = {
+    "solarsystem_labels",
+    "moon_labels",
+    "minor_moon_labels",
+    "minor_moon_labels_jupiter",
+    "minor_moon_labels_carme"
+  },
+  GUI = {
+    Name = "Etiqueta de S/2018 J 3",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Carme/S2018J3",
+    Description = "Etiqueta para la luna de Júpiter S2018J3 (grupo Carme)"
+  }
+}
+
+local S2021J4 = {
+  Identifier = "S2021J4",
+  Parent = transforms.JupiterBarycenter.Identifier,
+  Transform = {
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels346.ID.S2021J4,
+      Observer = coreKernels.ID.JupiterBarycenter
+    }
+  },
+  Renderable = {
+    Type = "RenderableGlobe",
+    Radii = { 1000, 1000, 1000 }
+  },
+  Tag = {
+    "moon_solarSystem",
+    "moon_giants",
+    "moon_jupiter",
+    "moon_carme",
+    "moon_minor",
+    "moon_minor_jupiter"
+  },
+  GUI = {
+    Name = "S/2021 J 4",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Carme/S2021J4"
+  }
+}
+
+local S2021J4Trail = {
+  Identifier = "S2021J4Trail",
+  Parent = transforms.JupiterBarycenter.Identifier,
+  Renderable = {
+    Type = "RenderableTrailOrbit",
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels346.ID.S2021J4,
+      Observer = coreKernels.ID.JupiterBarycenter
+    },
+    Color = { 0.4, 0.3, 0.01 },
+    Period = 710.13,
+    Resolution = 1000
+  },
+  Tag = {
+    "moonTrail_solarSystem",
+    "moonTrail_giants",
+    "moonTrail_jupiter",
+    "moonTrail_carme",
+    "moonTrail_minor",
+    "moonTrail_minor_jupiter"
+  },
+  GUI = {
+    Name = "Rastro de S/2021 J 4",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Carme/S2021J4"
+  }
+}
+
+local S2021J4Label = {
+  Identifier = "S2021J4Label",
+  Parent = S2021J4.Identifier,
+  Renderable = {
+    Type = "RenderableLabel",
+    Enabled = false,
+    Text = "S/2021 J 4",
+    FontSize = 70.0,
+    Size = 7.1,
+    MinMaxSize = { 1, 25 },
+    OrientationOption = "Camera View Direction",
+    BlendMode = "Additive",
+    EnableFading = true,
+    FadeUnit = "Gm",
+    FadeDistances = { 2.0, 125.0 },
+    FadeWidths = { 0.5, 50.0 }
+  },
+  Tag = {
+    "solarsystem_labels",
+    "moon_labels",
+    "minor_moon_labels",
+    "minor_moon_labels_jupiter",
+    "minor_moon_labels_carme"
+  },
+  GUI = {
+    Name = "Etiqueta de S/2021 J 4",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Carme/S2021J4",
+    Description = "Etiqueta para la luna de Júpiter S2021J4 (grupo Carme)"
+  }
+}
+
+local S2021J5 = {
+  Identifier = "S2021J5",
+  Parent = transforms.JupiterBarycenter.Identifier,
+  Transform = {
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels346.ID.S2021J5,
+      Observer = coreKernels.ID.JupiterBarycenter
+    }
+  },
+  Renderable = {
+    Type = "RenderableGlobe",
+    Radii = { 2000, 2000, 2000 }
+  },
+  Tag = {
+    "moon_solarSystem",
+    "moon_giants",
+    "moon_jupiter",
+    "moon_carme",
+    "moon_minor",
+    "moon_minor_jupiter"
+  },
+  GUI = {
+    Name = "S/2021 J 5",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Carme/S2021J5"
+  }
+}
+
+local S2021J5Trail = {
+  Identifier = "S2021J5Trail",
+  Parent = transforms.JupiterBarycenter.Identifier,
+  Renderable = {
+    Type = "RenderableTrailOrbit",
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels346.ID.S2021J5,
+      Observer = coreKernels.ID.JupiterBarycenter
+    },
+    Color = { 0.4, 0.3, 0.01 },
+    Period = 704.80,
+    Resolution = 1000
+  },
+  Tag = {
+    "moonTrail_solarSystem",
+    "moonTrail_giants",
+    "moonTrail_jupiter",
+    "moonTrail_carme",
+    "moonTrail_minor",
+    "moonTrail_minor_jupiter"
+  },
+  GUI = {
+    Name = "Rastro de S/2021 J 5",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Carme/S2021J5"
+  }
+}
+
+local S2021J5Label = {
+  Identifier = "S2021J5Label",
+  Parent = S2021J5.Identifier,
+  Renderable = {
+    Type = "RenderableLabel",
+    Enabled = false,
+    Text = "S/2021 J 5",
+    FontSize = 70.0,
+    Size = 7.1,
+    MinMaxSize = { 1, 25 },
+    OrientationOption = "Camera View Direction",
+    BlendMode = "Additive",
+    EnableFading = true,
+    FadeUnit = "Gm",
+    FadeDistances = { 2.0, 125.0 },
+    FadeWidths = { 0.5, 50.0 }
+  },
+  Tag = {
+    "solarsystem_labels",
+    "moon_labels",
+    "minor_moon_labels",
+    "minor_moon_labels_jupiter",
+    "minor_moon_labels_carme"
+  },
+  GUI = {
+    Name = "Etiqueta de S/2021 J 5",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Carme/S2021J5",
+    Description = "Etiqueta para la luna de Júpiter S2021J5 (grupo Carme)"
+  }
+}
+
+local S2021J6 = {
+  Identifier = "S2021J6",
+  Parent = transforms.JupiterBarycenter.Identifier,
+  Transform = {
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels346.ID.S2021J6,
+      Observer = coreKernels.ID.JupiterBarycenter
+    }
+  },
+  Renderable = {
+    Type = "RenderableGlobe",
+    Radii = { 2000, 2000, 2000 }
+  },
+  Tag = {
+    "moon_solarSystem",
+    "moon_giants",
+    "moon_jupiter",
+    "moon_carme",
+    "moon_minor",
+    "moon_minor_jupiter"
+  },
+  GUI = {
+    Name = "S/2021 J 6",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Carme/S2021J6"
+  }
+}
+
+local S2021J6Trail = {
+  Identifier = "S2021J6Trail",
+  Parent = transforms.JupiterBarycenter.Identifier,
+  Renderable = {
+    Type = "RenderableTrailOrbit",
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels346.ID.S2021J6,
+      Observer = coreKernels.ID.JupiterBarycenter
+    },
+    Color = { 0.4, 0.3, 0.01 },
+    Period = 732.55,
+    Resolution = 1000
+  },
+  Tag = {
+    "moonTrail_solarSystem",
+    "moonTrail_giants",
+    "moonTrail_jupiter",
+    "moonTrail_carme",
+    "moonTrail_minor",
+    "moonTrail_minor_jupiter"
+  },
+  GUI = {
+    Name = "Rastro de S/2021 J 6",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Carme/S2021J6"
+  }
+}
+
+local S2021J6Label = {
+  Identifier = "S2021J6Label",
+  Parent = S2021J6.Identifier,
+  Renderable = {
+    Type = "RenderableLabel",
+    Enabled = false,
+    Text = "S/2021 J 6",
+    FontSize = 70.0,
+    Size = 7.1,
+    MinMaxSize = { 1, 25 },
+    OrientationOption = "Camera View Direction",
+    BlendMode = "Additive",
+    EnableFading = true,
+    FadeUnit = "Gm",
+    FadeDistances = { 2.0, 125.0 },
+    FadeWidths = { 0.5, 50.0 }
+  },
+  Tag = {
+    "solarsystem_labels",
+    "moon_labels",
+    "minor_moon_labels",
+    "minor_moon_labels_jupiter",
+    "minor_moon_labels_carme"
+  },
+  GUI = {
+    Name = "Etiqueta de S/2021 J 6",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Carme/S2021J6",
+    Description = "Etiqueta para la luna de Júpiter S2021J6 (grupo Carme)"
+  }
+}
+
+local S2016J3 = {
+  Identifier = "S2016J3",
+  Parent = transforms.JupiterBarycenter.Identifier,
+  Transform = {
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels346.ID.S2016J3,
+      Observer = coreKernels.ID.JupiterBarycenter
+    }
+  },
+  Renderable = {
+    Type = "RenderableGlobe",
+    Radii = { 2000, 2000, 2000 }
+  },
+  Tag = {
+    "moon_solarSystem",
+    "moon_giants",
+    "moon_jupiter",
+    "moon_carme",
+    "moon_minor",
+    "moon_minor_jupiter"
+  },
+  GUI = {
+    Name = "S/2016 J 3",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Carme/S2016J3"
+  }
+}
+
+local S2016J3Trail = {
+  Identifier = "S2016J3Trail",
+  Parent = transforms.JupiterBarycenter.Identifier,
+  Renderable = {
+    Type = "RenderableTrailOrbit",
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels346.ID.S2016J3,
+      Observer = coreKernels.ID.JupiterBarycenter
+    },
+    Color = { 0.4, 0.3, 0.01 },
+    Period = 676.37,
+    Resolution = 1000
+  },
+  Tag = {
+    "moonTrail_solarSystem",
+    "moonTrail_giants",
+    "moonTrail_jupiter",
+    "moonTrail_carme",
+    "moonTrail_minor",
+    "moonTrail_minor_jupiter"
+  },
+  GUI = {
+    Name = "Rastro de S/2016 J 3",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Carme/S2016J3"
+  }
+}
+
+local S2016J3Label = {
+  Identifier = "S2016J3Label",
+  Parent = S2016J3.Identifier,
+  Renderable = {
+    Type = "RenderableLabel",
+    Enabled = false,
+    Text = "S/2016 J 3",
+    FontSize = 70.0,
+    Size = 7.1,
+    MinMaxSize = { 1, 25 },
+    OrientationOption = "Camera View Direction",
+    BlendMode = "Additive",
+    EnableFading = true,
+    FadeUnit = "Gm",
+    FadeDistances = { 2.0, 125.0 },
+    FadeWidths = { 0.5, 50.0 }
+  },
+  Tag = {
+    "solarsystem_labels",
+    "moon_labels",
+    "minor_moon_labels",
+    "minor_moon_labels_jupiter",
+    "minor_moon_labels_carme"
+  },
+  GUI = {
+    Name = "Etiqueta de S/2016 J 3",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Carme/S2016J3",
+    Description = "Etiqueta para la luna de Júpiter S2016J3 (grupo Carme)"
+  }
+}
+
+local S2022J1 = {
+  Identifier = "S2022J1",
+  Parent = transforms.JupiterBarycenter.Identifier,
+  Transform = {
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels346.ID.S2022J1,
+      Observer = coreKernels.ID.JupiterBarycenter
+    }
+  },
+  Renderable = {
+    Type = "RenderableGlobe",
+    Radii = { 2000, 2000, 2000 }
+  },
+  Tag = {
+    "moon_solarSystem",
+    "moon_giants",
+    "moon_jupiter",
+    "moon_carme",
+    "moon_minor",
+    "moon_minor_jupiter"
+  },
+  GUI = {
+    Name = "S/2022 J 1",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Carme/S2022J1"
+  }
+}
+
+local S2022J1Trail = {
+  Identifier = "S2022J1Trail",
+  Parent = transforms.JupiterBarycenter.Identifier,
+  Renderable = {
+    Type = "RenderableTrailOrbit",
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels346.ID.S2022J1,
+      Observer = coreKernels.ID.JupiterBarycenter
+    },
+    Color = { 0.4, 0.3, 0.01 },
+    Period = 667.34,
+    Resolution = 1000
+  },
+  Tag = {
+    "moonTrail_solarSystem",
+    "moonTrail_giants",
+    "moonTrail_jupiter",
+    "moonTrail_carme",
+    "moonTrail_minor",
+    "moonTrail_minor_jupiter"
+  },
+  GUI = {
+    Name = "Rastro de S/2022 J 1",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Carme/S2022J1"
+  }
+}
+
+local S2022J1Label = {
+  Identifier = "S2022J1Label",
+  Parent = S2022J1.Identifier,
+  Renderable = {
+    Type = "RenderableLabel",
+    Enabled = false,
+    Text = "S/2022 J 1",
+    FontSize = 70.0,
+    Size = 7.1,
+    MinMaxSize = { 1, 25 },
+    OrientationOption = "Camera View Direction",
+    BlendMode = "Additive",
+    EnableFading = true,
+    FadeUnit = "Gm",
+    FadeDistances = { 2.0, 125.0 },
+    FadeWidths = { 0.5, 50.0 }
+  },
+  Tag = {
+    "solarsystem_labels",
+    "moon_labels",
+    "minor_moon_labels",
+    "minor_moon_labels_jupiter",
+    "minor_moon_labels_carme"
+  },
+  GUI = {
+    Name = "Etiqueta de S/2022 J 1",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Carme/S2022J1",
+    Description = "Etiqueta para la luna de Júpiter S2022J1 (grupo Carme)"
+  }
+}
+
+local S2022J2 = {
+  Identifier = "S2022J2",
+  Parent = transforms.JupiterBarycenter.Identifier,
+  Transform = {
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels346.ID.S2022J2,
+      Observer = coreKernels.ID.JupiterBarycenter
+    }
+  },
+  Renderable = {
+    Type = "RenderableGlobe",
+    Radii = { 1000, 1000, 1000 }
+  },
+  Tag = {
+    "moon_solarSystem",
+    "moon_giants",
+    "moon_jupiter",
+    "moon_carme",
+    "moon_minor",
+    "moon_minor_jupiter"
+  },
+  GUI = {
+    Name = "S/2022 J 2",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Carme/S2022J2"
+  }
+}
+
+local S2022J2Trail = {
+  Identifier = "S2022J2Trail",
+  Parent = transforms.JupiterBarycenter.Identifier,
+  Renderable = {
+    Type = "RenderableTrailOrbit",
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels346.ID.S2022J2,
+      Observer = coreKernels.ID.JupiterBarycenter
+    },
+    Color = { 0.4, 0.3, 0.01 },
+    Period = 685.51,
+    Resolution = 1000
+  },
+  Tag = {
+    "moonTrail_solarSystem",
+    "moonTrail_giants",
+    "moonTrail_jupiter",
+    "moonTrail_carme",
+    "moonTrail_minor",
+    "moonTrail_minor_jupiter"
+  },
+  GUI = {
+    Name = "Rastro de S/2022 J 2",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Carme/S2022J2"
+  }
+}
+
+local S2022J2Label = {
+  Identifier = "S2022J2Label",
+  Parent = S2022J2.Identifier,
+  Renderable = {
+    Type = "RenderableLabel",
+    Enabled = false,
+    Text = "S/2022 J 2",
+    FontSize = 70.0,
+    Size = 7.1,
+    MinMaxSize = { 1, 25 },
+    OrientationOption = "Camera View Direction",
+    BlendMode = "Additive",
+    EnableFading = true,
+    FadeUnit = "Gm",
+    FadeDistances = { 2.0, 125.0 },
+    FadeWidths = { 0.5, 50.0 }
+  },
+  Tag = {
+    "solarsystem_labels",
+    "moon_labels",
+    "minor_moon_labels",
+    "minor_moon_labels_jupiter",
+    "minor_moon_labels_carme"
+  },
+  GUI = {
+    Name = "Etiqueta de S/2022 J 2",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Carme/S2022J2",
+    Description = "Etiqueta para la luna de Júpiter S2022J2 (grupo Carme)"
+  }
+}
+
+local S2017J2 = {
+  Identifier = "S2017J2",
+  Parent = transforms.JupiterBarycenter.Identifier,
+  Transform = {
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels344.ID.S2017J2,
+      Observer = coreKernels.ID.JupiterBarycenter
+    }
+  },
+  Renderable = {
+    Type = "RenderableGlobe",
+    Radii = { 1000, 1000, 1000 }
+  },
+  Tag = {
+    "moon_solarSystem",
+    "moon_giants",
+    "moon_jupiter",
+    "moon_carme",
+    "moon_minor",
+    "moon_minor_jupiter"
+  },
+  GUI = {
+    Name = "S/2017 J 2",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Carme/S2017J2"
+  }
+}
+
+local S2017J2Trail = {
+  Identifier = "S2017J2Trail",
+  Parent = transforms.JupiterBarycenter.Identifier,
+  Renderable = {
+    Type = "RenderableTrailOrbit",
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels344.ID.S2017J2,
+      Observer = coreKernels.ID.JupiterBarycenter
+    },
+    Color = { 0.4, 0.3, 0.01 },
+    Period = 723.1,
+    Resolution = 1000
+  },
+  Tag = {
+    "moonTrail_solarSystem",
+    "moonTrail_giants",
+    "moonTrail_jupiter",
+    "moonTrail_carme",
+    "moonTrail_minor",
+    "moonTrail_minor_jupiter"
+  },
+  GUI = {
+    Name = "Rastro de S/2017 J 2",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Carme/S2017J2"
+  }
+}
+
+local S2017J2Label = {
+  Identifier = "S2017J2Label",
+  Parent = S2017J2.Identifier,
+  Renderable = {
+    Type = "RenderableLabel",
+    Enabled = false,
+    Text = "S/2017 J 2",
+    FontSize = 70.0,
+    Size = 7.1,
+    MinMaxSize = { 1, 25 },
+    OrientationOption = "Camera View Direction",
+    BlendMode = "Additive",
+    EnableFading = true,
+    FadeUnit = "Gm",
+    FadeDistances = { 2.0, 125.0 },
+    FadeWidths = { 0.5, 50.0 }
+  },
+  Tag = {
+    "solarsystem_labels",
+    "moon_labels",
+    "minor_moon_labels",
+    "minor_moon_labels_jupiter",
+    "minor_moon_labels_carme"
+  },
+  GUI = {
+    Name = "Etiqueta de S/2017 J 2",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Carme/S2017J2",
+    Description = "Etiqueta para la luna de Júpiter S2017J2 (grupo Carme)"
+  }
+}
+
+local S2017J5 = {
+  Identifier = "S2017J5",
+  Parent = transforms.JupiterBarycenter.Identifier,
+  Transform = {
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels344.ID.S2017J5,
+      Observer = coreKernels.ID.JupiterBarycenter
+    }
+  },
+  Renderable = {
+    Type = "RenderableGlobe",
+    Radii = { 2000, 2000, 2000 }
+  },
+  Tag = {
+    "moon_solarSystem",
+    "moon_giants",
+    "moon_jupiter",
+    "moon_carme",
+    "moon_minor",
+    "moon_minor_jupiter"
+  },
+  GUI = {
+    Name = "S/2017 J 5",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Carme/S2017J5"
+  }
+}
+
+local S2017J5Trail = {
+  Identifier = "S2017J5Trail",
+  Parent = transforms.JupiterBarycenter.Identifier,
+  Renderable = {
+    Type = "RenderableTrailOrbit",
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels344.ID.S2017J5,
+      Observer = coreKernels.ID.JupiterBarycenter
+    },
+    Color = { 0.4, 0.3, 0.01 },
+    Period = 719.5,
+    Resolution = 1000
+  },
+  Tag = {
+    "moonTrail_solarSystem",
+    "moonTrail_giants",
+    "moonTrail_jupiter",
+    "moonTrail_carme",
+    "moonTrail_minor",
+    "moonTrail_minor_jupiter"
+  },
+  GUI = {
+    Name = "Rastro de S/2017 J 5",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Carme/S2017J5"
+  }
+}
+
+local S2017J5Label = {
+  Identifier = "S2017J5Label",
+  Parent = S2017J5.Identifier,
+  Renderable = {
+    Type = "RenderableLabel",
+    Enabled = false,
+    Text = "S/2017 J 5",
+    FontSize = 70.0,
+    Size = 7.1,
+    MinMaxSize = { 1, 25 },
+    OrientationOption = "Camera View Direction",
+    BlendMode = "Additive",
+    EnableFading = true,
+    FadeUnit = "Gm",
+    FadeDistances = { 2.0, 125.0 },
+    FadeWidths = { 0.5, 50.0 }
+  },
+  Tag = {
+    "solarsystem_labels",
+    "moon_labels",
+    "minor_moon_labels",
+    "minor_moon_labels_jupiter",
+    "minor_moon_labels_carme"
+  },
+  GUI = {
+    Name = "Etiqueta de S/2017 J 5",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Carme/S2017J5",
+    Description = "Etiqueta para la luna de Júpiter S2017J5 (grupo Carme)"
+  }
+}
+
+local S2017J8 = {
+  Identifier = "S2017J8",
+  Parent = transforms.JupiterBarycenter.Identifier,
+  Transform = {
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels344.ID.S2017J8,
+      Observer = coreKernels.ID.JupiterBarycenter
+    }
+  },
+  Renderable = {
+    Type = "RenderableGlobe",
+    Radii = { 1000, 1000, 1000 }
+  },
+  Tag = {
+    "moon_solarSystem",
+    "moon_giants",
+    "moon_jupiter",
+    "moon_carme",
+    "moon_minor",
+    "moon_minor_jupiter"
+  },
+  GUI = {
+    Name = "S/2017 J 8",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Carme/S2017J8"
+  }
+}
+
+local S2017J8Trail = {
+  Identifier = "S2017J8Trail",
+  Parent = transforms.JupiterBarycenter.Identifier,
+  Renderable = {
+    Type = "RenderableTrailOrbit",
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels344.ID.S2017J8,
+      Observer = coreKernels.ID.JupiterBarycenter
+    },
+    Color = { 0.4, 0.3, 0.01 },
+    Period = 719.6,
+    Resolution = 1000
+  },
+  Tag = {
+    "moonTrail_solarSystem",
+    "moonTrail_giants",
+    "moonTrail_jupiter",
+    "moonTrail_carme",
+    "moonTrail_minor",
+    "moonTrail_minor_jupiter"
+  },
+  GUI = {
+    Name = "Rastro de S/2017 J 8",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Carme/S2017J8"
+  }
+}
+
+local S2017J8Label = {
+  Identifier = "S2017J8Label",
+  Parent = S2017J8.Identifier,
+  Renderable = {
+    Type = "RenderableLabel",
+    Enabled = false,
+    Text = "S/2017 J 8",
+    FontSize = 70.0,
+    Size = 7.1,
+    MinMaxSize = { 1, 25 },
+    OrientationOption = "Camera View Direction",
+    BlendMode = "Additive",
+    EnableFading = true,
+    FadeUnit = "Gm",
+    FadeDistances = { 2.0, 125.0 },
+    FadeWidths = { 0.5, 50.0 }
+  },
+  Tag = {
+    "solarsystem_labels",
+    "moon_labels",
+    "minor_moon_labels",
+    "minor_moon_labels_jupiter",
+    "minor_moon_labels_carme"
+  },
+  GUI = {
+    Name = "Etiqueta de S/2017 J 8",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Carme/S2017J8",
+    Description = "Etiqueta para la luna de Júpiter S2017J8 (grupo Carme)"
+  }
+}
+
+local S2011J1 = {
+  Identifier = "S2011J1",
+  Parent = transforms.JupiterBarycenter.Identifier,
+  Transform = {
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels344.ID.S2011J1,
+      Observer = coreKernels.ID.JupiterBarycenter
+    }
+  },
+  Renderable = {
+    Type = "RenderableGlobe",
+    Radii = { 1000, 1000, 1000 }
+  },
+  Tag = {
+    "moon_solarSystem",
+    "moon_giants",
+    "moon_jupiter",
+    "moon_carme",
+    "moon_minor",
+    "moon_minor_jupiter"
+  },
+  GUI = {
+    Name = "S/2011 J 1",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Carme/S2011J1"
+  }
+}
+
+local S2011J1Trail = {
+  Identifier = "S2011J1Trail",
+  Parent = transforms.JupiterBarycenter.Identifier,
+  Renderable = {
+    Type = "RenderableTrailOrbit",
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels344.ID.S2011J1,
+      Observer = coreKernels.ID.JupiterBarycenter
+    },
+    Color = { 0.4, 0.3, 0.01 },
+    Period = 686.6,
+    Resolution = 1000
+  },
+  Tag = {
+    "moonTrail_solarSystem",
+    "moonTrail_giants",
+    "moonTrail_jupiter",
+    "moonTrail_carme",
+    "moonTrail_minor",
+    "moonTrail_minor_jupiter"
+  },
+  GUI = {
+    Name = "Rastro de S/2011 J 1",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Carme/S2011J1"
+  }
+}
+
+local S2011J1Label = {
+  Identifier = "S2011J1Label",
+  Parent = S2011J1.Identifier,
+  Renderable = {
+    Type = "RenderableLabel",
+    Enabled = false,
+    Text = "S/2011 J 1",
+    FontSize = 70.0,
+    Size = 7.1,
+    MinMaxSize = { 1, 25 },
+    OrientationOption = "Camera View Direction",
+    BlendMode = "Additive",
+    EnableFading = true,
+    FadeUnit = "Gm",
+    FadeDistances = { 2.0, 125.0 },
+    FadeWidths = { 0.5, 50.0 }
+  },
+  Tag = {
+    "solarsystem_labels",
+    "moon_labels",
+    "minor_moon_labels",
+    "minor_moon_labels_jupiter",
+    "minor_moon_labels_carme"
+  },
+  GUI = {
+    Name = "Etiqueta de S/2011 J 1",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Carme/S2011J1",
+    Description = "Etiqueta para la luna de Júpiter S2011J1 (grupo Carme)"
+  }
+}
+
+local S2003J9 = {
+  Identifier = "S2003J9",
+  Parent = transforms.JupiterBarycenter.Identifier,
+  Transform = {
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels344.ID.S2003J9,
+      Observer = coreKernels.ID.JupiterBarycenter
+    }
+  },
+  Renderable = {
+    Type = "RenderableGlobe",
+    Radii = { 1000, 1000, 1000 }
+  },
+  Tag = {
+    "moon_solarSystem",
+    "moon_giants",
+    "moon_jupiter",
+    "moon_carme",
+    "moon_minor",
+    "moon_minor_jupiter"
+  },
+  GUI = {
+    Name = "S/2003 J 9",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Carme/S2003J9"
+  }
+}
+
+local S2003J9Trail = {
+  Identifier = "S2003J9Trail",
+  Parent = transforms.JupiterBarycenter.Identifier,
+  Renderable = {
+    Type = "RenderableTrailOrbit",
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels344.ID.S2003J9,
+      Observer = coreKernels.ID.JupiterBarycenter
+    },
+    Color = { 0.4, 0.3, 0.01 },
+    Period = 767.6,
+    Resolution = 1000
+  },
+  Tag = {
+    "moonTrail_solarSystem",
+    "moonTrail_giants",
+    "moonTrail_jupiter",
+    "moonTrail_carme",
+    "moonTrail_minor",
+    "moonTrail_minor_jupiter"
+  },
+  GUI = {
+    Name = "Rastro de S/2003 J 9",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Carme/S2003J9"
+  }
+}
+
+local S2003J9Label = {
+  Identifier = "S2003J9Label",
+  Parent = S2003J9.Identifier,
+  Renderable = {
+    Type = "RenderableLabel",
+    Enabled = false,
+    Text = "S/2003 J 9",
+    FontSize = 70.0,
+    Size = 7.1,
+    MinMaxSize = { 1, 25 },
+    OrientationOption = "Camera View Direction",
+    BlendMode = "Additive",
+    EnableFading = true,
+    FadeUnit = "Gm",
+    FadeDistances = { 2.0, 125.0 },
+    FadeWidths = { 0.5, 50.0 }
+  },
+  Tag = {
+    "solarsystem_labels",
+    "moon_labels",
+    "minor_moon_labels",
+    "minor_moon_labels_jupiter",
+    "minor_moon_labels_carme"
+  },
+  GUI = {
+    Name = "Etiqueta de S/2003 J 9",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Carme/S2003J9",
+    Description = "Etiqueta para la luna de Júpiter S2003J9 (grupo Carme)"
+  }
+}
+
+local S2003J10 = {
+  Identifier = "S2003J10",
+  Parent = transforms.JupiterBarycenter.Identifier,
+  Transform = {
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels344.ID.S2003J10,
+      Observer = coreKernels.ID.JupiterBarycenter
+    }
+  },
+  Renderable = {
+    Type = "RenderableGlobe",
+    Radii = { 2000, 2000, 2000 }
+  },
+  Tag = {
+    "moon_solarSystem",
+    "moon_giants",
+    "moon_jupiter",
+    "moon_carme",
+    "moon_minor",
+    "moon_minor_jupiter"
+  },
+  GUI = {
+    Name = "S/2003 J 10",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Carme/S2003J10"
+  }
+}
+
+local S2003J10Trail = {
+  Identifier = "S2003J10Trail",
+  Parent = transforms.JupiterBarycenter.Identifier,
+  Renderable = {
+    Type = "RenderableTrailOrbit",
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels344.ID.S2003J10,
+      Observer = coreKernels.ID.JupiterBarycenter
+    },
+    Color = { 0.4, 0.3, 0.01 },
+    Period = 705.96,
+    Resolution = 1000
+  },
+  Tag = {
+    "moonTrail_solarSystem",
+    "moonTrail_giants",
+    "moonTrail_jupiter",
+    "moonTrail_carme",
+    "moonTrail_minor",
+    "moonTrail_minor_jupiter"
+  },
+  GUI = {
+    Name = "Rastro de S/2003 J 10",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Carme/S2003J10"
+  }
+}
+
+local S2003J10Label = {
+  Identifier = "S2003J10Label",
+  Parent = S2003J10.Identifier,
+  Renderable = {
+    Type = "RenderableLabel",
+    Enabled = false,
+    Text = "S/2003 J 10",
+    FontSize = 70.0,
+    Size = 7.1,
+    MinMaxSize = { 1, 25 },
+    OrientationOption = "Camera View Direction",
+    BlendMode = "Additive",
+    EnableFading = true,
+    FadeUnit = "Gm",
+    FadeDistances = { 2.0, 125.0 },
+    FadeWidths = { 0.5, 50.0 }
+  },
+  Tag = {
+    "solarsystem_labels",
+    "moon_labels",
+    "minor_moon_labels",
+    "minor_moon_labels_jupiter",
+    "minor_moon_labels_carme"
+  },
+  GUI = {
+    Name = "Etiqueta de S/2003 J 10",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Menores/Grupo Carme/S2003J10",
+    Description = "Etiqueta para la luna de Júpiter S2003J10 (grupo Carme)"
+  }
+}
+
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(Herse)
+  openspace.addSceneGraphNode(HerseTrail)
+  openspace.addSceneGraphNode(HerseLabel)
+
+  openspace.addSceneGraphNode(Aitne)
+  openspace.addSceneGraphNode(AitneTrail)
+  openspace.addSceneGraphNode(AitneLabel)
+
+  openspace.addSceneGraphNode(Kale)
+  openspace.addSceneGraphNode(KaleTrail)
+  openspace.addSceneGraphNode(KaleLabel)
+
+  openspace.addSceneGraphNode(Taygete)
+  openspace.addSceneGraphNode(TaygeteTrail)
+  openspace.addSceneGraphNode(TaygeteLabel)
+
+  openspace.addSceneGraphNode(Chaldene)
+  openspace.addSceneGraphNode(ChaldeneTrail)
+  openspace.addSceneGraphNode(ChaldeneLabel)
+
+  openspace.addSceneGraphNode(Erinome)
+  openspace.addSceneGraphNode(ErinomeTrail)
+  openspace.addSceneGraphNode(ErinomeLabel)
+
+  openspace.addSceneGraphNode(Kallichore)
+  openspace.addSceneGraphNode(KallichoreTrail)
+  openspace.addSceneGraphNode(KallichoreLabel)
+
+  openspace.addSceneGraphNode(Kalyke)
+  openspace.addSceneGraphNode(KalykeTrail)
+  openspace.addSceneGraphNode(KalykeLabel)
+
+  openspace.addSceneGraphNode(Pasithee)
+  openspace.addSceneGraphNode(PasitheeTrail)
+  openspace.addSceneGraphNode(PasitheeLabel)
+
+  openspace.addSceneGraphNode(S2010J1)
+  openspace.addSceneGraphNode(S2010J1Trail)
+  openspace.addSceneGraphNode(S2010J1Label)
+
+  openspace.addSceneGraphNode(Eukelade)
+  openspace.addSceneGraphNode(EukeladeTrail)
+  openspace.addSceneGraphNode(EukeladeLabel)
+
+  openspace.addSceneGraphNode(Arche)
+  openspace.addSceneGraphNode(ArcheTrail)
+  openspace.addSceneGraphNode(ArcheLabel)
+
+  openspace.addSceneGraphNode(Isonoe)
+  openspace.addSceneGraphNode(IsonoeTrail)
+  openspace.addSceneGraphNode(IsonoeLabel)
+
+  openspace.addSceneGraphNode(Carme)
+  openspace.addSceneGraphNode(CarmeTrail)
+  openspace.addSceneGraphNode(CarmeLabel)
+
+  openspace.addSceneGraphNode(S2003J5)
+  openspace.addSceneGraphNode(S2003J5Trail)
+  openspace.addSceneGraphNode(S2003J5Label)
+
+  openspace.addSceneGraphNode(S2018J3)
+  openspace.addSceneGraphNode(S2018J3Trail)
+  openspace.addSceneGraphNode(S2018J3Label)
+
+  openspace.addSceneGraphNode(S2021J4)
+  openspace.addSceneGraphNode(S2021J4Trail)
+  openspace.addSceneGraphNode(S2021J4Label)
+
+  openspace.addSceneGraphNode(S2021J5)
+  openspace.addSceneGraphNode(S2021J5Trail)
+  openspace.addSceneGraphNode(S2021J5Label)
+
+  openspace.addSceneGraphNode(S2021J6)
+  openspace.addSceneGraphNode(S2021J6Trail)
+  openspace.addSceneGraphNode(S2021J6Label)
+
+  openspace.addSceneGraphNode(S2016J3)
+  openspace.addSceneGraphNode(S2016J3Trail)
+  openspace.addSceneGraphNode(S2016J3Label)
+
+  openspace.addSceneGraphNode(S2022J1)
+  openspace.addSceneGraphNode(S2022J1Trail)
+  openspace.addSceneGraphNode(S2022J1Label)
+
+  openspace.addSceneGraphNode(S2022J2)
+  openspace.addSceneGraphNode(S2022J2Trail)
+  openspace.addSceneGraphNode(S2022J2Label)
+
+  openspace.addSceneGraphNode(S2017J2)
+  openspace.addSceneGraphNode(S2017J2Trail)
+  openspace.addSceneGraphNode(S2017J2Label)
+
+  openspace.addSceneGraphNode(S2017J5)
+  openspace.addSceneGraphNode(S2017J5Trail)
+  openspace.addSceneGraphNode(S2017J5Label)
+
+  openspace.addSceneGraphNode(S2017J8)
+  openspace.addSceneGraphNode(S2017J8Trail)
+  openspace.addSceneGraphNode(S2017J8Label)
+
+  openspace.addSceneGraphNode(S2011J1)
+  openspace.addSceneGraphNode(S2011J1Trail)
+  openspace.addSceneGraphNode(S2011J1Label)
+
+  openspace.addSceneGraphNode(S2003J9)
+  openspace.addSceneGraphNode(S2003J9Trail)
+  openspace.addSceneGraphNode(S2003J9Label)
+
+  openspace.addSceneGraphNode(S2003J10)
+  openspace.addSceneGraphNode(S2003J10Trail)
+  openspace.addSceneGraphNode(S2003J10Label)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(S2003J10Label)
+  openspace.removeSceneGraphNode(S2003J10Trail)
+  openspace.removeSceneGraphNode(S2003J10)
+
+  openspace.removeSceneGraphNode(S2003J9Label)
+  openspace.removeSceneGraphNode(S2003J9Trail)
+  openspace.removeSceneGraphNode(S2003J9)
+
+  openspace.removeSceneGraphNode(S2011J1Label)
+  openspace.removeSceneGraphNode(S2011J1Trail)
+  openspace.removeSceneGraphNode(S2011J1)
+
+  openspace.removeSceneGraphNode(S2017J8Label)
+  openspace.removeSceneGraphNode(S2017J8Trail)
+  openspace.removeSceneGraphNode(S2017J8)
+
+  openspace.removeSceneGraphNode(S2017J5Label)
+  openspace.removeSceneGraphNode(S2017J5Trail)
+  openspace.removeSceneGraphNode(S2017J5)
+
+  openspace.removeSceneGraphNode(S2017J2Label)
+  openspace.removeSceneGraphNode(S2017J2Trail)
+  openspace.removeSceneGraphNode(S2017J2)
+
+  openspace.removeSceneGraphNode(S2022J2Label)
+  openspace.removeSceneGraphNode(S2022J2Trail)
+  openspace.removeSceneGraphNode(S2022J2)
+
+  openspace.removeSceneGraphNode(S2022J1Label)
+  openspace.removeSceneGraphNode(S2022J1Trail)
+  openspace.removeSceneGraphNode(S2022J1)
+
+  openspace.removeSceneGraphNode(S2016J3Label)
+  openspace.removeSceneGraphNode(S2016J3Trail)
+  openspace.removeSceneGraphNode(S2016J3)
+
+  openspace.removeSceneGraphNode(S2021J6Label)
+  openspace.removeSceneGraphNode(S2021J6Trail)
+  openspace.removeSceneGraphNode(S2021J6)
+
+  openspace.removeSceneGraphNode(S2021J5Label)
+  openspace.removeSceneGraphNode(S2021J5Trail)
+  openspace.removeSceneGraphNode(S2021J5)
+
+  openspace.removeSceneGraphNode(S2021J4Label)
+  openspace.removeSceneGraphNode(S2021J4Trail)
+  openspace.removeSceneGraphNode(S2021J4)
+
+  openspace.removeSceneGraphNode(S2018J3Label)
+  openspace.removeSceneGraphNode(S2018J3Trail)
+  openspace.removeSceneGraphNode(S2018J3)
+
+  openspace.removeSceneGraphNode(S2003J5Label)
+  openspace.removeSceneGraphNode(S2003J5Trail)
+  openspace.removeSceneGraphNode(S2003J5)
+
+  openspace.removeSceneGraphNode(CarmeLabel)
+  openspace.removeSceneGraphNode(CarmeTrail)
+  openspace.removeSceneGraphNode(Carme)
+
+  openspace.removeSceneGraphNode(IsonoeLabel)
+  openspace.removeSceneGraphNode(IsonoeTrail)
+  openspace.removeSceneGraphNode(Isonoe)
+
+  openspace.removeSceneGraphNode(ArcheLabel)
+  openspace.removeSceneGraphNode(ArcheTrail)
+  openspace.removeSceneGraphNode(Arche)
+
+  openspace.removeSceneGraphNode(EukeladeLabel)
+  openspace.removeSceneGraphNode(EukeladeTrail)
+  openspace.removeSceneGraphNode(Eukelade)
+
+  openspace.removeSceneGraphNode(S2010J1Label)
+  openspace.removeSceneGraphNode(S2010J1Trail)
+  openspace.removeSceneGraphNode(S2010J1)
+
+  openspace.removeSceneGraphNode(PasitheeLabel)
+  openspace.removeSceneGraphNode(PasitheeTrail)
+  openspace.removeSceneGraphNode(Pasithee)
+
+  openspace.removeSceneGraphNode(KalykeLabel)
+  openspace.removeSceneGraphNode(KalykeTrail)
+  openspace.removeSceneGraphNode(Kalyke)
+
+  openspace.removeSceneGraphNode(KallichoreLabel)
+  openspace.removeSceneGraphNode(KallichoreTrail)
+  openspace.removeSceneGraphNode(Kallichore)
+
+  openspace.removeSceneGraphNode(ErinomeLabel)
+  openspace.removeSceneGraphNode(ErinomeTrail)
+  openspace.removeSceneGraphNode(Erinome)
+
+  openspace.removeSceneGraphNode(ChaldeneLabel)
+  openspace.removeSceneGraphNode(ChaldeneTrail)
+  openspace.removeSceneGraphNode(Chaldene)
+
+  openspace.removeSceneGraphNode(TaygeteLabel)
+  openspace.removeSceneGraphNode(TaygeteTrail)
+  openspace.removeSceneGraphNode(Taygete)
+
+  openspace.removeSceneGraphNode(KaleLabel)
+  openspace.removeSceneGraphNode(KaleTrail)
+  openspace.removeSceneGraphNode(Kale)
+
+  openspace.removeSceneGraphNode(AitneLabel)
+  openspace.removeSceneGraphNode(AitneTrail)
+  openspace.removeSceneGraphNode(Aitne)
+
+  openspace.removeSceneGraphNode(HerseLabel)
+  openspace.removeSceneGraphNode(HerseTrail)
+  openspace.removeSceneGraphNode(Herse)
+end)
+
+asset.export(Herse)
+asset.export(HerseTrail)
+asset.export(HerseLabel)
+
+asset.export(Aitne)
+asset.export(AitneTrail)
+asset.export(AitneLabel)
+
+asset.export(Kale)
+asset.export(KaleTrail)
+asset.export(KaleLabel)
+
+asset.export(Taygete)
+asset.export(TaygeteTrail)
+asset.export(TaygeteLabel)
+
+asset.export(Chaldene)
+asset.export(ChaldeneTrail)
+asset.export(ChaldeneLabel)
+
+asset.export(Erinome)
+asset.export(ErinomeTrail)
+asset.export(ErinomeLabel)
+
+asset.export(Kallichore)
+asset.export(KallichoreTrail)
+asset.export(KallichoreLabel)
+
+asset.export(Kalyke)
+asset.export(KalykeTrail)
+asset.export(KalykeLabel)
+
+asset.export(Pasithee)
+asset.export(PasitheeTrail)
+asset.export(PasitheeLabel)
+
+asset.export(S2010J1)
+asset.export(S2010J1Trail)
+asset.export(S2010J1Label)
+
+asset.export(Eukelade)
+asset.export(EukeladeTrail)
+asset.export(EukeladeLabel)
+
+asset.export(Arche)
+asset.export(ArcheTrail)
+asset.export(ArcheLabel)
+
+asset.export(Isonoe)
+asset.export(IsonoeTrail)
+asset.export(IsonoeLabel)
+
+asset.export(Carme)
+asset.export(CarmeTrail)
+asset.export(CarmeLabel)
+
+asset.export(S2003J5)
+asset.export(S2003J5Trail)
+asset.export(S2003J5Label)
+
+asset.export(S2018J3)
+asset.export(S2018J3Trail)
+asset.export(S2018J3Label)
+
+asset.export(S2021J4)
+asset.export(S2021J4Trail)
+asset.export(S2021J4Label)
+
+asset.export(S2021J5)
+asset.export(S2021J5Trail)
+asset.export(S2021J5Label)
+
+asset.export(S2021J6)
+asset.export(S2021J6Trail)
+asset.export(S2021J6Label)
+
+asset.export(S2016J3)
+asset.export(S2016J3Trail)
+asset.export(S2016J3Label)
+
+asset.export(S2022J1)
+asset.export(S2022J1Trail)
+asset.export(S2022J1Label)
+
+asset.export(S2022J2)
+asset.export(S2022J2Trail)
+asset.export(S2022J2Label)
+
+asset.export(S2017J2)
+asset.export(S2017J2Trail)
+asset.export(S2017J2Label)
+
+asset.export(S2017J5)
+asset.export(S2017J5Trail)
+asset.export(S2017J5Label)
+
+asset.export(S2017J8)
+asset.export(S2017J8Trail)
+asset.export(S2017J8Label)
+
+asset.export(S2011J1)
+asset.export(S2011J1Trail)
+asset.export(S2011J1Label)
+
+asset.export(S2003J9)
+asset.export(S2003J9Trail)
+asset.export(S2003J9Label)
+
+asset.export(S2003J10)
+asset.export(S2003J10Trail)
+asset.export(S2003J10Label)
+
+
+
+asset.meta = {
+  Name = "Lunas del Grupo Carme de Júpiter",
+  Description = [[Activo que contiene las lunas del Grupo Carme de Júpiter. Se generan globos en blanco, rastros SPICE y etiquetas para cada luna]],
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "MIT license"
+}

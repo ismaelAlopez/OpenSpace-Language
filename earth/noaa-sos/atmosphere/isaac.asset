@@ -1,0 +1,76 @@
+local globe = asset.require("../../earth")
+
+local Name = "Huracán Isaac - 2012"
+local Identifier = "noaa-sos-atmosphere-isaac"
+local Description = [[El Huracán Isaac se formó como una depresión tropical al este de las
+Antillas Menores el 21 de agosto y ese mismo día se convirtió en tormenta tropical. Como
+tormenta tropical, el Huracán Isaac pasó sobre La Española y Cuba, matando a muchas
+personas. Luego entró en el Golfo de México. Poco antes de tocar tierra cerca de la
+desembocadura del río Misisipi, la Tormenta Tropical Isaac se fortaleció y se convirtió
+en el Huracán Isaac el 28 de agosto. Isaac tocó tierra dos veces, regresando brevemente
+al mar después de su primer impacto antes de volver a tierra. Isaac fue una tormenta muy
+lenta después de tocar tierra y trajo cantidades significativas de lluvia al sureste de
+los Estados Unidos]]
+local URL = "https://sos.noaa.gov/catalog/datasets/hurricane-isaac-2012/"
+
+local syncedDirectory = asset.resource({
+  Name = Name,
+  Type = "HttpSynchronization",
+  Identifier = Identifier,
+  Version = 1,
+  UnzipFiles = true
+})
+
+local radarDestination = syncedDirectory .. "radar"
+local satDestination = syncedDirectory .. "sat"
+
+local LayerRadar = {
+  Identifier = Identifier .. "-radar",
+  Name = Name .. " (Radar)",
+  Type = "TemporalTileProvider",
+  ZIndex = 100,
+  Mode = "Folder",
+  Folder = {
+    Folder = radarDestination,
+    -- See https://en.cppreference.com/w/cpp/io/manip/get_time for an explanation of the
+    -- time formatting string
+    Format = "%y%j%H%M.png"
+  },
+  Description = Description
+}
+
+local LayerSat = {
+  Identifier = Identifier .. "-sat",
+  Name = Name .. " (Sat)",
+  Type = "TemporalTileProvider",
+  ZIndex = 100,
+  Mode = "Folder",
+  Folder = {
+    Folder = satDestination,
+    -- See https://en.cppreference.com/w/cpp/io/manip/get_time for an explanation of the
+    -- time formatting string
+    Format = "linear_rgb_cyl_%Y%m%d_%H%M.jpg"
+  },
+  Description = Description
+}
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", LayerRadar)
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", LayerSat)
+end)
+
+asset.onDeinitialize(function()
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", LayerSat)
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", LayerRadar)
+end)
+
+asset.export(LayerRadar)
+asset.export(LayerSat)
+
+asset.meta = {
+  Name = Name,
+  Description = Description .. "Datos proporcionados por la Administración Nacional Oceánica y Atmosférica",
+  Author = "Administración Nacional Oceánica y Atmosférica",
+  URL = URL,
+  License = "https://sos.noaa.gov/copyright/"
+}

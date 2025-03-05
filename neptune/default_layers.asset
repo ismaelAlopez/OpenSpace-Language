@@ -1,0 +1,11 @@
+asset.require("./layers/colorlayers/neptune_texture", true)
+
+
+
+asset.meta = {
+  Name = "Capas Predeterminadas de Neptuno",
+  Description = "Las capas predeterminadas de Neptuno son: Textura de Neptuno",
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "MIT license"
+}

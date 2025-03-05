@@ -1,0 +1,43 @@
+local transforms = asset.require("scene/solarsystem/sun/transforms")
+local coreKernels = asset.require("spice/core")
+
+local MercuryBarycenterTrail = {
+  Identifier = "MercuryBarycenterTrail",
+  Parent = transforms.SolarSystemBarycenter.Identifier,
+  Renderable = {
+    Type = "RenderableTrailOrbit",
+    Enabled = false,
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = coreKernels.ID.MercuryBarycenter,
+      Observer = coreKernels.ID.SolarSystemBarycenter
+    },
+    Color = { 0.6, 0.5, 0.5 },
+    Period = 87.968,
+    Resolution = 1000
+  },
+  Tag = { "planetTrail_solarSystem", "planetTrail_terrestrial" },
+  GUI = {
+    Name = "Rastro del Baricentro de Mercurio",
+    Path = "/Sistema Solar/Planetas/Mercurio",
+    Description = "Rastro del Baricentro de Mercurio observado por el Sol"
+  }
+}
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(MercuryBarycenterTrail)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(MercuryBarycenterTrail)
+end)
+
+asset.export(MercuryBarycenterTrail)
+
+asset.meta = {
+  Name = "Rastro de Mercurio",
+  Description = "Rastro del Baricentro de Mercurio",
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "MIT license"
+}

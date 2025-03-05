@@ -1,0 +1,72 @@
+local globe = asset.require("../../earth")
+
+local Name = "Anomalía de Temperatura: Anual (NOAA) - 1880 - Presente"
+local Identifier = "noaa-sos-atmosphere-temp_anom"
+local Description = [[Esta animación muestra la temperatura de la superficie de la Tierra desde 1880 hasta
+2019 en comparación con el promedio del siglo XX. Los mapas se basan en datos del Centro Nacional
+de Datos Climáticos de la NOAA. En 2016, la temperatura combinada de la superficie terrestre y oceánica fue 1.69°F
+(0.94°C) por encima del promedio del siglo XX, convirtiendo ese año en el más cálido desde que comenzaron los registros
+en 1880. Este es el tercer año consecutivo en que se establece un nuevo récord anual de temperatura global.
+Los primeros ocho meses de 2016 establecieron récords mensuales de temperatura y los últimos
+cuatro meses se clasificaron entre los cinco primeros para los récords de temperatura de cada mes. Hasta la fecha,
+todos los 16 años del siglo XXI se encuentran entre los diecisiete más cálidos registrados (1998 es
+actualmente el octavo más cálido). Los cinco años más cálidos han ocurrido desde 2010. 2017
+fue el tercer año más cálido, ligeramente más fresco que los dos anteriores. 2018 fue el cuarto
+más cálido]]
+local URL = "https://sos.noaa.gov/catalog/datasets/temperature-anomaly-yearly-noaa-1880-present/"
+
+local syncedDirectory = asset.resource({
+  Name = Name,
+  Type = "HttpSynchronization",
+  Identifier = Identifier,
+  Version = 1,
+  UnzipFiles = true
+})
+
+local Layer = {
+  Identifier = Identifier,
+  Name = Name,
+  Enabled = asset.enabled,
+  ZIndex = 100,
+  Type = "TemporalTileProvider",
+  Mode = "Folder",
+  Folder = {
+    Folder = syncedDirectory .. "4096_new",
+    -- See https://en.cppreference.com/w/cpp/io/manip/get_time for an explanation of the
+    -- time formatting string
+    Format = "ANOM.yearly.%Y.color.png"
+  },
+  Description = Description
+}
+
+local Colorbar = {
+  Identifier = Identifier,
+  Name = Name,
+  Enabled = asset.enabled,
+  Type = "ScreenSpaceImageLocal",
+  TexturePath = syncedDirectory .. "colorbar.png",
+  FaceCamera = false,
+  BackgroundColor = { 1.0, 1.0, 1.0, 1.0 },
+  CartesianPosition = { 0.0, -0.5, -2.0 }
+}
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+  openspace.addScreenSpaceRenderable(Colorbar)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeScreenSpaceRenderable(Colorbar)
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.export(Layer)
+asset.export(Colorbar)
+
+asset.meta = {
+  Name = Name,
+  Description = Description .. "Datos proporcionados por la Administración Nacional Oceánica y Atmosférica",
+  Author = "Administración Nacional Oceánica y Atmosférica",
+  URL = URL,
+  License = "https://sos.noaa.gov/copyright/"
+}

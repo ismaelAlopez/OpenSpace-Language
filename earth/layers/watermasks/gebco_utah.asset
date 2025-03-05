@@ -1,0 +1,27 @@
+local globe = asset.require("../../earth")
+
+local Layer = {
+  Name = "Gebco [Utah]",
+  Identifier = "Gebco_Utah",
+  Enabled = asset.enabled,
+  ZIndex = 10,
+  FilePath = asset.resource("gebco_utah.wms")
+}
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "WaterMasks", Layer)
+end)
+
+asset.onDeinitialize(function()
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "WaterMasks", Layer)
+end)
+
+asset.export("layer", Layer)
+
+asset.meta = {
+  Name = "Capa de WaterMask de Gebco (Utah)",
+  Description = "Capa de WaterMask para el globo terráqueo",
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "MIT license"
+}

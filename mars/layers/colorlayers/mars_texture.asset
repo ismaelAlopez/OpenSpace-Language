@@ -1,0 +1,36 @@
+local globe = asset.require("../../mars")
+
+local texturesPath = asset.resource({
+  Name = "Mars Textures",
+  Type = "HttpSynchronization",
+  Identifier = "mars_textures",
+  Version = 3
+})
+
+local Layer = {
+  Identifier = "Mars_Texture",
+  Name = "Textura de Marte",
+  Enabled = asset.enabled,
+  ZIndex = 5,
+  FilePath = texturesPath .. "mars.png",
+  Description = "Textura jpg predeterminada para Marte",
+  CacheSettings = { Enabled = false }
+}
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Mars.Identifier, "ColorLayers", Layer)
+end)
+
+asset.onDeinitialize(function()
+  openspace.globebrowsing.deleteLayer(globe.Mars.Identifier, "ColorLayers", Layer)
+end)
+
+asset.export("layer", Layer)
+
+asset.meta = {
+  Name = "Textura de Marte",
+  Description = "Textura jpg para Marte, disponible para uso sin conexión",
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "MIT license"
+}

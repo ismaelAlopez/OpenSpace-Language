@@ -1,0 +1,99 @@
+local transforms = asset.require("scene/solarsystem/sun/transforms")
+local coreKernels = asset.require("spice/core")
+
+local EarthBarycenter = {
+  Identifier = "EarthBarycenter",
+  Parent = transforms.SolarSystemBarycenter.Identifier,
+  Transform = {
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = coreKernels.ID.EarthBarycenter,
+      Observer = coreKernels.ID.SolarSystemBarycenter
+    }
+  },
+  GUI = {
+    Name = "Baricentro de la Tierra",
+    Path = "/Sistema Solar/Planetas/Tierra",
+    Hidden = true
+  }
+}
+
+local EarthCenter = {
+  Identifier = "EarthCenter",
+  Parent = EarthBarycenter.Identifier,
+  Transform = {
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = coreKernels.ID.Earth,
+      Observer = coreKernels.ID.EarthBarycenter
+    }
+  },
+  GUI = {
+    Name = "Centro de la Tierra",
+    Path = "/Sistema Solar/Planetas/Tierra",
+    Hidden = true
+  }
+}
+
+local EarthInertial = {
+  -- The default reference frame for Earth-orbiting satellites
+  Identifier = "EarthInertial",
+  Parent = EarthCenter.Identifier,
+  Transform = {
+    Rotation = {
+      Type = "SpiceRotation",
+      SourceFrame = coreKernels.Frame.J2000,
+      DestinationFrame = coreKernels.Frame.Galactic
+    }
+  },
+  GUI = {
+    Name = "Inercial de la Tierra",
+    Path = "/Sistema Solar/Planetas/Tierra",
+    Hidden = true
+  }
+}
+
+local EarthIAU = {
+  Identifier = "EarthIAU",
+  Parent = EarthCenter.Identifier,
+  Transform = {
+    Rotation = {
+      Type = "SpiceRotation",
+      SourceFrame = coreKernels.Frame.Earth,
+      DestinationFrame = coreKernels.Frame.Galactic
+    }
+  },
+  GUI = {
+    Name = "IAU de la Tierra",
+    Path = "/Sistema Solar/Planetas/Tierra",
+    Hidden = true
+  }
+}
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(EarthBarycenter)
+  openspace.addSceneGraphNode(EarthCenter)
+  openspace.addSceneGraphNode(EarthInertial)
+  openspace.addSceneGraphNode(EarthIAU)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(EarthIAU)
+  openspace.removeSceneGraphNode(EarthInertial)
+  openspace.removeSceneGraphNode(EarthCenter)
+  openspace.removeSceneGraphNode(EarthBarycenter)
+end)
+
+asset.export(EarthBarycenter)
+asset.export(EarthCenter)
+asset.export(EarthInertial)
+asset.export(EarthIAU)
+
+asset.meta = {
+  Name = "Transformaciones de la Tierra",
+  Description = [[Transformaciones de la Tierra: Baricentro de la Tierra, Centro de la Tierra, Inercial de la Tierra,
+    IAU de la Tierra. Se crea un nodo de grafo de escena para cada transformación]],
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "MIT license"
+}

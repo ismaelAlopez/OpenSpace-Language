@@ -1,0 +1,49 @@
+local globe = asset.require("../earth")
+
+
+
+local texturesPath = asset.resource({
+  Name = "5000 Years of Total Solar Eclipses",
+  Type = "HttpSynchronization",
+  Identifier = "earth_eclipse_5000_years",
+  Version = 1
+})
+
+
+local Layer = {
+  Identifier = "5000_Years_Eclipses",
+  Name = "5000 Años de Eclipses Solares Totales",
+  Enabled = asset.enabled,
+  ZIndex = 100,
+  FilePath = texturesPath .. "eclipse_freq_heatmap.tif",
+  Description = [[
+Este es un mapa de calor que muestra la densidad de las rutas de los eclipses solares sobre la Tierra durante el período de 5000 años, que abarca desde el 2000 a.C. hasta el 3000 d.C. Utiliza la lista de eclipses calculada por Fred Espenak y Jean Meeus, publicada en 2006 como el "Cánon de Cinco Milenios de Eclipses Solares". Las rutas de los 3742 eclipses clasificados en el Cánon como "T" (total) o "H" (híbrido o total-anular) fueron trazadas en un mapa global con una resolución de píxeles de 4 minutos (1/15 de grado) de latitud y longitud. Los píxeles contaron las rutas de los eclipses a medida que se trazaban, y cada ubicación de píxel terminó experimentando entre uno y 35 eclipses.
+
+Para más información, visita el Estudio de Visualización Científica de la NASA que generó esta imagen: https://svs.gsfc.nasa.gov/5222
+
+Gracias al visualizador Ernie Wright y al soporte técnico Ian Jones y Laurence Schuler por su colaboración.
+
+Consulta también el artículo de Jean Meeus, La Frecuencia de los Eclipses Solares Totales y Anulares para un Lugar Dado, JBAA 92, 3 (abril de 1982), pp. 124-126.
+  ]],
+  CacheSettings = { Enabled = false }
+}
+
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.onDeinitialize(function()
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.export("layer", Layer)
+
+
+asset.meta = {
+  Name = "5000 Años de Eclipses Solares Totales",
+  Description = Layer.Description,
+  Author = "Equipo de OpenSpace",
+  URL = "https://svs.gsfc.nasa.gov/5222",
+  License = "NASA"
+}

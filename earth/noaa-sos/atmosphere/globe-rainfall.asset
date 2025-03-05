@@ -1,0 +1,68 @@
+local globe = asset.require("../../earth")
+
+local Name = "Lluvia Solar - Mensual (NASA)"
+local Identifier = "noaa-sos-atmosphere-globe-rainfall"
+local Description = [[Globalmente, la lluvia es la principal fuente de agua dulce para plantas y
+animales, la lluvia es esencial para la vida en los paisajes de la Tierra. Además de mover
+tremendas cantidades de agua a través de la atmósfera de la Tierra, las nubes de lluvia también mueven
+tremendas cantidades de energía. Cuando el agua se evapora de la superficie y se eleva como vapor en la
+atmósfera, lleva consigo el calor de la superficie calentada por el sol. Más tarde, cuando el vapor de agua
+se condensa para formar gotas de nubes y lluvia, el calor se libera en la
+atmósfera. Este calentamiento es una parte importante del presupuesto energético y del clima de la Tierra]]
+local URL = "https://sos.noaa.gov/catalog/datasets/rainfall-monthly-nasa/"
+
+local syncedDirectory = asset.resource({
+  Name = Name,
+  Type = "HttpSynchronization",
+  Identifier = Identifier,
+  Version = 1,
+  UnzipFiles = true
+})
+
+local Layer = {
+  Identifier = Identifier,
+  Name = Name,
+  Enabled = asset.enabled,
+  ZIndex = 100,
+  Type = "TemporalTileProvider",
+  Mode = "Folder",
+  Folder = {
+    Folder = syncedDirectory .. "1440",
+    -- See https://en.cppreference.com/w/cpp/io/manip/get_time for an explanation of the
+    -- time formatting string
+    Format = "TRMM_3B43M_%Y-%m.PNG"
+  },
+  Description = Description
+}
+
+local Colorbar = {
+  Identifier = Identifier,
+  Name = Name,
+  Enabled = asset.enabled,
+  Type = "ScreenSpaceImageLocal",
+  TexturePath = syncedDirectory .. "colorbar.png",
+  FaceCamera = false,
+  BackgroundColor = { 1.0, 1.0, 1.0, 1.0 },
+  CartesianPosition = { 0.0, -0.5, -2.0 }
+}
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+  openspace.addScreenSpaceRenderable(Colorbar)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeScreenSpaceRenderable(Colorbar)
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.export(Layer)
+asset.export(Colorbar)
+
+asset.meta = {
+  Name = Name,
+  Description = Description .. "Datos proporcionados por la Administración Nacional Oceánica y Atmosférica",
+  Author = "Administración Nacional Oceánica y Atmosférica",
+  URL = URL,
+  License = "https://sos.noaa.gov/copyright/"
+}

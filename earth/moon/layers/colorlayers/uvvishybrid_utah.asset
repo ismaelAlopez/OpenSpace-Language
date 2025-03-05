@@ -1,0 +1,32 @@
+local globe = asset.require("../../moon")
+
+local Layer = {
+  Identifier = "UvvisHybrid_Utah",
+  Name = "Híbrido Uvvis [Utah]",
+  Enabled = asset.enabled,
+  ZIndex = 10,
+  FilePath = asset.resource("uvvishybrid_utah.wms"),
+  Settings = {
+    Gamma = 0.52,
+    Multiplier = 0.65
+  },
+  Description = [[Esta es una mezcla (o superposición) del mosaico Ultravioleta/Visible (UVVIS) V2 del Servicio Geológico de los Estados Unidos (USGS) y el mosaico original del Orbitador Lunar del USGS. El mosaico Clementine 750 nm Versión 2 es un conjunto de datos en escala de grises que representa el albedo (brillo de la superficie lunar) medido a una longitud de onda de 750 nm por la cámara UVVIS. El mapa base original fue radiométricamente y geométricamente controlado, modelado fotométricamente, un mosaico de imágenes global compilado utilizando más de 43,000 imágenes de las observaciones del filtro de 750 nanómetros de la UVVIS (Lee et al., 2009)]]
+}
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Moon.Identifier, "ColorLayers", Layer)
+end)
+
+asset.onDeinitialize(function()
+  openspace.globebrowsing.deleteLayer(globe.Moon.Identifier, "ColorLayers", Layer)
+end)
+
+asset.export("layer", Layer)
+
+asset.meta = {
+  Name = "Híbrido Uvvis [Utah]",
+  Description = [[Mapa híbrido del Orbitador Lunar - Clementine UVVISv2 59m v1 de la Luna. Este mapa está alojado en el servidor de OpenSpace en Utah]],
+  Author = "USGS",
+  URL = "https://astrogeology.usgs.gov/search/map/Moon/Lunar-Orbiter/Lunar_LO_UVVISv2_Hybrid_Mosaic_Global_59m",
+  License = "NASA/PDS"
+}

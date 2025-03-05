@@ -1,0 +1,37 @@
+local globe = asset.require("../../moon")
+
+local Layer = {
+  Identifier = "LolaDem_Utah",
+  Name = "Lola DEM [Utah]",
+  Enabled = asset.enabled,
+  ZIndex = 10,
+  FilePath = asset.resource("loladem_utah.wms"),
+  TilePixelSize = 360,
+  Settings = { Multiplier = 0.5 },
+  Description = [[Este modelo digital de elevación (DEM) se basa en datos del Altímetro
+    Láser del Orbitador Lunar (LOLA; Smith et al., 2010), un instrumento en la nave
+    espacial Lunar Reconnaissance Orbiter (LRO) de la Administración Nacional de
+    Aeronáutica y del Espacio (NASA) (Tooley et al., 2010). El DEM creado representa
+    más de 6.5 mil millones de mediciones recopiladas entre julio de 2009 y julio de
+    2013, ajustadas para consistencia en el sistema de coordenadas descrito a continuación,
+    y luego convertidas a radios lunares (Mazarico et al., 2012)]]
+}
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Moon.Identifier, "HeightLayers", Layer)
+end)
+
+asset.onDeinitialize(function()
+  openspace.globebrowsing.deleteLayer(globe.Moon.Identifier, "HeightLayers", Layer)
+end)
+
+asset.export("layer", Layer)
+
+asset.meta = {
+  Name = "Lola DEM [Utah]",
+  Description = [[Capa de DEM de LOLA de la Luna LRO 118m v1 para el globo lunar. Este
+    mapa está alojado en el servidor de OpenSpace en Utah]],
+  Author = "USGS",
+  URL = "https://astrogeology.usgs.gov/search/map/Moon/LRO/LOLA/Lunar_LRO_LOLA_Global_LDEM_118m_Mar2014",
+  License = "NASA/PDS"
+}

@@ -1,0 +1,25 @@
+asset.require("./base_layers")
+asset.require("./colorlayers/messenger_mdis_utah", false)
+asset.require("./colorlayers/messenger_mosaic_utah", false)
+asset.require("./colorlayers/messenger_mosaic2_utah", false)
+asset.require("./colorlayers/messenger_bdr_utah", asset.enabled)
+asset.require("./colorlayers/messenger_hie_utah", false)
+asset.require("./colorlayers/messenger_hiw_utah", false)
+asset.require("./colorlayers/messenger_loi_utah", false)
+asset.require("./colorlayers/messenger_shade_utah", false)
+asset.require("./colorlayers/messenger_mdr_utah", false)
+asset.require("./colorlayers/messenger_mp3_utah", false)
+
+asset.meta = {
+  Name = "Capas Predeterminadas de Mercurio (Utah)",
+  Description = [[Las capas predeterminadas de Mercurio son: Abundancia de Aluminio, Abundancia de Calcio,
+    Abundancia de Hierro, Abundancia de Magnesio, Abundancia de Silicio, Mensajero MDIS,
+    Mensajero Mosaic, Mensajero Mosaic2, Mensajero BDR, Mensajero HIE, Mensajero HIW,
+    Mensajero LOI, Mensajero SHADE, Mensajero MDR, Mensajero MP3, y Mensajero DEM (3D).
+
+    Capas cargadas solo desde el servidor de Utah
+  ]],
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "MIT license"
+}

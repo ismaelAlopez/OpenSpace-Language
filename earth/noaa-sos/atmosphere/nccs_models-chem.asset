@@ -1,0 +1,62 @@
+local globe = asset.require("../../earth")
+
+local Name = "Química Atmosférica: Modelo GEOS-5"
+local Identifier = "noaa-sos-atmosphere-nccs_models-chem"
+local Description = [[Los modelos crean un retrato dinámico de la Tierra a través de experimentos numéricos que simulan nuestro conocimiento actual de los procesos dinámicos y físicos que gobiernan la variabilidad del clima y el tiempo. La simulación visualizada aquí captura cómo los vientos levantan aerosoles de la superficie de la Tierra y los transportan alrededor del globo durante el período del 1 de septiembre de 2006 al 17 de marzo de 2007. Tales simulaciones permiten a los científicos identificar las fuentes y rutas de estas diminutas partículas que influyen en el clima y el tiempo]]
+local URL = "https://sos.noaa.gov/catalog/datasets/atmospheric-chemistry-geos-5-model/"
+
+local syncedDirectory = asset.resource({
+  Name = Name,
+  Type = "HttpSynchronization",
+  Identifier = Identifier,
+  Version = 1,
+  UnzipFiles = true,
+  UnzipFilesDestination = "images"
+})
+
+local Layer = {
+  Identifier = Identifier,
+  Name = Name,
+  Enabled = asset.enabled,
+  ZIndex = 100,
+  Type = "TemporalTileProvider",
+  Mode = "Folder",
+  Folder = {
+    Folder = syncedDirectory .. "images",
+    -- See https://en.cppreference.com/w/cpp/io/manip/get_time for an explanation of the
+    -- time formatting string
+    Format = "chem_%Y-%m-%d_%H-%M.png"
+  },
+  Description = Description
+}
+
+local Legend = {
+  Identifier = Identifier,
+  Name = Name,
+  Enabled = asset.enabled,
+  Type = "ScreenSpaceImageLocal",
+  TexturePath = syncedDirectory .. "geos-5-legend.jpg",
+  FaceCamera = false,
+  CartesianPosition = { 0.0, -0.5, -2.0 }
+}
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+  openspace.addScreenSpaceRenderable(Legend)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeScreenSpaceRenderable(Legend)
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.export(Layer)
+asset.export(Legend)
+
+asset.meta = {
+  Name = Name,
+  Description = Description .. "Datos proporcionados por la Administración Nacional Oceánica y Atmosférica",
+  Author = "Administración Nacional Oceánica y Atmosférica",
+  URL = URL,
+  License = "https://sos.noaa.gov/copyright/"
+}

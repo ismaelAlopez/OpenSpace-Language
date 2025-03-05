@@ -1,0 +1,21 @@
+asset.require("./colorlayers/mars_texture", false)
+asset.require("./colorlayers/ctx_blended", false)
+asset.require("./colorlayers/hirise", false)
+asset.require("./colorlayers/hirisels", false)
+
+asset.require("./heightlayers/mdem200m", asset.enabled)
+asset.require("./heightlayers/hirisels", false)
+
+asset.require("./overlays/indices", false)
+asset.require("./overlays/size_reference", false)
+
+asset.meta = {
+  Name = "Capas Base de Marte",
+  Description = [[Las capas base de Marte son: Textura de Marte, CTX Blended, HiRISE,
+    Conjunto Local de HiRISE, MDEM200M (3D), DEM del Conjunto Local de HiRISE (3D), Índices de Mosaico,
+    y Referencia de Tamaño.
+  ]],
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "MIT license"
+}

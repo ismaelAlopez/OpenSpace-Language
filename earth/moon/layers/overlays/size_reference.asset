@@ -1,0 +1,27 @@
+local globe = asset.require("../../moon")
+
+local Layer = {
+  Identifier = "Size_Reference",
+  Name = "Referencia de Tamaño",
+  Enabled = asset.enabled,
+  Type = "SizeReferenceTileProvider",
+  Radii = globe.Moon.Renderable.Radii
+}
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Moon.Identifier, "Overlays", Layer)
+end)
+
+asset.onDeinitialize(function()
+  openspace.globebrowsing.deleteLayer(globe.Moon.Identifier, "Overlays", Layer)
+end)
+
+asset.export("layer", Layer)
+
+asset.meta = {
+  Name = "Referencia de Tamaño de la Luna",
+  Description = "Capa de referencia de tamaño para el globo lunar",
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "MIT license"
+}

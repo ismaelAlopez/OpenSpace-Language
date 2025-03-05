@@ -1,0 +1,54 @@
+local globe = asset.require("../../earth")
+
+local Name = "Temperatura de la Superficie Terrestre - 1950 - 1999"
+local Identifier = "noaa-sos-atmosphere-land_temp"
+local Description = [[La temperatura del aire varía dramáticamente tanto en el tiempo como
+en el espacio. Debido a que el eje de rotación de la Tierra tiene una inclinación de 23°,
+el Hemisferio Norte y el Hemisferio Sur experimentan simultáneamente estaciones opuestas.
+Este conjunto de datos muestra la temperatura del aire terrestre mensual y gridded desde
+1950 hasta 1999. Los datos originales provienen de la Red de Climatología Histórica Global,
+que es parte del Centro Nacional de Datos Climáticos de NOAA. Los datos fueron interpolados
+por el Centro de Investigación Climática de la Universidad de Delaware]]
+local URL = "https://sos.noaa.gov/catalog/datasets/international-space-station-track/"
+
+local syncedDirectory = asset.resource({
+  Name = Name,
+  Type = "HttpSynchronization",
+  Identifier = Identifier,
+  Version = 1,
+  UnzipFiles = true
+})
+
+local Layer = {
+  Identifier = Identifier,
+  Name = Name,
+  Enabled = asset.enabled,
+  Type = "TemporalTileProvider",
+  ZIndex = 100,
+  Mode = "Folder",
+  Folder = {
+    Folder = syncedDirectory .. "4096",
+    -- See https://en.cppreference.com/w/cpp/io/manip/get_time for an explanation of the
+    -- time formatting string
+    Format = "cyl_%Y_%m.jpg"
+  },
+  Description = Description
+}
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.onDeinitialize(function()
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.export(Layer)
+
+asset.meta = {
+  Name = Name,
+  Description = Description .. "Datos proporcionados por la Administración Nacional Oceánica y Atmosférica",
+  Author = "Administración Nacional Oceánica y Atmosférica",
+  URL = URL,
+  License = "https://sos.noaa.gov/copyright/"
+}

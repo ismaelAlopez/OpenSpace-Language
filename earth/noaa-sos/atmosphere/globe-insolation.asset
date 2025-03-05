@@ -1,0 +1,69 @@
+local globe = asset.require("../../earth")
+
+local Name = "Insolación Solar - Mensual (NASA)"
+local Identifier = "noaa-sos-atmosphere-globe-insolation"
+local Description = [[Estos mapas muestran dónde y cuánta luz solar cayó sobre la
+superficie de la Tierra durante cada mes de 2018. Los científicos llaman a esta medida
+insolación solar. Saber cuánta energía del Sol llega a la superficie ayuda a los científicos
+a entender los patrones del clima y el tiempo, así como los patrones de crecimiento de
+plantas en nuestro mundo. Los mapas de insolación solar también son útiles para los
+ingenieros que diseñan paneles solares y baterías diseñadas para convertir la energía del
+Sol en electricidad para alimentar los electrodomésticos en nuestros hogares y lugares de
+trabajo]]
+local URL = "https://sos.noaa.gov/catalog/datasets/solar-insolation-monthly-nasa/"
+
+local syncedDirectory = asset.resource({
+  Name = Name,
+  Type = "HttpSynchronization",
+  Identifier = Identifier,
+  Version = 1,
+  UnzipFiles = true
+})
+
+local Layer = {
+  Identifier = Identifier,
+  Name = Name,
+  Enabled = asset.enabled,
+  ZIndex = 100,
+  Type = "TemporalTileProvider",
+  Mode = "Folder",
+  Folder = {
+    Folder = syncedDirectory .. "1440",
+    -- See https://en.cppreference.com/w/cpp/io/manip/get_time for an explanation of the
+    -- time formatting string
+    Format = "CERES_INSOL_M_%Y-%m.PNG"
+  },
+  Description = Description
+}
+
+local Colorbar = {
+  Identifier = Identifier,
+  Name = Name,
+  Enabled = asset.enabled,
+  Type = "ScreenSpaceImageLocal",
+  TexturePath = syncedDirectory .. "colorbar.png",
+  FaceCamera = false,
+  BackgroundColor = { 1.0, 1.0, 1.0, 1.0 },
+  CartesianPosition = { 0.0, -0.5, -2.0 }
+}
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+  openspace.addScreenSpaceRenderable(Colorbar)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeScreenSpaceRenderable(Colorbar)
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.export(Layer)
+asset.export(Colorbar)
+
+asset.meta = {
+  Name = Name,
+  Description = Description .. "Datos proporcionados por la Administración Nacional Oceánica y Atmosférica",
+  Author = "Administración Nacional Oceánica y Atmosférica",
+  URL = URL,
+  License = "https://sos.noaa.gov/copyright/"
+}

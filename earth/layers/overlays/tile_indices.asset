@@ -1,0 +1,26 @@
+local globe = asset.require("../../earth")
+
+local Layer = {
+  Identifier = "Tile_Indices",
+  Name = "Índices de Teselas",
+  Enabled = asset.enabled,
+  Type = "TileIndexTileProvider"
+}
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "Overlays", Layer)
+end)
+
+asset.onDeinitialize(function()
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "Overlays", Layer)
+end)
+
+asset.export("layer", Layer)
+
+asset.meta = {
+  Name = "Índices de Teselas de la Tierra",
+  Description = "Capa de índice de teselas para el globo terráqueo",
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "MIT license"
+}

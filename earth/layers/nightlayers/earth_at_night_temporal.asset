@@ -1,0 +1,51 @@
+local globe = asset.require("../../earth")
+
+local Layer = {
+  Identifier = "Earth_at_Night_Temporal",
+  Name = "La Tierra de Noche (Temporal)",
+  Enabled = asset.enabled,
+  ZIndex = 20,
+  Type = "TemporalTileProvider",
+  Mode = "Prototyped",
+  Prototyped = {
+    Time = {
+      Start = "2012-05-08",
+      End = "Yesterday"
+    },
+    TemporalResolution = "1d",
+    TimeFormat = "YYYY-MM-DD",
+    Prototype = openspace.globebrowsing.createTemporalGibsGdalXml(
+      "VIIRS_SNPP_DayNightBand_ENCC",
+      "500m",
+      "png"
+    )
+  },
+  Description = [[La Imaginería Nocturna de VIIRS (Banda Día/Noche, Contraste Casi Constante Mejorado) muestra la superficie y la atmósfera de la Tierra 
+  utilizando un sensor diseñado para capturar fuentes de emisión de luz baja, bajo condiciones de iluminación variables. Se muestra como una imagen en escala de grises. 
+  Las fuentes de iluminación incluyen tanto fuentes naturales como antropogénicas de emisiones de luz. 
+  La reflexión lunar puede usarse para resaltar la ubicación y las características de las nubes y otras características terrestres como el hielo marino y la cubierta de nieve 
+  cuando hay condiciones de luna parcial a llena. Cuando no hay luz de luna, se destacan las emisiones de luz nocturna naturales y antropogénicas como las luces de la ciudad, 
+  los relámpagos, las auroras, los incendios, las llamaradas de gas y las flotas pesqueras. Esta capa es útil para mostrar patrones de actividad humana y comportamientos 
+  energéticos como ciudades y carreteras, los períodos de vacaciones, el seguimiento de flotas de pesca y envío por la noche y, la quema de gas natural residual 
+  (llamaradas de gas) de sitios de producción de petróleo/gas en tierra y en alta mar. <br><br>La Imaginería Nocturna de VIIRS (Banda Día/Noche, Contraste Casi Constante Mejorado) 
+  está disponible desde el Conjunto de Radiómetros de Imágenes Infrarrojas Visibles (VIIRS) en el satélite conjunto NASA/NOAA Suomi National Polar orbiting Partnership (Suomi NPP).
+  La resolución del sensor es de 750 m en el nadir, la resolución de la imagen es de 500 m, y la resolución temporal es diaria. (Descripción de NASA Worldview)]]
+}
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "NightLayers", Layer)
+end)
+
+asset.onDeinitialize(function()
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "NightLayers", Layer)
+end)
+
+asset.export("layer", Layer)
+
+asset.meta = {
+  Name = "La Tierra de Noche (Temporal)",
+  Description = "Capa temporal para la Tierra con imagen nocturna diaria",
+  Author = "Equipo de OpenSpace",
+  URL = "https://worldview.earthdata.nasa.gov/?l=VIIRS_SNPP_DayNightBand_ENCC",
+  License = "NASA"
+}

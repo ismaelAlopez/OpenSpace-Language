@@ -1,0 +1,28 @@
+local globe = asset.require("../../earth")
+
+local Layer = {
+  Identifier = "MODIS_Water_Mask",
+  Name = "Máscara de Agua MODIS",
+  Enabled = asset.enabled,
+  ZIndex = 20,
+  FilePath = asset.resource("modis_water_mask.wms")
+}
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "WaterMasks", Layer)
+end)
+
+asset.onDeinitialize(function()
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "WaterMasks", Layer)
+end)
+
+asset.export("layer", Layer)
+
+asset.meta = {
+  Name = "Máscara de Agua MODIS",
+  Description = "Capa de Máscara de Agua MODIS para el globo terrestre",
+  Autor = "Servicios de Navegación de Imágenes Globales de NASA EOSDIS",
+  URL = "https://earthdata.nasa.gov/eosdis/science-system-description/"..
+    "eosdis-components/gibs",
+  License = "NASA"
+}

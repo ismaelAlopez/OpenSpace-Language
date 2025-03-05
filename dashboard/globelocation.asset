@@ -1,0 +1,23 @@
+local Item = {
+  Type = "DashboardItemGlobeLocation",
+  Identifier = "GlobeLocation",
+  GuiName = "Ubicación del Globo"
+}
+
+asset.onInitialize(function()
+  openspace.dashboard.addDashboardItem(Item)
+end)
+
+asset.onDeinitialize(function()
+  openspace.dashboard.removeDashboardItem(Item)
+end)
+
+asset.export(Item)
+
+asset.meta = {
+  Name = "Tablero - Ubicación del Globo",
+  Description = "Este recurso proporciona un elemento de tablero de Ubicación del Globo",
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "Licencia MIT"
+}

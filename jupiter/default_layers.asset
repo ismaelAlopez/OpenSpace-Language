@@ -1,0 +1,9 @@
+asset.require("./layers/colorlayers/jupiter_texture", true)
+
+asset.meta = {
+  Name = "Capas Predeterminadas de Júpiter",
+  Description = "Las capas predeterminadas de Júpiter son: Textura de Júpiter",
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "MIT license"
+}

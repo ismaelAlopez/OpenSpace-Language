@@ -1,0 +1,36 @@
+local kernels = asset.resource({
+  Name = "Neptune Spice Kernels",
+  Type = "HttpSynchronization",
+  Identifier = "neptune_kernels",
+  Version = 2
+})
+
+
+local ID = {
+  Halimede = "HALIMEDE",
+  Laomedeia = "LAOMEDEIA",
+  Psamathe = "PSAMATHE",
+  Sao = "SAO",
+  Neso = "NESO"
+}
+
+
+asset.onInitialize(function()
+  openspace.spice.loadKernel(kernels .. "nep102.bsp")
+end)
+
+asset.onDeinitialize(function()
+  openspace.spice.unloadKernel(kernels .. "nep102.bsp")
+end)
+
+asset.export("ID", ID)
+
+
+
+asset.meta = {
+  Name = "Kernels de Especias de Neptuno",
+  Description = "Kernels SPICE genéricos para Neptuno",
+  Author = "Equipo de OpenSpace",
+  URL = "https://naif.jpl.nasa.gov/pub/naif/pds/wgc/kernels/spk/",
+  License = "NASA"
+}

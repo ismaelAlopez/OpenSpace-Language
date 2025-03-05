@@ -1,0 +1,24 @@
+local Item = {
+  Type = "DashboardItemSimulationIncrement",
+  Identifier = "SimulationIncrement",
+  GuiName = "Incremento de Simulación"
+}
+
+asset.onInitialize(function()
+  openspace.dashboard.addDashboardItem(Item)
+end)
+
+asset.onDeinitialize(function()
+  openspace.dashboard.removeDashboardItem(Item)
+end)
+
+asset.export(Item)
+
+asset.meta = {
+  Name = "Dashboard - Incremento de Simulación",
+  Description = [[Este recurso proporciona un elemento de panel que muestra el incremento
+    de simulación, lo que significa cuán rápido progresa el tiempo en el juego en relación con el reloj de pared]],
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "MIT license"
+}

@@ -1,0 +1,37 @@
+local globe = asset.require("../../earth")
+
+
+
+local Layer = {
+  Identifier = "Terrain_tileset",
+  Name = "Conjunto de baldosas de terreno",
+  Enabled = asset.enabled,
+  ZIndex = 10,
+  FilePath = asset.resource("terrain_tileset.wms"),
+  TilePixelSize = 129,
+  Description = [[Esta capa del globo presenta datos de elevación con una resolución de aproximadamente 90 m o 1 km por píxel para el mundo. 
+                  Los datos de elevación incluyen datos de elevación SRTM (Shuttle Radar Topography Mission) de 90 m de la NASA y la Agencia 
+                  Nacional de Inteligencia Geoespacial (NGA), donde están disponibles, y datos de 1 km de GTOPO30 del USGS en otras áreas. 
+                  Las unidades verticales se miden en metros.]]
+}
+
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "HeightLayers", Layer)
+end)
+
+asset.onDeinitialize(function()
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "HeightLayers", Layer)
+end)
+
+asset.export("layer", Layer)
+
+
+
+asset.meta = {
+  Name = "Elevación Mundial (3D)",
+  Description = "Capa principal de altura cargada en la web para la Tierra. Esta capa está alojada por ESRI.",
+  Author = "ESRI",
+  URL = "https://www.arcgis.com/home/item.html?id=1b48cd3b6276416784fe90a68c580a89",
+  License = "Esri Master License Agreement"
+}

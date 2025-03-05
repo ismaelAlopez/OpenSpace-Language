@@ -1,0 +1,41 @@
+local globe = asset.require("../../mars")
+
+local Layer = {
+  Identifier = "HiRISE-LS-DEM",
+  Name = "HiRISE Conjunto Local DEM",
+  Enabled = asset.enabled,
+  ZIndex = 50,
+  FilePath = asset.resource("hirisels.wms"),
+  TilePixelSize = 129,
+  Description = [[HiRISE (High Resolution Imaging Science Experiment) es la cámara más
+    poderosa jamás enviada a otro planeta, uno de los seis instrumentos a bordo del
+    Mars Reconnaissance Orbiter. Lanzamos en 2005, llegamos a Marte en 2006 y hemos
+    estado tomando imágenes desde entonces. La capacidad de alta resolución de nuestra
+    cámara (imágenes de hasta 30 centímetros por píxel) sigue siendo sin precedentes
+    para cualquier orbitador existente en el estudio del Planeta Rojo, además de ser
+    un instrumento indispensable para ayudar a seleccionar sitios de aterrizaje para
+    la exploración robótica y humana futura. En la última década, también hemos
+    capturado avalanchas en progreso y descubierto flujos oscuros que pueden o no ser
+    filtraciones salinas. Cientos de artículos científicos se han publicado con
+    nuestros datos. (Descripción de URL). Este mapa contiene un subconjunto del DEM de
+    HiRISE donde está disponible a partir de 2018]]
+}
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Mars.Identifier, "HeightLayers", Layer)
+end)
+
+asset.onDeinitialize(function()
+  openspace.globebrowsing.deleteLayer(globe.Mars.Identifier, "HeightLayers", Layer)
+end)
+
+asset.export("layer", Layer)
+
+asset.meta = {
+  Name = "HiRISE Conjunto Local DEM",
+  Description = [[Capa DEM de HiRISE para el correspondiente conjunto local de imágenes.
+    Este mapa está alojado por ESRI]],
+  Author = "USGS",
+  URL = "https://www.uahirise.org",
+  License = "Esri Master License Agreement"
+}

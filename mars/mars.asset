@@ -1,0 +1,110 @@
+asset.require("./trail")
+local transforms = asset.require("./transforms")
+local coreKernels = asset.require("spice/core")
+
+
+
+local labelsPath = asset.resource({
+  Name = "Mars Labels",
+  Type = "HttpSynchronization",
+  Identifier = "mars_labels",
+  Version = 1
+})
+
+
+-- local MarsRadii = { 3396190.0, 3396190.0, 3376200.0 }
+local MarsRadii = { 3396190.0, 3396190.0, 3396190.0 }
+
+local Mars = {
+  Identifier = "Mars",
+  Parent = transforms.MarsBarycenter.Identifier,
+  Transform = {
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = coreKernels.ID.Mars,
+      Observer = coreKernels.ID.MarsBarycenter
+    },
+    Rotation = {
+      Type = "SpiceRotation",
+      SourceFrame = coreKernels.Frame.Mars,
+      DestinationFrame = coreKernels.Frame.Galactic
+    }
+  },
+  Renderable = {
+    Type = "RenderableGlobe",
+    Radii = MarsRadii,
+    Labels = {
+      Enabled = false,
+      FileName = labelsPath .. "mars.labels",
+      AlignmentOption = "Horizontally", -- or Circularly
+      FontSize = 20.0,
+      Size = 8.7,
+      FadeInEnabled = true,
+      FadeOutEnabled = true,
+      FadeDistances = { 750000.0, 2000000.0 },
+      DistanceEPS = 2500000.0,
+      Color = { 1.0, 1.0, 0.0 }
+    }
+  },
+  Tag = { "planet_solarSystem", "planet_terrestrial" },
+  GUI = {
+    Name = "Marte",
+    Path = "/Sistema Solar/Planetas/Marte",
+    Description = "Globo principal de Marte con etiquetas y capas de mapa"
+  }
+}
+
+local MarsLabel = {
+  Identifier = "MarsLabel",
+  Parent = Mars.Identifier,
+  Renderable = {
+    Type = "RenderableLabel",
+    Enabled = false,
+    Text = "Marte",
+    FontSize = 70.0,
+    Size = 8.50,
+    MinMaxSize = { 1, 50 },
+    OrientationOption = "Camera View Direction",
+    BlendMode = "Additive",
+    TransformationMatrix = {
+      1.0, 0.0, 0.0, -8.0E6,
+      0.0, 1.0, 0.0, 0.0,
+      0.0, 0.0, 1.0, 1.0E7,
+      0.0, 0.0, 0.0, 1.0
+    },
+    EnableFading = true,
+    FadeUnit = "au",
+    FadeDistances = { 1.5, 40.0 },
+    FadeWidths = { 1.0, 50.0 }
+  },
+  Tag = { "solarsystem_labels" },
+  GUI = {
+    Name = "Etiqueta de Marte",
+    Path = "/Sistema Solar/Planetas/Marte",
+    Description = "Etiqueta principal de Marte"
+  }
+}
+
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(Mars)
+  openspace.addSceneGraphNode(MarsLabel)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(MarsLabel)
+  openspace.removeSceneGraphNode(Mars)
+end)
+
+asset.export(Mars)
+asset.export(MarsLabel)
+
+
+
+asset.meta = {
+  Name = "Marte",
+  Description = "Globo de Marte, y etiqueta principal del globo",
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "MIT license"
+}

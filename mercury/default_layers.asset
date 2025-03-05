@@ -1,0 +1,18 @@
+asset.require("./layers/base_layers", true)
+asset.require("./layers/utah_layers", true)
+asset.require("./layers/sweden_layers", false)
+asset.require("./layers/newyork_layers", false)
+
+asset.meta = {
+  Name = "Capas Predeterminadas de Mercurio",
+  Description = [[Las capas predeterminadas de Mercurio son: Abundancia de Aluminio, Abundancia de Calcio,
+    Abundancia de Hierro, Abundancia de Magnesio, Abundancia de Silicio, Messenger MDIS,
+    Mosaico de Messenger, Mosaico2 de Messenger, BDR de Messenger, HIE de Messenger, HIW de Messenger,
+    LOI de Messenger, SOMBRA de Messenger, MDR de Messenger, MP3 de Messenger, y DEM de Messenger (3D).
+
+    Capas cargadas desde todos los servidores
+  ]],
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "MIT license"
+}

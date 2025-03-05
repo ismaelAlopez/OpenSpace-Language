@@ -1,0 +1,42 @@
+local transforms = asset.require("../transforms")
+local kernels = asset.require("../kernels")
+local coreKernels = asset.require("spice/core")
+
+local CallistoTrail = {
+  Identifier = "CallistoTrail",
+  Parent = transforms.JupiterBarycenter.Identifier,
+  Renderable = {
+    Type = "RenderableTrailOrbit",
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels.ID.Callisto,
+      Observer = coreKernels.ID.JupiterBarycenter
+    },
+    Color = { 0.4, 0.3, 0.01 },
+    Period = 17.0,
+    Resolution = 1000
+  },
+  Tag = { "moonTrail_solarSystem", "moonTrail_giants", "moonTrail_jupiter", "moonTrail_major_jupiter" },
+  GUI = {
+    Name = "Rastro de Calisto",
+    Path = "/Sistema Solar/Planetas/Júpiter/Lunas Principales/Calisto"
+  }
+}
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(CallistoTrail)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(CallistoTrail)
+end)
+
+asset.export(CallistoTrail)
+
+asset.meta = {
+  Name = "Rastro de Calisto",
+  Description = "Rastro de Calisto observado por Júpiter",
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "MIT license"
+}

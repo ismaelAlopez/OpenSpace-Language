@@ -1,0 +1,57 @@
+local globe = asset.require("../../earth")
+
+local Name = "Agua Precipitable - Expedición Antártica - 1902 - 1903"
+local Identifier = "noaa-sos-atmosphere-reanalysis-antarctic"
+local Description = [[Hasta 2010, la estimación globalmente completa más larga de la
+circulación atmosférica en cuatro dimensiones provino de un conjunto de datos producido conjuntamente por los Centros Nacionales de Predicción Ambiental de NOAA y el Centro Nacional de Investigación Atmosférica: el Reanálisis NCEP-NCAR. Este conjunto de datos de reconstrucciones de mapas meteorológicos generados por computadora o "reanálisis" comienza en 1948, dejando muchos eventos climáticos importantes como la sequía del Dust Bowl de la década de 1930 sin cubrir. Para expandir la cobertura de los reanálisis globales en cuadrícula, el Proyecto de Reanálisis del Siglo XX es un esfuerzo liderado por la División de Ciencias Físicas del Laboratorio de Investigación del Sistema Terrestre de NOAA y el Centro de Diagnóstico Climático CIRES de la Universidad de Colorado para producir un conjunto de datos de reanálisis que abarque todo el siglo XX, asimilando solo observaciones superficiales de presión sinóptica, temperatura mensual de la superficie del mar y distribución del hielo marino. Las observaciones de presión se han reunido a través de la cooperación internacional bajo los auspicios de la iniciativa de Reconstrucciones de la Circulación Atmosférica sobre la Tierra, ACRE, y grupos de trabajo del Sistema Global de Observación del Clima y el Programa Mundial de Investigación del Clima. El Proyecto utiliza un método de asimilación de datos de Filtro de Conjunto recientemente desarrollado que produce directamente cada campo de reanálisis de seis horas o mapa meteorológico como el estado más probable de la atmósfera global, y también estima la incertidumbre en ese mapa. Este conjunto de datos proporcionará las primeras estimaciones de la variabilidad troposférica global que abarcan desde 1871 hasta el presente con una resolución temporal de seis horas y una resolución de 2 grados de longitud por 2 grados de latitud]]
+local URL = "https://sos.noaa.gov/catalog/datasets/precipitable-water-antarctic-expedition-1902-1903/"
+
+local syncedDirectory = asset.resource({
+  Name = Name,
+  Type = "HttpSynchronization",
+  Identifier = Identifier,
+  Version = 1,
+  UnzipFiles = true
+})
+
+local Layer = {
+  Identifier = Identifier,
+  Name = Name,
+  Enabled = asset.enabled,
+  ZIndex = 100,
+  Type = "ImageSequenceTileProvider",
+  FolderPath = syncedDirectory .. "2048",
+  Description = Description
+}
+
+local Colorbar = {
+  Identifier = Identifier,
+  Name = Name,
+  Enabled = asset.enabled,
+  Type = "ScreenSpaceImageLocal",
+  TexturePath = syncedDirectory .. "colorbar.png",
+  FaceCamera = false,
+  BackgroundColor = { 1.0, 1.0, 1.0, 1.0 },
+  CartesianPosition = { 0.0, -0.5, -2.0 }
+}
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+  openspace.addScreenSpaceRenderable(Colorbar)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeScreenSpaceRenderable(Colorbar)
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.export(Layer)
+asset.export(Colorbar)
+
+asset.meta = {
+  Name = Name,
+  Description = Description .. "Datos proporcionados por la Administración Nacional Oceánica y Atmosférica",
+  Author = "Administración Nacional Oceánica y Atmosférica",
+  URL = URL,
+  License = "https://sos.noaa.gov/copyright/"
+}

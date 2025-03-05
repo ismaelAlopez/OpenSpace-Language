@@ -1,0 +1,61 @@
+local globe = asset.require("../../earth")
+
+local Name = "Modelo de Dispersión de Aerosoles Radiactivos de Fukushima"
+local Identifier = "noaa-sos-atmosphere-fukushima"
+local Description = [[El modelo Híbrido de Trayectoria Integrada de Partículas Individuales
+(HYSPLIT) fue desarrollado por NOAA para seguir el transporte y dispersión de
+contaminantes en la atmósfera. En HYSPLIT, el cálculo se compone de cuatro componentes:
+transporte por el viento medio, dispersión turbulenta, eliminación y decaimiento. Un gran número de
+partículas contaminantes, que por convención se llaman "partículas" pero son solo
+"puntos" computacionales (partículas o gases), se liberan en la ubicación de la fuente y
+siguen pasivamente el viento]]
+local URL = "https://sos.noaa.gov/catalog/datasets/fukushima-radioactive-aerosol-dispersion-model/"
+
+local syncedDirectory = asset.resource({
+  Name = Name,
+  Type = "HttpSynchronization",
+  Identifier = Identifier,
+  Version = 1,
+  UnzipFiles = true
+})
+
+local Layer = {
+  Identifier = Identifier,
+  Name = Name,
+  Enabled = asset.enabled,
+  ZIndex = 100,
+  Type = "ImageSequenceTileProvider",
+  FolderPath = syncedDirectory .. "2054",
+  Description = Description
+}
+
+local Colorbar = {
+  Identifier = Identifier,
+  Name = Name,
+  Enabled = asset.enabled,
+  Type = "ScreenSpaceImageLocal",
+  TexturePath = syncedDirectory .. "colorbar.png",
+  FaceCamera = false,
+  CartesianPosition = { 0.0, -0.5, -2.0 }
+}
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+  openspace.addScreenSpaceRenderable(Colorbar)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeScreenSpaceRenderable(Colorbar)
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.export(Layer)
+asset.export(Colorbar)
+
+asset.meta = {
+  Name = Name,
+  Description = Description .. "Datos proporcionados por la Administración Nacional Oceánica y Atmosférica",
+  Author = "Administración Nacional Oceánica y Atmosférica",
+  URL = URL,
+  License = "https://sos.noaa.gov/copyright/"
+}

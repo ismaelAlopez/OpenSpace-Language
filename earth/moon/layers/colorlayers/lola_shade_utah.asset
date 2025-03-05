@@ -1,0 +1,36 @@
+local globe = asset.require("../../moon")
+
+local Layer = {
+  Identifier = "Lola_Shade_Utah",
+  Name = "Sombra de Lola [Utah]",
+  Enabled = asset.enabled,
+  ZIndex = 100,
+  FilePath = asset.resource("lola_shade_utah.wms"),
+  Description = [[Este es un relieve sombreado de un modelo digital de elevación polar
+    (DEM) original del Altímetro Láser Orbital Lunar (LOLA; Smith et al., 2010), un instrumento
+    en la nave espacial Lunar Reconnaissance Orbiter (LRO) de la Administración Nacional de Aeronáutica y del Espacio (NASA)
+    (Tooley et al., 2010). El DEM es un mapa de forma (radio) de la Luna a una
+    resolución de 100 metros por píxel (m) basado en datos de altimetría adquiridos hasta septiembre,
+    2011 por el instrumento LOLA. Las trayectorias terrestres fueron interpoladas utilizando los programas de Generic
+    Mapping Tools "surface" y "grdblend". Los valores del mapa se refieren a un radio
+    de 1,737,400 m]]
+}
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Moon.Identifier, "ColorLayers", Layer)
+end)
+
+asset.onDeinitialize(function()
+  openspace.globebrowsing.deleteLayer(globe.Moon.Identifier, "ColorLayers", Layer)
+end)
+
+asset.export("layer", Layer)
+
+asset.meta = {
+  Name = "Sombra de Lola [Utah]",
+  Description = [[Capa de relieve sombreado de LOLA del LRO de la Luna a 237m v4 para el globo lunar. Este
+    mapa está alojado en el servidor de OpenSpace en Utah]],
+  Author = "USGS",
+  URL = "https://astrogeology.usgs.gov/search/map/Moon/LMMP/LOLA-derived/Lunar_LRO_LOLA_Shade_Global_128ppd_v04",
+  License = "NASA/PDS"
+}

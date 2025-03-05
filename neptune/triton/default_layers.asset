@@ -1,0 +1,10 @@
+asset.require("./layers/colorlayers/triton_voyager2_clrmosaic_globalfill_600m", true)
+
+
+asset.meta = {
+  Name = "Capas Predeterminadas de Tritón",
+  Description = "Las capas predeterminadas de Tritón son: Mosaico Voyager2",
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "MIT license"
+}

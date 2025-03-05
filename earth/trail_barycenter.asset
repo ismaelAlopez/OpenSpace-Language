@@ -1,0 +1,47 @@
+local transforms = asset.require("scene/solarsystem/sun/transforms")
+local coreKernels = asset.require("spice/core")
+
+
+
+local EarthBarycenterTrail = {
+  Identifier = "EarthBarycenterTrail",
+  Parent = transforms.SolarSystemBarycenter.Identifier,
+  Renderable = {
+    Type = "RenderableTrailOrbit",
+    Enabled = false,
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = coreKernels.ID.EarthBarycenter,
+      Observer = coreKernels.ID.SolarSystemBarycenter
+    },
+    Color = { 0.5, 0.8, 1.0 },
+    Period = 365.242,
+    Resolution = 1000
+  },
+  Tag = { "planetTrail_solarSystem", "planetTrail_terrestrial" },
+  GUI = {
+    Name = "Rastro del Baricentro de la Tierra",
+    Path = "Sistema Solar/Planetas/Tierra"
+  }
+}
+
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(EarthBarycenterTrail)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(EarthBarycenterTrail)
+end)
+
+asset.export(EarthBarycenterTrail)
+
+
+
+asset.meta = {
+  Name = "Rastro de la Tierra",
+  Description = "Rastro del Baricentro de la Tierra observado por el Sol",
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "MIT license"
+}

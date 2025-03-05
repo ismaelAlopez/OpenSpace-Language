@@ -1,0 +1,28 @@
+local globe = asset.require("../../mercury")
+
+local Layer = {
+  Identifier = "Messenger_MP3_Utah",
+  Name = "Mensajero MP3 [Utah]",
+  Enabled = asset.enabled,
+  ZIndex = 10,
+  FilePath = asset.resource("messenger_mp3_utah.wms")
+}
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Mercury.Identifier, "ColorLayers", Layer)
+end)
+
+asset.onDeinitialize(function()
+  openspace.globebrowsing.deleteLayer(globe.Mercury.Identifier, "ColorLayers", Layer)
+end)
+
+asset.export("layer", Layer)
+
+asset.meta = {
+  Name = "Mensajero MP3 [Utah]",
+  Description = [[Capa Mensajero MP3 de Mercurio para el globo de Mercurio. Este mapa está alojado en el
+    servidor OpenSpace en Utah]],
+  Author = "USGS",
+  URL = "",
+  License = "NASA/PDS"
+}

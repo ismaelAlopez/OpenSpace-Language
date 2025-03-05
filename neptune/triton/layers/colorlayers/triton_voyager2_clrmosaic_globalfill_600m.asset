@@ -1,0 +1,47 @@
+local globe = asset.require("../../triton")
+
+
+
+local texturesPath = asset.resource({
+  Name = "Triton Textures",
+  Type = "HttpSynchronization",
+  Identifier = "triton_textures",
+  Version = 1
+})
+
+
+local Layer = {
+  Identifier = "Triton_Voyager2_ClrMosaic_GlobalFill_600m",
+  Name = "Mosaico de Tritón Voyager2 [local]",
+  Enabled = asset.enabled,
+  ZIndex = 5,
+  FilePath = texturesPath .. "Triton_Voyager2_ClrMosaic_GlobalFill_600m.png",
+  Description = [[Los datos de Voyager 2 se utilizaron para construir el mejor mapa global de color de Tritón.
+    Este mapa tiene una resolución de 600 metros por píxel (m). El color se sintetizó combinando
+    imágenes de alta resolución tomadas a través de filtros naranja, violeta y ultravioleta; estas
+    imágenes se mostraron como imágenes rojas, verdes y azules y se combinaron para crear esta
+    versión en color (Smith et al., 1989).]],
+    CacheSettings = { Enabled = false }
+}
+
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Triton.Identifier, "ColorLayers", Layer)
+end)
+
+asset.onDeinitialize(function()
+  openspace.globebrowsing.deleteLayer(globe.Triton.Identifier, "ColorLayers", Layer)
+end)
+
+asset.export("Layer", Layer)
+
+
+
+asset.meta = {
+  Name = "Mosaico de Tritón Voyager2",
+  Description = [[Mosaico de Voyager2 de Tritón. Esta capa es local en la carpeta de sincronización.]],
+  Author = "USGS",
+  URL = "https://astrogeology.usgs.gov/search/map/Triton/Mosaic/" ..
+    "Triton_Voyager2_ClrMosaic_GlobalFill_600m/",
+  License = "NASA/PDS"
+}

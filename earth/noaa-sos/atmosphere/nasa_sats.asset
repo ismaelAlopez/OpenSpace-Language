@@ -1,0 +1,42 @@
+local globe = asset.require("../../earth")
+
+local Name = "Órbita Polar: Satélites de la NASA A-Train"
+local Identifier = "noaa-sos-atmosphere-nasa_sats"
+local Description = [[Para habilitar observaciones científicas coordinadas, el Sistema de Observación de la Tierra ha creado el A-Train. Cuando finalmente se complete en 2008, el A-Train consistirá en 6 satélites en órbita polar que viajan a solo minutos de distancia en una línea. Cuatro de los satélites son de la NASA, uno es un satélite del Centro Nacional de Estudios Espaciales (CNES) de Francia, y el otro es un satélite conjunto entre la NASA y el CNES. Los satélites tienen órbitas polares bajas a 438 millas (705 km) sobre la Tierra con una inclinación de 98 grados. Juntos, sus instrumentos científicos superpuestos brindan una imagen completa del clima y el tiempo de la Tierra. La "A" en el A-Train es por "tarde" porque el satélite líder, Aqua, cruza el ecuador a la hora local media de aproximadamente 1:30 pm. Actualmente, cinco de los satélites están en órbita, y el sexto satélite está programado para ser lanzado en 2008]]
+local URL = "https://sos.noaa.gov/catalog/datasets/polar-orbiting-nasa-a-train-satellites/"
+
+local syncedDirectory = asset.resource({
+  Name = Name,
+  Type = "HttpSynchronization",
+  Identifier = Identifier,
+  Version = 1,
+  UnzipFiles = true
+})
+
+local Layer = {
+  Identifier = Identifier,
+  Name = Name,
+  Enabled = asset.enabled,
+  ZIndex = 100,
+  Type = "ImageSequenceTileProvider",
+  FolderPath = syncedDirectory .. "2048",
+  Description = Description
+}
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.onDeinitialize(function()
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.export(Layer)
+
+asset.meta = {
+  Name = Name,
+  Description = Description .. "Datos proporcionados por la Administración Nacional Oceánica y Atmosférica",
+  Author = "Administración Nacional Oceánica y Atmosférica",
+  URL = URL,
+  License = "https://sos.noaa.gov/copyright/"
+}

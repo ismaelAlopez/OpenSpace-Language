@@ -1,0 +1,24 @@
+asset.require("./base_layers")
+asset.require("./colorlayers/bmng_utah", false)
+asset.require("./watermasks/gebco_utah", false)
+
+
+
+asset.meta = {
+  Name = "Capas Predeterminadas de la Tierra (Utah)",
+  Description = [[Las capas predeterminadas de la Tierra son: Blue Marble,
+    ESRI VIIRS Combo, ESRI NOAA20 Combo, ESRI World Imagery, VIIRS SNPP (Temporal),
+    Aqua Modis (Temporal), Terra Modis (Temporal),
+    AMSR2 GCOM W1 Concentración de Hielo Marino (Temporal), MODIS Terra Clorofila A (Temporal),
+    GHRSST L4 MUR Temperatura Superficial del Mar (Temporal), BMNG, Blue Marble Height (3D),
+    Elevación Mundial (3D), Tierra de Noche 2012, Textura de Tierra de Noche,
+    Tierra de Noche (Temporal), Costas, Características de Referencia, Etiquetas de Referencia,
+    Índices de Teselas, Referencia de Tamaño, Gebco y Máscara de Agua Modis.
+
+
+    Capas cargadas solo desde el servidor de Utah
+  ]],
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "MIT license"
+}

@@ -1,0 +1,51 @@
+local globe = asset.require("../../earth")
+
+
+
+local Layer = {
+  Identifier = "AMSR2_GCOM_W1_Sea_Ice_Concentration_Temporal",
+  Name = "Concentración de Hielo Marino AMSR2 GCOM W1 (Temporal)",
+  Enabled = asset.enabled,
+  ZIndex = 100,
+  Type = "TemporalTileProvider",
+  Mode = "Prototyped",
+  Prototyped = {
+    Time = {
+      Start = "2012-05-08",
+      End = "Yesterday"
+    },
+    TemporalResolution = "1d",
+    TimeFormat = "YYYY-MM-DD",
+    Prototype = openspace.globebrowsing.createTemporalGibsGdalXml(
+      "AMSRU2_Sea_Ice_Concentration_12km",
+      "2km",
+      "png"
+    )
+  },
+  Description = [[Cobertura temporal: 2 de julio de 2012 - Presente.
+  La capa unificada "Concentración de Hielo Marino (12 km)" del Radiómetro Avanzado de Microondas de Exploración/Escaneo (AMSR-E/AMSR2) 
+  muestra el porcentaje de concentración de hielo marino en las regiones polares. Se genera como un compuesto 
+  diario a partir de los pases de media órbita ascendente a la 1:30 a.m. y descendente a la 1:30 p.m. del sensor AMSR2, con una resolución espacial de 12 km.
+  (Descripción de NASA Worldview))]]
+}
+
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.onDeinitialize(function()
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.export("layer", Layer)
+
+
+
+asset.meta = {
+  Name = "Concentración de Hielo Marino AMSR2 GCOM W1 (Temporal)",
+  Description = "GIBS hosted layer",
+  Author = "Servicios Globales de Exploración de Imágenes EOSDIS de la NASA",
+  URL = "https://earthdata.nasa.gov/eosdis/science-system-description/eosdis-components/gibs",
+  License = "NASA"
+}

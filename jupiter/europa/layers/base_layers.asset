@@ -1,0 +1,11 @@
+asset.require("./colorlayers/europa_texture", false)
+
+
+
+asset.meta = {
+  Name = "Capas Base de Europa",
+  Description = "Las capas base de Europa son: Textura de Europa",
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "MIT license"
+}

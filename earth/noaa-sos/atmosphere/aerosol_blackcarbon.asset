@@ -1,0 +1,66 @@
+local globe = asset.require("../../earth")
+
+local Name = "Aerosoles: Carbono Negro"
+local Identifier = "noaa-sos-atmosphere-aerosol-blackcarbon"
+local Description = [[Con tantas incertidumbres relacionadas con el cambio climático, es
+importante observar todos los factores. Ya en 1896, los científicos han estado analizando
+la presencia de carbono negro en la atmósfera. Este grupo de tres conjuntos de datos observa la
+presencia de aerosoles en la atmósfera de la Tierra. El primer conjunto de datos contiene solo
+el espesor óptico del carbono negro, el segundo tiene el espesor óptico del sulfato y el tercero
+tiene una combinación de ambos, carbono negro y espesor óptico del sulfato. Los datos son del 31 de enero de 2007 y se extienden 120 horas hasta el 4 de febrero de 2007. El carbono negro es comúnmente
+conocido como hollín. Se genera a partir de la quema de combustibles fósiles y biocombustibles. El hollín es el
+resultado de la combustión incompleta, especialmente del carbón, combustibles diésel, biocombustibles y otras
+quemas de biomasa. El sulfato es el resultado del dióxido de azufre y el trióxido de azufre interactuando
+con otros compuestos en la atmósfera. Los aerosoles de sulfato en la atmósfera están asociados
+con la combustión de combustibles fósiles y también con la erupción de volcanes como el Mt.
+Pinatubo]]
+local URL = "https://sos.noaa.gov/catalog/datasets/aerosols-black-carbon/"
+
+local syncedDirectory = asset.resource({
+  Name = Name,
+  Type = "HttpSynchronization",
+  Identifier = Identifier,
+  Version = 1,
+  UnzipFiles = true
+})
+
+local Layer = {
+  Identifier = Identifier,
+  Name = Name,
+  Enabled = asset.enabled,
+  ZIndex = 100,
+  Type = "ImageSequenceTileProvider",
+  FolderPath = syncedDirectory .. "2048_png",
+  Description = Description
+}
+
+local Colorbar = {
+  Identifier = Identifier,
+  Name = Name,
+  Enabled = asset.enabled,
+  Type = "ScreenSpaceImageLocal",
+  TexturePath = syncedDirectory .. "colorbar.png",
+  FaceCamera = false,
+  CartesianPosition = { 0.0, -0.5, -2.0 }
+}
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+  openspace.addScreenSpaceRenderable(Colorbar)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeScreenSpaceRenderable(Colorbar)
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.export(Layer)
+asset.export(Colorbar)
+
+asset.meta = {
+  Name = Name,
+  Description = Description .. "Datos proporcionados por la Administración Nacional Oceánica y Atmosférica",
+  Author = "Administración Nacional Oceánica y Atmosférica",
+  URL = URL,
+  License = "https://sos.noaa.gov/copyright/"
+}
