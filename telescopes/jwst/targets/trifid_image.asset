@@ -1,0 +1,16 @@
+local image = asset.resource({
+  Name = "Imagen de la Nebulosa Trífida",
+  Type = "HttpSynchronization",
+  Identifier = "trifid_image",
+  Version = 1
+})
+
+asset.export("image", image)
+
+asset.meta = {
+  Name = "Nebulosa Trífida",
+  Description = "Imagen de la Nebulosa Trífida",
+  Author = "ESO/Gábor Tóth",
+  URL = "https://www.eso.org/public/images/eso1504g/",
+  License = "CC BY 4.0"
+}

@@ -1,0 +1,135 @@
+local kernels = asset.require("./kernels")
+local earth = asset.require("scene/solarsystem/planets/earth/transforms")
+local solarsystem = asset.require("scene/solarsystem/sun/transforms")
+local transforms = asset.require("scene/solarsystem/planets/earth/lagrange_points/l2")
+local coreKernels = asset.require("spice/core")
+
+
+local StartTime = "2023 JUL 01 15:53:08.239"
+local EndTime = "2031 OCT 13 00:37:22.437"
+
+local EuclidTrailSun = {
+  Identifier = "EuclidTrailSun",
+  Parent = solarsystem.SolarSystemBarycenter.Identifier,
+  Renderable = {
+    Type = "RenderableTrailTrajectory",
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels.ID.Euclid,
+      Observer = coreKernels.ID.SolarSystemBarycenter
+    },
+    Color = { 0.70, 0.50, 0.20 },
+    StartTime = StartTime,
+    EndTime = EndTime,
+    SampleInterval = 60000
+  },
+  GUI = {
+    Name = "Rastro de Euclid (Sol)",
+    Path = "/Sistema Solar/Telescopios/Euclid"
+  }
+}
+
+local EuclidTrailEarth = {
+  Identifier = "EuclidTrailEarth",
+  Parent = earth.EarthBarycenter.Identifier,
+  Renderable = {
+    Type = "RenderableTrailTrajectory",
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels.ID.Euclid,
+      Observer = coreKernels.ID.EarthBarycenter
+    },
+    Color = { 0.325, 0.65, 0.55 },
+    StartTime = StartTime,
+    EndTime = EndTime,
+    SampleInterval = 60000
+  },
+  GUI = {
+    Name = "Rastro de Euclid (Tierra)",
+    Path = "/Sistema Solar/Telescopios/Euclid"
+  }
+}
+
+local EuclidTrailOrbit = {
+  Identifier = "EuclidTrailOrbit",
+  Parent = transforms.L2Position.Identifier,
+  TimeFrame = {
+    Type = "TimeFrameInterval",
+    Start = StartTime,
+    End = EndTime
+  },
+  Renderable = {
+    Type = "RenderableTrailOrbit",
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels.ID.Euclid,
+      Observer = transforms.ID.L2,
+      Frame = coreKernels.Frame.Galactic
+    },
+    Color = { 0.863, 0.0, 0.902 },
+    Period = 182.621099, -- About 6 months
+    Resolution = 183 -- About a sample rate of once per day
+  },
+  GUI = {
+    Name = "Rastro de Órbita de Euclid",
+    Path = "/Sistema Solar/Telescopios/Euclid",
+    Description = "Rastro de la órbita de Euclid relativo a L2"
+  }
+}
+
+local EuclidTrailCoRevOrbit = {
+  Identifier = "EuclidTrailCoRevOrbit",
+  Parent = transforms.L2CoRevFrame.Identifier,
+  TimeFrame = {
+    Type = "TimeFrameInterval",
+    Start = StartTime,
+    End = EndTime
+  },
+  Renderable = {
+    Type = "RenderableTrailOrbit",
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels.ID.Euclid,
+      Observer = transforms.ID.L2,
+      Frame = transforms.Frame.L2Corevolving
+    },
+    Color = { 0.863, 0.0, 0.902 },
+    Period = 182.621099, -- About 6 months
+    Resolution = 183 -- About a sample rate of once per day
+  },
+  GUI = {
+    Name = "Rastro de Órbita Co-Revolucionaria de Euclid L2",
+    Path = "/Sistema Solar/Telescopios/Euclid",
+    Description = "Rastro de la órbita de Euclid relativo a L2"
+  }
+}
+
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(EuclidTrailSun)
+  openspace.addSceneGraphNode(EuclidTrailEarth)
+  openspace.addSceneGraphNode(EuclidTrailOrbit)
+  openspace.addSceneGraphNode(EuclidTrailCoRevOrbit)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(EuclidTrailCoRevOrbit)
+  openspace.removeSceneGraphNode(EuclidTrailOrbit)
+  openspace.removeSceneGraphNode(EuclidTrailEarth)
+  openspace.removeSceneGraphNode(EuclidTrailSun)
+end)
+
+asset.export(EuclidTrailSun)
+asset.export(EuclidTrailEarth)
+asset.export(EuclidTrailOrbit)
+asset.export(EuclidTrailCoRevOrbit)
+
+
+
+asset.meta = {
+  Name = "Rastros de Euclid",
+  Description = "Este recurso contiene los rastros de la nave espacial Euclid en relación con la Tierra y el Sol.",
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "Licencia MIT"
+}

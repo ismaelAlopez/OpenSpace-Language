@@ -1,0 +1,42 @@
+local charon = asset.require("../../charon")
+
+
+
+local Layer = {
+  Identifier = "Greyscale_USGS",
+  Name = "Blanco y Negro [USGS]",
+  Enabled = asset.enabled,
+  ZIndex = 10,
+  FilePath = "WMS:https://planetarymaps.usgs.gov/cgi-bin/mapserv?map=/maps/pluto/charon_simp_cyl.map&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&LAYERS=NEWHORIZONS_CHARON_MOSAIC&SRS=EPSG:4326&BBOX=-180,-90.0003,359.972,90"
+}
+
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(charon.Charon.Identifier, "ColorLayers", Layer)
+end)
+
+asset.onDeinitialize(function()
+  openspace.globebrowsing.deleteLayer(charon.Charon.Identifier, "ColorLayers", Layer)
+end)
+
+asset.export("layer", Layer)
+
+
+
+asset.meta = {
+  Name = "Charon Blanco y Negro [USGS]",
+  Description = [[Charon New Horizons LORRI MVIC Global Mosaic 300m v1. Este detallado,
+    mosaico global de alta calidad de la luna más grande de Plutón, Caronte, fue ensamblado
+    a partir de casi todas las imágenes de mayor resolución obtenidas por el Long-Range
+    Reconnaissance Imager (LORRI) y la Multispectral Visible Imaging Camera (MVIC) en New
+    Horizons. El mosaico es la vista global más detallada y completa hasta la fecha de la
+    superficie de Caronte utilizando datos de New Horizons. Destacando en Caronte hay una
+    enorme depresión de al menos 350 kilómetros de largo, y alcanzando 14 kilómetros de
+    profundidad, más de siete veces la profundidad del Gran Cañón. Este mosaico está
+    disponible en proyección equirectangular a una escala de píxel ecuatorial de 300 metros
+    por píxel (m). (Descripción de la URL)]],
+  Author = "USGS",
+  URL = "https://astrogeology.usgs.gov/search/map/Charon/NewHorizons/" ..
+    "Charon_NewHorizons_Global_Mosaic_300m_Jul2017",
+  License = "NASA/PDS"
+}

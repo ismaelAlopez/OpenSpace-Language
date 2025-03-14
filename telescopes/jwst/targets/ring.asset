@@ -1,0 +1,36 @@
+local ring = asset.require("./ring_image")
+
+local RingImage = {
+  Identifier = "RingImage",
+  Type = "ScreenSpaceImageLocal",
+  Name = "Nebulosa del Anillo",
+  UseRadiusAzimuthElevation = true,
+  FaceCamera = false,
+  RadiusAzimuthElevation = { 1.0, 0.5, 0.1 },
+  UsePerspectiveProjection = false,
+  Opacity = 1.0,
+  TexturePath = ring.image .. "ring-nebula.png",
+  Tag = { "mission_jwst_target" },
+  Description = [[
+    Imagen de la Nebulosa del Anillo por NASA, ESA, C.R. O'Dell (Universidad de Vanderbilt), y
+    D. Thompson (Observatorio del Gran Telescopio Binocular).
+  ]]
+}
+
+asset.onInitialize(function()
+  openspace.addScreenSpaceRenderable(RingImage)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeScreenSpaceRenderable(RingImage)
+end)
+
+asset.export(RingImage)
+
+asset.meta = {
+  Name = "Imagen de la Nebulosa del Anillo",
+  Description = "Imagen en pantalla de la Nebulosa del Anillo",
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "Licencia MIT"
+}

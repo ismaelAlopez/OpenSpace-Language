@@ -1,0 +1,41 @@
+local sunTransforms = asset.require("scene/solarsystem/sun/transforms")
+local coreKernels = asset.require("spice/core")
+
+local kernel = asset.resource("kernels/HEEQ180.tf")
+
+local HEEQ180ReferenceFrame = {
+  Identifier = "HEEQ180ReferenceFrame",
+  Parent = sunTransforms.SunCenter.Identifier,
+  Transform = {
+    Rotation = {
+      Type = "SpiceRotation",
+      SourceFrame = "HEEQ180",
+      DestinationFrame = coreKernels.Frame.Galactic
+    }
+  },
+  GUI = {
+    Name = "Marco de Referencia HEEQ180",
+    Path = "/Sistema Solar/Sol",
+    Hidden = true
+  }
+}
+
+asset.onInitialize(function()
+  openspace.spice.loadKernel(kernel)
+  openspace.addSceneGraphNode(HEEQ180ReferenceFrame)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(HEEQ180ReferenceFrame)
+  openspace.spice.unloadKernel(kernel)
+end)
+
+asset.export(HEEQ180ReferenceFrame)
+
+asset.meta = {
+  Name = "Transformación del Sol, HEEQ180",
+  Description = "Transformación del Sol: HEEQ180",
+  Author = "CCMC",
+  URL = "http://openspaceproject.com",
+  License = "MIT license"
+}

@@ -1,0 +1,35 @@
+local trifid = asset.require("./trifid_image")
+
+local TrifidImage = {
+  Identifier = "TrifidImage",
+  Type = "ScreenSpaceImageLocal",
+  Name = "Nebulosa Trífida",
+  UseRadiusAzimuthElevation = true,
+  FaceCamera = false,
+  RadiusAzimuthElevation = { 1.0, 0.5, 0.1 },
+  UsePerspectiveProjection = false,
+  Opacity = 1.0,
+  TexturePath = trifid.image .. "trifid-nebula.png",
+  Tag = { "mission_jwst_target" },
+  Description = [[
+    Imagen de la Nebulosa Trífida por ESO/Gábor Tóth.
+  ]]
+}
+
+asset.onInitialize(function()
+  openspace.addScreenSpaceRenderable(TrifidImage)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeScreenSpaceRenderable(TrifidImage)
+end)
+
+asset.export(TrifidImage)
+
+asset.meta = {
+  Name = "Imagen de la Nebulosa Trífida",
+  Description = "Imagen en pantalla de la Nebulosa Trífida",
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "Licencia MIT"
+}

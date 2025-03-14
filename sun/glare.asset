@@ -1,0 +1,45 @@
+local transforms = asset.require("./transforms")
+
+local textures = asset.resource({
+  Type = "HttpSynchronization",
+  Name = "Sun textures",
+  Identifier = "sun_textures",
+  Version = 4
+})
+
+local SunGlare = {
+  Identifier = "SunGlare",
+  Parent = transforms.SunIAU.Identifier,
+  Renderable = {
+    Type = "RenderablePlaneImageLocal",
+    Size = 41109609582.189,
+    Origin = "Center",
+    Billboard = true,
+    Texture = textures .. "halo.png",
+    BlendMode = "Additive",
+    Opacity = 0.65
+  },
+  GUI = {
+    Name = "Resplandor del Sol",
+    Path = "/Sistema Solar/Sol",
+    Description = "Efecto de resplandor del sol. Habilitado por defecto en lugar del globo solar"
+  }
+}
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(SunGlare)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(SunGlare)
+end)
+
+asset.export(SunGlare)
+
+asset.meta = {
+  Name = "Resplandor del Sol",
+  Description = "Plano de imagen con efecto de resplandor del sol",
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "MIT license"
+}

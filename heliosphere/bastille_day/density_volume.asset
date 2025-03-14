@@ -1,0 +1,104 @@
+local propertyHelper = asset.require("util/property_helper")
+local sunTransforms = asset.require("scene/solarsystem/sun/transforms")
+local sunAsset = asset.require("scene/solarsystem/sun/sun")
+
+
+
+local densityDirectory = asset.resource({
+  Name = "Bastille Day MAS Density",
+  Type = "HttpSynchronization",
+  Identifier = "bastille_day_mas_density",
+  Version = 1
+})
+
+
+local SunRadius = 6.957E8
+
+local DensityVolume = {
+  Identifier = "MAS-MHD-Density-bastille-day-2000",
+  -- TODO Elon: 21 April 2022. Interaction sphere should not depend on the transform scale.
+  -- InteractionSphere = sunAsset.Sun.Renderable.Radii[1] * 1.05,
+  InteractionSphere = 1 / 695700000,
+  Parent = sunTransforms.SunIAU.Identifier,
+  Transform = {
+    Rotation = {
+      Type = "FixedRotation",
+      XAxis = { -1.0, 0.0, 0.0 },
+      YAxis = { 0.0, 1.0, 0.0 },
+      ZAxis = { 0.0, 0.0, -1.0 }
+    },
+    Scale = {
+      Type = "StaticScale",
+      Scale = SunRadius
+    }
+  },
+  Renderable = {
+    Type = "RenderableTimeVaryingVolume",
+    StepSize = 0.004,
+    Brightness = 0.3,
+    TransferFunction = asset.resource("transferfunctions/mas-mhd-r-squared.txt"),
+    SourceDirectory = densityDirectory,
+    GridType = "Spherical",
+    SecondsBefore = openspace.time.secondsPerDay(),
+    SecondsAfter = openspace.time.secondsPerDay(),
+    Dimensions = { 100, 100, 128 },
+    InvertDataAtZ = true
+  },
+  GUI = {
+    Name = "Densidad MAS",
+    Path = "/Sistema Solar/Heliosfera/Día de la Bastilla 2000",
+    Description = [[Representación volumétrica para el evento CME del día de la bastilla. Este activo
+      contiene datos desde 2000-07-14 08:33 hasta 2000-07-14 11:49]]
+  }
+}
+
+local ToggleVolume = {
+  Identifier = "os.bastilleday.densityvolume.ToggleVolume",
+  Name = "Alternar volumen",
+  Command = [[
+    if openspace.propertyValue("Scene.MAS-MHD-Density-bastille-day-2000.Renderable.Enabled") then
+      openspace.setPropertyValueSingle(
+        "Scene.MAS-MHD-Density-bastille-day-2000.Renderable.Fade",
+        0.0,
+        openspace.propertyValue("OpenSpaceEngine.FadeDuration"),
+        "Linear",
+        'openspace.setPropertyValueSingle("Scene.MAS-MHD-Density-bastille-day-2000.Renderable.Enabled", false)'
+      )
+    else
+      openspace.setPropertyValueSingle("Scene.MAS-MHD-Density-bastille-day-2000.Renderable.Enabled", true)
+      openspace.setPropertyValueSingle(
+        "Scene.MAS-MHD-Density-bastille-day-2000.Renderable.Fade",
+        1.0,
+        openspace.propertyValue("OpenSpaceEngine.FadeDuration"),
+        "Linear"
+      )
+    end
+  ]],
+  Documentation = "Alternar la representación volumétrica del CME",
+  GuiPath = "/Día de la Bastilla 2000",
+  IsLocal = false
+}
+
+
+asset.onInitialize(function()
+  openspace.action.registerAction(ToggleVolume)
+  openspace.addSceneGraphNode(DensityVolume)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(DensityVolume)
+  openspace.action.removeAction(ToggleVolume)
+end)
+
+asset.export(DensityVolume)
+asset.export("ToggleVolume", ToggleVolume.Identifier)
+
+
+
+asset.meta = {
+  Name = "Representación Volumétrica de Predictive Science Inc. Día de la Bastilla",
+  Description = "Representación volumétrica para el evento CME del día de la bastilla",
+  Author = "CCMC, equipo de OpenSpace",
+  URL = "https://dx.doi.org/10.3847/1538-4357/aab36d",
+  License = "CC-BY"
+}

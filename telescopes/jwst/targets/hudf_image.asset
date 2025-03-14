@@ -1,0 +1,19 @@
+local image = asset.resource({
+  Name = "Imagen HUDF",
+  Type = "HttpSynchronization",
+  Identifier = "hudf_image",
+  Version = 4
+})
+
+
+asset.export("image", image)
+
+
+
+asset.meta = {
+  Name = "Campo Ultra Profundo del Hubble",
+  Description = "Imagen del Campo Ultra Profundo del Hubble",
+  Author = "NASA, ESA, y S. Beckwith (STScI) y el equipo HUDF",
+  URL = "https://esahubble.org/images/heic0611b/",
+  License = "CC BY 4.0"
+}

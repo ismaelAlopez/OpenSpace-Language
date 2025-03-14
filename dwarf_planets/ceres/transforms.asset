@@ -1,0 +1,43 @@
+local transforms = asset.require("scene/solarsystem/sun/transforms")
+local kernels = asset.require("./kernels")
+local coreKernels = asset.require("spice/core")
+
+local CeresPosition = {
+  Identifier = "CeresPosition",
+  Parent = transforms.SolarSystemBarycenter.Identifier,
+  Transform = {
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels.ID.Ceres,
+      Observer = coreKernels.ID.SolarSystemBarycenter
+    },
+    Rotation = {
+      Type = "SpiceRotation",
+      SourceFrame = kernels.Frame.Ceres,
+      DestinationFrame = coreKernels.Frame.Galactic
+    }
+  },
+  GUI = {
+    Name = "Posición de Ceres",
+    Path = "/Sistema Solar/Planetas Enanos/Ceres",
+    Hidden = true
+  }
+}
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(CeresPosition)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(CeresPosition)
+end)
+
+asset.export(CeresPosition)
+
+asset.meta = {
+  Name = "Transformaciones de Ceres",
+  Description = "Transformación de Ceres",
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "MIT license"
+}

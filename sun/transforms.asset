@@ -1,0 +1,120 @@
+local coreKernels = asset.require("spice/core")
+
+
+
+-- Barycenter of the solar system, expressed in the Galactic frame
+local SolarSystemBarycenter = {
+  Identifier = "SolarSystemBarycenter",
+  -- No parent; this node is attached to the scene graph root
+  TimeFrame = { -- Using Spice kernels for 1850-2150
+    Type = "TimeFrameInterval",
+    Start = "1550-JAN-01",
+    End = "2650-JAN-22"
+  },
+  GUI = {
+    Name = "Baricentro del Sistema Solar",
+    Path = "/Sistema Solar",
+    Hidden = true
+  }
+}
+
+local SunCenter = {
+  Identifier = "SunCenter",
+  Parent = SolarSystemBarycenter.Identifier,
+  Transform = {
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = coreKernels.ID.Sun,
+      Observer = coreKernels.ID.SolarSystemBarycenter
+    }
+  },
+  GUI = {
+    Name = "Centro del Sol",
+    Path = "/Sistema Solar/Sol",
+    Description = "Marco Spice para el Sol",
+    Hidden = true
+  }
+}
+
+-- Spice frame for the Sun
+local SunIAU = {
+  Identifier = "SunIAU",
+  Parent = SolarSystemBarycenter.Identifier,
+  Transform = {
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = coreKernels.ID.Sun,
+      Observer = coreKernels.ID.SolarSystemBarycenter
+    },
+    Rotation = {
+      Type = "SpiceRotation",
+      SourceFrame = coreKernels.Frame.Sun,
+      DestinationFrame = coreKernels.Frame.Galactic
+    }
+  },
+  GUI = {
+    Name = "Sol IAU",
+    Path = "/Sistema Solar/Sol",
+    Hidden = true
+  }
+}
+
+local SunEclipJ2000 = {
+  Identifier = "SunEclipJ2000",
+  Parent = SolarSystemBarycenter.Identifier,
+  Transform = {
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = coreKernels.ID.Sun,
+      Observer = coreKernels.ID.SolarSystemBarycenter
+    },
+    Rotation = {
+      Type = "SpiceRotation",
+      SourceFrame = coreKernels.Frame.EclipJ2000,
+      DestinationFrame = coreKernels.Frame.Galactic
+    }
+  },
+  GUI = {
+    Name = "Sol J2000",
+    Path = "/Sistema Solar/Sol",
+    Hidden = true
+  }
+}
+
+local LightSource = {
+  Type = "SceneGraphLightSource",
+  Identifier = "Sun",
+  Node = SunIAU.Identifier,
+  Intensity = 1.0
+}
+
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(SolarSystemBarycenter)
+  openspace.addSceneGraphNode(SunCenter)
+  openspace.addSceneGraphNode(SunIAU)
+  openspace.addSceneGraphNode(SunEclipJ2000)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(SunEclipJ2000)
+  openspace.removeSceneGraphNode(SunIAU)
+  openspace.removeSceneGraphNode(SunCenter)
+  openspace.removeSceneGraphNode(SolarSystemBarycenter)
+end)
+
+asset.export(SolarSystemBarycenter)
+asset.export(SunCenter)
+asset.export(SunIAU)
+asset.export(SunEclipJ2000)
+asset.export("LightSource", LightSource)
+
+
+
+asset.meta = {
+  Name = "Transformaciones del Sol",
+  Description = "Transformaciones del Sol: Baricentro del Sistema Solar, SOL IAU y SOL J2000",
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "MIT license"
+}

@@ -1,0 +1,19 @@
+asset.require("./trail")
+asset.require("./pluto")
+asset.require("./pluto_trail")
+asset.require("./pluto_trail_kepler")
+asset.require("./charon/charon")
+asset.require("./charon/charon_trail")
+asset.require("./minor/hydra")
+asset.require("./minor/kerberos")
+asset.require("./minor/nix")
+asset.require("./minor/styx")
+
+asset.meta = {
+  Name = "Sistema de Plutón",
+  Description = [[Meta asset para el sistema de Plutón, que contiene: Plutón, Rastro de Plutón,
+    Caronte, Rastro de Caronte, Hidra, Kerberos, Nix y Estigia]],
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "MIT license"
+}

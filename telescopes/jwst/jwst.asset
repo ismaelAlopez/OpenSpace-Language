@@ -1,0 +1,172 @@
+asset.require("./actions")
+asset.require("./mission")
+local sunTransforms = asset.require("scene/solarsystem/sun/transforms")
+local transforms = asset.require("./transforms")
+
+local models = asset.resource({
+  Name = "Modelo JWST",
+  Type = "HttpSynchronization",
+  Identifier = "jwst_model",
+  Version = 3
+})
+
+local band = asset.resource({
+  Name = "Textura de banda JWST",
+  Type = "HttpSynchronization",
+  Identifier = "jwst_band_texture",
+  Version = 1
+})
+
+local LaunchTime = "2021 DIC 25 12:20:00"
+
+local JWSTBand = {
+  Identifier = "JWSTBand",
+  Parent = transforms.JWSTPosition.Identifier,
+  TimeFrame = {
+    Type = "TimeFrameInterval",
+    Start = LaunchTime
+  },
+  Transform = {
+    Rotation = {
+      Type = "FixedRotation",
+      Attached = "JWSTBand",
+      XAxis = { 1.0, 0.0, 0.0 },
+      XAxisOrthogonal = true,
+      ZAxis = sunTransforms.SolarSystemBarycenter.Identifier
+    }
+  },
+  Renderable = {
+    Type = "RenderableSphereImageLocal",
+    Texture = band .. "JWST-band.png",
+    Size = 9.2E15,
+    Segments = 50,
+    DisableFadeInOut = true,
+    Orientation = "Inside",
+    Opacity = 0.05
+  },
+  Tag = { "mission_jwst_fov" },
+  GUI = {
+    Name = "Banda de visión segura JWST",
+    Path = "/Sistema Solar/Telescopios/JWST",
+    Description = [[
+      La banda de visión segura para el Telescopio Espacial James Webb en su posición actual
+    ]]
+  }
+}
+
+local JWSTModel = {
+  Identifier = "JWSTModel",
+  Parent = transforms.JWSTRotation.Identifier,
+  TimeFrame = {
+    Type = "TimeFrameInterval",
+    Start = LaunchTime
+  },
+  Renderable = {
+    Type = "RenderableModel",
+    GeometryFile = models .. "jwst_anim74_2fps_2018_nb.osmodel",
+    ModelScale = 0.0328,
+    EnableAnimation = true,
+    AnimationStartTime = "2021 12 25 12:20:00",
+    AnimationTimeScale = "Millisecond",
+    AnimationMode = "Once",
+    LightSources = {
+      sunTransforms.LightSource
+    },
+    PerformShading = true
+  },
+  GUI = {
+    Name = "Modelo de JWST",
+    Path = "/Sistema Solar/Telescopios/JWST",
+    Description = [[
+      Modelo animado del Telescopio Espacial James Webb que muestra su despliegue en
+      tiempo real
+    ]]
+  }
+}
+
+local JWSTFov = {
+  Identifier = "JWSTFov",
+  Parent = JWSTModel.Identifier,
+  TimeFrame = {
+    Type = "TimeFrameInterval",
+    Start = LaunchTime
+  },
+  Renderable = {
+    Type = "RenderablePrism",
+    Segments = 6,
+    Lines = 3,
+    Radius = 3.25,
+    LineWidth = 1.0,
+    Color = { 1.0, 1.0, 1.0 },
+    Length = 9.2E15
+  },
+  Transform = {
+    Rotation = {
+      Type = "StaticRotation",
+      Rotation = { 0, 0, math.rad(30) }
+    }
+  },
+  Tag = { "mission_jwst_fov" },
+  GUI = {
+    Name = "Campo de visión JWST",
+    Path = "/Sistema Solar/Telescopios/JWST",
+    Description = [[
+      El campo de visión para el Telescopio Espacial James Webb en su posición actual
+    ]]
+  }
+}
+
+local JWSTLabel = {
+  Identifier = "JWSTLabel",
+  Parent = transforms.JWSTPosition.Identifier,
+  TimeFrame = {
+    Type = "TimeFrameInterval",
+    Start = LaunchTime
+  },
+  Renderable = {
+    Type = "RenderableLabel",
+    Text = "JWST",
+    FontSize = 50,
+    Size = 6.5,
+    MinMaxSize = { 4.0, 30.0 },
+    OrientationOption = "Camera View Direction",
+    BlendMode = "Normal",
+    EnableFading = false
+  },
+  GUI = {
+    Name = "Etiqueta JWST",
+    Path = "/Sistema Solar/Telescopios/JWST",
+    Description = "Etiqueta principal para el Telescopio Espacial James Webb"
+  }
+}
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(JWSTBand)
+  openspace.addSceneGraphNode(JWSTModel)
+  openspace.addSceneGraphNode(JWSTFov)
+  openspace.addSceneGraphNode(JWSTLabel)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(JWSTLabel)
+  openspace.removeSceneGraphNode(JWSTFov)
+  openspace.removeSceneGraphNode(JWSTModel)
+  openspace.removeSceneGraphNode(JWSTBand)
+
+  openspace.scriptScheduler.clear(2)
+end)
+
+asset.export(JWSTBand)
+asset.export(JWSTModel)
+asset.export(JWSTFov)
+asset.export(JWSTLabel)
+
+asset.meta = {
+  Name = "Telescopio Espacial James Webb",
+  Description = [[
+    Modelo animado del Telescopio Espacial James Webb, banda de visión segura, campo de visión y etiqueta.
+  ]],
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "MIT license"
+}

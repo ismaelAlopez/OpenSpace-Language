@@ -1,0 +1,74 @@
+local sun = asset.require("scene/solarsystem/sun/sun")
+local magnetogramDirectory = asset.require("./magnetogram")
+
+
+local magnetograms
+
+local SwitchColorLayer = {
+  Identifier = "os.bastilleday.magnetogramtexture.SwitchColorLayer",
+  Name = "Siguiente textura del sol",
+  Command = [[
+    local textureList = openspace.globebrowsing.layers("Sun", "ColorLayers")
+    if (magnetogramsTextureIndex == -1) then
+      magnetogramsTextureIndex = 2
+    end
+    magnetogramsTextureIndex = magnetogramsTextureIndex + 1
+    if (magnetogramsTextureIndex >= #textureList) then
+      magnetogramsTextureIndex = 0
+    end
+    openspace.setPropertyValue("Scene.Sun.Renderable.Layers.ColorLayers.*.Enabled", false)
+    if (magnetogramsTextureIndex == 0) then
+      openspace.setPropertyValueSingle("Scene.Sun.Renderable.Layers.ColorLayers.Texture.Enabled", true)
+    else
+      str = "Scene.Sun.Renderable.Layers.ColorLayers.magnetogram-" .. magnetogramsTextureIndex .. ".Enabled"
+      openspace.setPropertyValueSingle(str, true)
+    end
+  ]],
+  Documentation = "Mostrar la siguiente textura del sol en la lista de texturas",
+  GuiPath = "/Día de la Bastilla 2000",
+  IsLocal = false
+}
+
+
+asset.onInitialize(function()
+  magnetograms = openspace.walkDirectoryFiles(magnetogramDirectory.TexturesPath)
+  rawset(_G, "magnetogramsTextureIndex", -1)
+  for i, imagename in ipairs(magnetograms) do
+    openspace.globebrowsing.addLayer(
+      "Sun",
+      "ColorLayers",
+      {
+        Identifier = "magnetogram-" .. i,
+        Name = imagename,   --"Magnetogram-" .. i,
+        Description = "",
+        FilePath = imagename,
+        Enabled = false,
+        ZIndex = 100,
+        CacheSettings = { Enabled = false }
+      }
+    )
+  end
+
+  openspace.action.registerAction(SwitchColorLayer)
+end)
+
+asset.onDeinitialize(function()
+  for i, imagename in ipairs(magnetograms) do
+    openspace.globebrowsing.deleteLayer("Sun", "ColorLayers", "magnetogram-" .. i)
+  end
+  openspace.action.removeAction(SwitchColorLayer)
+end)
+
+asset.export("SwitchColorLayer", SwitchColorLayer.Identifier)
+
+
+
+asset.meta = {
+  Name = "Texturas de magnetograma del Día de la Bastilla",
+  Description = [[Este recurso añade múltiples texturas de magnetograma al Sol. Además,
+  proporciona una acción para alternar entre las texturas. Consulte magnetogram.asset para
+  obtener detalles de las texturas]],
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "MIT license"
+}

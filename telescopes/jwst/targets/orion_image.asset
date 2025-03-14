@@ -1,0 +1,16 @@
+local image = asset.resource({
+  Name = "Imagen de Orión",
+  Type = "HttpSynchronization",
+  Identifier = "orion_image",
+  Version = 1
+})
+
+asset.export("image", image)
+
+asset.meta = {
+  Name = "Nebulosa de Orión",
+  Description = "Imagen de la Nebulosa de Orión",
+  Author = "Bill Schoening/NOIRLab/NSF/AURA",
+  URL = "https://noirlab.edu/public/images/noao-02677/",
+  License = "CC BY 4.0"
+}

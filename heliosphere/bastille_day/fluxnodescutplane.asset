@@ -1,0 +1,158 @@
+local propertyHelper = asset.require("util/property_helper")
+local transforms = asset.require("scene/solarsystem/sun/transforms_heliosphere")
+local rot = asset.require("./carrington_to_heeq_rotation")
+
+
+
+local TexturesPathEquatorial = asset.resource({
+Type = "HttpSynchronization",
+  Name = "cutplanes_textures",
+  Identifier = "cutplanes_textures",
+  Version = 1
+})
+
+local TexturesPathMeridial = asset.resource({
+  Type = "HttpSynchronization",
+  Name = "cutplane_meridial_textures",
+  Identifier = "cutplane_meridial_textures",
+  Version = 1
+})
+
+
+local EquatorialCutplane = {
+  Identifier = "EquatorialCutplane-bastille-day-2000",
+  Parent = transforms.HEEQ180ReferenceFrame.Identifier,
+  -- TODO Elon: 21 April 2022. Interaction sphere should not depend on the transform scale.
+  -- InteractionSphere = sunAsset.Sun.Renderable.Radii[1] * 1.05,
+  InteractionSphere = 695700000.0,
+  Transform = {
+    Rotation = rot.CarringtonLongitudeToHEEQ180Rotation
+  },
+  Renderable = {
+    Type = "RenderablePlaneTimeVaryingImage",
+    Size = 157000000000,
+    Enabled = true,
+    SourceFolder = TexturesPathEquatorial,
+    BlendMode = "Normal",
+    MirrorBackside = false,
+    Opacity = 0.7
+  },
+  GUI = {
+    Name = "Plano de corte ecuatorial",
+    Path = "/Sistema Solar/Heliosfera/Día de la Bastilla 2000",
+    Description = [[Secuencia de plano de corte ecuatorial para el evento CME del día de la Bastilla. Este
+      recurso contiene datos desde 2000-07-14 08:38 hasta 2000-07-14 12:00]]
+  }
+}
+
+local MeridialCutplane = {
+  Identifier = "MeridialCutplane-bastille-day-2000",
+  Parent = transforms.HEEQ180ReferenceFrame.Identifier,
+  -- TODO Elon: 21 April 2022. Interaction sphere should not depend on the transform scale.
+  -- InteractionSphere = sunAsset.Sun.Renderable.Radii[1] * 1.05,
+  InteractionSphere = 695700000,
+  Transform = {
+    Rotation = {
+      Type = "StaticRotation",
+      Rotation = { -math.pi/2, -math.pi, 0.0 }
+    }
+  },
+  Renderable = {
+    Type = "RenderablePlaneTimeVaryingImage",
+    Size = 157000000000,
+    Enabled = true,
+    SourceFolder = TexturesPathMeridial,
+    BlendMode = "Normal",
+    MirrorBackside = false,
+    Opacity = 0.7
+  },
+  GUI = {
+    Name = "Plano de corte meridional",
+    Path = "/Sistema Solar/Heliosfera/Día de la Bastilla 2000",
+    Description = [[Secuencia de plano de corte meridional para el evento CME del día de la Bastilla. Este recurso
+      contiene datos desde 2000-07-14 08:38 hasta 2000-07-14 12:00]]
+  }
+}
+
+local ToggleEquatorial = {
+  Identifier = "os.bastilleday.fluxnodescutplane.ToggleEquatorial",
+  Name = "Alternar plano de corte ecuatorial",
+  Command = [[
+    if openspace.propertyValue("Scene.EquatorialCutplane-bastille-day-2000.Renderable.Enabled") then
+      openspace.setPropertyValueSingle(
+        "Scene.EquatorialCutplane-bastille-day-2000.Renderable.Fade",
+        0.0,
+        openspace.propertyValue("OpenSpaceEngine.FadeDuration"),
+        "Linear",
+        'openspace.setPropertyValueSingle("Scene.EquatorialCutplane-bastille-day-2000.Renderable.Enabled", false)'
+      )
+    else
+      openspace.setPropertyValueSingle("Scene.EquatorialCutplane-bastille-day-2000.Renderable.Enabled", true)
+      openspace.setPropertyValueSingle(
+        "Scene.EquatorialCutplane-bastille-day-2000.Renderable.Fade",
+        1.0,
+        openspace.propertyValue("OpenSpaceEngine.FadeDuration"),
+        "Linear"
+      )
+    end
+  ]],
+  Documentation = "Alternar plano de corte ecuatorial del CME",
+  GuiPath = "/Día de la Bastilla 2000",
+  IsLocal = false
+}
+local ToggleMeridial = {
+  Identifier = "os.bastilleday.fluxnodescutplane.ToggleMeridial",
+  Name = "Alternar plano de corte meridional",
+  Command = [[
+    if openspace.propertyValue("Scene.MeridialCutplane-bastille-day-2000.Renderable.Enabled") then
+      openspace.setPropertyValueSingle(
+        "Scene.MeridialCutplane-bastille-day-2000.Renderable.Fade",
+        0.0,
+        openspace.propertyValue("OpenSpaceEngine.FadeDuration"),
+        "Linear",
+        'openspace.setPropertyValueSingle("Scene.MeridialCutplane-bastille-day-2000.Renderable.Enabled", false)'
+      )
+    else
+      openspace.setPropertyValueSingle("Scene.MeridialCutplane-bastille-day-2000.Renderable.Enabled", true)
+      openspace.setPropertyValueSingle(
+        "Scene.MeridialCutplane-bastille-day-2000.Renderable.Fade",
+        1.0,
+        openspace.propertyValue("OpenSpaceEngine.FadeDuration"),
+        "Linear"
+      )
+    end
+  ]],
+  Documentation = "Alternar plano de corte meridional del CME",
+  GuiPath = "/Día de la Bastilla 2000",
+  IsLocal = false
+}
+
+
+asset.onInitialize(function()
+  openspace.action.registerAction(ToggleEquatorial)
+  openspace.action.registerAction(ToggleMeridial)
+  openspace.addSceneGraphNode(EquatorialCutplane)
+  openspace.addSceneGraphNode(MeridialCutplane)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(MeridialCutplane)
+  openspace.removeSceneGraphNode(EquatorialCutplane)
+  openspace.action.removeAction(ToggleEquatorial)
+  openspace.action.removeAction(ToggleMeridial)
+end)
+
+asset.export("ToggleEquatorial", ToggleEquatorial.Identifier)
+asset.export("ToggleMeridial", ToggleMeridial.Identifier)
+asset.export(EquatorialCutplane)
+asset.export(MeridialCutplane)
+
+
+
+asset.meta = {
+  Name = "Planos de corte de Predictive Science Inc. Día de la Bastilla",
+  Description = "Planos de corte para el evento CME del día de la Bastilla",
+  Author = "CCMC, Christian Adamsson, Emilie Ho",
+  URL = "https://dx.doi.org/10.3847/1538-4357/aab36d",
+  License = "CC-BY"
+}

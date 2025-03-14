@@ -1,0 +1,106 @@
+local StartOfCme = {
+  Identifier = "os.bastilleday.setup.StartOfCme",
+  Name = "Reiniciar al inicio del CME, sin bucle",
+  Command = [[
+    openspace.time.setTime("2000-JUL-14 10:03:00.000")
+    openspace.time.setDeltaTime(1)
+    openspace.scriptScheduler.clear()
+  ]],
+  Documentation = "Botón para reiniciar al inicio del CME",
+  GuiPath = "/Día de la Bastilla 2000",
+  IsLocal = false
+}
+
+local ShortLoop = {
+  Identifier = "os.bastilleday.setup.ShortLoop",
+  Name = "Bucle 10:03 - 10:16, a 2 min/segundo",
+  Command = [[
+    local EndtimeShortLoop = "2000 JUL 14 10:16:00"
+    local StartTimeScriptsLowLoop = "openspace.time.setTime('2000 JUL 14 10:03:00')"
+    openspace.scriptScheduler.clear()
+    openspace.time.setDeltaTime(120)
+    openspace.time.setTime("2000-JUL-14 10:03:00.000")
+    openspace.scriptScheduler.loadScheduledScript(EndtimeShortLoop, StartTimeScriptsLowLoop)
+  ]],
+  Documentation = "Nuevo bucle: Reinicia el tiempo a las 10:03 y se detiene a las 10:16, establece el delta de tiempo a 2 min/segundo (120 segundos/segundo)",
+  GuiPath = "/Día de la Bastilla 2000",
+  IsLocal = false
+}
+
+local StandardLoop = {
+  Identifier = "os.bastilleday.setup.StandardLoop",
+  Name = "Bucle 10:03 - 11:00, a 4 min/segundo",
+  Command = [[
+    local StartTimeScriptsLowLoop = "openspace.time.setTime('2000 JUL 14 10:03:00')"
+    openspace.scriptScheduler.clear()
+    openspace.time.setDeltaTime(240)
+    openspace.time.setTime("2000-JUL-14 10:03:00.000")
+    openspace.scriptScheduler.loadScheduledScript("2000 JUL 14 11:00:00", StartTimeScriptsLowLoop)
+  ]],
+  Documentation = "Nuevo bucle: Reinicia el tiempo a las 10:03 y se detiene a las 11:00, delta de tiempo a 4 min/segundo (240 segundos/segundo)",
+  GuiPath = "/Día de la Bastilla 2000",
+  IsLocal = false
+}
+
+local FastLoop = {
+  Identifier = "os.bastilleday.setup.FastLoop",
+  Name = "Bucle 10:03 - 11:48, a 15 min/segundo",
+  Command = [[
+    local StartTimeScriptFastLoop = "openspace.time.setTime('2000 JUL 14 10:03:00')"
+    openspace.scriptScheduler.clear()
+    openspace.time.setDeltaTime(900)
+    openspace.time.setTime("2000-JUL-14 10:03:00.000")
+    openspace.scriptScheduler.loadScheduledScript("2000 JUL 14 11:48:00", StartTimeScriptFastLoop)
+  ]],
+  Documentation = "Bucle rápido: Comienza a las 10:03 y establece el delta de tiempo a 15 min/segundo (900 segundos/segundo)",
+  GuiPath = "/Día de la Bastilla 2000",
+  IsLocal = false
+}
+
+local LongLoop = {
+  Identifier = "os.bastilleday.setup.LongLoop",
+  Name = "Bucle 09:30 - 13:00, a 4 min/segundo",
+  Command = [[
+    local StartTimeScriptLongLoop = "openspace.time.setTime('2000 JUL 14 09:30:00')"
+    openspace.scriptScheduler.clear()
+    openspace.time.setDeltaTime(240)
+    openspace.time.setTime("2000-JUL-14 09:30:00.00")
+    openspace.scriptScheduler.loadScheduledScript("2000 JUL 14 13:00:00", StartTimeScriptLongLoop)
+  ]],
+  Documentation = "Bucle largo: Reinicia el tiempo a las 09:30 y se detiene a las 11:50, delta de tiempo a 4 min/segundo (240 segundos/segundo)",
+  GuiPath = "/Día de la Bastilla 2000",
+  IsLocal = false
+}
+
+
+asset.onInitialize(function()
+  openspace.action.registerAction(StartOfCme)
+  openspace.action.registerAction(ShortLoop)
+  openspace.action.registerAction(StandardLoop)
+  openspace.action.registerAction(FastLoop)
+  openspace.action.registerAction(LongLoop)
+end)
+
+asset.onDeinitialize(function()
+  openspace.action.removeAction(LongLoop)
+  openspace.action.removeAction(FastLoop)
+  openspace.action.removeAction(StandardLoop)
+  openspace.action.removeAction(ShortLoop)
+  openspace.action.removeAction(StartOfCme)
+end)
+
+asset.export("StartOfCme", StartOfCme.Identifier)
+asset.export("ShortLoop", ShortLoop.Identifier)
+asset.export("StandardLoop", StandardLoop.Identifier)
+asset.export("FastLoop", FastLoop.Identifier)
+asset.export("LongLoop", LongLoop.Identifier)
+
+
+
+asset.meta = {
+  Name = "Acciones del día de la Bastilla",
+  Description = "Activo con acciones relacionadas con el día de la Bastilla",
+  Author = "CCMC, OpenSpace Team",
+  URL = "http://openspaceproject.com",
+  License = "Licencia MIT"
+}

@@ -1,0 +1,45 @@
+local transforms = asset.require("./transforms")
+
+local textures = asset.resource({
+  Type = "HttpSynchronization",
+  Name = "Sun textures",
+  Identifier = "sun_textures",
+  Version = 4
+})
+
+local SunMarker = {
+  Identifier = "SunMarker",
+  Parent = transforms.SolarSystemBarycenter.Identifier,
+  Renderable = {
+    Type = "RenderablePlaneImageLocal",
+    Enabled = false,
+    Size = 3.0E11,
+    Origin = "Center",
+    Billboard = true,
+    Texture = textures .. "marker.png",
+    BlendMode = "Additive"
+  },
+  GUI = {
+    Name = "Marcador del Sol",
+    Path = "/Sistema Solar/Sol",
+    Description = "Marcador del Sol con nombre, dimensionado para la vista del Sistema Solar"
+  }
+}
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(SunMarker)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(SunMarker)
+end)
+
+asset.export(SunMarker)
+
+asset.meta = {
+  Name = "Marcador del Sol",
+  Description = "Marcador para el Sol, con una etiqueta y un palo",
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "MIT license"
+}

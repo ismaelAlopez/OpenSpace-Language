@@ -1,0 +1,101 @@
+local transforms = asset.require("scene/solarsystem/sun/transforms_heliosphere")
+
+local transferFunctions = asset.resource({
+  Name = "Funciones de Transferencia de Líneas de Campo",
+  Type = "HttpSynchronization",
+  Identifier = "sun_earth_event_july_2012-fieldlines_transferfunctions",
+  Version = 1
+})
+
+local fieldlineData = asset.resource({
+  Name = "Datos de Líneas de Campo PFSS",
+  Type = "HttpSynchronization",
+  Identifier = "sun_earth_event_july_2012-pfss",
+  Version = 1,
+  UnzipFiles = true
+})
+
+local DarkSun = {
+  Identifier = "os.2012july.DarkSun",
+  Name = "Sol Oscuro",
+  Command = [[
+    local property = "Scene.Sun.Renderable.Layers.ColorLayers.Texture.Settings.Multiplier"
+    local textureMultiplier = openspace.propertyValue(property)
+    if (textureMultiplier < 0.01) then
+      openspace.setPropertyValueSingle(property, 1.0, 1)
+    else
+      openspace.setPropertyValueSingle(property, 0.0, 1)
+    end
+  ]],
+  Documentation = "Hace que el Sol se vuelva negro",
+  GuiPath = "/2012Julio",
+  IsLocal = false
+}
+
+local pfssTransitionColorTable = transferFunctions .. "pfss_transition.txt"
+local pfssTopologyColorTable = transferFunctions .. "pfss_topology.txt"
+local pfssBsignColorTable = transferFunctions .. "pfss_bsign.txt"
+
+local PFSSPaths = {
+  SolarSoft = fieldlineData .. "leilas_solar_soft/"
+}
+
+local InteractionSphere = 695700000
+
+local PFSS = {
+  Identifier = "FL_PFSS",
+  Parent = transforms.HEEQ180ReferenceFrame.Identifier,
+  InteractionSphere = InteractionSphere,
+  Renderable = {
+    Type = "RenderableFieldlinesSequence",
+    SourceFolder = PFSSPaths.SolarSoft,
+    InputFileType = "Osfls",
+    Color = { 0.35, 0.51, 0.875, 0.22 },
+    FlowEnabled = true,
+    ReversedFlow = true,
+    FlowColor = { 1, 0.9, 1, 0.74 },
+    ParticleSize = 5,
+    ParticleSpacing = 250,
+    FlowSpeed = 75,
+    ColorTablePaths = {
+      pfssTopologyColorTable,
+      pfssBsignColorTable
+    },
+    ColorTableRanges = {
+      { 0, 2 },
+      { -1, 1 }
+    }
+  },
+  GUI = {
+    Name = "Líneas de Campo PFSS",
+    Path = "/Sistema Solar/Heliosfera"
+  }
+}
+
+asset.onInitialize(function()
+  openspace.action.registerAction(DarkSun)
+
+  openspace.addSceneGraphNode(PFSS)
+
+  -- openspace.setPropertyValueSingle("Scene.FL_PFSS.Renderable.FlowEnabled", true)
+  -- openspace.setPropertyValueSingle("Scene.FL_PFSS.Renderable.Flow.Reversed", true)
+  --openspace.setPropertyValueSingle("Scene.FL_PFSS.Renderable.Flow.particleSize", 5)
+  --openspace.setPropertyValueSingle("Scene.FL_PFSS.Renderable.Flow.particleSpacing", 250)
+  --openspace.setPropertyValueSingle("Scene.FL_PFSS.Renderable.Flow.speed", 75.0)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(PFSS)
+  openspace.action.removeAction(DarkSun)
+end)
+
+asset.export(PFSS)
+asset.export("DarkSun", DarkSun.Identifier)
+
+asset.meta = {
+  Name = "Líneas de Campo del modelo PFSS del evento de 2012",
+  Description = "Líneas de campo magnético del modelo PFSS para un evento CME de 2012",
+  Author = "CCMC",
+  URL = "",
+  License = "CC-BY"
+}

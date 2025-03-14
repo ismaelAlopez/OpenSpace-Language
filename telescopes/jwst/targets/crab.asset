@@ -1,0 +1,35 @@
+local crab = asset.require("./crab_image")
+
+local CrabImage = {
+  Identifier = "CrabImage",
+  Type = "ScreenSpaceImageLocal",
+  Name = "Nebulosa del Cangrejo",
+  UseRadiusAzimuthElevation = true,
+  FaceCamera = false,
+  RadiusAzimuthElevation = { 1.0, 0.5, 0.1 },
+  UsePerspectiveProjection = false,
+  Opacity = 1.0,
+  TexturePath = crab.image .. "crab-nebula.png",
+  Tag = { "mission_jwst_target" },
+  Description = [[
+    Imagen de la Nebulosa del Cangrejo por NASA, ESA y Allison Loll/Jeff Hester.
+  ]]
+}
+
+asset.onInitialize(function()
+  openspace.addScreenSpaceRenderable(CrabImage)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeScreenSpaceRenderable(CrabImage)
+end)
+
+asset.export(CrabImage)
+
+asset.meta = {
+  Name = "Imagen de la Nebulosa del Cangrejo",
+  Description = "Imagen en pantalla de la Nebulosa del Cangrejo",
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "Licencia MIT"
+}

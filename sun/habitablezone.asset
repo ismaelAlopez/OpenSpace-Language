@@ -1,0 +1,40 @@
+local transforms = asset.require("./transforms")
+local textures = asset.require("scene/milkyway/habitable_zones/habitable_zone_textures")
+
+local HabitableZone = {
+  Identifier = "SunHabitableZone",
+  Parent = transforms.SunEclipJ2000.Identifier,
+  Renderable = {
+    Type = "RenderableHabitableZone",
+    Enabled = false,
+    Texture = textures.TexturesPath .. "hot_to_cold_faded.png",
+    EffectiveTemperature = 5780, -- Kelvin
+    Luminosity = 1, -- solar
+    Opacity = 0.1,
+    Optimistic = true
+  },
+  GUI = {
+    Name = "Zona Habitable del Sol",
+    Path = "/Sistema Solar/Sol",
+    Description = "Zona habitable para el sol en nuestro sistema solar"
+  }
+}
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(HabitableZone)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(HabitableZone)
+end)
+
+asset.export(HabitableZone)
+
+asset.meta = {
+  Name = "Zona Habitable del Sol",
+  Description = [[La zona habitable alrededor de nuestro sol, calculada usando fórmulas y
+    coeficientes de Kopparapu et al. (2015) https://arxiv.org/abs/1404.5292]],
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "MIT license"
+}

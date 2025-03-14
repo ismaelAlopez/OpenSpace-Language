@@ -1,0 +1,11 @@
+asset.require("./planet")
+asset.require("./trail")
+asset.require("./label", false)
+
+asset.meta = {
+  Name = "Activo meta de Makemake",
+  Description = [[Rastro, Modelo y Etiqueta de Makemake.]],
+  Author = "Equipo de OpenSpace",
+  URL = "https://www.openspaceproject.com",
+  License = "MIT"
+}

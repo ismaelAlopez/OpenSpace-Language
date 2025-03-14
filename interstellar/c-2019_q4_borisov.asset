@@ -1,0 +1,81 @@
+local sunTransforms = asset.require("scene/solarsystem/sun/transforms")
+
+
+
+local trajectory = asset.resource({
+  Name = "Trayectoria de C-2019 Q4 Borisov",
+  Type = "HttpSynchronization",
+  Identifier = "borisov_horizons",
+  Version = 3
+})
+
+
+local C2019Q4BorisovTrail = {
+  Identifier = "C2019Q4BorisovTrail",
+  Parent = sunTransforms.SolarSystemBarycenter.Identifier,
+  Renderable = {
+    Type = "RenderableTrailTrajectory",
+    Translation = {
+      Type = "HorizonsTranslation",
+      HorizonsTextFile = trajectory .. "horizons_c2019q4borisov.hrz"
+      -- Target: Borisov (C/2019 Q4)
+      -- Observer: SSB
+      -- Start time: 2015-Jan-01 00:00:00 (first data point)
+      -- End time: 2050-Jan-01 00:00:00 (last data point)
+      -- Step size: 1 day
+    },
+    Color = { 0.9, 0.9, 0.0 },
+    StartTime = "2015 JAN 01 00:00:00",
+    EndTime = "2050 JAN 01 00:00:00",
+    SampleInterval = openspace.time.secondsPerDay()
+  },
+  GUI = {
+    Name = "Rastro de C/2019 Q4 Borisov",
+    Path = "/Sistema Solar/Interestelar",
+    Description = [[Rastro de C-2019 Q4 Borisov desde 2015 ENE 01 00:00:00
+    hasta 2050 ENE 01 00:00:00. Datos de JPL Horizons]]
+  }
+}
+
+local C2019Q4BorisovPosition = {
+  Identifier = "C2019Q4BorisovPosition",
+  Parent = sunTransforms.SolarSystemBarycenter.Identifier,
+  Transform = {
+    Translation = {
+      Type = "HorizonsTranslation",
+      HorizonsTextFile = trajectory .. "horizons_c2019q4borisov.hrz"
+    }
+  },
+  GUI = {
+    Name = "C/2019 Q4 Borisov",
+    Path = "/Sistema Solar/Interestelar",
+    Description = [[Posición de C-2019 Q4 Borisov desde 2015 ENE 01 00:00:00
+    hasta 2050 ENE 01 00:00:00. Datos de JPL Horizons]]
+  }
+}
+
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(C2019Q4BorisovPosition)
+  openspace.addSceneGraphNode(C2019Q4BorisovTrail)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(C2019Q4BorisovTrail)
+  openspace.removeSceneGraphNode(C2019Q4BorisovPosition)
+end)
+
+asset.export(C2019Q4BorisovPosition)
+asset.export(C2019Q4BorisovTrail)
+
+
+
+asset.meta = {
+  Name = "C/2019 Q4 Borisov",
+  Description = [[Este recurso contiene el rastro y la posición de C-2019 Q4 Borisov desde
+    2015 ENE 01 00:00:00 hasta 2050 ENE 01 00:00:00. Datos de JPL Horizons]],
+  Author = "Equipo de OpenSpace",
+  URL = "https://ssd.jpl.nasa.gov/horizons.cgi",
+  License = [[Los documentos redactados por JPL están patrocinados por la NASA bajo el Contrato NAS7-030010. Todos
+    los documentos disponibles en este servidor pueden estar protegidos por las leyes de derechos de autor de EE. UU. y extranjeras]]
+}

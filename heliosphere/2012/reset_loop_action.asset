@@ -1,0 +1,23 @@
+local ResetLoop = {
+  Identifier = "os.2012july.ResetLoop",
+  Name = "Botón de reinicio",
+  Command = [[
+    openspace.time.setTime("2012-JUL-01 07:00:00.000")
+    openspace.time.setDeltaTime(1400)
+    openspace.scriptScheduler.clear()
+  ]],
+  Documentation = "Botón de reinicio. Establece el tiempo al inicio del conjunto de datos. Sin bucle",
+  GuiPath = "/2012Julio",
+  IsLocal = false
+}
+
+
+asset.onInitialize(function()
+  openspace.action.registerAction(ResetLoop)
+end)
+
+asset.onDeinitialize(function()
+  openspace.action.removeAction(ResetLoop)
+end)
+
+asset.export("ResetLoop", ResetLoop.Identifier)

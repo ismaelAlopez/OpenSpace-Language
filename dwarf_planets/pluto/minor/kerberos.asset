@@ -1,0 +1,98 @@
+local transforms = asset.require("../transforms")
+local kernels = asset.require("../kernels")
+
+local Kerberos = {
+  Identifier = "Kerberos",
+  Parent = transforms.PlutoBarycenter.Identifier,
+  Transform = {
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels.ID.Kerberos,
+      Observer = kernels.ID.PlutoBarycenter
+    }
+  },
+  Renderable = {
+    Type = "RenderableGlobe",
+    Radii = { 10000, 10000, 10000 }
+  },
+  Tag = { "moon_solarSystem", "moon_dwarf", "moon_pluto", "moon_minor", "moon_minor_pluto" },
+  GUI = {
+    Path = "/Sistema Solar/Planetas Enanos/Plutón/Lunas/Kerberos"
+  }
+}
+
+local KerberosTrail = {
+  Identifier = "KerberosTrail",
+  Parent = transforms.PlutoBarycenter.Identifier,
+  Renderable = {
+    Type = "RenderableTrailOrbit",
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels.ID.Kerberos,
+      Observer = kernels.ID.PlutoBarycenter
+    },
+    Color = { 0.00, 0.62, 1.00 },
+    Period = 32.16756,
+    Resolution = 1000
+  },
+  Tag = {
+    "moonTrail_solarSystem",
+    "moonTrail_dwarf",
+    "moonTrail_pluto",
+    "moonTrail_minor",
+    "moonTrail_minor_pluto"
+  },
+  GUI = {
+    Name = "Rastro de Kerberos",
+    Path = "/Sistema Solar/Planetas Enanos/Plutón/Lunas/Kerberos"
+  }
+}
+
+local KerberosLabel = {
+  Identifier = "KerberosLabel",
+  Parent = Kerberos.Identifier,
+  Renderable = {
+    Type = "RenderableLabel",
+    Enabled = false,
+    Text = "Kerberos",
+    FontSize = 70.0,
+    Size = 6.0,
+    MinMaxSize = { 1, 25 },
+    OrientationOption = "Camera View Direction",
+    BlendMode = "Normal",
+    EnableFading = true,
+    FadeUnit = "Mm",
+    FadeDistances = { 250.0, 1000.0 },
+    FadeWidths = { 150.0, 500.0 }
+  },
+  Tag = { "solarsystem_labels", "moon_labels", "minor_moon_labels" },
+  GUI = {
+    Name = "Etiqueta de Kerberos",
+    Path = "/Sistema Solar/Planetas Enanos/Plutón/Lunas/Kerberos",
+    Description = "Etiqueta para la luna Kerberos de Plutón"
+  }
+}
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(Kerberos)
+  openspace.addSceneGraphNode(KerberosTrail)
+  openspace.addSceneGraphNode(KerberosLabel)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(KerberosLabel)
+  openspace.removeSceneGraphNode(KerberosTrail)
+  openspace.removeSceneGraphNode(Kerberos)
+end)
+
+asset.export(Kerberos)
+asset.export(KerberosTrail)
+asset.export(KerberosLabel)
+
+asset.meta = {
+  Name = "Kerberos",
+  Description = "Globo y Rastro para la luna Kerberos de Plutón",
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "MIT license"
+}

@@ -1,0 +1,18 @@
+local image = asset.resource({
+  Name = "Imagen de la Galaxia M51",
+  Type = "HttpSynchronization",
+  Identifier = "m51_image",
+  Version = 1
+})
+
+asset.export("image", image)
+
+asset.meta = {
+  Name = "Galaxia M51",
+  Description = "Imagen de la Galaxia M51",
+  Author = [[
+    NASA, ESA, S. Beckwith (STScI), and The Hubble Heritage Team (STScI/AURA)
+  ]],
+  URL = "https://hubblesite.org/contents/media/images/2005/12/1677-Image.html",
+  License = "https://hubblesite.org/copyright"
+}

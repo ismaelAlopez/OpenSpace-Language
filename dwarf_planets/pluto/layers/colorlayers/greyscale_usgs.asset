@@ -1,0 +1,39 @@
+local pluto = asset.require("../../pluto")
+
+local Layer = {
+  Identifier = "Greyscale_USGS",
+  Name = "Blanco y Negro [USGS]",
+  Enabled = asset.enabled,
+  ZIndex = 10,
+  FilePath = "WMS:https://planetarymaps.usgs.gov/cgi-bin/mapserv?map=/maps/pluto/pluto_simp_cyl.map&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&LAYERS=NEWHORIZONS_PLUTO_MOSAIC&SRS=EPSG:4326&BBOX=-180,-90,360,90"
+}
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(pluto.Pluto.Identifier, "ColorLayers", Layer)
+end)
+
+asset.onDeinitialize(function()
+  openspace.globebrowsing.deleteLayer(pluto.Pluto.Identifier, "ColorLayers", Layer)
+end)
+
+asset.export("layer", Layer)
+
+asset.meta = {
+  Name = "Plutón Blanco y Negro [USGS]",
+  Description = [[Este detallado y de alta calidad mosaico global de Plutón fue ensamblado a partir de
+    casi todas las imágenes de mayor resolución obtenidas por el Long-Range
+    Reconnaissance Imager (LORRI) y la Multispectral Visible Imaging Camera (MVIC)
+    en New Horizons. El mosaico es la vista global más detallada y completa hasta ahora
+    de la superficie de Plutón utilizando datos de New Horizons. Incluye datos de topografía del
+    hemisferio visible para New Horizons durante el acercamiento más cercano de la nave espacial. La
+    topografía se deriva de herramientas de mapeo de imágenes estereoscópicas digitales que miden la
+    paralaje - o la diferencia en las posiciones relativas aparentes - de las características en
+    la superficie obtenidas en diferentes ángulos de visión durante el encuentro. Los científicos
+    utilizan estos desplazamientos de paralaje de terrenos altos y bajos para estimar las alturas de las
+    formas del terreno. El mosaico está disponible en proyección Equirectangular a una escala de píxel
+    ecuatorial de 300 metros por píxel (m). (Descripción de URL)]],
+  Author = "USGS",
+  URL = "https://astrogeology.usgs.gov/search/map/Pluto/NewHorizons/" ..
+    "Pluto_NewHorizons_Global_Mosaic_300m_Jul2017",
+  License = "NASA/PDS"
+}

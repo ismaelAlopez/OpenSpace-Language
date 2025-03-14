@@ -1,0 +1,42 @@
+local transforms = asset.require("scene/solarsystem/sun/transforms")
+local kernels = asset.require("./kernels")
+local coreKernels = asset.require("spice/core")
+
+local CeresTrail = {
+  Identifier = "CeresTrail",
+  Parent = transforms.SolarSystemBarycenter.Identifier,
+  Renderable = {
+    Type = "RenderableTrailOrbit",
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels.ID.Ceres,
+      Observer = coreKernels.ID.SolarSystemBarycenter
+    },
+    Color = { 0.2, 0.8, 0.3 },
+    Period = 1680,
+    Resolution = 1000
+  },
+  Tag = { "planetTrail_solarSystem", "planetTrail_dwarf" },
+  GUI = {
+    Name = "Rastro de Ceres",
+    Path = "/Sistema Solar/Planetas Enanos/Ceres"
+  }
+}
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(CeresTrail)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(CeresTrail)
+end)
+
+asset.export(CeresTrail)
+
+asset.meta = {
+  Name = "Rastro de Ceres",
+  Description = "Rastro de Ceres observado por el Sol. Datos de NASA Spice",
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "MIT license"
+}

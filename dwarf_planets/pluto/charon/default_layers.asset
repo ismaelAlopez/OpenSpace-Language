@@ -1,0 +1,9 @@
+asset.require("./layers/colorlayers/greyscale_usgs", true)
+
+asset.meta = {
+  Name = "Capas Predeterminadas de Caronte",
+  Description = "Las capas predeterminadas de Caronte son: Blanco y Negro USGS",
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "MIT license"
+}

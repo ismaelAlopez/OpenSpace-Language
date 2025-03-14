@@ -1,0 +1,51 @@
+local transforms = asset.require("../transforms")
+local kernels = asset.require("../kernels")
+
+
+local CharonBarycentricTrail = {
+  Identifier = "CharonBarycentricTrail",
+  Parent = transforms.PlutoBarycenter.Identifier,
+  Renderable = {
+    Type = "RenderableTrailOrbit",
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels.ID.Charon,
+      Observer = kernels.ID.PlutoBarycenter
+    },
+    Color = { 0.00, 0.62, 1.00 },
+    Period = 6.38723,
+    Resolution = 1000
+  },
+  Tag = {
+    "moonTrail_solarSystem",
+    "moonTrail_dwarf",
+    "moonTrail_pluto",
+    "moonTrail_major",
+    "moonTrail_major_pluto"
+  },
+  GUI = {
+    Name = "Rastro Baricéntrico de Caronte",
+    Path = "/Sistema Solar/Planetas Enanos/Plutón/Caronte"
+  }
+}
+
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(CharonBarycentricTrail)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(CharonBarycentricTrail)
+end)
+
+asset.export(CharonBarycentricTrail)
+
+
+
+asset.meta = {
+  Name = "Rastro Baricéntrico de Caronte",
+  Description = "Rastro de Caronte observado desde el Baricentro de Plutón",
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "MIT license"
+}

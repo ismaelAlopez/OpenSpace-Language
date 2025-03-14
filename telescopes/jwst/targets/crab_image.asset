@@ -1,0 +1,19 @@
+local image = asset.resource({
+  Name = "Imagen de la Nebulosa del Cangrejo",
+  Type = "HttpSynchronization",
+  Identifier = "crab_image",
+  Version = 1
+})
+
+asset.export("image", image)
+
+asset.meta = {
+  Name = "Nebulosa del Cangrejo",
+  Description = "Imagen de la Nebulosa del Cangrejo",
+  Author = [[
+    NASA, ESA y Allison Loll/Jeff Hester (Universidad Estatal de Arizona).
+    Reconocimiento: Davide De Martin (ESA/Hubble)
+  ]],
+  URL = "https://esahubble.org/images/ann0820/",
+  License = "CC BY 4.0"
+}

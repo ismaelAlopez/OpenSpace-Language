@@ -1,0 +1,93 @@
+local transforms = asset.require("./transforms")
+local coreKernels = asset.require("spice/core")
+asset.require("./trail")
+
+local labelsPath = asset.resource({
+  Name = "Etiquetas de Plutón",
+  Type = "HttpSynchronization",
+  Identifier = "pluto_labels",
+  Version = 1
+})
+
+local Pluto = {
+  Identifier = "Pluto",
+  Parent = transforms.PlutoBarycenter.Identifier,
+  Transform = {
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = coreKernels.ID.Pluto,
+      Observer = coreKernels.ID.PlutoBarycenter
+    },
+    Rotation = {
+      Type = "SpiceRotation",
+      SourceFrame = coreKernels.Frame.Pluto,
+      DestinationFrame = coreKernels.Frame.Galactic
+    }
+  },
+  Renderable = {
+    Type = "RenderableGlobe",
+    Radii = { 1173000, 1173000, 1173000 },
+    Labels = {
+      Enabled = false,
+      FileName = labelsPath .. "pluto.labels",
+      AlignmentOption = "Horizontally", -- or Circularly
+      FontSize = 20.0,
+      Size = 8.5,
+      FadeInEnabled = true,
+      FadeOutEnabled = true,
+      FadeDistances = { 650000.0, 4000000.0 },
+      DistanceEPS = 500000.0,
+      Color = { 1.0, 1.0, 0.0 }
+    }
+  },
+  Tag = { "planet_solarSystem", "planet_terrestrial", "dwarf_planet" },
+  GUI = {
+    Path = "/Sistema Solar/Planetas Enanos/Plutón"
+  }
+}
+
+local PlutoLabel = {
+  Identifier = "PlutoLabel",
+  Parent = Pluto.Identifier,
+  Renderable = {
+    Type = "RenderableLabel",
+    Enabled = false,
+    Text = "Pluto",
+    FontSize = 70.0,
+    Size = 9.10,
+    MinMaxSize = { 1, 100 },
+    BlendMode = "Additive",
+    OrientationOption = "Camera View Direction",
+    EnableFading = true,
+    FadeUnit = "au",
+    FadeDistances = { 2.0, 120.0 },
+    FadeWidths = { 1.0, 150.0 }
+  },
+  Tag = { "solarsystem_labels" },
+  GUI = {
+    Name = "Etiqueta de Plutón",
+    Path = "/Sistema Solar/Planetas Enanos/Plutón",
+    Description = "Etiqueta para Plutón, visible en el nivel de zoom de vista general del sistema solar"
+  }
+}
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(Pluto)
+  openspace.addSceneGraphNode(PlutoLabel)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(PlutoLabel)
+  openspace.removeSceneGraphNode(Pluto)
+end)
+
+asset.export(Pluto)
+asset.export(PlutoLabel)
+
+asset.meta = {
+  Name = "Plutón",
+  Description = "Globo de Plutón y etiqueta principal del planeta",
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "MIT license"
+}

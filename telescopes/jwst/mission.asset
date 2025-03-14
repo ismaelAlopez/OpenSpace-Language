@@ -1,0 +1,100 @@
+--voyager/mission.asset
+
+-- Source:  http://pluto.jhuapl.edu/Mission/index.php
+-- Many of the values (especially days of the month if 01 or 30 or 31  and  hh::mm::ss if all 0)
+-- are approximate and need fixing
+
+local Mission = {
+  Name = "Telescopio Espacial James Webb",
+  Image = "https://www.esa.int/var/esa/storage/images/esa_multimedia/images/2016/12/jwst_mission_logo/16561412-4-eng-GB/JWST_mission_logo_pillars.png",
+  Description = "El Telescopio Espacial James Webb (a veces llamado JWST o Webb) es un observatorio infrarrojo en órbita que complementará y ampliará los descubrimientos del Telescopio Espacial Hubble, con una cobertura de longitud de onda más larga y una sensibilidad mucho mayor. Las longitudes de onda más largas permiten a Webb observar mucho más cerca del comienzo del tiempo y buscar la formación no observada de las primeras galaxias, así como mirar dentro de las nubes de polvo donde se están formando estrellas y sistemas planetarios hoy en día.",
+  Milestones = {
+    {
+      Name = "Lanzamiento",
+      Date = "2021 DEC 25 12:20:00",
+      Image = "https://webb.nasa.gov/ImagesContent/51775043129_7aeedc5a6d_k.jpg",
+      Description = "Web fue lanzado desde el complejo de lanzamiento ELA-3 de Arianespace en el Puerto Espacial de Europa, ubicado cerca de Kourou, Guayana Francesa. Es beneficioso que los sitios de lanzamiento estén ubicados cerca del ecuador: la rotación de la Tierra puede ayudar a dar un empuje adicional. La superficie de la Tierra en el ecuador se mueve a 1670 km/h. El Telescopio Espacial James Webb fue lanzado en un cohete Ariane 5. El vehículo de lanzamiento y el sitio de lanzamiento fueron parte de la contribución de la Agencia Espacial Europea a la misión. El Ariane 5 es uno de los vehículos de lanzamiento más confiables del mundo y fue elegido por una combinación de confiabilidad (era el único vehículo de lanzamiento que cumplía con los requisitos de la NASA para lanzar una misión como Webb) y por el valor que aportó a través de nuestra asociación internacional."
+    },
+    {
+      Name = "Llegada a la órbita L2",
+      Date = "2022 JAN 24 00:00:00",
+      Description = "Cuando le preguntas a un astrónomo sobre la órbita del Telescopio Espacial James Webb, te dirá algo que suena como si viniera de una novela de ciencia ficción. Webb no estará orbitando la Tierra, sino que lo enviaremos a casi un millón de millas en el espacio a un lugar llamado 'L2'. L2 es una abreviatura del segundo Punto de Lagrange, un maravilloso accidente de la gravedad y la mecánica orbital, y el lugar perfecto para estacionar el telescopio Webb en el espacio. Hay cinco llamados 'Puntos de Lagrange', áreas donde la gravedad del sol y la Tierra equilibran el movimiento orbital de un satélite. Colocar una nave espacial en cualquiera de estos puntos le permite permanecer en una posición fija en relación con la Tierra y el sol con una cantidad mínima de energía necesaria para la corrección de rumbo.",
+      Image = "https://www.nasa.gov/images/content/463480main_lagrange_point_lg_1.jpg",
+      Link = "https://www.nasa.gov/topics/universe/features/webb-l2.html"
+    },
+    {
+      Name = "NIRCam detectó los primeros fotones",
+      Date = "2022 FEB 03 19:28:00"
+    },
+    {
+      Name = "Alineación de fase fina",
+      Date = "2022 MAR 11 00:00:00",
+      Description = "Aunque el propósito de esta imagen era enfocarse en la estrella brillante en el centro para la evaluación de la alineación, las ópticas de Webb y NIRCam son tan sensibles que las galaxias y estrellas que se ven en el fondo aparecen. En esta etapa de la alineación del espejo de Webb, conocida como 'fase fina', cada uno de los segmentos del espejo primario se ha ajustado para producir una imagen unificada de la misma estrella utilizando solo el instrumento NIRCam. Esta imagen de la estrella, que se llama 2MASS J17554042+6551277, utiliza un filtro rojo para optimizar el contraste visual.",
+      Image = "https://www.nasa.gov/sites/default/files/thumbnails/image/telescope_alignment_evaluation_image_labeled.png"
+    },
+    {
+      Name = "Primera imagen de campo profundo publicada",
+      Date = "2022 JUL 11 14:30:00",
+      Description = "La primera imagen científica de JWST se publicó un día antes, el 11 de julio de 2022, en un discurso del Presidente de los Estados Unidos, Joe Biden. Esta imagen de campo profundo es la vista infrarroja de mayor resolución y más profunda de nuestro Universo tomada hasta la fecha. La luz de estas galaxias está siendo amplificada gravitacionalmente por la masa del cúmulo de galaxias SMACS 0723 en primer plano. Esto hace que su luz se distorsione en hermosos arcos. Esta imagen muestra SMACS 0723 tal como era hace 4.6 mil millones de años, pero las galaxias de fondo están mucho más lejos. La luz más lejana en esta imagen ha tardado más de 13 mil millones de años en llegar hasta nosotros. Esta imagen representa una parte del cielo que es tan pequeña que podría caber detrás de un grano de arena en la punta de tu dedo extendido a la longitud del brazo.",
+      Image = "https://planetary.s3.amazonaws.com/web/assets/pictures/_2400x2448_crop_center-center_82_line/JWST-First-Deep-Field.jpg.webp",
+      Link = "https://webbtelescope.org/news/first-images/gallery"
+    },
+    {
+      Name = "Alineación completa",
+      Description = "La alineación del Telescopio Espacial James Webb de la NASA ahora está completa. Después de una revisión completa, se ha confirmado que el observatorio es capaz de capturar imágenes nítidas y bien enfocadas con cada uno de sus cuatro poderosos instrumentos científicos a bordo. Al completar la séptima y última etapa de la alineación del telescopio, el equipo realizó una serie de reuniones clave de decisión y acordó unánimemente que Webb está listo para avanzar a su próxima y última serie de preparativos, conocida como la puesta en marcha de instrumentos científicos. Este proceso tomará aproximadamente dos meses antes de que comiencen las operaciones científicas en el verano.",
+      Image = "https://blogs.nasa.gov/webb/wp-content/uploads/sites/326/2022/04/webb_img_sharpness.png",
+      Date = "2022 APR 28 00:00:00",
+      Link = "https://blogs.nasa.gov/webb/2022/04/28/nasas-webb-in-full-focus-ready-for-instrument-commissioning/"
+    }
+  },
+  Phases = {
+    {
+      Name = "Lanzamiento",
+      TimeRange = { Start = "2021 DEC 25 12:20:00", End = "2021 DEC 25 12:47:00" }
+    },
+    {
+      Name = "Preparación para operaciones científicas",
+      TimeRange = { Start = "2021 DEC 25 12:47:00", End = "2022 JUL 12 14:30:00" },
+      Phases = {
+        {
+          Name = "Lanzamiento del Telescopio",
+          TimeRange = { Start = "2021 DEC 25 12:50:00", End = "2022 JAN 24 00:00:00" },
+            Description = "El primer mes se utilizó para el despliegue del telescopio, enfriamiento, encendido de instrumentos e inserción en órbita alrededor de L2.",
+          Phases = {
+            {
+              Name = "Lanzamineto del parasol solar",
+              TimeRange = { Start = "2021 DEC 25 12:50:00", End = "2022 JAN 04 00:00:00" },
+              Image = "https://c1.staticflickr.com/5/4573/37594108385_36d5e25c8a_b.jpg",
+                Description = "El parasol solar separa el observatorio en un lado cálido, orientado al sol (los modelos térmicos muestran que la temperatura máxima de la capa más externa es de 383K o aproximadamente 230F o 110C), y un lado frío (con la capa más fría teniendo una temperatura mínima modelada de 36K o alrededor de -394F o -236C). El parasol de cinco capas evita que la luz solar interfiera con los instrumentos sensibles del telescopio. El telescopio opera a menos de 50K (~-370F o ~-223C)"
+            }
+          }
+        },
+        {
+          Name = "Alineamiento del telescopio",
+          TimeRange = { Start = "2022 JAN 24 00:00:00", End = "2022 APR 28 00:00:00" },
+          Image = "https://blogs.nasa.gov/webb/wp-content/uploads/sites/326/2022/02/alignment_mosaic_compressed-1200x813.png",
+            Description = "Usando el Sensor de Guía Fina, apuntamos Webb a una sola estrella brillante y demostramos que el observatorio podía adquirir y fijar objetivos, y tomamos datos principalmente con NIRCam. Pero debido a que los segmentos del espejo primario aún no se habían alineado para funcionar como un solo espejo, había imágenes distorsionadas de la misma estrella objetivo. Luego nos embarcamos en el largo proceso de alinear toda la óptica del telescopio, comenzando con la identificación de qué segmento del espejo primario correspondía a cada imagen moviendo cada segmento uno a la vez y terminando unos meses después con todos los segmentos alineados como uno solo y el espejo secundario alineado de manera óptima.",
+          Link = "https://blogs.nasa.gov/webb/wp-content/uploads/sites/326/2022/02/SegmentAlignment.gif"
+        },
+        {
+          Name = "Comisionamiento de instrumentos científicos",
+            Description = "Ahora, el equipo de Webb centrará su atención en la puesta en marcha de los instrumentos científicos. Cada instrumento es un conjunto altamente sofisticado de detectores equipados con lentes únicas, máscaras, filtros y equipos personalizados que ayudan a realizar la ciencia para la que fueron diseñados. Las características especializadas de estos instrumentos se configurarán y operarán en varias combinaciones durante la fase de puesta en marcha de los instrumentos para confirmar completamente su preparación para la ciencia.",
+          TimeRange = { Start = "2022 APR 28 00:00:00", End = "2022 JUL 12 14:30:00" },
+        }
+      }
+    },
+    {
+      Name = "Operaciones científicas",
+      TimeRange = { Start = "2022 JUL 12 14:30:00", End = "2024 JAN 22 00:00:00" },
+      Description = "El Telescopio Espacial James Webb es un gran avance en nuestra búsqueda por entender el Universo y nuestros orígenes. Webb examinará cada fase de la historia cósmica: desde los primeros resplandores luminosos después del Big Bang hasta la formación de galaxias, estrellas y planetas, y la evolución de nuestro propio sistema solar."}
+  }
+}
+
+
+asset.onInitialize(function()
+  openspace.loadMission(Mission)
+end)
+
+asset.onDeinitialize(function()
+  openspace.unloadMission(Mission.Name)
+end)

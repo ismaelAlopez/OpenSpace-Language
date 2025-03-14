@@ -1,0 +1,21 @@
+local image = asset.resource({
+  Name = "Imagen de la Galaxia M82",
+  Type = "HttpSynchronization",
+  Identifier = "m82_image",
+  Version = 1
+})
+
+
+asset.export("image", image)
+
+
+asset.meta = {
+  Name = "Galaxia M82",
+  Description = "Imagen de la Galaxia M82",
+  Author = [[
+    NASA, ESA y el equipo de Hubble Heritage (STScI/AURA). Reconocimiento:
+    J. Gallagher (Universidad de Wisconsin), M. Mountain (STScI) y P. Puxley (NSF)
+  ]],
+  URL = "https://esahubble.org/images/heic0604a/",
+  License = "CC BY 4.0"
+}

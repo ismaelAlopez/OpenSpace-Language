@@ -1,0 +1,16 @@
+local image = asset.resource({
+  Name = "Imagen de la estrella HD 84406",
+  Type = "HttpSynchronization",
+  Identifier = "hd84406_image",
+  Version = 1
+})
+
+asset.export("image", image)
+
+asset.meta = {
+  Name = "Estrella HD 84406",
+  Description = "Imagen de alineación del JWST de la estrella HD 84406",
+  Author = "NASA/STScI",
+  URL = "https://www.nasa.gov/press-release/nasa-s-webb-reaches-alignment-milestone-optics-working-successfully",
+  License = "NASA"
+}

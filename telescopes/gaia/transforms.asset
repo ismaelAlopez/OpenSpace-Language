@@ -1,0 +1,50 @@
+local earthTransforms = asset.require("scene/solarsystem/planets/earth/transforms")
+
+local trail = asset.resource({
+  Name = "Gaia Trail",
+  Type = "HttpSynchronization",
+  Identifier = "gaia_trail",
+  Version = 3
+})
+
+local GaiaPosition = {
+  Identifier = "GaiaPosition",
+  Parent = earthTransforms.EarthCenter.Identifier,
+  Transform = {
+    Translation = {
+      Type = "HorizonsTranslation",
+      HorizonsTextFile = {
+        trail .. "gaia_orbit_horizons_1.hrz", --2013-12-19 09:55:27 to 2014-01-19 00:00:00
+        trail .. "gaia_orbit_horizons_2.hrz"  --2014-01-19 00:00:00 to 2026-09-14 00:00:00
+        -- Target: Gaia (spacecraft) (-139479)
+        -- Observer: Earth (399 GEOCENTRIC)
+        -- Start time: 2013-Dec-19 09:55:27 (first data point)
+        -- End time: 2026-Sep-14 00:00:00 (last data point)
+        -- Step size: First file has 40 minutes and seocnd has 1 day step size
+      }
+    }
+  },
+  GUI = {
+    Name = "Posición",
+    Path = "/Sistema Solar/Telescopios/Gaia"
+  }
+}
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(GaiaPosition)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(GaiaPosition)
+end)
+
+asset.export(GaiaPosition)
+
+asset.meta = {
+  Name = "Transformación de Gaia",
+  Description = [[Este recurso contiene la posición de Gaia desde el 19 de diciembre de 2013 09:55:27 hasta
+    el 14 de septiembre de 2026 21:15:27. Datos de JPL Horizons]],
+  Author = "Equipo de OpenSpace",
+  URL = "https://ssd.jpl.nasa.gov/horizons.cgi",
+  License = "NASA"
+}

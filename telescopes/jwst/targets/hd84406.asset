@@ -1,0 +1,35 @@
+local hd84406 = asset.require("./hd84406_image")
+
+local HD84406Image = {
+  Identifier = "HD84406Image",
+  Type = "ScreenSpaceImageLocal",
+  Name = "Estrella HD 84406",
+  UseRadiusAzimuthElevation = true,
+  FaceCamera = false,
+  RadiusAzimuthElevation = { 1.0, 0.5, 0.1 },
+  UsePerspectiveProjection = false,
+  Opacity = 1.0,
+  TexturePath = hd84406.image .. "HD84406.png",
+  Tag = { "mission_jwst_target" },
+  Description = [[
+    Imagen de alineación del JWST de la estrella HD 84406 por NASA/STScI.
+  ]]
+}
+
+asset.onInitialize(function()
+  openspace.addScreenSpaceRenderable(HD84406Image)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeScreenSpaceRenderable(HD84406Image)
+end)
+
+asset.export(HD84406Image)
+
+asset.meta = {
+  Name = "Imagen de la Estrella HD 84406",
+  Description = "Imagen en pantalla de la estrella HD 84406",
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "Licencia MIT"
+}

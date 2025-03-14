@@ -1,0 +1,44 @@
+local transforms = asset.require("./transforms")
+
+local Label = {
+  Identifier = "HaumeaLabel",
+  Parent = transforms.Position.Identifier,
+  Renderable = {
+    Type = "RenderableLabel",
+    Enabled = asset.enabled,
+    Text = "Haumea",
+    FontSize = 70.0,
+    Size = 9.10,
+    MinMaxSize = { 1, 100 },
+    BlendMode = "Additive",
+    OrientationOption = "Camera View Direction",
+    EnableFading = true,
+    FadeUnit = "au",
+    FadeDistances = { 2.0, 120.0 },
+    FadeWidths = { 1.0, 150.0 }
+  },
+  Tag = { "solarsystem_labels" },
+  GUI = {
+    Name = "Etiqueta de Haumea",
+    Path = "/Sistema Solar/Planetas Enanos/Haumea",
+    Description = "Etiqueta para Haumea, visible en el nivel de zoom de vista general del sistema solar"
+  }
+}
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(Label)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(Label)
+end)
+
+asset.export("Label", Label)
+
+asset.meta = {
+  Name = "Etiqueta de Haumea",
+  Description = [[Etiqueta de Haumea]],
+  Author = "Equipo de OpenSpace",
+  URL = "https://www.openspaceproject.com",
+  License = "MIT"
+}

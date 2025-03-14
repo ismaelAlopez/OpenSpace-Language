@@ -1,0 +1,35 @@
+local m82 = asset.require("./m82_image")
+
+local M82Image = {
+  Identifier = "M82Image",
+  Type = "ScreenSpaceImageLocal",
+  Name = "Galaxia M82",
+  UseRadiusAzimuthElevation = true,
+  FaceCamera = false,
+  RadiusAzimuthElevation = { 1.0, 0.5, 0.1 },
+  UsePerspectiveProjection = false,
+  Opacity = 1.0,
+  TexturePath = m82.image .. "m82-galaxy.png",
+  Tag = { "mission_jwst_target" },
+  Description = [[
+    Imagen de la Galaxia M82 por NASA, ESA y el equipo de Hubble Heritage (STScI/AURA).
+  ]]
+}
+
+asset.onInitialize(function()
+  openspace.addScreenSpaceRenderable(M82Image)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeScreenSpaceRenderable(M82Image)
+end)
+
+asset.export(M82Image)
+
+asset.meta = {
+  Name = "Imagen de la Galaxia M82",
+  Description = "Imagen en pantalla de la Galaxia M82",
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "MIT license"
+}
