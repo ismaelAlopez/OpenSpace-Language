@@ -1,0 +1,72 @@
+local kernels = asset.require("./kernels")
+local mercury = asset.require("scene/solarsystem/planets/mercury/transforms")
+local solarsystem = asset.require("scene/solarsystem/sun/transforms")
+local coreKernels = asset.require("spice/core")
+
+
+
+local BepiColomboTrailSun = {
+  Identifier = "BepiColomboTrailSun",
+  Parent = solarsystem.SolarSystemBarycenter.Identifier,
+  Renderable = {
+    Type = "RenderableTrailTrajectory",
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels.ID.MPO,
+      Observer = coreKernels.ID.SolarSystemBarycenter
+    },
+    Color = { 0.70, 0.50, 0.20 },
+    StartTime = "2018 OCT 20 01:45:00",
+    EndTime = "2028 MAY 01 12:00:00",
+    SampleInterval = 60000
+  },
+  GUI = {
+    Name = "Rastro de BepiColombo (Sol)",
+    Path = "/Sistema Solar/Misiones/BepiColombo"
+  }
+}
+
+local BepiColomboTrailMercury = {
+  Identifier = "BepiColomboTrailMercury",
+  Parent = mercury.MercuryBarycenter.Identifier,
+  Renderable = {
+    Type = "RenderableTrailTrajectory",
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels.ID.MPO,
+      Observer = coreKernels.ID.Mercury
+    },
+    Color = { 0.625, 0.255, 0.45 },
+    StartTime = "2025 DEC 05 12:00:00",
+    EndTime = "2028 MAY 01 12:00:00",
+    SampleInterval = 600
+  },
+  GUI = {
+    Name = "Rastro de BepiColombo (Mercurio)",
+    Path = "/Sistema Solar/Misiones/BepiColombo"
+  }
+}
+
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(BepiColomboTrailSun)
+  openspace.addSceneGraphNode(BepiColomboTrailMercury)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(BepiColomboTrailMercury)
+  openspace.removeSceneGraphNode(BepiColomboTrailSun)
+end)
+
+asset.export(BepiColomboTrailSun)
+asset.export(BepiColomboTrailMercury)
+
+
+
+asset.meta = {
+  Name = "Rastros de BepiColombo",
+  Description = "Este recurso contiene los rastros de la nave espacial BepiColombo en relación con el Sol y Mercurio.",
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "MIT license"
+}

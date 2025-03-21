@@ -1,0 +1,101 @@
+local transforms = asset.require("../model")
+local kernels = asset.require("../kernels")
+
+
+
+local StarTracker1 = {
+  Identifier = "BepiColomboMPO_StarTracker1",
+  Parent = transforms.BepiColombo.Identifier,
+  Renderable = {
+    Type = "RenderableFov",
+    Body = kernels.ID.MPO,
+    Frame = kernels.Frame.StarTracker1,
+    RGB = { 0.8, 0.7, 0.7 },
+    Instrument = {
+      Name = "MPO_STR-1",
+      Method = "CIRCLE",
+      Aberration = "NONE"
+    },
+    AlwaysDrawFov = true,
+    PotentialTargets = { "MERCURY", "EARTH", "VENUS" },
+    FrameConversions = {}
+  },
+  GUI = {
+    Name = "MPO Rastreador de Estrellas 1",
+    Path = "/Sistema Solar/Misiones/BepiColombo/Instrumentos",
+  }
+}
+
+local StarTracker2 = {
+  Identifier = "BepiColomboMPO_StarTracker2",
+  Parent = transforms.BepiColombo.Identifier,
+  Renderable = {
+    Type = "RenderableFov",
+    Body = kernels.ID.MPO,
+    Frame = kernels.Frame.StarTracker2,
+    RGB = { 0.8, 0.7, 0.7 },
+    Instrument = {
+      Name = "MPO_STR-2",
+      Method = "CIRCLE",
+      Aberration = "NONE"
+    },
+    AlwaysDrawFov = true,
+    PotentialTargets = { "MERCURY", "EARTH", "VENUS" },
+    FrameConversions = {}
+  },
+  GUI = {
+    Name = "MPO Rastreador de Estrellas 2",
+    Path = "/Sistema Solar/Misiones/BepiColombo/Instrumentos",
+  }
+}
+
+local StarTracker3 = {
+  Identifier = "BepiColomboMPO_StarTracker3",
+  Parent = transforms.BepiColombo.Identifier,
+  Renderable = {
+    Type = "RenderableFov",
+    Body = kernels.ID.MPO,
+    Frame = kernels.Frame.StarTracker3,
+    RGB = { 0.8, 0.7, 0.7 },
+    Instrument = {
+      Name = "MPO_STR-3",
+      Method = "CIRCLE",
+      Aberration = "NONE"
+    },
+    AlwaysDrawFov = true,
+    PotentialTargets = { "MERCURY", "EARTH", "VENUS" },
+    FrameConversions = {}
+  },
+  GUI = {
+    Name = "MPO Rastreador de Estrellas 3",
+    Path = "/Sistema Solar/Misiones/BepiColombo/Instrumentos",
+  }
+}
+
+
+asset.onInitialize(function()
+  -- Circle shapes are currently not supported
+  -- openspace.addSceneGraphNode(StarTracker1)
+  -- openspace.addSceneGraphNode(StarTracker2)
+  -- openspace.addSceneGraphNode(StarTracker3)
+end)
+
+asset.onDeinitialize(function()
+  -- openspace.removeSceneGraphNode(StarTracker1)
+  -- openspace.removeSceneGraphNode(StarTracker2)
+  -- openspace.removeSceneGraphNode(StarTracker3)
+end)
+
+
+
+asset.meta = {
+  Name = "Rastreador de Estrellas",
+  Description = [[
+    Desde un punto de vista funcional, los Rastreadores de Estrellas Autónomos pueden verse como una cámara de video más una unidad de procesamiento de imágenes que, partiendo de una imagen del cielo, extrae la información de actitud para el AOCS, medida con respecto al sistema de referencia inercial J2000.
+
+    El STR puede rastrear hasta 15 estrellas simultáneamente y consiste en una caja única que contiene la cabeza óptica, la electrónica principal y un deflector que está térmicamente desacoplado de la caja.
+  ]],
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "Licencia MIT"
+}

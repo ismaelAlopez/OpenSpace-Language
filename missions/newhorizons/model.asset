@@ -1,0 +1,42 @@
+local transforms = asset.require("./transforms")
+local sun = asset.require("scene/solarsystem/sun/transforms")
+
+
+
+local models = asset.resource({
+  Name = "Modelo de New Horizons",
+  Type = "HttpSynchronization",
+  Identifier = "newhorizons_model",
+  Version = 2
+})
+
+
+local NewHorizons = {
+  Identifier = "NewHorizons",
+  Parent = transforms.NewHorizonsPosition.Identifier,
+  Renderable = {
+    Type = "RenderableModel",
+    GeometryFile = models .. "NewHorizonsCleanModel.obj",
+    AmbientIntensity = 0.2,
+    DiffuseIntensity = 1.0,
+    SpecularIntensity = 1.0,
+    LightSources = {
+      sun.LightSource
+    }
+  },
+  GUI = {
+    Name = "New Horizons",
+    Path = "/Sistema Solar/Misiones/New Horizons"
+  }
+}
+
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(NewHorizons)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(NewHorizons)
+end)
+
+asset.export(NewHorizons)

@@ -1,0 +1,79 @@
+local transforms = asset.require("../model")
+local kernels = asset.require("../kernels")
+
+
+
+local MIXS_C = {
+  Identifier = "BepiColomboMPO_MIXS-C",
+  Parent = transforms.BepiColombo.Identifier,
+  Renderable = {
+    Type = "RenderableFov",
+    Body = kernels.ID.MPO,
+    Frame = kernels.Frame.MIXS_C,
+    RGB = { 0.8, 0.7, 0.7 },
+    Instrument = {
+      Name = "MPO_MIXS-C",
+      Method = "RECTANGLE",
+      Aberration = "NONE"
+    },
+    AlwaysDrawFov = true,
+    PotentialTargets = { "MERCURY", "EARTH", "VENUS" },
+    FrameConversions = {}
+  },
+  GUI = {
+    Name = "MPO MIXS-C",
+    Path = "/Sistema Solar/Misiones/BepiColombo/Instrumentos",
+  }
+}
+
+local MIXS_T = {
+  Identifier = "BepiColomboMPO_MIXS-T",
+  Parent = transforms.BepiColombo.Identifier,
+  Renderable = {
+    Type = "RenderableFov",
+    Body = kernels.ID.MPO,
+    Frame = kernels.Frame.MIXS_T,
+    RGB = { 0.8, 0.7, 0.7 },
+    Instrument = {
+      Name = "MPO_MIXS-T",
+      Method = "RECTANGLE",
+      Aberration = "NONE"
+    },
+    AlwaysDrawFov = true,
+    PotentialTargets = { "MERCURY", "EARTH", "VENUS" },
+    FrameConversions = {}
+  },
+  GUI = {
+    Name = "MPO MIXS-T",
+    Path = "/Sistema Solar/Misiones/BepiColombo/Instrumentos",
+  }
+}
+
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(MIXS_C)
+  openspace.addSceneGraphNode(MIXS_T)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(MIXS_T)
+  openspace.removeSceneGraphNode(MIXS_C)
+end)
+
+
+
+asset.meta = {
+  Name = "MIXS",
+  Description = [[
+    El instrumento MIXS contiene dos telescopios paralelos, diseñados para mapear la emisión
+    de rayos X de Mercurio a dos resoluciones angulares. El telescopio de campo estrecho (MIXS-T)
+    utiliza una óptica de incidencia rasante con un campo de visión (FOV) de 1 grado y un detector
+    de imagen con 64 x 64 píxeles. El telescopio de campo amplio (MIXS-C) utiliza un colimador para
+    definir un FOV de ~10 grados de ancho completo a cero máximo (FWZM). Su detector es idéntico al
+    de MIXS-T, pero como el colimador no tiene capacidad de imagen, los píxeles se agregan en una
+    sola salida. Los ejes ópticos están alineados con el eje de apuntado nadir de la nave espacial.
+  ]],
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "Licencia MIT"
+}

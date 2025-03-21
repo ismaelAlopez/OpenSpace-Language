@@ -1,0 +1,76 @@
+local sunTransforms = asset.require("scene/solarsystem/sun/transforms")
+local transforms = asset.require("./transforms")
+
+
+
+local model = asset.resource({
+  Name = "Modelo JUICE",
+  Type = "HttpSynchronization",
+  Identifier = "juice_models",
+  Version = 1
+})
+
+
+local JuiceModel = {
+  Identifier = "JuiceModel",
+  Parent = transforms.Juice.Identifier,
+  Transform = {
+    Translation = {
+      Type = "StaticTranslation",
+      -- Offset numbers found by eyeballing
+      Position = { 4.5, 0.0, -1.0 }
+    },
+    Rotation = {
+      Type = "StaticRotation",
+      Rotation = { math.pi / 2.0, 0.0, 0.0 }
+    }
+  },
+  Renderable = {
+    Type = "RenderableModel",
+    GeometryFile = model .. "juice.fbx",
+    ModelScale = "Centimeter",
+    LightSources = {
+      {
+        Type = "SceneGraphLightSource",
+        Identifier = "Sun",
+        Node = sunTransforms.SolarSystemBarycenter.Identifier,
+        Intensity = 0.6
+      },
+      {
+        Identifier = "Camera",
+        Type = "CameraLightSource",
+        Intensity = 0.4,
+        Enabled = false
+      }
+    }
+  },
+  GUI = {
+    Name = "Modelo JUICE",
+    Path = "/Sistema Solar/Misiones/Juice",
+    Description = "El modelo de la nave espacial JUICE"
+  }
+}
+
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(JuiceModel)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(JuiceModel)
+end)
+
+asset.export(JuiceModel)
+
+
+
+asset.meta = {
+  Name = "Modelo JUICE",
+  Description = [[
+    El modelo de la nave espacial JUICE. El archivo del modelo fue tomado de
+    https://www.cosmos.esa.int/web/esac-cmso/scifleet.
+  ]],
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "MIT license"
+}

@@ -1,0 +1,88 @@
+local transforms = asset.require("../transforms")
+local kernels = asset.require("../kernels")
+
+
+
+local JMC1 = {
+  Identifier = "JuiceJMC1",
+  Parent = transforms.Juice.Identifier,
+  TimeFrame = {
+    Type = "TimeFrameInterval",
+    Start = "2031 JUL 02 00:00:00.000",
+    End = "2035 OCT 05 00:00:00.000"
+  },
+  Renderable = {
+    Type = "RenderableFov",
+    Body = kernels.ID.Juice,
+    Frame = kernels.Frame.JMC1,
+    RGB = { 0.8, 0.7, 0.7 },
+    Instrument = {
+      Name = "JUICE_JMC-1",
+      Method = "RECTANGLE",
+      Aberration = "NONE"
+    },
+    AlwaysDrawFov = true,
+    PotentialTargets = { "JUPITER", "CALLISTO", "EUROPA", "GANYMEDE", "IO" },
+    FrameConversions = {}
+  },
+  GUI = {
+    Name = "JUICE_JMC-1 Campo de Visión",
+    Path = "/Sistema Solar/Misiones/Juice/Instrumentos",
+    Description = "Los campos de visión de las cámaras de monitoreo de Juice"
+  }
+}
+
+local JMC2 = {
+  Identifier = "JuiceJMC2",
+  Parent = transforms.Juice.Identifier,
+  TimeFrame = {
+    Type = "TimeFrameInterval",
+    Start = "2031 JUL 02 00:00:00.000",
+    End = "2035 OCT 05 00:00:00.000"
+  },
+  Renderable = {
+    Type = "RenderableFov",
+    Body = kernels.ID.Juice,
+    Frame = kernels.Frame.JMC2,
+    RGB = { 0.8, 0.7, 0.7 },
+    Instrument = {
+      Name = "JUICE_JMC-2",
+      Method = "RECTANGLE",
+      Aberration = "NONE"
+    },
+    AlwaysDrawFov = true,
+    PotentialTargets = { "JUPITER", "CALLISTO", "EUROPA", "GANYMEDE", "IO" },
+    FrameConversions = {}
+  },
+  GUI = {
+    Name = "JUICE_JMC-2 Campo de Visión",
+    Path = "/Sistema Solar/Misiones/Juice/Instrumentos",
+    Description = "Los campos de visión de las cámaras de monitoreo de Juice"
+  }
+}
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(JMC1)
+  openspace.addSceneGraphNode(JMC2)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(JMC2)
+  openspace.removeSceneGraphNode(JMC1)
+end)
+
+asset.export(JMC1)
+asset.export(JMC2)
+
+asset.meta = {
+  Name = "JMC",
+  Description = [[
+    Muestra el campo de visión de las Cámaras de Monitoreo de Juice (JMC) a bordo de Juice,
+    que proporcionan información sobre el estado del despliegue de varios sistemas de Juice,
+    como el panel solar, la antena, etc. Consulte https://microcameras.space/project/juice/
+    para más información.
+  ]],
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "Licencia MIT"
+}

@@ -1,0 +1,40 @@
+local earthTransforms = asset.require("scene/solarsystem/planets/earth/transforms")
+local kernels = asset.require("./kernels")
+local coreKernels = asset.require("spice/core")
+
+local ArtemisPosition = {
+  Identifier = "ArtemisPosition",
+  Parent = earthTransforms.EarthCenter.Identifier,
+  Transform = {
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels.ID.Artemis,
+      Observer = coreKernels.ID.Earth,
+      Frame = coreKernels.Frame.Galactic
+    }
+  },
+  GUI = {
+    Name = "Posición de Artemis-1",
+    Path = "/Sistema Solar/Misiones/Artemis",
+    Hidden = true
+  }
+}
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(ArtemisPosition)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(ArtemisPosition)
+end)
+
+asset.export(ArtemisPosition)
+
+asset.meta = {
+  Name = "Transformaciones de Artemis-1",
+  Description = "Transformaciones de Artemis-1, posición relativa a la Tierra",
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "MIT license"
+}
+

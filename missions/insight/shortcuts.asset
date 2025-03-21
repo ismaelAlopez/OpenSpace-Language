@@ -1,0 +1,75 @@
+--insight/shortcuts.asset
+local InsightEntryTime = "2018 NOV 26 19:39:03.68"
+
+local insightNavigationState = [[
+{
+  Anchor = "Insight",
+  Pitch = 0.0000567457,
+  Position = { 12.40506, -13.69270, -2.423553 },
+  ReferenceFrame = "Root",
+  Up = { 0.441211, 0.247019, 0.862737 },
+  Yaw = -0.0000446853
+}
+]]
+
+local Shortcuts = {
+  {
+    Command = [[
+      openspace.setPropertyValueSingle("Scene.Mars.Renderable.Layers.HeightLayers.Mola_Utah.Settings.Offset", -469.300000)
+      openspace.setPropertyValueSingle("Scene.Mars.Renderable.Layers.HeightLayers.OnMarsHiRISELS.Settings.Offset", -470.800006)
+    ]],
+    Documentation = "Habilitar el desplazamiento de la capa de altura para el aterrizaje de Insight",
+    Name = "Desplazamiento de Altura de Insight",
+    GuiPath = "/Misiones/Insight",
+    Local = false
+  },
+  {
+    Command = [[
+      openspace.setPropertyValueSingle("Scene.Mars.Renderable.Layers.HeightLayers.Mola_Utah.Settings.Offset", 0)
+      openspace.setPropertyValueSingle("Scene.Mars.Renderable.Layers.HeightLayers.OnMarsHiRISELS.Settings.Offset", 0)
+    ]],
+    Documentation = "Deshabilitar el desplazamiento de la capa de altura para el aterrizaje de Insight",
+    Name = "Desplazamiento de Altura Predeterminado",
+    GuiPath = "/Misiones/Insight",
+    Local = false
+  },
+  {
+    Command = [[
+      openspace.setPropertyValueSingle("Scene.Mars.Renderable.Layers.HeightLayers.OnMarsHiRISELS.Enabled", true)
+      openspace.setPropertyValueSingle("Scene.Mars.Renderable.Layers.ColorLayers.OnMarsHiRISELS.Enabled", true)
+    ]],
+    Documentation = "Habilitar la capa HiRISE para el aterrizaje de Insight",
+    Name = "Habilitar HiRISE",
+    GuiPath = "/Misiones/Insight",
+    Local = false
+  },
+  {
+    Command = [[
+      openspace.setPropertyValueSingle("Scene.Mars.Renderable.Layers.HeightLayers.OnMarsHiRISELS.Enabled", false)
+      openspace.setPropertyValueSingle("Scene.Mars.Renderable.Layers.ColorLayers.OnMarsHiRISELS.Enabled", false)
+    ]],
+    Documentation = "Deshabilitar la capa HiRISE utilizada para el aterrizaje de Insight",
+    Name = "Deshabilitar HiRISE",
+    GuiPath = "/Misiones/Insight",
+    Local = false
+  },
+  {
+    Command = "openspace.navigation.setNavigationState(" .. insightNavigationState .. ")",
+    Documentation = "Cambiar el estado de la cámara para el inicio de la EDL de Insight",
+    Name = "Estado de Navegación de la EDL de Insight",
+    GuiPath = "/Misiones/Insight",
+    Local = false
+  },
+  {
+    Command = [[
+      openspace.time.setPause(true)
+      openspace.time.setTime("]] .. InsightEntryTime .. [[")
+    ]],
+    Documentation = "Cambiar el tiempo para el inicio de la EDL de Insight",
+    Name = "Tiempo de la EDL de Insight",
+    GuiPath = "/Misiones/Insight",
+    Local = false
+  }
+}
+
+asset.export("Shortcuts", Shortcuts)

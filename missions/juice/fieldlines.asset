@@ -1,0 +1,58 @@
+local transforms = asset.require("./transforms")
+
+
+
+local data = asset.resource({
+  Type = "HttpSynchronization",
+  Name = "Simulaciones del Plano de Ganimedes",
+  Identifier = "juice_ganymede_fieldlines",
+  Version = 1
+})
+
+
+local GanymedeMagnetosphere = {
+  Identifier = "GanymedeMagnetosphere",
+  Parent = transforms.GPHIO.Identifier,
+  Renderable = {
+    Type = "RenderableFieldlinesSequence",
+    SourceFolder = data,
+    LineWidth = 3.0,
+    InputFileType = "Json",
+    ColorMethod = "By Quantity",
+    ColorQuantity = 0,
+    ColorTableRanges = { { 62.556353386366766, 1665.5534182835445 } },
+    ColorTablePaths = { asset.resource("CMR-illuminance2.txt") },
+    Color = { 0.03, 0.0, 0.0, 1.0 },
+    ParticleSpacing = 42.0,
+    ParticleSize = 30.0,
+    FlowColor = { 1.0, 1.0, 1.0, 0.1 }
+
+  },
+  GUI = {
+    Name = "Magnetosfera de Ganímedes",
+    Path = "/Sistema Solar/Misiones/Juice/Líneas de Campo",
+    Description = "Líneas de campo que muestran una simulación de los campos magnéticos alrededor de Ganímedes"
+  }
+}
+
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(GanymedeMagnetosphere)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(GanymedeMagnetosphere)
+end)
+
+
+
+asset.meta = {
+  Name = "Representación estática de las líneas de campo del campo magnético de Ganímedes",
+  Description = [[
+    Mostrando un único paso de tiempo de las líneas de campo magnético alrededor de Ganímedes en el sistema
+    de coordenadas GPHIO
+  ]],
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "MIT license"
+}

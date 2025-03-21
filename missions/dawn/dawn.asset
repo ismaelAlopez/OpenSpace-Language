@@ -1,0 +1,176 @@
+asset.require("scene/solarsystem/missions/dawn/mission")
+local transforms = asset.require("scene/solarsystem/sun/transforms")
+local sun = asset.require("scene/solarsystem/sun/transforms")
+local kernels = asset.require("./kernels")
+local coreKernels = asset.require("spice/core")
+
+
+
+local textures = asset.resource({
+  Name = "Texturas de Dawn",
+  Type = "HttpSynchronization",
+  Identifier = "dawn_textures",
+  Version = 1
+})
+
+local models = asset.resource({
+  Name = "Modelos de Dawn",
+  Type = "HttpSynchronization",
+  Identifier = "dawn_model",
+  Version = 2
+})
+
+
+local LightSources = {
+  sun.LightSource,
+  {
+    Identifier = "Camera",
+    Type = "CameraLightSource",
+    Intensity = 0.5
+  }
+}
+
+local DawnPosition = {
+  Identifier = "DawnPosition",
+  Parent = transforms.SolarSystemBarycenter.Identifier,
+  Transform = {
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels.ID.Dawn,
+      Observer = coreKernels.ID.SolarSystemBarycenter
+    },
+    -- Rotation for model version 2
+    Rotation = {
+      Type = "StaticRotation",
+      Rotation = { math.pi / 2.0, 0.0, math.pi / 2.0 }
+    }
+  },
+  GUI = {
+    Name = "Posición de Dawn",
+    Path = "/Sistema Solar/Misiones/Dawn",
+    Hidden = true
+  }
+}
+
+local Dawn = {
+  Identifier = "Dawn",
+  Parent = DawnPosition.Identifier,
+  Transform = {
+    Rotation = {
+      Type = "SpiceRotation",
+      SourceFrame = kernels.Frame.Dawn,
+      DestinationFrame = coreKernels.Frame.Galactic
+    }
+  },
+  Renderable = {
+    Type = "RenderableModel",
+    GeometryFile = models .. "Dawn_19.glb",
+    LightSources = LightSources
+  },
+  GUI = {
+    Name = "Dawn",
+    Path = "/Sistema Solar/Misiones/Dawn"
+  }
+}
+
+local DawnTrail = {
+  Identifier = "DawnTrail",
+  Parent = transforms.SolarSystemBarycenter.Identifier,
+  Renderable = {
+    Type = "RenderableTrailTrajectory",
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels.ID.Dawn,
+      Observer = coreKernels.ID.SolarSystemBarycenter
+    },
+    Color = { 1.0, 0.8, 0.4 },
+    ShowFullTrail = false,
+    StartTime = "2007 SEP 26 13:28:00",
+    EndTime = "2012 SEP 12 12:00:00",
+    PointSize = 5,
+    SampleInterval = 3600,
+    TimeStampSubsampleFactor = 4,
+    EnableFade = true,
+    Rendering = "Lines+Points"
+  },
+  GUI = {
+    Name = "Rastro de Dawn",
+    Path = "/Sistema Solar/Misiones/Dawn"
+  }
+}
+
+-- DawnFov 1
+local DawnFramingCamera1 = {
+  Identifier = "Dawn_framing_camera_1",
+  Parent = Dawn.Identifier,
+  Renderable = {
+    Type = "RenderableFov",
+    Body = kernels.ID.Dawn,
+    Frame = kernels.Frame.Dawn,
+    Color = { 0.8, 0.7, 0.7 },
+    Instrument = {
+      Name = "DAWN_FC1",
+      Method = "ELLIPSOID",
+      Aberration = "NONE"
+    },
+    PotentialTargets = { "VESTA", "CERES" }
+  },
+  GUI = {
+    Name = "Cámara de Encuadre de Dawn 1",
+    Path = "/Sistema Solar/Misiones/Dawn"
+  }
+}
+
+local DawnFramingCamera2 = {
+  Identifier = "Dawn_framing_camera_2",
+  Parent = Dawn.Identifier,
+  Renderable = {
+    Type = "RenderableFov",
+    Body = kernels.ID.Dawn,
+    Frame = kernels.Frame.Dawn,
+    Color = { 0.8, 0.7, 0.7 },
+    Instrument = {
+      Name = "DAWN_FC2",
+      Method = "ELLIPSOID",
+      Aberration = "NONE"
+    },
+    PotentialTargets = { "VESTA", "CERES" }
+  },
+  GUI = {
+    Name = "Cámara de Encuadre de Dawn 2",
+    Path = "/Sistema Solar/Misiones/Dawn"
+  }
+}
+
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(DawnPosition)
+  openspace.addSceneGraphNode(Dawn)
+  openspace.addSceneGraphNode(DawnTrail)
+  openspace.addSceneGraphNode(DawnFramingCamera1)
+  openspace.addSceneGraphNode(DawnFramingCamera2)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(DawnFramingCamera2)
+  openspace.removeSceneGraphNode(DawnFramingCamera1)
+  openspace.removeSceneGraphNode(DawnTrail)
+  openspace.removeSceneGraphNode(Dawn)
+  openspace.removeSceneGraphNode(DawnPosition)
+end)
+
+asset.export(DawnPosition)
+asset.export(Dawn)
+asset.export(DawnTrail)
+asset.export(DawnFramingCamera1)
+asset.export(DawnFramingCamera2)
+
+
+
+asset.meta = {
+  Name = "Dawn",
+  Description = "Nave espacial y estela de Dawn",
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "MIT license"
+}

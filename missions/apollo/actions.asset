@@ -1,0 +1,59 @@
+local ToggleMoonShading = {
+  Identifier = "os.apollo.ToggleMoonShading",
+  Name = "Alternar sombreado de la Luna",
+  Command = [[
+    openspace.setPropertyValueSingle(
+      "Scene.Moon.Renderable.PerformShading",
+      not openspace.propertyValue("Scene.Moon.Renderable.PerformShading")
+    )
+  ]],
+  Documentation = "Alterna el sombreado de la Luna",
+  GuiPath = "/Misiones/Apolo",
+  IsLocal = false
+}
+
+local FocusMoon = {
+  Identifier = "os.apollo.FocusMoon",
+  Name = "Enfocar en la Luna",
+  Command = [[
+    openspace.setPropertyValueSingle("NavigationHandler.OrbitalNavigator.Aim", "")
+    openspace.setPropertyValueSingle("NavigationHandler.OrbitalNavigator.Anchor", "Moon")
+    openspace.setPropertyValueSingle("NavigationHandler.OrbitalNavigator.RetargetAnchor", nil)
+  ]],
+  Documentation = "Establecer el enfoque de la cámara en la Luna",
+  GuiPath = "/Misiones/Apolo",
+  IsLocal = false
+}
+
+local FocusEarth = {
+  Identifier = "os.apollo.FocusEarth",
+  Name = "Enfocar en la Tierra",
+  Command = [[
+    openspace.setPropertyValueSingle("NavigationHandler.OrbitalNavigator.Aim", "")
+    openspace.setPropertyValueSingle("NavigationHandler.OrbitalNavigator.Anchor", "Earth")
+    openspace.setPropertyValueSingle("NavigationHandler.OrbitalNavigator.RetargetAnchor", nil)
+  ]],
+  Documentation = "Establecer el enfoque de la cámara en la Tierra",
+  GuiPath = "/Misiones/Apolo",
+  IsLocal = false
+}
+
+asset.onInitialize(function()
+  openspace.action.registerAction(ToggleMoonShading)
+  openspace.action.registerAction(FocusMoon)
+  openspace.action.registerAction(FocusEarth)
+end)
+
+asset.onDeinitialize(function()
+  openspace.action.removeAction(FocusEarth)
+  openspace.action.removeAction(FocusMoon)
+  openspace.action.removeAction(ToggleMoonShading)
+end)
+
+asset.meta = {
+  Name = "Acciones - Misiones Apolo",
+  Description = "Acciones relacionadas con las misiones Apolo",
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "Licencia MIT"
+}

@@ -1,0 +1,143 @@
+local transforms = asset.require("../transforms")
+local kernels = asset.require("../kernels")
+
+
+
+-- Circle shapes are not support
+local SwiCh2 = {
+  Identifier = "JuiceSwiCH2",
+  Parent = transforms.Juice.Identifier,
+  TimeFrame = {
+    Type = "TimeFrameInterval",
+    Start = "2031 JUL 02 00:00:00.000",
+    End = "2035 OCT 05 00:00:00.000"
+  },
+  Renderable = {
+    Type = "RenderableFov",
+    Body = kernels.ID.Juice,
+    Frame = kernels.Frame.SwiCH2,
+    RGB = { 0.0, 0.0, 0.0 },
+    Instrument = {
+      Name = "JUICE_SWI_CH2",
+      Method = "CIRCLE",
+      Aberration = "NONE"
+    },
+    AlwaysDrawFov = true,
+    PotentialTargets = { "JUPITER", "CALLISTO", "EUROPA", "GANYMEDE", "IO" },
+    FrameConversions = {}
+  },
+  GUI = {
+    Name = "SWI CH2 Campo de Visión",
+    Path = "/Sistema Solar/Misiones/Juice/Instrumentos"
+  }
+}
+
+local SwiFull = {
+  Identifier = "JuiceSwiFull",
+  Parent = transforms.Juice.Identifier,
+  TimeFrame = {
+    Type = "TimeFrameInterval",
+    Start = "2031 JUL 02 00:00:00.000",
+    End = "2035 OCT 05 00:00:00.000"
+  },
+  Transform = {
+    Translation = {
+      Type = "StaticTranslation",
+      -- These translations are eyeballed based on the existing model
+      Position = { 0.465, -0.1, 0.95 }
+    }
+  },
+  Renderable = {
+    Type = "RenderableFov",
+    Body = kernels.ID.Juice,
+    Frame = kernels.Frame.SwiFull,
+    RGB = { 0.0, 0.0, 0.0 },
+    Instrument = {
+      Name = "JUICE_SWI_FULL",
+      Method = "RECTANGLE",
+      Aberration = "NONE"
+    },
+    AlwaysDrawFov = true,
+    PotentialTargets = { "JUPITER", "CALLISTO", "EUROPA", "GANYMEDE", "IO" },
+    FrameConversions = {}
+  },
+  GUI = {
+    Name = "SWI Campo de Visión Completo",
+    Path = "/Sistema Solar/Misiones/Juice/Instrumentos",
+    Description = "El campo de visión completo del instrumento SWI a bordo de Juice"
+  }
+}
+
+-- This frame throws an error as the JUICE_SWI_FULL_GCO500 is not a recognized frame in
+-- the kernel set version 5
+local SwiFullGCO500 = {
+  Identifier = "JuiceSwiFullGCO500",
+  Parent = transforms.Juice.Identifier,
+  TimeFrame = {
+    Type = "TimeFrameInterval",
+    Start = "2031 JUL 02 00:00:00.000",
+    End = "2035 OCT 05 00:00:00.000"
+  },
+  Transform = {
+    Translation = {
+      Type = "StaticTranslation",
+      -- These translations are eyeballed based on the existing model
+      Position = { 0.465, -0.1, 0.95 }
+    }
+  },
+  Renderable = {
+    Type = "RenderableFov",
+    Body = kernels.ID.Juice,
+    Frame = kernels.Frame.SwiFullGCO500,
+    RGB = { 0.0, 0.0, 0.0 },
+    Instrument = {
+      Name = "JUICE_SWI_FULL_GCO500",
+      Method = "RECTANGLE",
+      Aberration = "NONE"
+    },
+    AlwaysDrawFov = true,
+    PotentialTargets = { "JUPITER", "CALLISTO", "EUROPA", "GANYMEDE", "IO" },
+    FrameConversions = {}
+  },
+  GUI = {
+    Name = "SWI Campo de Visión Completo GCO500",
+    Path = "/Sistema Solar/Misiones/Juice/Instrumentos"
+  }
+}
+
+
+asset.onInitialize(function()
+  -- We are only adding the main version of this instrument as a scene graph node. Other
+  -- versions are defined in the available SPICE kernels, but not a lot of information is
+  -- accessible about them. We don't want to remove them entirely as they might prove
+  -- useful to some users though
+
+  -- openspace.addSceneGraphNode(SwiCh2)
+  -- openspace.addSceneGraphNode(SwiFullGCO500)
+  openspace.addSceneGraphNode(SwiFull)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(SwiFull)
+  -- openspace.removeSceneGraphNode(SwiFullGCO500)
+  -- openspace.removeSceneGraphNode(SwiCh2)
+end)
+
+-- asset.export(SwiCh2)
+asset.export(SwiFull)
+-- asset.export(SwiFullGCO500)
+
+
+
+asset.meta = {
+  Name = "SWI",
+  Description = [[
+    Muestra el campo de visión del Instrumento de Ondas Submilimétricas (SWI), que mide
+    la química, meteorología y estructura de la atmósfera media de Júpiter, así como la
+    habitabilidad de las lunas galileanas. Consulte
+    https://www.mps.mpg.de/planetary-science/juice-swi para más información.
+  ]],
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "MIT license"
+}

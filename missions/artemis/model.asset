@@ -1,0 +1,56 @@
+local sun = asset.require("scene/solarsystem/sun/transforms")
+local transforms = asset.require("./transforms")
+
+local models = asset.resource({
+  Name = "Artemis Models",
+  Type = "HttpSynchronization",
+  Identifier = "artemis_1_models",
+  Version = 1
+})
+
+local ArtemisModel = {
+  Identifier = "ArtemisModel",
+  Parent = transforms.ArtemisPosition.Identifier,
+  ApproachFactor = 2700,
+  Transform = {
+    Rotation = {
+      Type = "FixedRotation",
+      Attached = "ArtemisModel",
+      XAxis = { 1.0, 0.0, 0.0 },
+      XAxisOrthogonal = true,
+      YAxis = sun.SunCenter.Identifier,
+      YAxisInvert = true
+    }
+  },
+  Renderable = {
+    Type = "RenderableModel",
+    GeometryFile = models .. "artemis.glb",
+    LightSources = {
+      sun.LightSource
+    },
+    AmbientIntensity = 0.05
+  },
+  GUI = {
+    Name = "Modelo Orión (Artemis-1)",
+    Path = "/Sistema Solar/Misiones/Artemis",
+    Description = "Modelo de la cápsula Orión para la misión Artemis-1"
+  }
+}
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(ArtemisModel)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(ArtemisModel)
+end)
+
+asset.export(ArtemisModel)
+
+asset.meta = {
+  Name = "Modelo Artemis-1",
+  Description = "Modelo de la cápsula Orión para la misión Artemis-1",
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "MIT license"
+}

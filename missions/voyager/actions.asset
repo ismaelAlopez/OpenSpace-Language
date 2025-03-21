@@ -1,0 +1,94 @@
+local SetupJupiterApproach = {
+  Identifier = "os.voyager.SetupJupiterApproach",
+  Name = "Configurar aproximación a Júpiter",
+  Command = [[
+    openspace.time.setTime("1979-01-20T01:32:07.914")
+  ]],
+  Documentation = "Establece el tiempo para la aproximación de la Voyager a Júpiter",
+  GuiPath = "/Misiones/Voyager",
+  IsLocal = false
+}
+
+local SetupSaturnApproach = {
+  Identifier = "os.voyager.SetupSaturnApproach",
+  Name = "Configurar aproximación a Saturno",
+  Command = [[
+    openspace.time.setTime("1980-10-20T07:43:42.645")
+  ]],
+  Documentation = "Establece el tiempo para la aproximación de la Voyager a Saturno",
+  GuiPath = "/Misiones/Voyager",
+  IsLocal = false
+}
+
+local JupiterFocus = {
+  Identifier = "os.voyager.JupiterFocus",
+  Name = "Enfocar en Júpiter",
+  Command = [[
+    openspace.setPropertyValueSingle("NavigationHandler.OrbitalNavigator.RetargetAnchor", nil)
+    openspace.setPropertyValueSingle("NavigationHandler.OrbitalNavigator.Anchor", "Júpiter")
+    openspace.setPropertyValueSingle("NavigationHandler.OrbitalNavigator.Aim", "")
+  ]],
+  Documentation = "Establece el enfoque de la cámara en Júpiter",
+  GuiPath = "/Misiones/Voyager",
+  IsLocal = false
+}
+
+local SaturnFocus = {
+  Identifier = "os.voyager.SaturnFocus",
+  Name = "Enfocar en Saturno",
+  Command = [[
+    openspace.setPropertyValueSingle("NavigationHandler.OrbitalNavigator.RetargetAnchor", nil)
+    openspace.setPropertyValueSingle("NavigationHandler.OrbitalNavigator.Anchor", "Saturno")
+    openspace.setPropertyValueSingle("NavigationHandler.OrbitalNavigator.Aim", "")
+  ]],
+  Documentation = "Establece el enfoque de la cámara en Saturno",
+  GuiPath = "/Misiones/Voyager",
+  IsLocal = false
+}
+
+local ToggleMinorMoonTrails = {
+  Identifier = "os.voyager.ToggleMinorMoonTrails",
+  Name = "Alternar rastros menores",
+  Command = [[
+    local list = openspace.property("{moonTrail_minor}.Renderable.Enabled")
+    for _,v in pairs(list) do
+      openspace.setPropertyValueSingle(v, not openspace.propertyValue(v))
+    end
+  ]],
+  Documentation = "Alterna los rastros de las lunas menores",
+  GuiPath = "/Rastros",
+  IsLocal = false
+}
+
+
+asset.onInitialize(function()
+  openspace.action.registerAction(SetupJupiterApproach)
+  openspace.action.registerAction(SetupSaturnApproach)
+  openspace.action.registerAction(JupiterFocus)
+  openspace.action.registerAction(SaturnFocus)
+  openspace.action.registerAction(ToggleMinorMoonTrails)
+end)
+
+asset.onDeinitialize(function()
+  openspace.action.removeAction(ToggleMinorMoonTrails)
+  openspace.action.removeAction(SaturnFocus)
+  openspace.action.removeAction(JupiterFocus)
+  openspace.action.removeAction(SetupSaturnApproach)
+  openspace.action.removeAction(SetupJupiterApproach)
+end)
+
+asset.export("SetupJupiterApproach", SetupJupiterApproach.Identifier)
+asset.export("SetupSaturnApproach", SetupSaturnApproach.Identifier)
+asset.export("JupiterFocus", JupiterFocus.Identifier)
+asset.export("SaturnFocus", SaturnFocus.Identifier)
+asset.export("ToggleMinorMoonTrails", ToggleMinorMoonTrails.Identifier)
+
+
+
+asset.meta = {
+  Name = "Voyager Actions",
+  Description = "Actions related to the Voyager 1 and 2 missions",
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "MIT license"
+}

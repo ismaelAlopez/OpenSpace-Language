@@ -1,0 +1,64 @@
+local transforms = asset.require("../transforms")
+local kernels = asset.require("../kernels")
+
+
+
+local Janus = {
+  Identifier = "JuiceJanus",
+  Parent = transforms.Juice.Identifier,
+  TimeFrame = {
+    Type = "TimeFrameInterval",
+    Start = "2031 JUL 02 00:00:00.000",
+    End = "2035 OCT 05 00:00:00.000"
+  },
+  Transform = {
+    Translation = {
+      Type = "StaticTranslation",
+      Position = { 0.44, 0.33, 0.9 }
+    }
+  },
+  Renderable = {
+    Type = "RenderableFov",
+    Body = kernels.ID.Juice,
+    Frame = kernels.Frame.Janus,
+    RGB = { 0.8, 0.7, 0.7 },
+    Instrument = {
+      Name = "JUICE_JANUS",
+      Method = "RECTANGLE",
+      Aberration = "NONE"
+    },
+    AlwaysDrawFov = true,
+    PotentialTargets = { "JUPITER", "CALLISTO", "EUROPA", "GANYMEDE", "IO" },
+    FrameConversions = {}
+  },
+  GUI = {
+    Name = "Campo de visión de Janus",
+    Path = "/Sistema Solar/Misiones/Juice/Instrumentos",
+    Description = "El campo de visión para el instrumento JANUS a bordo de Juice"
+  }
+}
+
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(Janus)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(Janus)
+end)
+
+asset.export(Janus)
+
+
+
+asset.meta = {
+  Name = "Janus",
+  Description = [[
+    Muestra el campo de visión para el instrumento Jovis Amorum ac Natorum Undique Scrutator (JANUS)
+    a bordo de Juice, que es la cámara que opera en longitudes de onda visibles. Consulte
+    https://elib.dlr.de/90175/1/2094.pdf para más información.
+  ]],
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "MIT license"
+}

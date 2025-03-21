@@ -1,0 +1,307 @@
+local FocusNewHorizons = {
+  Identifier = "os.newhorizons.FocusNewHorizons",
+  Name = "Enfocar en New Horizons",
+  Command = [[
+    openspace.setPropertyValue("NavigationHandler.OrbitalNavigator.Anchor", "NewHorizons")
+    openspace.setPropertyValue("NavigationHandler.OrbitalNavigator.Aim", "")
+    openspace.setPropertyValue("NavigationHandler.OrbitalNavigator.RetargetAnchor", nil)
+  ]],
+  Documentation = "Establece el enfoque de la cámara en 'NewHorizons'",
+  GuiPath = "/Misiones/New Horizons",
+  IsLocal = false
+}
+
+local AimPluto = {
+  Identifier = "os.newhorizons.AimPluto",
+  Name = "Anclar NH, Apuntar a Plutón",
+  Command = [[
+    openspace.setPropertyValue("NavigationHandler.OrbitalNavigator.Anchor", "NewHorizons")
+    openspace.setPropertyValue("NavigationHandler.OrbitalNavigator.Aim", "Pluto")
+    openspace.setPropertyValue("NavigationHandler.OrbitalNavigator.RetargetAnchor", nil)
+  ]],
+  Documentation = "Anclar en New Horizons, Apuntar a Plutón",
+  GuiPath = "/Misiones/New Horizons",
+  IsLocal = false
+}
+
+local FocusPluto = {
+  Identifier = "os.newhorizons.FocusPluto",
+  Name = "Enfocar en Plutón",
+  Command = [[
+    openspace.setPropertyValue("NavigationHandler.OrbitalNavigator.Anchor", "PlutoProjection")
+    openspace.setPropertyValue("NavigationHandler.OrbitalNavigator.Aim", "")
+    openspace.setPropertyValue("NavigationHandler.OrbitalNavigator.RetargetAnchor", nil)
+  ]],
+  Documentation = "Establece el enfoque de la cámara en 'Plutón'",
+  GuiPath = "/Misiones/New Horizons",
+  IsLocal = false
+}
+
+local FocusCharon = {
+  Identifier = "os.newhorizons.FocusCharon",
+  Name = "Enfocar en Caronte",
+  Command = [[
+    openspace.setPropertyValue("NavigationHandler.OrbitalNavigator.Anchor", "Charon")
+    openspace.setPropertyValue("NavigationHandler.OrbitalNavigator.Aim", "")
+    openspace.setPropertyValue("NavigationHandler.OrbitalNavigator.RetargetAnchor", nil)
+  ]],
+  Documentation = "Establece el enfoque de la cámara en 'Caronte'",
+  GuiPath = "/Misiones/New Horizons",
+  IsLocal = false
+}
+
+local ToggleImageProjection = {
+  Identifier = "os.newhorizons.ToggleImageProjection",
+  Name = "Alternar proyección de imagen NH",
+  Command = [[
+    local enabled = openspace.propertyValue("Scene.PlutoProjection.Renderable.ProjectionComponent.PerformProjection")
+    openspace.setPropertyValue("Scene.PlutoProjection.Renderable.ProjectionComponent.PerformProjection", not enabled)
+    openspace.setPropertyValue("Scene.CharonProjection.Renderable.ProjectionComponent.PerformProjection", not enabled)
+  ]],
+  Documentation = "Alterna la proyección de imágenes de New Horizons",
+  GuiPath = "/Misiones/New Horizons",
+  IsLocal = false
+}
+
+local ClearImageProjections = {
+  Identifier = "os.newhorizons.ClearImageProjections",
+  Name = "Limpiar proyecciones de imagen",
+  Command = [[
+    openspace.setPropertyValue("Scene.PlutoProjection.Renderable.ProjectionComponent.ClearAllProjections", true)
+    openspace.setPropertyValue("Scene.CharonProjection.Renderable.ProjectionComponent.ClearAllProjections", true)
+  ]],
+  Documentation = "Elimina todas las proyecciones de imagen de Plutón y Caronte",
+  GuiPath = "/Misiones/New Horizons",
+  IsLocal = false
+}
+
+local Approach = {
+  Identifier = "os.newhorizons.Approach",
+  Name = "Restablecer tiempo y proyecciones",
+  Command = [[
+    openspace.time.setTime("2015-07-14T09:00:00.000")
+    openspace.setPropertyValue("Scene.PlutoProjection.Renderable.ProjectionComponent.ClearAllProjections", true)
+    openspace.setPropertyValue("Scene.CharonProjection.Renderable.ProjectionComponent.ClearAllProjections", true)
+  ]],
+  Documentation = "Salta al 14 de julio de 2015 a las 09:00 UTC y elimina todas las proyecciones",
+  GuiPath = "/Misiones/New Horizons",
+  IsLocal = false
+}
+
+local IncreaseHeightmapPluto = {
+  Identifier = "os.newhorizons.IncreaseHeightmapPluto",
+  Name = "Exageración de altura de Plutón +",
+  Command = [[
+    openspace.setPropertyValueSingle(
+      "Scene.PlutoProjection.Renderable.HeightExaggeration",
+      openspace.propertyValue("Scene.PlutoProjection.Renderable.HeightExaggeration") + 5000
+    )
+  ]],
+  Documentation = "Aumenta la exageración del mapa de altura en Plutón",
+  GuiPath = "/Misiones/New Horizons",
+  IsLocal = false
+}
+
+local DecreaseHeightmapPluto = {
+  Identifier = "os.newhorizons.DecreaseHeightmapPluto",
+  Name = "Exageración de altura de Plutón -",
+  Command = [[
+    openspace.setPropertyValueSingle(
+      "Scene.PlutoProjection.Renderable.HeightExaggeration",
+      openspace.propertyValue("Scene.PlutoProjection.Renderable.HeightExaggeration") - 5000
+    )
+  ]],
+  Documentation = "Disminuye la exageración del mapa de altura en Plutón",
+  GuiPath = "/Misiones/New Horizons",
+  IsLocal = false
+}
+
+local IncreaseHeightmapCharon = {
+  Identifier = "os.newhorizons.IncreaseHeightmapCharon",
+  Name = "Exageración de altura de Caronte +",
+  Command = [[
+    openspace.setPropertyValueSingle(
+      "Scene.CharonProjection.Renderable.HeightExaggeration",
+      openspace.propertyValue("Scene.CharonProjection.Renderable.HeightExaggeration") + 5000
+    )
+  ]],
+  Documentation = "Aumenta la exageración del mapa de altura en Caronte",
+  GuiPath = "/Misiones/New Horizons",
+  IsLocal = false
+}
+
+local DecreaseHeightmapCharon = {
+  Identifier = "os.newhorizons.DecreaseHeightmapCharon",
+  Name = "Exageración de altura de Caronte -",
+  Command = [[
+    openspace.setPropertyValueSingle(
+      "Scene.CharonProjection.Renderable.HeightExaggeration",
+      openspace.propertyValue("Scene.CharonProjection.Renderable.HeightExaggeration") - 5000
+    )
+  ]],
+  Documentation = "Disminuye la exageración del mapa de altura en Caronte",
+  GuiPath = "/Misiones/New Horizons",
+  IsLocal = false
+}
+
+local TogglePlutoTrail = {
+  Identifier = "os.newhorizons.TogglePlutoTrail",
+  Name = "Alternar rastro de Plutón",
+  Command = [[
+    openspace.setPropertyValueSingle(
+      "Scene.PlutoBarycentricTrail.Renderable.Enabled",
+      not openspace.propertyValue("Scene.PlutoBarycentricTrail.Renderable.Enabled")
+    )
+  ]],
+  Documentation = "Alterna la visibilidad del rastro detrás de Plutón",
+  GuiPath = "/Misiones/New Horizons",
+  IsLocal = false
+}
+
+local TogglePlutoLabels = {
+  Identifier = "os.newhorizons.TogglePlutoLabels",
+  Name = "Alternar etiquetas de Plutón",
+  Command = [[
+    openspace.setPropertyValueSingle(
+      "Scene.PlutoText.Renderable.Enabled",
+      not openspace.propertyValue("Scene.PlutoText.Renderable.Enabled")
+    )
+    openspace.setPropertyValueSingle(
+      "Scene.CharonText.Renderable.Enabled",
+      not openspace.propertyValue("Scene.CharonText.Renderable.Enabled")
+    )
+    openspace.setPropertyValueSingle(
+      "Scene.HydraText.Renderable.Enabled",
+      not openspace.propertyValue("Scene.HydraText.Renderable.Enabled")
+    )
+    openspace.setPropertyValueSingle(
+      "Scene.NixText.Renderable.Enabled",
+      not openspace.propertyValue("Scene.NixText.Renderable.Enabled")
+    )
+    openspace.setPropertyValueSingle(
+      "Scene.KerberosText.Renderable.Enabled",
+      not openspace.propertyValue("Scene.KerberosText.Renderable.Enabled")
+    )
+    openspace.setPropertyValueSingle(
+      "Scene.StyxText.Renderable.Enabled",
+      not openspace.propertyValue("Scene.StyxText.Renderable.Enabled")
+    )
+  ]],
+  Documentation = "Alterna la visibilidad de las etiquetas de texto de Plutón, Caronte, Hidra, Nix, Cerbero y Estigia",
+  GuiPath = "/Misiones/New Horizons",
+  IsLocal = false
+}
+
+local ToggleNewHorizonsLabels = {
+  Identifier = "os.newhorizons.ToggleNewHorizonsLabels",
+  Name = "Alternar etiquetas de New Horizons",
+  Command = [[
+    local v = openspace.propertyValue("Scene.Labels.Renderable.Opacity")
+    if v <= 0.5 then
+      openspace.setPropertyValueSingle("Scene.Labels.Renderable.Opacity", 1.0, 2.0)
+    else
+      openspace.setPropertyValueSingle("Scene.Labels.Renderable.Opacity", 0.0, 2.0)
+    end
+  ]],
+  Documentation = "Alterna la visibilidad de las etiquetas para los instrumentos de New Horizons",
+  GuiPath = "/Misiones/New Horizons",
+  IsLocal = false
+}
+
+local ToggleShadows = {
+  Identifier = "os.newhorizons.ToggleShadows",
+  Name = "Alternar sombras",
+  Command = [[
+    openspace.setPropertyValueSingle(
+      "Scene.PlutoShadow.Renderable.Enabled",
+      not openspace.propertyValue("Scene.PlutoShadow.Renderable.Enabled")
+    )
+    openspace.setPropertyValueSingle(
+      "Scene.CharonShadow.Renderable.Enabled",
+      not openspace.propertyValue("Scene.CharonShadow.Renderable.Enabled")
+    )
+  ]],
+  Documentation = "Alterna la visibilidad de la visualización de sombras de Plutón y Caronte",
+  GuiPath = "/Misiones/New Horizons",
+  IsLocal = false
+}
+
+local ToggleNewHorizonsTrail = {
+  Identifier = "os.newhorizons.ToggleNewHorizonsTrail",
+  Name = "Alternar rastro de New Horizons",
+  Command = [[
+    openspace.setPropertyValueSingle(
+      "Scene.NewHorizonsTrailPluto.Renderable.Enabled",
+      not openspace.propertyValue("Scene.NewHorizonsTrailPluto.Renderable.Enabled")
+    )
+  ]],
+  Documentation = "Alterna el rastro de New Horizons",
+  GuiPath = "/Misiones/New Horizons",
+  IsLocal = false
+}
+
+
+asset.onInitialize(function()
+  openspace.action.registerAction(FocusNewHorizons)
+  openspace.action.registerAction(AimPluto)
+  openspace.action.registerAction(FocusPluto)
+  openspace.action.registerAction(FocusCharon)
+  openspace.action.registerAction(ToggleImageProjection)
+  openspace.action.registerAction(ClearImageProjections)
+  openspace.action.registerAction(Approach)
+  openspace.action.registerAction(IncreaseHeightmapPluto)
+  openspace.action.registerAction(DecreaseHeightmapPluto)
+  openspace.action.registerAction(IncreaseHeightmapCharon)
+  openspace.action.registerAction(DecreaseHeightmapCharon)
+  openspace.action.registerAction(TogglePlutoTrail)
+  openspace.action.registerAction(TogglePlutoLabels)
+  openspace.action.registerAction(ToggleNewHorizonsLabels)
+  openspace.action.registerAction(ToggleShadows)
+  openspace.action.registerAction(ToggleNewHorizonsTrail)
+end)
+
+asset.onDeinitialize(function()
+  openspace.action.removeAction(ToggleNewHorizonsTrail)
+  openspace.action.removeAction(ToggleShadows)
+  openspace.action.removeAction(ToggleNewHorizonsLabels)
+  openspace.action.removeAction(TogglePlutoLabels)
+  openspace.action.removeAction(TogglePlutoTrail)
+  openspace.action.removeAction(DecreaseHeightmapCharon)
+  openspace.action.removeAction(IncreaseHeightmapCharon)
+  openspace.action.removeAction(DecreaseHeightmapPluto)
+  openspace.action.removeAction(IncreaseHeightmapPluto)
+  openspace.action.removeAction(Approach)
+  openspace.action.removeAction(ClearImageProjections)
+  openspace.action.removeAction(ToggleImageProjection)
+  openspace.action.removeAction(FocusCharon)
+  openspace.action.removeAction(FocusPluto)
+  openspace.action.removeAction(AimPluto)
+  openspace.action.removeAction(FocusNewHorizons)
+end)
+
+asset.export("FocusNewHorizons", FocusNewHorizons.Identifier)
+asset.export("AimPluto", AimPluto.Identifier)
+asset.export("FocusPluto", FocusPluto.Identifier)
+asset.export("FocusCharon", FocusCharon.Identifier)
+asset.export("ToggleImageProjection", ToggleImageProjection.Identifier)
+asset.export("ClearImageProjections", ClearImageProjections.Identifier)
+asset.export("Approach", Approach.Identifier)
+asset.export("IncreaseHeightmapPluto", IncreaseHeightmapPluto.Identifier)
+asset.export("DecreaseHeightmapPluto", DecreaseHeightmapPluto.Identifier)
+asset.export("IncreaseHeightmapCharon", IncreaseHeightmapCharon.Identifier)
+asset.export("DecreaseHeightmapCharon", DecreaseHeightmapCharon.Identifier)
+asset.export("TogglePlutoTrail", TogglePlutoTrail.Identifier)
+asset.export("TogglePlutoLabels", TogglePlutoLabels.Identifier)
+asset.export("ToggleNewHorizonsLabels", ToggleNewHorizonsLabels.Identifier)
+asset.export("ToggleShadows", ToggleShadows.Identifier)
+asset.export("ToggleNewHorizonsTrail", ToggleNewHorizonsTrail.Identifier)
+
+
+
+asset.meta = {
+  Name = "Acciones de New Horizons",
+  Description = "Acciones para la misión New Horizons",
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "MIT license"
+}

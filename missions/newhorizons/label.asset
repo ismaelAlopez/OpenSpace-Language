@@ -1,0 +1,33 @@
+local NewHorizonsModel = asset.require("./model")
+
+
+local models = asset.resource({
+  Name = "New Horizons Model",
+  Type = "HttpSynchronization",
+  Identifier = "newhorizons_model",
+  Version = 2
+})
+
+local Labels = {
+  Identifier = "Labels",
+  Parent = NewHorizonsModel.NewHorizons.Identifier,
+  Renderable = {
+    Type = "RenderableModel",
+    GeometryFile = models .. "Labels.obj",
+    AmbientIntensity = 0.8
+  },
+  GUI = {
+    Path = "/Sistema Solar/Misiones/New Horizons"
+  }
+}
+
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(Labels)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(Labels)
+end)
+
+asset.export(Labels)

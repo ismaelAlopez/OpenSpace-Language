@@ -1,0 +1,162 @@
+local voyager_horizons = asset.resource({
+  Name = "Horizontes de Voyager",
+  Type = "HttpSynchronization",
+  Identifier = "voyager_horizons",
+  Version = 1
+})
+
+local pioneer_horizons = asset.resource({
+  Name = "Horizontes de Pioneer",
+  Type = "HttpSynchronization",
+  Identifier = "pioneer_horizons",
+  Version = 1
+})
+
+
+local Voyager1 = {
+  Identifier = "Voyager1",
+  Parent = "SolarSystemBarycenter",
+  Renderable = {
+    Type = "RenderableTrailTrajectory",
+    Enabled = false,
+    Translation = {
+      Type = "HorizonsTranslation",
+      HorizonsTextFile = voyager_horizons .. "voyager_1.hrz"
+      -- Target: Voyager 1 (spacecraft) (-31)
+      -- Observer: SSB
+      -- Start time: 1977-Sep-06 00:00:00 (first data point)
+      -- End time: 2030-Jan-01 00:00:00 (last data point)
+      -- Step size: 1 day
+    },
+    Color = { 0.9, 0.9, 0.0 },
+    Fade = 5.0,
+    StartTime = "1977 SEP 06 00:00:00",
+    EndTime = "2030 JAN 01 00:00:00",
+    SampleInterval = openspace.time.secondsPerDay()
+  },
+  GUI = {
+    Name = "Rastro de Voyager 1",
+    Path = "/Sistema Solar/Misiones/Voyager",
+    Description = [[Rastro de Voyager 1, abarcando desde el 6 de septiembre de 1977 hasta el 1 de enero de 2030.
+      Datos de JPL Horizons]]
+  }
+}
+
+local Voyager2 = {
+  Identifier = "Voyager2",
+  Parent = "SolarSystemBarycenter",
+  Renderable = {
+    Type = "RenderableTrailTrajectory",
+    Enabled = false,
+    Translation = {
+      Type = "HorizonsTranslation",
+      HorizonsTextFile = voyager_horizons .. "voyager_2.hrz"
+      -- Target: Voyager 2 (spacecraft) (-32)
+      -- Observer: SSB
+      -- Start time: 1977-Aug-21 00:00:00 (first data point)
+      -- End time: 2030-Jan-01 00:00:00 (last data point)
+      -- Step size: 1 day
+    },
+    Color = { 0.9, 0.9, 0.0 },
+    Fade = 5.0,
+    StartTime = "1977 AUG 21 00:00:00",
+    EndTime = "2030 JAN 01 00:00:00",
+    SampleInterval = openspace.time.secondsPerDay()
+  },
+  GUI = {
+    Name = "Rastro de Voyager 2",
+    Path = "/Sistema Solar/Misiones/Voyager",
+    Description = [[Rastro de Voyager 2, abarcando desde el 21 de agosto de 1977 hasta el 1 de enero de 2030.
+      Datos de JPL Horizons]]
+  }
+}
+
+local Pioneer10 = {
+  Identifier = "Pioneer10",
+  Parent = "SolarSystemBarycenter",
+  Renderable = {
+    Type = "RenderableTrailTrajectory",
+    Enabled = false,
+    Translation = {
+      Type = "HorizonsTranslation",
+      HorizonsTextFile = pioneer_horizons .. "pioneer_10.hrz"
+      -- Target: Pioneer 10 (spacecraft) (-23)
+      -- Observer: SSB
+      -- Start time: 1972-Mar-04 00:00:00 (first data point)
+      -- End time: 2030-Jan-01 00:00:00 (last data point)
+      -- Step size: 1 day
+    },
+    Color = { 0.9, 0.3, 0.0 },
+    Fade = 5.0,
+    StartTime = "1972 MAR 04 00:00:00",
+    EndTime = "2030 JAN 01 00:00:00",
+    SampleInterval = openspace.time.secondsPerDay()
+  },
+  GUI = {
+    Name = "Rastro de Pioneer 10",
+    Path = "/Sistema Solar/Misiones/Pioneer",
+    Description = [[Rastro de Pioneer 10, abarcando desde el 4 de marzo de 1972 hasta el 1 de enero de 2030.
+      Datos de JPL Horizons]]
+  }
+}
+
+local Pioneer11 ={
+  Identifier = "Pioneer11",
+  Parent = "SolarSystemBarycenter",
+  Renderable = {
+    Type = "RenderableTrailTrajectory",
+    Enabled = false,
+    Translation = {
+      Type = "HorizonsTranslation",
+      HorizonsTextFile = pioneer_horizons .. "pioneer_11.hrz"
+      -- Target: Pioneer 11 (spacecraft) (-24)
+      -- Observer: SSB
+      -- Start time: 1973-Apr-07 00:00:00 (first data point)
+      -- End time: 2030-Jan-01 00:00:00 (last data point)
+      -- Step size: 1 day
+    },
+    Color = { 0.9, 0.3, 0.0 },
+    Fade = 5.0,
+    StartTime = "1973 APR 07 00:00:00",
+    EndTime = "2030 JAN 01 00:00:00",
+    SampleInterval = openspace.time.secondsPerDay()
+  },
+  GUI = {
+    Name = "Rastro de Pioneer 11",
+    Path = "/Sistema Solar/Misiones/Pioneer",
+    Description = [[Rastro de Pioneer 11, abarcando desde el 7 de abril de 1973 hasta el 1 de enero de 2030.
+      Datos de JPL Horizons]]
+  }
+}
+
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(Voyager1)
+  openspace.addSceneGraphNode(Voyager2)
+  openspace.addSceneGraphNode(Pioneer10)
+  openspace.addSceneGraphNode(Pioneer11)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(Pioneer11)
+  openspace.removeSceneGraphNode(Pioneer10)
+  openspace.removeSceneGraphNode(Voyager2)
+  openspace.removeSceneGraphNode(Voyager1)
+end)
+
+asset.export(Voyager1)
+asset.export(Voyager2)
+asset.export(Pioneer10)
+asset.export(Pioneer11)
+
+
+
+asset.meta = {
+  Name = "Rastros de Pioneer y Voyager",
+  Description = [[Pioneer 10, Pioneer 11, Voyager 1 y Voyager 2. Impulsados por datos de
+    JPL Horizons para un mejor rendimiento que spice pero con menor resolución. Los datos
+    abarcan desde poco después de los lanzamientos de las misiones hasta el 1 de enero de 2030]],
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "MIT license"
+}

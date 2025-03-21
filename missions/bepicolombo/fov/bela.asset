@@ -1,0 +1,106 @@
+local transforms = asset.require("../model")
+local kernels = asset.require("../kernels")
+
+
+
+local BelaReceiver = {
+  Identifier = "BepiColomboMPO_BelaReceiver",
+  Parent = transforms.BepiColombo.Identifier,
+  Renderable = {
+    Type = "RenderableFov",
+    Body = kernels.ID.MPO,
+    Frame = kernels.Frame.BelaReceiver,
+    RGB = { 0.8, 0.7, 0.7 },
+    Instrument = {
+      Name = "MPO_BELA_RX",
+      Method = "CIRCLE",
+      Aberration = "NONE"
+    },
+    AlwaysDrawFov = true,
+    PotentialTargets = { "MERCURIO", "TIERRA", "VENUS" },
+    FrameConversions = {}
+  },
+  GUI = {
+    Name = "Receptor MPO BELA",
+    Path = "/Sistema Solar/Misiones/BepiColombo/Instrumentos",
+  }
+}
+
+local BelaTransmitterMain = {
+  Identifier = "BepiColomboMPO_BelaTransmitterMain",
+  Parent = transforms.BepiColombo.Identifier,
+  Renderable = {
+    Type = "RenderableFov",
+    Body = kernels.ID.MPO,
+    Frame = kernels.Frame.BelaTransmitterMain,
+    RGB = { 0.8, 0.7, 0.7 },
+    Instrument = {
+      Name = "MPO_BELA_TX_MAIN",
+      Method = "CIRCLE",
+      Aberration = "NONE"
+    },
+    AlwaysDrawFov = true,
+    PotentialTargets = { "MERCURY", "EARTH", "VENUS" },
+    FrameConversions = {}
+  },
+  GUI = {
+    Name = "Transmisor Principal MPO BELA",
+    Path = "/Sistema Solar/Misiones/BepiColombo/Instrumentos",
+  }
+}
+
+local BelaTransmitterRed = {
+  Identifier = "BepiColomboMPO_BelaTransmitterRed",
+  Parent = transforms.BepiColombo.Identifier,
+  Renderable = {
+    Type = "RenderableFov",
+    Body = kernels.ID.MPO,
+    Frame = kernels.Frame.BelaTransmitterRed,
+    RGB = { 0.8, 0.7, 0.7 },
+    Instrument = {
+      Name = "MPO_BELA_TX_RED",
+      Method = "CIRCLE",
+      Aberration = "NONE"
+    },
+    AlwaysDrawFov = true,
+    PotentialTargets = { "MERCURY", "EARTH", "VENUS" },
+    FrameConversions = {}
+  },
+  GUI = {
+    Name = "Transmisor Rojo MPO BELA",
+    Path = "/Sistema Solar/Misiones/BepiColombo/Instrumentos",
+  }
+}
+
+asset.onInitialize(function()
+  -- Circle shapes are currently not supported
+  -- openspace.addSceneGraphNode(BelaReceiver)
+  -- openspace.addSceneGraphNode(BelaTransmitterMain)
+  -- openspace.addSceneGraphNode(BelaTransmitterRed)
+end)
+
+asset.onDeinitialize(function()
+  -- openspace.removeSceneGraphNode(BelaTransmitterRed)
+  -- openspace.removeSceneGraphNode(BelaTransmitterMain)
+  -- openspace.removeSceneGraphNode(BelaReceiver)
+end)
+
+asset.meta = {
+  Name = "BELA",
+  Description = [[
+    BELA por primera vez devolverá una señal de reflexión láser digitalizada (solo en un
+    modo de instrumento dedicado para mantener el volumen de datos general moderado). Esto
+    permitirá caracterizar la rugosidad de la superficie con un detalle y precisión sin
+    precedentes. La capacidad de medición de albedo de BELA será particularmente importante
+    para cráteres permanentemente sombreados donde se sospecha que se encuentra hielo. Aquí,
+    BELA puede observar con su láser donde la mayoría de los otros instrumentos de
+    teledetección no podrán obtener una señal. En su modo operativo normal, BELA emplea
+    algoritmos de coincidencia de filtros digitales modificados para la detección de pulsos
+    de retorno, mientras que otros instrumentos similares (MOLA, MLA) utilizan coincidencia
+    de filtros analógicos. Los filtros digitales se pueden intercambiar en cualquier momento
+    mediante telemando y/o carga de parámetros.
+  ]],
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "Licencia MIT"
+}

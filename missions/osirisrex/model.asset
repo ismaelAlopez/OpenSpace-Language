@@ -1,0 +1,184 @@
+local transforms = asset.require("./transforms")
+local sun = asset.require("scene/solarsystem/sun/transforms")
+local sunTransforms = asset.require("scene/solarsystem/sun/transforms")
+local earthTransforms = asset.require("scene/solarsystem/planets/earth/transforms")
+local kernels = asset.require("./kernels")
+local coreKernels = asset.require("spice/core")
+
+
+
+local models = asset.resource({
+  Name = "Modelos de Osiris Rex",
+  Type = "HttpSynchronization",
+  Identifier = "osirisrex_models",
+  Version = 3
+})
+
+
+local BennuBodyId = "2101955"
+
+local OsirisRex = {
+  Identifier = "OsirisRex",
+  Parent = sunTransforms.SolarSystemBarycenter.Identifier,
+  Transform = {
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels.ID.OsirisRex,
+      Observer = coreKernels.ID.SolarSystemBarycenter
+    },
+    Rotation = {
+      Type = "SpiceRotation",
+      SourceFrame = kernels.Frame.OsirisRex,
+      DestinationFrame = coreKernels.Frame.Galactic
+    }
+  },
+  Renderable = {
+    Type = "RenderableModel",
+    GeometryFile = models .. "orx_base_resized_12_sep_2016.obj",
+    LightSources = {
+      sun.LightSource,
+      {
+        Identifier = "Camera",
+        Type = "CameraLightSource",
+        Intensity = 0.5
+      }
+    }
+  },
+  GUI = {
+    Name = "OSIRIS REx",
+    Path = "/Sistema Solar/Misiones/OSIRIS REx"
+  }
+}
+
+local PolyCam = {
+  Identifier = "ORX_OCAMS_POLYCAM",
+  Parent = OsirisRex.Identifier,
+  Transform = {
+    Translation = {
+      Type = "StaticTranslation",
+      Position = { -0.2476, 0.2710, 0.3364 }
+    },
+    Rotation = {
+      Type = "SpiceRotation",
+      SourceFrame = kernels.Frame.Polycam,
+      DestinationFrame = kernels.Frame.OsirisRex
+    }
+  },
+  Renderable = {
+    Type = "RenderableModel",
+    GeometryFile = models .. "orx_polycam_resized_12_sep_2016.obj",
+    LightSources = {
+      sun.LightSource,
+      {
+        Identifier = "Camera",
+        Type = "CameraLightSource",
+        Intensity = 0.5
+      }
+    }
+  },
+  GUI = {
+    Name = "OCAMS POLYCAM",
+    Path = "/Sistema Solar/Misiones/OSIRIS REx/Instrumentos"
+  }
+}
+
+local Rexis = {
+  Identifier = "ORX_REXIS",
+  Parent = OsirisRex.Identifier,
+  Transform = {
+    Translation = {
+      Type = "StaticTranslation",
+      Position = { 0, 0.3371, 0.2712 }
+    },
+    Rotation = {
+      Type = "SpiceRotation",
+      SourceFrame = kernels.Frame.Rexis,
+      DestinationFrame = kernels.Frame.OsirisRex
+    }
+  },
+  Renderable = {
+    Type = "RenderableModel",
+    GeometryFile = models .. "orx_rexis_resized_12_sep_2016.obj",
+    LightSources = {
+      sun.LightSource,
+      {
+        Identifier = "Camera",
+        Type = "CameraLightSource",
+        Intensity = 0.5
+      }
+    }
+  },
+  GUI = {
+    Name = "REXIS",
+    Path = "/Sistema Solar/Misiones/OSIRIS REx/Instrumentos"
+  }
+}
+
+local PolyCamFov = {
+  Identifier = "POLYCAM_FOV",
+  Parent = PolyCam.Identifier,
+  Renderable = {
+    Type = "RenderableFov",
+    Body = "OSIRIS-REX",
+    Frame = kernels.Frame.Polycam,
+    RGB = { 0.8, 0.7, 0.7 },
+    Instrument = {
+      Name = kernels.Frame.Polycam,
+      Method = "ELLIPSOID",
+      Aberration = "NONE"
+    },
+    PotentialTargets = { kernels.ID.Bennu }
+  },
+  GUI = {
+    Name = "POLYCAM FOV",
+    Path = "/Sistema Solar/Misiones/OSIRIS REx/Instrumentos"
+  }
+}
+
+-- Commenting this out as REXIS' shape is circle, which is currently not supported in
+-- the RenderableFOV class
+-- local RexisFov = {
+--   Identifier = "REXIS FOV",
+--   Parent = Rexis.Identifier,
+--   Renderable = {
+--     Type = "RenderableFov",
+--     Body = kernels.Frame.OsirisRex,
+--     Frame = kernels.Frame.Rexis,
+--     RGB = { 0.8, 0.7, 0.7 },
+--     Instrument = {
+--       Name = "ORX_REXIS",
+--       Method = "ELLIPSOID",
+--       Aberration = "NONE"
+--     },
+--     PotentialTargets = { kernels.ID.Bennu },
+--     FrameConversions = {
+--       [kernels.ID.Bennu] = kernels.Frame.Bennu
+--     }
+--   },
+--   GUI = {
+--     Name = "REXIS FOV",
+--     Path = "/Solar System/Missions/OSIRIS REx/Instruments"
+--   }
+-- }
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(OsirisRex)
+  openspace.addSceneGraphNode(PolyCam)
+  openspace.addSceneGraphNode(Rexis)
+  openspace.addSceneGraphNode(PolyCamFov)
+  -- openspace.addSceneGraphNode(RexisFov)
+end)
+
+asset.onDeinitialize(function()
+  -- openspace.removeSceneGraphNode(RexisFov)
+  openspace.removeSceneGraphNode(PolyCamFov)
+  openspace.removeSceneGraphNode(Rexis)
+  openspace.removeSceneGraphNode(PolyCam)
+  openspace.removeSceneGraphNode(OsirisRex)
+end)
+
+asset.export(OsirisRex)
+asset.export(PolyCam)
+asset.export(Rexis)
+asset.export(PolyCamFov)
+-- asset.export(RexisFov)

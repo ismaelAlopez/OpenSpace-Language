@@ -1,0 +1,59 @@
+local Setup = {
+  Identifier = "os.insight.Setup",
+  Name = "Configurar escena para EDL de Insight",
+  Command = [[
+    openspace.setPropertyValueSingle("Scene.Mars.Renderable.Layers.HeightLayers.Mola_Utah.Settings.Offset", -469.300000)
+    openspace.setPropertyValueSingle("Scene.Mars.Renderable.Layers.HeightLayers.HiRISE-LS-DEM.Settings.Offset", -470.850006)
+    openspace.setPropertyValueSingle("Scene.Mars.Renderable.Layers.HeightLayers.MDEM200M.Settings.Offset", -470.000000)
+    openspace.setPropertyValueSingle("Scene.Mars.Renderable.Layers.HeightLayers.HiRISE-LS-DEM.Enabled", true)
+    openspace.setPropertyValueSingle("Scene.Mars.Renderable.Layers.ColorLayers.HiRISE-LS.Enabled", true)
+    openspace.time.setPause(true)
+    openspace.time.setTime("2018 NOV 26 19:39:01.68")
+    openspace.navigation.setNavigationState({
+      Anchor = "Insight",
+      Pitch = 0.0000567457,
+      Position = { 12.40506, -13.69270, -2.423553 },
+      ReferenceFrame = "Root",
+      Up = { 0.441211, 0.247019, 0.862737 },
+      Yaw = -0.0000446853
+    })
+  ]],
+  Documentation = "Configurar y navegar al aterrizaje de Insight",
+  GuiPath = "/Misiones/Insight",
+  IsLocal = false
+}
+
+local DisableLayers = {
+  Identifier = "os.insight.DisableLayers",
+  Name = "Desactivar capas de EDL de Insight",
+  Command = [[
+    openspace.setPropertyValueSingle("Scene.Mars.Renderable.Layers.HeightLayers.Mola_Utah.Settings.Offset", 0)
+    openspace.setPropertyValueSingle("Scene.Mars.Renderable.Layers.HeightLayers.HiRISE-LS-DEM.Settings.Offset", 0)
+    openspace.setPropertyValueSingle("Scene.Mars.Renderable.Layers.HeightLayers.HiRISE-LS-DEM.Enabled", false)
+    openspace.setPropertyValueSingle("Scene.Mars.Renderable.Layers.ColorLayers.HiRISE-LS.Enabled", false)
+  ]],
+  Documentation = "Desactivar configuraciones de capas de Marte usadas para EDL de Insight",
+  GuiPath = "/Misiones/Insight",
+  IsLocal = false
+}
+
+
+asset.onInitialize(function()
+  openspace.action.registerAction(Setup)
+  openspace.action.registerAction(DisableLayers)
+end)
+
+asset.onDeinitialize(function()
+  openspace.action.removeAction(DisableLayers)
+  openspace.action.removeAction(Setup)
+end)
+
+
+
+asset.meta = {
+  Name = "Acciones de Insight",
+  Description = "Acciones relacionadas con la misión Insight",
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "MIT license"
+}

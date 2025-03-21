@@ -1,0 +1,47 @@
+local transforms = asset.require("scene/solarsystem/planets/jupiter/transforms")
+local kernels = asset.require("../kernels")
+local coreKernels = asset.require("spice/core")
+
+
+
+local JuiceTrailJupiter = {
+  Identifier = "JuiceTrailJupiter",
+  Parent = transforms.JupiterBarycenter.Identifier,
+  Renderable = {
+    Type = "RenderableTrailTrajectory",
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels.ID.Juice,
+      Observer = coreKernels.ID.JupiterBarycenter
+    },
+    Color = { 0.70, 0.370, 0.45 },
+    StartTime = "2031 JUL 02 00:00:00.000",
+    EndTime = "2035 OCT 05 01:58:58.683",
+    SampleInterval = 3600
+  },
+  GUI = {
+    Name = "Trayectoria de Juice (Júpiter)",
+    Path = "/Sistema Solar/Misiones/Juice",
+    Description = "La trayectoria de Juice relativa a Júpiter"
+  }
+}
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(JuiceTrailJupiter)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(JuiceTrailJupiter)
+end)
+
+asset.export(JuiceTrailJupiter)
+
+asset.meta = {
+  Name = "Trayectoria de Juice relativa a Júpiter",
+  Description = [[
+    La trayectoria de la nave espacial Juice relativa a Júpiter
+  ]],
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "MIT license"
+}

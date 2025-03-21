@@ -1,0 +1,48 @@
+local transforms = asset.require("./transforms")
+local sun = asset.require("scene/solarsystem/sun/transforms")
+local kernels = asset.require("./kernels")
+local coreKernels = asset.require("spice/core")
+
+
+local models = asset.resource({
+  Name = "Bennu Models",
+  Type = "HttpSynchronization",
+  Identifier = "bennu_models",
+  Version = 2
+})
+
+
+local Bennu = {
+  Identifier = "Bennu",
+  Parent = transforms.BennuBarycenter.Identifier,
+  Transform = {
+    Rotation = {
+      Type = "SpiceRotation",
+      SourceFrame = kernels.Frame.Bennu,
+      DestinationFrame = coreKernels.Frame.Galactic
+    }
+  },
+  Renderable = {
+    Type = "RenderableModel",
+    Enabled = false,
+    GeometryFile = models .. "Bennu_v20_200k_an.obj",
+    LightSources = {
+      sun.LightSource
+    },
+    SpecularIntensity = 0.0
+  },
+  GUI = {
+    Path = "/Sistema Solar/Asteroide"
+  }
+}
+
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(Bennu)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(Bennu)
+end)
+
+asset.export(Bennu)

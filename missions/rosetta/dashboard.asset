@@ -1,0 +1,39 @@
+local rosetta = asset.require("./rosetta")
+local cg = asset.require("./67p")
+
+
+local Spacing = {
+  Type = "DashboardItemSpacing",
+  Identifier = "RosettaSpacing",
+  GuiName = "Espaciado de Rosetta",
+  Spacing = 25
+}
+
+local Distance = {
+  Type = "DashboardItemDistance",
+  Identifier = "Rosetta67PDistance",
+  GuiName = "Distancia Rosetta 67P",
+  SourceType = "Node",
+  SourceNodeName = rosetta.Rosetta.Identifier,
+  DestinationType = "Node",
+  DestinationNodeName = cg.Comet67P.Identifier
+}
+
+local Instruments = {
+  Type = "DashboardItemInstruments",
+  Identifier = "RosettaInstruments",
+  GuiName = "Instrumentos de Rosetta"
+}
+
+
+asset.onInitialize(function()
+  openspace.dashboard.addDashboardItem(Spacing)
+  openspace.dashboard.addDashboardItem(Distance)
+  openspace.dashboard.addDashboardItem(Instruments)
+end)
+
+asset.onDeinitialize(function()
+  openspace.dashboard.removeDashboardItem(Instruments)
+  openspace.dashboard.removeDashboardItem(Distance)
+  openspace.dashboard.removeDashboardItem(Spacing)
+end)

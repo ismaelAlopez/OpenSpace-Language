@@ -1,0 +1,134 @@
+local transforms = asset.require("../model")
+local kernels = asset.require("../kernels")
+
+
+
+local PhebusSlit75 = {
+  Identifier = "BepiColomboMPO_PhebusSlit75",
+  Parent = transforms.BepiColombo.Identifier,
+  Renderable = {
+    Type = "RenderableFov",
+    Body = kernels.ID.MPO,
+    Frame = kernels.Frame.PhebusSlit75,
+    RGB = { 0.8, 0.7, 0.7 },
+    Instrument = {
+      Name = "MPO_PHEBUS_SLIT_75",
+      Method = "RECTANGLE",
+      Aberration = "NONE"
+    },
+    AlwaysDrawFov = true,
+    PotentialTargets = { "MERCURY", "EARTH", "VENUS" },
+    FrameConversions = {}
+  },
+  GUI = {
+    Name = "MPO Phebus Slit 75",
+    Path = "/Sistema Solar/Misiones/BepiColombo/Instrumentos",
+  }
+}
+
+local PhebusSlit100 = {
+  Identifier = "BepiColomboMPO_PhebusSlit100",
+  Parent = transforms.BepiColombo.Identifier,
+  Renderable = {
+    Type = "RenderableFov",
+    Body = kernels.ID.MPO,
+    Frame = kernels.Frame.PhebusSlit100,
+    RGB = { 0.8, 0.7, 0.7 },
+    Instrument = {
+      Name = "MPO_PHEBUS_SLIT_100",
+      Method = "RECTANGLE",
+      Aberration = "NONE"
+    },
+    AlwaysDrawFov = true,
+    PotentialTargets = { "MERCURY", "EARTH", "VENUS" },
+    FrameConversions = {}
+  },
+  GUI = {
+    Name = "MPO Phebus Slit 100",
+    Path = "/Sistema Solar/Misiones/BepiColombo/Instrumentos",
+  }
+}
+
+local Phebus75 = {
+  Identifier = "BepiColomboMPO_Phebus75",
+  Parent = transforms.BepiColombo.Identifier,
+  Renderable = {
+    Type = "RenderableFov",
+    Body = kernels.ID.MPO,
+    Frame = kernels.Frame.Phebus75,
+    RGB = { 0.8, 0.7, 0.7 },
+    Instrument = {
+      Name = "MPO_PHEBUS_75",
+      Method = "RECTANGLE",
+      Aberration = "NONE"
+    },
+    AlwaysDrawFov = true,
+    PotentialTargets = { "MERCURY", "EARTH", "VENUS" },
+    FrameConversions = {}
+  },
+  GUI = {
+    Name = "MPO Phebus 75",
+    Path = "/Sistema Solar/Misiones/BepiColombo/Instrumentos",
+  }
+}
+
+local Phebus100 = {
+  Identifier = "BepiColomboMPO_Phebus100",
+  Parent = transforms.BepiColombo.Identifier,
+  Renderable = {
+    Type = "RenderableFov",
+    Body = kernels.ID.MPO,
+    Frame = kernels.Frame.Phebus100,
+    RGB = { 0.8, 0.7, 0.7 },
+    Instrument = {
+      Name = "MPO_PHEBUS_100",
+      Method = "RECTANGLE",
+      Aberration = "NONE"
+    },
+    AlwaysDrawFov = true,
+    PotentialTargets = { "MERCURY", "EARTH", "VENUS" },
+    FrameConversions = {}
+  },
+  GUI = {
+    Name = "MPO Phebus 100",
+    Path = "/Sistema Solar/Misiones/BepiColombo/Instrumentos",
+  }
+}
+
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(PhebusSlit75)
+  openspace.addSceneGraphNode(PhebusSlit100)
+  openspace.addSceneGraphNode(Phebus75)
+  openspace.addSceneGraphNode(Phebus100)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(Phebus100)
+  openspace.removeSceneGraphNode(Phebus75)
+  openspace.removeSceneGraphNode(PhebusSlit100)
+  openspace.removeSceneGraphNode(PhebusSlit75)
+end)
+
+
+
+asset.meta = {
+  Name = "Phebus",
+  Description = [[
+    El instrumento PHEBUS es un espectrómetro UV que cubre el rango espectral de
+    50 nm a 315 nm con dos bandas estrechas adicionales en el visible alrededor de 404 nm (línea K)
+    y 422 nm (línea Ca). Los fotones de la fuente (exosfera de Mercurio) son recogidos por
+    un espejo primario de SiC instalado dentro de un mecanismo de rotación de un grado de libertad
+    (360 grados). El espejo primario enfoca los fotones en una rendija. La información espectrométrica
+    se obtiene mediante el uso de dos rejillas que comparten la misma pupila. Los fotones
+    que pasan por la rendija se dispersan según su longitud de onda en dos detectores de anodo de retardo cruzado intensificados separados. Un detector (denominado EUV) cubre el
+    rango de longitud de onda de 55-155 nm. El segundo (denominado FUV) cubre el rango de 145-315 nm.
+    Los dos intensificadores basados en placas de microcanal utilizan altos voltajes
+    en valores alrededor de 3600-5000 V. Las dos bandas espectrales estrechas visibles se obtienen mediante
+    dos prismas en el lado del detector FUV que alimentan dos tubos fotomultiplicadores idénticos.
+    El nivel de alto voltaje necesario para estos PMT es de alrededor de 1000 V. Se llaman detectores NUV Ca y NUV K.
+  ]],
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "Licencia MIT"
+}

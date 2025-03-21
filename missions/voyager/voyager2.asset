@@ -1,0 +1,384 @@
+local sunTransforms = asset.require("scene/solarsystem/sun/transforms")
+local coreKernels = asset.require("spice/core")
+
+
+
+local models = asset.resource({
+  Name = "Voyager Model",
+  Type = "HttpSynchronization",
+  Identifier = "voyager_model",
+  Version = 2
+})
+
+local kernels = asset.resource({
+  Name = "Voyager 2 Kernels",
+  Type = "HttpSynchronization",
+  Identifier = "voyager2_spice",
+  Version = 2
+})
+
+
+local Kernels = {
+  kernels .. "vg2_v02.tf",
+  kernels .. "vg200022.tsc",
+  kernels .. "Voyager_2.m05016u.merged.bsp",
+  kernels .. "voyager_2.ST+1992_m05208u.merged.bsp",
+  kernels .. "vgr2_jup230.bsp",
+  kernels .. "vgr2_sat337.bsp",
+  kernels .. "vgr2_ura083.bsp",
+  kernels .. "vgr2_nep081.bsp",
+  kernels .. "vgr2.x2100.bsp",
+  kernels .. "vgr2_super.bc",
+  kernels .. "vgr2_super_v2.bc"
+}
+
+local RotationMatrix = {
+  -1, 0, 0, 0,
+  0, 0, -1, 0,
+  0, -1, 0, 0,
+  0, 0, 0, 1
+}
+
+
+local Voyager2 = {
+  Identifier = "Voyager_2",
+  Parent = sunTransforms.SolarSystemBarycenter.Identifier,
+  TimeFrame = {
+    Type = "TimeFrameInterval",
+    Start = "1977-AUG-20 16:07:06.535",
+    End = "2027-DEC-27"
+  },
+  Transform = {
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = "VOYAGER 2",
+      Observer = "SSB"
+    },
+    Rotation = {
+      Type = "SpiceRotation",
+      SourceFrame = "VG2_SC_BUS",
+      DestinationFrame = coreKernels.Frame.Galactic
+    }
+  },
+  Renderable = {
+    Type = "RenderableModel",
+    Enabled = asset.enabled,
+    GeometryFile = models .. "Voyager.glb",
+    ModelTransform = RotationMatrix,
+    LightSources = {
+      sunTransforms.LightSource,
+      {
+        Identifier = "Camera",
+        Type = "CameraLightSource",
+        Intensity = 0.5
+      }
+    }
+  },
+  GUI = {
+    Name = "Voyager 2",
+    Path = "/Sistema Solar/Misiones/Voyager 2"
+  }
+}
+
+-- The trails are organized as follows.  The cruise phases can be resolved in relatively
+-- low resolution since they are just straight lines
+-- The encounter phases should be much higher resolution or otherwise artifacts would
+-- appear
+local VoyagerTrailCruiseEarthJupiter = {
+  Identifier = "Voyager_2_Trail_Cruise_Earth_Jupiter",
+  Parent = sunTransforms.SolarSystemBarycenter.Identifier,
+  Renderable = {
+    Type = "RenderableTrailTrajectory",
+    Enabled = asset.enabled,
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = "VOYAGER 2",
+      Observer = "SSB"
+    },
+    Color = { 0.70, 0.50, 0.20 },
+    StartTime = "1977-AUG-20 16:07:06.535",
+    EndTime = "1979 JUL 06",
+    -- 1 sample every 2d
+    SampleInterval = openspace.time.duration("1977-AUG-20 16:07:06.535", "1979 JUL 06") /
+                     openspace.time.secondsPerYear() * 2
+  },
+  Tag = { "voyager2_trail" },
+  GUI = {
+    Name = "Voyager 2 Trayectoria Crucero Tierra-Júpiter",
+    Path = "/Sistema Solar/Misiones/Voyager 2"
+  }
+}
+
+local VoyagerTrailEncounterJupiter = {
+  Identifier = "Voyager_2_Trail_Encounter_Jupiter",
+  Parent = sunTransforms.SolarSystemBarycenter.Identifier,
+  Renderable = {
+    Type = "RenderableTrailTrajectory",
+    Enabled = asset.enabled,
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = "VOYAGER 2",
+      Observer = "SSB"
+    },
+    Color = { 0.70, 0.50, 0.20 },
+    EnableFade = false,
+    -- @TODO: Probably an off-by-one bug in RenderableTrailTrajectory?
+    StartTime = "1979 JUL 05 23:24:00",
+    EndTime = "1979 JUL 15",
+    SampleInterval = 100
+  },
+  Tag = { "voyager2_trail" },
+  GUI = {
+    Name = "Voyager 2 Trayectoria Encuentro Júpiter",
+    Path = "/Sistema Solar/Misiones/Voyager 2"
+  }
+}
+
+local VoyagerTrailCruiseJupiterSaturn = {
+  Identifier = "Voyager_2_Trail_Cruise_Jupiter_Saturn",
+  Parent = sunTransforms.SolarSystemBarycenter.Identifier,
+  Renderable = {
+    Type = "RenderableTrailTrajectory",
+    Enabled = asset.enabled,
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = "VOYAGER 2",
+      Observer = "SSB"
+    },
+    EnableFade = false,
+    Color = { 0.70, 0.50, 0.20 },
+    StartTime = "1979 JUL 15",
+    EndTime = "1981 AUG 23",
+    -- 1 sample every 2d
+    SampleInterval = openspace.time.duration("1979 JUL 15", "1981 AUG 23") /
+                     openspace.time.secondsPerYear() * 2
+  },
+  Tag = { "voyager2_trail" },
+  GUI = {
+    Name = "Voyager 2 Trayectoria Crucero Júpiter-Saturno",
+    Path = "/Sistema Solar/Misiones/Voyager 2"
+  }
+}
+
+local VoyagerTrailEncounterSaturn = {
+  Identifier = "Voyager_2_Trail_Encounter_Saturn",
+  Parent = sunTransforms.SolarSystemBarycenter.Identifier,
+  Renderable = {
+    Type = "RenderableTrailTrajectory",
+    Enabled = asset.enabled,
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = "VOYAGER 2",
+      Observer = "SSB"
+    },
+    EnableFade = false,
+    Color = { 0.70, 0.50, 0.20 },
+    -- @TODO: Probably an off-by-one bug in RenderableTrailTrajectory?
+    StartTime = "1981 AUG 22 23:08:30",
+    EndTime = "1981 AUG 30",
+    SampleInterval = 100
+  },
+  Tag = { "voyager2_trail" },
+  GUI = {
+    Name = "Voyager 2 Trayectoria Encuentro Saturno",
+    Path = "/Sistema Solar/Misiones/Voyager 2"
+  }
+}
+
+local VoyagerTrailCruiseSaturnUranus = {
+  Identifier = "Voyager_2_Trail_Cruise_Saturn_Uranus",
+  Parent = sunTransforms.SolarSystemBarycenter.Identifier,
+  Renderable = {
+    Type = "RenderableTrailTrajectory",
+    Enabled = asset.enabled,
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = "VOYAGER 2",
+      Observer = "SSB"
+    },
+    EnableFade = false,
+    Color = { 0.70, 0.50, 0.20 },
+    StartTime = "1981 AUG 30",
+    EndTime = "1986 JAN 22",
+    -- 1 sample every 2d
+    SampleInterval = openspace.time.duration("1981 AUG 30", "1986 JAN 22") /
+                     openspace.time.secondsPerYear() * 2
+  },
+  Tag = { "voyager2_trail" },
+  GUI = {
+    Name = "Voyager 2 Trayectoria Crucero Saturno-Urano",
+    Path = "/Sistema Solar/Misiones/Voyager 2"
+  }
+}
+
+local VoyagerTrailEncounterUranus = {
+  Identifier = "Voyager_2_Trail_Encounter_Uranus",
+  Parent = sunTransforms.SolarSystemBarycenter.Identifier,
+  Renderable = {
+    Type = "RenderableTrailTrajectory",
+    Enabled = asset.enabled,
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = "VOYAGER 2",
+      Observer = "SSB"
+    },
+    EnableFade = false,
+    Color = { 0.70, 0.50, 0.20 },
+    -- @TODO: Probably an off-by-one bug in RenderableTrailTrajectory?
+    StartTime = "1986 JAN 21 23:30:00",
+    EndTime = "1986 JAN 27",
+    SampleInterval = 100
+  },
+  Tag = { "voyager2_trail" },
+  GUI = {
+    Name = "Voyager 2 Trayectoria Encuentro Urano",
+    Path = "/Sistema Solar/Misiones/Voyager 2"
+  }
+}
+
+local VoyagerTrailCruiseUranusNeptune = {
+  Identifier = "Voyager_2_Trail_Cruise_Uranus_Neptune",
+  Parent = sunTransforms.SolarSystemBarycenter.Identifier,
+  Renderable = {
+    Type = "RenderableTrailTrajectory",
+    Enabled = asset.enabled,
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = "VOYAGER 2",
+      Observer = "SSB"
+    },
+    EnableFade = false,
+    Color = { 0.70, 0.50, 0.20 },
+    StartTime = "1986 JAN 27",
+    EndTime = "1989 AUG 24",
+    -- 1 sample every 2d
+    SampleInterval = openspace.time.duration("1986 JAN 27", "1989 AUG 24") /
+                     openspace.time.secondsPerYear() * 2
+  },
+  Tag = { "voyager2_trail" },
+  GUI = {
+    Name = "Voyager 2 Trayectoria Crucero Urano-Neptuno",
+    Path = "/Sistema Solar/Misiones/Voyager 2"
+  }
+}
+
+local VoyagerTrailEncounterNeptune = {
+  Identifier = "Voyager_2_Trail_Encounter_Neptune",
+  Parent = sunTransforms.SolarSystemBarycenter.Identifier,
+  Renderable = {
+    Type = "RenderableTrailTrajectory",
+    Enabled = asset.enabled,
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = "VOYAGER 2",
+      Observer = "SSB"
+    },
+    EnableFade = false,
+    Color = { 0.70, 0.50, 0.20 },
+    -- @TODO: Probably an off-by-one bug in RenderableTrailTrajectory?
+    StartTime = "1989 AUG 23 22:30:00",
+    EndTime = "1989 AUG 26",
+    SampleInterval = 100
+  },
+  Tag = { "voyager2_trail" },
+  GUI = {
+    Name = "Voyager 2 Trayectoria Encuentro Neptuno",
+    Path = "/Sistema Solar/Misiones/Voyager 2"
+  }
+}
+
+local VoyagerTrailCruiseNeptuneInf = {
+  Identifier = "Voyager_2_Trail_Cruise_Neptune_Inf",
+  Parent = sunTransforms.SolarSystemBarycenter.Identifier,
+  Renderable = {
+    Type = "RenderableTrailTrajectory",
+    Enabled = asset.enabled,
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = "VOYAGER 2",
+      Observer = "SSB"
+    },
+    EnableFade = false,
+    Color = { 0.70, 0.50, 0.20 },
+    StartTime = "1989 AUG 26",
+    EndTime = "2100 JAN 01",
+    -- 1 sample every 2d
+    SampleInterval = openspace.time.duration("1989 AUG 26", "2100 JAN 01") /
+                     openspace.time.secondsPerYear() * 2
+  },
+  Tag = { "voyager2_trail" },
+  GUI = {
+    Name = "Voyager 2 Trayectoria Crucero Neptuno-Inf",
+    Path = "/Sistema Solar/Misiones/Voyager 2"
+  }
+}
+
+local FocusVoyager2 = {
+  Identifier = "os.voyager.FocusVoyager2",
+  Name = "Enfocar en Voyager 2",
+  Command = [[
+    openspace.setPropertyValueSingle("NavigationHandler.OrbitalNavigator.RetargetAnchor", nil)
+    openspace.setPropertyValueSingle("NavigationHandler.OrbitalNavigator.Anchor", "Voyager_2")
+    openspace.setPropertyValueSingle("NavigationHandler.OrbitalNavigator.Aim", "")
+  ]],
+  Documentation = "Establecer el enfoque de la cámara en Voyager 2",
+  GuiPath = "/Misiones/Voyager",
+  IsLocal = false
+}
+
+
+asset.onInitialize(function()
+  openspace.spice.loadKernel(Kernels)
+
+  openspace.action.registerAction(FocusVoyager2)
+
+  openspace.addSceneGraphNode(Voyager2)
+  openspace.addSceneGraphNode(VoyagerTrailCruiseEarthJupiter)
+  openspace.addSceneGraphNode(VoyagerTrailEncounterJupiter)
+  openspace.addSceneGraphNode(VoyagerTrailCruiseJupiterSaturn)
+  openspace.addSceneGraphNode(VoyagerTrailEncounterSaturn)
+  openspace.addSceneGraphNode(VoyagerTrailCruiseSaturnUranus)
+  openspace.addSceneGraphNode(VoyagerTrailEncounterUranus)
+  openspace.addSceneGraphNode(VoyagerTrailCruiseUranusNeptune)
+  openspace.addSceneGraphNode(VoyagerTrailEncounterNeptune)
+  openspace.addSceneGraphNode(VoyagerTrailCruiseNeptuneInf)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(VoyagerTrailCruiseNeptuneInf)
+  openspace.removeSceneGraphNode(VoyagerTrailEncounterNeptune)
+  openspace.removeSceneGraphNode(VoyagerTrailCruiseUranusNeptune)
+  openspace.removeSceneGraphNode(VoyagerTrailEncounterUranus)
+  openspace.removeSceneGraphNode(VoyagerTrailCruiseSaturnUranus)
+  openspace.removeSceneGraphNode(VoyagerTrailEncounterSaturn)
+  openspace.removeSceneGraphNode(VoyagerTrailCruiseJupiterSaturn)
+  openspace.removeSceneGraphNode(VoyagerTrailEncounterJupiter)
+  openspace.removeSceneGraphNode(VoyagerTrailCruiseEarthJupiter)
+  openspace.removeSceneGraphNode(Voyager2)
+
+  openspace.action.removeAction(FocusVoyager2)
+
+  openspace.spice.unloadKernel(Kernels)
+end)
+
+asset.export(Voyager2)
+asset.export(VoyagerTrailCruiseEarthJupiter)
+asset.export(VoyagerTrailEncounterJupiter)
+asset.export(VoyagerTrailCruiseJupiterSaturn)
+asset.export(VoyagerTrailEncounterSaturn)
+asset.export(VoyagerTrailCruiseSaturnUranus)
+asset.export(VoyagerTrailEncounterUranus)
+asset.export(VoyagerTrailCruiseUranusNeptune)
+asset.export(VoyagerTrailEncounterNeptune)
+asset.export(VoyagerTrailCruiseNeptuneInf)
+
+asset.meta = {
+  Name = "Modelo y Trayectorias de Voyager 2",
+  Description = [[
+    Modelo y trayectorias de Voyager 2 desde el 20 de agosto de 1977 a las 16:07:06.535 hasta el 1 de enero de 2100. Crédito del modelo:
+    NASA Visualization Technology Applications And Development (VTAD)
+  ]],
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "MIT license"
+}

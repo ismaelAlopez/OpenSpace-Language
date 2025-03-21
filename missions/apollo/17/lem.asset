@@ -1,0 +1,79 @@
+local sun = asset.require("scene/solarsystem/sun/transforms")
+local moonAsset = asset.require("scene/solarsystem/planets/earth/moon/moon")
+
+
+
+local model = asset.resource({
+  Name = "Modelos del Lem Apolo",
+  Type = "HttpSynchronization",
+  Identifier = "apollo_lem_model",
+  Version = 4
+})
+
+local Apollo17Lem = {
+  Identifier = "Apollo17Lem",
+  Parent = moonAsset.Moon.Identifier,
+  Transform = {
+    Translation = {
+      Type = "GlobeTranslation",
+      Globe = moonAsset.Moon.Identifier,
+      Longitude = -329.22833,
+      Latitude = 20.19092,
+      UseHeightmap = true
+    },
+    Rotation = {
+      Type = "GlobeRotation",
+      Globe = moonAsset.Moon.Identifier,
+      Longitude = -329.22833,
+      Latitude = 20.19092
+    }
+  },
+  GUI = {
+    Name = "Posición del Lem Apolo 17",
+    Path = "/Sistema Solar/Misiones/Apolo/17",
+    Hidden = true
+  }
+}
+
+local Apollo17LemModel = {
+  Identifier = "Apollo17LemModel",
+  Parent = Apollo17Lem.Identifier,
+  Transform = {
+    Scale = {
+      Type = "StaticScale",
+      Scale = 0.24
+    }
+  },
+  Renderable = {
+    Type = "RenderableModel",
+    GeometryFile = model .. "LM-2_ver2clean.obj",
+    SpecularIntensity = 0.0,
+    RotationVector = { -90.0, 283.86999, 0 },
+    LightSources = {
+      sun.LightSource,
+      {
+        Identifier = "Camera",
+        Type = "CameraLightSource",
+        Intensity = 0.5
+      }
+    }
+  },
+  GUI = {
+    Name = "Lem Apolo 17",
+    Path = "/Sistema Solar/Misiones/Apolo/17"
+  }
+}
+
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(Apollo17Lem)
+  openspace.addSceneGraphNode(Apollo17LemModel)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(Apollo17LemModel)
+  openspace.removeSceneGraphNode(Apollo17Lem)
+end)
+
+asset.export(Apollo17Lem)
+asset.export(Apollo17LemModel)

@@ -1,0 +1,54 @@
+local transforms = asset.require("../model")
+local kernels = asset.require("../kernels")
+
+
+
+local MGNS = {
+  Identifier = "BepiColomboMPO_MGNS",
+  Parent = transforms.BepiColombo.Identifier,
+  Renderable = {
+    Type = "RenderableFov",
+    Body = kernels.ID.MPO,
+    Frame = kernels.Frame.MGNS,
+    RGB = { 0.8, 0.7, 0.7 },
+    Instrument = {
+      Name = "MPO_MGNS",
+      Method = "CIRCLE",
+      Aberration = "NONE"
+    },
+    AlwaysDrawFov = true,
+    PotentialTargets = { "MERCURY", "EARTH", "VENUS" },
+    FrameConversions = {}
+  },
+  GUI = {
+    Name = "MPO MGNS",
+    Path = "/Sistema Solar/Misiones/BepiColombo/Instrumentos",
+  }
+}
+
+asset.onInitialize(function()
+  -- Circle shapes are currently not supported
+  -- openspace.addSceneGraphNode(MGNS)
+end)
+
+asset.onDeinitialize(function()
+  -- openspace.removeSceneGraphNode(MGNS)
+end)
+
+asset.meta = {
+  Name = "MGNS",
+  Description = [[
+    El Espectrómetro de Rayos Gamma y Neutrones de Mercurio (MGNS) a bordo del Orbitador
+    Planetario de Mercurio BepiColombo está diseñado para observar y estudiar las emisiones
+    de rayos gamma y neutrones de Mercurio. El MGNS es un instrumento científico
+    multifuncional, que comprende un espectrómetro de rayos gamma y cuatro detectores de
+    neutrones. La unidad de sensor del espectrómetro de rayos gamma consiste en un cristal
+    de centelleo inorgánico de alta resolución de energía de 3 por 3 pulgadas, es decir,
+    CeBr3, mientras que la unidad de sensor de los detectores de neutrones consiste en tres
+    tubos llenos de gas 3He y un cristal de centelleo orgánico de estibeno con un
+    centelleador plástico como su escudo de anticoincidencia.
+  ]],
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "MIT license"
+}

@@ -1,0 +1,15 @@
+asset.require("./model")
+asset.require("./trails")
+asset.require("./mission")
+asset.require("./fov")
+
+
+
+asset.meta = {
+  Name = "BepiColombo",
+  Description =
+    "Este asset incluye todos los otros assets para la misión BepiColombo.",
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "MIT license"
+}

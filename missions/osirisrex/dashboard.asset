@@ -1,0 +1,40 @@
+local transforms = asset.require("./transforms")
+local model = asset.require("./model")
+
+
+
+local Spacing = {
+  Type = "DashboardItemSpacing",
+  Identifier = "OsirisRexSpacing",
+  GuiName = "Espaciado OSIRIS-REx",
+  Spacing = 25
+}
+
+local Distance = {
+  Type = "DashboardItemDistance",
+  Identifier = "OsirisRexBennuDistance",
+  GuiName = "Distancia OSIRIS-REx Bennu",
+  SourceType = "Node",
+  SourceNodeName = model.OsirisRex.Identifier,
+  DestinationType = "Node",
+  DestinationNodeName = transforms.BennuBarycenter.Identifier
+}
+
+local Instruments = {
+  Type = "DashboardItemInstruments",
+  Identifier = "OsirisRexInstruments",
+  GuiName = "Instrumentos OSIRIS-REx"
+}
+
+
+asset.onInitialize(function()
+  openspace.dashboard.addDashboardItem(Spacing)
+  openspace.dashboard.addDashboardItem(Distance)
+  openspace.dashboard.addDashboardItem(Instruments)
+end)
+
+asset.onDeinitialize(function()
+  openspace.dashboard.removeDashboardItem(Instruments)
+  openspace.dashboard.removeDashboardItem(Distance)
+  openspace.dashboard.removeDashboardItem(Spacing)
+end)

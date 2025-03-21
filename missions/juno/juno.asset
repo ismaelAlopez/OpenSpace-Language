@@ -1,0 +1,94 @@
+asset.require("scene/solarsystem/missions/juno/mission")
+asset.require("scene/solarsystem/planets/jupiter/layers/colorlayers/jupiter_video")
+local transforms = asset.require("scene/solarsystem/planets/jupiter/transforms")
+local sun = asset.require("scene/solarsystem/sun/transforms")
+local kernels = asset.require("./kernels")
+local coreKernels = asset.require("spice/core")
+
+
+
+local model = asset.resource({
+  Name = "Modelo Juno",
+  Type = "HttpSynchronization",
+  Identifier = "juno_model",
+  Version = 2
+})
+
+local RotationMatrix = {
+  0, 1, 0, 0,
+  0, 0, 1, 0,
+  1, 0, 0, 0,
+  0, 0, 0, 1
+}
+
+local Juno = {
+  Identifier = "Juno",
+  Parent = transforms.JupiterBarycenter.Identifier,
+  TimeFrame = {
+    Type = "TimeFrameInterval",
+    Start = "2011-08-07T17:15:00",
+    End = "2025-10-16T19:29:24"
+  },
+  Transform = {
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels.ID.Juno,
+      Observer = coreKernels.ID.JupiterBarycenter
+    },
+    Rotation = {
+      Type = "SpiceRotation",
+      SourceFrame = kernels.Frame.Juno,
+      DestinationFrame = coreKernels.Frame.Galactic
+    }
+  },
+  Renderable = {
+    Type = "RenderableModel",
+    GeometryFile = model .. "Juno.obj",
+    ModelTransform = RotationMatrix,
+    LightSources = {
+      sun.LightSource,
+      {
+        Identifier = "Camera",
+        Type = "CameraLightSource",
+        Intensity = 0.5
+      }
+    }
+  },
+  GUI = {
+    Path = "/Sistema Solar/Misiones/Juno"
+  }
+}
+
+local JunoTrail = {
+  Identifier = "JunoTrail",
+  Parent = transforms.JupiterBarycenter.Identifier,
+  Renderable = {
+    Type = "RenderableTrailTrajectory",
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels.ID.Juno,
+      Observer = coreKernels.ID.JupiterBarycenter
+    },
+    Color = { 0.70, 0.50, 0.20 },
+    StartTime = "2016 JUL 01",
+    EndTime = "2025 DEC 13",
+    SampleInterval = 3600
+  },
+  GUI = {
+    Name = "Rastro de Juno",
+    Path = "/Sistema Solar/Misiones/Juno"
+  }
+}
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(Juno)
+  openspace.addSceneGraphNode(JunoTrail)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(JunoTrail)
+  openspace.removeSceneGraphNode(Juno)
+end)
+
+asset.export(Juno)
+asset.export(JunoTrail)

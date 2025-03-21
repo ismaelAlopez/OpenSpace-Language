@@ -1,0 +1,156 @@
+local transforms = asset.require("scene/solarsystem/sun/transforms")
+local kernels = asset.require("./kernels")
+local coreKernels = asset.require("spice/core")
+
+
+
+local textures = asset.resource({
+  Name = "Texturas de Vesta",
+  Type = "HttpSynchronization",
+  Identifier = "vesta_textures",
+  Version = 1
+})
+
+local images = asset.resource({
+  Name = "Imágenes de Vesta",
+  Type = "HttpSynchronization",
+  Identifier = "vesta_images",
+  Version = 1
+})
+
+local models = asset.resource({
+  Name = "Modelos de Vesta",
+  Type = "HttpSynchronization",
+  Identifier = "vesta_model",
+  Version = 1
+})
+
+
+local Vesta = {
+  Identifier = "Vesta",
+  Parent = transforms.SolarSystemBarycenter.Identifier,
+  Transform = {
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels.ID.Vesta,
+      Observer = coreKernels.ID.SolarSystemBarycenter
+    },
+    Rotation = {
+      Type = "SpiceRotation",
+      SourceFrame = kernels.Frame.Vesta,
+      DestinationFrame = coreKernels.Frame.Galactic
+    }
+  },
+  BoundingSphere = 262000,
+  InteractionSphere = 262000,
+  Renderable = {
+    Type = "RenderableModelProjection",
+    GeometryFile = models .. "VestaComet_5000.obj",
+    Projection = {
+      Sequence = images,
+      SequenceType = "image-sequence",
+      Observer = kernels.ID.Dawn,
+      Target = kernels.ID.Vesta,
+      Aberration = "NONE",
+
+      DataInputTranslation = {
+        Instrument = {
+          -- FC1 = {
+          --   DetectorType = "Camera",
+          --   Spice = { "DAWN_FC1" },
+          -- },
+          FC2 = {
+            DetectorType = "Camera",
+            Spice = { "DAWN_FC2" }
+          }
+        },
+        Target = {
+          Read = {
+            "TARGET_NAME",
+            "INSTRUMENT_HOST_NAME",
+            "INSTRUMENT_ID",
+            "START_TIME",
+            "STOP_TIME",
+            --"DETECTOR_TYPE",
+            --"SEQUENCE_ID"
+          },
+          Convert = {
+            VESTA = { "VESTA" },
+            DAWN = { "DAWN" },
+            --FRAMINGCAMERA1 = { "DAWN_FC1" },
+            FRAMINGCAMERA2 = { "DAWN_FC2" },
+            --FC1 = { "DAWN_FC1" },
+            FC2 = { "DAWN_FC2" }
+          }
+        }
+      },
+      Instrument = {
+        Name = "DAWN_FC2",
+        Method = "ELLIPSOID",
+        Aberration = "NONE",
+        Fovy = 5.46,
+        Aspect = 1
+      },
+
+      --[[ Instrument = {
+          Name = "DAWN_FC1",
+          Method = "ELLIPSOID",
+          Aberration = "NONE",
+          Fovy = 5.46,
+          Aspect = 1,
+          Near = 0.2,
+          Far = 10000
+      },--]]
+      PotentialTargets = { "VESTA" }
+    }
+  },
+  GUI = {
+    Path = "/Sistema Solar/Cinturón de Asteroides/Vesta"
+  }
+}
+
+local VestaTrail = {
+  Identifier = "VestaTrail",
+  Parent = transforms.SolarSystemBarycenter.Identifier,
+  Renderable = {
+    Type = "RenderableTrailOrbit",
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels.ID.Vesta,
+      Observer = coreKernels.ID.SolarSystemBarycenter
+    },
+    Color = { 0.7, 0.8, 0.7 },
+    StartTime = "2007 JUL 20 12:00:00",
+    EndTime = "2018 JAN 22 12:00:00",
+    Period = 1325.0,
+    Resolution = 3600 * 24
+  },
+  GUI = {
+    Name = "Rastro de Vesta",
+    Path = "/Sistema Solar/Cinturón de Asteroides/Vesta"
+  }
+}
+
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(Vesta)
+  openspace.addSceneGraphNode(VestaTrail)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(VestaTrail)
+  openspace.removeSceneGraphNode(Vesta)
+end)
+
+asset.export(Vesta)
+asset.export(VestaTrail)
+
+
+
+asset.meta = {
+  Name = "Vesta",
+  Description = "Proyección del modelo y rastro de Vesta",
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "MIT license"
+}

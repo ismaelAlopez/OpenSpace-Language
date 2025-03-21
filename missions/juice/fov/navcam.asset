@@ -1,0 +1,59 @@
+local transforms = asset.require("../transforms")
+local kernels = asset.require("../kernels")
+
+
+
+local NavCam = {
+  Identifier = "JuiceNavCam",
+  Parent = transforms.Juice.Identifier,
+  TimeFrame = {
+    Type = "TimeFrameInterval",
+    Start = "2031 JUL 02 00:00:00.000",
+    End = "2035 OCT 05 00:00:00.000"
+  },
+  Renderable = {
+    Type = "RenderableFov",
+    Body = kernels.ID.Juice,
+    Frame = kernels.Frame.NavCam,
+    RGB = { 0.8, 0.7, 0.7 },
+    Instrument = {
+      Name = "JUICE_NAVCAM-1",
+      Method = "RECTANGLE",
+      Aberration = "NONE"
+    },
+    AlwaysDrawFov = true,
+    PotentialTargets = { "JUPITER", "CALLISTO", "EUROPA", "GANYMEDE", "IO" },
+    FrameConversions = {}
+  },
+  GUI = {
+    Name = "Campo de Visión NavCam",
+    Path = "/Sistema Solar/Misiones/Juice/Instrumentos",
+    Description = "La cámara a bordo de Juice utilizada para navegar por las estrellas"
+  }
+}
+
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(NavCam)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(NavCam)
+end)
+
+asset.export(NavCam)
+
+
+
+asset.meta = {
+  Name = "NavCam",
+  Description = [[
+    Muestra el campo de visión de la cámara de navegación (NavCam) a bordo de Juice, que se utiliza
+    para medir la ubicación de Juice. Consulte
+    https://www.spiedigitallibrary.org/proceedings/Download?urlId=10.1117%2F12.2536086
+    para más información.
+  ]],
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "MIT license"
+}

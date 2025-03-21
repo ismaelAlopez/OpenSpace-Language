@@ -1,0 +1,92 @@
+local earth_transforms = asset.require("scene/solarsystem/planets/earth/transforms")
+local moon_transforms = asset.require("scene/solarsystem/planets/earth/moon/moon")
+local kernels = asset.require("./kernels")
+local coreKernels = asset.require("spice/core")
+
+
+
+local LaunchTrail = {
+  Identifier = "Apollo8LaunchTrail",
+  Parent = earth_transforms.EarthIAU.Identifier,
+  Renderable = {
+    Type = "RenderableTrailTrajectory",
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels.ID.Apollo8,
+      Observer = coreKernels.ID.Earth,
+      Frame = coreKernels.Frame.Earth
+    },
+    Color = { 0.70, 0.50, 0.20 },
+    StartTime = "1968 DEC 21 12:51:00",
+    EndTime = "1968 DEC 21 23:23:22",
+    SampleInterval = 30,
+    RenderBinMode = "PostDeferredTransparent"
+  },
+  GUI = {
+    Name = "Rastro de Lanzamiento del Apolo 8",
+    Path = "/Sistema Solar/Misiones/Apolo/8"
+  }
+}
+
+local MoonTrail = {
+  Identifier = "Apollo8MoonTrail",
+  Parent = moon_transforms.Moon.Identifier,
+  Renderable = {
+    Type = "RenderableTrailTrajectory",
+    Enabled = false,
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels.ID.Apollo8,
+      Observer = coreKernels.ID.Moon,
+      Frame = coreKernels.Frame.Moon
+    },
+    Color = { 0.70, 0.50, 0.20 },
+    StartTime = "1968 DEC 23",
+    EndTime = "1968 DEC 26",
+    SampleInterval = 30
+  },
+  GUI = {
+    Name = "Rastro de la Luna del Apolo 8",
+    Path = "/Sistema Solar/Misiones/Apolo/8"
+  }
+}
+
+local EarthBarycenterTrail = {
+  Identifier = "Apollo8EarthBarycenterTrail",
+  Parent = earth_transforms.EarthCenter.Identifier,
+  Renderable = {
+    Type = "RenderableTrailTrajectory",
+    Enabled = false,
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels.ID.Apollo8,
+      Observer = coreKernels.ID.Earth,
+      Frame = coreKernels.Frame.Galactic
+    },
+    Color = { 0.8, 0.2, 0.2 },
+    StartTime = "1968 DEC 21",
+    EndTime = "1968 DEC 28",
+    SampleInterval = 30
+  },
+  GUI = {
+    Name = "Rastro del Baricentro de la Tierra del Apolo 8",
+    Path = "/Sistema Solar/Misiones/Apolo/8"
+  }
+}
+
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(LaunchTrail)
+  openspace.addSceneGraphNode(MoonTrail)
+  openspace.addSceneGraphNode(EarthBarycenterTrail)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(EarthBarycenterTrail)
+  openspace.removeSceneGraphNode(MoonTrail)
+  openspace.removeSceneGraphNode(LaunchTrail)
+end)
+
+asset.export(LaunchTrail)
+asset.export(MoonTrail)
+asset.export(EarthBarycenterTrail)

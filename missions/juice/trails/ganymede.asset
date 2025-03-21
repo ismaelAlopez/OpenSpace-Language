@@ -1,0 +1,47 @@
+local transforms = asset.require("../transforms")
+local kernelsJup = asset.require("scene/solarsystem/planets/jupiter/kernels")
+local kernels = asset.require("../kernels")
+
+
+
+local JuiceTrailGanymede = {
+  Identifier = "JuiceTrailGanymede",
+  Parent = transforms.GanymedePosition.Identifier,
+  Renderable = {
+    Type = "RenderableTrailTrajectory",
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = kernels.ID.Juice,
+      Observer = kernelsJup.ID.Ganymede
+    },
+    Color = { 0.70, 0.770, 0.35 },
+    StartTime = "2034 DEC 01 00:00:00.000",
+    EndTime = "2035 OCT 05 01:58:58.683",
+    SampleInterval = 600
+  },
+  GUI = {
+    Name = "Trayectoria de Juice (Ganímedes)",
+    Path = "/Sistema Solar/Misiones/Juice",
+    Description = "La trayectoria de Juice relativa a Ganímedes"
+  }
+}
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(JuiceTrailGanymede)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(JuiceTrailGanymede)
+end)
+
+asset.export(JuiceTrailGanymede)
+
+asset.meta = {
+  Name = "Trayectoria de Juice relativa a Ganímedes",
+  Description = [[
+    La trayectoria de la nave espacial Juice relativa a Ganímedes
+  ]],
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "MIT license"
+}

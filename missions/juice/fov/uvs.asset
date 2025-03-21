@@ -1,0 +1,56 @@
+local transforms = asset.require("../transforms")
+local kernels = asset.require("../kernels")
+
+
+
+local UVS = {
+  Identifier = "JuiceUVS",
+  Parent = transforms.Juice.Identifier,
+  TimeFrame = {
+    Type = "TimeFrameInterval",
+    Start = "2031 JUL 02 00:00:00.000",
+    End = "2035 OCT 05 00:00:00.000"
+  },
+  Renderable = {
+    Type = "RenderableFov",
+    Body = kernels.ID.Juice,
+    Frame = kernels.Frame.UVS,
+    RGB = { 0.8, 0.7, 0.7 },
+    Instrument = {
+      Name = "JUICE_UVS",
+      Method = "POLYGON",
+      Aberration = "NONE"
+    },
+    AlwaysDrawFov = true,
+    PotentialTargets = { "JUPITER", "CALLISTO", "EUROPA", "GANYMEDE", "IO" },
+    FrameConversions = {}
+  },
+  GUI = {
+    Name = "Campo de visión UVS",
+    Path = "/Sistema Solar/Misiones/Juice/Instrumentos",
+    Description = "El campo de visión del instrumento UVS a bordo de Juice"
+  }
+}
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(UVS)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(UVS)
+end)
+
+asset.export(UVS)
+
+asset.meta = {
+  Name = "UVS",
+  Description = [[
+    Muestra el campo de visión del Espectrógrafo Ultravioleta (UVS), que mide la
+    composición, química, estructura y variabilidad de la atmósfera de Europa. Ver
+    https://www.lpi.usra.edu/opag/meetings/aug2015/presentations/day-1/8_b_retherford.pdf
+    para más información.
+  ]],
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "Licencia MIT"
+}

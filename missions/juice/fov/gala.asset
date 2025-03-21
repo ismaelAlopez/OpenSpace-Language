@@ -1,0 +1,57 @@
+local transforms = asset.require("../transforms")
+local kernels = asset.require("../kernels")
+
+
+
+local Gala = {
+  Identifier = "JuiceGala",
+  Parent = transforms.Juice.Identifier,
+  TimeFrame = {
+    Type = "TimeFrameInterval",
+    Start = "2031 JUL 02 00:00:00.000",
+    End = "2035 OCT 05 00:00:00.000"
+  },
+  Renderable = {
+    Type = "RenderableFov",
+    Body = kernels.ID.Juice,
+    Frame = kernels.Frame.Gala,
+    RGB = { 0.8, 0.7, 0.7 },
+    Instrument = {
+      Name = "JUICE_GALA_RXT",
+      Method = "CIRCLE",
+      Aberration = "NONE"
+    },
+    AlwaysDrawFov = true,
+    PotentialTargets = { "JUPITER", "CALLISTO", "EUROPA", "GANYMEDE", "IO" },
+    FrameConversions = {}
+  },
+  GUI = {
+    Name = "Campo de visión de Gala",
+    Path = "/Sistema Solar/Misiones/Juice/Instrumentos",
+    Description = "El campo de visión para el instrumento Altímetro Láser de Ganímedes (GALA)"
+  }
+}
+
+asset.onInitialize(function()
+  -- Circle shapes are currently not supported
+  openspace.addSceneGraphNode(Gala)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(Gala)
+end)
+
+asset.export(Gala)
+
+asset.meta = {
+  Name = "GALA",
+  Description = [[
+    Muestra el campo de visión para el instrumento Altímetro Láser de Ganímedes (GALA) a bordo de Juice,
+    midiendo un modelo de altura 2.5D de Ganímedes y Europa. Ver
+    https://elib.dlr.de/94264/1/JUICE%20GALA%20-%20Design%20Overview%20v04.pdf para más
+    información.
+  ]],
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "MIT license"
+}

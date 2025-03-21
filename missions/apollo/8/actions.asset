@@ -1,0 +1,55 @@
+local EarthRise = {
+  Identifier = "os.apollo8.SetupEarthrise",
+  Name = "Establecer tiempo de Earthrise",
+  Command = [[
+    openspace.time.setPause(true)
+    openspace.time.setDeltaTime(1)
+    openspace.time.setTime("1968 DEC 24 16:37:31")
+    openspace.navigation.setNavigationState({
+      Anchor = "Apollo8",
+      Position = { 14.94592, 32.36777, -41.71296 },
+      ReferenceFrame = "Root",
+      Up = { 0.960608, -0.212013, 0.179675 }
+    })
+    openspace.setPropertyValue("*Trail.Renderable.Enabled", false)
+  ]],
+  Documentation = "Saltar justo antes de la foto de Earthrise",
+  GuiPath = "/Misiones/Apolo/8",
+  IsLocal = false
+}
+
+local Launch = {
+  Identifier = "os.apollo8.SetupLaunch",
+  Name = "Establecer tiempo de lanzamiento de Apolo 8",
+  Command = [[
+    openspace.time.setTime("1968-12-21T12:51:37.00")
+    openspace.setPropertyValueSingle("Scene.Apollo8LaunchTrail.Renderable.Enabled", true)
+  ]],
+  Documentation = "Saltar al tiempo justo antes del despegue de Apolo 8, con su rastro habilitado",
+  GuiPath = "/Misiones/Apolo/8",
+  IsLocal = false
+}
+
+
+asset.onInitialize(function()
+  openspace.action.registerAction(EarthRise)
+  openspace.action.registerAction(Launch)
+end)
+
+asset.onDeinitialize(function()
+  openspace.action.removeAction(Launch)
+  openspace.action.removeAction(EarthRise)
+end)
+
+asset.export("EarthRise", EarthRise.Identifier)
+asset.export("Launch", Launch.Identifier)
+
+
+
+asset.meta = {
+  Name = "Acciones de Apolo 8",
+  Description = "Activo con acciones relacionadas con la misión Apolo 8",
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "Licencia MIT"
+}

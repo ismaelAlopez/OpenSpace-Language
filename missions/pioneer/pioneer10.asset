@@ -1,0 +1,86 @@
+local sunTransforms = asset.require("scene/solarsystem/sun/transforms")
+local model = asset.require("scene/solarsystem/missions/pioneer/pioneermodel")
+local coreKernels = asset.require("spice/core")
+
+
+local kernelsFolder = asset.resource({
+  Name = "Kernels de Pioneer",
+  Type = "HttpSynchronization",
+  Identifier = "pioneer_10_spice",
+  Version = 1
+})
+
+local Pioneer10ID = -23
+
+local Pioneer10 = {
+  Identifier = "Pioneer_10",
+  Parent = sunTransforms.SolarSystemBarycenter.Identifier,
+  Transform = {
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = Pioneer10ID,
+      Observer = coreKernels.ID.SolarSystemBarycenter
+    }
+  },
+  Renderable = model.PioneerModel,
+  GUI = {
+    Name = "Nave Espacial Pioneer 10",
+    Path = "/Sistema Solar/Misiones/Pioneer",
+    Description = "Nave Espacial Pioneer 10. Posicionada por datos SPICE"
+  }
+}
+
+local StartTime = "1972 MAR 03 02:04:00"
+local EndTime = "1990 JAN 02 00:00:00"
+
+local Pioneer10Trail = {
+  Identifier = "Pioneer_10Trail",
+  Parent = sunTransforms.SolarSystemBarycenter.Identifier,
+  Renderable = {
+    Type = "RenderableTrailTrajectory",
+    Translation = {
+      Type = "SpiceTranslation",
+      Target = Pioneer10ID,
+      Observer = coreKernels.ID.SolarSystemBarycenter
+    },
+    Color = { 0.70, 0.50, 0.20 },
+    StartTime = StartTime,
+    EndTime = EndTime,
+    EnableFade = false,
+    -- 1 sample every 2d
+    SampleInterval =
+      openspace.time.duration(StartTime, EndTime) / openspace.time.secondsPerYear() * 2
+  },
+  GUI = {
+    Name = "Rastro de Pioneer 10 (SPICE)",
+    Path = "/Sistema Solar/Misiones/Pioneer",
+    Description = [[Rastro de Pioneer 10, abarcando desde el 3 de marzo de 1972 hasta el 2 de enero de 1990.
+      Datos de SPICE]]
+  }
+}
+
+asset.onInitialize(function()
+  openspace.spice.loadKernel(kernelsFolder .. "p10-a.bsp")
+
+  openspace.addSceneGraphNode(Pioneer10)
+  openspace.addSceneGraphNode(Pioneer10Trail)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(Pioneer10Trail)
+  openspace.removeSceneGraphNode(Pioneer10)
+
+  openspace.spice.unloadKernel(kernelsFolder .. "p10-a.bsp")
+end)
+
+asset.export(Pioneer10)
+asset.export(Pioneer10Trail)
+
+asset.meta = {
+  Name = "Pioneer 10",
+  Description = [[Modelo y Rastro de Pioneer 10. Controlado por datos SPICE para alta precisión desde
+    el 3 de marzo de 1972 hasta el 2 de enero de 1990]],
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "Licencia MIT"
+}

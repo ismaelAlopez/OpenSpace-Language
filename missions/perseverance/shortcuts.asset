@@ -1,0 +1,85 @@
+local PerseveranceLaunchTime = "2020 JUL 17 13:56:42"
+local PerseveranceLandingTime = "2021 FEB 18 20:32:16"
+
+local PerseveranceNavigationState = [[
+{
+  Anchor = "Perseverance",
+  Pitch = 0.0000567457,
+  Position = { 12.40506, -13.69270, -2.423553 },
+  ReferenceFrame = "Root",
+  Up = { 0.441211, 0.247019, 0.862737 },
+  Yaw = -0.0000446853
+}
+]]
+
+local Shortcuts = {
+  {
+    Command = [[
+      openspace.setPropertyValueSingle("Scene.Mars.Renderable.Layers.HeightLayers.Mola_Utah.Settings.Offset", -1677.088867)
+      openspace.setPropertyValueSingle("Scene.Mars.Renderable.Layers.HeightLayers.OnMarsHiRISELS.Settings.Offset", -1677.088867)
+    ]],
+    Documentation = "Habilitar el desplazamiento de la capa de altura para la trayectoria de aterrizaje de Perseverance",
+    Name = "Desplazamiento de altura de Perseverance",
+    GuiPath = "/Misiones/Insight",
+    Local = false
+  },
+  {
+    Command = [[
+      openspace.setPropertyValueSingle("Scene.Mars.Renderable.Layers.HeightLayers.Mola_Utah.Settings.Offset", 0)
+      openspace.setPropertyValueSingle("Scene.Mars.Renderable.Layers.HeightLayers.OnMarsHiRISELS.Settings.Offset", 0)
+    ]],
+    Documentation = "Deshabilitar el desplazamiento de la capa de altura de aterrizaje de Perseverance",
+    Name = "Desplazamiento de altura predeterminado",
+    GuiPath = "/Misiones/Insight",
+    Local = false
+  },
+  {
+    Command = [[
+      openspace.setPropertyValueSingle("Scene.Mars.Renderable.Layers.HeightLayers.OnMarsHiRISELS.Enabled", true)
+      openspace.setPropertyValueSingle("Scene.Mars.Renderable.Layers.ColorLayers.OnMarsHiRISELS.Enabled", true)
+    ]],
+    Documentation = "Habilitar la capa HiRISE para Perseverance",
+    Name = "Habilitar HiRISE",
+    GuiPath = "/Misiones/Insight",
+    Local = false
+  },
+  {
+    Command = [[
+      openspace.setPropertyValueSingle("Scene.Mars.Renderable.Layers.HeightLayers.OnMarsHiRISELS.Enabled", false)
+      openspace.setPropertyValueSingle("Scene.Mars.Renderable.Layers.ColorLayers.OnMarsHiRISELS.Enabled", false)
+    ]],
+    Documentation = "Deshabilitar la capa HiRISE utilizada para Perseverance",
+    Name = "Deshabilitar HiRISE",
+    GuiPath = "/Misiones/Insight",
+    Local = false
+  },
+  {
+    Command = "openspace.navigation.setNavigationState(" .. PerseveranceNavigationState .. ")",
+    Documentation = "Cambiar el estado de la cámara para el inicio de Insight EDL",
+    Name = "Estado de navegación de Insight EDL",
+    GuiPath = "/Misiones/Insight",
+    Local = false
+  },
+  {
+    Command = [[
+      openspace.time.setPause(true)
+      openspace.time.setTime("]] .. PerseveranceLaunchTime .. [[")
+    ]],
+    Documentation = "Cambiar la hora para el lanzamiento de Perseverance",
+    Name = "Hora de lanzamiento de Perseverance",
+    GuiPath = "/Misiones/Perseverance",
+    Local = false
+  },
+  {
+    Command = [[
+      openspace.time.setPause(true)
+      openspace.time.setTime("]] .. PerseveranceLandingTime .. [[")
+    ]],
+    Documentation = "Cambiar la hora para cuando Perseverance haya aterrizado",
+    Name = "Hora de aterrizaje de Perseverance",
+    GuiPath = "/Misiones/Perseverance",
+    Local = false
+  }
+}
+
+asset.export("Shortcuts", Shortcuts)
