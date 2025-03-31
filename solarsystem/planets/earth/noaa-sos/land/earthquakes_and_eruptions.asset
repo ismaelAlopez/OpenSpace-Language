@@ -1,0 +1,67 @@
+local globe = asset.require("../../earth")
+
+
+
+local Name = "Terremotos y Erupciones - 1960 - 2010"
+local Identifier = "noaa-sos-land-earthquakes_and_eruptions"
+local Description = [[La mayoría de los terremotos y erupciones volcánicas de la Tierra ocurren en los
+límites de las placas tectónicas. Este conjunto de datos muestra todos los terremotos de magnitud 5.0 o
+mayor desde 1960 hasta 2010. Los terremotos se ilustran con un gran punto blanco en
+el momento del evento. El tamaño del punto es proporcional a la magnitud del
+terremoto. Se genera un tono musical para los eventos más grandes. Cuanto mayor sea el terremoto,
+más bajo será el tono. Los puntos blancos eventualmente se vuelven grises y se encogen lentamente hasta convertirse en puntos de un solo píxel]]
+local URL = "https://sos.noaa.gov/catalog/datasets/earthquakes-and-eruptions-1960-2010/"
+
+
+local syncedDirectory = asset.resource({
+  Name = Name,
+  Type = "HttpSynchronization",
+  Identifier = Identifier,
+  Version = 1,
+  UnzipFiles = true
+})
+
+
+local Layer = {
+  Identifier = Identifier,
+  Name = Name,
+  Enabled = asset.enabled,
+  ZIndex = 100,
+  Type = "ImageSequenceTileProvider",
+  FolderPath = syncedDirectory .. "4096",
+  Description = Description
+}
+
+local Legend = {
+  Identifier = Identifier,
+  Name = Name,
+  Enabled = asset.enabled,
+  Type = "ScreenSpaceImageLocal",
+  TexturePath = syncedDirectory .. "eqmaglegend.png",
+  FaceCamera = false,
+  CartesianPosition = { 0.0, -0.5, -2.0 }
+}
+
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+  openspace.addScreenSpaceRenderable(Legend)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeScreenSpaceRenderable(Legend)
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.export(Layer)
+asset.export(Legend)
+
+
+
+asset.meta = {
+  Name = Name,
+  Description = Description .. "Datos proporcionados por la Administración Nacional Oceánica y Atmosférica",
+  Author = "Administración Nacional Oceánica y Atmosférica",
+  URL = URL,
+  License = "https://sos.noaa.gov/copyright/"
+}

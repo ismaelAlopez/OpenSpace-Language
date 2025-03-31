@@ -1,0 +1,98 @@
+local globe = asset.require("../../earth")
+
+
+
+local Name = "Serie Historica de Tsunamis: Alaska - 1964"
+local Identifier = "noaa-sos-oceans-tsunami_historical_series-alaska"
+local Description = [[A las 5:36 pm del viernes 27 de marzo de 1964 (28 de marzo, 03:36Z UTC)
+el terremoto más grande jamás medido en América del Norte, y el segundo más grande registrado
+en cualquier lugar, golpeó a 40 millas al oeste de Valdez, Alaska, en Prince William Sound con
+una magnitud de momento que ahora sabemos que es de 9.2. Casi una hora y media después, el
+Observatorio Magnético y Sísmico de Honolulu (posteriormente renombrado como el Centro de
+Advertencia de Tsunamis del Pacífico, o PTWC) pudo emitir su primer "aviso de ola de marea"
+que señalaba que un tsunami era posible y que podría llegar a las Islas Hawaianas cinco horas
+después. Al enterarse de una observación de tsunami en la Isla Kodiak, Alaska, una hora y media
+después, el Observatorio de Honolulu emitió una "advertencia formal de ola de marea/ola sísmica
+marina" advirtiendo que era posible que hubiera daños en Hawái y en todo el Océano Pacífico,
+pero que no era posible predecir la intensidad del tsunami. El terremoto generó de hecho un
+tsunami que mató a 124 personas (106 en Alaska, 13 en California y 5 en Oregón) y causó
+aproximadamente $2.3 mil millones (dólares de 2016) en pérdidas materiales a lo largo de la
+costa del Pacífico de América del Norte desde Alaska hasta el sur de California y en Hawái.
+Las mayores alturas de las olas se registraron en Alaska con más de 67 m o 220 pies, y olas
+de casi 10 m o 32 pies de altura golpearon Columbia Británica, Canadá. En los "48 inferiores",
+olas de hasta 4.5 m o 15 pies golpearon Washington, de hasta 3.7 m o 12 pies golpearon Oregón,
+y de hasta 4.8 m o más de 15 pies golpearon California. Olas de tamaño similar golpearon Hawái
+con casi 5 m o más de 16 pies de altura. Olas de más de 1 m o 3 pies de altura también golpearon
+México, Chile e incluso Nueva Zelanda]]
+local URL = "https://sos.noaa.gov/catalog/datasets/tsunami-historical-series-alaska-1964/"
+
+
+local syncedDirectory = asset.resource({
+  Name = Name,
+  Type = "HttpSynchronization",
+  Identifier = Identifier,
+  Version = 1
+})
+
+
+local LayerCoastal = {
+  Identifier = Identifier .. "-coastal",
+  Name = Name .. " (Costero)",
+  ZIndex = 100,
+  FilePath = syncedDirectory .. "Tsunami_Coastal_Map_Alaska_1964_4k.jpg",
+  Description = Description
+}
+
+local LayerEnergyCoastal = {
+  Identifier = Identifier .. "-energy_coastal",
+  Name = Name .. " (Energia Costero)",
+  ZIndex = 100,
+  FilePath = syncedDirectory .. "Tsunami_Energy+Coastal_Map_Alaska_1964_4k.jpg",
+  Description = Description
+}
+
+local LayerEnergy = {
+  Identifier = Identifier .. "-energy",
+  Name = Name .. " (Energia)",
+  ZIndex = 100,
+  FilePath = syncedDirectory .. "Tsunami_Energy_Map_Alaska_1964_4k.jpg",
+  Description = Description
+}
+
+local LayerNull = {
+  Identifier = Identifier .. "-null",
+  Name = Name .. " (Nulo)",
+  ZIndex = 100,
+  FilePath = syncedDirectory .. "Tsunami_Null_Coastal_Map_Alaska_1964_4k.jpg",
+  Description = Description
+}
+
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", LayerCoastal)
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", LayerEnergyCoastal)
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", LayerEnergy)
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", LayerNull)
+end)
+
+asset.onDeinitialize(function()
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", LayerNull)
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", LayerEnergy)
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", LayerEnergyCoastal)
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", LayerCoastal)
+end)
+
+asset.export(LayerCoastal)
+asset.export(LayerEnergyCoastal)
+asset.export(LayerEnergy)
+asset.export(LayerNull)
+
+
+
+asset.meta = {
+  Name = Name,
+  Description = Description .. "Datos proporcionados por la Administración Nacional Oceánica y Atmosférica",
+  Author = "Administración Nacional Oceánica y Atmosférica",
+  URL = URL,
+  License = "https://sos.noaa.gov/copyright/"
+}

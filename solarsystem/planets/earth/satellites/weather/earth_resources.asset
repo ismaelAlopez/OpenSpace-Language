@@ -1,0 +1,54 @@
+local transforms = asset.require("scene/solarsystem/planets/earth/transforms")
+
+
+
+local omm = asset.resource({
+  Name = "Datos OMM del Satelite (Recursos de la Tierra)",
+  Type = "UrlSynchronization",
+  Identifier = "satellite_omm_data_resource",
+  Url = "https://www.celestrak.com/NORAD/elements/gp.php?GROUP=resource&FORMAT=kvn",
+  Filename = "resource.txt",
+  SecondsUntilResync = openspace.time.secondsPerDay()
+})
+
+
+local ResourceSatellites = {
+  Identifier = "ResourceSatellites",
+  Parent = transforms.EarthInertial.Identifier,
+  Renderable = {
+    Type = "RenderableOrbitalKepler",
+    Path = omm .. "resource.txt",
+    Format = "OMM",
+    SegmentQuality = 3,
+    Color = { 0.75, 0.75, 0.35 },
+    TrailFade = 15,
+    PointSizeExponent = 5.0,
+    RenderBinMode = "PostDeferredTransparent"
+  },
+  Tag = { "earth_satellites" },
+  GUI = {
+    Name = "Recursos de la Tierra",
+    Path = "/Sistema Solar/Planetas/Tierra/Satélites"
+  }
+}
+
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(ResourceSatellites)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(ResourceSatellites)
+end)
+
+asset.export(ResourceSatellites)
+
+
+
+asset.meta = {
+  Name = "Satélites Clima - Recursos de la Tierra",
+  Description = "Activo de satélites para Clima - Recursos de la Tierra. Datos de Celestrak",
+  Author = "Equipo de OpenSpace",
+  URL = "https://celestrak.com/NORAD/elements/",
+  License = "Celestrak"
+}

@@ -1,0 +1,47 @@
+local globe = asset.require("../../earth")
+
+
+
+local Name = "Terremotos: Top 10 Historicos - hasta 2011"
+local Identifier = "noaa-sos-land-top_quakes"
+local Description = [[Se estima que hay 500,000 terremotos detectables en el mundo cada año. De esos, 100,000 se pueden sentir y 100 de ellos causan daños. Cualquier cosa que cause que las ondas sísmicas se propaguen a través de la Tierra es un terremoto. La causa de los terremotos puede ser natural, como cuando una placa tectónica se desliza debajo de otra, o antropogénica (causada por humanos), como la perforación para combustibles fósiles, la extracción de minerales, grandes explosiones y el colapso de grandes edificios. La superficie de la Tierra está compuesta por un mosaico de placas tectónicas que se mueven unas con respecto a otras. Cuando dos placas se deslizan una junto a la otra, se acumula una tensión en el límite. Cuando esa tensión alcanza un nivel crítico, el límite se desliza y el resultado es un terremoto. Debido a que la mayoría de los terremotos naturales ocurren debido al deslizamiento de placas, los límites entre placas tectónicas son "puntos calientes" para terremotos. La magnitud de los terremotos se mide mediante la escala de magnitud de Richter. Es una escala logarítmica de base 10 del movimiento del suelo causado por el terremoto. Cada aumento de 1 en magnitud representa 10 veces más movimiento del suelo]]
+local URL = "https://sos.noaa.gov/catalog/datasets/earthquakes-historical-top-10-through-2011/"
+
+
+local syncedDirectory = asset.resource({
+  Name = Name,
+  Type = "HttpSynchronization",
+  Identifier = Identifier,
+  Version = 1
+})
+
+
+local Layer = {
+  Identifier = Identifier,
+  Name = Name,
+  Enabled = asset.enabled,
+  ZIndex = 100,
+  FilePath = syncedDirectory .. "sos_saras_big_quakes_20110316.png",
+  Description = Description
+}
+
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.onDeinitialize(function()
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.export(Layer)
+
+
+
+asset.meta = {
+  Name = Name,
+  Description = Description .. "Datos proporcionados por la Administración Nacional Oceánica y Atmosférica",
+  Author = "Administración Nacional Oceánica y Atmosférica",
+  URL = URL,
+  License = "https://sos.noaa.gov/copyright/"
+}

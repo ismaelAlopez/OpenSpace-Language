@@ -1,0 +1,62 @@
+local globe = asset.require("../../earth")
+
+
+local Name = "Topografia y Batimetria con Luces Nocturnas"
+local Identifier = "noaa-sos-land-hot_topo"
+local Description = [[Esta visualización del planeta Tierra muestra un planeta giratorio para
+mostrar tanto una vista nocturna como diurna. El lado diurno de la visualización muestra
+la batimetría y la topografía del globo. Se utiliza un código de colores para distinguir
+entre las elevaciones. El rojo y el gris representan el terreno más alto en la tierra, el
+verde y el amarillo representan el más bajo. En el océano, los colores más oscuros son los
+fondos oceánicos más profundos, mientras que los colores más claros indican áreas menos
+profundas, así como cadenas montañosas en el fondo marino. El sombreado azul muy claro en
+el océano, cerca de las formas terrestres, es generalmente la plataforma continental poco
+profunda. Algunos rasgos interesantes que se pueden observar son las cadenas montañosas en
+los océanos, como la dorsal mesoatlántica en el medio del océano Atlántico, que se está
+expandiendo. También en el océano está la Fosa de las Marianas, que se encuentra al sur de
+Japón. Esta fosa es el lugar más profundo del océano con una asombrosa profundidad de
+36,201 pies, casi 7 millas. En tierra, los Himalayas son una característica destacada, ya
+que son el hogar del Monte Everest, el punto más alto de la Tierra con una altura de
+29,035 pies, casi 5.5 millas]]
+local URL = "https://sos.noaa.gov/catalog/datasets/topography-and-bathymetry-with-nighttime-lights/"
+
+
+local syncedDirectory = asset.resource({
+  Name = Name,
+  Type = "HttpSynchronization",
+  Identifier = Identifier,
+  Version = 1,
+  UnzipFiles = true,
+  UnzipFilesDestination = "images"
+})
+
+
+local Layer = {
+  Identifier = Identifier,
+  Name = Name,
+  Enabled = asset.enabled,
+  ZIndex = 100,
+  Type = "ImageSequenceTileProvider",
+  FolderPath = syncedDirectory .. "images",
+  Description = Description
+}
+
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.onDeinitialize(function()
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.export(Layer)
+
+
+asset.meta = {
+  Name = Name,
+  Description = Description .. "Datos proporcionados por la Administración Nacional Oceánica y Atmosférica",
+  Author = "Administración Nacional Oceánica y Atmosférica",
+  URL = URL,
+  License = "https://sos.noaa.gov/copyright/"
+}

@@ -1,0 +1,83 @@
+local globe = asset.require("../../earth")
+
+
+
+local Name = "Influencia Humana en los Ecosistemas Marinos"
+local Identifier = "noaa-sos-oceans-marine_impacts"
+local Description = [[El océano tiene un impacto en la vida de todos en la Tierra, incluso
+aquellos que no viven en las costas. Se ha estimado que uno de cada seis empleos en
+los Estados Unidos está relacionado con el mar y que el 50% de todas las especies en
+la Tierra son sostenidas por el océano. Debido a esto, es importante proteger y preservar
+los océanos. Sin embargo, se ha demostrado que los humanos tienen un impacto negativo
+en los océanos. Un informe publicado en febrero de 2008 encontró que el 40% de los
+océanos del mundo están fuertemente afectados por actividades humanas, como la
+sobrepesca y la contaminación. En total, se examinaron 17 actividades humanas
+diferentes en el informe, incluyendo el escurrimiento de fertilizantes, el transporte
+marítimo comercial y actividades indirectas como los cambios en la temperatura de la
+superficie del mar, la radiación UV y la acidificación del océano]]
+local URL = "https://sos.noaa.gov/catalog/datasets/human-influences-on-marine-ecosystems/"
+
+
+local syncedDirectory = asset.resource({
+  Name = Name,
+  Type = "HttpSynchronization",
+  Identifier = Identifier,
+  Version = 1
+})
+
+
+local Layer = {
+  Identifier = Identifier,
+  Name = Name,
+  Enabled = asset.enabled,
+  ZIndex = 100,
+  FilePath = syncedDirectory .. "5000.png",
+  Description = Description
+}
+
+local Colorbar = {
+  Identifier = Identifier,
+  Name = Name,
+  Enabled = asset.enabled,
+  Type = "ScreenSpaceImageLocal",
+  TexturePath = syncedDirectory .. "colorbar.png",
+  FaceCamera = false,
+  CartesianPosition = { 0.0, -0.5, -2.0 }
+}
+
+local ColorbarHumanImpact = {
+  Identifier = Identifier,
+  Name = Name,
+  Enabled = asset.enabled,
+  Type = "ScreenSpaceImageLocal",
+  TexturePath = syncedDirectory .. "HumanImpactColorbar.png",
+  FaceCamera = false,
+  CartesianPosition = { 0.0, -0.5, -2.0 }
+}
+
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+  openspace.addScreenSpaceRenderable(Colorbar)
+  openspace.addScreenSpaceRenderable(ColorbarHumanImpact)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeScreenSpaceRenderable(ColorbarHumanImpact)
+  openspace.removeScreenSpaceRenderable(Colorbar)
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.export(Layer)
+asset.export(Colorbar)
+asset.export(ColorbarHumanImpact)
+
+
+
+asset.meta = {
+  Name = Name,
+  Description = Description .. "Datos proporcionados por la Administración Nacional Oceánica y Atmosférica",
+  Author = "Administración Nacional Oceánica y Atmosférica",
+  URL = URL,
+  License = "https://sos.noaa.gov/copyright/"
+}

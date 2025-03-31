@@ -1,0 +1,113 @@
+local globe = asset.require("../../earth")
+
+
+
+local Name = "Terremotos y Plantas de Energia Nuclear"
+local Identifier = "noaa-sos-land-nuclear_earthquake"
+local Description = [[Los terremotos han estado ocurriendo en la Tierra desde su formación. 
+Ocurren cuando las placas tectónicas que se deslizan unas contra otras o se pasan entre sí acumulan suficiente tensión para deslizarse, 
+causando que la roca se asiente en una nueva posición y el suelo tiemble. 
+El Servicio Geológico de los Estados Unidos predice que ocurren 500,000 terremotos cada año, 
+aunque la mayoría pasan desapercibidos porque son muy pequeños o están muy lejos de áreas pobladas. 
+10,000 de ellos pueden ser sentidos por los humanos y 100 de ellos causan daños. 
+Desafortunadamente, los científicos aún no han descubierto una forma precisa y confiable de predecir terremotos, 
+y hay debate sobre si tal cosa es siquiera posible. Los métodos actuales de predicción implican medir la tensión 
+que ha sido liberada por terremotos pasados y con qué frecuencia han ocurrido terremotos en esa ubicación antes. 
+Debido al hecho de que los instrumentos que pueden medir la tensión y los sismógrafos precisos son una invención reciente, 
+la predicción de terremotos sigue siendo inexacta e imprecisa.]]
+local URL = "https://sos.noaa.gov/catalog/datasets/earthquakes-and-nuclear-power-plants/"
+
+
+local syncedDirectory = asset.resource({
+  Name = Name,
+  Type = "HttpSynchronization",
+  Identifier = Identifier,
+  Version = 1
+})
+
+
+local imagesDestination = syncedDirectory .. "images"
+
+local LayerBase = {
+  Identifier = Identifier .. "-base",
+  Name = Name .. " (Base)",
+  ZIndex = 100,
+  FilePath = syncedDirectory .. "2048.jpg",
+  Description = Description
+}
+
+local LayerAll = {
+  Identifier = Identifier .. "-all",
+  Name = Name .. " (Todos)",
+  ZIndex = 100,
+  FilePath = syncedDirectory .. "all_earthquakes.png",
+  Description = Description
+}
+
+local LayerNew = {
+  Identifier = Identifier .. "-new",
+  Name = Name .. " (Nuevos)",
+  ZIndex = 100,
+  FilePath = syncedDirectory .. "new.jpg",
+  Description = Description
+}
+
+local LayerNuclear = {
+  Identifier = Identifier .. "-nuclear",
+  Name = Name .. " (Nuclear)",
+  ZIndex = 100,
+  FilePath = syncedDirectory .. "nuclear_plants.png",
+  Description = Description
+}
+
+local LayerImages = {
+  Identifier = Identifier .. "-images",
+  Name = Name .. " (Imágenes)",
+  Type = "ImageSequenceTileProvider",
+  ZIndex = 100,
+  FolderPath = imagesDestination,
+  Description = Description
+}
+
+local Legend = {
+  Identifier = Identifier,
+  Name = Name,
+  Type = "ScreenSpaceImageLocal",
+  TexturePath = syncedDirectory .. "legend.png",
+  FaceCamera = false,
+  Scale = 0.175,
+  CartesianPosition = { 1.0, 0.0, -2.0 }
+}
+
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", LayerBase)
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", LayerAll)
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", LayerNew)
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", LayerNuclear)
+  openspace.addScreenSpaceRenderable(Legend)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeScreenSpaceRenderable(Legend)
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", LayerNuclear)
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", LayerNew)
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", LayerAll)
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", LayerBase)
+end)
+
+asset.export(LayerBase)
+asset.export(LayerAll)
+asset.export(LayerNew)
+asset.export(LayerNuclear)
+asset.export(Legend)
+
+
+
+asset.meta = {
+  Name = Name,
+  Description = Description .. "Datos proporcionados por la Administración Nacional Oceánica y Atmosférica",
+  Author = "Administración Nacional Oceánica y Atmosférica",
+  URL = URL,
+  License = "https://sos.noaa.gov/copyright/"
+}

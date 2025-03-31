@@ -1,0 +1,54 @@
+local transforms = asset.require("scene/solarsystem/planets/earth/transforms")
+
+
+
+local omm = asset.resource({
+  Name = "Datos OMM del Satelite (GOES)",
+  Type = "UrlSynchronization",
+  Identifier = "satellite_omm_data_goes",
+  Url = "https://www.celestrak.com/NORAD/elements/gp.php?GROUP=goes&FORMAT=kvn",
+  Filename = "goes.txt",
+  SecondsUntilResync = openspace.time.secondsPerDay()
+})
+
+
+local GoesSatellites = {
+  Identifier = "GoesSatellites",
+  Parent = transforms.EarthInertial.Identifier,
+  Renderable = {
+    Type = "RenderableOrbitalKepler",
+    Path = omm .. "goes.txt",
+    Format = "OMM",
+    SegmentQuality = 3,
+    Color = { 0.75, 0.75, 0.35 },
+    TrailFade = 15,
+    PointSizeExponent = 5.0,
+    RenderBinMode = "PostDeferredTransparent"
+  },
+  Tag = { "earth_satellites" },
+  GUI = {
+    Name = "GOES",
+    Path = "/Sistema Solar/Planetas/Tierra/Satélites"
+  }
+}
+
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(GoesSatellites)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(GoesSatellites)
+end)
+
+asset.export(GoesSatellites)
+
+
+
+asset.meta = {
+  Name = "Satélites Meteorológicos - GOES",
+  Description = "Asset de satélites meteorológicos - GOES. Datos de Celestrak",
+  Author = "Equipo de OpenSpace",
+  URL = "https://celestrak.com/NORAD/elements/",
+  License = "Celestrak"
+}

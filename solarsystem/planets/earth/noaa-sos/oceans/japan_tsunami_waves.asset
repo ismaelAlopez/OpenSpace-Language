@@ -1,0 +1,49 @@
+local globe = asset.require("../../earth")
+
+
+
+local Name = "Tsunami de Japon: Propagacion de Olas - 11 de marzo de 2011"
+local Identifier = "noaa-sos-oceans-japan_tsunami_waves"
+local Description = [[El 11 de marzo de 2011 a las 2:45 p.m. hora local, ocurrió un terremoto de magnitud 9.0 a 81 millas (130 km) de la costa este de Sendai, Honshu, Japón, desencadenando un tsunami masivo. Un tsunami es una serie de olas oceánicas generadas por desplazamientos repentinos en el fondo marino, deslizamientos de tierra o actividad volcánica. En el océano profundo, la ola del tsunami puede tener solo unos pocos centímetros de altura. La ola del tsunami puede llegar suavemente a la costa o puede aumentar en altura para convertirse en un muro de agua turbulenta en rápido movimiento de varios metros de altura. Las alturas de ola pronosticadas en Japón fueron de hasta 66 pies (20 m) y hubo muchos informes de olas de tsunami de tres pisos de altura en partes de Japón. A través del Océano Pacífico, muchos países emitieron evacuaciones a lo largo de las costas debido a las olas de tsunami pronosticadas. La propagación del tsunami se calculó con el método de pronóstico de NOAA utilizando el modelo MOST (Método de División de Tsunami) con la fuente del tsunami inferida de DART. Aproximadamente 25 minutos después del terremoto, el tsunami fue registrado por primera vez por una de las boyas DART.]]
+local URL = "https://sos.noaa.gov/catalog/datasets/japan-tsunami-wave-propagation-march-11-2011/"
+
+
+local syncedDirectory = asset.resource({
+  Name = Name,
+  Type = "HttpSynchronization",
+  Identifier = Identifier,
+  Version = 1,
+  UnzipFiles = true
+})
+
+
+local Layer = {
+  Identifier = Identifier,
+  Name = Name,
+  Enabled = asset.enabled,
+  ZIndex = 100,
+  Type = "ImageSequenceTileProvider",
+  FolderPath = syncedDirectory .. "4096",
+  Description = Description
+}
+
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.onDeinitialize(function()
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.export(Layer)
+
+
+
+asset.meta = {
+  Name = Name,
+  Description = Description .. "Datos proporcionados por la Administración Nacional Oceánica y Atmosférica",
+  Author = "Administración Nacional Oceánica y Atmosférica",
+  URL = URL,
+  License = "https://sos.noaa.gov/copyright/"
+}

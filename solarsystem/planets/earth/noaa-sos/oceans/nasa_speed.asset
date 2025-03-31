@@ -1,0 +1,56 @@
+local globe = asset.require("../../earth")
+
+
+
+local Name = "Corrientes de Superficie del Mar"
+local Identifier = "noaa-sos-oceans-nasa_speed"
+local Description = [[El agua en el océano está en constante movimiento. Las corrientes oceánicas
+son típicamente impulsadas por el viento de superficie y pueden tener un gran impacto en el clima. 
+El noroeste de Europa es moderadamente templado considerando su latitud porque la Corriente del Golfo 
+en la costa este de los Estados Unidos transporta agua cálida hacia el norte a esas áreas. De hecho, 
+el Océano Atlántico a lo largo de la costa de los EE. UU. es mucho más cálido que el Océano Pacífico 
+a lo largo de la costa de los EE. UU. debido al agua cálida transportada en la Corriente del Golfo. 
+En esta visualización, un modelo creado por la NASA, las variaciones de color denotan velocidad. 
+Las áreas de color verde claro se mueven más rápido que las áreas azules.]]
+local URL = "https://sos.noaa.gov/catalog/datasets/sea-surface-currents/"
+
+
+local syncedDirectory = asset.resource({
+  Name = Name,
+  Type = "HttpSynchronization",
+  Identifier = Identifier,
+  Version = 1,
+  UnzipFiles = true
+})
+
+
+local Layer = {
+  Identifier = Identifier,
+  Name = Name,
+  Enabled = asset.enabled,
+  ZIndex = 100,
+  Type = "ImageSequenceTileProvider",
+  FolderPath = syncedDirectory .. "4000",
+  Description = Description
+}
+
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.onDeinitialize(function()
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.export(Layer)
+
+
+
+asset.meta = {
+  Name = Name,
+  Description = Description .. "Datos proporcionados por la Administración Nacional Oceánica y Atmosférica",
+  Author = "Administración Nacional Oceánica y Atmosférica",
+  URL = URL,
+  License = "https://sos.noaa.gov/copyright/"
+}

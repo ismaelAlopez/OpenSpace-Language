@@ -1,0 +1,71 @@
+local globe = asset.require("../../earth")
+
+
+
+local Name = "Edad de las Lineas de Contorno del Fondo Marino"
+local Identifier = "noaa-sos-land-sea_floor_age-iso_lines_yellow"
+local Description = [[La superficie de la Tierra está compuesta por un mosaico de placas tectónicas
+que se mueven unas con respecto a otras. La Tierra está formada por siete placas principales
+y varias placas más pequeñas. A medida que las placas se mueven, se puede crear nuevo fondo marino.
+Las placas forman tres tipos diferentes de límites: convergentes, divergentes y transformantes.
+Los límites convergentes también se llaman límites de colisión porque son áreas donde dos placas
+colisionan. En los límites transformantes, las placas se deslizan y rozan entre sí. Los límites
+divergentes son las áreas donde las placas se separan unas de otras. Donde las placas se separan,
+se forma nuevo material cortical a partir de magma fundido debajo de la superficie de la Tierra.
+Debido a esto, el fondo marino más joven se puede encontrar a lo largo de los límites divergentes,
+como la Dorsal del Océano Atlántico Medio. Sin embargo, la expansión generalmente no es uniforme,
+causando características lineales perpendiculares a los límites divergentes]]
+local URL = "https://sos.noaa.gov/catalog/datasets/age-of-the-seafloor-contour-lines/"
+
+
+local syncedDirectory = asset.resource({
+  Name = Name,
+  Type = "HttpSynchronization",
+  Identifier = Identifier,
+  Version = 1
+})
+
+
+local Layer = {
+  Identifier = Identifier,
+  Name = Name,
+  Enabled = asset.enabled,
+  ZIndex = 100,
+  FilePath = syncedDirectory .. "4096.png",
+  Description = Description
+}
+
+local Colorbar = {
+  Identifier = Identifier,
+  Name = Name,
+  Enabled = asset.enabled,
+  Type = "ScreenSpaceImageLocal",
+  TexturePath = syncedDirectory .. "colorbar.png",
+  FaceCamera = false,
+  Scale = 0.2,
+  CartesianPosition = { 0.0, -0.5, -2.0 }
+}
+
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+  openspace.addScreenSpaceRenderable(Colorbar)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeScreenSpaceRenderable(Colorbar)
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.export(Layer)
+asset.export(Colorbar)
+
+
+
+asset.meta = {
+  Name = Name,
+  Description = Description .. "Datos proporcionados por la Administración Nacional Oceánica y Atmosférica",
+  Author = "Administración Nacional Oceánica y Atmosférica",
+  URL = URL,
+  License = "https://sos.noaa.gov/copyright/"
+}

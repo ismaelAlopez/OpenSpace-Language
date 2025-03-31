@@ -1,0 +1,56 @@
+local transforms = asset.require("scene/solarsystem/planets/earth/transforms")
+
+
+
+local omm = asset.resource({
+  Name = "Datos OMM del Satelite (Sistema de Navegacion Naval)",
+  Type = "UrlSynchronization",
+  Identifier = "satellite_omm_data_nnss",
+  Url = "https://www.celestrak.com/NORAD/elements/gp.php?GROUP=nnss&FORMAT=kvn",
+  Filename = "nnss.txt",
+  SecondsUntilResync = openspace.time.secondsPerDay()
+})
+
+
+local NavyNavigationSatellites = {
+  Identifier = "NavyNavigationSatellites",
+  Parent = transforms.EarthInertial.Identifier,
+  Renderable = {
+    Type = "RenderableOrbitalKepler",
+    Path = omm .. "nnss.txt",
+    Format = "OMM",
+    SegmentQuality = 3,
+    Color = { 0.75, 0.75, 0.35 },
+    TrailFade = 17,
+    PointSizeExponent = 5.0,
+    RenderBinMode = "PostDeferredTransparent"
+  },
+  Tag = { "earth_satellites" },
+  GUI = {
+    Name = "Sistema de Satélites de Navegación Naval",
+    Path = "/Sistema Solar/Planetas/Tierra/Satélites",
+    Description = [[El primer sistema de navegación por satélite utilizado operativamente.]]
+  }
+}
+
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(NavyNavigationSatellites)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(NavyNavigationSatellites)
+end)
+
+asset.export(NavyNavigationSatellites)
+
+
+
+asset.meta = {
+  Name = "Satélites de Navegación Sistema de Navegación Naval",
+  Description = [[Activo de satélites para el Sistema de Navegación Naval. Datos
+    de Celestrak]],
+  Author = "Equipo de OpenSpace",
+  URL = "https://celestrak.com/NORAD/elements/",
+  License = "Celestrak"
+}

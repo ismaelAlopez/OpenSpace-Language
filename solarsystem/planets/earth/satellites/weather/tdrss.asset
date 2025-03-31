@@ -1,0 +1,55 @@
+local transforms = asset.require("scene/solarsystem/planets/earth/transforms")
+
+
+
+local omm = asset.resource({
+  Name = "Datos OMM del Satelite (Sistema de Satelites de Seguimiento y Retransmisión de Datos (TDRSS))",
+  Type = "UrlSynchronization",
+  Identifier = "satellite_omm_data_tdrss",
+  Url = "https://www.celestrak.com/NORAD/elements/gp.php?GROUP=tdrss&FORMAT=kvn",
+  Filename = "tdrss.txt",
+  SecondsUntilResync = openspace.time.secondsPerDay()
+})
+
+
+local TrackingDataRelaySatellites = {
+  Identifier = "TrackingDataRelaySatellites",
+  Parent = transforms.EarthInertial.Identifier,
+  Renderable = {
+    Type = "RenderableOrbitalKepler",
+    Path = omm .. "tdrss.txt",
+    Format = "OMM",
+    SegmentQuality = 3,
+    Color = { 0.75, 0.75, 0.35 },
+    TrailFade = 17,
+    PointSizeExponent = 5.0,
+    RenderBinMode = "PostDeferredTransparent"
+  },
+  Tag = { "earth_satellites" },
+  GUI = {
+    Name = "Sistema de Satélites de Seguimiento y Retransmisión de Datos (TDRSS)",
+    Path = "/Sistema Solar/Planetas/Tierra/Satélites"
+  }
+}
+
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(TrackingDataRelaySatellites)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(TrackingDataRelaySatellites)
+end)
+
+asset.export(TrackingDataRelaySatellites)
+
+
+
+asset.meta = {
+  Name = "Satélites Meteorológicos - Sistema de Satélites de Seguimiento y Retransmisión de Datos (TDRSS)",
+  Description = [[Activo de satélites meteorológicos - Sistema de Satélites de Seguimiento y Retransmisión
+    de Datos (TDRSS). Datos de Celestrak]],
+  Author = "Equipo de OpenSpace",
+  URL = "https://celestrak.com/NORAD/elements/",
+  License = "Celestrak"
+}

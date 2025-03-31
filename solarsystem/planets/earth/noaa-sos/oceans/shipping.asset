@@ -1,0 +1,55 @@
+local globe = asset.require("../../earth")
+
+
+
+local Name = "Shipping Routes (with labels) - One Year"
+local Identifier = "noaa-sos-oceans-shipping"
+local Description = [[Había más de 30,000 barcos mercantes de más de 1000 toneladas brutas en el mar en 2005. 
+La Organización Meteorológica Mundial tiene un Esquema de Observación Voluntaria de Barcos que equipa a los barcos 
+con instrumentos meteorológicos para proporcionar observaciones para modelos meteorológicos y pronosticadores. 
+Además de observar el clima, también se registra la ubicación de los barcos a través de GPS. 
+Desde octubre de 2004 hasta octubre de 2005 se recopilaron 1,189,127 puntos de datos móviles de barcos de 3,374 
+embarcaciones comerciales y de investigación, lo que representa aproximadamente el 11% de todos los barcos en el mar en 2005. 
+Al conectar los puntos de datos para cada embarcación, se trazaron las rutas de envío durante el transcurso de un año. 
+El Centro Nacional de Análisis y Síntesis Ecológica compiló estos datos para incluirlos en su Mapa Global de Impactos Humanos 
+en los Ecosistemas Marinos]]
+local URL = "https://sos.noaa.gov/catalog/datasets/shipping-routes-with-labels-one-year/"
+
+
+local syncedDirectory = asset.resource({
+  Name = Name,
+  Type = "HttpSynchronization",
+  Identifier = Identifier,
+  Version = 1
+})
+
+
+local Layer = {
+  Identifier = Identifier,
+  Name = Name,
+  Enabled = asset.enabled,
+  ZIndex = 100,
+  FilePath = syncedDirectory .. "4096.jpg",
+  Description = Description
+}
+
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.onDeinitialize(function()
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.export(Layer)
+
+
+
+asset.meta = {
+  Name = "Rutas de Envío (con etiquetas) - Un Año",
+  Description = Description .. "Datos proporcionados por la Administración Nacional Oceánica y Atmosférica",
+  Author = "Administración Nacional Oceánica y Atmosférica",
+  URL = URL,
+  License = "https://sos.noaa.gov/copyright/"
+}

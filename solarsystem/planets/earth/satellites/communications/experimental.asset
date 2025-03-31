@@ -1,0 +1,54 @@
+local transforms = asset.require("scene/solarsystem/planets/earth/transforms")
+
+
+
+local omm = asset.resource({
+  Name = "Datos OMM de Satelites (Experimental)",
+  Type = "UrlSynchronization",
+  Identifier = "satellite_omm_data_x-comm",
+  Url = "https://www.celestrak.com/NORAD/elements/gp.php?GROUP=x-comm&FORMAT=kvn",
+  Filename = "x-comm.txt",
+  SecondsUntilResync = openspace.time.secondsPerDay()
+})
+
+
+local ExperimentalSatellites = {
+  Identifier = "ExperimentalSatellites",
+  Parent = transforms.EarthInertial.Identifier,
+  Renderable = {
+    Type = "RenderableOrbitalKepler",
+    Path = omm .. "x-comm.txt",
+    Format = "OMM",
+    SegmentQuality = 3,
+    Color = { 0.75, 0.75, 0.35 },
+    TrailFade = 15,
+    PointSizeExponent = 5.0,
+    RenderBinMode = "PostDeferredTransparent"
+  },
+  Tag = { "earth_satellites" },
+  GUI = {
+    Name = "Experimental",
+    Path = "/Sistema Solar/Planetas/Tierra/Satélites"
+  }
+}
+
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(ExperimentalSatellites)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(ExperimentalSatellites)
+end)
+
+asset.export(ExperimentalSatellites)
+
+
+
+asset.meta = {
+  Name = "Satélites de Comunicaciones - Experimental",
+  Description = "Activo de satélites para Comunicaciones - Experimental. Datos de Celestrak",
+  Author = "Equipo de OpenSpace",
+  URL = "https://celestrak.com/NORAD/elements/",
+  License = "Celestrak"
+}

@@ -1,0 +1,55 @@
+local transforms = asset.require("scene/solarsystem/planets/earth/transforms")
+
+
+
+local omm = asset.resource({
+  Name = "Datos OMM de Satelites (GPS)",
+  Type = "UrlSynchronization",
+  Identifier = "satellite_omm_data_gps-ops",
+  Url = "https://www.celestrak.com/NORAD/elements/gp.php?GROUP=gps-ops&FORMAT=kvn",
+  Filename = "gps-ops.txt",
+  SecondsUntilResync = openspace.time.secondsPerDay()
+})
+
+
+local GpsSatellites = {
+  Identifier = "GpsSatellites",
+  Parent = transforms.EarthInertial.Identifier,
+  Renderable = {
+    Type = "RenderableOrbitalKepler",
+    Path = omm .. "gps-ops.txt",
+    Format = "OMM",
+    SegmentQuality = 3,
+    Color = { 0.9, 0.5, 0.0 },
+    TrailFade = 15,
+    PointSizeExponent = 5.5,
+    RenderBinMode = "PostDeferredTransparent"
+  },
+  Tag = { "earth_satellites" },
+  GUI = {
+    Name = "GPS",
+    Path = "/Sistema Solar/Planetas/Tierra/Satélites",
+    Description = [[Los satélites GPS que nos proporcionan nuestras ubicaciones precisas en la Tierra.]]
+  }
+}
+
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(GpsSatellites)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(GpsSatellites)
+end)
+
+asset.export(GpsSatellites)
+
+
+
+asset.meta = {
+  Name = "Satélites de Navegación GPS",
+  Description = "Activo de satélites para Navegación GPS. Datos de Celestrak",
+  Author = "Equipo de OpenSpace",
+  URL = "https://celestrak.com/NORAD/elements/",
+  License = "Celestrak"
+}

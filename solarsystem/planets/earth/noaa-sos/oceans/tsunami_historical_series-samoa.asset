@@ -1,0 +1,90 @@
+local globe = asset.require("../../earth")
+
+
+
+local Name = "Serie Historica de Tsunamis: Samoa - 2009"
+local Identifier = "noaa-sos-oceans-tsunami_historical_series-samoa"
+local Description = [[A las 6:48 de la mañana del 29 de septiembre de 2009 (17:48 UTC), un
+terremoto de magnitud 8.1 golpeó cerca de las Islas Samoa en el suroeste del Océano Pacífico.
+El Centro de Alerta de Tsunamis del Pacífico (PTWC) determinó rápidamente que la gran magnitud
+de este terremoto, su ubicación bajo el fondo marino, su profundidad relativamente superficial
+dentro de la tierra, y un historial de terremotos causantes de tsunamis en la región significaban
+que podría haber movido el fondo marino y, por lo tanto, representar un riesgo significativo de
+tsunami. El PTWC emitió su primera alerta de tsunami varios minutos después para Samoa, Samoa
+Americana, Tonga y otros grupos de islas cercanas. El terremoto de hecho causó un tsunami
+peligroso, y durante las horas siguientes el PTWC lo rastreó a través del Océano Pacífico y
+actualizó sus alertas con alturas de olas de tsunami medidas y recomendó que áreas adicionales
+consideraran la evacuación costera. El PTWC canceló todas las alertas de tsunami unas cuatro
+horas después del terremoto]]
+local URL = "https://sos.noaa.gov/catalog/datasets/tsunami-historical-series-samoa-2009/"
+
+
+local syncedDirectory = asset.resource({
+  Name = Name,
+  Type = "HttpSynchronization",
+  Identifier = Identifier,
+  Version = 1
+})
+
+
+local LayerCoastal = {
+  Identifier = Identifier .. "-coastal",
+  Name = Name .. " (Costero)",
+  ZIndex = 100,
+  FilePath = syncedDirectory .. "Tsunami_Coastal_Map_Samoa_2009_4k.jpg",
+  Description = Description
+}
+
+local LayerEnergyCoastal = {
+  Identifier = Identifier .. "-energy_coastal",
+  Name = Name .. " (Energia Costera)",
+  ZIndex = 100,
+  FilePath = syncedDirectory .. "Tsunami_Energy+Coastal_Map_Samoa_2009_4k.jpg",
+  Description = Description
+}
+
+local LayerEnergy = {
+  Identifier = Identifier .. "-energy",
+  Name = Name .. " (Energia)",
+  ZIndex = 100,
+  FilePath = syncedDirectory .. "Tsunami_Energy_Map_Samoa_2009_4k.jpg",
+  Description = Description
+}
+
+local LayerNull = {
+  Identifier = Identifier .. "-null",
+  Name = Name .. " (Nulo)",
+  ZIndex = 100,
+  FilePath = syncedDirectory .. "Tsunami_Null_Coastal_Map_Samoa_2009_4k.jpg",
+  Description = Description
+}
+
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", LayerCoastal)
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", LayerEnergyCoastal)
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", LayerEnergy)
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", LayerNull)
+end)
+
+asset.onDeinitialize(function()
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", LayerNull)
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", LayerEnergy)
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", LayerEnergyCoastal)
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", LayerCoastal)
+end)
+
+asset.export(LayerCoastal)
+asset.export(LayerEnergyCoastal)
+asset.export(LayerEnergy)
+asset.export(LayerNull)
+
+
+
+asset.meta = {
+  Name = Name,
+  Description = Description .. "Datos proporcionados por la Administración Nacional Oceánica y Atmosférica",
+  Author = "Administración Nacional Oceánica y Atmosférica",
+  URL = URL,
+  License = "https://sos.noaa.gov/copyright/"
+}

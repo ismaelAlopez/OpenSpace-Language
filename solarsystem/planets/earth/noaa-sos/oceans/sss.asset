@@ -1,0 +1,69 @@
+local globe = asset.require("../../earth")
+
+
+
+local Name = "Salinidad Superficial del Mar"
+local Identifier = "noaa-sos-oceans-sss"
+local Description = [[Procesos que ocurrieron a lo largo de la historia de la Tierra, como la
+meteorización de rocas, la evaporación del agua del océano y la formación de hielo marino,
+han hecho que el océano sea salado. Esos procesos aún están en marcha hoy en día y son
+contrarrestados por procesos que disminuyen la sal en el océano, como el aporte de agua
+dulce de los ríos, la precipitación y el derretimiento del hielo. El resultado es una
+superficie oceánica donde la salinidad - la concentración de sal - cambia, y estos cambios,
+por pequeños que sean, tienen efectos a gran escala en el ciclo del agua de la Tierra y la
+circulación oceánica]]
+local URL = "https://sos.noaa.gov/catalog/datasets/sea-surface-salinity/"
+
+
+local syncedDirectory = asset.resource({
+  Name = Name,
+  Type = "HttpSynchronization",
+  Identifier = Identifier,
+  Version = 1,
+  UnzipFiles = true
+})
+
+
+local Layer = {
+  Identifier = Identifier,
+  Name = Name,
+  Enabled = asset.enabled,
+  ZIndex = 100,
+  Type = "ImageSequenceTileProvider",
+  FolderPath = syncedDirectory .. "4096",
+  Description = Description
+}
+
+local Colorbar = {
+  Identifier = Identifier,
+  Name = Name,
+  Enabled = asset.enabled,
+  Type = "ScreenSpaceImageLocal",
+  TexturePath = syncedDirectory .. "colorbar.png",
+  FaceCamera = false,
+  CartesianPosition = { 0.0, -0.5, -2.0 }
+}
+
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+  openspace.addScreenSpaceRenderable(Colorbar)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeScreenSpaceRenderable(Colorbar)
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.export(Layer)
+asset.export(Colorbar)
+
+
+
+asset.meta = {
+  Name = Name,
+  Description = Description .. "Datos proporcionados por la Administración Nacional Oceánica y Atmosférica",
+  Author = "Administración Nacional Oceánica y Atmosférica",
+  URL = URL,
+  License = "https://sos.noaa.gov/copyright/"
+}

@@ -1,0 +1,56 @@
+local globe = asset.require("../../earth")
+
+
+
+local Name = "Luces Nocturnas"
+local Identifier = "noaa-sos-land-earth_night-nightlights"
+local Description = [[Los datos fueron registrados por el Programa de Satélites Meteorológicos de Defensa
+(DMSP) en el Centro Nacional de Datos Geofísicos (NGDC), ahora parte de los Centros
+Nacionales de Información Ambiental (NCEI) de NOAA. Los datos fueron recolectados
+utilizando satélites en órbita polar que proporcionan cobertura completa del globo dos
+veces al día. Los satélites tienen un sistema de escaneo de líneas operativas que les
+permite detectar bajos niveles de radiancia visible-cercana al infrarrojo por la noche.
+Con estos datos, es posible detectar nubes iluminadas por la luz de la luna, luces de
+ciudades y pueblos, sitios industriales, quemas de gas, incendios, relámpagos y auroras.
+El conjunto de datos de Luces Nocturnas del Mundo fue compilado a partir de datos del
+Programa de Satélites Meteorológicos de Defensa (DMSP) que abarcan de octubre de 1994 a
+marzo de 1995]]
+local URL = "https://sos.noaa.gov/catalog/datasets/nighttime-lights/"
+
+
+local syncedDirectory = asset.resource({
+  Name = Name,
+  Type = "HttpSynchronization",
+  Identifier = Identifier,
+  Version = 1
+})
+
+
+local Layer = {
+  Identifier = Identifier,
+  Name = Name,
+  Enabled = asset.enabled,
+  ZIndex = 100,
+  FilePath = syncedDirectory .. "4800.jpg",
+  Description = Description
+}
+
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.onDeinitialize(function()
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.export(Layer)
+
+
+asset.meta = {
+  Name = Name,
+  Description = Description .. "Datos proporcionados por la Administración Nacional Oceánica y Atmosférica",
+  Author = "Administración Nacional Oceánica y Atmosférica",
+  URL = URL,
+  License = "https://sos.noaa.gov/copyright/"
+}

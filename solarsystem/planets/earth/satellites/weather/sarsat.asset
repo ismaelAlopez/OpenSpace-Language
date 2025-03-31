@@ -1,0 +1,55 @@
+local transforms = asset.require("scene/solarsystem/planets/earth/transforms")
+
+
+
+local omm = asset.resource({
+  Name = "Datos OMM de Satelites (Busqueda y Rescate (SARSAT))",
+  Type = "UrlSynchronization",
+  Identifier = "satellite_omm_data_sarsat",
+  Url = "https://www.celestrak.com/NORAD/elements/gp.php?GROUP=sarsat&FORMAT=kvn",
+  Filename = "sarsat.txt",
+  SecondsUntilResync = openspace.time.secondsPerDay()
+})
+
+
+local SarSatellites = {
+  Identifier = "SarSatellites",
+  Parent = transforms.EarthInertial.Identifier,
+  Renderable = {
+    Type = "RenderableOrbitalKepler",
+    Path = omm .. "sarsat.txt",
+    Format = "OMM",
+    SegmentQuality = 3,
+    Color = { 0.75, 0.75, 0.35 },
+    TrailFade = 10,
+    PointSizeExponent = 5.0,
+    RenderBinMode = "PostDeferredTransparent"
+  },
+  Tag = { "earth_satellites" },
+  GUI = {
+    Name = "Búsqueda y Rescate (SARSAT)",
+    Path = "/Sistema Solar/Planetas/Tierra/Satélites"
+  }
+}
+
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(SarSatellites)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(SarSatellites)
+end)
+
+asset.export(SarSatellites)
+
+
+
+asset.meta = {
+  Name = "Satélites Clima - Búsqueda y Rescate (SARSAT)",
+  Description = [[Asset de satélites para Clima - Búsqueda y Rescate (SARSAT). Datos de
+    Celestrak]],
+  Author = "Equipo de OpenSpace",
+  URL = "https://celestrak.com/NORAD/elements/",
+  License = "Celestrak"
+}

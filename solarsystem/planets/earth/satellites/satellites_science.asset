@@ -1,0 +1,15 @@
+asset.require("./science/spaceearth")
+asset.require("./science/geodetic")
+asset.require("./science/engineering")
+asset.require("./science/education")
+
+
+
+asset.meta = {
+  Name = "Ciencia de Satélites",
+  Description = [[Meta activo para satélites científicos de la Tierra. Contiene los grupos:
+    espacio-tierra, geodésico, ingeniería y educación]],
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "Licencia MIT"
+}

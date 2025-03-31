@@ -1,0 +1,65 @@
+local globe = asset.require("../../earth")
+
+
+
+local Name = "Seguimiento del Gran Tiburon Blanco"
+local Identifier = "noaa-sos-oceans-shark"
+local Description = [[Antes de que la tecnología de etiquetado satelital fuera factible, 
+se pensaba que los grandes tiburones blancos (Carcharodon carcharias) pasaban la mayor 
+parte de su tiempo cerca de las costas alimentándose de focas y leones marinos. Con el 
+advenimiento de la tecnología de etiquetado satelital, se han descubierto muchos nuevos 
+comportamientos del gran tiburón blanco. Al etiquetar un tiburón con un transmisor 
+satelital, los científicos pueden rastrear el movimiento del tiburón durante períodos 
+prolongados. En 2001, un tiburón etiquetado frente a la costa de California fue rastreado 
+hasta Hawái, a 3,800 km (2,280 millas) de distancia. El tiburón pasó el invierno allí 
+antes de regresar a aguas más cercanas a California. Varios otros tiburones etiquetados 
+frente a la costa de California también fueron rastreados viajando grandes distancias 
+desde California]]
+local URL = "https://sos.noaa.gov/catalog/datasets/great-white-shark-track/"
+
+
+local syncedDirectory = asset.resource({
+  Name = Name,
+  Type = "HttpSynchronization",
+  Identifier = Identifier,
+  Version = 1,
+  UnzipFiles = true
+})
+
+
+local Layer = {
+  Identifier = Identifier,
+  Name = Name,
+  Enabled = asset.enabled,
+  ZIndex = 100,
+  Type = "TemporalTileProvider",
+  Mode = "Folder",
+  Folder = {
+    Folder = syncedDirectory .. "2048",
+    -- See https://en.cppreference.com/w/cpp/io/manip/get_time for an explanation of the
+    -- time formatting string
+    Format = "shark-migration-%y%j-%H%M.jpg"
+  },
+  Description = Description
+}
+
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.onDeinitialize(function()
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.export(Layer)
+
+
+
+asset.meta = {
+  Name = Name,
+  Description = Description .. "Datos proporcionados por la Administración Nacional Oceánica y Atmosférica",
+  Author = "Administración Nacional Oceánica y Atmosférica",
+  URL = URL,
+  License = "https://sos.noaa.gov/copyright/"
+}

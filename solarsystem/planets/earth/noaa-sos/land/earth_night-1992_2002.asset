@@ -1,0 +1,62 @@
+local globe = asset.require("../../earth")
+
+
+
+local Name = "Comparacion de Luces Nocturnas - 1992 y 2002"
+local Identifier = "noaa-sos-land-earth_night-1992_2002"
+local Description = [[Los datos fueron registrados por el Programa de Satélites Meteorológicos
+  de Defensa (DMSP) en el Centro Nacional de Datos Geofísicos (NGDC), ahora parte de los
+  Centros Nacionales de Información Ambiental (NCEI) de NOAA. Los datos fueron recolectados
+  utilizando satélites en órbita polar que proporcionan cobertura completa del globo dos veces
+  al día. Los satélites tienen un sistema de escaneo de líneas operativas que les permite
+  detectar bajos niveles de radiancia visible-cercana al infrarrojo por la noche]]
+local URL = "https://sos.noaa.gov/catalog/datasets/nighttime-lights-comparison-1992-and-2002/"
+
+
+local syncedDirectory = asset.resource({
+  Name = Name,
+  Type = "HttpSynchronization",
+  Identifier = Identifier,
+  Version = 1
+})
+
+
+local Layer1992 = {
+  Identifier = Identifier .. "-1992",
+  Name = Name .. " (1992)",
+  ZIndex = 100,
+  FilePath = syncedDirectory .. "Nightlights_1992.jpg",
+  Description = Description
+}
+
+local Layer2002 = {
+  Identifier = Identifier .. "-2002",
+  Name = Name .. " (2002)",
+  ZIndex = 100,
+  FilePath = syncedDirectory .. "Nightlights_2002.jpg",
+  Description = Description
+}
+
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", Layer1992)
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", Layer2002)
+end)
+
+asset.onDeinitialize(function()
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", Layer1992)
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", Layer2002)
+end)
+
+asset.export(Layer1992)
+asset.export(Layer2002)
+
+
+
+asset.meta = {
+  Name = Name,
+  Description = Description .. "Datos proporcionados por la Administración Nacional Oceánica y Atmosférica",
+  Author = "Administración Nacional Oceánica y Atmosférica",
+  URL = URL,
+  License = "https://sos.noaa.gov/copyright/"
+}

@@ -1,0 +1,93 @@
+local globe = asset.require("../../earth")
+
+
+
+local Name = "Modelo Climatico: Comparacion de Cambio de Temperatura (GFDL a1b y b1)"
+local Identifier = "noaa-sos-models-ipcc_temp-compare"
+local Description = [["El Panel Intergubernamental sobre Cambio Climático (IPCC) fue
+establecido por la OMM y el PNUMA para evaluar información científica, técnica y socioeconómica
+relevante para la comprensión del cambio climático, sus posibles impactos y
+opciones para la adaptación y mitigación. Está abierto a todos los miembros de la ONU y de la OMM."
+- de www.ipcc.ch. En un esfuerzo por visualizar mejor el futuro del cambio climático, el
+IPCC publica informes de evaluación sobre el estado actual de la atmósfera y lo que el
+futuro podría deparar. Modelos de varias organizaciones atmosféricas y oceánicas están incluidos
+en estos informes para establecer una comprensión amplia de la ciencia. Los datos de
+tres de los modelos del IPCC que siguen el cambio de temperatura desde 1870 - 2100 han sido
+formateados para Science On a Sphere]]
+local URL = "https://sos.noaa.gov/catalog/datasets/climate-model-temperature-change-comparison-gfdl-a1b-and-b1/"
+
+
+local syncedDirectory = asset.resource({
+  Name = Name,
+  Type = "HttpSynchronization",
+  Identifier = Identifier,
+  Version = 1
+})
+
+
+local layersNames = {
+  "2025_gfdl_a1b",
+  "2025_gfdl_b1",
+  "2050_gfdl_a1b",
+  "2050_gfdl_b1",
+  "2075_gfdl_a1b",
+  "2075_gfdl_b1",
+  "2100_gfdl_a1b",
+  "2100_gfdl_b1"
+}
+
+local layers = {}
+for i,v in ipairs(layersNames) do
+  local layer = {
+    Identifier = Identifier .. v,
+    Name = Name,
+    Enabled = asset.enabled,
+    ZIndex = 100,
+    FilePath = syncedDirectory .. v .. ".png",
+    Description = Description
+  }
+
+  table.insert(layers, layer)
+end
+
+local Colorbar = {
+  Identifier = Identifier,
+  Name = Name,
+  Enabled = asset.enabled,
+  Type = "ScreenSpaceImageLocal",
+  TexturePath = syncedDirectory .. "colorbar.png",
+  FaceCamera = false,
+  Scale = 0.2,
+  BackgroundColor = { 1.0, 1.0, 1.0, 1.0 },
+  CartesianPosition = { 1.0, -0.5, -2.0 }
+}
+
+
+asset.onInitialize(function()
+  for i,v in ipairs(layers) do
+    openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", v)
+  end
+  openspace.addScreenSpaceRenderable(Colorbar)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeScreenSpaceRenderable(Colorbar)
+  for i,v in ipairs(layers) do
+    openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", v)
+  end
+end)
+
+for _,v in ipairs(layers) do
+  asset.export(v)
+end
+asset.export(Colorbar)
+
+
+
+asset.meta = {
+  Name = Name,
+  Description = Description .. "Datos proporcionados por la Administración Nacional Oceánica y Atmosférica",
+  Author = "Administración Nacional Oceánica y Atmosférica",
+  URL = URL,
+  License = "https://sos.noaa.gov/copyright/"
+}

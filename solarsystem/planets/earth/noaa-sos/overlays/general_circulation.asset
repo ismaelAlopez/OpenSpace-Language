@@ -1,0 +1,50 @@
+local globe = asset.require("../../earth")
+
+
+
+local Name = "Circulacion General Atmosferica"
+local Identifier = "noaa-sos-overlays-general_circulation"
+local Description = [[Los superposiciones son conjuntos de datos con fondos transparentes que contienen
+datos de primer plano utilizados para complementar otros conjuntos de datos de SOS. Este conjunto de datos en particular superpone
+flechas y nombres de los vientos predominantes aproximados en cualquier conjunto de datos que esté
+visualizando. La superposición de circulación general sería particularmente útil al señalar el
+efecto de sombra de lluvia, así como el movimiento de las nubes o al describir el efecto Coriolis.]]
+local URL = "https://sos.noaa.gov/catalog/datasets/atmospheric-general-circulation/"
+
+
+local syncedDirectory = asset.resource({
+  Name = Name,
+  Type = "HttpSynchronization",
+  Identifier = Identifier,
+  Version = 1
+})
+
+
+local Layer = {
+  Identifier = Identifier,
+  Name = Name,
+  Enabled = asset.enabled,
+  FilePath = syncedDirectory .. "features_arrows.png",
+  Description = Description
+}
+
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "Overlays", Layer)
+end)
+
+asset.onDeinitialize(function()
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "Overlays", Layer)
+end)
+
+asset.export(Layer)
+
+
+
+asset.meta = {
+  Name = Name,
+  Description = Description .. "Datos proporcionados por la Administración Nacional Oceánica y Atmosférica",
+  Author = "Administración Nacional Oceánica y Atmosférica",
+  URL = URL,
+  License = "https://sos.noaa.gov/copyright/"
+}

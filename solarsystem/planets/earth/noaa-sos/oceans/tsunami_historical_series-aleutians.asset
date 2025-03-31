@@ -1,0 +1,96 @@
+local globe = asset.require("../../earth")
+
+
+
+local Name = "Serie Historica de Tsunamis: Islas Aleutianas - 1946"
+local Identifier = "noaa-sos-oceans-tsunami_historical_series-aleutians"
+local Description = [[El 1 de abril de 1946 a las 4:28 am (12:28 UTC), un terremoto de magnitud
+8.6 ocurrió frente a la costa de la Isla Unimak en las Islas Aleutianas de Alaska,
+generando un tsunami que causó el mayor daño y número de muertes en la historia de Hawái,
+lo que llevó a la creación del primer sistema de alerta de tsunamis de los Estados Unidos.
+Como es típico en tsunamis peligrosos, las mayores alturas de las olas se registraron cerca
+del epicentro. Las olas alcanzaron hasta 42 m o aproximadamente 138 pies en la Isla Unimak,
+destruyendo su faro y matando a las cinco personas allí presentes. En otros lugares, este
+tsunami causó el mayor daño y número de muertes en islas habitadas del Pacífico. En Hawái,
+las olas alcanzaron aproximadamente 17 m o 55 pies de altura y mataron a 158 personas, la
+mayoría en la ciudad de Hilo, mientras que en las Islas Marquesas en la Polinesia Francesa,
+las olas alcanzaron incluso más alto, 20 m o 65 pies, pero solo mataron a dos personas. La
+Isla de Pascua en Chile también tuvo olas de casi 9 m o 28 pies, mientras que sus Islas Juan
+Fernández tuvieron olas de casi 3 m o 9 pies de altura. La Isla Pitcairn también tuvo olas
+de 5 m o 16 pies de altura, Nueva Zelanda tuvo olas de más de 2 m o 8 pies de altura, y
+Samoa tuvo olas de más de 1 m o aproximadamente 4 pies de altura. En América del Norte, las
+olas más altas fueron en California con más de 2 m o más de 8 pies, matando a una persona
+allí, y en América del Sur mató a otra persona en Perú]]
+local URL = "https://sos.noaa.gov/catalog/datasets/tsunami-historical-series-aleutian-islands-1946/"
+
+
+local syncedDirectory = asset.resource({
+  Name = Name,
+  Type = "HttpSynchronization",
+  Identifier = Identifier,
+  Version = 1
+})
+
+
+local LayerCoastal = {
+  Identifier = Identifier .. "-coastal",
+  Name = Name .. " (Costero)",
+  ZIndex = 100,
+  FilePath = syncedDirectory .. "Tsunami_Coastal_Map_Aleutians_1946_2k.jpg",
+  Description = Description
+}
+
+local LayerEnergyCoastal = {
+  Identifier = Identifier .. "-energy_coastal",
+  Name = Name .. " (Energia Costera)",
+  ZIndex = 100,
+  FilePath = syncedDirectory .. "Tsunami_Energy+Coastal_Map_Aleutians_1946_4k.jpg",
+  Description = Description
+}
+
+local LayerEnergy = {
+  Identifier = Identifier .. "-energy",
+  Name = Name .. " (Energia)",
+  ZIndex = 100,
+  FilePath = syncedDirectory .. "Tsunami_Energy_Map_Aleutians_1946_4k.jpg",
+  Description = Description
+}
+
+local LayerNull = {
+  Identifier = Identifier .. "-null",
+  Name = Name .. " (Nulo)",
+  ZIndex = 100,
+  FilePath = syncedDirectory .. "Tsunami_Null_Coastal_Map_Aleutians_1946_4k.jpg",
+  Description = Description
+}
+
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", LayerCoastal)
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", LayerEnergyCoastal)
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", LayerEnergy)
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", LayerNull)
+end)
+
+
+asset.onDeinitialize(function()
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", LayerNull)
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", LayerEnergy)
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", LayerEnergyCoastal)
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", LayerCoastal)
+end)
+
+asset.export(LayerCoastal)
+asset.export(LayerEnergyCoastal)
+asset.export(LayerEnergy)
+asset.export(LayerNull)
+
+
+
+asset.meta = {
+  Name = Name,
+  Description = Description .. "Datos proporcionados por la Administración Nacional Oceánica y Atmosférica",
+  Author = "Administración Nacional Oceánica y Atmosférica",
+  URL = URL,
+  License = "https://sos.noaa.gov/copyright/"
+}

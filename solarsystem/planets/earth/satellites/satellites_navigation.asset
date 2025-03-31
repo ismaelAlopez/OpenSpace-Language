@@ -1,0 +1,18 @@
+asset.require("./navigation/beidou")
+asset.require("./navigation/galileo")
+asset.require("./navigation/glosnass")
+asset.require("./navigation/gps")
+asset.require("./navigation/musson")
+asset.require("./navigation/nnss")
+asset.require("./navigation/sbas")
+
+
+
+asset.meta = {
+  Name = "Satélites de Navegación",
+  Description = [[Meta asset para los satélites de navegación de la Tierra. Contiene los grupos:
+    beidou, galileo, glosnass, gps, musson, nnss y sbas]],
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "Licencia MIT"
+}

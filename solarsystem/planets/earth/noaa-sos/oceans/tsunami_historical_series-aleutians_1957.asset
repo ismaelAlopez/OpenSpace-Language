@@ -1,0 +1,96 @@
+local globe = asset.require("../../earth")
+
+
+
+local Name = "Serie Historica de Tsunamis: Islas Aleutianas - 1957"
+local Identifier = "noaa-sos-oceans-tsunami_historical_series-aleutians_1957"
+local Description = [[A las 4:22 am del sábado 9 de marzo de 1957 (9 de marzo, 14:22 Z UTC) el
+segundo gran terremoto en 11 años golpeó las Islas Aleutianas de Alaska. Este terremoto tuvo
+la misma magnitud que el terremoto anterior: 8.6 en la escala de magnitud de momento (Johnson
+et al. 1994), pero fue al oeste del terremoto de 1946, cerca de las Islas Andreanof. Al igual
+que el evento anterior, también causó un tsunami peligroso que provocó daños significativos
+en las Islas Aleutianas y en Hawái, y fue observado tan lejos como Chile. Las mayores alturas
+de las olas se registraron en las Islas Aleutianas de Alaska, con olas de casi 23 m o 75 pies
+de altura llegando a la costa de la Isla Unimak. El tsunami alcanzó Hawái poco más de cuatro
+horas después, con las olas más grandes golpeando la isla de Kauai con más de 11 m o 38 pies
+de altura y causando $5.3 millones en daños en todo el estado ($46 millones en 2017), incluida
+la destrucción de más de 80 hogares. En otras partes del Océano Pacífico, las olas del tsunami
+alcanzaron alturas de 6 m o 20 pies en las Islas Marquesas (Polinesia Francesa), 3 m o 10 pies
+en Japón, 1.5 m o 5 pies en Samoa Americana, y más de 1 m o 3 pies en México y Chile. Sin
+embargo, a diferencia del evento anterior, no causó muertes gracias a las alertas efectivas
+de tsunamis del Observatorio de Honolulu y el Sistema de Alerta de Olas Sísmicas. Estos
+esfuerzos, establecidos en 1948, se convertirían más tarde en el Centro de Alerta de Tsunamis
+del Pacífico (PTWC) y el Sistema de Alerta de Tsunamis del Pacífico.]]
+local URL = "https://sos.noaa.gov/catalog/datasets/tsunami-historical-series-aleutian-islands-1957/"
+
+
+local syncedDirectory = asset.resource({
+  Name = Name,
+  Type = "HttpSynchronization",
+  Identifier = Identifier,
+  Version = 1
+})
+
+
+-- OBS: This data seems to be incorrect
+local LayerCoastal = {
+  Identifier = Identifier .. "-coastal",
+  Name = Name .. " (Costero)",
+  ZIndex = 100,
+  FilePath = syncedDirectory .. "Tsunami_Coastal_Map_Aleutians_1957_2k.jpg",
+  Description = Description
+}
+
+local LayerEnergyCoastal = {
+  Identifier = Identifier .. "-energy_coastal",
+  Name = Name .. " (Energia Costera)",
+  ZIndex = 100,
+  FilePath = syncedDirectory .. "Tsunami_Energy+Coastal_Map_Aleutians_1957_2k.jpg",
+  Description = Description
+}
+
+local LayerEnergy = {
+  Identifier = Identifier .. "-energy",
+  Name = Name .. " (Energia)",
+  ZIndex = 100,
+  FilePath = syncedDirectory .. "Tsunami_Energy_Map_Aleutians_1957_2k.jpg",
+  Description = Description
+}
+
+local LayerNull = {
+  Identifier = Identifier .. "-null",
+  Name = Name .. " (Nulo)",
+  ZIndex = 100,
+  FilePath = syncedDirectory .. "Tsunami_Null_Coastal_Map_Aleutians_1957_2k.jpg",
+  Description = Description
+}
+
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", LayerCoastal)
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", LayerEnergyCoastal)
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", LayerEnergy)
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", LayerNull)
+end)
+
+asset.onDeinitialize(function()
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", LayerNull)
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", LayerEnergy)
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", LayerEnergyCoastal)
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", LayerCoastal)
+end)
+
+asset.export(LayerCoastal)
+asset.export(LayerEnergyCoastal)
+asset.export(LayerEnergy)
+asset.export(LayerNull)
+
+
+
+asset.meta = {
+  Name = Name,
+  Description = Description .. "Datos proporcionados por la Administración Nacional Oceánica y Atmosférica",
+  Author = "Administración Nacional Oceánica y Atmosférica",
+  URL = URL,
+  License = "https://sos.noaa.gov/copyright/"
+}

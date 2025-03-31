@@ -1,0 +1,54 @@
+local transforms = asset.require("scene/solarsystem/planets/earth/transforms")
+
+
+
+local omm = asset.resource({
+  Name = "Datos OMM del Satelite (Escombros de Iridium 33)",
+  Type = "UrlSynchronization",
+  Identifier = "satellite_omm_data_iridium-33-debris",
+  Url = "https://www.celestrak.com/NORAD/elements/gp.php?GROUP=iridium-33-debris&FORMAT=kvn",
+  Filename = "iridium-33-debris.txt",
+  SecondsUntilResync = openspace.time.secondsPerDay()
+})
+
+
+local DebrisIridium = {
+  Identifier = "DebrisIridium-33",
+  Parent = transforms.EarthInertial.Identifier,
+  Renderable = {
+    Type = "RenderableOrbitalKepler",
+    Path = omm .. "iridium-33-debris.txt",
+    Format = "OMM",
+    SegmentQuality = 3,
+    Color = { 0.8, 0.0, 0.3 },
+    TrailFade = 5,
+    PointSizeExponent = 5.0,
+    RenderBinMode = "PostDeferredTransparent"
+  },
+  Tag = { "earth_satellites" },
+  GUI = {
+    Name = "Escombros de Iridium 33",
+    Path = "/Sistema Solar/Planetas/Tierra/Satélites"
+  }
+}
+
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(DebrisIridium)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(DebrisIridium)
+end)
+
+asset.export(DebrisIridium)
+
+
+
+asset.meta = {
+  Name = "Escombros de Satélites - Escombros de Iridium 33",
+  Description = "Activo de satélites para los escombros de Iridium 33. Datos de Celestrak",
+  Author = "Equipo de OpenSpace",
+  URL = "https://celestrak.com/NORAD/elements/",
+  License = "Celestrak"
+}

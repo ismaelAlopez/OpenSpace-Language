@@ -1,0 +1,55 @@
+local transforms = asset.require("scene/solarsystem/sun/transforms")
+
+
+
+local sssb = asset.resource({
+  Name = "Datos de Cuerpos Pequenos del Sistema Solar (Asteroide Amor)",
+  Type = "HttpSynchronization",
+  Identifier = "sssb_data_amor_asteroid",
+  Version = 4
+})
+
+
+local Object = {
+  Identifier = "sssb_amor_asteroid",
+  Parent = transforms.SunEclipJ2000.Identifier,
+  Renderable = {
+    Type = "RenderableOrbitalKepler",
+    Path = sssb .. "sssb_data_amor_asteroid.csv",
+    Format = "SBDB",
+    Segments = 200,
+    SegmentQuality = 4,
+    Color = { 1.0, 1.0, 1.0 },
+    TrailFade = 11,
+    PointSizeExponent = 9.2
+  },
+  GUI = {
+    Name = "Asteroides Amor",
+    Path = "/Sistema Solar/Cuerpos Pequeños",
+    Description = [[Asteroides cercanos a la Tierra con órbitas exteriores a la de la
+      Tierra pero interiores a la de Marte.]]
+  }
+}
+
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(Object)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(Object)
+end)
+
+asset.export(Object)
+
+
+
+asset.meta = {
+  Name = "Asteroides Amor",
+  Description = [[Asset renderizable de cuerpos pequeños con datos del JPL Horizons que
+    contiene el grupo Amor]],
+  Author = "Base de Datos de Cuerpos Pequeños del JPL alojada por el Instituto de Tecnología de California",
+  URL = "https://ssd.jpl.nasa.gov/sbdb_query.cgi",
+  License = [[Los documentos creados por el JPL están patrocinados por la NASA bajo el Contrato NAS7-030010.
+    Todos los documentos disponibles en este servidor pueden estar protegidos por las leyes de derechos de autor de EE. UU. y extranjeras.]]
+}

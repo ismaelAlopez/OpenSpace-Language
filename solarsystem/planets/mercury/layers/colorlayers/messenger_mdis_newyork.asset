@@ -1,0 +1,37 @@
+local globe = asset.require("../../mercury")
+
+local Layer = {
+  Identifier = "Messenger_MDIS_NewYork",
+  Name = "Mensajero MDIS [Nueva York]",
+  Enabled = asset.enabled,
+  ZIndex = 10,
+  FilePath = asset.resource("messenger_mdis_newyork.wms"),
+  Description = [[Este mapa base de mayo de 2013 es una combinación de los siguientes mosaicos; (1)
+  La versión 2013-05-10 del mosaico global monocromático, hecho de mosaicos de Applied Coherent
+  Technology (ACT) Corporation, (2) Un mosaico promedio del polo norte de 90N a 82.5N,
+  compuesto de imágenes de muchas campañas, hecho por C. Ernst, y (3) Un mosaico promedio del polo sur
+  de 90S a 85S, compuesto de imágenes de la campaña de monitoreo del polo sur de la misión primaria,
+  hecho por N. Chabot. Para llenar áreas menores de datos faltantes, se utilizó la versión 2013-05-10
+  del mosaico global de alta incidencia. Este mosaico monocromático está compuesto de imágenes de la
+  Cámara de ángulo Estrecho (NAC) y la Cámara de ángulo Ancho (WAC) del Sistema de Imágenes Dual de Mercurio (MDIS)
+  adquiridas en el filtro centrado en 750 nm. La resolución de este mosaico es de 250 metros por píxel (m)]]
+}
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Mercury.Identifier, "ColorLayers", Layer)
+end)
+
+asset.onDeinitialize(function()
+  openspace.globebrowsing.deleteLayer(globe.Mercury.Identifier, "ColorLayers", Layer)
+end)
+
+asset.export("layer", Layer)
+
+asset.meta = {
+  Name = "Mensajero MDIS [Nueva York]",
+  Description = [[Capa de Mensajero MDIS para el globo de Mercurio. Este mapa está alojado en el
+    servidor de OpenSpace en Nueva York]],
+  Author = "USGS",
+  URL = "https://astrogeology.usgs.gov/search/map/Mercury/Messenger/Global/Mercury_MESSENGER_MDIS_mosaic_global_250m_2013",
+  License = "NASA/PDS"
+}

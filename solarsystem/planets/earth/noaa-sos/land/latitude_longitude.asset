@@ -1,0 +1,81 @@
+local globe = asset.require("../../earth")
+
+
+
+local Name = "Capas de Latitud y Longitud"
+local Identifier = "noaa-sos-land-latitude_longitude"
+local Description = [[Mostrando la relación de las líneas de latitud y longitud en la Tierra,
+este conjunto de datos es útil al hablar sobre características o áreas geográficas, GPS y la
+introducción a la lectura de mapas y exploración]]
+local URL = "https://sos.noaa.gov/catalog/datasets/latitude-longitude-layers/"
+
+
+local syncedDirectory = asset.resource({
+  Name = Name,
+  Type = "HttpSynchronization",
+  Identifier = Identifier,
+  Version = 1
+})
+
+
+local LayerBase = {
+  Identifier = Identifier,
+  Name = Name,
+  ZIndex = 100,
+  FilePath = syncedDirectory .. "2048-base.png",
+  Description = Description
+}
+
+local LayerCombined = {
+  Identifier = Identifier .. "-combined",
+  Name = Name .. " (Combinado)",
+  ZIndex = 100,
+  FilePath = syncedDirectory .. "2048-flat-combined.png",
+  Description = Description
+}
+
+local LayerLatitude = {
+  Identifier = Identifier .. "-latitude",
+  Name = Name .. " (Latitud)",
+  ZIndex = 100,
+  FilePath = syncedDirectory .. "2048-layer-latitude.png",
+  Description = Description
+}
+
+local LayerLongitude = {
+  Identifier = Identifier .. "-longitude",
+  Name = Name .. " (Longitud)",
+  ZIndex = 100,
+  FilePath = syncedDirectory .. "2048-layer-longitude.png",
+  Description = Description
+}
+
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", LayerBase)
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", LayerCombined)
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", LayerLatitude)
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", LayerLongitude)
+end)
+
+asset.onDeinitialize(function()
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", LayerLongitude)
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", LayerLatitude)
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", LayerCombined)
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", LayerBase)
+end)
+
+asset.export(LayerBase)
+asset.export(LayerCombined)
+asset.export(LayerLatitude)
+asset.export(LayerLongitude)
+
+
+
+asset.meta = {
+  Name = Name,
+  Description = Description .. "Datos proporcionados por la Administración Nacional Oceánica y Atmosférica",
+  Author = "Administración Nacional Oceánica y Atmosférica",
+  URL = URL,
+  License = "https://sos.noaa.gov/copyright/"
+}

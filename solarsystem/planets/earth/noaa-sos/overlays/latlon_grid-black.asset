@@ -1,0 +1,48 @@
+local globe = asset.require("../../earth")
+
+
+
+local Name = "Cuadricula de Latitud/Longitud (negra)"
+local Identifier = "noaa-sos-overlays-latlon_grid-black"
+local Description = [[Los superposiciones son conjuntos de datos con fondos transparentes que contienen
+datos de primer plano utilizados para complementar otros conjuntos de datos de SOS. Este conjunto de datos en particular superpone una
+cuadrícula de latitud y longitud en negro sobre cualquier conjunto de datos que estés viendo]]
+local URL = "https://sos.noaa.gov/catalog/datasets/latlong-grid-black/"
+
+
+local syncedDirectory = asset.resource({
+  Name = Name,
+  Type = "HttpSynchronization",
+  Identifier = Identifier,
+  Version = 1
+})
+
+
+local Layer = {
+  Identifier = Identifier,
+  Name = Name,
+  Enabled = asset.enabled,
+  FilePath = syncedDirectory .. "4096.png",
+  Description = Description
+}
+
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "Overlays", Layer)
+end)
+
+asset.onDeinitialize(function()
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "Overlays", Layer)
+end)
+
+asset.export(Layer)
+
+
+
+asset.meta = {
+  Name = Name,
+  Description = Description .. "Datos proporcionados por la Administración Nacional Oceánica y Atmosférica",
+  Author = "Administración Nacional Oceánica y Atmosférica",
+  URL = URL,
+  License = "https://sos.noaa.gov/copyright/"
+}

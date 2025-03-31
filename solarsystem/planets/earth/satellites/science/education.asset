@@ -1,0 +1,54 @@
+local transforms = asset.require("scene/solarsystem/planets/earth/transforms")
+
+
+
+local omm = asset.resource({
+  Name = "Datos OMM de Satelites (Educacion)",
+  Type = "UrlSynchronization",
+  Identifier = "satellite_omm_data_education",
+  Url = "https://www.celestrak.com/NORAD/elements/gp.php?GROUP=education&FORMAT=kvn",
+  Filename = "education.txt",
+  SecondsUntilResync = openspace.time.secondsPerDay()
+})
+
+
+local EducationSatellites = {
+  Identifier = "EducationSatellites",
+  Parent = transforms.EarthInertial.Identifier,
+  Renderable = {
+    Type = "RenderableOrbitalKepler",
+    Path = omm .. "education.txt",
+    Format = "OMM",
+    SegmentQuality = 3,
+    Color = { 0.75, 0.75, 0.35 },
+    TrailFade = 20,
+    PointSizeExponent = 5.0,
+    RenderBinMode = "PostDeferredTransparent"
+  },
+  Tag = { "earth_satellites" },
+  GUI = {
+    Name = "Educación",
+    Path = "/Sistema Solar/Planetas/Tierra/Satélites"
+  }
+}
+
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(EducationSatellites)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(EducationSatellites)
+end)
+
+asset.export(EducationSatellites)
+
+
+
+asset.meta = {
+  Name = "Satélites Ciencia Educación",
+  Description = "Activo de satélites para Ciencia y Educación. Datos de Celestrak",
+  Author = "Equipo de OpenSpace",
+  URL = "https://celestrak.com/NORAD/elements/",
+  License = "Celestrak"
+}

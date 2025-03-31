@@ -1,0 +1,94 @@
+local globe = asset.require("../../earth")
+
+
+
+local Name = "Ondas Sismicas: Terremoto de Northridge - 1994"
+local Identifier = "noaa-sos-land-seismic_waves-1994northride"
+local Description = [[A las 4:30 a.m. del 17 de enero de 1994, el temblor de un terremoto
+despertó a 10 millones de personas en la región de Los Ángeles, en el sur de California.
+El epicentro del terremoto estaba en Northridge, CA, y fue un sismo de magnitud 6.7 que
+resultó ser el terremoto más costoso en la historia de los Estados Unidos. El temblor dañó
+gravemente comunidades en todo el Valle de San Fernando y el Valle de Simi, así como
+las montañas circundantes al norte y oeste de Los Ángeles, causando pérdidas estimadas
+en $20 mil millones. Cincuenta y siete personas murieron, más de 9,000 resultaron heridas
+y más de 20,000 fueron desplazadas de sus hogares debido a los efectos del terremoto]]
+local URL = "https://sos.noaa.gov/catalog/datasets/seismic-waves-northridge-earthquake-1994/"
+
+
+local syncedDirectory = asset.resource({
+  Name = Name,
+  Type = "HttpSynchronization",
+  Identifier = Identifier,
+  Version = 1,
+  UnzipFiles = true
+})
+
+
+local imagesDestination = syncedDirectory .. "2048"
+local pipsDestination = syncedDirectory .. "pips"
+
+local LayerBase = {
+  Identifier = Identifier,
+  Name = Name,
+  ZIndex = 100,
+  FilePath = syncedDirectory .. "background.jpg",
+  Description = Description
+}
+
+local LayerStations = {
+  Identifier = Identifier .. "-stations",
+  Name = Name .. " (Estaciones)",
+  ZIndex = 100,
+  FilePath = syncedDirectory .. "station_names.png",
+  Description = Description
+}
+
+local LayerImages = {
+  Identifier = Identifier .. "-images",
+  Name = Name .. " (Imágenes)",
+  Type = "ImageSequenceTileProvider",
+  ZIndex = 100,
+  FolderPath = imagesDestination,
+  Description = Description
+}
+
+local Pips = {
+  Identifier = Identifier,
+  Name = Name,
+  Type = "ScreenSpaceImageLocal",
+  -- @TODO:  We need a temporal provider for ScreenSpaceImages to handle this
+  TexturePath = pipsDestination .. "/0002.png",
+  Enabled = false,
+  FaceCamera = false,
+  CartesianPosition = { 0.75, 0.0, -2.0 }
+}
+
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", LayerBase)
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", LayerStations)
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", LayerImages)
+  openspace.addScreenSpaceRenderable(Pips)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeScreenSpaceRenderable(Pips)
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", LayerImages)
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", LayerStations)
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", LayerBase)
+end)
+
+asset.export(LayerBase)
+asset.export(LayerStations)
+asset.export(LayerImages)
+asset.export(Pips)
+
+
+
+asset.meta = {
+  Name = Name,
+  Description = Description .. "Datos proporcionados por la Administración Nacional Oceánica y Atmosférica",
+  Author = "Administración Nacional Oceánica y Atmosférica",
+  URL = URL,
+  License = "https://sos.noaa.gov/copyright/"
+}

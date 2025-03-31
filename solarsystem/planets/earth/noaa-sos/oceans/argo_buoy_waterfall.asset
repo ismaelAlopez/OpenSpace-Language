@@ -1,0 +1,58 @@
+local globe = asset.require("../../earth")
+
+
+
+local Name = "Rastros de Flotadores: Argo (animacion de profundidades de boyas)"
+local Identifier = "noaa-sos-oceans-argo_buoy_waterfall"
+local Description = [["Argo es una red global de 3,000 flotadores de perfilado a la deriva
+libre que mide la temperatura y la salinidad de los primeros 2000 m del océano. Esto permite,
+por primera vez, un monitoreo continuo de la temperatura, salinidad y velocidad de
+la parte superior del océano, con todos los datos siendo transmitidos y puestos a disposición
+pública dentro de horas después de su recolección." - del sitio web de Argo. En la mitología griega,
+Jason navegó en el barco Argo para capturar un vellocino de oro. En el mundo de la oceanografía,
+Jason es un altímetro satelital que permite a los científicos medir las alturas de las superficies
+oceánicas. Este programa mundial de boyas fue nombrado Argo porque los datos del proyecto Jason y
+de este proyecto de boyas se usarán juntos en modelos computacionales para ayudar a predecir el
+clima oceánico]]
+local URL = "https://sos.noaa.gov/catalog/datasets/float-tracks-argo-buoy-depths-animation/"
+
+
+local syncedDirectory = asset.resource({
+  Name = Name,
+  Type = "HttpSynchronization",
+  Identifier = Identifier,
+  Version = 1,
+  UnzipFiles = true
+})
+
+
+local Layer = {
+  Identifier = Identifier,
+  Name = Name,
+  Enabled = asset.enabled,
+  ZIndex = 100,
+  Type = "ImageSequenceTileProvider",
+  FolderPath = syncedDirectory .. "4096",
+  Description = Description
+}
+
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.onDeinitialize(function()
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.export(Layer)
+
+
+
+asset.meta = {
+  Name = Name,
+  Description = Description .. "Datos proporcionados por la Administración Nacional Oceánica y Atmosférica",
+  Author = "Administración Nacional Oceánica y Atmosférica",
+  URL = URL,
+  License = "https://sos.noaa.gov/copyright/"
+}

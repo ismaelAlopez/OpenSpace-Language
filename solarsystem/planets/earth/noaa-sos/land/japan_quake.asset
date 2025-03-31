@@ -1,0 +1,68 @@
+local globe = asset.require("../../earth")
+
+
+
+local Name = "Terremoto en Japon - Marzo 2011"
+local Identifier = "noaa-sos-land-japan_quake"
+local Description = [[El 11 de marzo de 2011 a las 2:45 hora local, ocurrió un terremoto de magnitud 9.0
+a 81 millas (130 km) de la costa este de Sendai, Japón, desencadenando un tsunami masivo.
+Se estima que la ola inicial del tsunami tardó entre 10 y 30 minutos en llegar a tierra.
+Se pronosticaron alturas de olas de hasta 33 pies (10 m) y hubo muchos informes de olas
+de tsunami de tres pisos de altura en partes de Japón. A través del Océano Pacífico,
+muchos países emitieron evacuaciones a lo largo de las costas debido a las olas de tsunami
+pronosticadas]]
+local URL = "https://sos.noaa.gov/catalog/datasets/japan-earthquake-march-2011/"
+
+
+local syncedDirectory = asset.resource({
+  Name = Name,
+  Type = "HttpSynchronization",
+  Identifier = Identifier,
+  Version = 1,
+  UnzipFiles = true
+})
+
+
+local Layer = {
+  Identifier = Identifier,
+  Name = Name,
+  Enabled = asset.enabled,
+  ZIndex = 100,
+  Type = "ImageSequenceTileProvider",
+  FolderPath = syncedDirectory .. "2048",
+  Description = Description
+}
+
+local Legend = {
+  Identifier = Identifier,
+  Name = Name,
+  Enabled = asset.enabled,
+  Type = "ScreenSpaceImageLocal",
+  TexturePath = syncedDirectory .. "legend_annotated.png",
+  FaceCamera = false,
+  CartesianPosition = { 0.0, -0.5, -2.0 }
+}
+
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+  openspace.addScreenSpaceRenderable(Legend)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeScreenSpaceRenderable(Legend)
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.export(Layer)
+asset.export(Legend)
+
+
+
+asset.meta = {
+  Name = Name,
+  Description = Description .. "Datos proporcionados por la Administración Nacional Oceánica y Atmosférica",
+  Author = "Administración Nacional Oceánica y Atmosférica",
+  URL = URL,
+  License = "https://sos.noaa.gov/copyright/"
+}

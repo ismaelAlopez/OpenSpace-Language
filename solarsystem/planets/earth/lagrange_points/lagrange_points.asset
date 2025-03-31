@@ -1,0 +1,14 @@
+asset.require("./l1")
+asset.require("./l2")
+asset.require("./l4")
+asset.require("./l5")
+
+
+asset.meta = {
+  Name = "Puntos de Lagrange de la Tierra",
+  Description = [[Meta asset para incluir todos los puntos de Lagrange de la Tierra. Incluye L1, L2, L4
+    y L5]],
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "MIT license"
+}

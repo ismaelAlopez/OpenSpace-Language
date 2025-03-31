@@ -1,0 +1,18 @@
+asset.require("./satellites_communications")
+-- The debris contains a **lot** of nodes, so we disable it on default
+-- asset.require("./satellites_debris")
+asset.require("./satellites_interesting")
+asset.require("./satellites_misc")
+asset.require("./satellites_navigation")
+asset.require("./satellites_science")
+asset.require("./satellites_weather")
+
+
+
+asset.meta = {
+  Name = "Todos los Satélites",
+  Description = "Meta asset para todos los satélites de la Tierra. Contiene otros meta assets",
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "MIT license"
+}

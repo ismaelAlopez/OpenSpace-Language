@@ -1,0 +1,69 @@
+local globe = asset.require("../../earth")
+
+
+local Name = "Temperatura de la Superficie del Mar Modelo NOAA (con vegetacion)"
+local Identifier = "noaa-sos-oceans-gfdl_sst-land_background"
+local Description = [[Este conjunto de datos muestra cómo varían las temperaturas del agua de la superficie del océano global a lo largo de unos pocos años. Además de observar los efectos del ciclo estacional, el espectador puede ver cómo las corrientes y remolinos de la superficie del océano transportan calor y agua alrededor del globo. Las imágenes no se generaron a partir de observaciones, sino de un modelo informático de última generación del clima de la Tierra creado en el Laboratorio de Dinámica de Fluidos Geofísicos (GFDL) de NOAA.]]
+local URL = "https://sos.noaa.gov/catalog/datasets/sea-surface-temperature-noaa-model-with-vegetation/"
+
+
+local syncedDirectory = asset.resource({
+  Name = Name,
+  Type = "HttpSynchronization",
+  Identifier = Identifier,
+  Version = 1,
+  UnzipFiles = true,
+  UnzipFilesDestination = "images"
+})
+
+
+local Layer = {
+  Identifier = Identifier,
+  Name = Name,
+  Enabled = asset.enabled,
+  ZIndex = 100,
+  Type = "TemporalTileProvider",
+  Mode = "Folder",
+  Folder = {
+    Folder = syncedDirectory .. "images",
+    -- See https://en.cppreference.com/w/cpp/io/manip/get_time for an explanation of the
+    -- time formatting string
+    Format = "GFDL_CM2p4_SSTctl_%Y.png"
+  },
+  Description = Description
+}
+
+local Colorbar = {
+  Identifier = Identifier,
+  Name = Name,
+  Enabled = asset.enabled,
+  Type = "ScreenSpaceImageLocal",
+  TexturePath = syncedDirectory .. "colorbar.png",
+  FaceCamera = false,
+  Scale = 0.04,
+  CartesianPosition = { 0.85, 0.0, -2.0 }
+}
+
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+  openspace.addScreenSpaceRenderable(Colorbar)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeScreenSpaceRenderable(Colorbar)
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.export(Layer)
+asset.export(Colorbar)
+
+
+
+asset.meta = {
+  Name = Name,
+  Description = Description .. "Datos proporcionados por la Administración Nacional Oceánica y Atmosférica",
+  Author = "Administración Nacional Oceánica y Atmosférica",
+  URL = URL,
+  License = "https://sos.noaa.gov/copyright/"
+}

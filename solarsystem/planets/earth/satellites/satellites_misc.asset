@@ -1,0 +1,16 @@
+asset.require("./misc/military")
+asset.require("./misc/radar")
+asset.require("./misc/cubesats")
+asset.require("./misc/other")
+asset.require("./misc/active")
+
+
+
+asset.meta = {
+  Name = "Satélites Misceláneos",
+  Description = [[Meta asset para satélites misceláneos de la Tierra. Contiene los grupos:
+    militares, radar, cubesats y otros]],
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "MIT license"
+}

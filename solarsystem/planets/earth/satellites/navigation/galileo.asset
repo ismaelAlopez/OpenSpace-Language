@@ -1,0 +1,54 @@
+local transforms = asset.require("scene/solarsystem/planets/earth/transforms")
+
+
+
+local omm = asset.resource({
+  Name = "Datos OMM del Satelite (Galileo)",
+  Type = "UrlSynchronization",
+  Identifier = "satellite_omm_data_galileo",
+  Url = "https://www.celestrak.com/NORAD/elements/gp.php?GROUP=galileo&FORMAT=kvn",
+  Filename = "galileo.txt",
+  SecondsUntilResync = openspace.time.secondsPerDay()
+})
+
+
+local GalileoSatellites = {
+  Identifier = "GalileoSatellites",
+  Parent = transforms.EarthInertial.Identifier,
+  Renderable = {
+    Type = "RenderableOrbitalKepler",
+    Path = omm .. "galileo.txt",
+    Format = "OMM",
+    SegmentQuality = 3,
+    Color = { 0.75, 0.75, 0.35 },
+    TrailFade = 15,
+    PointSizeExponent = 5.0,
+    RenderBinMode = "PostDeferredTransparent"
+  },
+  Tag = { "earth_satellites" },
+  GUI = {
+    Name = "Galileo",
+    Path = "/Sistema Solar/Planetas/Tierra/Satélites"
+  }
+}
+
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(GalileoSatellites)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(GalileoSatellites)
+end)
+
+asset.export(GalileoSatellites)
+
+
+
+asset.meta = {
+  Name = "Satélites de Navegación Galileo",
+  Description = "Asset de satélites para la navegación Galileo. Datos de Celestrak",
+  Author = "Equipo de OpenSpace",
+  URL = "https://celestrak.com/NORAD/elements/",
+  License = "Celestrak"
+}

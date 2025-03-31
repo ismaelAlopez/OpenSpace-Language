@@ -1,0 +1,79 @@
+local globe = asset.require("../../earth")
+
+
+
+local Name = "NOAA Ciencia en una Esfera. Agricultura: Intensidad de Tierras de Cultivo"
+local Identifier = "noaa-sos-land-agriculture-cropland"
+local Description = [[Estas visualizaciones, creadas por el Instituto del Medio Ambiente
+de la Universidad de Minnesota, muestran la intensidad global del uso de la tierra para
+pastizales y tierras de cultivo. Las tierras de cultivo son terrenos dedicados al cultivo
+de plantas para el uso humano como alimentos, materiales o combustibles. Los pastizales
+son terrenos utilizados para criar y pastorear animales. En total, las tierras de cultivo
+cubren aproximadamente 16 millones de kilómetros cuadrados, un área de tierra
+aproximadamente del tamaño de América del Sur. Los pastizales globales ocupan más de
+30 millones de kilómetros cuadrados, aproximadamente el área de África]]
+local URL = "https://sos.noaa.gov/catalog/datasets/agriculture-cropland-intensity/"
+
+
+local syncedDirectory = asset.resource({
+  Name = Name,
+  Type = "HttpSynchronization",
+  Identifier = Identifier,
+  Version = 1
+})
+
+
+local Layer = {
+  Identifier = Identifier,
+  Name = Name,
+  Enabled = asset.enabled,
+  ZIndex = 100,
+  FilePath = syncedDirectory .. "4096.png",
+  Description = Description
+}
+
+local LayerCountries = {
+  Identifier = Identifier .. "-countries",
+  Name = Name .. " (w/ countries)",
+  Enabled = asset.enabled,
+  ZIndex = 100,
+  FilePath = syncedDirectory .. "4096_countries.png",
+  Description = Description
+}
+
+local Legend = {
+  Identifier = Identifier,
+  Name = Name,
+  Enabled = asset.enabled,
+  Type = "ScreenSpaceImageLocal",
+  TexturePath = syncedDirectory .. "legend.png",
+  FaceCamera = false,
+  CartesianPosition = { 0.0, -0.5, -2.0 }
+}
+
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", LayerCountries)
+  openspace.addScreenSpaceRenderable(Legend)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeScreenSpaceRenderable(Legend)
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", LayerCountries)
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.export(Layer)
+asset.export(LayerCountries)
+asset.export(Legend)
+
+
+
+asset.meta = {
+  Name = Name,
+  Description = Description .. "Datos proporcionados por la Administración Nacional Oceánica y Atmosférica",
+  Author = "Administración Nacional Oceánica y Atmosférica",
+  URL = URL,
+  License = "https://sos.noaa.gov/copyright/"
+}

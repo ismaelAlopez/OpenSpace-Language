@@ -1,0 +1,77 @@
+local globe = asset.require("../../earth")
+
+
+
+local Name = "Modelo Climatico: Cambio de Hielo Marino (GFDL a1b) 1861 - 2100"
+local Identifier = "noaa-sos-models-gfdl_seaice"
+local Description = [[En las próximas décadas, se proyecta que la región del Ártico se
+caliente aproximadamente al doble de la tasa promedio global según los científicos del
+Laboratorio de Dinámica de Fluidos Geofísicos de NOAA. Esto no es una buena noticia
+para el hielo marino del Ártico. De hecho, la concentración de hielo marino en las
+latitudes del norte ha estado disminuyendo durante los últimos 30 años y se espera que
+esta tendencia continúe a medida que cambie el clima. La desaparición del hielo marino
+puede tener un impacto importante a nivel global. El derretimiento del hielo marino
+puede alterar la cinta transportadora oceánica global, impactar la vida marina y la
+industria pesquera, y cambiar el balance energético de la Tierra. El hielo marino enfría
+el clima porque es reflectante y devuelve gran parte del calentamiento solar al espacio.
+A medida que el hielo se derrite, más de esta energía es absorbida por el agua más
+oscura del océano. La temperatura aumenta a medida que se absorbe más luz solar en
+lugar de reflejarse. Este es un ciclo de retroalimentación positiva porque a medida que
+la temperatura aumenta, más hielo marino se derrite causando una mayor absorción,
+lo que lleva a un aumento de las temperaturas]]
+local URL = "https://sos.noaa.gov/catalog/datasets/climate-model-sea-ice-change-gfdl-a1b-1861-2100/"
+
+
+local syncedDirectory = asset.resource({
+  Name = Name,
+  Type = "HttpSynchronization",
+  Identifier = Identifier,
+  Version = 1,
+  UnzipFiles = true,
+  UnzipFilesDestination = "images"
+})
+
+
+local Layer = {
+  Identifier = Identifier,
+  Name = Name,
+  Enabled = asset.enabled,
+  ZIndex = 100,
+  Type = "ImageSequenceTileProvider",
+  FolderPath = syncedDirectory .. "images",
+  Description = Description
+}
+
+local Colorbar = {
+  Identifier = Identifier,
+  Name = Name,
+  Enabled = asset.enabled,
+  Type = "ScreenSpaceImageLocal",
+  TexturePath = syncedDirectory .. "colorbar_big.png",
+  FaceCamera = false,
+  CartesianPosition = { 0.0, -0.5, -2.0 }
+}
+
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+  openspace.addScreenSpaceRenderable(Colorbar)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeScreenSpaceRenderable(Colorbar)
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.export(Layer)
+asset.export(Colorbar)
+
+
+
+asset.meta = {
+  Name = Name,
+  Description = Description .. "Datos proporcionados por la Administración Nacional Oceánica y Atmosférica",
+  Author = "Administración Nacional Oceánica y Atmosférica",
+  URL = URL,
+  License = "https://sos.noaa.gov/copyright/"
+}

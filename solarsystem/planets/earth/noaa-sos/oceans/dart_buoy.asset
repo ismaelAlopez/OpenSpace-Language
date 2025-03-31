@@ -1,0 +1,46 @@
+local globe = asset.require("../../earth")
+
+
+
+local Name = "Ubicaciones de Boyas (solo DART)"
+local Identifier = "noaa-sos-oceans-dart_buoy"
+local Description = [[Después de los horribles eventos del Tsunami del Océano Índico el 26 de diciembre de 2004, la necesidad de un sistema de alerta de tsunamis era evidente. Como parte del Programa Nacional de Mitigación de Riesgos de Tsunamis (NTHMP) de los EE. UU., el Proyecto de Evaluación y Reporte de Tsunamis en el Océano Profundo (DART) es un esfuerzo continuo para mantener y mejorar la capacidad de detección temprana y reporte en tiempo real de tsunamis en el océano abierto. Desarrollado por el Laboratorio Ambiental Marino del Pacífico (PMEL) de NOAA y operado por el Centro Nacional de Boyas de Datos (NDBC) de NOAA, DART es esencial para cumplir con la responsabilidad nacional de NOAA en la mitigación de riesgos y alertas de tsunamis. Cuando se complete a mediados de 2007, el Proyecto DART consistirá en 32 boyas DART.]]
+local URL = "https://sos.noaa.gov/catalog/datasets/buoy-locations-dart-only/"
+
+
+local syncedDirectory = asset.resource({
+  Name = Name,
+  Type = "HttpSynchronization",
+  Identifier = Identifier,
+  Version = 1
+})
+
+
+local Layer = {
+  Identifier = Identifier,
+  Name = Name,
+  Enabled = asset.enabled,
+  ZIndex = 100,
+  FilePath = syncedDirectory .. "2000.jpg",
+  Description = Description
+}
+
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.onDeinitialize(function()
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.export(Layer)
+
+
+asset.meta = {
+  Name = Name,
+  Description = Description .. "Datos proporcionados por la Administración Nacional Oceánica y Atmosférica",
+  Author = "Administración Nacional Oceánica y Atmosférica",
+  URL = URL,
+  License = "https://sos.noaa.gov/copyright/"
+}

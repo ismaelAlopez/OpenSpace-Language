@@ -1,0 +1,125 @@
+local globe = asset.require("../../earth")
+
+
+
+local Name = "Proxies Paleoclimaticos"
+local Identifier = "noaa-sos-land-paleo_overlays"
+local Description = [[Cada año, las partículas que se erosionan de los continentes son transportadas
+a los océanos por el viento como polvo y por los ríos como arenas y gravas. Una vez que llegan
+al océano, se mezclan con miles de millones de toneladas de conchas de plancton muerto, se hunden
+y se depositan en el fondo marino. Allí, se acumulan verticalmente en capas sobre el material de
+años anteriores. De manera similar, la nieve de este año se acumula sobre la nieve de años
+anteriores en las regiones polares, en lugares como Groenlandia y la Antártida. Con el tiempo,
+este proceso forma nuevas capas de hielo. Los árboles, de manera similar, añaden capas anuales
+de nuevas células en círculos concéntricos justo debajo de su corteza, llamados anillos de
+crecimiento. Y, en muchas cuevas alrededor del mundo, la intensidad del ciclo estacional de un
+monzón húmedo seguido de una estación seca se registra en la química de las estalagmitas que
+se elevan desde el suelo de la cueva, formadas por gotas de agua rica en minerales que caen
+desde el techo de la cueva.]]
+local URL = "https://sos.noaa.gov/catalog/datasets/paleoclimate-proxies/"
+
+
+local syncedDirectory = asset.resource({
+  Name = Name,
+  Type = "HttpSynchronization",
+  Identifier = Identifier,
+  Version = 1
+})
+
+
+local LayerBase = {
+  Identifier = Identifier,
+  Name = Name,
+  ZIndex = 100,
+  FilePath = syncedDirectory .. "4096.png",
+  Description = Description
+}
+
+local LayerCorals = {
+  Identifier = Identifier .. "-corals",
+  Name = Name .. " (Corales)",
+  ZIndex = 100,
+  FilePath = syncedDirectory .. "corals.png",
+  Description = Description
+}
+
+local LayerIcerings = {
+  Identifier = Identifier .. "-icerings",
+  Name = Name .. " (Anillos de Hielo)",
+  ZIndex = 100,
+  FilePath = syncedDirectory .. "icerings.png",
+  Description = Description
+}
+
+local LayerOcean = {
+  Identifier = Identifier .. "-ocean",
+  Name = Name .. " (Océano)",
+  ZIndex = 100,
+  FilePath = syncedDirectory .. "ocean.png",
+  Description = Description
+}
+
+local LayerSpeleothem = {
+  Identifier = Identifier .. "-speleothem",
+  Name = Name .. " (Espeleotemas)",
+  ZIndex = 100,
+  FilePath = syncedDirectory .. "speleothem.png",
+  Description = Description
+}
+
+local LayerTreeRings = {
+  Identifier = Identifier .. "-tree_rings",
+  Name = Name .. " (Anillos de Árbol)",
+  ZIndex = 100,
+  FilePath = syncedDirectory .. "tree_rings.png",
+  Description = Description
+}
+
+local Legend = {
+  Identifier = Identifier,
+  Name = Name,
+  Type = "ScreenSpaceImageLocal",
+  TexturePath = syncedDirectory .. "legend.jpg",
+  FaceCamera = false,
+  Scale = 0.2,
+  CartesianPosition = { 0.85, 0.0, -2.0 }
+}
+
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", LayerBase)
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", LayerCorals)
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", LayerIcerings)
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", LayerOcean)
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", LayerSpeleothem)
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", LayerTreeRings)
+  openspace.addScreenSpaceRenderable(Legend)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeScreenSpaceRenderable(Legend)
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", LayerTreeRings)
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", LayerSpeleothem)
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", LayerOcean)
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", LayerIcerings)
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", LayerCorals)
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", LayerBase)
+end)
+
+asset.export(LayerBase)
+asset.export(LayerCorals)
+asset.export(LayerIcerings)
+asset.export(LayerOcean)
+asset.export(LayerSpeleothem)
+asset.export(LayerTreeRings)
+asset.export(Legend)
+
+
+
+asset.meta = {
+  Name = Name,
+  Description = Description .. "Datos proporcionados por la Administración Nacional Oceánica y Atmosférica",
+  Author = "Administración Nacional Oceánica y Atmosférica",
+  URL = URL,
+  License = "https://sos.noaa.gov/copyright/"
+}

@@ -1,0 +1,63 @@
+local globe = asset.require("../../earth")
+
+
+
+local Name = "Hielo Marino: Fraccion y Absorción de Radiacion Solar"
+local Identifier = "noaa-sos-oceans-seaice_radiation"
+local Description = [[Mientras que el hielo marino es mayormente blanco y refleja los rayos del sol, 
+el agua del océano es oscura y absorbe la energía del sol a un ritmo más alto. 
+Una disminución en el albedo de la región - su reflectividad, en efecto - ha sido una 
+preocupación clave entre los científicos desde que la cobertura de hielo marino del Ártico 
+en verano comenzó a reducirse en las últimas décadas. A medida que más energía del sol 
+es absorbida por el sistema climático, se intensifica el calentamiento continuo en la región, 
+que es más pronunciado que en cualquier otro lugar del planeta.]]
+local URL = "https://sos.noaa.gov/catalog/datasets/sea-ice-fraction-and-solar-radiation-absorption/"
+
+
+local syncedDirectory = asset.resource({
+  Name = Name,
+  Type = "HttpSynchronization",
+  Identifier = Identifier,
+  Version = 1
+})
+
+
+local LayerFraction = {
+  Identifier = Identifier,
+  Name = Name,
+  ZIndex = 100,
+  FilePath = syncedDirectory .. "sea_ice_fraction.png",
+  Description = Description
+}
+
+local LayerSolar = {
+  Identifier = Identifier .. "-solar",
+  Name = Name .. " (Solar)",
+  ZIndex = 100,
+  FilePath = syncedDirectory .. "solar.png",
+  Description = Description
+}
+
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", LayerFraction)
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", LayerSolar)
+end)
+
+asset.onDeinitialize(function()
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", LayerSolar)
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", LayerFraction)
+end)
+
+asset.export(LayerFraction)
+asset.export(LayerSolar)
+
+
+
+asset.meta = {
+  Name = Name,
+  Description = Description .. "Datos proporcionados por la Administración Nacional Oceánica y Atmosférica",
+  Author = "Administración Nacional Oceánica y Atmosférica",
+  URL = URL,
+  License = "https://sos.noaa.gov/copyright/"
+}

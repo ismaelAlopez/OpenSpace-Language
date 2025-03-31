@@ -1,0 +1,53 @@
+local globe = asset.require("../../earth")
+
+
+
+local Name = "ETOPO2: Topografia y Batimetria (color mejorado)"
+local Identifier = "noaa-sos-land-etopo2-earth_color"
+local Description = [[Muchos conjuntos de datos se han creado utilizando el conjunto de datos ETOPO2,
+que fue generado a partir de bases de datos digitales de elevaciones del fondo marino y de la tierra en una cuadrícula
+de latitud/longitud de 2 minutos (1 minuto de latitud = 1 milla náutica, o 1.15 millas terrestres).
+El ETOPO2 es una combinación de observaciones de altimetría satelital, mediciones de ecosonda a bordo de barcos,
+datos de la Base de Datos Batimétrica Digital de Resolución Variable y datos del proyecto GLOBE,
+que tiene un modelo de elevación digital global. Este conjunto de datos utiliza verde, amarillo, naranja, rojo y blanco
+para denotar el aumento de la elevación de la tierra]]
+local URL = "https://sos.noaa.gov/catalog/datasets/etopo2-topography-and-bathymetry-color-enhanced/"
+
+
+local syncedDirectory = asset.resource({
+  Name = Name,
+  Type = "HttpSynchronization",
+  Identifier = Identifier,
+  Version = 1
+})
+
+
+local Layer = {
+  Identifier = Identifier,
+  Name = Name,
+  Enabled = asset.enabled,
+  ZIndex = 100,
+  FilePath = syncedDirectory .. "7200.jpg",
+  Description = Description
+}
+
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.onDeinitialize(function()
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.export(Layer)
+
+
+
+asset.meta = {
+  Name = Name,
+  Description = Description .. "Datos proporcionados por la Administración Nacional Oceánica y Atmosférica",
+  Author = "Administración Nacional Oceánica y Atmosférica",
+  URL = URL,
+  License = "https://sos.noaa.gov/copyright/"
+}

@@ -1,0 +1,63 @@
+local globe = asset.require("../../earth")
+
+
+
+local Name = "Rastreo de Tortugas Marinas: Oceano Pacifico"
+local Identifier = "noaa-sos-oceans-pac_turtle"
+local Description = [[Es común que los científicos etiqueten animales y los liberen en su
+entorno natural para estudiar sus comportamientos y migraciones. Adelita, una tortuga
+boba (Caretta caretta), fue capturada originalmente frente a Baja California, México,
+como una juvenil de 8 libras. Después de ser criada en cautiverio, Adelita fue liberada
+el 10 de agosto de 1996 desde Santa Rosaliita, un pequeño pueblo en México en la
+Península de Baja California. Adelita pesaba 223 libras cuando fue liberada. Antes de
+ser liberada, Wallace J. Nichols, entonces estudiante de doctorado en la Universidad de
+Arizona, equipó a Adelita con una etiqueta satelital. La etiqueta transmitió una señal
+que permitió monitorear el recorrido de Adelita después de su liberación]]
+
+local URL = "https://sos.noaa.gov/catalog/datasets/sea-turtle-track-pacific-ocean/"
+
+
+local syncedDirectory = asset.resource({
+  Name = Name,
+  Type = "HttpSynchronization",
+  Identifier = Identifier,
+  Version = 1,
+  UnzipFiles = true
+})
+
+
+local Layer = {
+  Identifier = Identifier,
+  Name = Name,
+  Enabled = asset.enabled,
+  ZIndex = 100,
+  Type = "TemporalTileProvider",
+  Mode = "Folder",
+  Folder = {
+    Folder = syncedDirectory .. "2048",
+    -- See https://en.cppreference.com/w/cpp/io/manip/get_time for an explanation of the
+    -- time formatting string
+    Format = "pac-turtle-migration-%y%j-%H%M.jpg"
+  },
+  Description = Description
+}
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.onDeinitialize(function()
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.export(Layer)
+
+
+
+asset.meta = {
+  Name = "Rastreo de Tortugas Marinas: Océano Pacífico",
+  Description = Description .. "Datos proporcionados por la Administración Nacional Oceánica y Atmosférica",
+  Author = "Administración Nacional Oceánica y Atmosférica",
+  URL = URL,
+  License = "https://sos.noaa.gov/copyright/"
+}

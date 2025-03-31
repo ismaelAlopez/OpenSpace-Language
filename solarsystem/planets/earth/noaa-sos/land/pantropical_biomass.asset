@@ -1,0 +1,64 @@
+local globe = asset.require("../../earth")
+
+
+
+local Name = "Cobertura Terrestre: Biomasa Lenosa en los Pan-tropicos"
+local Identifier = "noaa-sos-land-pantropical_biomass"
+local Description = [[La deforestación y degradación de los bosques tropicales representan un
+estimado del 20% de las emisiones antropogénicas de dióxido de carbono en el mundo, un
+contribuyente significativo a los gases de efecto invernadero. A pesar de los importantes
+servicios que brindan los bosques tropicales, hay datos e información incompletos sobre
+su condición y cobertura, y por lo tanto no existe una línea base precisa para evaluar y
+monitorear cambios futuros.]]
+local URL = "https://sos.noaa.gov/catalog/datasets/land-cover-woody-biomass-in-pan-tropics/"
+
+
+local syncedDirectory = asset.resource({
+  Name = Name,
+  Type = "HttpSynchronization",
+  Identifier = Identifier,
+  Version = 1
+})
+
+
+local Layer = {
+  Identifier = Identifier,
+  Name = Name,
+  Enabled = asset.enabled,
+  ZIndex = 100,
+  FilePath = syncedDirectory .. "4096.jpg",
+  Description = Description
+}
+
+local Legend = {
+  Identifier = Identifier,
+  Name = Name,
+  Enabled = asset.enabled,
+  Type = "ScreenSpaceImageLocal",
+  TexturePath = syncedDirectory .. "legend.jpg",
+  FaceCamera = false,
+  CartesianPosition = { 0.0, -0.5, -2.0 }
+}
+
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+  openspace.addScreenSpaceRenderable(Legend)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeScreenSpaceRenderable(Legend)
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.export(Layer)
+asset.export(Legend)
+
+
+
+asset.meta = {
+  Name = Name,
+  Description = Description .. "Datos proporcionados por la Administración Nacional Oceánica y Atmosférica",
+  URL = URL,
+  License = "https://sos.noaa.gov/copyright/"
+}

@@ -1,0 +1,166 @@
+asset.require("scene/solarsystem/heliosphere/2012/reset_loop_action")
+local transforms = asset.require("scene/solarsystem/planets/earth/magnetosphere/transforms_magnetosphere")
+
+local transferFunctions = asset.resource({
+  Name = "Funciones de Transferencia de Líneas de Campo",
+  Type = "HttpSynchronization",
+  Identifier = "sun_earth_event_july_2012-fieldlines_transferfunctions",
+  Version = 2
+})
+
+local fieldlineData = asset.resource({
+  Name = "Datos de Líneas de Campo BATSRUS",
+  Type = "HttpSynchronization",
+  Identifier = "sun_earth_event_july_2012-batsrus",
+  Version = 1,
+  UnzipFiles = true
+})
+
+local unzippedDataDestination = {
+  openClosed = fieldlineData .. "magnetic_fieldlines-open_closed",
+  velocityFlow = fieldlineData .. "velocity_flowlines-upstream",
+  asherStatic = fieldlineData .. "ashers_static_seeds"
+}
+
+local LoopBatsrus = {
+  Identifier = "os.2012july.LoopBatsrus",
+  Name = "Bucle BATSRUS",
+  Command = [[
+    openspace.scriptScheduler.clear()
+    openspace.time.setDeltaTime(1400)
+    openspace.time.setTime("2012-JUL-14 06:00:00.000")
+    local StartTimeScriptBatsrusLoop = "openspace.time.setTime('2012 JUL 14 06:00:00')"
+    openspace.scriptScheduler.loadScheduledScript("2012 JUL 16 07:30:00", StartTimeScriptBatsrusLoop)
+  ]],
+  Documentation = "Establece el tiempo al inicio de los datos, establece un tiempo delta más alto y vuelve al inicio cuando llega al final de los datos",
+  GuiPath = "/2012Julio",
+  IsLocal = false
+}
+
+local batsrusTemperatureColorTable = transferFunctions .. "batsrus_temperature.txt"
+local batsrusDensityColorTable = transferFunctions .. "batsrus_density.txt"
+local batsrusCurrentColorTable = transferFunctions .. "batsrus_current2.txt"
+local batsrusVelocityColorTable = transferFunctions .. "batsrus_velocity.txt"
+local batsrusTopologyColorTable = transferFunctions .. "batsrus_topology.txt"
+
+local colorRanges = {
+  { 0, 100000000 },
+  { 0, 60 },
+  { -0.015, 0.015 },
+  { 150, 900 },
+  { 0, 3 }
+}
+
+local InteractionSphere = 6380000  -- A value slightly bigger than earth radius
+
+----------------------LÍNEAS DE CAMPO ABIERTAS/CERRADAS DE JULIO DE LUTZ-------------------------
+local BatsrusJ12OpenClosed = {
+  Identifier = "FL_BATSRUS_J12_OpenClosed",
+  Parent = transforms.GSMReferenceFrame.Identifier,
+  InteractionSphere = InteractionSphere,
+  Renderable = {
+    Type = "RenderableFieldlinesSequence",
+    SourceFolder = unzippedDataDestination.openClosed,
+    InputFileType = "Osfls",
+    Color = { 0.7, 0.4, 0.0, 0.6 }, -- Default color
+    ColorMethod = "By Quantity", -- Color by Quantity
+    ColorQuantity = 0, -- Temperature
+    ColorTablePaths = {
+      batsrusTemperatureColorTable,
+      batsrusDensityColorTable,
+      batsrusCurrentColorTable,
+      batsrusVelocityColorTable,
+      batsrusTopologyColorTable
+    },
+    ColorTableRanges = colorRanges,
+    MaskingEnabled = true,
+    MaskingQuantity = 4, -- Topology
+    MaskingRanges = { {2.5, 3.0} } -- Corresponds to closed fieldlines only
+  },
+  GUI = {
+    Name = "Líneas de Campo BATSRUS J12 Abiertas/Cerradas",
+    Path = "/Sistema Solar/Heliosfera"
+  }
+}
+
+--------------------- LÍNEAS DE FLUJO DE VELOCIDAD ------------------------
+local BatsrusJ12FlowLines = {
+  Identifier = "FL_BATSRUS_J12_FlowLines",
+  Parent = transforms.GSMReferenceFrame.Identifier,
+  InteractionSphere = InteractionSphere,
+  Renderable = {
+    Type = "RenderableFieldlinesSequence",
+    SourceFolder = unzippedDataDestination.velocityFlow,
+    InputFileType = "Osfls",
+    ColorMethod = "By Quantity", -- Color by Quantity
+    ColorQuantity = 3, -- Velocity
+    Color = { 0.7, 0.4, 0.0, 0.12 }, -- Default color
+    ColorTablePaths = {
+      batsrusTemperatureColorTable,
+      batsrusDensityColorTable,
+      batsrusCurrentColorTable,
+      batsrusVelocityColorTable,
+      batsrusTopologyColorTable
+    },
+    ColorTableRanges = colorRanges
+  },
+  GUI = {
+    Name = "Líneas de Campo BATSRUS J12 Líneas de Flujo",
+    Path = "/Sistema Solar/Heliosfera"
+  }
+}
+
+--------------------- PUNTOS DE SEMILLA ESTáTICOS DE ASHER ------------------------
+local BatsrusAsherStaticSeedsFlowLines = {
+  Identifier = "FL_BATSRUS_ASHER_STATIC_SSEDS_FlowLines",
+  Parent = transforms.GSMReferenceFrame.Identifier,
+  InteractionSphere = InteractionSphere,
+  Renderable = {
+    Type = "RenderableFieldlinesSequence",
+    Enabled = false,
+    SourceFolder = unzippedDataDestination.asherStatic,
+    InputFileType = "Osfls",
+    ColorTablePaths = {
+      batsrusTemperatureColorTable,
+      batsrusDensityColorTable,
+      batsrusCurrentColorTable,
+      batsrusVelocityColorTable,
+      batsrusTopologyColorTable
+    },
+   ColorTableRanges = colorRanges
+  },
+  GUI = {
+    Name = "Líneas de Campo BATSRUS Asher Estático",
+    Path = "/Sistema Solar/Heliosfera"
+  }
+}
+
+asset.onInitialize(function()
+  openspace.action.registerAction(LoopBatsrus)
+
+  openspace.addSceneGraphNode(BatsrusJ12OpenClosed)
+  openspace.addSceneGraphNode(BatsrusJ12FlowLines)
+  openspace.addSceneGraphNode(BatsrusAsherStaticSeedsFlowLines)
+
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(BatsrusAsherStaticSeedsFlowLines)
+  openspace.removeSceneGraphNode(BatsrusJ12FlowLines)
+  openspace.removeSceneGraphNode(BatsrusJ12OpenClosed)
+
+  openspace.action.removeAction(LoopBatsrus)
+end)
+
+asset.export("LoopBatsrus", LoopBatsrus.Identifier)
+asset.export(BatsrusJ12OpenClosed)
+asset.export(BatsrusJ12FlowLines)
+asset.export(BatsrusAsherStaticSeedsFlowLines)
+
+asset.meta = {
+  Name = "Líneas de Campo del modelo Batsrus del evento de 2012",
+  Description = "Líneas de campo magnético del modelo Batsrus para un evento CME de 2012",
+  Author = "CCMC",
+  URL = "",
+  License = "CC-BY"
+}

@@ -1,0 +1,51 @@
+local globe = asset.require("../../earth")
+
+
+local Name = "Tsunami de Japon: Altura de las Olas - 11 de Marzo de 2011"
+local Identifier = "noaa-sos-oceans-japan_tsunami"
+local Description = [[El 11 de marzo de 2011 a las 2:45 hora local, ocurrió un terremoto de magnitud 9.0
+a 81 millas (130 km) de la costa este de Sendai, Japón, desencadenando un tsunami masivo.
+Se estima que la ola inicial del tsunami tardó entre 10 y 30 minutos en llegar a tierra.
+Se pronosticaron alturas de olas de hasta 33 pies (10 m) y hubo muchos informes de olas
+de tsunami de tres pisos de altura en partes de Japón. A través del Océano Pacífico,
+muchos países emitieron evacuaciones a lo largo de las costas debido a las olas de tsunami
+pronosticadas.]]
+local URL = "https://sos.noaa.gov/catalog/datasets/japan-tsunami-wave-heights-march-11-2011/"
+
+
+local syncedDirectory = asset.resource({
+  Name = Name,
+  Type = "HttpSynchronization",
+  Identifier = Identifier,
+  Version = 1
+})
+
+
+local Layer = {
+  Identifier = Identifier,
+  Name = Name,
+  Enabled = asset.enabled,
+  ZIndex = 100,
+  FilePath = syncedDirectory .. "4096.png",
+  Description = Description
+}
+
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.onDeinitialize(function()
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.export(Layer)
+
+
+asset.meta = {
+  Name = Name,
+  Description = Description .. "Datos proporcionados por la Administración Nacional Oceánica y Atmosférica",
+  Author = "Administración Nacional Oceánica y Atmosférica",
+  URL = URL,
+  License = "https://sos.noaa.gov/copyright/"
+}

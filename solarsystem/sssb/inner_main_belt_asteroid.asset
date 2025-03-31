@@ -1,0 +1,56 @@
+local transforms = asset.require("scene/solarsystem/sun/transforms")
+
+
+
+local sssb = asset.resource({
+  Name = "Datos de Pequenos Cuerpos del Sistema Solar (Asteroide del Cinturón Principal Interno)",
+  Type = "HttpSynchronization",
+  Identifier = "sssb_data_inner_main_belt_asteroid",
+  Version = 4
+})
+
+
+local Object = {
+  Identifier = "sssb_inner_main_belt_asteroid",
+  Parent = transforms.SunEclipJ2000.Identifier,
+  Renderable = {
+    Type = "RenderableOrbitalKepler",
+    Path = sssb .. "sssb_data_inner_main_belt_asteroid.csv",
+    Format = "SBDB",
+    Segments = 200,
+    SegmentQuality = 1,
+    Color = { 1.0, 1.0, 0.0 },
+    TrailFade = 0.5,
+    PointSizeExponent = 9.2
+  },
+  GUI = {
+    Name = "Cinturón Principal Interno de Asteroides",
+    Path = "/Sistema Solar/Pequeños Cuerpos",
+    Description = [[Asteroides con un semieje mayor menor a 2.0 UA y una distancia
+      al perihelio mayor a 1.666 UA.]]
+  }
+}
+
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(Object)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(Object)
+end)
+
+asset.export(Object)
+
+
+
+asset.meta = {
+  Name = "Cinturón Principal Interno de Asteroides",
+  Description = [[Asset Renderizable de Pequeños Cuerpos con datos del JPL Horizons que contiene
+    el grupo del Cinturón Principal Interno de Asteroides]],
+  Author = "Base de Datos de Pequeños Cuerpos del JPL alojada por el Instituto de Tecnología de California",
+  URL = "https://ssd.jpl.nasa.gov/sbdb_query.cgi",
+  License = [[Los documentos creados por el JPL están patrocinados por la NASA bajo el Contrato NAS7-030010.
+    Todos los documentos disponibles en este servidor pueden estar protegidos bajo las Leyes de Copyright
+    de los EE.UU. y extranjeras]]
+}

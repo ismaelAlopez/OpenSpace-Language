@@ -1,0 +1,54 @@
+local transforms = asset.require("scene/solarsystem/planets/earth/transforms")
+
+
+
+local omm = asset.resource({
+  Name = "Datos OMM de Satelite (Geodetico)",
+  Type = "UrlSynchronization",
+  Identifier = "satellite_omm_data_geodetic",
+  Url = "https://www.celestrak.com/NORAD/elements/gp.php?GROUP=geodetic&FORMAT=kvn",
+  Filename = "geodetic.txt",
+  SecondsUntilResync = openspace.time.secondsPerDay()
+})
+
+
+local GeodeticSatellites = {
+  Identifier = "GeodeticSatellites",
+  Parent = transforms.EarthInertial.Identifier,
+  Renderable = {
+    Type = "RenderableOrbitalKepler",
+    Path = omm .. "geodetic.txt",
+    Format = "OMM",
+    SegmentQuality = 3,
+    Color = { 0.75, 0.75, 0.35 },
+    TrailFade = 20,
+    PointSizeExponent = 5.0,
+    RenderBinMode = "PostDeferredTransparent"
+  },
+  Tag = { "earth_satellites" },
+  GUI = {
+    Name = "Geodético",
+    Path = "/Sistema Solar/Planetas/Tierra/Satélites"
+  }
+}
+
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(GeodeticSatellites)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(GeodeticSatellites)
+end)
+
+asset.export(GeodeticSatellites)
+
+
+
+asset.meta = {
+  Name = "Satélites Ciencia Geodético",
+  Description = "Asset de satélites para Ciencia Geodético. Datos de Celestrak",
+  Author = "Equipo de OpenSpace",
+  URL = "https://celestrak.com/NORAD/elements/",
+  License = "Celestrak"
+}

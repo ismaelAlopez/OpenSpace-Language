@@ -1,0 +1,54 @@
+local transforms = asset.require("scene/solarsystem/planets/earth/transforms")
+
+
+
+local omm = asset.resource({
+  Name = "Datos OMM del Satelite (Glosnass)",
+  Type = "UrlSynchronization",
+  Identifier = "satellite_omm_data_glo-ops",
+  Url = "https://www.celestrak.com/NORAD/elements/gp.php?GROUP=glo-ops&FORMAT=kvn",
+  Filename = "glo-ops.txt",
+  SecondsUntilResync = openspace.time.secondsPerDay()
+})
+
+
+local GlosnassSatellites = {
+  Identifier = "GlosnassSatellites",
+  Parent = transforms.EarthInertial.Identifier,
+  Renderable = {
+    Type = "RenderableOrbitalKepler",
+    Path = omm .. "glo-ops.txt",
+    Format = "OMM",
+    SegmentQuality = 3,
+    Color = { 0.75, 0.75, 0.35 },
+    TrailFade = 15,
+    PointSizeExponent = 5.0,
+    RenderBinMode = "PostDeferredTransparent"
+  },
+  Tag = { "earth_satellites" },
+  GUI = {
+    Name = "Glosnass",
+    Path = "/Sistema Solar/Planetas/Tierra/Satélites"
+  }
+}
+
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(GlosnassSatellites)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(GlosnassSatellites)
+end)
+
+asset.export(GlosnassSatellites)
+
+
+
+asset.meta = {
+  Name = "Satélites de Navegación Glosnass",
+  Description = "Asset de satélites para la navegación Glosnass. Datos de Celestrak",
+  Author = "Equipo de OpenSpace",
+  URL = "https://celestrak.com/NORAD/elements/",
+  License = "Celestrak"
+}

@@ -1,0 +1,109 @@
+local sunTransforms = asset.require("scene/solarsystem/sun/transforms")
+
+
+
+local orbit = asset.resource({
+  Name = "Orbita de Itokawa",
+  Type = "HttpSynchronization",
+  Identifier = "itokawa_horizons",
+  Version = 2
+})
+
+local model = asset.resource({
+  Name = "Modelo de Itokawa",
+  Type = "HttpSynchronization",
+  Identifier = "itokawa_model",
+  Version = 1
+})
+
+
+local ItokawaTrail = {
+  Identifier = "ItokawaTrail",
+  Parent = sunTransforms.SolarSystemBarycenter.Identifier,
+  Renderable = {
+    Type = "RenderableTrailOrbit",
+    Translation = {
+      Type = "HorizonsTranslation",
+      HorizonsTextFile = orbit .. "horizons_itokawa.hrz"
+      -- Target: 25143 Itokawa (1998 SF36)
+      -- Observer: SSB
+      -- Start time: 1950-Jan-01 00:00:00 (first data point)
+      -- End time: 2050-Jan-01 00:00:00 (last data point)
+      -- Step size: 1 day
+    },
+    Color = { 0.0, 0.9, 0.9 },
+    Period = 557, -- Orbit time 557 days
+    Resolution = 557 -- Step size 1 day
+  },
+  GUI = {
+    Name = "Rastro de Itokawa",
+    Path = "/Sistema Solar/Cuerpos Pequeños/Itokawa",
+    Description = [[Rastro del asteroide 25143 Itokawa desde el 1 de enero de 1950
+      a las 00:00:00 hasta el 1 de enero de 2050 a las 00:00:00. Datos de JPL Horizons]]
+  }
+}
+
+local ItokawaPosition = {
+  Identifier = "ItokawaPosition",
+  Parent = sunTransforms.SolarSystemBarycenter.Identifier,
+  Transform = {
+    Translation = {
+      Type = "HorizonsTranslation",
+      HorizonsTextFile = orbit .. "horizons_itokawa.hrz"
+    }
+  },
+  GUI = {
+    Name = "Posición de Itokawa",
+    Path = "/Sistema Solar/Cuerpos Pequeños/Itokawa",
+    Description = [[Posición del asteroide 25143 Itokawa desde el 1 de enero de 1950
+      a las 00:00:00 hasta el 1 de enero de 2050 a las 00:00:00. Datos de JPL Horizons]]
+  }
+}
+
+local ItokawaModel = {
+  Identifier = "ItokawaModel",
+  Parent = ItokawaPosition.Identifier,
+  Renderable = {
+    Type = "RenderableModel",
+    GeometryFile = model .. "itokawa.glb",
+    LightSources = {
+      sunTransforms.LightSource
+    },
+    PerformShading = true,
+    SpecularIntensity = 0.0
+  },
+  GUI = {
+    Name = "Modelo de Itokawa",
+    Path = "/Sistema Solar/Cuerpos Pequeños/Itokawa",
+    Description = [[Modelo del asteroide 25143 Itokawa. Modelo 3D de
+      https://solarsystem.nasa.gov/resources/2377/asteroid-itokawa-3d-model]]
+  }
+}
+
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(ItokawaPosition)
+  openspace.addSceneGraphNode(ItokawaTrail)
+  openspace.addSceneGraphNode(ItokawaModel)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(ItokawaModel)
+  openspace.removeSceneGraphNode(ItokawaTrail)
+  openspace.removeSceneGraphNode(ItokawaPosition)
+end)
+
+asset.export(ItokawaPosition)
+asset.export(ItokawaTrail)
+asset.export(ItokawaModel)
+
+
+
+asset.meta = {
+  Name = "Asteroide Itokawa",
+  Description = [[Posición, rastro y modelo del asteroide 25143 Itokawa desde
+    el 1 de enero de 1950 a las 00:00:00 hasta el 1 de enero de 2050 a las 00:00:00. Datos de JPL Horizons]],
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "MIT license"
+}

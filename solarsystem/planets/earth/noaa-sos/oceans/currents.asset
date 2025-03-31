@@ -1,0 +1,74 @@
+local globe = asset.require("../../earth")
+
+
+
+local Name = "Circulacion Oceanica (corrientes etiquetadas)"
+local Identifier = "noaa-sos-oceans-currents"
+local Description = [[El océano no es un cuerpo de agua inmóvil. Hay un movimiento constante
+en el océano en forma de una cinta transportadora oceánica global debido a las corrientes
+termohalinas. Estas corrientes están impulsadas por la densidad, que se ve afectada tanto
+por la temperatura como por la salinidad. El agua fría y salada es densa y se hunde al
+fondo del océano, mientras que el agua cálida es menos densa y sube a la superficie. El
+"inicio" de la cinta transportadora oceánica está en el Mar de Noruega. El agua cálida es
+transportada al Mar de Noruega por la Corriente del Golfo. El agua cálida proporciona
+calor a la atmósfera en las latitudes del norte que se enfrían particularmente durante el
+invierno. Esta pérdida de calor hacia la atmósfera hace que el agua se enfríe y se vuelva
+más densa, lo que provoca que se hunda al fondo del océano. A medida que más agua cálida
+es transportada hacia el norte, el agua más fría se hunde y se mueve hacia el sur para
+hacer espacio para el agua cálida entrante. Esta agua fría de fondo fluye al sur del
+ecuador hasta llegar a la Antártida. Eventualmente, las aguas frías de fondo logran
+calentarse y subir a la superficie, continuando la cinta transportadora que rodea el
+globo. El agua tarda casi 1000 años en recorrer toda la cinta transportadora]]
+local URL = "https://sos.noaa.gov/catalog/datasets/ocean-circulation-labeled-currents/"
+
+
+local syncedDirectory = asset.resource({
+  Name = Name,
+  Type = "HttpSynchronization",
+  Identifier = Identifier,
+  Version = 1
+})
+
+
+local Layer = {
+  Identifier = Identifier,
+  Name = Name,
+  Enabled = asset.enabled,
+  ZIndex = 100,
+  FilePath = syncedDirectory .. "4096.jpg",
+  Description = Description
+}
+
+local Legend = {
+  Identifier = Identifier,
+  Name = Name,
+  Enabled = asset.enabled,
+  Type = "ScreenSpaceImageLocal",
+  TexturePath = syncedDirectory .. "legend.jpg",
+  FaceCamera = false,
+  CartesianPosition = { 0.0, -0.5, -2.0 }
+}
+
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+  openspace.addScreenSpaceRenderable(Legend)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeScreenSpaceRenderable(Legend)
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.export(Layer)
+asset.export(Legend)
+
+
+
+asset.meta = {
+  Name = Name,
+  Description = Description .. "Datos proporcionados por la Administración Nacional Oceánica y Atmosférica",
+  Author = "Administración Nacional Oceánica y Atmosférica",
+  URL = URL,
+  License = "https://sos.noaa.gov/copyright/"
+}

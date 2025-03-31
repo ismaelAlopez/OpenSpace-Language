@@ -1,0 +1,97 @@
+local globe = asset.require("../../earth")
+
+
+
+local Name = "Animacion del Hielo Marino - 2009"
+local Identifier = "noaa-sos-oceans-2009_ice_animation"
+local Description = [[El hielo marino es simplemente agua del océano que se ha congelado. Al menos el 15% del
+océano está cubierto por hielo marino durante alguna parte del año. Esto significa que, en promedio, el hielo marino
+cubre casi 10 millones de millas cuadradas (alrededor de 25 millones de kilómetros cuadrados) de la Tierra.
+Las concentraciones de hielo marino son monitoreadas de cerca por los científicos porque los cambios en las concentraciones
+de hielo marino pueden tener un gran impacto en el resto del globo. El calentamiento global se amplifica en las regiones polares.
+Debido a esto, monitorear los cambios en el hielo marino puede ser un buen indicador del cambio climático. El Mapa Global de
+Cobertura de Nieve y Hielo utilizado en este conjunto de datos se crea a partir de una combinación de observaciones del
+Radiómetro Avanzado de Alta Resolución de NOAA, la Caracterización de Respuesta Espectral del Satélite Meteosat de Segunda Generación,
+el Imager de GOES y el Programa de Satélites Meteorológicos de Defensa con el Sensor Especial de Microondas/Imager.
+La resolución es de 2 km]]
+local URL = "https://sos.noaa.gov/catalog/datasets/sea-ice-animation-2009/"
+
+
+local syncedDirectory = asset.resource({
+  Name = Name,
+  Type = "HttpSynchronization",
+  Identifier = Identifier,
+  Version = 1,
+  UnzipFiles = true
+})
+
+
+local Layer = {
+  Identifier = Identifier,
+  Name = Name,
+  Enabled = asset.enabled,
+  ZIndex = 100,
+  Type = "ImageSequenceTileProvider",
+  FolderPath = syncedDirectory .. "4096",
+  Description = Description
+}
+
+local Colorbar2007to2009 = {
+  Identifier = Identifier .. "-2007_2009",
+  Name = Name .. " (Comparación 2007-2009)",
+  Enabled = asset.enabled,
+  Type = "ScreenSpaceImageLocal",
+  TexturePath = syncedDirectory .. "2007-2009-Compare.png",
+  FaceCamera = false,
+  CartesianPosition = { -0.85, -0.5, -2.0 }
+}
+
+local Colorbar2008Minimum = {
+  Identifier = Identifier .. "-2008_minimum",
+  Name = Name .. " (Mínimo 2008)",
+  Enabled = asset.enabled,
+  Type = "ScreenSpaceImageLocal",
+  TexturePath = syncedDirectory .. "2008-Minimum-Label.png",
+  FaceCamera = false,
+  CartesianPosition = { 0.6, -0.4, -2.0 }
+}
+
+local Colorbar2009IceConcentration = {
+  Identifier = Identifier .. "-2009_iceconcentration",
+  Name = Name .. " (Concentración de Hielo 2009)",
+  Enabled = asset.enabled,
+  Type = "ScreenSpaceImageLocal",
+  TexturePath = syncedDirectory .. "2009-IceConcentration-Label.png",
+  FaceCamera = false,
+  CartesianPosition = { 0.6, -0.6, -2.0 }
+}
+
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+  openspace.addScreenSpaceRenderable(Colorbar2007to2009)
+  openspace.addScreenSpaceRenderable(Colorbar2008Minimum)
+  openspace.addScreenSpaceRenderable(Colorbar2009IceConcentration)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeScreenSpaceRenderable(Colorbar2009IceConcentration)
+  openspace.removeScreenSpaceRenderable(Colorbar2008Minimum)
+  openspace.removeScreenSpaceRenderable(Colorbar2007to2009)
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.export(Layer)
+asset.export(Colorbar2007to2009)
+asset.export(Colorbar2008Minimum)
+asset.export(Colorbar2009IceConcentration)
+
+
+
+asset.meta = {
+  Name = Name,
+  Description = Description .. "Datos proporcionados por la Administración Nacional Oceánica y Atmosférica",
+  Author = "Administración Nacional Oceánica y Atmosférica",
+  URL = URL,
+  License = "https://sos.noaa.gov/copyright/"
+}

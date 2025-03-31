@@ -1,0 +1,56 @@
+local transforms = asset.require("scene/solarsystem/sun/transforms")
+
+
+
+local sssb = asset.resource({
+  Name = "Datos de Cuerpos Pequenos del Sistema Solar (Cometa tipo Chiron)",
+  Type = "HttpSynchronization",
+  Identifier = "sssb_data_chiron-type_comet",
+  Version = 4
+})
+
+
+local Object = {
+  Identifier = "sssb_chiron-type_comet",
+  Parent = transforms.SunEclipJ2000.Identifier,
+  Renderable = {
+    Type = "RenderableOrbitalKepler",
+    Path = sssb .. "sssb_data_chiron-type_comet.csv",
+    Format = "SBDB",
+    Segments = 200,
+    SegmentQuality = 10,
+    Color = { 0.15, 0.1, 1.0 },
+    TrailFade = 25,
+    PointSizeExponent = 10.5
+  },
+  GUI = {
+    Name = "Cometas tipo Chiron",
+    Path = "/Sistema Solar/Cuerpos Pequeños",
+    Description = [[Cometas con un parámetro de Tisserand con respecto a Júpiter
+      mayor que 3 y un semieje mayor que el de Júpiter.]]
+  }
+}
+
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(Object)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(Object)
+end)
+
+asset.export(Object)
+
+
+
+asset.meta = {
+  Name = "Cometas Tipo Chiron",
+  Description = [[Asset Renderizable de Cuerpos Pequeños con datos de JPL Horizons
+    que contiene el grupo Tipo Chiron]],
+  Author = "Base de Datos de Cuerpos Pequeños de JPL alojada por el Instituto de Tecnología de California",
+  URL = "https://ssd.jpl.nasa.gov/sbdb_query.cgi",
+  License = [[Los documentos creados por JPL están patrocinados por la NASA bajo el Contrato NAS7-030010.
+    Todos los documentos disponibles en este servidor pueden estar protegidos bajo las Leyes de Copyright
+    de los EE.UU. y extranjeras]]
+}

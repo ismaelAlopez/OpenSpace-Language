@@ -1,0 +1,53 @@
+local globe = asset.require("../../earth")
+
+
+
+local Name = "Presas y Embalses: Yangtze - 1800 - 2010"
+local Identifier = "noaa-sos-land-dams-yangtze"
+local Description = [[Los humanos han manipulado los ríos durante miles de años, pero en
+los últimos 200 años las presas en los ríos se han vuelto desenfrenadas. Los embalses y
+presas se construyen para el almacenamiento de agua, para reducir el riesgo de inundaciones
+fluviales y para la generación de energía. Son una de las principales huellas de los humanos
+en la Tierra y cambian el ciclo hidrológico mundial]]
+local URL = "https://sos.noaa.gov/catalog/datasets/dams-and-reservoirs-yangtze-1800-2010/"
+
+
+local syncedDirectory = asset.resource({
+  Name = Name,
+  Type = "HttpSynchronization",
+  Identifier = Identifier,
+  Version = 1,
+  UnzipFiles = true
+})
+
+
+local Layer = {
+  Identifier = Identifier,
+  Name = Name,
+  Enabled = asset.enabled,
+  ZIndex = 100,
+  Type = "ImageSequenceTileProvider",
+  FolderPath = syncedDirectory .. "4096",
+  Description = Description
+}
+
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.onDeinitialize(function()
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.export(Layer)
+
+
+
+asset.meta = {
+  Name = Name,
+  Description = Description .. "Datos proporcionados por la Administración Nacional Oceánica y Atmosférica",
+  Author = "Administración Nacional Oceánica y Atmosférica",
+  URL = URL,
+  License = "https://sos.noaa.gov/copyright/"
+}

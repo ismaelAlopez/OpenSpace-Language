@@ -1,0 +1,37 @@
+local globe = asset.require("../../moon")
+
+local Layer = {
+  Identifier = "WAC_V1_NewYork",
+  Name = "WAC V1 [Nueva York]",
+  Enabled = asset.enabled,
+  ZIndex = 10,
+  FilePath = asset.resource("wac_v1_newyork.wms"),
+  Settings = { Gamma = 0.84 },
+  Description = [[La Cámara de ángulo Ancho (WAC) del Orbitador de Reconocimiento Lunar (LROC)
+    a bordo del Orbitador de Reconocimiento Lunar (LRO) ha permitido al equipo del instrumento
+    crear un mosaico global compuesto por más de 15,000 imágenes adquiridas entre noviembre de 2009
+    y febrero de 2011. La WAC mapea toda la Luna en un mes, sin embargo, el ángulo de incidencia solar
+    en el ecuador cambia aproximadamente 28° desde el principio hasta el final del mes. Para igualar las
+    variaciones del ángulo de incidencia (generalmente ángulos entre 55-75 grados), este mosaico de morfología
+    (a 643 nm), está compuesto por datos recopilados durante tres períodos (20/1/2010 a 28/1/2010, 30/5/2010 a 6/6/2010,
+    24/7/2010 a 31/7/2010). (Descripción de URL)]]
+}
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Moon.Identifier, "ColorLayers", Layer)
+end)
+
+asset.onDeinitialize(function()
+  openspace.globebrowsing.deleteLayer(globe.Moon.Identifier, "ColorLayers", Layer)
+end)
+
+asset.export("layer", Layer)
+
+asset.meta = {
+  Name = "WAC [Nueva York]",
+  Description = [[Mapa de color de ángulo ancho de la Luna. Este mapa está alojado en el servidor de OpenSpace
+    en Nueva York]],
+  Author = "USGS",
+  URL = "https://astrogeology.usgs.gov/search/map/Moon/LRO/LROC_WAC/Lunar_LRO_LROC-WAC_Mosaic_global_100m_June2013",
+  License = "NASA/PDS"
+}

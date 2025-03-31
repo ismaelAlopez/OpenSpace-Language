@@ -1,0 +1,50 @@
+local globe = asset.require("../../earth")
+
+
+
+local Name = "Luces Nocturnas - 2012"
+local Identifier = "noaa-sos-land-earth_night-2012"
+local Description = [[La Tierra de Noche ha sido un conjunto de datos favorito de los usuarios de SOS durante muchos
+años. Black Marble 2012 es la versión más reciente de la espectacular vista de nuestro planeta desde
+órbita cercana a la Tierra por la noche, que es el resultado de una asociación entre NOAA, NASA y
+el Departamento de Defensa]]
+local URL = "https://sos.noaa.gov/catalog/datasets/nighttime-lights-2012/"
+
+
+local syncedDirectory = asset.resource({
+  Name = Name,
+  Type = "HttpSynchronization",
+  Identifier = Identifier,
+  Version = 1
+})
+
+
+local Layer = {
+  Identifier = Identifier,
+  Name = Name,
+  Enabled = asset.enabled,
+  ZIndex = 100,
+  FilePath = syncedDirectory .. "3600.jpg",
+  Description = Description
+}
+
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.onDeinitialize(function()
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.export(Layer)
+
+
+
+asset.meta = {
+  Name = Name,
+  Description = Description .. "Datos proporcionados por la Administración Nacional Oceánica y Atmosférica",
+  Author = "Administración Nacional Oceánica y Atmosférica",
+  URL = URL,
+  License = "https://sos.noaa.gov/copyright/"
+}

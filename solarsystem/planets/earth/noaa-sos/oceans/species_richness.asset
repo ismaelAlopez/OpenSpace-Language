@@ -1,0 +1,74 @@
+local globe = asset.require("../../earth")
+
+
+
+local Name = "Riqueza de Especies de Pesquerías"
+local Identifier = "noaa-sos-oceans-species_richness"
+local Description = [[La riqueza de especies es un conteo del número de diferentes especies en
+una comunidad ecológica, paisaje o región. La riqueza de especies es una de varias
+mediciones utilizadas por los científicos para ayudar a determinar cuán biológicamente
+rica y diversa es un área determinada. Este mapa muestra la distribución global
+predicha de 1066 peces marinos e invertebrados comercialmente recolectados. Las áreas
+en el mapa con colores más brillantes (naranja/amarillo) destacan áreas con un mayor
+número de diferentes especies (mayor riqueza de especies), mientras que los colores
+más fríos (púrpura) indican áreas con un menor número de especies (menor riqueza de
+especies). El mapa muestra que el mayor número de diferentes especies se concentra a
+lo largo de las costas. Estas áreas costeras también son donde encontramos nuestros
+mayores ecosistemas marinos, como arrecifes de coral, manglares y marismas, que
+proporcionan alimento y refugio para especies marinas importantes económica,
+cultural y ecológicamente. Esto subraya la importancia de proteger hábitats críticos a
+lo largo de nuestras costas para la vida marina y las pesquerías.]]
+local URL = "https://sos.noaa.gov/catalog/datasets/fisheries-species-richness/"
+
+
+local syncedDirectory = asset.resource({
+  Name = Name,
+  Type = "HttpSynchronization",
+  Identifier = Identifier,
+  Version = 1
+})
+
+
+local Layer = {
+  Identifier = Identifier,
+  Name = Name,
+  Enabled = asset.enabled,
+  ZIndex = 100,
+  FilePath = syncedDirectory .. "4096.png",
+  Description = Description
+}
+
+local Colorbar = {
+  Identifier = Identifier,
+  Name = Name,
+  Enabled = asset.enabled,
+  Type = "ScreenSpaceImageLocal",
+  TexturePath = syncedDirectory .. "colorbar-speciesrichness.png",
+  FaceCamera = false,
+  Scale = 0.3,
+  CartesianPosition = { 0.0, -0.5, -2.0 }
+}
+
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+  openspace.addScreenSpaceRenderable(Colorbar)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeScreenSpaceRenderable(Colorbar)
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.export(Layer)
+asset.export(Colorbar)
+
+
+
+asset.meta = {
+  Name = Name,
+  Description = Description .. "Datos proporcionados por la Administración Nacional Oceánica y Atmosférica",
+  Author = "Administración Nacional Oceánica y Atmosférica",
+  URL = URL,
+  License = "https://sos.noaa.gov/copyright/"
+}

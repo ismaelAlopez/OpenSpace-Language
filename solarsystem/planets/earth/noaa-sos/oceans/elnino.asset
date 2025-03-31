@@ -1,0 +1,87 @@
+local globe = asset.require("../../earth")
+
+
+
+local Name = "Impactos estacionales de El Nino y La Nina"
+local Identifier = "noaa-sos-oceans-elnino"
+local Description = [[El Niño es el calentamiento del Océano Pacífico frente a la costa
+occidental de América del Sur, cerca de Ecuador y Perú. Se llama El Niño, o niño en
+español, en referencia al niño Jesús porque el fenómeno se observó originalmente cerca
+de la época de Navidad. El opuesto de El Niño es La Niña, o niña en español, que es un
+enfriamiento del Océano Pacífico. Debido a que el sistema terrestre está interconectado,
+los cambios en el océano causan cambios en la atmósfera. Los eventos de El Niño y La Niña
+no solo afectan las temperaturas oceánicas en el Pacífico tropical, sino también el clima
+global. La ocurrencia de El Niño y La Niña no es predecible, pero en promedio ocurre una
+vez cada cuatro años y generalmente dura alrededor de 18 meses.]]
+local URL = "https://sos.noaa.gov/catalog/datasets/el-nino-and-la-nina-seasonal-impacts/"
+
+
+local syncedDirectory = asset.resource({
+  Name = Name,
+  Type = "HttpSynchronization",
+  Identifier = Identifier,
+  Version = 1
+})
+
+
+local LayerElninoSummer = {
+  Identifier = Identifier .. "-elnino_summer",
+  Name = Name .. " (El Nino, verano)",
+  ZIndex = 100,
+  FilePath = syncedDirectory .. "elnino-summer-no-map-transparent-shapes.png",
+  Description = Description
+}
+
+local LayerElninoWinter = {
+  Identifier = Identifier .. "-elnino_winter",
+  Name = Name .. " (El Nino, invierno)",
+  ZIndex = 100,
+  FilePath = syncedDirectory .. "elnino-winter-no-map-transparent-shapes.png",
+  Description = Description
+}
+
+local LayerLaninaSummer = {
+  Identifier = Identifier .. "-lanina_summer",
+  Name = Name .. " (La Nina, verano)",
+  ZIndex = 100,
+  FilePath = syncedDirectory .. "lanina-summer-no-map-transparent-shapes.png",
+  Description = Description
+}
+
+local LayerLaninaWinter = {
+  Identifier = Identifier .. "-lanina_winter",
+  Name = Name .. " (La Nina, winter)",
+  ZIndex = 100,
+  FilePath = syncedDirectory .. "lanina-winter-no-map-transparent-shapes.png",
+  Description = Description
+}
+
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", LayerElninoSummer)
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", LayerElninoWinter)
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", LayerLaninaSummer)
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", LayerLaninaWinter)
+end)
+
+asset.onDeinitialize(function()
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", LayerLaninaWinter)
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", LayerLaninaSummer)
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", LayerElninoWinter)
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", LayerElninoSummer)
+end)
+
+asset.export(LayerElninoSummer)
+asset.export(LayerElninoWinter)
+asset.export(LayerLaninaSummer)
+asset.export(LayerLaninaWinter)
+
+
+
+asset.meta = {
+  Name = Name,
+  Description = Description .. "Data provided by the National Oceanic and Atmospheric Administration",
+  Author = "National Oceanic and Atmospheric Administration",
+  URL = URL,
+  License = "https://sos.noaa.gov/copyright/"
+}

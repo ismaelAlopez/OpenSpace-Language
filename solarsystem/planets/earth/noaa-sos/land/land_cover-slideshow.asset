@@ -1,0 +1,102 @@
+local globe = asset.require("../../earth")
+
+
+
+local Name = "Cobertura Terrestre (mapa con presentación de etiquetas)"
+local Identifier = "noaa-sos-land-land_cover-slideshow"
+local Description = [[El instrumento Moderate Resolution Imaging Spectroradiometer (MODIS)
+en el satélite Terra de la NASA proporciona a los científicos una nueva vista de la Tierra.
+Usando datos recopilados por MODIS, investigadores de la Universidad de Boston pudieron crear estos
+mapas de cobertura terrestre. Comprender la cobertura terrestre de la Tierra ayuda a los responsables
+de políticas involucrados en la gestión de recursos naturales. Los mapas también son críticos para los
+científicos mientras estudian los cambios en el sistema terrestre y modelan el sistema terrestre. Por
+ejemplo, para calcular el presupuesto de carbono del sistema terrestre, los científicos pueden usar
+estos mapas para determinar la extensión de la vegetación que cubre la superficie terrestre y que está
+absorbiendo dióxido de carbono. Cada uno de los diferentes tipos de tierra tiene diferentes impactos
+en el sistema terrestre. La nieve y el hielo enfrían el planeta al reflejar la luz solar de vuelta al
+espacio, los bosques absorben grandes cantidades de dióxido de carbono, y las tierras de cultivo y las
+áreas urbanas reflejan el impacto humano en la Tierra]]
+local URL = "https://sos.noaa.gov/catalog/datasets/land-cover-map-with-slideshow-of-labels/"
+
+
+local syncedDirectory = asset.resource({
+  Name = Name,
+  Type = "HttpSynchronization",
+  Identifier = Identifier,
+  Version = 1,
+  UnzipFiles = true
+})
+
+
+local labelsDestination = syncedDirectory .. "labels/"
+
+local Layer = {
+  Identifier = Identifier,
+  Name = Name,
+  Enabled = asset.enabled,
+  ZIndex = 100,
+  FilePath = syncedDirectory .. "2048.jpg",
+  Description = Description
+}
+
+function create_label(number)
+  return {
+    Identifier = Identifier .. "-" .. number,
+    Name = Name .. " (" .. number .. ")",
+    Enabled = asset.enabled,
+    Type = "ScreenSpaceImageLocal",
+    TexturePath = labelsDestination .. "lcc_" .. number .. ".jpg",
+    FaceCamera = false,
+    CartesianPosition = { 0.75, 0.0, -2.0 }
+  }
+end
+
+local label_01 = create_label("01")
+local label_02 = create_label("02")
+local label_03 = create_label("03")
+local label_04 = create_label("04")
+local label_05 = create_label("05")
+local label_06 = create_label("06")
+local label_07 = create_label("07")
+local label_08 = create_label("08")
+local label_09 = create_label("09")
+local label_10 = create_label("10")
+local label_11 = create_label("11")
+local label_12 = create_label("12")
+local label_13 = create_label("13")
+local label_14 = create_label("14")
+local label_15 = create_label("15")
+local label_16 = create_label("16")
+
+local labels = {
+  label_01, label_02, label_03, label_04, label_05, label_06, label_07, label_08,
+  label_09, label_10, label_11, label_12, label_13, label_14, label_15, label_16
+}
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+
+  for _,v in ipairs(labels) do
+    openspace.addScreenSpaceRenderable(v)
+  end
+end)
+
+asset.onDeinitialize(function()
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", Layer.Identifier)
+  for _,v in ipairs(labels) do
+    openspace.removeScreenSpaceRenderable(v)
+  end
+end)
+
+asset.export(Layer)
+for _,v in ipairs(labels) do
+  asset.export(v)
+end
+
+asset.meta = {
+  Name = Name,
+  Description = Description .. "Datos proporcionados por la Administración Nacional Oceánica y Atmosférica",
+  Author = "Administración Nacional Oceánica y Atmosférica",
+  URL = URL,
+  License = "https://sos.noaa.gov/copyright/"
+}

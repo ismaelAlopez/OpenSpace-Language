@@ -1,0 +1,67 @@
+local globe = asset.require("../../earth")
+
+
+local Name = "Rastros de Vida Marina: Oceano Pacifico"
+local Identifier = "noaa-sos-oceans-marine_life_tracking"
+local Description = [[Este conjunto de datos contiene las ubicaciones de una tortuga laúd,
+un elefante marino del norte y dos tiburones blancos para cada día durante el transcurso
+de varios meses. Los datos utilizados fueron tomados de topp.org (TOPP significa Etiquetado
+de Depredadores Pelágicos), un sitio que rastrea animales marinos en un intento de aprender
+más sobre ellos. El objetivo de TOPP es proteger la vida marina de la sobrepesca, el cambio
+climático y varias otras amenazas. El propósito de este conjunto de datos es servir como
+un ejemplo de un conjunto de datos de rastreo de animales hecho a mano. Para un conjunto
+de datos más extenso utilizando datos de TOPP, vaya aquí]]
+local URL = "https://sos.noaa.gov/catalog/datasets/marine-life-tracks-pacific-ocean/"
+
+
+local syncedDirectory = asset.resource({
+  Name = Name,
+  Type = "HttpSynchronization",
+  Identifier = Identifier,
+  Version = 1
+})
+
+
+local Layer = {
+  Identifier = Identifier,
+  Name = Name,
+  Enabled = asset.enabled,
+  ZIndex = 100,
+  FilePath = syncedDirectory .. "2048.png",
+  Description = Description
+}
+
+local Legend = {
+  Identifier = Identifier,
+  Name = Name,
+  Enabled = asset.enabled,
+  Type = "ScreenSpaceImageLocal",
+  TexturePath = syncedDirectory .. "legend.png",
+  FaceCamera = false,
+  CartesianPosition = { 0.0, -0.5, -2.0 }
+}
+
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+  openspace.addScreenSpaceRenderable(Legend)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeScreenSpaceRenderable(Legend)
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.export(Layer)
+asset.export(Legend)
+
+
+
+asset.meta = {
+  Name = Name,
+  Description = Description .. "Datos proporcionados por la Administración Nacional Oceánica y Atmosférica",
+  Author = "Administración Nacional Oceánica y Atmosférica",
+  URL = URL,
+  License = "https://sos.noaa.gov/copyright/"
+}
+

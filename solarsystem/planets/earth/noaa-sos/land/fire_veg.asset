@@ -1,0 +1,83 @@
+local globe = asset.require("../../earth")
+
+
+
+local Name = "Observaciones de Incendios y Vegetacion - 2002 - 2011"
+local Identifier = "noaa-sos-land-fire_veg"
+local Description = [[Este conjunto de datos lleva a los espectadores en un recorrido narrado
+  de detecciones de incendios a nivel global que comienza en julio de 2002 y termina en julio
+  de 2011. El conjunto de datos también incluye datos de vegetación y cobertura de nieve para
+  mostrar cómo los incendios responden a los cambios estacionales. El recorrido comienza en
+  Australia en 2002 mostrando una red de incendios masivos en pastizales que se extienden por
+  el interior de Australia, así como los bosques más verdes de eucaliptos en el norte y este
+  del continente. Luego, el recorrido se traslada a Asia, donde se pueden ver grandes cantidades
+  de incendios agrícolas, primero en China en junio de 2004, luego en una vasta franja de Europa
+  y el oeste de Rusia en agosto, y luego en India y el sudeste asiático a principios de 2005]]
+local URL = "https://sos.noaa.gov/catalog/datasets/fire-observations-and-vegetation-2002-2011/"
+
+
+local syncedDirectory = asset.resource({
+  Name = Name,
+  Type = "HttpSynchronization",
+  Identifier = Identifier,
+  Version = 1,
+  UnzipFiles = true
+})
+
+
+local Layer = {
+  Identifier = Identifier,
+  Name = Name,
+  Enabled = asset.enabled,
+  ZIndex = 100,
+  Type = "ImageSequenceTileProvider",
+  FolderPath = syncedDirectory .. "2048",
+  Description = Description
+}
+
+local ColorbarFire = {
+  Identifier = Identifier,
+  Name = Name,
+  Enabled = asset.enabled,
+  Type = "ScreenSpaceImageLocal",
+  TexturePath = syncedDirectory .. "fire_colorbar.png",
+  FaceCamera = false,
+  CartesianPosition = { -0.5, -0.5, -2.0 }
+}
+
+local ColorbarVeg = {
+  Identifier = Identifier,
+  Name = Name,
+  Enabled = asset.enabled,
+  Type = "ScreenSpaceImageLocal",
+  TexturePath = syncedDirectory .. "veg_colorbar.png",
+  FaceCamera = false,
+  CartesianPosition = { 0.5, -0.5, -2.0 }
+}
+
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+  openspace.addScreenSpaceRenderable(ColorbarFire)
+  openspace.addScreenSpaceRenderable(ColorbarVeg)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeScreenSpaceRenderable(ColorbarVeg)
+  openspace.removeScreenSpaceRenderable(ColorbarFire)
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.export(Layer)
+asset.export(ColorbarFire)
+asset.export(ColorbarVeg)
+
+
+
+asset.meta = {
+  Name = Name,
+  Description = Description .. "Datos proporcionados por la Administración Nacional Oceánica y Atmosférica",
+  Author = "Administración Nacional Oceánica y Atmosférica",
+  URL = URL,
+  License = "https://sos.noaa.gov/copyright/"
+}

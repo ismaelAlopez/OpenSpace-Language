@@ -1,0 +1,62 @@
+local globe = asset.require("../../earth")
+
+
+
+local Name = "Incendios - 2009"
+local Identifier = "noaa-sos-land-fire"
+local Description = [[Para monitorear los incendios que ocurren a nivel global, se ha montado un sensor especial
+en los satélites Terra y Aqua. El sensor, llamado Espectrorradiómetro de Imágenes de Resolución Moderada (MODIS),
+es capaz de proporcionar imágenes satelitales diarias de las masas terrestres de la Tierra en tiempo casi real
+utilizando el Sistema de Respuesta Rápida MODIS. Hay muchos usos para los datos recopilados por MODIS, como
+monitorear incendios globales detectando las anomalías de temperatura anormalmente altas en la superficie. Cuando
+una ubicación es mucho más cálida que el área circundante, sugiere la presencia de un incendio o un flujo de lava.
+Es importante conocer el tamaño, la ubicación y la intensidad de los incendios debido al daño que pueden causar,
+y también para ayudar a los científicos a comprender las emisiones de los incendios y sus efectos a corto y largo
+plazo en los ecosistemas.]]
+local URL = "https://sos.noaa.gov/catalog/datasets/fires-2009/"
+
+
+local syncedDirectory = asset.resource({
+  Name = Name,
+  Type = "HttpSynchronization",
+  Identifier = Identifier,
+  Version = 1,
+  UnzipFiles = true
+})
+
+
+local Layer = {
+  Identifier = Identifier,
+  Name = Name,
+  Enabled = asset.enabled,
+  ZIndex = 100,
+  Type = "TemporalTileProvider",
+  Mode = "Folder",
+  Folder = {
+    Folder = syncedDirectory .. "4096",
+    -- See https://en.cppreference.com/w/cpp/io/manip/get_time for an explanation of the
+    -- time formatting string
+    Format = "firemap.%Y%j-%Y%j.4096x2048.png"
+  },
+  Description = Description
+}
+
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.onDeinitialize(function()
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.export(Layer)
+
+
+asset.meta = {
+  Name = Name,
+  Description = Description .. "Datos proporcionados por la Administración Nacional Oceánica y Atmosférica",
+  Author = "Administración Nacional Oceánica y Atmosférica",
+  URL = URL,
+  License = "https://sos.noaa.gov/copyright/"
+}

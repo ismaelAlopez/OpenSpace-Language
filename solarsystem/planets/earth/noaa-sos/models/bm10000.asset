@@ -1,0 +1,78 @@
+local globe = asset.require("../../earth")
+
+
+
+local Name = "Marmol Azul: Cambios en el Nivel del Mar, Hielo y Vegetacion - 19,000AC - 10,000DC"
+local Identifier = "noaa-sos-models-bm10000"
+local Description = [[La Tierra ha pasado por muchos cambios y continúa cambiando
+hoy en día. Para comprender mejor estos cambios, la Universidad de Ciencias Aplicadas de Zúrich
+creó una simulación utilizando datos climáticos pasados, observaciones y modelos computacionales.
+La simulación comienza hace 21,000 años y termina 8,000 años en el futuro, mostrando los
+cambios en la concentración de hielo, el nivel del mar y la vegetación. El año 19,000AC fue
+elegido como la fecha de inicio porque fue el último máximo glacial, cuando las capas de hielo
+de la Tierra alcanzaron su máxima extensión. Como se ve en la animación, gran parte del norte
+de Europa y América del Norte estaban cubiertos de hielo en el año 19,000AC. Las etiquetas de
+la animación incluyen información sobre la concentración de dióxido de carbono, temperatura
+promedio, nivel del mar y población. La línea roja indica los niveles actuales. Las fronteras
+amarillas en el mapa representan las costas actuales. Los datos desde 19,000AC hasta 2,000DC
+incluyen los datos paleoclimáticos más actualizados disponibles. Se puede encontrar una lista
+de fuentes aquí. Algunos eventos notables en la simulación pasada incluyen:
+
+El Mar del Norte se forma rápidamente alrededor del año 8,000AC, creando las Islas Británicas.
+El "Mega-Lago Chad" se forma en el actual Desierto del Sahara y está rodeado de paisajes
+frondosos alrededor del año 7,000AC.
+El hielo retrocede y América del Norte y Europa están en gran parte libres de hielo, comenzando
+en el año 6,500AC.
+La vegetación frondosa en el norte de África y la península arábiga retrocede en el año 2,000AC.
+
+Para el período de tiempo de 2,000DC a 3,000DC, se utilizó un modelo computacional basado en el
+escenario A2 del IPCC. Este escenario asume una cesación completa de las emisiones de dióxido
+de carbono en el año 2100. Se pueden encontrar más detalles sobre el modelo utilizado aquí.
+En esta parte de la simulación, los pasos de tiempo cambian de un cuadro cada 500 años, como
+se utilizó en la primera parte de la animación, a un cuadro cada 50 años para mostrar los
+cambios rápidos que se modelan. La capa de hielo del norte desaparece rápidamente y el hielo
+en Groenlandia y la Antártida comienza a derretirse de manera constante. Para el año 3,000DC,
+se predice un aumento del nivel del mar de 6m (19 pies). La simulación continúa desde 3,000DC
+hasta 10,000DC en pasos de tiempo de 500 años en un escenario ficticio de derretimiento total
+de los glaciares a nivel mundial y muestra los impactos que esto tendría en las costas.]]
+local URL = "https://sos.noaa.gov/catalog/datasets/blue-marble-sea-level-ice-and-vegetation-changes-19000bc-10000ad/"
+
+
+local syncedDirectory = asset.resource({
+  Name = Name,
+  Type = "HttpSynchronization",
+  Identifier = Identifier,
+  Version = 1,
+  UnzipFiles = true
+})
+
+
+local Layer = {
+  Identifier = Identifier,
+  Name = Name,
+  Enabled = asset.enabled,
+  ZIndex = 100,
+  Type = "ImageSequenceTileProvider",
+  FolderPath = syncedDirectory .. "4096",
+  Description = Description
+}
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.onDeinitialize(function()
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.export(Layer)
+
+
+
+asset.meta = {
+  Name = Name,
+  Description = Description .. "Datos proporcionados por la Administración Nacional Oceánica y Atmosférica",
+  Author = "Administración Nacional Oceánica y Atmosférica",
+  URL = URL,
+  License = "https://sos.noaa.gov/copyright/"
+}

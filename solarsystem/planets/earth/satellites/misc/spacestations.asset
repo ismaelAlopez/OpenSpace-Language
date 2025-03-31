@@ -1,0 +1,57 @@
+local transforms = asset.require("scene/solarsystem/planets/earth/transforms")
+
+
+
+local omm = asset.resource({
+  Name = "Datos OMM de Satelites (Estaciones Espaciales)",
+  Type = "UrlSynchronization",
+  Identifier = "satellite_omm_data_stations",
+  Url = "https://www.celestrak.com/NORAD/elements/gp.php?GROUP=stations&FORMAT=kvn",
+  Filename = "stations.txt",
+  SecondsUntilResync = openspace.time.secondsPerDay()
+})
+
+
+local SpaceStations = {
+  Identifier = "SpaceStations",
+  Parent = transforms.EarthInertial.Identifier,
+  Renderable = {
+    Type = "RenderableOrbitalKepler",
+    Path = omm .. "stations.txt",
+    Format = "OMM",
+    SegmentQuality = 3,
+    Color = { 0.9, 0.1, 0.0 },
+    TrailFade = 20,
+    PointSizeExponent = 5.0,
+    RenderBinMode = "PostDeferredTransparent"
+  },
+  Tag = { "earth_satellites" },
+  GUI = {
+    Name = "Estaciones Espaciales",
+    Path = "/Sistema Solar/Planetas/Tierra/Satélites",
+    Description = [[Una colección de estaciones espaciales (incluyendo la ISS y la
+      Tiangong de China), junto con ciertos cubesats y constelaciones de satélites de
+      agencias espaciales.]]
+  }
+}
+
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(SpaceStations)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(SpaceStations)
+end)
+
+asset.export(SpaceStations)
+
+
+
+asset.meta = {
+  Name = "Satélites Estaciones Espaciales",
+  Description = "Activo de satélites para Estaciones Espaciales. Datos de Celestrak",
+  Author = "Equipo de OpenSpace",
+  URL = "https://celestrak.com/NORAD/elements/",
+  License = "Celestrak"
+}

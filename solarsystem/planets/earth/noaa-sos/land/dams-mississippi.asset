@@ -1,0 +1,50 @@
+local globe = asset.require("../../earth")
+
+
+
+local Name = "Presas y Embalses: Rio Mississippi - 1800 - 2010"
+local Identifier = "noaa-sos-land-dams-mississippi"
+local Description = [[Este conjunto de datos ilustra la construcción de presas en la
+cuenca del río Mississippi desde 1800 hasta el presente. Mostramos todas las presas listadas en la
+Base de Datos Global de Embalses y Presas (GRanD). Se incluyen todas las presas que tienen un embalse con una capacidad de almacenamiento de más de 0.1 kilómetros cúbicos, y se añadieron muchas presas más pequeñas donde los datos estaban disponibles]]
+local URL = "https://sos.noaa.gov/catalog/datasets/dams-and-reservoirs-mississippi-river-1800-2010/"
+
+
+local syncedDirectory = asset.resource({
+  Name = Name,
+  Type = "HttpSynchronization",
+  Identifier = Identifier,
+  Version = 1,
+  UnzipFiles = true
+})
+
+
+local Layer = {
+  Identifier = Identifier,
+  Name = Name,
+  Enabled = asset.enabled,
+  ZIndex = 100,
+  Type = "ImageSequenceTileProvider",
+  FolderPath = syncedDirectory .. "4096",
+  Description = Description
+}
+
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.onDeinitialize(function()
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.export(Layer)
+
+
+asset.meta = {
+  Name = Name,
+  Description = Description .. "Datos proporcionados por la Administración Nacional Oceánica y Atmosférica",
+  Author = "Administración Nacional Oceánica y Atmosférica",
+  URL = URL,
+  License = "https://sos.noaa.gov/copyright/"
+}

@@ -1,0 +1,77 @@
+local transforms = asset.require("scene/solarsystem/sun/transforms")
+
+
+
+local horizons = asset.resource({
+  Name = "5 Astraea Trayectoria",
+  Type = "HttpSynchronization",
+  Identifier = "astraea_horizons",
+  Version = 2
+})
+
+
+local AstraeaTrail = {
+  Identifier = "AstraeaTrail",
+  Parent = transforms.SolarSystemBarycenter.Identifier,
+  Renderable = {
+    Type = "RenderableTrailOrbit",
+    Translation = {
+      Type = "HorizonsTranslation",
+      HorizonsTextFile = horizons .. "horizons_astraea.hrz"
+      -- Target: 5 Astraea (A845 XA)
+      -- Observer: SSB
+      -- Start time: 2014-Jan-01 00:00 (first data point)
+      -- End time: 2050-Jan-01 00:00 (last data point)
+      -- Step size: 1 day
+    },
+    Color = { 0.9, 0.9, 0.0 },
+    Period = 1507, -- Orbit time 1507 days
+    Resolution = 1507 -- Step size of 1 day
+  },
+  GUI = {
+    Name = "5 Astraea Trayectoria",
+    Path = "/Sistema Solar/Interestelar"
+  }
+}
+
+local AstraeaPosition = {
+  Identifier = "AstraeaPosition",
+  Parent = transforms.SolarSystemBarycenter.Identifier,
+  Transform = {
+    Translation = {
+      Type = "HorizonsTranslation",
+      HorizonsTextFile = horizons .. "horizons_astraea.hrz"
+    }
+  },
+  GUI = {
+    Name = "5 Astraea",
+    Path = "/Sistema Solar/Interestelar"
+  }
+}
+
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(AstraeaPosition)
+  openspace.addSceneGraphNode(AstraeaTrail)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(AstraeaTrail)
+  openspace.removeSceneGraphNode(AstraeaPosition)
+end)
+
+asset.export(AstraeaPosition)
+asset.export(AstraeaTrail)
+
+
+
+asset.meta = {
+  Name = "5 Astraea",
+  Description = [[Este recurso contiene la trayectoria y posición de 5 Astraea desde
+    2014 ENE 01 00:00:00 hasta 2050 ENE 01 00:00:00. Datos de JPL Horizons]],
+  Author = "Zach Shaffer",
+  URL = "https://ssd.jpl.nasa.gov/horizons.cgi",
+  License = [[Los documentos creados por JPL están patrocinados por la NASA bajo el Contrato NAS7-030010.
+    Todos los documentos disponibles en este servidor pueden estar protegidos bajo las Leyes de Copyright
+    de los EE. UU. y extranjeras]]
+}

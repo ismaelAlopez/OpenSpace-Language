@@ -1,0 +1,70 @@
+local globe = asset.require("../../earth")
+
+
+
+local Name = "ETOPO1: Topografia y Batimetria"
+local Identifier = "noaa-sos-land-etopo1"
+local Description = [[ETOPO1 es un modelo de relieve global de la superficie de la Tierra
+con una resolución de 1 minuto de arco que integra la topografía terrestre y la batimetría oceánica. 
+Fue construido a partir de numerosos conjuntos de datos globales y regionales, y está disponible en 
+versiones de "Superficie de Hielo" (parte superior de las capas de hielo de la Antártida y Groenlandia) 
+y "Lecho Rocoso" (base de las capas de hielo). La versión de "Superficie de Hielo" está disponible para 
+Science On a Sphere. Este conjunto de datos es una versión de mayor resolución de ETOPO2, que es un 
+modelo de relieve global de la superficie de la Tierra con una resolución de 2 minutos de arco. Un minuto 
+de arco es 1/60 de un grado. Los científicos utilizan mapas de alta resolución como ETOPO1 para mejorar 
+la precisión en la predicción, modelado y advertencias de tsunamis, así como para mejorar el modelado de 
+la circulación oceánica y la visualización de la Tierra]]
+local URL = "https://sos.noaa.gov/catalog/datasets/etopo1-topography-and-bathymetry/"
+
+
+local syncedDirectory = asset.resource({
+  Name = Name,
+  Type = "HttpSynchronization",
+  Identifier = Identifier,
+  Version = 1
+})
+
+
+local Layer = {
+  Identifier = Identifier,
+  Name = Name,
+  Enabled = asset.enabled,
+  ZIndex = 100,
+  FilePath = syncedDirectory .. "4096.jpg",
+  Description = Description
+}
+
+local Colorbar = {
+  Identifier = Identifier,
+  Name = Name,
+  Enabled = asset.enabled,
+  Type = "ScreenSpaceImageLocal",
+  TexturePath = syncedDirectory .. "etopo1_color_scale.png",
+  FaceCamera = false,
+  Scale = 0.1,
+  CartesianPosition = { 0.5, 0.0, -2.0 }
+}
+
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+  openspace.addScreenSpaceRenderable(Colorbar)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeScreenSpaceRenderable(Colorbar)
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.export(Layer)
+asset.export(Colorbar)
+
+
+
+asset.meta = {
+  Name = Name,
+  Description = Description .. "Datos proporcionados por la Administración Nacional Oceánica y Atmosférica",
+  Author = "Administración Nacional Oceánica y Atmosférica",
+  URL = URL,
+  License = "https://sos.noaa.gov/copyright/"
+}

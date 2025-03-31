@@ -1,0 +1,127 @@
+local globe = asset.require("../../earth")
+
+
+
+local Name = "Aumento del Nivel del Mar: Impacto de 6 metros (negro)"
+local Identifier = "noaa-sos-oceans-6m_sea_level_rise-black"
+local Description = [[Hay muchas preguntas en torno al cambio climático. Una gran
+pregunta es cómo el cambio climático afectará a los océanos. El nivel del mar ha estado
+aumentando constantemente desde 1900 a una tasa de 1 a 2.5 milímetros por año. De hecho,
+desde 1992, nuevos métodos de altimetría satelital utilizando el satélite TOPEX/Poseidon
+indican una tasa de aumento de 3 milímetros por año. El Cuarto Informe de Evaluación del
+IPCC afirma que "hay evidencia sólida de que el nivel global del mar aumentó gradualmente
+en el siglo XX y actualmente está aumentando a un ritmo mayor, después de un período de
+poco cambio entre el año 0 y el año 1900. Se proyecta que el nivel del mar aumentará a
+un ritmo aún mayor en este siglo." - Cuarto Informe de Evaluación sobre el Aumento del
+Nivel del Mar. El nivel del mar puede aumentar por dos mecanismos diferentes con respecto
+al cambio climático. El primero es la expansión del agua del mar a medida que los océanos
+se calientan debido a un aumento en la temperatura global. El segundo mecanismo es el
+derretimiento del hielo sobre la tierra, lo que agrega agua al océano. El Cuarto Informe
+de Evaluación del IPCC predice que el aumento total promedio global del nivel del mar de
+1990 a 2100 será de 7 a 15 pulgadas para escenarios de bajas emisiones y de 10 a 23
+pulgadas para escenarios de altas emisiones.]]
+local URL = "https://sos.noaa.gov/catalog/datasets/sea-level-rise-impact-of-6-meter-black/"
+
+
+local syncedDirectory = asset.resource({
+  Name = Name,
+  Type = "HttpSynchronization",
+  Identifier = Identifier,
+  Version = 1
+})
+
+
+local Layer0m = {
+  Identifier = Identifier .. "-0m",
+  Name = Name .. " (0m)",
+  ZIndex = 100,
+  FilePath = syncedDirectory .. "0m-new.png",
+  Description = Description
+}
+
+local Layer1m = {
+  Identifier = Identifier .. "-1m",
+  Name = Name .. " (1m)",
+  ZIndex = 100,
+  FilePath = syncedDirectory .. "1m-new.png",
+  Description = Description
+}
+
+local Layer2m = {
+  Identifier = Identifier .. "-2m",
+  Name = Name .. " (2m)",
+  ZIndex = 100,
+  FilePath = syncedDirectory .. "2m-new.png",
+  Description = Description
+}
+
+local Layer3m = {
+  Identifier = Identifier .. "-3m",
+  Name = Name .. " (3m)",
+  ZIndex = 100,
+  FilePath = syncedDirectory .. "3m-new.png",
+  Description = Description
+}
+
+local Layer4m = {
+  Identifier = Identifier .. "-4m",
+  Name = Name .. " (4m)",
+  ZIndex = 100,
+  FilePath = syncedDirectory .. "4m-new.png",
+  Description = Description
+}
+
+local Layer5m = {
+  Identifier = Identifier .. "-5m",
+  Name = Name .. " (5m)",
+  ZIndex = 100,
+  FilePath = syncedDirectory .. "5m-new.png",
+  Description = Description
+}
+
+local Layer6m = {
+  Identifier = Identifier .. "-6m",
+  Name = Name .. " (6m)",
+  ZIndex = 100,
+  FilePath = syncedDirectory .. "6m-new.png",
+  Description = Description
+}
+
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", Layer0m)
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", Layer1m)
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", Layer2m)
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", Layer3m)
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", Layer4m)
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", Layer5m)
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", Layer6m)
+end)
+
+asset.onDeinitialize(function()
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", Layer6m)
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", Layer5m)
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", Layer4m)
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", Layer3m)
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", Layer2m)
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", Layer1m)
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", Layer0m)
+end)
+
+asset.export(Layer0m)
+asset.export(Layer1m)
+asset.export(Layer2m)
+asset.export(Layer3m)
+asset.export(Layer4m)
+asset.export(Layer5m)
+asset.export(Layer6m)
+
+
+
+asset.meta = {
+  Name = Name,
+  Description = Description .. "Datos proporcionados por la Administración Nacional Oceánica y Atmosférica",
+  Author = "Administración Nacional Oceánica y Atmosférica",
+  URL = URL,
+  License = "https://sos.noaa.gov/copyright/"
+}

@@ -1,0 +1,68 @@
+local globe = asset.require("../../earth")
+
+
+
+local Name = "Eventos de Inundaciones - 2000 - 2009"
+local Identifier = "noaa-sos-land-flooding-major_floods"
+local Description = [[Las inundaciones son el peligro natural más común, costoso y mortal de la nación. 
+La lluvia intensa es la causa más frecuente de inundaciones, pero hay muchos otros desencadenantes naturales, 
+incluidos huracanes, marejadas, atascos de hielo y deshielo. Las inundaciones y las inundaciones repentinas han 
+ocurrido en los 50 estados de los EE. UU. Las inundaciones en las cuencas fluviales son una parte natural de los 
+procesos del río, sirviendo para mejorar la calidad del agua y proporcionar hábitat esencial para las especies, 
+entre otros beneficios. Las inundaciones son un tema de interés científico, así como de importancia cultural, y 
+son críticas para la planificación del uso de la tierra y las políticas. También son una preocupación vital para 
+la seguridad y el bienestar de las comunidades en áreas propensas a inundaciones, incluidas aquellas que viven a 
+lo largo de vías fluviales y costas. Las personas de todos los ámbitos de la vida son vulnerables a los efectos 
+de las inundaciones.]]
+local URL = "https://sos.noaa.gov/catalog/datasets/flood-events-2000-2009/"
+
+
+local syncedDirectory = asset.resource({
+  Name = Name,
+  Type = "HttpSynchronization",
+  Identifier = Identifier,
+  Version = 1
+})
+
+
+local Layer = {
+  Identifier = Identifier,
+  Name = Name,
+  Enabled = asset.enabled,
+  ZIndex = 100,
+  FilePath = syncedDirectory .. "4096.jpg",
+  Description = Description
+}
+
+local LayerFloods = {
+  Identifier = Identifier .. "-floods",
+  Name = Name .. " (Inundaciones)",
+  Enabled = asset.enabled,
+  ZIndex = 100,
+  FilePath = syncedDirectory .. "flood_3600.png",
+  Description = Description
+}
+
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", LayerFloods)
+end)
+
+asset.onDeinitialize(function()
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", LayerFloods)
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.export(Layer)
+asset.export(LayerFloods)
+
+
+
+asset.meta = {
+  Name = Name,
+  Description = Description .. "Datos proporcionados por la Administración Nacional Oceánica y Atmosférica",
+  Author = "Administración Nacional Oceánica y Atmosférica",
+  URL = URL,
+  License = "https://sos.noaa.gov/copyright/"
+}

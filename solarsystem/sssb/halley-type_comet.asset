@@ -1,0 +1,55 @@
+local transforms = asset.require("scene/solarsystem/sun/transforms")
+
+
+
+local sssb = asset.resource({
+  Name = "Datos de Cuerpos Pequenos del Sistema Solar (Cometa tipo Halley)",
+  Type = "HttpSynchronization",
+  Identifier = "sssb_data_halley-type_comet",
+  Version = 4
+})
+
+
+local Object = {
+  Identifier = "sssb_halley-type_comet",
+  Parent = transforms.SunEclipJ2000.Identifier,
+  Renderable = {
+    Type = "RenderableOrbitalKepler",
+    Path = sssb .. "sssb_data_halley-type_comet.csv",
+    Format = "SBDB",
+    Segments = 200,
+    SegmentQuality = 9,
+    Color = { 0.66, 0.66, 0.66 },
+    TrailFade = 18,
+    PointSizeExponent = 10.6
+  },
+  GUI = {
+    Name = "Cometas tipo Halley",
+    Path = "/Sistema Solar/Cuerpos Pequeños",
+    Description = "Cometas periódicos con un período orbital entre 20 y 200 años."
+  }
+}
+
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(Object)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(Object)
+end)
+
+asset.export(Object)
+
+
+
+asset.meta = {
+  Name = "Cometas Tipo Halley",
+  Description = [[Asset Renderizable de Cuerpos Pequeños con datos del JPL Horizons que contiene
+    el grupo de Cometas Tipo Halley]],
+  Author = "Base de Datos de Cuerpos Pequeños del JPL alojada por el Instituto de Tecnología de California",
+  URL = "https://ssd.jpl.nasa.gov/sbdb_query.cgi",
+  License = [[Los documentos creados por el JPL están patrocinados por la NASA bajo el Contrato NAS7-030010.
+    Todos los documentos disponibles en este servidor pueden estar protegidos bajo las Leyes de Copyright
+    de los EE. UU. y extranjeras]]
+}

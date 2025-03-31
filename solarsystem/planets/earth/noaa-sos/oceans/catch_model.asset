@@ -1,0 +1,73 @@
+local globe = asset.require("../../earth")
+
+
+
+local Name = "Modelo de Captura de Pesquerias - 2005 vs 2050"
+local Identifier = "noaa-sos-oceans-catch_model"
+local Description = [[El cambio climático puede representar una amenaza significativa para los
+recursos pesqueros a nivel global. Este conjunto de datos muestra el cambio porcentual
+en la captura global de pesquerías proyectado para ocurrir en 2050 debido al cambio
+climático. La comparación se realiza con los niveles de captura de pesquerías reportados
+en 2005. Este estudio sugiere que la distribución de las principales poblaciones de peces
+cambiará debido al cambio climático a medida que cambie la temperatura del océano. Las
+áreas en naranja experimentan una reducción en la captura de pesquerías, mientras que
+las áreas en azul experimentan un aumento en la captura de pesquerías. El patrón general
+es un desplazamiento hacia los polos en las capturas potenciales de pesquerías, es decir,
+las distribuciones de peces se desplazarán hacia áreas de mayor latitud (hacia los polos)
+y aguas más frías a medida que aumenten las temperaturas del océano. El estudio también
+predice la extinción de especies en áreas donde las especies son más sensibles a los
+cambios de temperatura, lo que resulta en una reducción de la captura de pesquerías en
+estas áreas]]
+local URL = "https://sos.noaa.gov/catalog/datasets/fisheries-catch-model-2005-vs-2050/"
+
+
+local syncedDirectory = asset.resource({
+  Name = Name,
+  Type = "HttpSynchronization",
+  Identifier = Identifier,
+  Version = 1
+})
+
+
+local Layer = {
+  Identifier = Identifier,
+  Name = Name,
+  Enabled = asset.enabled,
+  ZIndex = 100,
+  FilePath = syncedDirectory .. "4096.png",
+  Description = Description
+}
+
+local Colorbar = {
+  Identifier = Identifier,
+  Name = Name,
+  Enabled = asset.enabled,
+  Type = "ScreenSpaceImageLocal",
+  TexturePath = syncedDirectory .. "colorbar-catch.png",
+  FaceCamera = false,
+  CartesianPosition = { 0.0, -0.5, -2.0 }
+}
+
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+  openspace.addScreenSpaceRenderable(Colorbar)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeScreenSpaceRenderable(Colorbar)
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.export(Layer)
+asset.export(Colorbar)
+
+
+
+asset.meta = {
+  Name = Name,
+  Description = Description .. "Datos proporcionados por la Administración Nacional Oceánica y Atmosférica",
+  Author = "Administración Nacional Oceánica y Atmosférica",
+  URL = URL,
+  License = "https://sos.noaa.gov/copyright/"
+}

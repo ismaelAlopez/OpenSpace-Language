@@ -1,0 +1,58 @@
+local globe = asset.require("../../earth")
+
+
+
+local Name = "NOAA Ciencia en una Esfera. Marmol Azul"
+local Identifier = "noaa-sos-land-blue_marble-blue_marble"
+local Description = [[El Mármol Azul es una representación increíblemente detallada y en color
+real de la Tierra. La NASA es responsable de este conjunto de datos creado a partir de una
+compilación de imágenes satelitales a lo largo de 2001. La mayor parte de la información
+provino del MODIS de la NASA, el Espectrorradiómetro de Imágenes de Resolución Moderada,
+que está unido al satélite Terra a 435 millas sobre la Tierra. La imagen de fondo de la
+tierra y los océanos fue creada utilizando datos de junio a septiembre de 2001. Esto no
+se pudo hacer en un solo día o incluso en una semana porque en cualquier día dado las
+nubes bloquean una parte significativa de la superficie. La imagen de las nubes es un
+compuesto de datos de tres días. Los datos de los primeros dos días se recopilaron en la
+longitud de onda visible y el tercer día fue necesario para obtener una vista de las nubes
+sobre los polos utilizando imágenes térmicas infrarrojas.]]
+local URL = "https://sos.noaa.gov/catalog/datasets/blue-marble/"
+
+
+local syncedDirectory = asset.resource({
+  Name = Name,
+  Type = "HttpSynchronization",
+  Identifier = Identifier,
+  Version = 1
+})
+
+
+local Layer = {
+  Identifier = Identifier,
+  Name = Name,
+  Enabled = asset.enabled,
+  ZIndex = 100,
+  FilePath = syncedDirectory .. "4096.jpg",
+  Description = Description,
+  CacheSettings = { Enabled = false }
+}
+
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.onDeinitialize(function()
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.export(Layer)
+
+
+
+asset.meta = {
+  Name = Name,
+  Description = Description .. "Datos proporcionados por la Administración Nacional Oceánica y Atmosférica",
+  Author = "Administración Nacional Oceánica y Atmosférica",
+  URL = URL,
+  License = "https://sos.noaa.gov/copyright/"
+}

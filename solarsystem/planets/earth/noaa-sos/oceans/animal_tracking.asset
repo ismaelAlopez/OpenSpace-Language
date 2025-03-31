@@ -1,0 +1,75 @@
+local globe = asset.require("../../earth")
+
+
+
+local Name = "Rutas de Focas y Aves Marinas: Oceano Pacifico"
+local Identifier = "noaa-sos-oceans-animal_tracking"
+local Description = [["TOPP, Etiquetado de los Depredadores del Pacífico, comenzó en 2000 como uno de
+  los 17 proyectos del Censo de la Vida Marina, un ambicioso esfuerzo de 10 años y 80 naciones para
+  evaluar y explicar la diversidad y abundancia de vida en los océanos, y dónde esa
+  vida ha vivido, está viviendo y vivirá." - Del sitio web de TOPP. De esto surgió el
+  Proyecto de Etiquetado de Pelágicos del Pacífico. Los pelágicos son especies de océano abierto como
+  aves marinas y focas elefante. ¡Los científicos colocan etiquetas satelitales en los animales que recopilan
+  información sobre posición, temperatura del océano, presión, salinidad y más! Esto permite
+  a los científicos comprender mejor los patrones de migración y hábitos de estos animales]]
+local URL = "https://sos.noaa.gov/catalog/datasets/seal-and-seabird-tracks-pacific-ocean/"
+
+
+local syncedDirectory = asset.resource({
+  Name = Name,
+  Type = "HttpSynchronization",
+  Identifier = Identifier,
+  Version = 1,
+  UnzipFiles = true
+})
+
+
+local Layer = {
+  Identifier = Identifier,
+  Name = Name,
+  Enabled = asset.enabled,
+  ZIndex = 100,
+  Type = "TemporalTileProvider",
+  Mode = "Folder",
+  Folder = {
+    Folder = syncedDirectory .. "4096",
+    -- See https://en.cppreference.com/w/cpp/io/manip/get_time for an explanation of the
+    -- time formatting string
+    Format = "TOPPMOVIE.%Y-%m-%d.png"
+  },
+  Description = Description
+}
+
+local Colorbar = {
+  Identifier = Identifier,
+  Name = Name,
+  Enabled = asset.enabled,
+  Type = "ScreenSpaceImageLocal",
+  TexturePath = syncedDirectory .. "colorbar.jpg",
+  FaceCamera = false,
+  CartesianPosition = { 0.85, 0.0, -2.0 }
+}
+
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+  openspace.addScreenSpaceRenderable(Colorbar)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeScreenSpaceRenderable(Colorbar)
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.export(Layer)
+asset.export(Colorbar)
+
+
+
+asset.meta = {
+  Name = Name,
+  Description = Description .. "Datos proporcionados por la Administración Nacional Oceánica y Atmosférica",
+  Author = "Administración Nacional Oceánica y Atmosférica",
+  URL = URL,
+  License = "https://sos.noaa.gov/copyright/"
+}

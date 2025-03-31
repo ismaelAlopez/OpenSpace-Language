@@ -1,0 +1,112 @@
+local globe = asset.require("../../earth")
+
+
+
+local Name = "Terremotos - 2001-2015"
+local Identifier = "noaa-sos-land-earthquake-2001_2015"
+local Description = [[Esta animación muestra cada terremoto registrado en secuencia a medida
+que ocurrieron desde el 1 de enero de 2001 hasta el 31 de diciembre de 2015, a una
+velocidad de 30 días por segundo. Los hipocentros de los terremotos aparecen primero
+como destellos y luego permanecen como círculos de colores antes de encogerse con el
+tiempo para no oscurecer terremotos posteriores. El tamaño del círculo representa la
+magnitud del terremoto, mientras que el color representa su profundidad dentro de la
+tierra. Al final de la animación, primero mostrará todos los terremotos en este período
+de 15 años. Luego, mostrará solo aquellos terremotos mayores a magnitud 6.5, el tamaño
+mínimo de terremoto conocido para generar un tsunami. Finalmente, solo mostrará aquellos
+terremotos con magnitudes de 8.0 o mayores, los "grandes" terremotos más propensos a
+representar una amenaza de tsunami cuando ocurren bajo el océano o cerca de una costa y
+cuando son poco profundos dentro de la tierra (menos de 100 km o 60 mi de profundidad)]]
+local URL = "https://sos.noaa.gov/catalog/datasets/earthquakes-2001-2015/"
+
+
+local syncedDirectory = asset.resource({
+  Name = Name,
+  Type = "HttpSynchronization",
+  Identifier = Identifier,
+  Version = 1
+})
+
+
+local LayerAllquakes = {
+  Identifier = Identifier .. "-allquakes",
+  Name = Name .. " (Todos los Terremotos)",
+  ZIndex = 100,
+  FilePath = syncedDirectory .. "All_Quakes_2001-2015_4k.jpg",
+  Description = Description
+}
+
+local LayerQuakeBasemap = {
+  Identifier = Identifier .. "-quake-basemap",
+  Name = Name .. " (Mapa Base de Terremotos)",
+  ZIndex = 100,
+  FilePath = syncedDirectory .. "quake_basemap_4k.jpg",
+  Description = Description
+}
+
+local LayerTsunamiBasemap = {
+  Identifier = Identifier .. "-tsunami-basemap",
+  Name = Name .. " (Mapa Base de Tsunamis)",
+  ZIndex = 100,
+  FilePath = syncedDirectory .. "Tsunami_basemap_4k.jpg",
+  Description = Description
+}
+
+local LayerQuakesGte6p5 = {
+  Identifier = Identifier .. "-gte6_5",
+  Name = Name .. " (Mayor o Igual a 6.5)",
+  ZIndex = 100,
+  FilePath = syncedDirectory .. "Quakes_gte6.5_2001-2015_4k.jpg",
+  Description = Description
+}
+
+local LayerQuakesGte8 = {
+  Identifier = Identifier .. "-gte8",
+  Name = Name .. " (Mayor o Igual a 8.0)",
+  ZIndex = 100,
+  FilePath = syncedDirectory .. "Quakes_gte8_2001-2015_4k.jpg",
+  Description = Description
+}
+
+local Legend = {
+  Identifier = Identifier,
+  Name = Name,
+  Type = "ScreenSpaceImageLocal",
+  TexturePath = syncedDirectory .. "Earthquake_Legend.png",
+  FaceCamera = false,
+  CartesianPosition = { 0.0, -0.5, -2.0 }
+}
+
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", LayerAllquakes)
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", LayerQuakeBasemap)
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", LayerTsunamiBasemap)
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", LayerQuakesGte6p5)
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", LayerQuakesGte8)
+  openspace.addScreenSpaceRenderable(Legend)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeScreenSpaceRenderable(Legend)
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", LayerQuakesGte8)
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", LayerQuakesGte6p5)
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", LayerTsunamiBasemap)
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", LayerQuakeBasemap)
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", LayerAllquakes)
+end)
+
+asset.export(LayerAllquakes)
+asset.export(LayerQuakeBasemap)
+asset.export(LayerTsunamiBasemap)
+asset.export(LayerQuakesGte6p5)
+asset.export(LayerQuakesGte8)
+
+
+
+asset.meta = {
+  Name = Name,
+  Description = Description .. "Datos proporcionados por la Administración Nacional Oceánica y Atmosférica",
+  Author = "Administración Nacional Oceánica y Atmosférica",
+  URL = URL,
+  License = "https://sos.noaa.gov/copyright/"
+}

@@ -1,0 +1,66 @@
+local globe = asset.require("../../earth")
+
+
+
+local Name = "Lineas Magneticas de la Tierra"
+local Identifier = "noaa-sos-land-earths_magnetism_magnetic_lines"
+local Description = [[La Tierra es como un imán gigante con un Polo Norte y un Polo Sur. Sin embargo,
+el Polo Norte y el Polo Sur magnéticos no están alineados con el Polo Norte y el Polo Sur
+geográficos. El Polo Norte geográfico se define por la latitud 90° N y es el eje de
+rotación de la Tierra. El Polo Norte magnético es donde el campo magnético de la Tierra apunta
+verticalmente hacia abajo. La Tierra crea su propio campo magnético a partir de las corrientes eléctricas
+generadas en el núcleo líquido de hierro-níquel. Para ilustrar el campo magnético de la Tierra,
+se han creado tres conjuntos de datos sobre el magnetismo terrestre. Todos estos conjuntos de datos muestran
+los cambios en el campo magnético desde 1590 hasta 2010. El primer conjunto de datos muestra las líneas
+del campo magnético en la superficie de la Tierra. Los polos magnéticos están indicados por estrellas. Las
+líneas azules muestran dónde el campo magnético se sumerge en la Tierra y las líneas rojas muestran dónde
+el campo magnético emerge de la Tierra. Donde las líneas del campo son horizontales a la Tierra, entre las
+líneas rojas y azules, está el ecuador magnético sombreado en amarillo]]
+local URL = "https://sos.noaa.gov/catalog/datasets/earths-magnetic-lines/"
+
+
+local syncedDirectory = asset.resource({
+  Name = Name,
+  Type = "HttpSynchronization",
+  Identifier = Identifier,
+  Version = 1,
+  UnzipFiles = true
+})
+
+
+local Layer = {
+  Identifier = Identifier,
+  Name = Name,
+  Enabled = asset.enabled,
+  ZIndex = 100,
+  Type = "TemporalTileProvider",
+  Mode = "Folder",
+  Folder = {
+    Folder = syncedDirectory .. "4096",
+    -- See https://en.cppreference.com/w/cpp/io/manip/get_time for an explanation of the
+    -- time formatting string
+    Format = "%Y.png"
+  },
+  Description = Description
+}
+
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.onDeinitialize(function()
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.export(Layer)
+
+
+
+asset.meta = {
+  Name = Name,
+  Description = Description .. "Datos proporcionados por la Administración Nacional Oceánica y Atmosférica",
+  Author = "Administración Nacional Oceánica y Atmosférica",
+  URL = URL,
+  License = "https://sos.noaa.gov/copyright/"
+}

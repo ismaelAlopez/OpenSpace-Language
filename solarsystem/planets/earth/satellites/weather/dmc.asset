@@ -1,0 +1,54 @@
+local transforms = asset.require("scene/solarsystem/planets/earth/transforms")
+
+
+
+local omm = asset.resource({
+  Name = "Datos OMM del Satelite (Monitoreo de Desastres)",
+  Type = "UrlSynchronization",
+  Identifier = "satellite_omm_data_dmc",
+  Url = "https://www.celestrak.com/NORAD/elements/gp.php?GROUP=dmc&FORMAT=kvn",
+  Filename = "dmc.txt",
+  SecondsUntilResync = openspace.time.secondsPerDay()
+})
+
+
+local DisasterMonitoringConstellation = {
+  Identifier = "DisasterMonitoringConstellation",
+  Parent = transforms.EarthInertial.Identifier,
+  Renderable = {
+    Type = "RenderableOrbitalKepler",
+    Path = omm .. "dmc.txt",
+    Format = "OMM",
+    SegmentQuality = 3,
+    Color = { 0.75, 0.75, 0.35 },
+    TrailFade = 17,
+    PointSizeExponent = 5.0,
+    RenderBinMode = "PostDeferredTransparent"
+  },
+  Tag = { "earth_satellites" },
+  GUI = {
+    Name = "Monitoreo de Desastres",
+    Path = "/Sistema Solar/Planetas/Tierra/Satélites"
+  }
+}
+
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(DisasterMonitoringConstellation)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(DisasterMonitoringConstellation)
+end)
+
+asset.export(DisasterMonitoringConstellation)
+
+
+
+asset.meta = {
+  Name = "Satélites Clima - Monitoreo de Desastres",
+  Description = "Activo de satélites para Clima - Monitoreo de Desastres. Datos de Celestrak",
+  Author = "Equipo de OpenSpace",
+  URL = "https://celestrak.com/NORAD/elements/",
+  License = "Celestrak"
+}

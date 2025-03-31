@@ -1,0 +1,83 @@
+local globe = asset.require("../../earth")
+
+
+
+local Name = "Temperatura Superficial"
+local Identifier = "noaa-sos-land-surface_temperature"
+local Description = [[Estos mapas combinan temperaturas superficiales diurnas de alta resolución
+derivadas de observaciones satelitales tanto para tierra como para mar y las muestran con una escala
+de colores común. Mostrar estos datos de alta resolución con una escala de colores común hace
+evidente la gran diferencia entre el calentamiento superficial en tierra frente al mar. También
+muestra la relativamente pequeña variación estacional en la temperatura superficial del mar a nivel
+global en comparación con las temperaturas terrestres. La mayor variación estacional en la
+temperatura promedio del hemisferio norte en relación con el hemisferio sur, resultado de la mayor
+área terrestre en el hemisferio norte, también es evidente]]
+local URL = "https://sos.noaa.gov/catalog/datasets/surface-temperature/"
+
+
+local syncedDirectory = asset.resource({
+  Name = Name,
+  Type = "HttpSynchronization",
+  Identifier = Identifier,
+  Version = 1,
+  UnzipFiles = true
+})
+
+
+local Layer = {
+  Identifier = Identifier,
+  Name = Name,
+  Enabled = asset.enabled,
+  ZIndex = 100,
+  Type = "ImageSequenceTileProvider",
+  FolderPath = syncedDirectory .. "4096",
+  Description = Description
+}
+
+local Colorbar = {
+  Identifier = Identifier,
+  Name = Name,
+  Enabled = asset.enabled,
+  Type = "ScreenSpaceImageLocal",
+  TexturePath = syncedDirectory .. "colorbar.png",
+  FaceCamera = false,
+  Scale = 0.07,
+  CartesianPosition = { 1.0, 0.0, -2.0 }
+}
+
+local Colorbar2 = {
+  Identifier = Identifier .. "-1",
+  Name = Name .. " (1)",
+  Enabled = asset.enabled,
+  Type = "ScreenSpaceImageLocal",
+  TexturePath = syncedDirectory .. "colorbar2.png",
+  FaceCamera = false,
+  CartesianPosition = { 0.0, -0.5, -2.0 }
+}
+
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+  openspace.addScreenSpaceRenderable(Colorbar)
+  openspace.addScreenSpaceRenderable(Colorbar2)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeScreenSpaceRenderable(Colorbar2)
+  openspace.removeScreenSpaceRenderable(Colorbar)
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.export(Layer)
+asset.export(Colorbar)
+asset.export(Colorbar2)
+
+
+
+asset.meta = {
+  Name = Name,
+  Description = Description .. "Datos proporcionados por la Administración Nacional Oceánica y Atmosférica",
+  Author = "Administración Nacional Oceánica y Atmosférica",
+  URL = URL,
+  License = "https://sos.noaa.gov/copyright/"
+}

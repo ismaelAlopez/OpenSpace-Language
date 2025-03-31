@@ -1,0 +1,54 @@
+local globe = asset.require("../../earth")
+
+
+
+local Name = "Terminador Dia/Noche (con nubes)"
+local Identifier = "noaa-sos-land-irsat_nightlights"
+local Description = [[La línea que separa el día y la noche se llama el terminador. También
+se le conoce como la "línea gris" y la "zona de penumbra". Es una línea difusa debido a
+que nuestra atmósfera dobla la luz solar. De hecho, la atmósfera dobla la luz solar medio
+grado, lo que equivale a unos 37 millas (60 km). Comúnmente se piensa que mientras la mitad
+de la Tierra está cubierta de oscuridad, la otra mitad está cubierta de luz solar. Esto no
+es del todo cierto porque la curvatura de la luz solar resulta en que la tierra cubierta
+por luz solar tenga mayor área que la tierra cubierta por oscuridad.]]
+local URL = "https://sos.noaa.gov/catalog/datasets/daynight-terminator-with-clouds/"
+
+
+local syncedDirectory = asset.resource({
+  Name = Name,
+  Type = "HttpSynchronization",
+  Identifier = Identifier,
+  Version = 1,
+  UnzipFiles = true
+})
+
+
+local Layer = {
+  Identifier = Identifier,
+  Name = Name,
+  Enabled = asset.enabled,
+  ZIndex = 100,
+  Type = "ImageSequenceTileProvider",
+  FolderPath = syncedDirectory .. "2048",
+  Description = Description
+}
+
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.onDeinitialize(function()
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.export(Layer)
+
+
+asset.meta = {
+  Name = Name,
+  Description = Description .. "Datos proporcionados por la Administración Nacional Oceánica y Atmosférica",
+  Author = "Administración Nacional Oceánica y Atmosférica",
+  URL = URL,
+  License = "https://sos.noaa.gov/copyright/"
+}

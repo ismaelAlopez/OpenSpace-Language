@@ -1,0 +1,54 @@
+local transforms = asset.require("scene/solarsystem/planets/earth/transforms")
+
+
+
+local omm = asset.resource({
+  Name = "Datos OMM del Satelite (Molniya)",
+  Type = "UrlSynchronization",
+  Identifier = "satellite_omm_data_molniya",
+  Url = "https://www.celestrak.com/NORAD/elements/gp.php?GROUP=molniya&FORMAT=kvn",
+  Filename = "molniya.txt",
+  SecondsUntilResync = openspace.time.secondsPerDay()
+})
+
+
+local MolniyaSatellites = {
+  Identifier = "MolniyaSatellites",
+  Parent = transforms.EarthInertial.Identifier,
+  Renderable = {
+    Type = "RenderableOrbitalKepler",
+    Path = omm .. "molniya.txt",
+    Format = "OMM",
+    SegmentQuality = 3,
+    Color = { 0.75, 0.75, 0.35 },
+    TrailFade = 15,
+    PointSizeExponent = 5.0,
+    RenderBinMode = "PostDeferredTransparent"
+  },
+  Tag = { "earth_satellites" },
+  GUI = {
+    Name = "Molniya",
+    Path = "/Sistema Solar/Planetas/Tierra/Satélites"
+  }
+}
+
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(MolniyaSatellites)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(MolniyaSatellites)
+end)
+
+asset.export(MolniyaSatellites)
+
+
+
+asset.meta = {
+  Name = "Satélites de Comunicaciones - Molniya",
+  Description = "Asset de satélites para Comunicaciones - Molniya. Datos de Celestrak",
+  Author = "Equipo de OpenSpace",
+  URL = "https://celestrak.com/NORAD/elements/",
+  License = "Celestrak"
+}

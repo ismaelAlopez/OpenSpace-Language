@@ -1,0 +1,57 @@
+local transforms = asset.require("scene/solarsystem/planets/earth/transforms")
+
+
+
+local omm = asset.resource({
+  Name = "Datos OMM de Satelites (Geoestacionarios)",
+  Type = "UrlSynchronization",
+  Identifier = "satellite_omm_data_geo",
+  Url = "https://www.celestrak.com/NORAD/elements/gp.php?GROUP=geo&FORMAT=kvn",
+  Filename = "geo.txt",
+  SecondsUntilResync = openspace.time.secondsPerDay()
+})
+
+
+local GeoStationarySatellites = {
+  Identifier = "GeoStationarySatellites",
+  Parent = transforms.EarthInertial.Identifier,
+  Renderable = {
+    Type = "RenderableOrbitalKepler",
+    Path = omm .. "geo.txt",
+    Format = "OMM",
+    SegmentQuality = 3,
+    Color = { 0.9, 0.9, 0.0 },
+    TrailFade = 5,
+    PointSizeExponent = 5.2,
+    RenderBinMode = "PostDeferredTransparent"
+  },
+  Tag = { "earth_satellites" },
+  GUI = {
+    Name = "Geoestacionarios",
+    Path = "/Sistema Solar/Planetas/Tierra/Satélites",
+    Description = [[Satélites que están actualmente activos y en una órbita geoestacionaria,
+      lo que significa que su período orbital coincide con la rotación de la Tierra.]]
+  }
+}
+
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(GeoStationarySatellites)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(GeoStationarySatellites)
+end)
+
+asset.export(GeoStationarySatellites)
+
+
+
+asset.meta = {
+  Name = "Satélites de Comunicaciones - Geoestacionarios",
+  Description = [[Asset de satélites para Comunicaciones - Geoestacionarios. Datos de
+    Celestrak]],
+  Author = "Equipo de OpenSpace",
+  URL = "https://celestrak.com/NORAD/elements/",
+  License = "Celestrak"
+}

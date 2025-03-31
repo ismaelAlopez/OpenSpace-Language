@@ -1,0 +1,54 @@
+local transforms = asset.require("scene/solarsystem/planets/earth/transforms")
+
+
+
+local omm = asset.resource({
+  Name = "Datos OMM del Satelite (Otros)",
+  Type = "UrlSynchronization",
+  Identifier = "satellite_omm_data_other",
+  Url = "https://www.celestrak.com/NORAD/elements/gp.php?GROUP=other&FORMAT=kvn",
+  Filename = "other.txt",
+  SecondsUntilResync = openspace.time.secondsPerDay()
+})
+
+
+local OtherSatellites = {
+  Identifier = "OtherSatellites",
+  Parent = transforms.EarthInertial.Identifier,
+  Renderable = {
+    Type = "RenderableOrbitalKepler",
+    Path = omm .. "other.txt",
+    Format = "OMM",
+    SegmentQuality = 3,
+    Color = { 0.75, 0.75, 0.35 },
+    TrailFade = 15,
+    PointSizeExponent = 5.0,
+    RenderBinMode = "PostDeferredTransparent"
+  },
+  Tag = { "earth_satellites" },
+  GUI = {
+    Name = "Otros",
+    Path = "/Sistema Solar/Planetas/Tierra/Satélites"
+  }
+}
+
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(OtherSatellites)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(OtherSatellites)
+end)
+
+asset.export(OtherSatellites)
+
+
+
+asset.meta = {
+  Name = "Satélites Otros",
+  Description = "Asset de satélites para Otros. Datos de Celestrak",
+  Author = "Equipo de OpenSpace",
+  URL = "https://celestrak.com/NORAD/elements/",
+  License = "Celestrak"
+}

@@ -1,0 +1,312 @@
+--[[
+
+References:
+[1]     Source :    http://www.asteroidmission.org/about-mission/
+        Date :      2016-08-23
+        Comment :   Precision is not even month - it just defines the overall mission approach
+
+[2]     Source :    http://brinktest.lpl.arizona.edu/mission/
+        Date :      2016-08-23
+        Comment :   Data taken from text descriptions of the visualizations. There is a little time bar up
+                    in the upper right corner.
+
+[3]     Source :    SPICE kernel data coverage
+        Date :      2016-08-23
+        Comment :   The spice data is split up into across different files. These files
+                    seems to represent different phases. A script was used to extract the
+                    SPICE coverage from all .bc files and use the names of the files as
+                    mission names and associate the name with the time coverage.
+                    Script used: support/mission/ckbrief2mission.js
+
+[4]     Source :    Visual interpretation of SPICE kernel data coverage
+        Date :      2016-08-23
+        Comment :   Based on observation of the visualized spice data through OpenSpace.
+
+[5]     Source :    https://www.asteroidmission.org/asteroid-operations/
+        Date :      2023-03-30
+        Comment :   Text about the phases
+
+https://www.asteroidmission.org/wp-content/uploads/2018/10/SPP-Approach-Poster-10-03-18.pdf
+--]]
+
+local Mission = {
+  Name = "OSIRIS-REx",
+  Description = "Lanzada el 8 de septiembre de 2016, la nave espacial Origins, Spectral Interpretation, Resource Identification, Security-Regolith Explorer (OSIRIS-REx) viajó a un asteroide cercano a la Tierra llamado Bennu (anteriormente 1999 RQ36), y recolectó una muestra de rocas y material de la superficie que regresará a la Tierra en 2023. La misión ayudará a los científicos a investigar cómo se formaron los planetas y cómo comenzó la vida, así como a mejorar nuestra comprensión de los asteroides que podrían impactar la Tierra.",
+  Image = "https://www.nasa.gov/sites/default/files/styles/full_width_feature/public/thumbnails/image/osiris-rex-mission-logo12_copy.png",
+  Actions = { "os.osirisrex.AimAtBennu", "os.osirisrex.SetLaunchTime", "os.osirisrex.LookImageCapture" },
+  Phases = {
+    -- All 1-level phases based on [1]
+    {
+      Name = "Crucero de Salida",
+      Image = "https://www.nasa.gov/sites/default/files/styles/full_width_feature/public/thumbnails/image/28929096574_85a647dc8e_o.jpg",
+      Phases = {
+        -- Phases from [4]
+        {
+          Name = "Pre Lanzamiento", TimeRange = { Start = "2016 SEP 03 01:00:00", End = "2016 SEP 08 23:05:05" }
+        },
+        {
+          Name = "Lanzamiento",
+          TimeRange = { Start = "2016 SEP 08 23:05:05", End = "2016 SEP 08 23:09:00" }
+        },
+        {
+          Name = "Órbita Terrestre",
+          TimeRange = { Start = "2016 SEP 08 23:09:00", End = "2016 SEP 08 23:45:00" }
+        },
+        {
+          Name = "Órbita Solar",
+          TimeRange = { Start = "2016 SEP 08 23:45:00", End = "2018 SEP 01 00:00:00" },
+          Image = "https://www.nasa.gov/sites/default/files/styles/full_width_feature/public/thumbnails/image/ega_1ms_mapcam_color_corrected_0.png",
+          Description = "Una imagen compuesta en color de la Tierra tomada el 22 de septiembre por la cámara MapCam en la nave espacial OSIRIS-REx de la NASA. Esta imagen fue tomada solo unas horas después de que la nave completara su Asistencia Gravitacional Terrestre a una distancia de aproximadamente 106,000 millas (170,000 kilómetros). MapCam es parte del Conjunto de Cámaras OSIRIS-REx (OCAMS) operado por la Universidad de Arizona. En esta imagen son visibles el Océano Pacífico y varias masas de tierra familiares, incluyendo Australia en la parte inferior izquierda, y Baja California y el suroeste de los Estados Unidos en la parte superior derecha. Las rayas verticales oscuras en la parte superior de la imagen son causadas por tiempos de exposición cortos (menos de tres milisegundos). Se requieren tiempos de exposición cortos para capturar un objeto tan brillante como la Tierra, pero no se anticipan para un objeto tan oscuro como el asteroide Bennu, para el cual la cámara fue diseñada. Fecha de captura: 22 de septiembre de 2017",
+          Phases = {
+        {
+          Name = "Próxima Asistencia Gravitacional", TimeRange = { Start = "2017 JAN 22 15:00:00", End = "2017 SEP 22 15:00:00" }
+        },
+        {
+          Name = "Asistencia Gravitacional", TimeRange = { Start = "2017 SEP 22 15:00:00", End = "2017 SEP 22 21:00:00" }
+        }
+          }
+        }
+      }
+    },
+    {
+      Name = "Operaciones del Asteroide",
+      Phases = {
+        -- Nested Levels from [3]
+        {
+          Name = "Aproximación",
+          Description = "La fase de aproximación comenzó el 17 de agosto de 2018, cuando la nave espacial aún estaba a aproximadamente 1.2 millones de millas (dos millones de km) de Bennu, y continuó hasta que la nave llegó al asteroide el 3 de diciembre de 2018. Los objetivos principales de la aproximación fueron localizar visualmente a Bennu por primera vez, inspeccionar el área circundante en busca de posibles peligros y recopilar suficientes imágenes de Bennu para que los científicos generaran un modelo detallado de la forma del asteroide, asignaran un sistema de coordenadas y comprendieran su estado de rotación.",
+          TimeRange = { Start = "2018-AUG-17 00:00:00.000", End = "2018-DEC-31 01:34:21.183" },
+          Image = "https://www.nasa.gov/sites/default/files/styles/full_width_feature/public/thumbnails/image/lbt-orex-1049-loop-gif.gif",
+          Phases = {
+        {
+          Name = "Observación de Búsqueda de Plumas de Polvo",
+          Description = "Búsqueda de plumas de polvo y gas que se originan en la superficie del asteroide, y caracterización de sus regiones de origen y densidades de columna. La información sobre la presencia y ubicación de plumas de polvo y gas es necesaria para evaluar la seguridad, comprender la historia geológica y dinámica del asteroide, e informar la selección del sitio de muestreo.",
+          TimeRange = { Start = "2018-SEP-11 21:31:01.183", End = "2018-SEP-12 02:18:41.183" },
+          Image = "https://www.asteroidmission.org/wp-content/uploads/2018/09/MapCamDustSearch-1.jpg"
+        },
+        {
+          Name = "Curva de Luz",
+          TimeRange = { Start = "2018-OCT-09 21:50:48.182", End = "2018-OCT-10 02:33:16.183" }
+        },
+        {
+          Name = "Búsqueda de Satélites Naturales",
+          TimeRange = { Start = "2018-OCT-26 19:38:30.183", End = "2018-OCT-27 00:22:34.183" }
+        },
+        {
+          Name = "Función de Fase",
+          TimeRange = { Start = "2018-OCT-12 21:42:26.183", End = "2018-OCT-13 02:24:54.183" }
+        },
+        {
+          Name = "Modelo de Forma",
+          TimeRange = { Start = "2018-NOV-09 11:02:59.183", End = "2018-NOV-16 15:51:33.183" }
+        },
+        {
+          Name = "Modelo de Forma Forzado 4x4",
+          TimeRange = { Start = "2018-NOV-17 11:03:54.183", End = "2018-NOV-17 15:51:34.183" }
+        },
+        {
+          Name = "Mapa Espectral",
+          TimeRange = { Start = "2018-OCT-30 20:44:53.183", End = "2018-OCT-31 01:34:21.183" }
+        }
+          }
+        },
+        {
+            Name = "Encuesta Preliminar",
+            Description = "La fase de Encuesta Preliminar comenzó con la llegada de la nave espacial a Bennu el 3 de diciembre de 2018, y marcó la primera vez que la nave OSIRIS-REx operó alrededor del asteroide. La nave realizó un total de cinco pasadas sobre el polo norte, el ecuador y el polo sur a una distancia de 4.3 millas (7 km). Los objetivos científicos principales de la Encuesta Preliminar fueron estimar la masa de Bennu, refinar el modelo del estado de giro del asteroide y generar un modelo de forma global con una resolución de 75 cm.",
+            Image = "https://www.asteroidmission.org/wp-content/uploads/2018/05/Prelim-Survey-for-Web.jpg",
+            Phases = {
+            {
+              Name = "Fase MapCamOLA 1",
+              TimeRange = { Start = "2018-NOV-20 01:13:12.183", End = "2018-NOV-20 06:13:04.183" }
+            },
+            {
+              Name = "Fase OLA 1",
+              TimeRange = { Start = "2018-NOV-19 22:30:00.184", End = "2018-NOV-19 23:19:28.183" }
+            },
+            {
+              Name = "Fase OLA 2",
+              TimeRange = { Start = "2018-NOV-23 22:19:34.184", End = "2018-NOV-23 23:19:26.183" }
+            },
+            {
+              Name = "Fase OLA 3",
+              TimeRange = { Start = "2018-NOV-24 00:48:38.184", End = "2018-NOV-24 01:38:06.184" }
+            },
+            {
+              Name = "Fase OLA 4",
+              TimeRange = { Start = "2018-NOV-27 22:29:58.184", End = "2018-NOV-27 23:19:26.183" }
+            },
+            {
+              Name = "Fase PolyCam 1",
+              TimeRange = { Start = "2018-NOV-19 12:00:33.183", End = "2018-NOV-19 16:46:25.183" }
+            },
+            {
+              Name = "Fase PolyCam 2",
+              TimeRange = { Start = "2018-NOV-20 07:10:26.183", End = "2018-NOV-20 12:10:18.183" }
+            },
+            {
+              Name = "Fase PolyCam 3",
+              TimeRange = { Start = "2018-NOV-23 11:51:29.184", End = "2018-NOV-23 16:51:21.184" }
+            },
+            {
+              Name = "Fase PolyCam 4",
+              TimeRange = { Start = "2018-NOV-24 07:17:39.184", End = "2018-NOV-24 12:03:31.184" }
+            },
+            {
+              Name = "Fase PolyCam 5",
+              TimeRange = { Start = "2018-NOV-27 12:00:20.184", End = "2018-NOV-27 16:46:12.184" }
+            },
+            {
+              Name = "Fase PolyCam 6",
+              TimeRange = { Start = "2018-NOV-28 07:10:35.183", End = "2018-NOV-28 12:10:27.183" }
+            }
+            }
+          },
+        {
+            Name = "Encuesta Detallada",
+            Phases = {
+            {
+              Name = "Fase Diamante de Béisbol 1",
+              TimeRange = { Start = "2019-JAN-13 18:59:31.195", End = "2019-JAN-13 23:59:29.179" }
+            },
+            {
+              Name = "Fase Diamante de Béisbol 2",
+              TimeRange = { Start = "2019-JAN-14 16:56:01.185", End = "2019-JAN-14 21:55:58.219" }
+            },
+            {
+              Name = "Fase Diamante de Béisbol 3",
+              TimeRange = { Start = "2019-JAN-20 18:59:15.211", End = "2019-JAN-20 23:59:13.195" }
+            },
+            {
+              Name = "Fase Diamante de Béisbol 4",
+              TimeRange = { Start = "2019-JAN-21 19:26:47.179", End = "2019-JAN-22 00:26:44.213" }
+            },
+            {
+              Name = "Fase Estaciones Ecuatoriales 1",
+              TimeRange = { Start = "2019-JAN-27 10:36:24.185", End = "2019-JAN-27 15:20:28.185" }
+            },
+            {
+              Name = "Fase Estaciones Ecuatoriales 2",
+              TimeRange = { Start = "2019-FEB-03 10:35:30.185", End = "2019-FEB-03 15:21:22.185" }
+            },
+            {
+              Name = "Fase Estaciones Ecuatoriales 3",
+              TimeRange = { Start = "2019-FEB-10 10:51:50.185", End = "2019-FEB-10 15:51:42.185" }
+            },
+            {
+              Name = "Fase Estaciones Ecuatoriales 4",
+              TimeRange = { Start = "2019-FEB-17 10:29:11.186", End = "2019-FEB-17 15:29:03.186" }
+            },
+            {
+              Name = "Fase Estaciones Ecuatoriales 5",
+              TimeRange = { Start = "2019-FEB-24 10:08:28.186", End = "2019-FEB-24 15:08:20.185" }
+            },
+            {
+              Name = "Fase Estaciones Ecuatoriales 6",
+              TimeRange = { Start = "2019-MAR-03 09:52:58.186", End = "2019-MAR-03 14:42:26.186" }
+            },
+            {
+              Name = "Fase Estaciones Ecuatoriales 7",
+              TimeRange = { Start = "2019-MAR-10 09:57:47.186", End = "2019-MAR-10 14:36:33.186" }
+            },
+            {
+              Name = "Fase Búsqueda de Plumas 1",
+              TimeRange = { Start = "2019-JAN-28 10:34:36.185", End = "2019-JAN-28 15:22:16.185" }
+            },
+            {
+              Name = "Fase Búsqueda de Plumas 2",
+              TimeRange = { Start = "2019-FEB-18 10:29:11.186", End = "2019-FEB-18 15:29:03.186" }
+            }
+            }
+          },
+        {
+            Name = "Órbita B",
+            Description = "Al final de la Encuesta Detallada, la nave espacial entró en una órbita cercana - con un radio de 0.6 millas (1 km) - alrededor de Bennu para comenzar la Fase de Órbita B. Esta fase rompió el récord establecido por OSIRIS-REx en Órbita A por ser la órbita más cercana que una nave espacial ha realizado alrededor de un cuerpo pequeño. Las principales actividades científicas de esta fase fueron el mapeo global de Bennu, el desarrollo de modelos de forma basados en datos de OLA y la ejecución de un experimento de Radio Ciencia. Estos datos se utilizaron para evaluar posibles sitios de recolección de muestras en tres elementos clave: seguridad, capacidad de muestreo y valor científico. La Órbita B concluyó con el equipo seleccionando un sitio principal y uno de respaldo para la recolección de muestras.",
+            Image = "https://www.asteroidmission.org/wp-content/uploads/2018/05/Orbital-B-for-Web.jpg",
+            Phases = {
+            {
+              Name = "Fase de Sitio de Muestra Candidato 1",
+              TimeRange = { Start = "2019-APR-08 10:35:27.186", End = "2019-APR-08 15:22:06.186" }
+            },
+            {
+              Name = "Fase de Sitio de Muestra Candidato 2",
+              TimeRange = { Start = "2019-APR-08 16:16:06.186", End = "2019-APR-11 10:38:58.186" }
+            },
+            {
+              Name = "Fase de Sitio de Muestra Candidato 3",
+              TimeRange = { Start = "2019-APR-22 17:51:23.186", End = "2019-APR-29 19:41:03.186" }
+            }
+            }
+          },
+          {
+            Name = "Reconocimiento",
+            Phases = {
+            {
+              Name = "Sortie de 225m",
+              Phases = {
+              {
+                Name = "Latitud 0°",
+                TimeRange = { Start = "2019-MAY-25 03:50:31.195", End = "2019-MAY-25 04:32:17.227" }
+              },
+              {
+                Name = "Latitud -20°",
+                TimeRange = { Start = "2019-MAY-25 03:50:48.216", End = "2019-MAY-25 04:37:10.209" }
+              },
+              {
+                Name = "Latitud -40°",
+                TimeRange = { Start = "2019-MAY-25 04:02:43.176", End = "2019-MAY-25 04:54:41.179" }
+              },
+              {
+                Name = "Latitud -60°",
+                TimeRange = { Start = "2019-MAY-25 04:21:46.161", End = "2019-MAY-25 05:18:44.232" }
+              }
+              }
+            },
+            {
+              Name = "Sortie de 525m",
+              Phases = {
+              {
+                Name = "Latitud 0°",
+                TimeRange = { Start = "2019-MAY-25 04:06:39.220", End = "2019-MAY-25 04:44:17.198" }
+              },
+              {
+                Name = "Latitud -40°",
+                TimeRange = { Start = "2019-MAY-25 04:11:39.201", End = "2019-MAY-25 04:49:37.224" }
+              },
+              {
+                Name = "Perfil Nominal Caso 5",
+                TimeRange = { Start = "2019-MAY-25 03:01:50.184", End = "2019-MAY-25 06:38:50.232" }
+              },
+              {
+                Name = "Perfil Nominal Caso 8",
+                TimeRange = { Start = "2019-MAY-25 03:01:50.184", End = "2019-MAY-25 06:38:50.232" }
+              }
+              }
+            }
+            }
+          }
+          }
+        -- Fin de [3]
+        },
+        {
+          Name = "Tiempo de Respaldo",
+          TimeRange = { Start = "2020 JAN 01 00:00:00", End = "2021 JAN 01 00:00:00" }
+        },
+        {
+          Name = "Crucero de Retorno",
+          TimeRange = { Start = "2021 JAN 01 00:00:00", End = "2023 SEP 20 00:00:00"}
+        }
+  -- Not too interesting in terms of space visualization --> out commented
+  -- { Name = "Sample Analysis",             TimeRange = { Start = "2023 JAN 01 00:00:00", End = "2025 JUN 01 00:00:00" } },
+
+  -- End of [1]
+  }
+}
+
+
+asset.onInitialize(function()
+  openspace.loadMission(Mission)
+end)
+
+asset.onDeinitialize(function()
+  openspace.unloadMission(Mission.Name)
+end)

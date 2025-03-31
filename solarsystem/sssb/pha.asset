@@ -1,0 +1,59 @@
+local transforms = asset.require("scene/solarsystem/sun/transforms")
+
+
+
+local sssb = asset.resource({
+  Name = "Datos de Cuerpos Pequenos del Sistema Solar (Asteroides Potencialmente Peligrosos)",
+  Type = "HttpSynchronization",
+  Identifier = "sssb_data_pha",
+  Version = 4
+})
+
+
+local Object = {
+  Identifier = "sssb_pha",
+  Parent = transforms.SunEclipJ2000.Identifier,
+  Renderable = {
+    Type = "RenderableOrbitalKepler",
+    Path = sssb .. "sssb_data_pha.csv",
+    Format = "SBDB",
+    Segments = 200,
+    SegmentQuality = 3,
+    Color = { 0.98, 0.09, 0.06 },
+    TrailFade = 17,
+    PointSizeExponent = 9.2
+  },
+  GUI = {
+    Name = "Asteroides Potencialmente Peligrosos",
+    Path = "/Sistema Solar/Cuerpos Pequeños",
+    Description = [[Asteroides que se consideran potencialmente peligrosos para la Tierra
+      debido a sus aproximaciones cercanas. Todos los asteroides con una Distancia Mínima
+      de Intersección Orbital con la Tierra (MOID) de 0.05 UA o menos, y con una magnitud
+      absoluta (H) de 22.0 o menos.]]
+  }
+}
+
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(Object)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(Object)
+end)
+
+asset.export(Object)
+
+
+
+asset.meta = {
+  Name = "Asteroides Potencialmente Peligrosos",
+  Description = [[Asset Renderizable de Cuerpos Pequeños con datos del JPL Horizons que
+    contiene el grupo de Asteroides Potencialmente Peligrosos.]],
+  Author = [[Base de Datos de Cuerpos Pequeños del JPL alojada por el Instituto de
+    Tecnología de California]],
+  URL = "https://ssd.jpl.nasa.gov/sbdb_query.cgi",
+  License = [[Los documentos creados por el JPL están patrocinados por la NASA bajo el
+    Contrato NAS7-030010. Todos los documentos disponibles en este servidor pueden estar
+    protegidos por las Leyes de Copyright de los EE.UU. y extranjeras.]]
+}

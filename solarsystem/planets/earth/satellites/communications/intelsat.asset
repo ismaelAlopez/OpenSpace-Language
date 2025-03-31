@@ -1,0 +1,54 @@
+local transforms = asset.require("scene/solarsystem/planets/earth/transforms")
+
+
+
+local omm = asset.resource({
+  Name = "Datos OMM del Satelite (Intelsat)",
+  Type = "UrlSynchronization",
+  Identifier = "satellite_omm_data_intelsat",
+  Url = "https://www.celestrak.com/NORAD/elements/gp.php?GROUP=intelsat&FORMAT=kvn",
+  Filename = "intelsat.txt",
+  SecondsUntilResync = openspace.time.secondsPerDay()
+})
+
+
+local IntelsatSatellites = {
+  Identifier = "IntelsatSatellites",
+  Parent = transforms.EarthInertial.Identifier,
+  Renderable = {
+    Type = "RenderableOrbitalKepler",
+    Path = omm .. "intelsat.txt",
+    Format = "OMM",
+    SegmentQuality = 3,
+    Color = { 0.75, 0.75, 0.35 },
+    TrailFade = 5,
+    PointSizeExponent = 5.0,
+    RenderBinMode = "PostDeferredTransparent"
+  },
+  Tag = { "earth_satellites" },
+  GUI = {
+    Name = "Intelsat",
+    Path = "/Sistema Solar/Planetas/Tierra/Satélites"
+  }
+}
+
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(IntelsatSatellites)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(IntelsatSatellites)
+end)
+
+asset.export(IntelsatSatellites)
+
+
+
+asset.meta = {
+  Name = "Satélites de Comunicaciones - Intelsat",
+  Description = "Activo de satélites para Comunicaciones - Intelsat. Datos de Celestrak",
+  Author = "Equipo de OpenSpace",
+  URL = "https://celestrak.com/NORAD/elements/",
+  License = "Celestrak"
+}

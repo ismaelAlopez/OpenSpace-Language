@@ -1,0 +1,16 @@
+asset.require("./debris/debris_asat")
+asset.require("./debris/debris_breezem")
+asset.require("./debris/debris_fengyun")
+asset.require("./debris/debris_iridium33")
+asset.require("./debris/debris_kosmos2251")
+
+
+
+asset.meta = {
+  Name = "Escombros de Satélites",
+  Description = [[Meta asset para los escombros espaciales de la Tierra. Contiene los grupos: debris_asat,
+    debris_breezem, debris_fengyun, debris_iridium33, y debris_kosmos2251]],
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "MIT license"
+}

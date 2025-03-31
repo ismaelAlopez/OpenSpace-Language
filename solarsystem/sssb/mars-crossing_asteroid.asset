@@ -1,0 +1,56 @@
+local transforms = asset.require("scene/solarsystem/sun/transforms")
+
+
+
+local sssb = asset.resource({
+  Name = "Datos de Pequenos Cuerpos del Sistema Solar (Asteroide que Cruza Marte)",
+  Type = "HttpSynchronization",
+  Identifier = "sssb_data_mars-crossing_asteroid",
+  Version = 4
+})
+
+
+local Object = {
+  Identifier = "sssb_mars-crossing_asteroid",
+  Parent = transforms.SunEclipJ2000.Identifier,
+  Renderable = {
+    Type = "RenderableOrbitalKepler",
+    Path = sssb .. "sssb_data_mars-crossing_asteroid.csv",
+    Format = "SBDB",
+    Segments = 200,
+    SegmentQuality = 1,
+    Color = { 0.814, 0.305, 0.22 },
+    TrailFade = 13,
+    PointSizeExponent = 9.2
+  },
+  GUI = {
+    Name = "Asteroides que Cruzan Marte",
+    Path = "/Sistema Solar/Pequeños Cuerpos",
+    Description = [[Asteroides que cruzan la órbita de Marte, con un eje semi-mayor
+      de menos de 3.2 UA, y una distancia de perihelio de entre 1.3 y 1.666 UA.]]
+  }
+}
+
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(Object)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(Object)
+end)
+
+asset.export(Object)
+
+
+
+asset.meta = {
+  Name = "Asteroides que Cruzan Marte",
+  Description = [[Asset Renderizable de Pequeños Cuerpos con datos del JPL Horizons que contiene
+    el grupo de asteroides que cruzan Marte]],
+  Author = "Base de Datos de Pequeños Cuerpos del JPL alojada por el Instituto de Tecnología de California",
+  URL = "https://ssd.jpl.nasa.gov/sbdb_query.cgi",
+  License = [[Los documentos creados por el JPL están patrocinados por la NASA bajo el Contrato NAS7-030010.
+    Todos los documentos disponibles en este servidor pueden estar protegidos bajo las Leyes de Copyright
+    de los EE.UU. y extranjeras]]
+}

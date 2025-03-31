@@ -1,0 +1,54 @@
+local transforms = asset.require("scene/solarsystem/planets/earth/transforms")
+
+
+
+local omm = asset.resource({
+  Name = "Datos OMM del Satelite (Clima)",
+  Type = "UrlSynchronization",
+  Identifier = "satellite_omm_data_weather",
+  Url = "https://www.celestrak.com/NORAD/elements/gp.php?GROUP=weather&FORMAT=kvn",
+  Filename = "weather.txt",
+  SecondsUntilResync = openspace.time.secondsPerDay()
+})
+
+
+local WeatherSatellites = {
+  Identifier = "WeatherSatellites",
+  Parent = transforms.EarthInertial.Identifier,
+  Renderable = {
+    Type = "RenderableOrbitalKepler",
+    Path = omm .. "weather.txt",
+    Format = "OMM",
+    SegmentQuality = 3,
+    Color = { 0.75, 0.75, 0.35 },
+    TrailFade = 15,
+    PointSizeExponent = 5.0,
+    RenderBinMode = "PostDeferredTransparent"
+  },
+  Tag = { "earth_satellites" },
+  GUI = {
+    Name = "Clima",
+    Path = "/Sistema Solar/Planetas/Tierra/Satélites"
+  }
+}
+
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(WeatherSatellites)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(WeatherSatellites)
+end)
+
+asset.export(WeatherSatellites)
+
+
+
+asset.meta = {
+  Name = "Satélites Clima - Clima",
+  Description = "Recurso de satélites para Clima - Clima. Datos de Celestrak",
+  Author = "Equipo de OpenSpace",
+  URL = "https://celestrak.com/NORAD/elements/",
+  License = "Celestrak"
+}

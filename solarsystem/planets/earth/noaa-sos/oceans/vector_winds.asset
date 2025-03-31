@@ -1,0 +1,71 @@
+local globe = asset.require("../../earth")
+
+
+
+local Name = "Vientos Superficiales del Oceano"
+local Identifier = "noaa-sos-oceans-vector_winds"
+local Description = [[El dispersómetro SeaWinds, transportado a bordo del satélite
+QuikSCAT de la NASA, es un radar de microondas diseñado para medir la retrodispersión
+relacionada con la velocidad y dirección del viento cerca de la superficie sobre los océanos.
+Una superficie oceánica más rugosa devuelve una señal más fuerte porque las olas reflejan
+más energía del radar hacia la antena del dispersómetro (retrodispersión), y una superficie
+oceánica más suave devuelve una señal más débil porque se refleja menos energía. Dada la
+relación conocida entre la rugosidad de la superficie y la intensidad del viento, es posible
+calcular la velocidad y dirección del viento - el vector del viento - a partir de múltiples
+observaciones de la señal devuelta desde un área determinada de la superficie oceánica]]
+local URL = "https://sos.noaa.gov/catalog/datasets/ocean-surface-winds/"
+
+
+local syncedDirectory = asset.resource({
+  Name = Name,
+  Type = "HttpSynchronization",
+  Identifier = Identifier,
+  Version = 1,
+  UnzipFiles = true,
+  UnzipFilesDestination = "images"
+})
+
+
+local Layer = {
+  Identifier = Identifier,
+  Name = Name,
+  Enabled = asset.enabled,
+  ZIndex = 100,
+  Type = "ImageSequenceTileProvider",
+  FolderPath = syncedDirectory .. "images",
+  Description = Description
+}
+
+local Colorbar = {
+  Identifier = Identifier,
+  Name = Name,
+  Enabled = asset.enabled,
+  Type = "ScreenSpaceImageLocal",
+  TexturePath = syncedDirectory .. "colorbar.png",
+  FaceCamera = false,
+  CartesianPosition = { 0.0, -0.5, -2.0 }
+}
+
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+  openspace.addScreenSpaceRenderable(Colorbar)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeScreenSpaceRenderable(Colorbar)
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.export(Layer)
+asset.export(Colorbar)
+
+
+
+asset.meta = {
+  Name = Name,
+  Description = Description .. "Datos proporcionados por la Administración Nacional Oceánica y Atmosférica",
+  Author = "Administración Nacional Oceánica y Atmosférica",
+  URL = URL,
+  License = "https://sos.noaa.gov/copyright/"
+}

@@ -1,0 +1,65 @@
+local globe = asset.require("../../earth")
+
+
+
+local Name = "Seguimiento de Tortuga Marina: Oceano Atlantico"
+local Identifier = "noaa-sos-oceans-atl_turtle"
+local Description = [[El Instituto de Ciencias Marinas de Virginia encontró una tortuga
+boba juvenil subadulta (Caretta caretta) varada frente a Deltaville, Virginia, a lo largo
+de la parte occidental de la Bahía de Chesapeake en julio de 2004. La tortuga marina,
+apropiadamente llamada Delta por el lugar donde fue encontrada varada, tenía una aleta
+izquierda rota y una lesión grave en la cabeza, probablemente causada por una colisión
+con una hélice de barco. Delta fue transferida al Programa de Varamiento del Acuario de
+Virginia para su rehabilitación. Después de muchos meses de recuperación y cirugía en la
+cabeza, Delta estaba lista para ser liberada en noviembre de 2004. Antes de su liberación,
+Delta fue equipada con un transmisor satelital por Kate Mansfield, entonces estudiante de
+doctorado en el Instituto de Ciencias Marinas de Virginia (College of William and Mary).
+Esto se hizo para rastrear los movimientos de Delta y determinar el éxito de su recuperación]]
+local URL = "https://sos.noaa.gov/catalog/datasets/sea-turtle-track-atlantic-ocean/"
+
+
+local syncedDirectory = asset.resource({
+  Name = Name,
+  Type = "HttpSynchronization",
+  Identifier = Identifier,
+  Version = 1,
+  UnzipFiles = true
+})
+
+
+local Layer = {
+  Identifier = Identifier,
+  Name = Name,
+  Enabled = asset.enabled,
+  ZIndex = 100,
+  Type = "TemporalTileProvider",
+  Mode = "Folder",
+  Folder = {
+    Folder = syncedDirectory .. "2048",
+    -- See https://en.cppreference.com/w/cpp/io/manip/get_time for an explanation of the
+    -- time formatting string
+    Format = "turtle-migration-%y%j-%H%M.jpg"
+  },
+  Description = Description
+}
+
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.onDeinitialize(function()
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.export(Layer)
+
+
+
+asset.meta = {
+  Name = Name,
+  Description = Description .. "Datos proporcionados por la Administración Nacional Oceánica y Atmosférica",
+  Author = "Administración Nacional Oceánica y Atmosférica",
+  URL = URL,
+  License = "https://sos.noaa.gov/copyright/"
+}

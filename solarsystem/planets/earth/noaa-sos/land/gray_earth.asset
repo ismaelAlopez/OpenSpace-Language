@@ -1,0 +1,62 @@
+local globe = asset.require("../../earth")
+
+
+
+local Name = "Tierra Gris"
+local Identifier = "noaa-sos-land-gray_earth"
+local Description = [[Este conjunto de datos proporciona una vista de la topografía y batimetría de
+la Tierra sombreando los continentes y el fondo marino. Tierra Gris también muestra los principales
+sistemas fluviales y cuencas continentales.
+
+Ríos más largos del mundo en cada continente:
+  África - Nilo - 4,132 millas (6,650 km)
+  Sudamérica - Amazonas - 4,000 millas (6,437 km)
+  Asia - Yangtsé - 3,915 millas (6,300 km)
+  Norteamérica - Misuri - 2,540 millas (4,088 km)
+  Australia - Murray - 1,558 millas (2,508 km)
+  Europa - Volga - 2,266 millas (3,645 km)
+
+Según la fuente del conjunto de datos, Natural Earth Data, el sombreado de relieve y la hipsografía
+(estudio de la topografía de la Tierra; medición y mapeo de las elevaciones terrestres) se derivan
+de los datos de elevación modificados de SRTM - Shuttle Radar Topography Mission - Plus a una resolución
+de 1 km. Daniel Huffman, de la Universidad de Wisconsin, Madison, creó la hipsografía igualada
+regionalmente que forma la base de las imágenes de Tierra Gris]]
+local URL = "https://sos.noaa.gov/catalog/datasets/gray-earth/"
+
+
+local syncedDirectory = asset.resource({
+  Name = Name,
+  Type = "HttpSynchronization",
+  Identifier = Identifier,
+  Version = 1
+})
+
+
+local Layer = {
+  Identifier = Identifier,
+  Name = Name,
+  Enabled = asset.enabled,
+  ZIndex = 100,
+  FilePath = syncedDirectory .. "4096.png",
+  Description = Description
+}
+
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.onDeinitialize(function()
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.export(Layer)
+
+
+asset.meta = {
+  Name = Name,
+  Description = Description .. "Datos proporcionados por la Administración Nacional Oceánica y Atmosférica",
+  Author = "Administración Nacional Oceánica y Atmosférica",
+  URL = URL,
+  License = "https://sos.noaa.gov/copyright/"
+}

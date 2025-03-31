@@ -1,0 +1,63 @@
+local globe = asset.require("../../earth")
+
+
+
+local Name = "Extension de Hielo Marino: Solo Septiembre"
+local Identifier = "noaa-sos-oceans-weeklyseaice-sept_seaice"
+local Description = [[El hielo marino es simplemente agua de océano que se ha congelado. Al menos el 15% del
+océano está cubierto por hielo marino en alguna parte del año. Esto significa que, en promedio, el hielo marino
+cubre casi 10 millones de millas cuadradas (alrededor de 25 millones de kilómetros cuadrados) de la Tierra.
+El hielo marino es monitoreado de cerca por los científicos porque los cambios en la cobertura de hielo marino pueden tener un
+gran impacto en el resto del globo. El calentamiento global se amplifica en las regiones polares.
+Debido a esto, monitorear los cambios en el hielo marino puede ser un buen indicador del cambio climático.
+El Centro Nacional de Datos de Nieve y Hielo monitorea el hielo marino utilizando un registro de datos satelitales de microondas pasivas
+que comienza en 1978. El Sensor Especial de Microondas Imager/Sounder (SSMIS) es el instrumento de monitoreo actual. Este conjunto de datos de extensión de hielo marino está en una cuadrícula de tamaño de celda de 25 km que cubre tanto las regiones polares del Ártico como del Antártico. Este conjunto de datos solo muestra los meses de septiembre desde 1979 hasta 2019 para el Ártico y el Antártico. Septiembre fue elegido específicamente para resaltar el cambio en la extensión mínima de hielo marino del Ártico a lo largo del tiempo. La disminución en la cobertura de hielo marino del Ártico es evidente en este conjunto de datos. Otro conjunto de datos de extensión de hielo marino disponible muestra la Extensión de Hielo Marino de 1987 a 2013. En el Ártico, la cobertura máxima generalmente ocurre en marzo y la cobertura mínima ocurre en septiembre.
+Lo contrario es cierto para el Antártico, donde el mínimo ocurre en marzo y el máximo ocurre en septiembre. Un punto interesante a notar es que la extensión del hielo marino en el Ártico está disminuyendo, mientras que el hielo marino del Antártico no muestra una tendencia a la baja.]]
+local URL = "https://sos.noaa.gov/catalog/datasets/sea-ice-extent-september-only/"
+
+
+local syncedDirectory = asset.resource({
+  Name = Name,
+  Type = "HttpSynchronization",
+  Identifier = Identifier,
+  Version = 1,
+  UnzipFiles = true
+})
+
+
+local Layer = {
+  Identifier = Identifier,
+  Name = Name,
+  Enabled = asset.enabled,
+  ZIndex = 100,
+  Type = "TemporalTileProvider",
+  Mode = "Folder",
+  Folder = {
+    Folder = syncedDirectory .. "4096",
+    -- See https://en.cppreference.com/w/cpp/io/manip/get_time for an explanation of the
+    -- time formatting string
+    Format = "nt_monthext_%Y%m%d-%Y%m%d_n07_sos.png"
+  },
+  Description = Description
+}
+
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.onDeinitialize(function()
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.export(Layer)
+
+
+
+asset.meta = {
+  Name = Name,
+  Description = Description .. "Datos proporcionados por la Administración Nacional Oceánica y Atmosférica",
+  Author = "Administración Nacional Oceánica y Atmosférica",
+  URL = URL,
+  License = "https://sos.noaa.gov/copyright/"
+}

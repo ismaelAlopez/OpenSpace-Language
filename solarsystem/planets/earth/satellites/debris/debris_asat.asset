@@ -1,0 +1,55 @@
+local transforms = asset.require("scene/solarsystem/planets/earth/transforms")
+
+
+
+local omm = asset.resource({
+  Name = "Datos OMM del Satelite (Escombros de la prueba ASAT india)",
+  Type = "UrlSynchronization",
+  Identifier = "satellite_omm_data_2019-006",
+  Url = "https://www.celestrak.com/NORAD/elements/gp.php?INTDES=2019-006&FORMAT=kvn",
+  Filename = "2019-006.txt",
+  SecondsUntilResync = openspace.time.secondsPerDay()
+})
+
+
+local DebrisAsat = {
+  Identifier = "DebrisAsat-2019-006",
+  Parent = transforms.EarthInertial.Identifier,
+  Renderable = {
+    Type = "RenderableOrbitalKepler",
+    Path = omm .. "2019-006.txt",
+    Format = "OMM",
+    SegmentQuality = 3,
+    Color = { 0.25, 0.35, 0.45 },
+    TrailFade = 15,
+    PointSizeExponent = 5.0,
+    RenderBinMode = "PostDeferredTransparent"
+  },
+  Tag = { "earth_satellites" },
+  GUI = {
+    Name = "Escombros de la prueba ASAT india",
+    Path = "/Sistema Solar/Planetas/Tierra/Satélites"
+  }
+}
+
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(DebrisAsat)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(DebrisAsat)
+end)
+
+asset.export(DebrisAsat)
+
+
+
+asset.meta = {
+  Name = "Escombros de Satélites - Escombros de la prueba ASAT india",
+  Description = [[Activo de satélites para los escombros de la prueba ASAT india. Datos de
+    Celestrak]],
+  Author = "Equipo de OpenSpace",
+  URL = "https://celestrak.com/NORAD/elements/",
+  License = "Celestrak"
+}

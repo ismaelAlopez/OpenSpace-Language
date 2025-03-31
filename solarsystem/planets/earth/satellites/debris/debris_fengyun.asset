@@ -1,0 +1,54 @@
+local transforms = asset.require("scene/solarsystem/planets/earth/transforms")
+
+
+
+local omm = asset.resource({
+  Name = "Datos OMM del Satelite (Escombros Fengyun)",
+  Type = "UrlSynchronization",
+  Identifier = "satellite_omm_data_1999-025",
+  Url = "https://www.celestrak.com/NORAD/elements/gp.php?INTDES=1999-025&FORMAT=kvn",
+  Filename = "1999-025.txt",
+  SecondsUntilResync = openspace.time.secondsPerDay()
+})
+
+
+local DebrisFengyun = {
+  Identifier = "DebrisFengyun-1999-025",
+  Parent = transforms.EarthInertial.Identifier,
+  Renderable = {
+    Type = "RenderableOrbitalKepler",
+    Path = omm .. "1999-025.txt",
+    Format = "OMM",
+    SegmentQuality = 3,
+    Color = { 0.784, 1.0, 0.737 },
+    TrailFade = 1.5,
+    PointSizeExponent = 5.0,
+    RenderBinMode = "PostDeferredTransparent"
+  },
+  Tag = { "earth_satellites" },
+  GUI = {
+    Name = "Escombros Fengyun",
+    Path = "/Sistema Solar/Planetas/Tierra/Satélites"
+  }
+}
+
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(DebrisFengyun)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(DebrisFengyun)
+end)
+
+asset.export(DebrisFengyun)
+
+
+
+asset.meta = {
+  Name = "Escombros de Satélites - Escombros Fengyun",
+  Description = "Activo de satélites para Escombros - Escombros Fengyun. Datos de Celestrak",
+  Author = "Equipo de OpenSpace",
+  URL = "https://celestrak.com/NORAD/elements/",
+  License = "Celestrak"
+}

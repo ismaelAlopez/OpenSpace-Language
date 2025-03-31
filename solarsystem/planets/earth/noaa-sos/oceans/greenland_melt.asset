@@ -1,0 +1,65 @@
+local globe = asset.require("../../earth")
+
+
+
+local Name = "Tendencias de Derretimiento de Groenlandia"
+local Identifier = "noaa-sos-oceans-greenland_melt"
+local Description = [[Los cambios en el clima alrededor de Groenlandia pueden tener un efecto
+a nivel mundial. Según el Dr. Konrad Steffen, profesor de geografía en la Universidad de
+Colorado y director del instituto conjunto de la NOAA CIRES, "Por cada grado (F) de aumento
+en la temperatura media anual cerca de Groenlandia, la tasa de aumento del nivel del mar
+incrementa aproximadamente un 10 por ciento." A medida que Groenlandia se calienta, el hielo
+que la cubre se derrite y fluye hacia los océanos. Para estudiar las tendencias de derretimiento
+en Groenlandia, los investigadores de la NASA desarrollaron un "índice de derretimiento", que
+es el número de días en que ocurrió el derretimiento multiplicado por el área derretida. Hay
+un aumento constante en el índice de derretimiento desde 1988 hasta el presente. De hecho,
+en 2006 Groenlandia experimentó más días de nieve derretida y a altitudes más altas que el
+promedio de los últimos 18 años estudiados]]
+local URL = "https://sos.noaa.gov/catalog/datasets/greenland-melting-trends/"
+
+
+local syncedDirectory = asset.resource({
+  Name = Name,
+  Type = "HttpSynchronization",
+  Identifier = Identifier,
+  Version = 1,
+  UnzipFiles = true
+})
+
+
+local Layer = {
+  Identifier = Identifier,
+  Name = Name,
+  Enabled = asset.enabled,
+  ZIndex = 100,
+  Type = "TemporalTileProvider",
+  Mode = "Folder",
+  Folder = {
+    Folder = syncedDirectory .. "2048",
+    -- See https://en.cppreference.com/w/cpp/io/manip/get_time for an explanation of the
+    -- time formatting string
+    Format = "dav19_%Y.jpg"
+  },
+  Description = Description
+}
+
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.onDeinitialize(function()
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.export(Layer)
+
+
+
+asset.meta = {
+  Name = Name,
+  Description = Description .. "Datos proporcionados por la Administración Nacional Oceánica y Atmosférica",
+  Author = "Administración Nacional Oceánica y Atmosférica",
+  URL = URL,
+  License = "https://sos.noaa.gov/copyright/"
+}

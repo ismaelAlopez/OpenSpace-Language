@@ -1,0 +1,56 @@
+local transforms = asset.require("scene/solarsystem/planets/earth/transforms")
+
+
+
+local omm = asset.resource({
+  Name = "Datos OMM de Satelites (100 Más Brillantes)",
+  Type = "UrlSynchronization",
+  Identifier = "satellite_omm_data_visual",
+  Url = "https://www.celestrak.com/NORAD/elements/gp.php?GROUP=visual&FORMAT=kvn",
+  Filename = "visual.txt",
+  SecondsUntilResync = openspace.time.secondsPerDay()
+})
+
+
+local BrightestSatellites = {
+  Identifier = "BrightestSatellites",
+  Parent = transforms.EarthInertial.Identifier,
+  Renderable = {
+    Type = "RenderableOrbitalKepler",
+    Path = omm .. "visual.txt",
+    Format = "OMM",
+    SegmentQuality = 3,
+    Color = { 0.55, 0.25, 0.65 },
+    TrailFade = 15,
+    PointSizeExponent = 5.0,
+    RenderBinMode = "PostDeferredTransparent"
+  },
+  Tag = { "earth_satellites" },
+  GUI = {
+    Name = "100 Más Brillantes",
+    Path = "/Sistema Solar/Planetas/Tierra/Satélites",
+    Description = [[Los 100 (aproximadamente) satélites que aparecerán más brillantes 
+      cuando se observen desde la Tierra.]]
+  }
+}
+
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(BrightestSatellites)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(BrightestSatellites)
+end)
+
+asset.export(BrightestSatellites)
+
+
+
+asset.meta = {
+  Name = "Satélites 100 Más Brillantes",
+  Description = "Asset de satélites para los 100 más brillantes. Datos de Celestrak",
+  Author = "Equipo de OpenSpace",
+  URL = "https://celestrak.com/NORAD/elements/",
+  License = "Celestrak"
+}

@@ -1,0 +1,47 @@
+local globe = asset.require("../../earth")
+
+
+
+local Name = "Ubicaciones de Ventilas Hidrotermales"
+local Identifier = "noaa-sos-oceans-vent_locations"
+local Description = [[Este conjunto de datos muestra todas las ubicaciones conocidas de ventilas hidrotermales en el fondo marino. 
+Las ventilas hidrotermales se forman en lugares donde hay actividad volcánica, como a lo largo de los límites de las placas terrestres. 
+Ocurren cuando el agua de mar se filtra hacia abajo y se calienta profundamente debajo del fondo marino. 
+El fluido caliente asciende y brota de las ventilas a temperaturas de hasta 400 °C (¡más de 750 °F!), 
+llevando consigo energía química que sustenta la vida en el frío, oscuro y profundo océano.]]
+
+local URL = "https://sos.noaa.gov/catalog/datasets/deep-sea-vent-locations/"
+
+local syncedDirectory = asset.resource({
+  Name = Name,
+  Type = "HttpSynchronization",
+  Identifier = Identifier,
+  Version = 1
+})
+
+local Layer = {
+  Identifier = Identifier,
+  Name = Name,
+  Enabled = asset.enabled,
+  ZIndex = 100,
+  FilePath = syncedDirectory .. "vents_2016.png",
+  Description = Description
+}
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.onDeinitialize(function()
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.export(Layer)
+
+asset.meta = {
+  Name = Name,
+  Description = Description .. "Datos proporcionados por la Administración Nacional Oceánica y Atmosférica",
+  Author = "Administración Nacional Oceánica y Atmosférica",
+  URL = URL,
+  License = "https://sos.noaa.gov/copyright/"
+}

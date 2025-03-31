@@ -1,0 +1,72 @@
+local globe = asset.require("../../earth")
+
+
+
+local Name = "Intercambio de CO2 entre el Oceano y la Atmosfera"
+local Identifier = "noaa-sos-oceans-ocean_acid-co2_flux"
+local Description = [[Cuando el dióxido de carbono (CO2) se libera a la atmósfera por la
+quema de combustibles fósiles, aproximadamente el 50% permanece en la atmósfera, mientras
+que el 25% es absorbido por las plantas y árboles terrestres, y el otro 25% es absorbido
+en ciertas áreas del océano. En otras áreas del océano, donde la concentración de CO2 es
+mayor en el agua que en la atmósfera superior, el CO2 se libera a la atmósfera]]
+local URL = "https://sos.noaa.gov/catalog/datasets/ocean-atmosphere-co2-exchange/"
+
+
+local syncedDirectory = asset.resource({
+  Name = Name,
+  Type = "HttpSynchronization",
+  Identifier = Identifier,
+  Version = 1,
+  UnzipFiles = true
+})
+
+
+local Layer = {
+  Identifier = Identifier,
+  Name = Name,
+  Enabled = asset.enabled,
+  ZIndex = 100,
+  Type = "TemporalTileProvider",
+  Mode = "Folder",
+  Folder = {
+    Folder = syncedDirectory .. "images",
+    -- See https://en.cppreference.com/w/cpp/io/manip/get_time for an explanation of the
+    -- time formatting string
+    Format = "CO2F.yearly.%Y.color.png"
+  },
+  Description = Description
+}
+
+local Colorbar = {
+  Identifier = Identifier,
+  Name = Name,
+  Enabled = asset.enabled,
+  Type = "ScreenSpaceImageLocal",
+  TexturePath = syncedDirectory .. "colorbar.png",
+  FaceCamera = false,
+  CartesianPosition = { 0.0, -0.5, -2.0 }
+}
+
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+  openspace.addScreenSpaceRenderable(Colorbar)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeScreenSpaceRenderable(Colorbar)
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.export(Layer)
+asset.export(Colorbar)
+
+
+
+asset.meta = {
+  Name = Name,
+  Description = Description .. "Datos proporcionados por la Administración Nacional Oceánica y Atmosférica",
+  Author = "Administración Nacional Oceánica y Atmosférica",
+  URL = URL,
+  License = "https://sos.noaa.gov/copyright/"
+}

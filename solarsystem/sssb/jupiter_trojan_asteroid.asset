@@ -1,0 +1,56 @@
+local transforms = asset.require("scene/solarsystem/sun/transforms")
+
+
+
+local sssb = asset.resource({
+  Name = "Datos de Pequenos Cuerpos del Sistema Solar (Asteroide Troyano de Júpiter)",
+  Type = "HttpSynchronization",
+  Identifier = "sssb_data_jupiter_trojan_asteroid",
+  Version = 4
+})
+
+
+local Object = {
+  Identifier = "sssb_jupiter_trojan_asteroid",
+  Parent = transforms.SunEclipJ2000.Identifier,
+  Renderable = {
+    Type = "RenderableOrbitalKepler",
+    Path = sssb .. "sssb_data_jupiter_trojan_asteroid.csv",
+    Format = "SBDB",
+    Segments = 200,
+    SegmentQuality = 1,
+    Color = { 0.5, 0.8, 0.5 },
+    TrailFade = 5,
+    PointSizeExponent = 9.2
+  },
+  GUI = {
+    Name = "Asteroides Troyanos de Júpiter",
+    Path = "/Sistema Solar/Cuerpos Pequeños",
+    Description = [[Asteroides atrapados en los puntos de Lagrange L4/L5 de Júpiter (con un
+      semieje mayor de entre 4.6 y 5.5 UA), con una excentricidad menor a 0.3.]]
+  }
+}
+
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(Object)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(Object)
+end)
+
+asset.export(Object)
+
+
+
+asset.meta = {
+  Name = "Asteroides Troyanos de Júpiter",
+  Description = [[Asset Renderizable de Pequeños Cuerpos con datos del JPL Horizons que contiene
+    el grupo de Troyanos de Júpiter]],
+  Author = "Base de Datos de Pequeños Cuerpos de JPL alojada por el Instituto de Tecnología de California",
+  URL = "https://ssd.jpl.nasa.gov/sbdb_query.cgi",
+  License = [[Los documentos creados por JPL están patrocinados por la NASA bajo el Contrato NAS7-030010.
+    Todos los documentos disponibles en este servidor pueden estar protegidos bajo las Leyes de
+    Copyright de EE.UU. y extranjeras]]
+}

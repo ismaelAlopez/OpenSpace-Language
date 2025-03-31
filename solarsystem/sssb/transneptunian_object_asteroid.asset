@@ -1,0 +1,56 @@
+local transforms = asset.require("scene/solarsystem/sun/transforms")
+
+
+local sssb = asset.resource({
+  Name = "Datos de Cuerpos Pequenos del Sistema Solar (Asteroide Transneptuniano)",
+  Type = "HttpSynchronization",
+  Identifier = "sssb_data_transneptunian_object_asteroid",
+  Version = 4
+})
+
+
+local Object = {
+  Identifier = "sssb_transneptunian_object_asteroid",
+  Parent = transforms.SunEclipJ2000.Identifier,
+  Renderable = {
+    Type = "RenderableOrbitalKepler",
+    Path = sssb .. "sssb_data_transneptunian_object_asteroid.csv",
+    Format = "SBDB",
+    Segments = 200,
+    SegmentQuality = 8,
+    Color = { 0.56, 0.64, 0.95 },
+    TrailFade = 10,
+    PointSizeExponent = 10.3
+  },
+  GUI = {
+    Name = "Asteroides Transneptunianos",
+    Path = "/Sistema Solar/Cuerpos Pequeños",
+    Description = [[Cualquier planeta menor o enano en el sistema solar que orbite el Sol a una
+      distancia promedio mayor que Neptuno (semieje mayor de 30.1 UA).]]
+  }
+}
+
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(Object)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(Object)
+end)
+
+asset.export(Object)
+
+
+
+asset.meta = {
+  Name = "Asteroides Transneptunianos",
+  Description = [[Asset Renderizable de Cuerpos Pequeños con datos del JPL Horizons que contiene
+    el grupo Transneptuniano]],
+  Author = [[Base de Datos de Cuerpos Pequeños del JPL alojada por el Instituto de
+    Tecnología de California]],
+  URL = "https://ssd.jpl.nasa.gov/sbdb_query.cgi",
+  License = [[Los documentos creados por el JPL están patrocinados por la NASA bajo el Contrato NAS7-030010. Todos
+    los documentos disponibles en este servidor pueden estar protegidos por las Leyes de
+    Copyright de EE.UU. y extranjeras]]
+}

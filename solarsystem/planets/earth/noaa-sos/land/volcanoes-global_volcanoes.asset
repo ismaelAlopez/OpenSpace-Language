@@ -1,0 +1,72 @@
+local globe = asset.require("../../earth")
+
+
+
+local Name = "Ubicaciones de Volcanes"
+local Identifier = "noaa-sos-land-volcanoes-global_volcanoes"
+local Description = [[Según el Programa de Vulcanismo Global del Instituto Smithsonian,
+probablemente hay unos 20 volcanes en erupción en este momento, y alrededor de 550 volcanes
+han tenido erupciones documentadas históricamente. Un volcán es una abertura, o ruptura,
+en la corteza terrestre a través de la cual se expulsan lava fundida, cenizas y gases.
+Los volcanes típicamente se forman en tres configuraciones diferentes. La primera es en
+los límites de placas divergentes, donde las placas tectónicas se separan unas de otras,
+como la Dorsal del Océano Atlántico Medio. La mayoría de estos volcanes están en el fondo
+del océano y son responsables de crear nuevo suelo marino. La segunda ubicación es en los
+límites de placas convergentes, donde dos placas, típicamente una oceánica y una
+continental, están colisionando. Los volcanes a lo largo del Anillo de Fuego del Pacífico
+son de límites de placas convergentes. La tercera ubicación es sobre puntos calientes,
+que típicamente están en el medio de las placas tectónicas y son causados por magma
+caliente que asciende a la superficie. Los volcanes en Hawái son el resultado de puntos
+calientes.]]
+local URL = "https://sos.noaa.gov/catalog/datasets/volcano-locations/"
+
+
+local syncedDirectory = asset.resource({
+  Name = Name,
+  Type = "HttpSynchronization",
+  Identifier = Identifier,
+  Version = 1
+})
+
+
+local LayerBase = {
+  Identifier = Identifier .. "-base",
+  Name = Name .. " (Base)",
+  Enabled = asset.enabled,
+  ZIndex = 100,
+  FilePath = syncedDirectory .. "land.jpg",
+  Description = Description
+}
+
+local Layer = {
+  Identifier = Identifier,
+  Name = Name,
+  Enabled = asset.enabled,
+  ZIndex = 110,
+  FilePath = syncedDirectory .. "4096.png",
+  Description = Description
+}
+
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", LayerBase)
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.onDeinitialize(function()
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", LayerBase)
+end)
+
+asset.export(LayerBase)
+asset.export(Layer)
+
+
+
+asset.meta = {
+  Name = Name,
+  Description = Description .. "Datos proporcionados por la Administración Nacional Oceánica y Atmosférica",
+  Author = "Administración Nacional Oceánica y Atmosférica",
+  URL = URL,
+  License = "https://sos.noaa.gov/copyright/"
+}

@@ -1,0 +1,106 @@
+local globe = asset.require("../../earth")
+
+
+
+local Name = "Ubicaciones de Tsunamis - 2000 A.C. - 2014"
+local Identifier = "noaa-sos-oceans-tsunami_locations"
+local Description = [[Terremotos, deslizamientos de tierra, volcanes, explosiones y procesos
+atmosféricos: todos estos desastres han causado tsunamis en el pasado. Pero, con mucho, 
+el generador más común de tsunamis son los terremotos, como se ha visto recientemente 
+en Sumatra, Chile y Japón. El Centro Nacional de Datos Geofísicos de la NOAA archiva 
+informes académicos e históricos de todo el mundo sobre dónde se estima que se originaron 
+los tsunamis, y ha compilado una base de datos de más de 2,500 eventos desde el año 2000 
+A.C. hasta 2014. Esta imagen traza aproximadamente la mitad de esos eventos: tsunamis que 
+se clasifican como un "tsunami definitivo" o "tsunami probable". Los íconos están sombreados 
+según la devastación del evento por el número de muertes causadas, donde blanco = ninguno, 
+amarillo = 1-50, naranja = 51-100 y rojo = >101. Dado que los terremotos son el generador 
+de tsunamis más común, la mayor densidad de orígenes de eventos se encuentra alrededor del 
+"Anillo de Fuego" del Pacífico, conocido por su prevalencia de actividad volcánica y tectónica. 
+Los puntos se superponen sobre un mapa de batimetría oceánica (Natural Earth 2 del proyecto 
+Natural Earth), que indica muchas de las características oceánicas pronunciadas, como islas 
+volcánicas, zonas de rift y límites de placas que a menudo están asociados con la generación 
+de tsunamis.]]
+local URL = "https://sos.noaa.gov/catalog/datasets/tsunami-locations-2000-bce-2014/"
+
+
+local syncedDirectory = asset.resource({
+  Name = Name,
+  Type = "HttpSynchronization",
+  Identifier = Identifier,
+  Version = 1
+})
+
+
+local LayerBase = {
+  Identifier = Identifier,
+  Name = Name,
+  ZIndex = 100,
+  FilePath = syncedDirectory .. "4096.jpg",
+  Description = Description
+}
+
+local LayerGray = {
+  Identifier = Identifier .. "-gray",
+  Name = Name .. " (Gris)",
+  ZIndex = 100,
+  FilePath = syncedDirectory .. "gray_earth_with_countries_4096.png",
+  Description = Description
+}
+
+local LayerNeutral = {
+  Identifier = Identifier .. "-neutral",
+  Name = Name .. " (Neutral)",
+  ZIndex = 100,
+  FilePath = syncedDirectory .. "natural_earth_with_countries_4096.png",
+  Description = Description
+}
+
+local LayerEvents = {
+  Identifier = Identifier .. "-events",
+  Name = Name .. " (Eventos)",
+  ZIndex = 100,
+  FilePath = syncedDirectory .. "tsunami_events.png",
+  Description = Description
+}
+
+local Legend = {
+  Identifier = Identifier,
+  Name = Name,
+  Type = "ScreenSpaceImageLocal",
+  TexturePath = syncedDirectory .. "legend.png",
+  FaceCamera = false,
+  CartesianPosition = { 0.85, 0.0, -2.0 }
+}
+
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", LayerBase)
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", LayerGray)
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", LayerNeutral)
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", LayerEvents)
+  openspace.addScreenSpaceRenderable(Legend)
+end)
+
+asset.onDeinitialize(function()
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", LayerEvents)
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", LayerNeutral)
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", LayerGray)
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", LayerBase)
+  openspace.removeScreenSpaceRenderable(Legend)
+end)
+
+asset.export(LayerBase)
+asset.export(LayerGray)
+asset.export(LayerNeutral)
+asset.export(LayerEvents)
+asset.export(Legend)
+
+
+
+asset.meta = {
+  Name = Name,
+  Description = Description .. "Datos proporcionados por la Administración Nacional Oceánica y Atmosférica",
+  Author = "Administración Nacional Oceánica y Atmosférica",
+  URL = URL,
+  License = "https://sos.noaa.gov/copyright/"
+}

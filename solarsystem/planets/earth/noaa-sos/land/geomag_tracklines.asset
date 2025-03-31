@@ -1,0 +1,65 @@
+local globe = asset.require("../../earth")
+
+
+local Name = "Lineas de Seguimiento Geomagneticas"
+local Identifier = "noaa-sos-land-geomag_tracklines"
+local Description = [[La Tierra es como un imán gigante con un Polo Norte y un Polo Sur. Sin embargo,
+los Polos Norte y Sur Magnéticos no están alineados con los Polos Norte y Sur Geográficos.
+El Polo Norte Geográfico se define por la latitud 90° N y es el eje de rotación de la Tierra.
+El Polo Norte Magnético es donde el campo magnético de la Tierra apunta verticalmente hacia abajo.
+La Tierra crea su propio campo magnético a partir de las corrientes eléctricas generadas en el núcleo
+líquido de hierro-níquel.]]
+local URL = "https://sos.noaa.gov/catalog/datasets/geomagnetic-tracklines/"
+
+
+local syncedDirectory = asset.resource({
+  Name = Name,
+  Type = "HttpSynchronization",
+  Identifier = Identifier,
+  Version = 1
+})
+
+
+local Layer = {
+  Identifier = Identifier,
+  Name = Name,
+  Enabled = asset.enabled,
+  ZIndex = 100,
+  FilePath = syncedDirectory .. "4096.png",
+  Description = Description
+}
+
+local Legend = {
+  Identifier = Identifier,
+  Name = Name,
+  Enabled = asset.enabled,
+  Type = "ScreenSpaceImageLocal",
+  TexturePath = syncedDirectory .. "legend.png",
+  FaceCamera = false,
+  Scale = 0.2,
+  CartesianPosition = { 0.75, 0.0, -2.0 }
+}
+
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+  openspace.addScreenSpaceRenderable(Legend)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeScreenSpaceRenderable(Legend)
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.export(Layer)
+asset.export(Legend)
+
+
+
+asset.meta = {
+  Name = Name,
+  Description = Description .. "Datos proporcionados por la Administración Nacional Oceánica y Atmosférica",
+  Author = "Administración Nacional Oceánica y Atmosférica",
+  URL = URL,
+  License = "https://sos.noaa.gov/copyright/"
+}

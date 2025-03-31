@@ -1,0 +1,93 @@
+local globe = asset.require("../../earth")
+
+
+
+local Name = "Acidificacion Oceanica: Estado de Saturacion"
+local Identifier = "noaa-sos-oceans-ocean_acid-saturation"
+local Description = [[La acidificación oceánica es una consecuencia a menudo pasada por alto de
+la liberación de emisiones de dióxido de carbono por parte de la humanidad en la atmósfera
+debido a la quema de combustibles fósiles. El exceso de dióxido de carbono entra en el
+océano y reacciona con el agua para formar ácido carbónico, lo que disminuye el pH del
+océano (es decir, hace que el agua de mar sea menos básica) y reduce las concentraciones
+de iones de carbonato. Organismos como corales, almejas, ostras y algunos tipos de
+plancton utilizan iones de carbonato para crear sus conchas y esqueletos. Las disminuciones
+en la concentración de iones de carbonato dificultarán que estas criaturas formen
+estructuras duras, particularmente en sus etapas juveniles. La acidificación oceánica
+puede causar que algunos organismos mueran, se reproduzcan con menos éxito o abandonen
+un área. Otros organismos como las hierbas marinas y algunas especies de plancton pueden
+desempeñarse mejor en océanos afectados por la acidificación oceánica porque utilizan
+dióxido de carbono para fotosintetizar, pero no requieren iones de carbonato para
+sobrevivir. La diversidad de los ecosistemas oceánicos y los servicios ecosistémicos
+pueden cambiar drásticamente debido a la acidificación oceánica]]
+local URL = "https://sos.noaa.gov/catalog/datasets/ocean-acidification-saturation-state/"
+
+
+local syncedDirectory = asset.resource({
+  Name = Name,
+  Type = "HttpSynchronization",
+  Identifier = Identifier,
+  Version = 1,
+  UnzipFiles = true
+})
+
+
+local Layer = {
+  Identifier = Identifier,
+  Name = Name,
+  Enabled = asset.enabled,
+  ZIndex = 100,
+  Type = "TemporalTileProvider",
+  Mode = "Folder",
+  Folder = {
+    Folder = syncedDirectory .. "images",
+    -- See https://en.cppreference.com/w/cpp/io/manip/get_time for an explanation of the
+    -- time formatting string
+    Format = "ARAG.yearly.%Y.color.png"
+  },
+  Description = Description
+}
+
+local Reefs = {
+  Identifier = Identifier .. "-reefs",
+  Name = Name .. " (Arrecifes)",
+  Enabled = asset.enabled,
+  FilePath = syncedDirectory .. "reefs.png",
+  Description = Description
+}
+
+local Colorbar = {
+  Identifier = Identifier,
+  Name = Name,
+  Enabled = asset.enabled,
+  Type = "ScreenSpaceImageLocal",
+  TexturePath = syncedDirectory .. "colorbar.png",
+  FaceCamera = false,
+  CartesianPosition = { 0.0, -0.5, -2.0 }
+}
+
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", Reefs)
+  openspace.addScreenSpaceRenderable(Colorbar)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeScreenSpaceRenderable(Colorbar)
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", Reefs)
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.export(Layer)
+asset.export(Reefs)
+asset.export(Colorbar)
+
+
+
+asset.meta = {
+  Name = Name,
+  Description = Description .. "Datos proporcionados por la Administración Nacional Oceánica y Atmosférica",
+  Author = "Administración Nacional Oceánica y Atmosférica",
+  URL = URL,
+  License = "https://sos.noaa.gov/copyright/"
+}

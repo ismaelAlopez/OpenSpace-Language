@@ -1,0 +1,53 @@
+local transforms = asset.require("scene/solarsystem/planets/earth/transforms")
+
+
+
+local omm = asset.resource({
+  Name = "Datos OMM del Satelite (Escombros de Kosmos 2251)",
+  Type = "UrlSynchronization",
+  Identifier = "satellite_omm_data_cosmos-2251-debris",
+  Url = "https://www.celestrak.com/NORAD/elements/gp.php?GROUP=cosmos-2251-debris&FORMAT=kvn",
+  Filename = "cosmos-2251-debris.txt",
+  SecondsUntilResync = openspace.time.secondsPerDay()
+})
+
+
+local DebrisCosmos = {
+  Identifier = "DebrisCosmos-2251",
+  Parent = transforms.EarthInertial.Identifier,
+  Renderable = {
+    Type = "RenderableOrbitalKepler",
+    Path = omm .. "cosmos-2251-debris.txt",
+    Format = "OMM",
+    SegmentQuality = 3,
+    Color = { 0.66, 0.8, 0.5 },
+    TrailFade = 1.5,
+    RenderBinMode = "PostDeferredTransparent"
+  },
+  Tag = { "earth_satellites" },
+  GUI = {
+    Name = "Escombros de Kosmos 2251",
+    Path = "/Sistema Solar/Planetas/Tierra/Satélites"
+  }
+}
+
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(DebrisCosmos)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(DebrisCosmos)
+end)
+
+asset.export(DebrisCosmos)
+
+
+
+asset.meta = {
+  Name = "Escombros de Satélites - Escombros de Kosmos 2251",
+  Description = "Asset de satélites para los escombros de Kosmos 2251. Datos de Celestrak",
+  Author = "Equipo de OpenSpace",
+  URL = "https://celestrak.com/NORAD/elements/",
+  License = "Celestrak"
+}

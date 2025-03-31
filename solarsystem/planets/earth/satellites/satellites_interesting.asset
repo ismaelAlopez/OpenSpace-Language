@@ -1,0 +1,18 @@
+asset.require("./misc/brightest")
+asset.require("./communications/geostationary")
+asset.require("./navigation/gps")
+asset.require("./misc/spacestations")
+asset.require("./misc/iss")
+asset.require("./misc/tiangong")
+asset.require("./misc/tle-new")
+
+
+
+asset.meta = {
+  Name = "Satélites Interesantes",
+  Description = [[Meta asset para satélites interesantes de la Tierra. Contiene los grupos:
+    más brillantes, geoestacionarios, gps, estaciones espaciales, iss, y tle-nuevo]],
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "MIT license"
+}

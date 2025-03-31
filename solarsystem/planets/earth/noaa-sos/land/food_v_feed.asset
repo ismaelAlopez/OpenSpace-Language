@@ -1,0 +1,76 @@
+local globe = asset.require("../../earth")
+
+
+
+local Name = "Agricultura: Alimentos vs. Piensos"
+local Identifier = "noaa-sos-land-food_v_feed"
+local Description = [[No toda la tierra cultivable se utiliza para producir alimentos directamente para las personas. 
+Muchos de los cultivos alimentarios que se producen se utilizan como alimento para animales. Este mapa muestra qué 
+regiones producen cultivos que son consumidos principalmente por humanos (en verde), qué regiones producen 
+aproximadamente la misma cantidad de alimentos para humanos y piensos para animales (en naranja), y dónde la mayoría 
+de los cultivos se utilizan como alimento para animales (en rojo)]]
+local URL = "https://sos.noaa.gov/catalog/datasets/agriculture-food-vs-feed/"
+
+
+local syncedDirectory = asset.resource({
+  Name = Name,
+  Type = "HttpSynchronization",
+  Identifier = Identifier,
+  Version = 1
+})
+
+
+local Layer = {
+  Identifier = Identifier,
+  Name = Name,
+  Enabled = asset.enabled,
+  ZIndex = 100,
+  FilePath = syncedDirectory .. "4096.png",
+  Description = Description
+}
+
+local LayerCountries = {
+  Identifier = Identifier .. "-countries",
+  Name = Name .. " (con países)",
+  Enabled = asset.enabled,
+  ZIndex = 100,
+  FilePath = syncedDirectory .. "4096_countries.png",
+  Description = Description
+}
+
+local Label = {
+  Identifier = Identifier,
+  Name = Name,
+  Enabled = asset.enabled,
+  Type = "ScreenSpaceImageLocal",
+  TexturePath = syncedDirectory .. "label.png",
+  FaceCamera = false,
+  CartesianPosition = { 0.0, -0.5, -2.0 }
+}
+
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", LayerCountries)
+  openspace.addScreenSpaceRenderable(Label)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeScreenSpaceRenderable(Label)
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", LayerCountries)
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.export(Layer)
+asset.export(LayerCountries)
+asset.export(Label)
+
+
+
+asset.meta = {
+  Name = Name,
+  Description = Description .. "Datos proporcionados por la Administración Nacional Oceánica y Atmosférica",
+  Author = "Administración Nacional Oceánica y Atmosférica",
+  URL = URL,
+  License = "https://sos.noaa.gov/copyright/"
+}

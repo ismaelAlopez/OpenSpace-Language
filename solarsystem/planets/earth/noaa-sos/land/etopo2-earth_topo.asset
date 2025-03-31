@@ -1,0 +1,55 @@
+local globe = asset.require("../../earth")
+
+
+
+local Name = "ETOPO2: Topografia y Batimetria (colores naturales)"
+local Identifier = "noaa-sos-land-etopo2-earth_topo"
+local Description = [[Muchos conjuntos de datos se han creado utilizando el conjunto de datos ETOPO2,
+que fue generado a partir de bases de datos digitales de elevaciones del fondo marino y terrestres en una cuadrícula
+de 2 minutos de latitud/longitud (1 minuto de latitud = 1 milla náutica, o 1.15 millas terrestres).
+El ETOPO2 es una combinación de observaciones de altimetría satelital, mediciones de ecosonda a bordo de barcos,
+datos de la Base de Datos Digital Batimétrica de Resolución Variable y datos del proyecto GLOBE, que tiene un modelo
+digital de elevación global. El lado de topografía y batimetría del conjunto de datos Hot Topo fue creado con esta
+base de datos digital, así como los conjuntos de datos EarthLiteColor, EarthOne y Earth Land/Bathymetry. EarthOne y
+Earth Land/Bathymetry están sombreados en colores relativamente reales, mientras que Hot Topo y EarthLiteColor usan
+verde, amarillo, naranja, rojo y blanco para denotar el aumento de la elevación del terreno]]
+local URL = "https://sos.noaa.gov/catalog/datasets/etopo2-topography-and-bathymetry-natural-colors/"
+
+
+local syncedDirectory = asset.resource({
+  Name = Name,
+  Type = "HttpSynchronization",
+  Identifier = Identifier,
+  Version = 1
+})
+
+
+local Layer = {
+  Identifier = Identifier,
+  Name = Name,
+  Enabled = asset.enabled,
+  ZIndex = 100,
+  FilePath = syncedDirectory .. "4096.jpg",
+  Description = Description
+}
+
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.onDeinitialize(function()
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.export(Layer)
+
+
+
+asset.meta = {
+  Name = Name,
+  Description = Description .. "Datos proporcionados por la Administración Nacional Oceánica y Atmosférica",
+  Author = "Administración Nacional Oceánica y Atmosférica",
+  URL = URL,
+  License = "https://sos.noaa.gov/copyright/"
+}

@@ -1,0 +1,79 @@
+local globe = asset.require("../../earth")
+
+
+
+local Name = "Agricultura: Rendimiento de Cultivos (actual)"
+local Identifier = "noaa-sos-land-land_production-cropland_current"
+local Description = [[Un componente importante de la película 2 Mil Millones Más a Cenar,
+este conjunto de datos muestra el rendimiento actual de los tres principales cultivos
+globales, maíz, trigo y arroz, medido en toneladas por hectárea. De manera similar,
+Rendimiento de Cultivos - Potencial, ilustra el rendimiento potencial para un área
+determinada, determinado utilizando la productividad de otra región con condiciones
+ambientales análogas y entrada optimizada de agua y nutrientes como referencia. Para
+ambos mapas, las áreas más oscuras muestran rendimientos más pequeños, mientras que las
+áreas de color rosa brillante indican rendimientos más altos]]
+local URL = "https://sos.noaa.gov/catalog/datasets/agriculture-cropland-yield-current/"
+
+
+local syncedDirectory = asset.resource({
+  Name = Name,
+  Type = "HttpSynchronization",
+  Identifier = Identifier,
+  Version = 1
+})
+
+
+local Layer = {
+  Identifier = Identifier,
+  Name = Name,
+  Enabled = asset.enabled,
+  ZIndex = 100,
+  FilePath = syncedDirectory .. "4096.png",
+  Description = Description
+}
+
+local LayerCountries = {
+  Identifier = Identifier .. "-countries",
+  Name = Name .. " (con países)",
+  Enabled = asset.enabled,
+  ZIndex = 100,
+  FilePath = syncedDirectory .. "4096_countries.png",
+  Description = Description
+}
+
+local Legend = {
+  Identifier = Identifier,
+  Name = Name,
+  Enabled = asset.enabled,
+  Type = "ScreenSpaceImageLocal",
+  TexturePath = syncedDirectory .. "legend.png",
+  FaceCamera = false,
+  CartesianPosition = { 0.0, -0.5, -2.0 }
+}
+
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", LayerCountries)
+  openspace.addScreenSpaceRenderable(Legend)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeScreenSpaceRenderable(Legend)
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", LayerCountries)
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.export(Layer)
+asset.export(LayerCountries)
+asset.export(Legend)
+
+
+
+asset.meta = {
+  Name = Name,
+  Description = Description .. "Datos proporcionados por la Administración Nacional Oceánica y Atmosférica",
+  Author = "Administración Nacional Oceánica y Atmosférica",
+  URL = URL,
+  License = "https://sos.noaa.gov/copyright/"
+}

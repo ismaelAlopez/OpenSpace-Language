@@ -1,0 +1,98 @@
+local globe = asset.require("../../earth")
+
+
+
+local Name = "Perspectiva de Riesgo de Arrecifes de Coral"
+local Identifier = "noaa-sos-oceans-reefs_risk"
+local Description = [[Desde el turismo hasta la prevención de enfermedades, está claro que los arrecifes ofrecen
+mucho más que recreación. Según el informe recientemente publicado "Arrecifes en Riesgo Revisitados",
+los arrecifes de coral:
+
+Apoyan a más de 275 millones de personas en todo el mundo.
+Protegen las costas en más de 100 países, ayudando a defenderse contra tormentas y erosión.
+Representan el 15% del producto interno bruto en más de 20 países.
+Tienen el potencial de combatir enfermedades, incluyendo tratamientos para el cáncer, VIH, malaria y
+otras enfermedades.
+
+Sin embargo, los arrecifes de coral enfrentan hoy amenazas serias. El nuevo informe encuentra que
+aproximadamente el 75% de los arrecifes de coral del mundo están actualmente amenazados por presiones
+locales y globales. Las presiones locales representan la amenaza más inmediata, especialmente por la
+sobrepesca y la pesca destructiva, que es particularmente extendida en el sudeste asiático. Las amenazas
+globales del cambio climático y las alteraciones en la química del océano (es decir, la acidificación
+del océano) están agravando las presiones sobre los arrecifes. El cambio climático está causando que las
+temperaturas del océano aumenten, lo que, a su vez, está llevando a un blanqueamiento generalizado de
+los corales.]]
+local URL = "https://sos.noaa.gov/catalog/datasets/coral-reef-risk-outlook/"
+
+
+local syncedDirectory = asset.resource({
+  Name = Name,
+  Type = "HttpSynchronization",
+  Identifier = Identifier,
+  Version = 1
+})
+
+
+local Layer2012 = {
+  Identifier = Identifier .. "-2012",
+  Name = Name .. " (2012)",
+  ZIndex = 100,
+  FilePath = syncedDirectory .. "2012_2048.jpg",
+  Description = Description
+}
+
+local Layer2030 = {
+  Identifier = Identifier .. "-2030",
+  Name = Name .. " (2030)",
+  ZIndex = 100,
+  FilePath = syncedDirectory .. "2030_2048.jpg",
+  Description = Description
+}
+
+local Layer2050 = {
+  Identifier = Identifier .. "-2050",
+  Name = Name .. " (2050)",
+  ZIndex = 100,
+  FilePath = syncedDirectory .. "2050_2048.jpg",
+  Description = Description
+}
+
+local Legend = {
+  Identifier = Identifier,
+  Name = Name,
+  Type = "ScreenSpaceImageLocal",
+  TexturePath = syncedDirectory .. "coral_legend.png",
+  FaceCamera = false,
+  Scale = 0.3,
+  CartesianPosition = { 0.0, -0.5, -2.0 }
+}
+
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", Layer2012)
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", Layer2030)
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", Layer2050)
+  openspace.addScreenSpaceRenderable(Legend)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeScreenSpaceRenderable(Legend)
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", Layer2050)
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", Layer2030)
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", Layer2012)
+end)
+
+asset.export(Layer2012)
+asset.export(Layer2030)
+asset.export(Layer2050)
+asset.export(Legend)
+
+
+
+asset.meta = {
+  Name = Name,
+  Description = Description .. "Datos proporcionados por la Administración Nacional Oceánica y Atmosférica",
+  Author = "Administración Nacional Oceánica y Atmosférica",
+  URL = URL,
+  License = "https://sos.noaa.gov/copyright/"
+}

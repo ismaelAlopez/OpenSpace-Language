@@ -1,0 +1,55 @@
+local transforms = asset.require("scene/solarsystem/planets/earth/transforms")
+
+
+
+local omm = asset.resource({
+  Name = "Datos OMM de Satelites (Sistema de Aumentacion Basado en Satelites)",
+  Type = "UrlSynchronization",
+  Identifier = "satellite_omm_data_sbas",
+  Url = "https://www.celestrak.com/NORAD/elements/gp.php?GROUP=sbas&FORMAT=kvn",
+  Filename = "sbas.txt",
+  SecondsUntilResync = openspace.time.secondsPerDay()
+})
+
+
+local SatelliteBasedAugmentationSatellites = {
+  Identifier = "SatelliteBasedAugmentationSatellites",
+  Parent = transforms.EarthInertial.Identifier,
+  Renderable = {
+    Type = "RenderableOrbitalKepler",
+    Path = omm .. "sbas.txt",
+    Format = "OMM",
+    SegmentQuality = 3,
+    Color = { 0.75, 0.75, 0.35 },
+    TrailFade = 15,
+    PointSizeExponent = 5.0,
+    RenderBinMode = "PostDeferredTransparent"
+  },
+  Tag = { "earth_satellites" },
+  GUI = {
+    Name = "Sistema de Aumentación Basado en Satélites",
+    Path = "/Sistema Solar/Planetas/Tierra/Satélites"
+  }
+}
+
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(SatelliteBasedAugmentationSatellites)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(SatelliteBasedAugmentationSatellites)
+end)
+
+asset.export(SatelliteBasedAugmentationSatellites)
+
+
+
+asset.meta = {
+  Name = "Satélites de Navegación del Sistema de Aumentación Basado en Satélites",
+  Description = [[Activo de satélites para el Sistema de Navegación Basado en Aumentación Satelital.
+    Datos de Celestrak]],
+  Author = "Equipo de OpenSpace",
+  URL = "https://celestrak.com/NORAD/elements/",
+  License = "Celestrak"
+}

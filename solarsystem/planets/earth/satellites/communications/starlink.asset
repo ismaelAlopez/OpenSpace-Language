@@ -1,0 +1,56 @@
+local transforms = asset.require("scene/solarsystem/planets/earth/transforms")
+
+
+
+local omm = asset.resource({
+  Name = "Datos OMM de Satelites (Starlink)",
+  Type = "UrlSynchronization",
+  Identifier = "satellite_omm_data_starlink",
+  Url = "https://www.celestrak.com/NORAD/elements/gp.php?GROUP=starlink&FORMAT=kvn",
+  Filename = "starlink.txt",
+  SecondsUntilResync = openspace.time.secondsPerDay()
+})
+
+
+local StarlinkSatellites = {
+  Identifier = "StarlinkSatellites",
+  Parent = transforms.EarthInertial.Identifier,
+  Renderable = {
+    Type = "RenderableOrbitalKepler",
+    Path = omm .. "starlink.txt",
+    Format = "OMM",
+    SegmentQuality = 3,
+    Color = { 0.65, 0.55, 0.55 },
+    TrailFade = 5,
+    PointSizeExponent = 5.0,
+    RenderBinMode = "PostDeferredTransparent"
+  },
+  Tag = { "earth_satellites" },
+  GUI = {
+    Name = "Starlink",
+    Path = "/Sistema Solar/Planetas/Tierra/Satélites",
+    Description = [[Constelación de satélites en órbita baja terrestre lanzada por SpaceX para
+      proporcionar acceso a internet de banda ancha.]]
+  }
+}
+
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(StarlinkSatellites)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(StarlinkSatellites)
+end)
+
+asset.export(StarlinkSatellites)
+
+
+
+asset.meta = {
+  Name = "Satélites de Comunicaciones - Starlink",
+  Description = "Activo de satélites para Comunicaciones - Starlink. Datos de Celestrak",
+  Author = "Equipo de OpenSpace",
+  URL = "https://celestrak.com/NORAD/elements/",
+  License = "Celestrak"
+}

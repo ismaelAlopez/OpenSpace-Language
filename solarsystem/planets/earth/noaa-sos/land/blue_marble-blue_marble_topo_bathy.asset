@@ -1,0 +1,59 @@
+local globe = asset.require("../../earth")
+
+
+
+local Name = "Marmol Azul: con Topografia y Batimetria"
+local Identifier = "noaa-sos-land-blue_marble-next_gen-topo_bathy"
+local Description = [[El Mármol Azul es una representación increíblemente detallada y a todo color
+  de la Tierra. La Nueva Generación del Mármol Azul es una actualización del original que tiene
+  mayor detalle. "El Mármol Azul original era un compuesto de cuatro meses de observaciones MODIS
+  con una resolución espacial (nivel de detalle) de 1 kilómetro cuadrado por píxel. Mármol Azul:
+  Nueva Generación ofrece un año de compuestos mensuales con una resolución espacial de
+  500 metros"]]
+local URL = "https://sos.noaa.gov/catalog/datasets/blue-marble-with-topography-seasonal/"
+
+
+local syncedDirectory = asset.resource({
+  Name = Name,
+  Type = "HttpSynchronization",
+  Identifier = Identifier,
+  Version = 1,
+  UnzipFiles = true
+})
+
+
+local Layer = {
+  Identifier = Identifier,
+  Name = Name,
+  Enabled = asset.enabled,
+  ZIndex = 100,
+  Type = "TemporalTileProvider",
+  Mode = "Folder",
+  Folder = {
+    Folder = syncedDirectory .. "5400",
+    -- See https://en.cppreference.com/w/cpp/io/manip/get_time for an explanation of the
+    -- time formatting string
+    Format = "world.topo.bathy.%Y%m.3x5400x2700.jpg"
+  },
+  Description = Description
+}
+
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.onDeinitialize(function()
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.export(Layer)
+
+
+asset.meta = {
+  Name = Name,
+  Description = Description .. "Datos proporcionados por la Administración Nacional Oceánica y Atmosférica",
+  Author = "Administración Nacional Oceánica y Atmosférica",
+  URL = URL,
+  License = "https://sos.noaa.gov/copyright/"
+}

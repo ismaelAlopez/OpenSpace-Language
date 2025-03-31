@@ -1,0 +1,79 @@
+local globe = asset.require("../../earth")
+
+
+
+local Name = "Modelo Climatico: Cambio de Temperatura (Hadley a1b) - 1860 - 2099"
+local Identifier = "noaa-sos-models-ukmet-a1b"
+local Description = [[Los científicos utilizan modelos climáticos por computadora como una forma de entender cómo
+  se ha comportado el clima en el pasado y cómo es probable que cambie en el futuro.
+  Los científicos usan diferentes escenarios para permitirles evaluar todas las diferentes
+  posibilidades futuras para el clima. El Centro Hadley de la Oficina Meteorológica del Reino Unido ha creado
+  dos conjuntos de datos para Science On a Sphere, utilizando dos escenarios diferentes. El primer escenario,
+  A1B-IMAGE, asume un camino de "negocios como siempre" hacia el futuro con tasas de dióxido de carbono
+  en continuo aumento. En este escenario, el CO2 aumenta a 774ppm para 2099 y la
+  temperatura media global aumenta en 4.41°C. El segundo escenario, E1, es un escenario de mitigación
+  agresiva que incluye un uso reducido de combustibles fósiles con el objetivo de mantener
+  el calentamiento global medio por debajo de 2°C. En el escenario E1, el dióxido de carbono aumenta a 435ppm para
+  2050 y luego cae a 421ppm para 2099, con un aumento de temperatura media global de
+  2.12°C]]
+local URL = "https://sos.noaa.gov/catalog/datasets/climate-model-temperature-change-hadley-a1b-1860-2099/"
+
+
+local syncedDirectory = asset.resource({
+  Name = Name,
+  Type = "HttpSynchronization",
+  Identifier = Identifier,
+  Version = 1,
+  UnzipFiles = true
+})
+
+
+local Layer = {
+  Identifier = Identifier,
+  Name = Name,
+  Enabled = asset.enabled,
+  ZIndex = 100,
+  Type = "TemporalTileProvider",
+  Mode = "Folder",
+  Folder = {
+    Folder = syncedDirectory .. "2100",
+    -- See https://en.cppreference.com/w/cpp/io/manip/get_time for an explanation of the
+    -- time formatting string
+    Format = "000_%Y_1_A1B_HQ.png"
+  },
+  Description = Description
+}
+
+local Colorbar = {
+  Identifier = Identifier,
+  Name = Name,
+  Enabled = asset.enabled,
+  Type = "ScreenSpaceImageLocal",
+  TexturePath = syncedDirectory .. "colorbar.png",
+  FaceCamera = false,
+  CartesianPosition = { 0.0, -0.5, -2.0 }
+}
+
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+  openspace.addScreenSpaceRenderable(Colorbar)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeScreenSpaceRenderable(Colorbar)
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.export(Layer)
+asset.export(Colorbar)
+
+
+
+asset.meta = {
+  Name = Name,
+  Description = Description .. "Datos proporcionados por la Administración Nacional Oceánica y Atmosférica",
+  Author = "Administración Nacional Oceánica y Atmosférica",
+  URL = URL,
+  License = "https://sos.noaa.gov/copyright/"
+}

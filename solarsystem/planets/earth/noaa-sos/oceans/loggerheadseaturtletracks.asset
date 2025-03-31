@@ -1,0 +1,58 @@
+local globe = asset.require("../../earth")
+
+
+
+local Name = "Rastros de Tortugas Marinas Caguama"
+local Identifier = "noaa-sos-oceans-loggerheadseaturtletracks"
+local Description = [[El uso de etiquetas transmisoras por satélite en la vida silvestre permite a los científicos
+monitorear los comportamientos de la vida silvestre en sus hábitats naturales. Este conjunto de datos contiene
+los rastros de tortugas marinas caguama juveniles que fueron etiquetadas y monitoreadas. Algunas de las
+tortugas fueron capturadas en embarcaciones pesqueras comerciales al norte de Hawái y las otras tortugas
+fueron criadas en el criadero del Acuario del Puerto de Nagoya en Japón. Después de ser etiquetadas,
+las tortugas fueron liberadas en varias ubicaciones en el mar. Los datos utilizados en este conjunto de datos
+son de 1997 a 2006. La animación representa una climatología diaria que muestra el movimiento diario de las
+tortugas, independientemente del año. El fondo es una climatología diaria de la temperatura de la superficie
+del mar detectada remotamente por satélite. El tamaño del gráfico de la tortuga es proporcional a la longitud
+de la tortuga]]
+local URL = "https://sos.noaa.gov/catalog/datasets/loggerhead-sea-turtle-tracks/"
+
+
+local syncedDirectory = asset.resource({
+  Name = Name,
+  Type = "HttpSynchronization",
+  Identifier = Identifier,
+  Version = 1,
+  UnzipFiles = true
+})
+
+
+local Layer = {
+  Identifier = Identifier,
+  Name = Name,
+  Enabled = asset.enabled,
+  ZIndex = 100,
+  Type = "ImageSequenceTileProvider",
+  FolderPath = syncedDirectory .. "4096",
+  Description = Description
+}
+
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.onDeinitialize(function()
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.export(Layer)
+
+
+
+asset.meta = {
+  Name = Name,
+  Description = Description .. "Datos proporcionados por la Administración Nacional Oceánica y Atmosférica",
+  Author = "Administración Nacional Oceánica y Atmosférica",
+  URL = URL,
+  License = "https://sos.noaa.gov/copyright/"
+}

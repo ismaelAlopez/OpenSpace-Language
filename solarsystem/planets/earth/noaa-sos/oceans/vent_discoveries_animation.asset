@@ -1,0 +1,61 @@
+local globe = asset.require("../../earth")
+
+
+
+local Name = "Descubrimientos de Ventilas Hidrotermales en el Fondo Marino"
+local Identifier = "noaa-sos-oceans-vent_discoveries_animation"
+local Description = [[Este conjunto de datos es una animación que muestra los descubrimientos
+de ventilas hidrotermales en el fondo marino desde 1977 hasta 2016 (acumulativo, anualmente).
+En 1977, los científicos hicieron un descubrimiento sorprendente que cambió nuestra comprensión
+de la vida en la Tierra. En el fondo marino profundo, descubrieron manantiales calientes, o
+ventilas hidrotermales, con animales que nunca antes se habían visto. Estos descubrimientos
+continúan hasta hoy. Más de 240 campos de ventilas han sido descubiertos con vehículos tripulados,
+operados remotamente y autónomos.]]
+local URL = "https://sos.noaa.gov/catalog/datasets/deep-sea-vent-discoveries/"
+
+
+local syncedDirectory = asset.resource({
+  Name = Name,
+  Type = "HttpSynchronization",
+  Identifier = Identifier,
+  Version = 1,
+  UnzipFiles = true
+})
+
+
+local Layer = {
+  Identifier = Identifier,
+  Name = Name,
+  Enabled = asset.enabled,
+  ZIndex = 100,
+  Type = "TemporalTileProvider",
+  Mode = "Folder",
+  Folder = {
+    Folder = syncedDirectory .. "new",
+    -- See https://en.cppreference.com/w/cpp/io/manip/get_time for an explanation of the
+    -- time formatting string
+    Format = "vents_%Y.png"
+  },
+  Description = Description
+}
+
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.onDeinitialize(function()
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.export(Layer)
+
+
+
+asset.meta = {
+  Name = Name,
+  Description = Description .. "Datos proporcionados por la Administración Nacional Oceánica y Atmosférica",
+  Author = "Administración Nacional Oceánica y Atmosférica",
+  URL = URL,
+  License = "https://sos.noaa.gov/copyright/"
+}

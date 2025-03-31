@@ -1,0 +1,74 @@
+local globe = asset.require("../../earth")
+
+
+
+local Name = "Cobertura Terrestre (animacion)"
+local Identifier = "noaa-sos-land-land_cover-animation"
+local Description = [[El instrumento Moderate Resolution Imaging Spectroradiometer (MODIS)
+en el satélite Terra de la NASA proporciona a los científicos una nueva vista de la Tierra.
+Usando datos recopilados por MODIS, investigadores de la Universidad de Boston pudieron crear estos
+mapas de cobertura terrestre. Comprender la cobertura terrestre de la Tierra ayuda a los responsables
+de políticas involucrados en la gestión de recursos naturales. Los mapas también son críticos para los
+científicos mientras estudian los cambios en el sistema terrestre y modelan el sistema terrestre. Por
+ejemplo, para calcular el presupuesto de carbono del sistema terrestre, los científicos pueden usar estos
+mapas para determinar la extensión de la vegetación que cubre la superficie terrestre y que está absorbiendo
+dióxido de carbono. Cada uno de los diferentes tipos de tierra tiene diferentes impactos en el sistema
+terrestre. La nieve y el hielo enfrían el planeta al reflejar la luz solar de vuelta al espacio, los bosques
+absorben grandes cantidades de dióxido de carbono, y las tierras de cultivo y las áreas urbanas reflejan el
+impacto humano en la Tierra]]
+local URL = "https://sos.noaa.gov/catalog/datasets/land-cover-animation/"
+
+
+local syncedDirectory = asset.resource({
+  Name = Name,
+  Type = "HttpSynchronization",
+  Identifier = Identifier,
+  Version = 1,
+  UnzipFiles = true
+})
+
+
+local Layer = {
+  Identifier = Identifier,
+  Name = Name,
+  Enabled = asset.enabled,
+  ZIndex = 100,
+  Type = "ImageSequenceTileProvider",
+  FolderPath = syncedDirectory .. "3600",
+  Description = Description
+}
+
+local Label = {
+  Identifier = Identifier,
+  Name = Name,
+  Enabled = asset.enabled,
+  Type = "ScreenSpaceImageLocal",
+  TexturePath = syncedDirectory .. "lcc_ribbon_label.jpg",
+  FaceCamera = false,
+  Scale = 0.75,
+  CartesianPosition = { 0.0, -0.5, -2.0 }
+}
+
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+  openspace.addScreenSpaceRenderable(Label)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeScreenSpaceRenderable(Label)
+  openspace.globebrowsing.deleteLayer(globe.Earth.Identifier, "ColorLayers", Layer)
+end)
+
+asset.export(Layer)
+asset.export(Label)
+
+
+
+asset.meta = {
+  Name = Name,
+  Description = Description .. "Datos proporcionados por la Administración Nacional Oceánica y Atmosférica",
+  Author = "Administración Nacional Oceánica y Atmosférica",
+  URL = URL,
+  License = "https://sos.noaa.gov/copyright/"
+}
