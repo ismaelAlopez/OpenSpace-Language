@@ -1,0 +1,59 @@
+local textures = asset.resource({
+  Name = "Texturas de la Via Lactea Todo el Cielo",
+  Type = "HttpSynchronization",
+  Identifier = "milkyway_textures",
+  Version = 2
+})
+
+
+local Object = {
+  Identifier = "AllSky_Visible",
+  Transform = {
+    Rotation = {
+      Type = "StaticRotation",
+      Rotation = { 0, 0, math.pi }
+    }
+  },
+  Renderable = {
+    Type = "RenderableSphereImageLocal",
+    Size = 9.2E21,
+    Segments = 40,
+    Opacity = 0.25,
+    Texture = textures .. "DarkUniverse_mellinger_4k.jpg",
+    Orientation = "Inside",
+    MirrorTexture = true,
+    FadeOutThreshold = 0.0015,
+    DimInAtmosphere = true
+  },
+  Tag = { "daytime_hidden" },
+  GUI = {
+    Name = "Vía Láctea Visible",
+    Path = "/Vía Láctea/Imágenes Todo el Cielo",
+    Description = [[Una imagen de todo el cielo del cielo nocturno tal como lo ve nuestro ojo (en el espectro visible), 
+      con las estrellas eliminadas. Verás la parte más brillante de la Galaxia si miras hacia el centro galáctico 
+      hacia las constelaciones de Escorpio y Sagitario. Este brillo es la luz de millones de estrellas; las franjas 
+      oscuras son nubes de polvo en primer plano, que oscurecen nuestra vista de las estrellas detrás de ellas. 
+      Censo: 1 imagen de todo el cielo.]]
+  }
+}
+
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(Object)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(Object)
+end)
+
+asset.export(Object)
+
+
+
+asset.meta = {
+  Name = "Luz Visible de Todo el Cielo de la Vía Láctea",
+  Description = Object.GUI.Description,
+  Author = "Brian Abbott, Carter Emmart (AMNH), OpenSpace Team",
+  URL = "https://www.amnh.org/research/hayden-planetarium/digital-universe",
+  License = "AMNH Digital Universe"
+}

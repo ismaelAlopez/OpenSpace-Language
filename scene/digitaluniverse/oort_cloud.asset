@@ -1,0 +1,73 @@
+local transforms = asset.require("scene/solarsystem/sun/transforms")
+
+
+
+local speck = asset.resource({
+  Name = "Archivos Speck de Cuadriculas",
+  Type = "HttpSynchronization",
+  Identifier = "digitaluniverse_grids_speck",
+  Version = 3
+})
+
+
+local EclipticRotationMatrix = {
+  -0.05487554,  0.4941095, -0.8676661,
+  -0.9938214 , -0.1109906, -0.0003515167,
+  -0.09647644,  0.8622859,  0.4971472
+}
+
+local Object = {
+  Identifier = "OortSphere",
+  Parent = transforms.SolarSystemBarycenter.Name,
+  Transform = {
+    Scale = {
+      Type = "StaticScale",
+      Scale = 7.47989845E15
+    },
+    Rotation = {
+      Type = "StaticRotation",
+      Rotation = EclipticRotationMatrix
+    }
+  },
+  Renderable = {
+    Type = "RenderableSphericalGrid",
+    Enabled = false,
+    Opacity = 0.8,
+    Color = { 0.4, 0.3, 0.2 },
+    LineWidth = 2.0,
+    Segments = 24
+  },
+  GUI = {
+    Name = "Esfera de Oort",
+    Path = "/Sistema Solar/Cometas",
+    Description = [[La nube de Oort es una región del espacio que rodea al Sol donde se cree
+      que se originan los cometas. Se cree que se extiende desde 20,000-100,000 Unidades
+      Astronómicas (UA), con su mayor concentración alrededor de 50,000 UA (1 UA es la
+      distancia promedio entre la Tierra y el Sol, que equivale a 149 millones de kilómetros,
+      o 93 millones de millas). Representamos la nube de Oort con una esfera de alambre de
+      50,000 UA de radio que representa la ubicación de la concentración central. Cincuenta
+      mil unidades astronómicas equivalen a aproximadamente 10 meses luz, que son 0.8 años
+      luz, o 4.8 billones de millas.]]
+  }
+}
+
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(Object)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(Object)
+end)
+
+asset.export(Object)
+
+
+
+asset.meta = {
+  Name = "Esfera de la Nube de Oort",
+  Description = Object.GUI.Description,
+  Author = "Brian Abbott (AMNH)",
+  URL = "https://www.amnh.org/research/hayden-planetarium/digital-universe",
+  License = "AMNH Digital Universe"
+}

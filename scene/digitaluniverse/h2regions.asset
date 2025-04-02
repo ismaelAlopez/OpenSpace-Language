@@ -1,0 +1,75 @@
+local textures = asset.resource({
+  Name = "Texturas de Regiones HII",
+  Type = "HttpSynchronization",
+  Identifier = "digitaluniverse_h2regions_textures",
+  Version = 1
+})
+
+local speck = asset.resource({
+  Name = "Archivos Speck de Regiones HII",
+  Type = "HttpSynchronization",
+  Identifier = "digitaluniverse_h2regions_speck",
+  Version = 4
+})
+
+
+local Object = {
+  Identifier = "HIIRegions",
+  Renderable = {
+    Type = "RenderablePolygonCloud",
+    Enabled = false,
+    Labels = {
+      File = speck .. "h2.label",
+      Color = { 0.5, 0.5, 0.5 },
+      Size = 16.24,
+      MinMaxSize = { 4, 20 },
+      Unit = "pc"
+    },
+    Coloring = {
+      FixedColor = { 0.0, 0.5, 1.0 }
+    },
+    Opacity = 0.70,
+    File = speck .. "h2.speck",
+    PolygonSides = 6,
+    Unit = "pc",
+    SizeSettings = {
+      ScaleExponent = 18.5,
+      MaxSize = 8.0,
+      EnableMaxSizeControl = true
+    }
+  },
+  GUI = {
+    Name = "Regiones HII",
+    Path = "/Vía Láctea/Nebulosas",
+    Description = [[Las regiones HII (pronunciado "H-dos") son viveros estelares para
+      estrellas recién nacidas. Las estrellas nacen de nubes condensadas de gas de hidrógeno.
+      A medida que estas nubes se condensan, las densidades se vuelven lo suficientemente
+      altas como para formar estrellas. Una región HII es la nube circundante de hidrógeno
+      que brilla debido a las estrellas nacidas dentro de ella. El resultado es una nebulosa
+      brillante que se puede ver a grandes distancias. Una celebridad local entre las regiones
+      HII es la Nebulosa de Orión (M42). Estas regiones de formación estelar se encuentran en
+      el plano de la Galaxia porque es allí donde ocurre la formación de estrellas en galaxias
+      espirales como nuestra Vía Láctea. Debido a esto, son excelentes trazadores de los brazos
+      espirales de la Galaxia. Censo: 1,108 regiones de formación estelar.]]
+  }
+}
+
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(Object)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(Object)
+end)
+
+asset.export(Object)
+
+
+
+asset.meta = {
+  Name = "Regiones HII",
+  Description = Object.GUI.Description,
+  URL = "https://www.amnh.org/research/hayden-planetarium/digital-universe",
+  License = "AMNH Digital Universe"
+}

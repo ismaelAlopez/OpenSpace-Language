@@ -1,0 +1,79 @@
+local speck = asset.resource({
+  Name = "Galah Speck Files",
+  Type = "HttpSynchronization",
+  Identifier = "gaia_galah",
+  Version = 1
+})
+
+local colormaps = asset.resource({
+  Name = "Tabla de Colores de Estrellas",
+  Type = "HttpSynchronization",
+  Identifier = "stars_colormap",
+  Version = 3
+})
+
+local textures = asset.resource({
+  Name = "Texturas de Estrellas",
+  Type = "HttpSynchronization",
+  Identifier = "stars_textures",
+  Version = 1
+})
+
+
+local GaiaAbundanceGalah = {
+  Identifier = "GaiaAbundanceGalah",
+  Renderable = {
+    Type = "RenderableStars",
+    Enabled = false,
+    File = speck .. "GaiaAbundGalah.speck",
+    Glare = {
+      Texture = textures .. "halo.png"
+    },
+    -- ShapeTexture = textures .. "disc.png",
+    MagnitudeExponent = 7.25,
+    SizeComposition = "Distance Modulus",
+    ColorOption = "Other Data",
+    OtherData = "FeH",
+    ColorMap = colormaps .. "colorbv.cmap",
+    OtherDataColorMap = colormaps .. "rainbowgradient.cmap",
+    ColorRange = { { -0.8, 0.6 } },
+    StaticFilter = -9999,
+    StaticFilterReplacement = 0.0,
+    DataMapping = {
+      Bv = "colorb_v",
+      Luminance = "lum",
+      AbsoluteMagnitude = "absmag",
+      ApparentMagnitude = "appmag",
+      Vx = "vx",
+      Vy = "vy",
+      Vz = "vz",
+      Speed = "speed"
+    }
+  },
+  GUI = {
+    Path = "/Vía Láctea/Gaia",
+    Name = "Abundancia Gaia Galah",
+    Description = "Conjunto de datos de estrellas codificadas por color según su metalicidad"
+  }
+}
+
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(GaiaAbundanceGalah)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(GaiaAbundanceGalah)
+end)
+
+asset.export(GaiaAbundanceGalah)
+
+
+
+asset.meta = {
+  Name = "Abundancia Gaia Galah",
+  Description = "Este recurso contiene un conjunto de datos RenderableStars con datos de metalicidad",
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "MIT License"
+}

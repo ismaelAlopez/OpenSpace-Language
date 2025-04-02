@@ -1,0 +1,63 @@
+local speck = asset.resource({
+  Name = "Archivos Speck de Grupos de Galaxias",
+  Type = "HttpSynchronization",
+  Identifier = "digitaluniverse_groups_speck",
+  Version = 1
+})
+
+
+local TransformMatrix = {
+  -0.7357425748,    0.67726129641,  0.0,           0.0,
+  -0.074553778365, -0.080991471307, 0.9939225904,  0.0,
+  0.67314530211,    0.73127116582,  0.11008126223, 0.0,
+  0.0,              0.0,            0.0,           1.0
+}
+
+local Object = {
+  Identifier = "NearbyGalaxyGroups",
+  Renderable = {
+    Type = "RenderablePointCloud",
+    Enabled = false,
+    Labels = {
+      Enabled = true,
+      File = speck .. "groups.label",
+      Color = { 0.1, 0.4, 0.2 },
+      Size = 20.4,
+      MinMaxSize = { 8, 20 },
+      Unit = "Mpc",
+      TransformationMatrix = TransformMatrix
+    },
+    Opacity = 0.65,
+    Unit = "Mpc",
+    TransformationMatrix = TransformMatrix
+  },
+  GUI = {
+    Name = "Etiquetas de Grupos de Galaxias",
+    Path = "/Universo/Encuestas Cercanas",
+    Description = [[Los datos de Grupos de Galaxias son un conjunto de etiquetas que marcan
+      los grupos de galaxias cercanos. La Vía Láctea está en el Grupo Local, y estamos
+      rodeados por muchos otros grupos delineados por estas etiquetas. Censo: 62 etiquetas
+      de grupos de galaxias.]]
+  }
+}
+
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(Object)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(Object)
+end)
+
+asset.export(Object)
+
+
+
+asset.meta = {
+  Name = "Etiquetas de Grupos de Galaxias",
+  Author = "Brian Abbott (AMNH)",
+  Description = Object.GUI.Description,
+  URL = "https://www.amnh.org/research/hayden-planetarium/digital-universe",
+  License = "AMNH Digital Universe"
+}

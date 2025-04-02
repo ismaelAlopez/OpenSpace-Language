@@ -1,0 +1,54 @@
+local textures = asset.resource({
+  Name = "ESO Milky Way Textures",
+  Type = "HttpSynchronization",
+  Identifier = "milkyway-eso_textures",
+  Version = 1
+})
+
+
+local Object = {
+  Identifier = "MilkyWay-ESO",
+  Transform = {
+    Rotation = {
+      Type = "StaticRotation",
+      Rotation = { 0, 0, math.pi }
+    }
+  },
+  Renderable = {
+    Type = "RenderableSphereImageLocal",
+    Size = 9.2E20,
+    Segments = 40,
+    Opacity = 0.4,
+    Texture = textures .. "eso0932a_blend.png",
+    Orientation = "Inside",
+    MirrorTexture = true,
+    FadeOutThreshold = 0.01
+  },
+  GUI = {
+    Name = "Vía Láctea (ESO)",
+    Path = "/Vía Láctea/Vía Láctea",
+    Description = "Imagen de la galaxia Vía Láctea (alternativa)"
+  }
+}
+
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(Object)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(Object)
+end)
+
+asset.export(Object)
+
+
+
+asset.meta = {
+  Name = "Galaxia Vía Láctea (ESO)",
+  Description = [[Este recurso contiene una alternativa a la imagen de la Digital Universe para la
+    Vía Láctea de ESO]],
+  Author = "ESO/S. Brunier",
+  URL = "https://www.eso.org/public/usa/images/eso0932a/",
+  License = "Creative Commons Attribution 4.0 International License"
+}

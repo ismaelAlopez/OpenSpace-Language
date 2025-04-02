@@ -1,0 +1,15 @@
+local texturesPath = asset.resource({
+  Name = "Texturas de la Zona Habitable",
+  Type = "HttpSynchronization",
+  Identifier = "habitable_zone_textures",
+  Version = 1
+})
+asset.export("TexturesPath", texturesPath)
+
+asset.meta = {
+  Name = "Texturas de la Zona Habitable",
+  Description = "Texturas predeterminadas que se pueden usar para la representación de la zona habitable",
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "Licencia MIT"
+}

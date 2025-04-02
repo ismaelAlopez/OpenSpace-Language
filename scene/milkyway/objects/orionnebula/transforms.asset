@@ -1,0 +1,43 @@
+local sunTransforms = asset.require("scene/solarsystem/sun/transforms")
+
+
+
+local Parsec = 3.0856776E16
+local NebulaPosition = {
+  Identifier = "NebulaPosition",
+  Parent = sunTransforms.SolarSystemBarycenter.Identifier,
+  Transform = {
+    Translation = {
+      Type = "StaticTranslation",
+      Position = {
+        -329.915 * Parsec,
+        -183.153 * Parsec,
+        -132.706 * Parsec
+      }
+    }
+  },
+  GUI = {
+    Name = "Posición de la Nebulosa de Orión",
+    Path = "/Vía Láctea/Orión",
+    Hidden = true
+  }
+}
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(NebulaPosition)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(NebulaPosition)
+end)
+
+asset.export(NebulaPosition)
+
+asset.meta = {
+  Name = "Transformaciones de la Nebulosa de Orión",
+  Description = [[Este recurso contiene la posición de la Nebulosa de Orión. Generalmente no
+    incluirías este recurso ya que otros recursos lo incluirían]],
+  Author = "Brian Abbott (AMNH)",
+  URL = "https://www.amnh.org/research/hayden-planetarium/digital-universe",
+  License = "AMNH Digital Universe"
+}

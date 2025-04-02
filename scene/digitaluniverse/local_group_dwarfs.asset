@@ -1,0 +1,84 @@
+local textures = asset.resource({
+  Name = "Texturas de Enanas Locales",
+  Type = "HttpSynchronization",
+  Identifier = "digitaluniverse_localdwarfs_textures",
+  Version = 1
+})
+
+local speck = asset.resource({
+  Name = "Archivos Speck de Enanas Locales",
+  Type = "HttpSynchronization",
+  Identifier = "digitaluniverse_localdwarfs_speck",
+  Version = 2
+})
+
+
+local Object = {
+  Identifier = "LocalDwarfGalaxies",
+  Renderable = {
+    Type = "RenderablePolygonCloud",
+    Enabled = false,
+    Opacity = 0.3,
+    File = speck .. "localgroup.speck",
+    Labels = {
+      File = speck .. "localgroup.label",
+      Color = { 0.3, 0.3, 1.0 },
+      Size = 18.4,
+      MinMaxSize = { 7, 20 },
+      Unit = "Mpc"
+    },
+    Coloring = {
+      FixedColor = { 0.5, 1.0, 1.0 },
+      ColorMapping = {
+        File = speck .. "localgroup.cmap",
+        ParameterOptions = {
+          { Key = "association" }
+        }
+      }
+    },
+    PolygonSides = 12,
+    Unit = "Mpc",
+    SizeSettings = {
+      ScaleExponent = 20.77,
+      MaxSize = 0.7,
+      EnableMaxSizeControl = true
+    }
+  },
+  GUI = {
+    Name = "Grupo Local",
+    Path = "/Universo/Encuestas Cercanas",
+    Description = [[Un grupo de galaxias está típicamente compuesto por un pequeño número de
+      galaxias grandes que están rodeadas por un gran número de galaxias pequeñas. La Vía
+      Láctea pertenece al Grupo Local y es una de aproximadamente 100 galaxias en ese
+      grupo. La Vía Láctea, la Galaxia de Andrómeda (también conocida como Messier 31, o
+      M31) y la Galaxia del Triángulo (M33) son tres de las galaxias más grandes del Grupo
+      Local. Cada una es una galaxia espiral que contiene cientos de miles de millones de
+      estrellas. Rodeando la Vía Láctea y Andrómeda hay una multitud de galaxias enanas,
+      galaxias más pequeñas y a menudo irregulares que contienen cientos de millones a unos
+      pocos miles de millones de estrellas. Colores: Aqua son galaxias asociadas con la Vía
+      Láctea, Amarillo muestra galaxias agrupadas alrededor de la Galaxia de Andrómeda,
+      Verde son otros miembros del Grupo Local, y Gris son galaxias vecinas que no están en
+      el Grupo Local. Censo: 102 galaxias.]]
+  }
+}
+
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(Object)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(Object)
+end)
+
+asset.export(Object)
+
+
+
+asset.meta = {
+  Name = "Grupo Local",
+  Description = Object.GUI.Description,
+  Author = "Brian Abbott (AMNH)",
+  URL = "https://www.amnh.org/research/hayden-planetarium/digital-universe",
+  License = "AMNH Digital Universe"
+}

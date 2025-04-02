@@ -1,0 +1,65 @@
+local speck = asset.resource({
+  Name = "Archivos de Incertidumbre Estelar",
+  Type = "HttpSynchronization",
+  Identifier = "digitaluniverse_star_uncertainty_data",
+  Version = 1
+})
+
+
+local Object = {
+  Identifier = "StarUncertainty",
+  Renderable = {
+    Type = "RenderableConstellationLines",
+    Enabled = false,
+    Labels = {
+      File = speck .. "star_uncertainty.label",
+      Opacity = 0.75,
+      Color = { 0.6, 0.6, 1.0 },
+      Size = 14.1,
+      MinMaxSize = { 8, 170 },
+      Unit = "pc"
+    },
+    Opacity = 0.8,
+    LineWidth = 5.0,
+    File = speck .. "star_uncertainty.speck",
+    NamesFile = speck .. "star_uncertainty.dat",
+    Colors = { { 1.0, 1.0, 0.0 }, { 0.0, 0.8, 1.0 }, { 0.957, 0.51, 0.10 } },
+    Unit = "pc",
+    DimInAtmosphere = true
+  },
+  Tag = { "daytime_hidden" },
+  GUI = {
+    Name = "Incertidumbre en la Distancia Estelar",
+    Path = "/Vía Láctea/Estrellas",
+    Description = [[La incertidumbre en la posición de una estrella se deriva de la
+      incertidumbre en su medición de paralaje. Esto resulta en un rango de distancia
+      donde la estrella podría existir. Aquí dibujamos líneas sobre estrellas selectas
+      que nos dan una pista visual del rango de posibles distancias para esa estrella.
+      Colores: Las líneas aqua son estrellas con mediciones de paralaje geométrico de Gaia
+      (las más precisas), las líneas naranjas indican estrellas con paralajes geométricos
+      de Hipparcos, y las líneas amarillas son estrellas con paralajes fotogeométricos de
+      Gaia (las menos precisas). La etiqueta incluye el nombre de la estrella y la longitud
+      de la incertidumbre en años luz. Censo: 3,440 estrellas con incertidumbre.]]
+  }
+}
+
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(Object)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(Object)
+end)
+
+asset.export(Object)
+
+
+
+asset.meta = {
+  Name = "Incertidumbre en la Distancia Estelar",
+  Description = Object.GUI.Description,
+  Author = "Brian Abbott, Zack Reeves (AMNH)",
+  URL = "https://www.amnh.org/research/hayden-planetarium/digital-universe",
+  License = "AMNH Digital Universe"
+}

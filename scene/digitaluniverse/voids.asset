@@ -1,0 +1,60 @@
+local speck = asset.resource({
+  Name = "Archivos Speck de Vacios",
+  Type = "HttpSynchronization",
+  Identifier = "digitaluniverse_voids_speck",
+  Version = 2
+})
+
+
+local Object = {
+  Identifier = "Voids",
+  Renderable = {
+    Type = "RenderablePointCloud",
+    Enabled = false,
+    Labels = {
+      Enabled = true,
+      File = speck .. "voids.label",
+      Color = { 0.296, 0.629, 1.0 },
+      Size = 20.9,
+      MinMaxSize = { 8, 20 },
+      Unit = "Mpc"
+    },
+    DrawElements = false,
+    Opacity = 0.65,
+    Unit = "Mpc"
+  },
+  GUI = {
+    Name = "Vacíos",
+    Path = "/Universo/Encuestas Cercanas",
+    Description = [[Los vacíos cósmicos son vastos espacios vacíos donde no hay galaxias
+      o hay muy pocas galaxias. Están asociados con puntos fríos en la luz del fondo cósmico
+      de microondas (CMB), la imagen más temprana que tenemos del universo. Esos puntos fríos
+      en el CMB evolucionaron hacia grandes vacíos, algunos de hasta 300 millones de años luz
+      de diámetro. Las etiquetas indican aproximadamente la ubicación de los vacíos cósmicos
+      en las galaxias de Tully. Los vacíos solo son visibles con indicios de movimiento mientras
+      giras alrededor de estos datos. Las etiquetas ayudan a guiar la vista y proporcionan puntos
+      de referencia para los vacíos más grandes en nuestro vecindario cósmico. Censo: 24 etiquetas
+      de vacíos cósmicos.]]
+  }
+}
+
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(Object)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(Object)
+end)
+
+asset.export(Object)
+
+
+
+asset.meta = {
+  Name = "Vacíos",
+  Author = "Brian Abbott (AMNH)",
+  Description = Object.GUI.Description,
+  URL = "https://www.amnh.org/research/hayden-planetarium/digital-universe",
+  License = "AMNH Digital Universe"
+}

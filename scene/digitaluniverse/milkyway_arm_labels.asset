@@ -1,0 +1,74 @@
+local textures = asset.resource({
+  Name = "Texturas del Plano de la Via Lactea",
+  Type = "HttpSynchronization",
+  Identifier = "digitaluniverse_milkyway_textures",
+  Version = 2
+})
+
+local speck = asset.resource({
+  Name = "Plano de la Via Lactea Speck",
+  Type = "HttpSynchronization",
+  Identifier = "digitaluniverse_milkyway_speck",
+  Version = 3
+})
+
+
+local Object = {
+  Identifier = "MilkyWayGalaxyArmLabelsImage",
+  Renderable = {
+    Type = "RenderablePointCloud",
+    Enabled = false,
+    Opacity = 0.99,
+    File = speck .. "galaxyArmLabels.speck",
+    Texture = {
+      Folder = textures
+    },
+    -- Use fixed orientation, and rotate planes based on orientation information in
+    -- the dataset
+    OrientationRenderOption = "Fixed Rotation",
+    UseOrientationData = true,
+    Unit = "pc",
+    Fading = {
+      FadeInDistances = { 8000.0, 140000.0 } -- Fade in value in the same unit as "Unit"
+    },
+    SizeSettings = {
+      SizeMapping = {
+        ParameterOptions = { "size" }
+      },
+      ScaleExponent = 16.936
+    },
+  },
+  GUI = {
+    Name = "Etiquetas de los Brazos de la Vía Láctea",
+    Path = "/Vía Láctea/Galaxia",
+    Description = [[Esta es una imagen que contiene etiquetas para los brazos espirales
+      de la Vía Láctea. Etiquetamos de esta manera--"codificando" las etiquetas en una imagen en lugar
+      de tener etiquetas nativas--para que puedan mantener su tamaño, forma y ubicación
+      mientras se superponen a la galaxia. Estas etiquetas están diseñadas para ser una guía, y se
+      mapean con mayor precisión a los diversos conjuntos de datos en el Universo Digital. Por ejemplo,
+      los púlsares, las regiones de formación estelar (HII) y los cúmulos abiertos muestran la estructura
+      espiral local. Podemos usar tendencias en estos conjuntos de datos para mapear los brazos de la Vía Láctea.
+      Censo: 1 imagen.]]
+  }
+}
+
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(Object)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(Object)
+end)
+
+asset.export(Object)
+
+
+
+asset.meta = {
+  Name = "Etiquetas de los Brazos de la Vía Láctea",
+  Description = Object.GUI.Description,
+  Author = "Brian Abbott (AMNH)",
+  URL = "https://www.amnh.org/research/hayden-planetarium/digital-universe",
+  License = "AMNH Digital Universe"
+}

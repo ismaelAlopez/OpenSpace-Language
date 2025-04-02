@@ -1,0 +1,82 @@
+local textures = asset.resource({
+  Name = "Texturas de Puntos",
+  Type = "HttpSynchronization",
+  Identifier = "digitaluniverse_point_textures",
+  Version = 1
+})
+
+local speck = asset.resource({
+  Name = "Archivos Speck de Quqsares",
+  Type = "HttpSynchronization",
+  Identifier = "digitaluniverse_quasars_speck",
+  Version = 3
+})
+
+local colormaps = asset.resource({
+  Name = "Mapa de Colores de Quasares",
+  Type = "HttpSynchronization",
+  Identifier = "digitaluniverse_quasars_colormap",
+  Version = 1
+})
+
+
+local Object = {
+  Identifier = "Quasars",
+  Renderable = {
+    Type = "RenderablePointCloud",
+    Enabled = true,
+    Opacity = 0.95,
+    File = speck .. "qso.speck",
+    Texture = {
+      File = textures .. "point3A.png",
+    },
+    Unit = "Mpc",
+    Fading = {
+      FadeInDistances = { 1000.0, 10000.0 } -- Fade in value in the same unit as "Unit"
+    },
+    Coloring = {
+      FixedColor = { 0.85, 0.35, 0.18 },
+      ColorMapping = {
+        Enabled = false,
+        File = colormaps .. "viridis.cmap",
+        ParameterOptions = {
+          { Key = "lookback_time", Range = { 1.4, 13.0 } }
+        }
+      }
+    },
+    SizeSettings = {
+      ScaleExponent = 23.5,
+      MaxSize = 0.3,
+      EnableMaxSizeControl = true
+    }
+  },
+  GUI = {
+    Name = "Quásares",
+    Path = "/Universo/Encuestas del Cielo Profundo",
+    Description = [[Los quásares son los objetos más distantes que vemos. Son galaxias
+      extremadamente activas que contienen agujeros negros supermasivos que devoran material
+      a un ritmo furioso. A medida que el material cae en el agujero negro, forma un disco y
+      emite luz de alta energía que vemos a grandes distancias. Censo: 755,850 quásares.]]
+  }
+}
+
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(Object)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(Object)
+end)
+
+asset.export(Object)
+
+
+
+asset.meta = {
+  Name = "Quásares",
+  Description = Object.GUI.Description,
+  Author = "Brian Abbott, Sohum Udani (AMNH)",
+  URL = "https://www.amnh.org/research/hayden-planetarium/digital-universe",
+  License = "AMNH Digital Universe"
+}

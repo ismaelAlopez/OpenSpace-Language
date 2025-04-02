@@ -1,0 +1,186 @@
+local sun = asset.require("scene/solarsystem/sun/transforms")
+local transforms = asset.require("./transforms")
+
+
+
+local sync = asset.resource({
+  Name = "Modelo de la Nebulosa de Orion",
+  Type = "HttpSynchronization",
+  Identifier = "orion_nebula_model",
+  Version = 2
+})
+
+
+local NebulaHolder = {
+  Identifier = "OrionNebulaHolder",
+  Parent = transforms.NebulaPosition.Identifier,
+  Transform = {
+    Scale = {
+      Type = "StaticScale",
+      Scale = 35999998699110400.0
+    },
+    Rotation = {
+      Type = "FixedRotation",
+      Attached = "OrionNebulaHolder",
+      XAxis = { 1.0, 1.0, 0.51 },
+      XAxisOrthogonal = true,
+      YAxis = "Sun",
+      YAxisInverted = false
+    }
+  },
+  GUI = {
+    Name = "Nebulosa de Orión",
+    Path = "/Vía Láctea/Orión",
+    Description = [[En el modelo del Universo Digital de la Nebulosa de Orión, representamos
+      el frente de ionización efectivamente como un terreno, con una imagen plana del Hubble
+      de la nebulosa mapeada en la superficie ondulante. En realidad, el frente de ionización
+      tiene un grosor leve, de aproximadamente un tercio de un año luz, pero es bastante delgado
+      en comparación con el tamaño total de la nebulosa, que se extiende unos diez años luz de
+      lado a lado.
+      <br><br>En el centro, vemos pequeñas estructuras en forma de lágrima con sus extremos
+      estrechos apuntando lejos de la estrella brillante: estos son discos protoplanetarios, o
+      proplyds, de gas y polvo densos que rodean estrellas jóvenes. Las formaciones más grandes
+      que se ven más lejos del centro de la nebulosa tienen una forma de copa, con el extremo
+      estrecho apuntando lejos del centro de la nebulosa. Estas enormes estructuras son choques
+      de arco que delinean la región donde los vientos de alta velocidad de la estrella central
+      disminuyen de velocidades supersónicas a subsónicas. Puedes pensar en una región HII como
+      una especie de tremenda explosión, que ocurre durante milenios, y los choques de arco son
+      parte de la expansión del material]]
+  }
+}
+
+local OrionNebulaModel = {
+  Identifier = "OrionNebulaModel",
+  Parent = NebulaHolder.Identifier,
+  Transform = {
+    Scale = {
+      Type = "StaticScale",
+      Scale = 0.675
+    }
+  },
+  InteractionSphere = 0.8,
+  Renderable = {
+    Type = "RenderableModel",
+    GeometryFile = sync .. "orion_nebula.obj",
+    Opacity = 1.0,
+    EnableFaceCulling = false,
+    SpecularIntensity = 0.0,
+    AmbientIntensity = 0.0,
+    DiffuseIntensity = 1.0,
+    --PerformShading = false,
+    RotationVector = { 0.0, 22.3, 0.0 },
+    LightSources = {
+      sun.LightSource,
+      {
+        Identifier = "Camera",
+        Type = "CameraLightSource",
+        Intensity = 0.5
+      }
+    }
+  },
+  GUI = {
+    Name = "Modelo de la Nebulosa de Orion",
+    Path = "/Vía Láctea/Orión",
+    Description = "Modelo 3D de la Nebulosa de Orión. Ver Nebulosa de Orión para descripción"
+  }
+}
+
+local OrionNebulaShocksModel = {
+  Identifier = "OrionNebulaShocksModel",
+  Parent = NebulaHolder.Identifier,
+  Transform = {
+    Scale = {
+      Type = "StaticScale",
+      Scale = 0.675
+    }
+  },
+  Renderable = {
+    Type = "RenderableModel",
+    GeometryFile = sync .. "orishocks.obj",
+    Opacity = 1.0,
+    SpecularIntensity = 0.0,
+    AmbientIntensity = 0.0,
+    DiffuseIntensity = 1.0,
+    --PerformShading = false,
+    RotationVector = { 0.0, 22.3, 0.0 },
+    LightSources = {
+      sun.LightSource,
+      {
+        Identifier = "Camera",
+        Type = "CameraLightSource",
+        Intensity = 0.5
+      }
+    }
+  },
+  GUI = {
+    Name = "Choques de la Nebulosa de Orión",
+    Path = "/Vía Láctea/Orión",
+    Description = "Modelo 3D de los choques de la Nebulosa de Orión. Ver Nebulosa de Orión para descripción"
+  }
+}
+
+local OrionNebulaProplydsModel = {
+  Identifier = "OrionNebulaProplydsModel",
+  Parent = NebulaHolder.Identifier,
+  Transform = {
+    Scale = {
+      Type = "StaticScale",
+      Scale = 0.675
+    }
+  },
+  Renderable = {
+    Type = "RenderableModel",
+    GeometryFile = sync .. "proplyds.obj",
+    Opacity = 1.0,
+    SpecularIntensity = 0.0,
+    AmbientIntensity = 0.0,
+    DiffuseIntensity = 1.0,
+    --PerformShading = false,
+    RotationVector = { 0.0, 22.3, 0.0 },
+    LightSources = {
+      sun.LightSource,
+      {
+        Identifier = "Camera",
+        Type = "CameraLightSource",
+        Intensity = 0.5
+      }
+    }
+  },
+  GUI = {
+    Name = "Proplyds de la Nebulosa de Orion",
+    Path = "/Vía Láctea/Orión",
+    Description = "Modelo 3D de los proplyds de la Nebulosa de Orión. Ver Nebulosa de Orión para descripción"
+  }
+}
+
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(NebulaHolder)
+  openspace.addSceneGraphNode(OrionNebulaModel)
+  openspace.addSceneGraphNode(OrionNebulaShocksModel)
+  openspace.addSceneGraphNode(OrionNebulaProplydsModel)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(OrionNebulaProplydsModel)
+  openspace.removeSceneGraphNode(OrionNebulaShocksModel)
+  openspace.removeSceneGraphNode(OrionNebulaModel)
+  openspace.removeSceneGraphNode(NebulaHolder)
+end)
+
+asset.export(NebulaHolder)
+asset.export(OrionNebulaModel)
+asset.export(OrionNebulaShocksModel)
+asset.export(OrionNebulaProplydsModel)
+
+
+
+asset.meta = {
+  Name = "Modelo de la Nebulosa de Orión",
+  Description = [[Activo del Universo Digital para el modelo 3D de la Nebulosa de Orión. Este activo
+    contiene modelos separados para la nebulosa, proplyds y choques. Para ser usado en
+    conjunto con el cúmulo estelar de Orión. Usa orionnebula.asset para incluir ambos]],
+  Author = "Universo Digital AMNH",
+  URL = "https://www.amnh.org/research/hayden-planetarium/digital-universe",
+  License = "Universo Digital AMNH"
+}

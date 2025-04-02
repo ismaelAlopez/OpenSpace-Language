@@ -1,0 +1,75 @@
+local textures = asset.resource({
+  Name = "Texturas de Puntos",
+  Type = "HttpSynchronization",
+  Identifier = "digitaluniverse_point_textures",
+  Version = 1
+})
+
+local speck = asset.resource({
+  Name = "Archivos Speck de 2MASS",
+  Type = "HttpSynchronization",
+  Identifier = "digitaluniverse_2mass_speck",
+  Version = 2
+})
+
+
+local Object = {
+  Identifier = "2MASS",
+  Renderable = {
+    Type = "RenderablePointCloud",
+    Enabled = false,
+    Opacity = 1.0,
+    File = speck .. "2MASS.speck",
+    Unit = "Mpc",
+    Texture = {
+      File = textures .. "point3A.png",
+    },
+    Coloring = {
+      FixedColor = { 1.0, 0.4, 0.2 },
+      ColorMapping = {
+        File = speck .. "lss.cmap",
+        ParameterOptions = {
+          { Key = "prox5Mpc", Range = { 1.0, 50.0 } },
+          { Key = "redshift", Range = { 0.0, 0.075 } }
+        }
+      }
+    },
+    SizeSettings = {
+      ScaleExponent = 22.2,
+      MaxSize = 0.44,
+      EnableMaxSizeControl = true
+    }
+  },
+  GUI = {
+    Name = "Galaxias 2MASS",
+    Path = "/Universo/Encuestas Cercanas",
+    Description = [[La Encuesta de Todo el Cielo en Dos Micrones (2MASS) es una encuesta
+      infrarroja del cielo publicada en 2003. Tomada desde dos telescopios en Arizona y Chile,
+      ofrece una vista de todo el cielo de galaxias más allá de la Vía Láctea. Debido a que es
+      infrarroja, la luz detectada proviene principalmente de estrellas frías dentro de las
+      galaxias, que comprenden la mayoría de la masa en una galaxia. Colores: Las galaxias
+      naranjas muestran regiones densas de galaxias, las galaxias aqua son áreas de densidad
+      intermedia, y las galaxias verdes son áreas de menor densidad. Censo: 43,533 galaxias.]]
+  }
+}
+
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(Object)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(Object)
+end)
+
+asset.export(Object)
+
+
+
+asset.meta = {
+  Name = "Galaxias 2MASS",
+  Description = Object.GUI.Description,
+  Author = "Brian Abbott (AMNH)",
+  URL = "https://www.amnh.org/research/hayden-planetarium/digital-universe",
+  License = "AMNH Digital Universe"
+}

@@ -1,0 +1,86 @@
+local textures = asset.resource({
+  Name = "Texturas de Puntos",
+  Type = "HttpSynchronization",
+  Identifier = "digitaluniverse_point_textures",
+  Version = 1
+})
+
+local speck = asset.resource({
+  Name = "Archivos Speck de Abell",
+  Type = "HttpSynchronization",
+  Identifier = "digitaluniverse_abell_speck",
+  Version = 3
+})
+
+
+local TransformMatrix = {
+  -0.7357425748,    0.67726129641,  0.0,           0.0,
+  -0.074553778365, -0.080991471307, 0.9939225904,  0.0,
+  0.67314530211,    0.73127116582,  0.11008126223, 0.0,
+  0.0,              0.0,            0.0,           1.0
+}
+
+local Object = {
+  Identifier = "Abell",
+  Renderable = {
+    Type = "RenderablePointCloud",
+    Enabled = false,
+    File = speck .. "abell.speck",
+    Labels = {
+      File = speck .. "abell.label",
+      Opacity = 1.0,
+      Color = { 0.0, 0.8, 0.0 },
+      Size = 21.2,
+      MinMaxSize = { 10, 12 },
+      Unit = "Mpc",
+      TransformationMatrix = TransformMatrix
+    },
+    Opacity = 1.0,
+    Coloring = {
+      FixedColor = { 1.0, 0.4, 0.2 },
+      --ColorMap = speck .. "abell.cmap", -- TODO: Decide whether to add
+    },
+    Texture = {
+      File = textures .. "point3A.png",
+    },
+    Unit = "Mpc",
+    TransformationMatrix = TransformMatrix,
+    SizeSettings = {
+      ScaleExponent = 23.2,
+      MaxSize = 0.27,
+      EnableMaxSizeControl = true
+    }
+  },
+  GUI = {
+    Name = "Cúmulos de Galaxias Abell",
+    Path = "/Universo/Encuestas del Cielo Profundo",
+    Description = [[El catálogo Abell incluye todos los cúmulos de galaxias cercanos, y no tan cercanos. 
+      La encuesta del hemisferio norte, publicada en 1958, fue compilada por George Abell a partir de las 
+      placas del Palomar Sky Survey. Un catálogo posterior del hemisferio sur fue publicado póstumamente 
+      en 1989. Cada punto en este conjunto de datos representa un cúmulo de decenas a cientos (posiblemente 
+      incluso miles) de galaxias, similar a los cúmulos de Virgo o Fornax. Los datos tienen un límite 
+      arbitrario para la integridad, lo que resulta en la forma rectangular del conjunto de datos. Censo: 
+      2,246 cúmulos de galaxias.]]
+  }
+}
+
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(Object)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(Object)
+end)
+
+asset.export(Object)
+
+
+
+asset.meta = {
+  Name = "Cúmulos de Galaxias Abell",
+  Description = Object.GUI.Description,
+  Author = "Stuart Levy (NCSA/UIUC), Brian Abbott (AMNH)",
+  URL = "https://www.amnh.org/research/hayden-planetarium/digital-universe",
+  License = "AMNH Digital Universe"
+}

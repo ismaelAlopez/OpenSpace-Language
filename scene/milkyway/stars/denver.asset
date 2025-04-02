@@ -1,0 +1,71 @@
+local textures = asset.resource({
+  Name = "Texturas de Estrellas",
+  Type = "HttpSynchronization",
+  Identifier = "stars-denver_textures",
+  Version = 1
+})
+
+local speck = asset.resource({
+  Name = "Archivo Speck de Estrellas",
+  Type = "HttpSynchronization",
+  Identifier = "stars-denver_speck",
+  Version = 1
+})
+
+local colorLUT = asset.resource({
+  Name = "Tabla de Color de Estrellas",
+  Type = "HttpSynchronization",
+  Identifier = "stars-denver_colormap",
+  Version = 2
+})
+
+
+local Object = {
+  Identifier = "Stars-Denver",
+  Renderable = {
+    Type = "RenderableStars",
+    File = speck .. "denver_stars.speck",
+    Glare = {
+      Texture = textures .. "halo.png"
+    },
+    ColorMap = colorLUT .. "denver_colorbv.cmap",
+    MagnitudeExponent = 6.2,
+    SizeComposition = "Distance Modulus",
+    DataMapping = {
+      Bv = "colorb_v",
+      Luminance = "lum",
+      AbsoluteMagnitude = "absmag",
+      ApparentMagnitude = "appmag",
+      Vx = "vx",
+      Vy = "vy",
+      Vz = "vz",
+      Speed = "speed"
+    }
+  },
+  GUI = {
+    Name = "Estrellas (Denver)",
+    Path = "/Vía Láctea/Estrellas"
+  }
+}
+
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(Object)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(Object)
+end)
+
+asset.export(Object)
+
+
+
+asset.meta = {
+  Name = "Estrellas Denver",
+  Description = [[Atlas alternativo de la Vía Láctea: basado en los catálogos HIPPARCOS y Yale Bright
+    Star]],
+  Author = "Ka chun Yu",
+  URL = "http://openspaceproject.com",
+  License = "Creative Commons Attribution-Share Alike 3.0 Unported"
+}

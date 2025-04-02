@@ -1,0 +1,29 @@
+-- This is a blank scene that that just sets up the default menus/dasboard/keys, etc.
+
+-- Specifying which other assets should be loaded in this scene
+asset.require("spice/core")
+
+asset.require("dashboard/default_dashboard")
+-- Load default key bindings applicable to most scenes
+asset.require("./default_keybindings")
+
+-- Load web gui
+local webGui = asset.require("util/webgui")
+
+-- Scale the different UI components based on the operating system's DPI scaling value
+asset.require("util/dpiscaling")
+
+-- Load the images required for the launcher to show up
+asset.require("util/launcher_images")
+
+-- Modules and component settings
+asset.require("modules/touch/default_settings")
+
+-- load language  
+-- asset.require("util/language")
+
+asset.onInitialize(function()
+  webGui.setCefRoute("onscreen")
+  openspace.setDefaultGuiSorting()
+  openspace.setPropertyValueSingle("RenderEngine.VerticalLogOffset", 0.100000)
+end)

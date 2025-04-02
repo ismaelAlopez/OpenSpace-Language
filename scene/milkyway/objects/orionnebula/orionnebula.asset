@@ -1,0 +1,12 @@
+asset.require("./cluster")
+asset.require("./nebula")
+
+
+asset.meta = {
+  Name = "Nebulosa de Orión",
+  Description = [[Este recurso es un recurso meta, que contiene todos los recursos para la
+    Nebulosa de Orión del Universo Digital de AMNH. Esto incluye un modelo 3D y un cúmulo estelar]],
+  Author = "Brian Abbott (AMNH)",
+  URL = "https://www.amnh.org/research/hayden-planetarium/digital-universe",
+  License = "AMNH Digital Universe"
+}

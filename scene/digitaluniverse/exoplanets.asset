@@ -1,0 +1,73 @@
+local textures = asset.resource({
+  Name = "Texturas de Exoplanetas",
+  Type = "HttpSynchronization",
+  Identifier = "digitaluniverse_exoplanets_textures",
+  Version = 1
+})
+
+local speck = asset.resource({
+  Name = "Archivos Speck de Exoplanetas",
+  Type = "HttpSynchronization",
+  Identifier = "digitaluniverse_exoplanets_speck",
+  Version = 4
+})
+
+
+local Object = {
+  Identifier = "Exoplanets",
+  Renderable = {
+    Type = "RenderablePointCloud",
+    Enabled = false,
+    File = speck .. "expl.speck",
+    Labels = {
+      File = speck .. "expl.label",
+      Color = { 0.3, 0.3, 0.8 },
+      Size = 13.75,
+      MinMaxSize = { 10, 100 },
+      Unit = "pc"
+    },
+    Opacity = 1.0,
+    Texture = {
+      File = textures .. "target-blue.png",
+    },
+    Unit = "pc",
+    SizeSettings = {
+      ScaleExponent = 16.9,
+      MaxSize = 2.8,
+      EnableMaxSizeControl = true
+    }
+  },
+  GUI = {
+    Name = "Exoplanetas",
+    Path = "/Vía Láctea/Exoplanetas",
+    Description = [[Los planetas extrasolares, o exoplanetas, son un fenómeno relativamente
+      nuevo en la astronomía: no se disponía de evidencia observacional hasta 1995. A simple
+      vista, los exoplanetas se pierden en el resplandor de su estrella anfitriona. Se requieren
+      técnicas no convencionales para inferirlos u observarlos. Aquí, los sistemas de exoplanetas
+      están representados por un anillo azul centrado en cada estrella anfitriona. El anillo no
+      pretende significar una órbita, sino servir solo como un marcador. Las etiquetas enumeran
+      el nombre de la estrella anfitriona y, si hay más de un planeta, enumerarán el número de
+      planetas entre paréntesis. Censo: 5,589 planetas en 4,139 sistemas.]]
+  }
+}
+
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(Object)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(Object)
+end)
+
+asset.export(Object)
+
+
+
+asset.meta = {
+  Name = "Exoplanetas",
+  Description = Object.GUI.Description,
+  Author = "Brian Abbott, Zack Reeves (AMNH)",
+  URL = "https://www.amnh.org/research/hayden-planetarium/digital-universe",
+  License = "AMNH Digital Universe"
+}

@@ -1,0 +1,139 @@
+local constellations_helper = asset.require("util/constellations_helper")
+
+
+
+local speck = asset.resource({
+  Name = "Archivos de Constelaciones",
+  Type = "HttpSynchronization",
+  Identifier = "digitaluniverse_constellations_data",
+  Version = 3
+})
+
+
+local zodiacs = {
+  "CNC", "TAU", "PSC", "ARI", "LIB", "AQR", "CAP", "SCO", "VIR", "SGR", "GEM", "LEO"
+}
+
+local function zodiacsString(zodiacsList)
+  local zodiacsString = "{"
+  local isFirst = true
+
+  for k, zodiac in pairs(zodiacsList) do
+    local fullName = constellations_helper.findFullName(zodiac)
+    if fullName ~= nil then
+      if isFirst then
+        isFirst = false
+      else
+        zodiacsString = zodiacsString .. ", "
+      end
+
+      zodiacsString = zodiacsString .. [["]] .. fullName .. [["]]
+    end
+  end
+
+  zodiacsString = zodiacsString .. "}"
+  return zodiacsString
+end
+
+
+local Constellations = {
+  Identifier = "Constellations",
+  Renderable = {
+    Type = "RenderableConstellationLines",
+    Enabled = false,
+    Labels = {
+      File = speck .. "constellation_lines.label",
+      Opacity = 0.3,
+      Color = { 0.8, 0.8, 0.8 },
+      Size = 14.5,
+      MinMaxSize = { 8, 170 },
+      Unit = "pc"
+    },
+    Opacity = 0.3,
+    File = speck .. "constellation_lines.speck",
+    NamesFile = speck .. "constellations.dat",
+    Colors = { { 0.6, 0.4, 0.4 }, { 0.8, 0.0, 0.0 }, { 0.0, 0.3, 0.8 } },
+    Unit = "pc",
+    DimInAtmosphere = true
+  },
+  Tag = { "daytime_hidden" },
+  GUI = {
+    Name = "Líneas de Constelaciones",
+    Path = "/Vía Láctea/Constelaciones",
+    Description = [[Líneas que conectan las estrellas que forman las figuras de las constelaciones.
+      Representamos las constelaciones conectando las estrellas principales que forman las
+      "figuras de palo" de las constelaciones, tal como se ven desde la Tierra. Colores: la mayoría
+      de las constelaciones son rosadas, mientras que las constelaciones zodiacales son rojas.
+      También coloreamos Orión y la Osa Mayor de azul como dos constelaciones reconocibles en el
+      cielo nocturno. Censo: 88 constelaciones.]]
+  }
+}
+
+local zodiacsString = zodiacsString(zodiacs)
+
+-- Actions
+local ShowConstellations = {
+  Identifier = "os.constellations.ShowConstellations",
+  Name = "Mostrar todas",
+  Command = [[
+    openspace.setPropertyValueSingle("Scene.Constellations.Renderable.ConstellationSelection", {})
+    openspace.fadeIn("Scene.Constellations.Renderable")
+  ]],
+  Documentation = "Muestra todas las líneas de las constelaciones",
+  GuiPath = "/Constelaciones/Líneas",
+  IsLocal = false
+}
+
+local HideConstellations = {
+  Identifier = "os.constellations.HideConstellations",
+  Name = "Ocultar todas",
+  Command = [[
+    openspace.fadeOut("Scene.Constellations.Renderable", nil, "openspace.setPropertyValueSingle('Scene.Constellations.Renderable.Enabled', false); openspace.setPropertyValueSingle('Scene.Constellations.Renderable.ConstellationSelection', {})")
+  ]],
+  Documentation = "Oculta todas las líneas de las constelaciones",
+  GuiPath = "/Constelaciones/Líneas",
+  IsLocal = false
+}
+
+local ShowZodiacs = {
+  Identifier = "os.constellation.ShowZodiacs",
+  Name = "Mostrar zodiaco",
+  Command = [[
+    openspace.setPropertyValueSingle("Scene.Constellations.Renderable.ConstellationSelection", ]] .. zodiacsString .. [[)
+    openspace.fadeIn("Scene.Constellations.Renderable")
+  ]],
+  Documentation = "Muestra las líneas de las constelaciones zodiacales",
+  GuiPath = "/Constelaciones/Líneas",
+  IsLocal = false
+}
+
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(Constellations)
+
+  openspace.action.registerAction(ShowConstellations)
+  openspace.action.registerAction(HideConstellations)
+  openspace.action.registerAction(ShowZodiacs)
+end)
+
+asset.onDeinitialize(function()
+  openspace.action.removeAction(ShowZodiacs)
+  openspace.action.removeAction(HideConstellations)
+  openspace.action.removeAction(ShowConstellations)
+
+  openspace.removeSceneGraphNode(Constellations)
+end)
+
+asset.export(Constellations)
+asset.export("ShowConstellations", ShowConstellations.Identifier)
+asset.export("HideConstellations", HideConstellations.Identifier)
+asset.export("ShowZodiacs", ShowZodiacs.Identifier)
+
+
+
+asset.meta = {
+  Description = Constellations.GUI.Description,
+  Author = "Brian Abbott, Zack Reeves (AMNH)",
+  URL = "https://www.amnh.org/research/hayden-planetarium/digital-universe",
+  License = "AMNH Digital Universe"
+}

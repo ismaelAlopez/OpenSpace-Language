@@ -1,0 +1,155 @@
+local textures = asset.resource({
+  Name = "Texturas de Radiacion de Fondo",
+  Type = "HttpSynchronization",
+  Identifier = "digitaluniverse_backgroundradiation_textures",
+  Version = 2
+})
+
+
+local PlanckMultiverse1 = {
+  Identifier = "PlanckMultiverse1",
+  Transform = {
+    Translation = {
+      Type = "StaticTranslation",
+      Position = { 0.0, 0.0, 2000E23 }
+    },
+    Rotation = {
+      Type = "StaticRotation",
+      Rotation = { 0, 0, math.pi }
+    }
+  },
+  Renderable = {
+    Type = "RenderableSphereImageLocal",
+    Enabled = false,
+    Size = 3975.41417036064E23,
+    Segments = 80,
+    Opacity = 0.3,
+    Texture = textures .. "cmb4k.jpg",
+    Orientation = "Both",
+    MirrorTexture = true,
+    FadeInThreshold = 0.4
+  },
+  GUI = {
+    Name = "Planck Multiverso 1",
+    Path = "/Universo/Fondo de Microondas Cósmico"
+  }
+}
+
+local PlanckMultiverse2 = {
+  Identifier = "PlanckMultiverse2",
+  Transform = {
+    Translation = {
+      Type = "StaticTranslation",
+      Position = { 2500E23, 0.0, 2000E23}
+    },
+    Rotation = {
+      Type = "StaticRotation",
+      Rotation = { 0, 0, math.pi }
+    }
+  },
+  Renderable = {
+    Type = "RenderableSphereImageLocal",
+    Enabled = false,
+    Size = 3975.41417036064E23,
+    Segments = 80,
+    Opacity = 0.3,
+    Texture = textures .. "cmb4k.jpg",
+    Orientation = "Both",
+    MirrorTexture = true,
+    FadeInThreshold = 0.4
+  },
+  GUI = {
+    Name = "Planck Multiverso 2",
+    Path = "/Universo/Fondo de Microondas Cósmico"
+  }
+}
+
+local PlanckMultiverse3 = {
+  Identifier = "PlanckMultiverse3",
+  Transform = {
+    Translation = {
+      Type = "StaticTranslation",
+      Position = { 2500E23, 5000E23, 2000E23}
+    },
+    Rotation = {
+      Type = "StaticRotation",
+      Rotation = { 0, 0, math.pi }
+    }
+  },
+  Renderable = {
+    Type = "RenderableSphereImageLocal",
+    Enabled = false,
+    Size = 3975.41417036064E23,
+    Segments = 80,
+    Opacity = 0.3,
+    Texture = textures .. "cmb4k.jpg",
+    Orientation = "Both",
+    MirrorTexture = true,
+    FadeInThreshold = 0.4
+  },
+  GUI = {
+    Name = "Planck Multiverso 3",
+    Path = "/Universo/Fondo de Microondas Cósmico"
+  }
+}
+
+local PlanckMultiverse4 = {
+  Identifier = "PlanckMultiverse4",
+  Transform = {
+    Translation = {
+      Type = "StaticTranslation",
+      Position = { 0.0, 10000E23, 0.0 }
+    },
+    Rotation = {
+      Type = "StaticRotation",
+      Rotation = { 0, 0, math.pi }
+    }
+  },
+  Renderable = {
+    Type = "RenderableSphereImageLocal",
+    Enabled = false,
+    Size = 3975.41417036064E23,
+    Segments = 80,
+    Opacity = 0.3,
+    Texture = textures .. "cmb4k.jpg",
+    Orientation = "Both",
+    MirrorTexture = true,
+    FadeInThreshold = 0.4
+  },
+  GUI = {
+    Name = "Planck Multiverso 4",
+    Path = "/Universo/Fondo de Microondas Cósmico"
+  }
+}
+
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(PlanckMultiverse1)
+  openspace.addSceneGraphNode(PlanckMultiverse2)
+  openspace.addSceneGraphNode(PlanckMultiverse3)
+  openspace.addSceneGraphNode(PlanckMultiverse4)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(PlanckMultiverse4)
+  openspace.removeSceneGraphNode(PlanckMultiverse3)
+  openspace.removeSceneGraphNode(PlanckMultiverse2)
+  openspace.removeSceneGraphNode(PlanckMultiverse1)
+end)
+
+asset.export(PlanckMultiverse1)
+asset.export(PlanckMultiverse2)
+asset.export(PlanckMultiverse3)
+asset.export(PlanckMultiverse4)
+
+
+
+asset.meta = {
+  Name = "Radiación de Fondo del Multiverso",
+  Description = [[Representación no física de la ubicación de imágenes hipotéticas de la
+    radiación cósmica de fondo de microondas tal como se observarían desde otras ubicaciones
+    en el universo. <br> Este no es un conjunto de datos medidos]],
+  Author = "Brian Abbott (AMNH), OpenSpace Team",
+  URL = "https://www.amnh.org/research/hayden-planetarium/digital-universe",
+  License = "AMNH Digital Universe"
+}

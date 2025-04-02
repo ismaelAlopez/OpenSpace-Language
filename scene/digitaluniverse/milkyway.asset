@@ -1,0 +1,73 @@
+local textures = asset.resource({
+  Name = "Texturas del Plano de la Via Lactea",
+  Type = "HttpSynchronization",
+  Identifier = "digitaluniverse_milkyway_textures",
+  Version = 2
+})
+
+local speck = asset.resource({
+  Name = "Plano de la Via Lactea Speck",
+  Type = "HttpSynchronization",
+  Identifier = "digitaluniverse_milkyway_speck",
+  Version = 3
+})
+
+
+local Object = {
+  Identifier = "MilkyWayGalaxyImage",
+  Renderable = {
+    Type = "RenderablePointCloud",
+    Opacity = 0.99,
+    File = speck .. "galaxy.speck",
+    Texture = {
+      Folder = textures
+    },
+    -- Use fixed orientation, and rotate planes based on orientation information in
+    -- the dataset
+    OrientationRenderOption = "Fixed Rotation",
+    UseOrientationData = true,
+    Unit = "pc",
+    Fading = {
+      FadeInDistances = { 16000.0, 100000.0 } -- Fade in value in the same unit as "Unit"
+    },
+    SizeSettings = {
+      SizeMapping = {
+        ParameterOptions = { "size" }
+      },
+      ScaleExponent = 16.936
+    },
+  },
+  GUI = {
+    Name = "Imagen de la Galaxia Vía Láctea",
+    Path = "/Vía Láctea/Galaxia",
+    Description = [[La vista exterior de la Vía Láctea está representada aquí por una
+      imagen bidimensional. La imagen es de NGC 1232, una galaxia que se cree que se
+      asemeja a nuestra Vía Láctea. La imagen ha sido debidamente dimensionada y
+      aproximadamente orientada para funcionar como un marcador de posición, permitiendo
+      ver el contexto de la Galaxia en relación con otros datos en el atlas. Las
+      características que ves en la imagen, por supuesto, no representan nuestra Galaxia
+      como tal, pero se asemejan a características similares que se encuentran en
+      nuestra Galaxia. Censo: 1 imagen.]]
+  }
+}
+
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(Object)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(Object)
+end)
+
+asset.export(Object)
+
+
+
+asset.meta = {
+  Name = "Galaxia Vía Láctea",
+  Description = Object.GUI.Description,
+  Author = "Brian Abbott, Carter Emmart (AMNH)",
+  URL = "https://www.amnh.org/research/hayden-planetarium/digital-universe",
+  License = "AMNH Digital Universe"
+}

@@ -1,0 +1,76 @@
+local textures = asset.resource({
+  Name = "Texturas de Pulsares",
+  Type = "HttpSynchronization",
+  Identifier = "digitaluniverse_pulsars_textures",
+  Version = 1
+})
+
+local speck = asset.resource({
+  Name = "Archivos Speck de Pulsares",
+  Type = "HttpSynchronization",
+  Identifier = "digitaluniverse_pulsars_speck",
+  Version = 3
+})
+
+
+local Object = {
+  Identifier = "Pulsars",
+  Renderable = {
+    Type = "RenderablePolygonCloud",
+    Enabled = false,
+    Labels = {
+      File = speck .. "pulsars.label",
+      Color = { 0.75, 0.21, 0.21 },
+      Size = 15.27,
+      MinMaxSize = { 4, 20 },
+      Unit = "pc"
+    },
+    Coloring = {
+      FixedColor = { 0.7, 0.0, 0.0 }
+    },
+    Opacity = 1.0,
+    File = speck .. "pulsars.speck",
+    PolygonSides = 4,
+    Unit = "pc",
+    SizeSettings = {
+      ScaleExponent = 18.1,
+      MaxSize = 19.0,
+      EnableMaxSizeControl = true
+    }
+  },
+  GUI = {
+    Name = "Púlsares",
+    Path = "/Vía Láctea/Restos Estelares",
+    Description = [[Un púlsar es una estrella de neutrones giratoria, un remanente estelar
+      ultra-denso que resulta del colapso del núcleo estelar impulsado por una supernova.
+      Al morir, las estrellas dejan uno de tres posibles remanentes: una enana blanca,
+      una estrella de neutrones o un agujero negro. Las estrellas que son más masivas
+      que el sol a menudo se convierten en estrellas de neutrones en una violenta
+      explosión llamada supernova. Los púlsares no están pulsando, sino que son estrellas
+      de neutrones giratorias cuyos haces de radiación apuntan hacia la Tierra, al igual
+      que un faro barre el horizonte. Sus fuertes campos magnéticos canalizan haces de
+      luz desde sus polos. Cuando estos haces apuntan hacia la Tierra, vemos una fuerte
+      señal de radio. Censo: 3,221 púlsares.]]
+  }
+}
+
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(Object)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(Object)
+end)
+
+asset.export(Object)
+
+
+
+asset.meta = {
+  Name = "Púlsares",
+  Description = Object.GUI.Description,
+  Author = "Brian Abbott, Zack Reeves (AMNH)",
+  URL = "https://www.amnh.org/research/hayden-planetarium/digital-universe",
+  License = "AMNH Digital Universe"
+}

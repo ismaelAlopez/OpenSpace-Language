@@ -1,0 +1,70 @@
+local textures = asset.resource({
+  Name = "Texturas de Cumulos Globulares",
+  Type = "HttpSynchronization",
+  Identifier = "digitaluniverse_globularclusters_textures",
+  Version = 1
+})
+
+local speck = asset.resource({
+  Name = "Archivos Speck de Cumulos Globulares",
+  Type = "HttpSynchronization",
+  Identifier = "digitaluniverse_globularclusters_speck",
+  Version = 3
+})
+
+
+local Object = {
+  Identifier = "GlobularClusters",
+  Renderable = {
+    Type = "RenderablePolygonCloud",
+    Enabled = false,
+    Labels = {
+      File = speck .. "gc.label",
+      Color = { 0.36, 0.36, 0.0 },
+      Size = 16.7,
+      MinMaxSize = { 4, 20 },
+      Unit = "pc"
+    },
+    Coloring = {
+      FixedColor = { 0.8, 0.8, 0.0 }
+    },
+    Opacity = 0.65,
+    File = speck .. "gc.speck",
+    PolygonSides = 5,
+    Unit = "pc",
+    SizeSettings = {
+      ScaleExponent = 18.6,
+      MaxSize = 13.0,
+      EnableMaxSizeControl = true
+    }
+  },
+  GUI = {
+    Name = "Cúmulos Globulares",
+    Path = "/Vía Láctea/Cúmulos Estelares",
+    Description = [[Los cúmulos estelares globulares son grupos gravitacionalmente ligados de 100,000
+      a 1 millón de estrellas. Son "esferas" compactas de estrellas con densidades estelares muy altas.
+      Estos cúmulos tienen típicamente de 30 a 100 años luz de diámetro.
+      Censo: 161 cúmulos globulares.]]
+  }
+}
+
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(Object)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(Object)
+end)
+
+asset.export(Object)
+
+
+
+asset.meta = {
+  Name = "Cúmulos Globulares",
+  Description = Object.GUI.Description,
+  Author = "Brian Abbott, Zack Reeves (AMNH)",
+  URL = "https://www.amnh.org/research/hayden-planetarium/digital-universe",
+  License = "AMNH Digital Universe"
+}

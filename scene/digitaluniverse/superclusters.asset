@@ -1,0 +1,73 @@
+local textures = asset.resource({
+  Name = "Texturas de Puntos",
+  Type = "HttpSynchronization",
+  Identifier = "digitaluniverse_point_textures",
+  Version = 1
+})
+
+local speck = asset.resource({
+  Name = "Galaxy Superclusters Speck Files",
+  Type = "HttpSynchronization",
+  Identifier = "digitaluniverse_superclusters_speck",
+  Version = 2
+})
+
+
+local Object = {
+  Identifier = "GalaxySuperclusters",
+  Renderable = {
+    Type = "RenderablePointCloud",
+    Enabled = false,
+    File = speck .. "superclust.speck",
+    Labels = {
+      Enabled = true,
+      File = speck .. "superclust.label",
+      Color = { 0.9, 0.9, 0.9 },
+      Size = 22.44,
+      MinMaxSize = { 8, 20 },
+      Unit = "Mpc"
+    },
+    DrawElements = false,
+    Opacity = 0.65,
+    Texture = {
+      File = textures .. "point3A.png",
+    },
+    Unit = "Mpc",
+    SizeSettings = {
+      ScaleExponent = 23.1,
+      MaxSize = 0.2,
+      EnableMaxSizeControl = true
+    }
+  },
+  GUI = {
+    Name = "Etiquetas de Supercúmulos",
+    Path = "/Universo/Encuestas del Cielo Profundo",
+    Description = [[El conjunto de datos de supercúmulos es un conjunto de etiquetas que marcan los principales
+      supercúmulos de galaxias en el universo local. Corresponden y deben visualizarse
+      con los cúmulos de Abell. Los astrónomos estiman que hay 10 millones de supercúmulos en
+      el universo observable. A menudo, llevan nombres de constelaciones porque se ven
+      en esas constelaciones desde nuestra perspectiva del cielo nocturno. Censo: 33
+      etiquetas de supercúmulos.]]
+  }
+}
+
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(Object)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(Object)
+end)
+
+asset.export(Object)
+
+
+
+asset.meta = {
+  Name = "Supercúmulos de Galaxias",
+  Description = Object.GUI.Description,
+  Author = "Brian Abbott (AMNH)",
+  URL = "https://www.amnh.org/research/hayden-planetarium/digital-universe",
+  License = "AMNH Digital Universe"
+}

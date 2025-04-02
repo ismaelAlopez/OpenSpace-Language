@@ -1,0 +1,72 @@
+local textures = asset.resource({
+  Name = "Texturas de Cumulos Abiertos",
+  Type = "HttpSynchronization",
+  Identifier = "digitaluniverse_openclusters_textures",
+  Version = 1
+})
+
+local speck = asset.resource({
+  Name = "Archivos Speck de Cumulos Abiertos",
+  Type = "HttpSynchronization",
+  Identifier = "digitaluniverse_openclusters_speck",
+  Version = 4
+})
+
+
+local Object = {
+  Identifier = "OpenStarClusters",
+  Renderable = {
+    Type = "RenderablePolygonCloud",
+    Enabled = false,
+    Labels = {
+      File = speck .. "oc.label",
+      Color = { 0.0, 0.36, 0.14 },
+      Size = 15.5,
+      MinMaxSize = { 4, 30 },
+      Unit = "pc"
+    },
+    Coloring = {
+      FixedColor = { 0.13, 0.99, 0.50 }
+    },
+    Opacity = 0.9,
+    File = speck .. "oc.speck",
+    Unit = "pc",
+    PolygonSides = 12,
+    SizeSettings = {
+      ScaleExponent = 17.8,
+      MaxSize = 23.0,
+      EnableMaxSizeControl = true
+    }
+  },
+  GUI = {
+    Name = "Cúmulos Estelares Abiertos",
+    Path = "/Vía Láctea/Cúmulos Estelares",
+    Description = [[Un cúmulo estelar abierto es un conjunto suelto de estrellas que varían
+      en número desde cientos hasta miles y que están unidas por su gravitación mutua. Debido
+      a que estas son estrellas jóvenes, esperamos verlas en las regiones de formación estelar
+      de nuestra galaxia, es decir, en los brazos espirales. Por esta razón, los cúmulos abiertos
+      existen, en su mayoría, en el plano de la galaxia e indican una formación estelar
+      relativamente reciente. Censo: 1,867 cúmulos estelares.]]
+  }
+}
+
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(Object)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(Object)
+end)
+
+asset.export(Object)
+
+
+
+asset.meta = {
+  Name = "Cúmulos Estelares Abiertos",
+  Description = Object.GUI.Description,
+  Author = "Brian Abbott, Zack Reeves (AMNH)",
+  URL = "https://www.amnh.org/research/hayden-planetarium/digital-universe",
+  License = "AMNH Digital Universe"
+}

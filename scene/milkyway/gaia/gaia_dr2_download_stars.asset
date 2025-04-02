@@ -1,0 +1,42 @@
+-- Download a dataset of 618 million stars (28 GB), already preprocessed and stored in a binary octree.
+-- The octree was generated from the full DR2 by filtering away all stars with a parallax error higher than 0.5
+-- Max Star Per Node = 50,000 and max distance = 500kpc
+local gaia618Destination = asset.resource({
+  Name = "Gaia DR2 618M Octree",
+  Type = "HttpSynchronization",
+  Identifier = "gaia_stars_618M_octree",
+  Version = 1,
+  UnzipFiles = true,
+  UnzipFilesDestination = "data"
+})
+local gaia618DestinationExtracted = gaia618Destination .. "data"
+
+-- Download the full DR2 dataset with 24 values per star (preprocessed with theReadFitsTask (gaia_read.task) into 8 binary files).
+-- From these files new subsets can be created with the ConstructOctreeTask (gaia_octree.task).
+-- Total size of download is 151 GB.
+local gaiaFull = asset.resource({
+  Name = "Gaia DR2 Conjunto Completo Sin Procesar",
+  Type = "HttpSynchronization",
+  Identifier = "gaia_stars_dr2_raw",
+  Version = 1
+})
+
+asset.export("GaiaDR2_618M", gaia618DestinationExtracted)
+asset.export("GaiaFullDataset", gaiaFull)
+
+asset.meta = {
+  Name = "Descarga de Estrellas GaiaDR2",
+  Description = [[Este recurso contiene código para sincronizar subconjuntos de Gaia desde los servidores de OpenSpace. 
+  Edite este archivo para elegir qué subconjuntos sincronizar. ADVERTENCIA puede usar 150GB]],
+  Author = "ESA/Gaia/DPAC",
+  URL = "https://gea.esac.esa.int/archive/documentation/GDR2/index.html",
+  License = [[Los datos de Gaia son abiertos y gratuitos para usar, siempre que se dé crédito a
+    'ESA/Gaia/DPAC'. En general, el acceso y uso del Archivo Gaia de ESA (en adelante
+    llamado 'el sitio web') constituye la aceptación de los siguientes términos y
+    condiciones generales. Ni ESA ni ninguna otra parte involucrada en la creación,
+    producción o entrega del sitio web será responsable de ningún daño directo, incidental,
+    consecuente, indirecto o punitivo que surja del acceso o uso del sitio web por parte
+    del usuario. El sitio web no garantiza la precisión de la información proporcionada
+    por fuentes externas y no acepta responsabilidad alguna por las consecuencias que
+    surjan del uso de dichos datos]]
+}

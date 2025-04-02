@@ -1,0 +1,76 @@
+local transforms = asset.require("./transforms")
+
+
+
+local sync = asset.resource({
+  Name = "Cumulo Estelar de la Nebulosa de Orion",
+  Type = "HttpSynchronization",
+  Identifier = "orion_nebula_star_cluster",
+  Version = 1
+})
+
+
+local OrionClusterStars = {
+  Identifier = "OrionClusterStars",
+  Parent = transforms.NebulaPosition.Identifier,
+  Renderable = {
+    Type = "RenderableStars",
+    File = sync .. "oricluster.speck",
+    Glare = {
+      Texture = sync .. "halo.png"
+    },
+    ColorMap = sync .. "colorbv.cmap",
+    MagnitudeExponent = 5.02,
+    SizeComposition = "Distance Modulus",
+    DataMapping = {
+      Bv = "colorb_v",
+      Luminance = "lum",
+      AbsoluteMagnitude = "absmag",
+      ApparentMagnitude = "appmag",
+      Vx = "vx",
+      Vy = "vy",
+      Vz = "vz",
+      Speed = "speed"
+    }
+  },
+  GUI = {
+    Name = "Cúmulo Estelar de la Nebulosa de Orión",
+    Path = "/Vía Láctea/Orión",
+    Description = [[Para tener una representación precisa de la nebulosa de Orión, necesitamos
+      incluir el cúmulo estelar que nació de ella. Nos basamos en un estudio de la
+      población estelar del cúmulo realizado por Lynne Hillenbrand, quien trabajaba en la
+      Universidad de California, Berkeley en ese momento. El catálogo de su artículo contiene
+      más de 1500 estrellas, aproximadamente la mitad de las estrellas en el cúmulo real.
+      El cúmulo está muy abarrotado, con una densidad máxima de 10000 estrellas por parsec
+      cúbico en un amplio rango de masas desde una décima parte de la masa del sol hasta 50
+      veces su masa. Nos enfrentamos a un problema: no hay distancias. Para las distancias
+      estelares, tuvimos que deducirlas mediante métodos estadísticos. Sabiendo el tamaño del
+      cúmulo y aproximando la forma a ser aproximadamente esférica, colocamos cada estrella a
+      lo largo de una línea de visión a través de esta esfera imaginaria centrada en el cúmulo.
+      En este sentido, estos datos son datos observados y la vista desde la Tierra es precisa.
+      Pero la distancia de cada estrella ha sido derivada de este enfoque basado en conjeturas
+      fundamentadas para la distribución del cúmulo]]
+  }
+}
+
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(OrionClusterStars)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(OrionClusterStars)
+end)
+
+asset.export(OrionClusterStars)
+
+
+
+asset.meta = {
+  Name = "Cúmulo Estelar de la Nebulosa de Orión",
+  Description = [[Activo del Universo Digital para el cúmulo estelar de Orión. Para ser usado
+    junto con el modelo de nebulosa. Use orionnebula.asset para incluir ambos]],
+  Author = "Universo Digital AMNH",
+  URL = "https://www.amnh.org/research/hayden-planetarium/digital-universe",
+  License = "Universo Digital AMNH"
+}

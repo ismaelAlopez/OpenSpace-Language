@@ -1,0 +1,81 @@
+local textures = asset.resource({
+  Name = "Texturas de Puntos",
+  Type = "HttpSynchronization",
+  Identifier = "digitaluniverse_point_textures",
+  Version = 1
+})
+
+local speck = asset.resource({
+  Name = "Archivos Speck de Enanas Marrones",
+  Type = "HttpSynchronization",
+  Identifier = "digitaluniverse_brown_dwarfs_speck",
+  Version = 1
+})
+
+
+local Object = {
+  Identifier = "BrownDwarfs",
+  Renderable = {
+    Type = "RenderablePointCloud",
+    Enabled = false,
+    File = speck .. "bd.speck",
+    Texture = {
+      File = textures .. "point3.png"
+    },
+    Unit = "pc",
+    Coloring = {
+      FixedColor = { 0.4, 0.0, 0.1 },
+      ColorMapping = {
+        File = speck .. "bd.cmap",
+        ParameterOptions = {
+          { Key = "typeindex", Range = { 1.0, 4.0 } }
+        }
+      }
+    },
+    SizeSettings = {
+      ScaleExponent = 15.8,
+      MaxSize = 0.7,
+      EnableMaxSizeControl = true
+    }
+  },
+  GUI = {
+    Name = "Enanas Marrones",
+    Path = "/Vía Láctea/Objetos Subestelares",
+    Description = [[Durante décadas se creyó que las estrellas de tipo M eran las más frías
+      de la galaxia. Algunas estrellas de tipo M, llamadas enanas rojas, constituyen el
+      70% de las estrellas de la galaxia. Sin embargo, recientemente se descubrió una nueva
+      clase de objetos, aún más fríos que las estrellas de tipo M, y se les asignó un tipo
+      espectral L. Los objetos de tipo L están en el límite entre las enanas rojas y las
+      enanas marrones, y suelen ser estrellas muy débiles o enanas marrones. Aún más fríos
+      que los objetos de tipo L están los objetos de tipo T. Estos son en su mayoría enanas
+      marrones y se asemejan a objetos grandes y masivos similares a Júpiter, demasiado
+      grandes para ser planetas y típicamente demasiado pequeños para ser estrellas. Más
+      allá de las enanas T están los objetos de tipo Y, que son aún más débiles. Las enanas
+      marrones son extremadamente difíciles de ver, principalmente porque son muy débiles
+      en luz óptica. Sin embargo, aparecen más brillantes en luz infrarroja.
+      Colores: Representamos estos objetos como puntos exagerados y son rojos para los
+      objetos de tipo L, granates para los de tipo T y púrpura para los de tipo Y.
+      Censo: 2,196 objetos.]]
+  }
+}
+
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(Object)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(Object)
+end)
+
+asset.export(Object)
+
+
+
+asset.meta = {
+  Name = "Enanas Marrones",
+  Author = "Brian Abbott, Zack Reeves, Jackie Faherty (AMNH)",
+  Description = Object.GUI.Description,
+  License = "AMNH Digital Universe",
+  URL = "https://www.amnh.org/research/hayden-planetarium/digital-universe",
+}

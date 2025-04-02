@@ -1,0 +1,66 @@
+local coreKernels = asset.require("spice/core")
+
+
+
+local data = asset.resource({
+  Name = "Archivos de Constelaciones",
+  Type = "HttpSynchronization",
+  Identifier = "digitaluniverse_constellations_data",
+  Version = 1
+})
+
+
+local zodiacs = {
+  "CNC", "TAU", "PSC", "ARI", "LIB", "AQR", "CAP", "SCO", "VIR", "SGR", "GEM", "LEO"
+}
+
+local Object = {
+  Identifier = "ConstellationBounds",
+  Renderable = {
+    Type = "RenderableConstellationBounds",
+    Enabled = false,
+    File = data .. "bound_20.dat",
+    NamesFile = data .. "constellations.dat",
+    -- Selection = zodiacs
+  },
+  Transform = {
+    Rotation = {
+      Type = "SpiceRotation",
+      SourceFrame = coreKernels.Frame.J2000,
+      DestinationFrame = coreKernels.Frame.Galactic
+    },
+    Scale = {
+      Type = "StaticScale",
+      Scale = 10e17
+    }
+  },
+  GUI = {
+    Name = "Límites de Constelaciones",
+    Path = "/Vía Láctea/Constelaciones",
+    Description = [[Así como un continente se divide en países, los astrónomos dividen el cielo
+      en 88 regiones llamadas constelaciones. Cada objeto cae en una de estas 88
+      regiones. Los límites de estas regiones se muestran en este recurso. Úselos en
+      conjunto con las etiquetas de constelaciones. Censo: 88 constelaciones.]]
+  }
+}
+
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(Object)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(Object)
+end)
+
+asset.export(Object)
+
+
+
+asset.meta = {
+  Name = "Límites de Constelaciones",
+  Description = Object.GUI.Description,
+  Author = "Brian Abbott (AMNH)",
+  URL = "https://www.amnh.org/research/hayden-planetarium/digital-universe",
+  License = "AMNH Digital Universe"
+}

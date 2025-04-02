@@ -1,0 +1,73 @@
+local textures = asset.resource({
+  Name = "Texturas de Puntos",
+  Type = "HttpSynchronization",
+  Identifier = "digitaluniverse_point_textures",
+  Version = 1
+})
+
+local speck = asset.resource({
+  Name = "Archivos Speck de 2dF",
+  Type = "HttpSynchronization",
+  Identifier = "digitaluniverse_2dF_speck",
+  Version = 3
+})
+
+
+local Object = {
+  Identifier = "2dF",
+  Renderable = {
+    Type = "RenderablePointCloud",
+    Enabled = false,
+    Opacity = 1.0,
+    File = speck .. "2dF.speck",
+    Unit = "Mpc",
+    Texture = {
+      File = textures .. "point3A.png",
+    },
+    Coloring = {
+      ColorMapping = {
+        File = speck .. "2dF.cmap",
+        ParameterOptions = {
+          { Key = "proximity", Range = { 1.0, 25.0 } },
+          { Key = "redshift", Range = { 0.0, 0.075 } }
+        }
+      }
+    },
+    SizeSettings = {
+      ScaleExponent = 22.6,
+      MaxSize = 0.2,
+      EnableMaxSizeControl = true
+    }
+  },
+  GUI = {
+    Name = "Galaxias 2dF",
+    Path = "/Universo/Encuestas del Cielo Profundo",
+    Description = [[El Estudio de Dos Grados (2dF) fue un proyecto diseñado para mapear
+      porciones del universo extragaláctico. El estudio 2dF tiene tres componentes principales:
+      la franja del Polo Norte Galáctico, la franja del Polo Sur Galáctico y los campos aleatorios
+      que rodean la franja del Polo Sur Galáctico. Colores: Las galaxias naranjas muestran regiones
+      densas de galaxias, las galaxias aqua son áreas de densidad intermedia, y las galaxias verdes
+      son áreas de menor densidad. Censo: 229,293 galaxias.]]
+  }
+}
+
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(Object)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(Object)
+end)
+
+asset.export(Object)
+
+
+
+asset.meta = {
+  Name = "Galaxias 2dF",
+  Description = Object.GUI.Description,
+  Autor = "Brian Abbott (AMNH), Eric Gawiser (Rutgers U)",
+  URL = "https://www.amnh.org/research/hayden-planetarium/digital-universe",
+  License = "AMNH Digital Universe"
+}

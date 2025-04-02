@@ -1,0 +1,62 @@
+local speck = asset.resource({
+  Name = "Archivos Speck de Clusteres",
+  Type = "HttpSynchronization",
+  Identifier = "digitaluniverse_clusters_speck",
+  Version = 2
+})
+
+
+local TransformMatrix = {
+  -0.7357425748,    0.67726129641,  0.0,           0.0,
+  -0.074553778365, -0.080991471307, 0.9939225904,  0.0,
+  0.67314530211,    0.73127116582,  0.11008126223, 0.0,
+  0.0,              0.0,            0.0,           1.0
+}
+
+local Object = {
+  Identifier = "GalaxyClusterLabels",
+  Renderable = {
+    Type = "RenderablePointCloud",
+    Enabled = false,
+    Labels = {
+      Enabled = true,
+      File = speck .. "galclust.label",
+      Color = { 0.9, 0.5, 0.22 },
+      Size = 22,
+      MinMaxSize = { 8, 15 },
+      Unit = "Mpc",
+      TransformationMatrix = TransformMatrix
+    },
+    Opacity = 0.65,
+    Unit = "Mpc",
+    TransformationMatrix = TransformMatrix
+  },
+  GUI = {
+    Name = "Etiquetas de Clústeres de Galaxias",
+    Path = "/Universo/Encuestas Cercanas",
+    Description = [[El conjunto de datos de clústeres de galaxias es una serie de etiquetas que marcan 
+      dónde están los grandes clústeres de galaxias en el universo cercano. Estas etiquetas deben 
+      usarse junto con el grupo de galaxias de Tully. Censo: 15 etiquetas de clústeres de galaxias.]]
+  }
+}
+
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(Object)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(Object)
+end)
+
+asset.export(Object)
+
+
+
+asset.meta = {
+  Name = "Etiquetas de Clústeres de Galaxias",
+  Description = Object.GUI.Description,
+  Author = "Brian Abbott (AMNH)",
+  URL = "https://www.amnh.org/research/hayden-planetarium/digital-universe",
+  License = "AMNH Digital Universe"
+}

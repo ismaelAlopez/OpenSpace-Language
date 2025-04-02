@@ -1,0 +1,138 @@
+local speck = asset.resource({
+  Name = "Archivos Speck de Estrellas",
+  Type = "HttpSynchronization",
+  Identifier = "stars_du",
+  Version = 6
+})
+
+local sunspeck = asset.resource({
+  Name = "Archivos Speck de Estrellas",
+  Type = "HttpSynchronization",
+  Identifier = "digitaluniverse_sunstar_speck",
+  Version = 1
+})
+
+local colormaps = asset.resource({
+  Name = "Tabla de Colores de Estrellas",
+  Type = "HttpSynchronization",
+  Identifier = "stars_colormap",
+  Version = 3
+})
+
+local textures = asset.resource({
+  Name = "Texturas de Estrellas",
+  Type = "HttpSynchronization",
+  Identifier = "stars_textures",
+  Version = 1
+})
+
+
+local Stars = {
+  Identifier = "Stars",
+  Renderable = {
+    Type = "RenderableStars",
+    File = speck .. "stars.speck",
+    Core = {
+      Texture = textures .. "glare.png",
+      Multiplier = 15.0,
+      Gamma = 1.66,
+      Scale = 0.18
+    },
+    Glare = {
+      Texture = textures .. "halo.png",
+      Multiplier = 0.65
+    },
+    MagnitudeExponent = 6.325,
+    ColorMap = colormaps .. "colorbv.cmap",
+    OtherDataColorMap = colormaps .. "viridis.cmap",
+    SizeComposition = "Distance Modulus",
+    DataMapping = {
+      Bv = "colorb_v",
+      Luminance = "lum",
+      AbsoluteMagnitude = "absmag",
+      ApparentMagnitude = "appmag",
+      Vx = "vx",
+      Vy = "vy",
+      Vz = "vz",
+      Speed = "speed"
+    },
+    DimInAtmosphere = true
+  },
+  Tag = { "daytime_hidden" },
+  GUI = {
+    Name = "Estrellas",
+    Path = "/Vía Láctea/Estrellas",
+    Description = [[Estas son las estrellas cercanas que rodean al Sol y están lo
+      suficientemente cerca como para obtener distancias precisas. Estas incluyen todas
+      las estrellas que vemos a simple vista y muchas estrellas más tenues que eso. En
+      todo el cielo nocturno, durante todo el año, y en los hemisferios norte y sur,
+      podemos ver aproximadamente 9,000 estrellas en total a simple vista. Las estrellas
+      son las fábricas de luz del universo y vienen en una variedad de tamaños, colores y
+      brillos. El catálogo base es Hipparcos, con datos de Gaia DR3 aplicados para
+      distancia y velocidad cuando están disponibles. Censo: 112,746 estrellas.]]
+  }
+}
+
+local SunStar = {
+  Identifier = "SunStar",
+  Renderable = {
+    Type = "RenderableStars",
+    File = sunspeck .. "sunstar.speck",
+    Core = {
+      Texture = textures .. "glare.png",
+      Multiplier = 1.0,
+      Scale = 0.1
+    },
+    Glare = {
+      Texture = textures .. "halo.png",
+      Multiplier = 0.55,
+      Gamma = 1.1,
+      Size = 0.95
+    },
+    MagnitudeExponent = 6.25,
+    ColorMap = colormaps .. "colorbv.cmap",
+    SizeComposition = "Distance Modulus",
+    FadeInDistances = { 0.0075, 0.1 },
+    DataMapping = {
+      Bv = "colorb_v",
+      Luminance = "lum",
+      AbsoluteMagnitude = "absmag",
+      ApparentMagnitude = "appmag",
+      Vx = "vx",
+      Vy = "vy",
+      Vz = "vz",
+      Speed = "speed"
+    },
+    DimInAtmosphere = true
+  },
+  GUI = {
+    Name = "Sol",
+    Path = "/Vía Láctea/Estrellas",
+    Description = [[Estrella individual para representar al Sol cuando está fuera del
+      Sistema Solar.]]
+  }
+}
+
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(Stars)
+  openspace.addSceneGraphNode(SunStar)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(SunStar)
+  openspace.removeSceneGraphNode(Stars)
+end)
+
+asset.export(Stars)
+asset.export(SunStar)
+
+
+
+asset.meta = {
+  Name = "Estrellas",
+  Description = Stars.GUI.Description,
+  Author = "Brian Abbott, Zack Reeves, Andrew Ayala, Jackie Faherty (AMNH)",
+  URL = "https://www.amnh.org/research/hayden-planetarium/digital-universe",
+  License = "AMNH Digital Universe"
+}

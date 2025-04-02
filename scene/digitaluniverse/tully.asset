@@ -1,0 +1,143 @@
+local textures = asset.resource({
+  Name = "Texturas de Tully",
+  Type = "HttpSynchronization",
+  Identifier = "digitaluniverse_tully_textures",
+  Version = 3
+})
+
+local speck = asset.resource({
+  Name = "Archivos Speck de Tully",
+  Type = "HttpSynchronization",
+  Identifier = "digitaluniverse_tully_speck",
+  Version = 4
+})
+
+
+local TransformMatrix = {
+  -0.7357425748,    0.67726129641,  0.0,           0.0,
+  -0.074553778365, -0.080991471307, 0.9939225904,  0.0,
+  0.67314530211,    0.73127116582,  0.11008126223, 0.0,
+  0.0,              0.0,            0.0,           1.0
+}
+
+local TullyGalaxies = {
+  Identifier = "TullyGalaxies",
+  Renderable = {
+    Type = "RenderablePointCloud",
+    Enabled = true,
+    Labels = {
+      File = speck .. "tully.label",
+      Color = { 0.7, 0.7, 0.7 },
+      Size = 19.36,
+      MinMaxSize = { 8, 20 },
+      Unit = "Mpc",
+      TransformationMatrix = TransformMatrix
+    },
+    Opacity = 0.99,
+    File = speck .. "tully.speck",
+    SkipFirstDataPoint = true,
+    Texture = {
+      File = textures .. "point3A.png"
+    },
+    Coloring = {
+      FixedColor = { 1.0, 0.4, 0.2 },
+      ColorMapping = {
+        File = speck .. "lss.cmap",
+        ParameterOptions = {
+          { Key = "prox5Mpc", Range = { 1.0, 30.0 } }
+        }
+      }
+    },
+    Unit = "Mpc",
+    TransformationMatrix = TransformMatrix,
+    Fading = {
+      FadeInDistances = { 0.001, 1.0 } -- Fade in value in the same unit as "Unit"
+    },
+    SizeSettings = {
+      ScaleExponent = 21.7,
+      MaxSize = 0.3,
+      EnableMaxSizeControl = true
+    }
+  },
+  GUI = {
+    Name = "Galaxias de Tully",
+    Path = "/Universo/Encuestas Cercanas",
+    Description = [[El Catálogo de Tully es el catálogo más refinado y preciso de galaxias
+      cercanas. Incluye más de 30,000 galaxias en el universo local que rodean la Vía
+      Láctea. Este catálogo demuestra excepcionalmente bien la estructura a gran escala
+      del universo. Cada galaxia tiene una imagen representativa que está correctamente
+      dimensionada e inclinada y refleja su tipo morfológico. Los datos forman un cubo,
+      que es un límite arbitrario basado en la integridad de estos datos. Más allá de esto,
+      los datos de estas fuentes no son tan confiables. El tamaño del cubo es
+      aproximadamente 1 mil millones de años luz en diagonal, o alrededor de 700 millones
+      de años luz por lado. Colores: El naranja denota regiones más densas del universo
+      local, el aqua se asigna a galaxias en un área de densidad intermedia, y el verde se
+      asigna a regiones de menor densidad. Censo: 30,059 galaxias.]]
+  }
+}
+
+local TullyGalaxiesImages = {
+  Identifier = "TullyGalaxiesImages",
+  Renderable = {
+    Type = "RenderablePointCloud",
+    Opacity = 0.99,
+    File = speck .. "tully.speck",
+    SkipFirstDataPoint = true,
+    Texture = {
+      Folder = textures
+    },
+    TransformationMatrix = TransformMatrix,
+    -- Use fixed orientation, and rotate planes based on orientation information in
+    -- the dataset
+    OrientationRenderOption = "Fixed Rotation",
+    UseOrientationData = true,
+    Unit = "Mpc",
+    Fading = {
+      FadeInDistances = { 0.0005, 0.003 } -- Fade in value in the same unit as "Unit"
+    },
+    SizeSettings = {
+      SizeMapping = {
+        ParameterOptions = { "diamkpc" },
+        ScaleFactor = "Kiloparsec"
+      },
+      -- No exponential scaling, just use size mapping to set the correct size
+      ScaleExponent = 0.0
+    }
+  },
+  GUI = {
+    Name = "Imágenes de Galaxias de Tully",
+    Path = "/Universo/Encuestas Cercanas",
+    Description = [[Cada galaxia de Tully está representada por una imagen que refleja su
+      tipo morfológico (espiral, elíptica, etc.). La mayoría de estas provienen del
+      Catálogo de Galaxias. Un puñado de galaxias cercanas están representadas por sus
+      imágenes reales, que provienen principalmente del Observatorio Nacional de
+      Astronomía Óptica (NOAO). Cada una de estas imágenes ha sido alterada de su estado
+      original. Tomadas desde la Tierra, las estrellas de primer plano de nuestra propia
+      galaxia aparecen en cada imagen y fueron eliminadas. Censo: 30,159 imágenes de
+      galaxias.]]
+  }
+}
+
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(TullyGalaxies)
+  openspace.addSceneGraphNode(TullyGalaxiesImages)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(TullyGalaxiesImages)
+  openspace.removeSceneGraphNode(TullyGalaxies)
+end)
+
+asset.export(TullyGalaxies)
+asset.export(TullyGalaxiesImages)
+
+
+
+asset.meta = {
+  Name = "Galaxias de Tully",
+  Description = TullyGalaxies.GUI.Description,
+  Author = "Stuart Levy (NCSA/UIUC), Brian Abbott (AMNH)",
+  URL = "https://www.amnh.org/research/hayden-planetarium/digital-universe",
+  License = "AMNH Digital Universe"
+}

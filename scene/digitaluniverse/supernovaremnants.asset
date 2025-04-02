@@ -1,0 +1,75 @@
+local textures = asset.resource({
+  Name = "Texturas de Restos de Supernova",
+  Type = "HttpSynchronization",
+  Identifier = "digitaluniverse_supernovaremnants_textures",
+  Version = 1
+})
+
+local speck = asset.resource({
+  Name = "Archivos Speck de Restos de Supernova",
+  Type = "HttpSynchronization",
+  Identifier = "digitaluniverse_supernovaremnants_speck",
+  Version = 3
+})
+
+
+local Object = {
+  Identifier = "SupernovaRemnants",
+  Renderable = {
+    Type = "RenderablePolygonCloud",
+    Enabled = false,
+    Labels = {
+      File = speck .. "snr.label",
+      Color = { 0.51, 0.40, 0.04 },
+      Size = 16.0,
+      MinMaxSize = { 4, 100 },
+      Unit = "pc"
+    },
+    Coloring = {
+      FixedColor = { 1.0, 0.5, 0.0 }
+    },
+    Opacity = 0.32,
+    File = speck .. "snr.speck",
+    PolygonSides = 7,
+    Unit = "pc",
+    SizeSettings = {
+      ScaleExponent = 18.4,
+      MaxSize = 19.0,
+      EnableMaxSizeControl = true
+    }
+  },
+  GUI = {
+    Name = "Restos de Supernova",
+    Path = "/Vía Láctea/Nebulosas",
+    Description = [[Un resto de supernova es el gas nebuloso que queda tras una explosión
+      de supernova. Este gas se expande a grandes velocidades y choca con el gas
+      interestelar circundante. Esto excita el gas circundante y hace que brille,
+      produciendo la nube nebulosa que observamos desde la Tierra. Un resto de supernova
+      contiene una estrella de neutrones o un púlsar en su centro, el núcleo de la estrella
+      moribunda. Sin embargo, la nube que envuelve el núcleo no dura mucho. Después de
+      unos 50,000 años, el gas se mezcla con el medio interestelar y deja de brillar.
+      Astronómicamente, este es un tiempo muy corto, por lo que los restos de supernova
+      que vemos deben ser de explosiones que han ocurrido recientemente, hablando en
+      términos cósmicos. Censo: 112 restos de supernova.]]
+  }
+}
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(Object)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(Object)
+end)
+
+asset.export(Object)
+
+
+
+asset.meta = {
+  Name = "Restos de Supernova",
+  Description = Object.GUI.Description,
+  Author = "Brian Abbott, Zack Reeves (AMNH)",
+  URL = "https://www.amnh.org/research/hayden-planetarium/digital-universe",
+  License = "AMNH Digital Universe"
+}

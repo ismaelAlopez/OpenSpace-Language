@@ -1,0 +1,176 @@
+local transforms = asset.require("scene/solarsystem/sun/transforms")
+local earth_transforms = asset.require("scene/solarsystem/planets/earth/transforms")
+
+
+
+local speck = asset.resource({
+  Name = "Archivos Speck de Orbitas Estelares",
+  Type = "HttpSynchronization",
+  Identifier = "digitaluniverse_starorbits_speck",
+  Version = 2
+})
+
+local SunOrbit = {
+  Identifier = "SunOrbit",
+  Renderable = {
+    Type = "RenderableDUMeshes",
+    Enabled = false,
+    Opacity = 1.0,
+    File = speck .. "starorbits-Sun.speck",
+    MeshColor = { { 1.0, 0.65, 0.0 } },
+    Unit = "pc"
+  },
+  GUI = {
+    Name = "Órbita del Sol",
+    Path = "/Vía Láctea/Estrellas/Órbitas Estelares",
+    Description = [[Órbita proyectada del Sol alrededor de la Vía Láctea durante los
+      próximos 1 mil millones de años.]]
+  }
+}
+
+local BarnardsOrbit = {
+  Identifier = "BarnardsOrbit",
+  Renderable = {
+    Type = "RenderableDUMeshes",
+    Enabled = false,
+    Opacity = 1.0,
+    File = speck .. "starorbits-BarnardsStar.speck",
+    MeshColor = { { 0.39, 0.58, 0.93 } },
+    Unit = "pc"
+  },
+  GUI = {
+    Name = "Órbita de Barnard",
+    Path = "/Vía Láctea/Estrellas/Órbitas Estelares",
+    Description = [[Órbita proyectada de la Estrella de Barnard alrededor de la Vía
+      Láctea durante los próximos 1 mil millones de años.]]
+  }
+}
+
+local KapteynsOrbit = {
+  Identifier = "KapteynsOrbit",
+  Renderable = {
+    Type = "RenderableDUMeshes",
+    Enabled = false,
+    Opacity = 1.0,
+    File = speck .. "starorbits-KapteynsStar.speck",
+    MeshColor = { { 0.6, 0.6, 0.6 } },
+    Unit = "pc"
+  },
+  GUI = {
+    Name = "Órbita de Kapteyn",
+    Path = "/Vía Láctea/Estrellas/Órbitas Estelares",
+    Description = [[Órbita proyectada de la Estrella de Kapteyn alrededor de la Vía
+      Láctea durante los próximos 1 mil millones de años.]]
+  }
+}
+
+local Lacaille9352Orbit = {
+  Identifier = "Lacaille9352Orbit",
+  Renderable = {
+    Type = "RenderableDUMeshes",
+    Enabled = false,
+    Opacity = 1.0,
+    File = speck .. "starorbits-Lacaille9352.speck",
+    MeshColor = { { 0.58, 0.0, 0.83 } },
+    Unit = "pc"
+  },
+  GUI = {
+    Name = "Órbita de Lacaille 9352",
+    Path = "/Vía Láctea/Estrellas/Órbitas Estelares",
+    Description = [[Órbita proyectada de Lacaille 9352 alrededor de la Vía Láctea
+      durante los próximos 1 mil millones de años.]]
+  }
+}
+
+local LSR1826Orbit = {
+  Identifier = "LSR1826Orbit",
+  Renderable = {
+    Type = "RenderableDUMeshes",
+    Enabled = false,
+    Opacity = 1.0,
+    File = speck .. "starorbits-LSR1826+3014.speck",
+    MeshColor = { { 0.0, 0.39, 0.0 } },
+    Unit = "pc"
+  },
+  GUI = {
+    Name = "Órbita de LSR1826+3014",
+    Path = "/Vía Láctea/Estrellas/Órbitas Estelares",
+    Description = [[Órbita proyectada de LSR1826+3014 alrededor de la Vía Láctea
+      durante los próximos 1 mil millones de años.]]
+  }
+}
+
+local LSRJ0822Orbit = {
+  Identifier = "LSRJ0822Orbit",
+  Renderable = {
+    Type = "RenderableDUMeshes",
+    Enabled = false,
+    Opacity = 1.0,
+    File = speck .. "starorbits-LSRJ0822+1700.speck",
+    MeshColor = { { 0.5, 1.0, 0.0 } },
+    Unit = "pc"
+  },
+  GUI = {
+    Name = "Órbita de LSRJ0822+1700",
+    Path = "/Vía Láctea/Estrellas/Órbitas Estelares",
+    Description = [[Órbita proyectada de LSRJ0822+1700 alrededor de la Vía Láctea
+      durante los próximos 1 mil millones de años.]]
+  }
+}
+
+local PM_J13420Orbit = {
+  Identifier = "PM_J13420Orbit",
+  Renderable = {
+    Type = "RenderableDUMeshes",
+    Enabled = false,
+    Opacity = 1.0,
+    File = speck .. "starorbits-PM_J13420-3415.speck",
+    MeshColor = { { 0.70, 0.13, 0.13 } },
+    Unit = "pc"
+  },
+  GUI = {
+    Name = "Órbita de PM_J13420-3415",
+    Path = "/Vía Láctea/Estrellas/Órbitas Estelares",
+    Description = [[Órbita proyectada de PM_J13420-3415 alrededor de la Vía Láctea
+      durante los próximos 1 mil millones de años.]]
+  }
+}
+
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(SunOrbit)
+  openspace.addSceneGraphNode(BarnardsOrbit)
+  openspace.addSceneGraphNode(KapteynsOrbit)
+  openspace.addSceneGraphNode(Lacaille9352Orbit)
+  openspace.addSceneGraphNode(LSR1826Orbit)
+  openspace.addSceneGraphNode(LSRJ0822Orbit)
+  openspace.addSceneGraphNode(PM_J13420Orbit)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(PM_J13420Orbit)
+  openspace.removeSceneGraphNode(LSRJ0822Orbit)
+  openspace.removeSceneGraphNode(LSR1826Orbit)
+  openspace.removeSceneGraphNode(Lacaille9352Orbit)
+  openspace.removeSceneGraphNode(KapteynsOrbit)
+  openspace.removeSceneGraphNode(BarnardsOrbit)
+  openspace.removeSceneGraphNode(SunOrbit)
+end)
+
+asset.export(SunOrbit)
+asset.export(BarnardsOrbit)
+asset.export(KapteynsOrbit)
+asset.export(Lacaille9352Orbit)
+asset.export(LSR1826Orbit)
+asset.export(LSRJ0822Orbit)
+asset.export(PM_J13420Orbit)
+
+
+
+asset.meta = {
+  Name = "Órbitas Estelares",
+  Description = [[Órbitas proyectadas de estrellas seleccionadas durante los próximos 1 mil millones de años. Censo: 7 órbitas estelares.]],
+  Author = "Brian Abbott, Zack Reeves (AMNH)",
+  URL = "https://www.amnh.org/research/hayden-planetarium/digital-universe",
+  License = "AMNH Digital Universe"
+}

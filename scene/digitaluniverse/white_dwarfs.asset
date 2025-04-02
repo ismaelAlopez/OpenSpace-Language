@@ -1,0 +1,68 @@
+local textures = asset.resource({
+  Name = "Texturas de Puntos",
+  Type = "HttpSynchronization",
+  Identifier = "digitaluniverse_point_textures",
+  Version = 1
+})
+
+local speck = asset.resource({
+  Name = "Archivos Speck de Enanas Blancas",
+  Type = "HttpSynchronization",
+  Identifier = "digitaluniverse_white_dwarfs_speck",
+  Version = 1
+})
+
+
+local Object = {
+  Identifier = "WhiteDwarfs",
+  Renderable = {
+    Type = "RenderablePointCloud",
+    Enabled = false,
+    File = speck .. "wd.speck",
+    Texture = {
+      File = textures .. "point3.png",
+    },
+    Unit = "pc",
+    Coloring = {
+      FixedColor = { 1.0, 1.0, 1.0 },
+    },
+    SizeSettings = {
+      ScaleExponent = 15.5,
+      MaxSize = 0.7,
+      EnableMaxSizeControl = true
+    }
+  },
+  GUI = {
+    Name = "Enanas Blancas",
+    Path = "/Vía Láctea/Restos Estelares",
+    Description = [[Una enana blanca es el núcleo de una estrella moribunda. Estos son objetos
+      tenues que tienen aproximadamente el tamaño de la Tierra pero con la densidad de una
+      estrella similar al Sol. Las estrellas que no son lo suficientemente masivas como para
+      terminar en una estrella de neutrones o un agujero negro evolucionarán hacia una enana
+      blanca. Este es el destino final de más del 95% de las estrellas en nuestra galaxia.
+      Mientras la estrella muere, las capas exteriores se expanden y el gas brillará y se
+      convertirá en una nebulosa planetaria, mientras que el núcleo de la estrella se
+      transforma en una enana blanca. Censo: 192,613 enanas blancas.]]
+  }
+}
+
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(Object)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(Object)
+end)
+
+asset.export(Object)
+
+
+
+asset.meta = {
+  Name = "Enanas Blancas",
+  Description = Object.GUI.Description,
+  Author = "Zack Reeves, Brian Abbott (AMNH)",
+  URL = "https://www.amnh.org/research/hayden-planetarium/digital-universe",
+  License = "AMNH Digital Universe"
+}

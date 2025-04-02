@@ -1,0 +1,94 @@
+local fullOS = openspace.systemCapabilities.fullOperatingSystem()
+if string.find(fullOS, "Darwin") then
+  openspace.printWarning("Gaia module (RenderableGaiaStars) not supported on mac")
+  return
+end
+
+-- Download a preprocessed binary octree of Radial Velocity subset values per star
+-- (preprocessed into 8 binary files).
+local starsFolder = asset.resource({
+  Name = "Estrellas Gaia RV",
+  Type = "HttpSynchronization",
+  Identifier = "gaia_stars_rv_octree",
+  Version = 1
+})
+
+local colormaps = asset.resource({
+  Name = "Tabla de Colores de Estrellas",
+  Type = "HttpSynchronization",
+  Identifier = "stars_colormap",
+  Version = 3
+})
+
+local textures = asset.resource({
+  Name = "Texturas de Estrellas",
+  Type = "HttpSynchronization",
+  Identifier = "stars_textures",
+  Version = 1
+})
+
+
+local GaiaStars = {
+  Identifier = "GaiaStars",
+  Renderable = {
+    Type = "RenderableGaiaStars",
+    File = starsFolder,
+    FileReaderOption = "StreamOctree",
+    RenderMode = "Motion",
+    ShaderOption = "Point_SSBO",
+    Texture = textures .. "halo.png",
+    ColorMap = colormaps .. "colorbv.cmap",
+    LuminosityMultiplier = 35,
+    MagnitudeBoost = 25,
+    CutOffThreshold = 38,
+    BillboardSize = 1,
+    CloseUpBoostDist = 250,
+    Sharpness = 1.45,
+    LodPixelThreshold = 0,
+    MaxGpuMemoryPercent = 0.24,
+    MaxCpuMemoryPercent = 0.4,
+    FilterSize = 5,
+    Sigma = 0.5,
+    AdditionalNodes = { 3.0, 2.0 },
+    FilterPosX = { 0.0, 0.0 },
+    FilterPosY = { 0.0, 0.0 },
+    FilterPosZ = { 0.0, 0.0 },
+    FilterGMag = { 20.0, 20.0 },
+    FilterBpRp = { 0.0, 0.0 },
+    FilterDist = { 9.0, 9.0 }
+  },
+  GUI = {
+    Name = "Estrellas Gaia",
+    Path = "/Vía Láctea",
+    Description = "Subconjunto de Velocidad Radial de GaiaDR2"
+  }
+}
+
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(GaiaStars)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(GaiaStars)
+end)
+
+asset.export(GaiaStars)
+
+
+
+asset.meta = {
+  Name = "Estrellas Gaia",
+  Description = [[Este recurso contiene un subconjunto de GaiaDR2. Este subconjunto contiene 7.5M de estrellas que tienen
+  valores precisos para varias columnas]],
+  Author = "ESA/Gaia/DPAC",
+  URL = "https://gea.esac.esa.int/archive/documentation/GDR2/index.html",
+  License = [[Los datos de Gaia son abiertos y gratuitos para usar, siempre que se dé crédito a
+    'ESA/Gaia/DPAC'. En general, el acceso y uso del Archivo Gaia de la ESA (en adelante
+    llamado 'el sitio web') constituye la aceptación de los siguientes términos y
+    condiciones generales. Ni la ESA ni ninguna otra parte involucrada en la creación,
+    producción o entrega del sitio web será responsable de ningún daño directo, incidental,
+    consecuente, indirecto o punitivo que surja del acceso o uso del sitio web por parte del usuario.
+    El sitio web no garantiza la precisión de la información proporcionada por fuentes externas
+    y no acepta responsabilidad alguna por las consecuencias derivadas del uso de dichos datos]]
+}

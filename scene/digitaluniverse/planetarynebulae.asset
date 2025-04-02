@@ -1,0 +1,77 @@
+local textures = asset.resource({
+  Name = "Texturas de Nebulosas Planetarias",
+  Type = "HttpSynchronization",
+  Identifier = "digitaluniverse_planetarynebulae_textures",
+  Version = 1
+})
+
+local speck = asset.resource({
+  Name = "Archivos Speck de Nebulosas Planetarias",
+  Type = "HttpSynchronization",
+  Identifier = "digitaluniverse_planetarynebulae_speck",
+  Version = 3
+})
+
+
+local Object = {
+  Identifier = "PlanetaryNebulae",
+  Renderable = {
+    Type = "RenderablePolygonCloud",
+    Enabled = false,
+    Labels = {
+      File = speck .. "pn.label",
+      Color = { 0.35, 0.35, 0.60 },
+      Size = 16.24,
+      MinMaxSize = { 4, 25 },
+      Unit = "pc"
+    },
+    Coloring = {
+      FixedColor = { 0.4, 0.4, 0.9 }
+    },
+    Opacity = 0.99,
+    File = speck .. "pn.speck",
+    PolygonSides = 3,
+    Unit = "pc",
+    SizeSettings = {
+      ScaleExponent = 18.2,
+      MaxSize = 19.0,
+      EnableMaxSizeControl = true
+    }
+  },
+  GUI = {
+    Name = "Nebulosas Planetarias",
+    Path = "/Vía Láctea/Nebulosas",
+    Description = [[Una nebulosa planetaria es una envoltura en expansión de gas expulsada
+      por una estrella de tamaño promedio al final de su ciclo de vida. Pareciendo discos
+      verdosos para un observador telescópico, las nebulosas planetarias recibieron su
+      nombre por su parecido con los planetas gaseosos de nuestro sistema solar. De ninguna
+      manera están relacionadas con los planetas, más bien, son productos de estrellas
+      moribundas. A medida que el gas de la estrella se expande, barre el gas más frío como
+      una máquina quitanieves. El gas brilla debido a la luz ultravioleta del remanente
+      estelar en el centro. Debido a que la fase de nebulosa planetaria en la evolución de
+      una estrella es relativamente corta, solo observamos aquellas que han ocurrido
+      recientemente en la población estelar más joven. Por lo tanto, esperamos ver nebulosas
+      planetarias en el disco de la Galaxia. Censo: 1,657 nebulosas planetarias.]]
+  }
+}
+
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(Object)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(Object)
+end)
+
+asset.export(Object)
+
+
+
+asset.meta = {
+  Name = "Nebulosas Planetarias",
+  Description = Object.GUI.Description,
+  Author = "Brian Abbott, Zack Reeves (AMNH)",
+  URL = "https://www.amnh.org/research/hayden-planetarium/digital-universe",
+  License = "AMNH Digital Universe"
+}

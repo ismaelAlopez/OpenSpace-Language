@@ -1,0 +1,74 @@
+local textures = asset.resource({
+  Name = "Texturas de Puntos",
+  Type = "HttpSynchronization",
+  Identifier = "digitaluniverse_point_textures",
+  Version = 1
+})
+
+local speck = asset.resource({
+  Name = "Archivos Speck de 6dF",
+  Type = "HttpSynchronization",
+  Identifier = "digitaluniverse_6dF_speck",
+  Version = 3
+})
+
+
+local Object = {
+  Identifier = "6dF",
+  Renderable = {
+    Type = "RenderablePointCloud",
+    Enabled = false,
+    Opacity = 1.0,
+    File = speck .. "6dF.speck",
+    Unit = "Mpc",
+    Texture = {
+      File = textures .. "point3A.png",
+    },
+    Coloring = {
+      FixedColor = { 1.0, 1.0, 0.0 },
+      ColorMapping = {
+        File = speck .. "6dF.cmap",
+        ParameterOptions = {
+          { Key = "proximity", Range = { 1.0, 10.0 } },
+          { Key = "redshift", Range = { 0.0, 0.075 } }
+        }
+      }
+    },
+    SizeSettings = {
+      ScaleExponent = 22.5,
+      MaxSize = 0.2,
+      EnableMaxSizeControl = true
+    }
+  },
+  GUI = {
+    Name = "Galaxias 6dF",
+    Path = "/Universo/Encuestas del Cielo Profundo",
+    Description = [[El estudio de galaxias Six-degree Field (6dF) mapeó casi la mitad del cielo
+      desde el Observatorio Anglo-Australiano. Debido a que es un estudio del hemisferio sur,
+      no hay cobertura en estos datos para el cielo del hemisferio norte. Como con todos
+      los estudios de galaxias, las galaxias naranjas están en áreas relativamente densas,
+      las galaxias verdes están en áreas relativamente dispersas, y las galaxias aqua están entre ambas. Censo:
+      109,569 galaxias.]]
+  }
+}
+
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(Object)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(Object)
+end)
+
+asset.export(Object)
+
+
+
+asset.meta = {
+  Name = "Galaxias 6dF",
+  Description = Object.GUI.Description,
+  Author = "Brian Abbott (AMNH)",
+  URL = "https://www.amnh.org/research/hayden-planetarium/digital-universe",
+  License = "AMNH Digital Universe"
+}
