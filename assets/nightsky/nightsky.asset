@@ -1,0 +1,21 @@
+asset.require("./altaz", false)
+asset.require("./cardinal_directions", false)
+asset.require("./ecliptic_band", false)
+asset.require("./equatorial_band", false)
+asset.require("./galactic_band", false)
+asset.require("./meridian", false)
+asset.require("./light_pollution", false)
+asset.require("./zenith", false)
+asset.require("./planets", false)
+asset.require("actions/nightsky/camera", false)
+asset.require("actions/nightsky/daytime", false)
+
+
+
+asset.meta = {
+  Name = "Recursos del Cielo Nocturno",
+  Description = [[Una colección de recursos útiles para estudiar el cielo nocturno.]],
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "MIT license"
+}

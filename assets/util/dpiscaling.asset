@@ -1,0 +1,38 @@
+asset.onInitialize(function()
+  local scale = openspace.dpiScaling()
+  openspace.printInfo("Estableciendo el factor de escalado DPI a " .. tostring(scale))
+
+
+  if openspace.modules.isLoaded("CefWebGui") then
+    openspace.setPropertyValueSingle(
+      "Modules.CefWebGui.GuiScale",
+      openspace.propertyValue("Modules.CefWebGui.GuiScale") * scale
+    )
+  end
+
+  local dashboards = openspace.property("Dashboard.*.FontSize")
+  for _, v in ipairs(dashboards) do
+    openspace.setPropertyValueSingle(
+      v,
+      openspace.propertyValue(v) * scale
+    )
+  end
+
+  local offset = openspace.propertyValue("Dashboard.StartPositionOffset")
+  openspace.setPropertyValueSingle(
+    "Dashboard.StartPositionOffset",
+    { offset[1] * scale, offset[2] * scale }
+  )
+end)
+
+
+
+asset.meta = {
+  Name = "Escalado DPI",
+  Description = [[Recupera el escalado DPI del sistema operativo y lo aplica a algunos
+    lugares seleccionados para que se ajusten mejor en monitores de "alta resolución pero
+    tamaño pequeño"]],
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "MIT license"
+}

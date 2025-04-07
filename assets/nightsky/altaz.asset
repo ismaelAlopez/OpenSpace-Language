@@ -1,0 +1,139 @@
+local earthAsset = asset.require("scene/solarsystem/planets/earth/earth")
+
+
+
+local AltAzGridPosition = {
+  Identifier = "AltAzGridPosition",
+  Parent = earthAsset.Earth.Identifier,
+  Transform = {
+    Translation = {
+      Type = "GlobeTranslation",
+      Globe = earthAsset.Earth.Identifier,
+      Latitude = 0.0,
+      Longitude = 0.0,
+      Altitude = 0.0,
+      UseHeightmap = false,
+      UseCamera = true
+    },
+    Rotation = {
+      Type = "GlobeRotation",
+      Globe = earthAsset.Earth.Identifier,
+      Latitude = 0.0,
+      Longitude = 0.0,
+      UseHeightmap = false,
+      UseCamera = true
+    }
+  },
+  GUI = {
+    Name = "Posición de la cuadrícula Altitud-Azimut",
+    Path = "/Cielo Nocturno/Sistemas de Coordenadas/Altitud-Azimut",
+    Hidden = true
+  }
+}
+
+local AltAzGrid = {
+  Identifier = "AltAzGrid",
+  Parent = AltAzGridPosition.Identifier,
+  Transform = {
+    Scale = {
+      Type = "StaticScale",
+      Scale = 50000
+    },
+    Rotation = {
+      Type = "StaticRotation",
+      Rotation = { -math.pi / 2.0, 0.0, 0.0 }
+    }
+  },
+  Renderable = {
+    Type = "RenderableSphericalGrid",
+    Enabled = asset.enabled,
+    Opacity = 0.8,
+    Color = { 0.2, 0.4, 0.2 },
+    LineWidth = 2.0,
+    RenderBinMode = "PostDeferredTransparent"
+  },
+  GUI = {
+    Name = "Cuadrícula Altitud-Azimut",
+    Description = [[Una cuadrícula local de Altitud/Azimut centrada en tu posición
+    sobre la superficie de un planeta. La cuadrícula se puede alternar, ocultar o
+    mostrar utilizando las acciones correspondientes en el panel de acciones, bajo
+    "Cielo Nocturno". Usa estas acciones para moverla a otro planeta. El valor
+    predeterminado es la Tierra.]],
+    Path = "/Cielo Nocturno/Sistemas de Coordenadas/Altitud-Azimut"
+  }
+}
+
+
+local ShowAltaz = {
+  Identifier = "os.nightsky.ShowAltaz",
+  Name = "Mostrar cuadrícula Alt/Az",
+  Command = [[
+    local camera = openspace.navigation.getNavigationState()
+    openspace.setParent("AltAzGridPosition", camera.Anchor)
+    openspace.setPropertyValueSingle("Scene.AltAzGridPosition.Translation.Globe", camera.Anchor)
+    openspace.setPropertyValueSingle("Scene.AltAzGridPosition.Rotation.Globe", camera.Anchor)
+    openspace.fadeIn("Scene.AltAzGrid.Renderable")
+  ]],
+  Documentation = "Muestra una cuadrícula local de Altitud/Azimut centrada en tu posición",
+  GuiPath = "/Cielo Nocturno/Líneas y Cuadrículas/Mostrar y Ocultar",
+  IsLocal = false
+}
+
+local HideAltaz = {
+  Identifier = "os.nightsky.HideAltaz",
+  Name = "Ocultar cuadrícula Alt/Az",
+  Command = "openspace.fadeOut('Scene.AltAzGrid.Renderable')",
+  Documentation = "Oculta la cuadrícula local de Altitud/Azimut centrada en tu posición",
+  GuiPath = "/Cielo Nocturno/Líneas y Cuadrículas/Mostrar y Ocultar",
+  IsLocal = false
+}
+
+local ToggleAltaz = {
+  Identifier = "os.nightsky.ToggleAltaz",
+  Name = "Alternar cuadrícula Alt/Az",
+  Command = [[
+    local camera = openspace.navigation.getNavigationState()
+    openspace.setParent("AltAzGridPosition", camera.Anchor)
+    openspace.setPropertyValueSingle("Scene.AltAzGridPosition.Translation.Globe", camera.Anchor)
+    openspace.setPropertyValueSingle("Scene.AltAzGridPosition.Rotation.Globe", camera.Anchor)
+    openspace.toggleFade("Scene.AltAzGrid.Renderable")
+  ]],
+  Documentation = "Alterna la cuadrícula local de Altitud/Azimut centrada en tu posición",
+  GuiPath = "/Cielo Nocturno/Líneas y Cuadrículas",
+  IsLocal = false
+}
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(AltAzGridPosition)
+  openspace.addSceneGraphNode(AltAzGrid)
+  openspace.action.registerAction(ShowAltaz)
+  openspace.action.registerAction(HideAltaz)
+  openspace.action.registerAction(ToggleAltaz)
+
+end)
+
+asset.onDeinitialize(function()
+  openspace.action.removeAction(ToggleAltaz)
+  openspace.action.removeAction(HideAltaz)
+  openspace.action.removeAction(ShowAltaz)
+  openspace.removeSceneGraphNode(AltAzGrid)
+  openspace.removeSceneGraphNode(AltAzGridPosition)
+end)
+
+asset.export(AltAzGridPosition)
+asset.export(AltAzGrid)
+asset.export("ShowAltaz", ShowAltaz.Identifier)
+asset.export("HideAltaz", HideAltaz.Identifier)
+asset.export("ToggleAltaz", ToggleAltaz.Identifier)
+
+
+
+asset.meta = {
+  Name = "Cuadrícula Altitud/Azimut",
+  Description = [[Una cuadrícula local de Altitud/Azimut centrada en tu posición
+    sobre la superficie de un planeta. El asset también incluye algunas acciones
+    para alternar, ocultar o mostrar la cuadrícula.]],
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "MIT license"
+}

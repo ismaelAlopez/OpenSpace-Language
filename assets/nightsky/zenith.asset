@@ -1,0 +1,140 @@
+local earthAsset = asset.require("scene/solarsystem/planets/earth/earth")
+
+
+
+local textures = asset.resource({
+  Name = "Texturas del Cenit",
+  Type = "HttpSynchronization",
+  Identifier = "zenith_textures",
+  Version = 1
+})
+
+
+local ZenithPosition = {
+  Identifier = "ZenithPosition",
+  Parent = earthAsset.Earth.Identifier,
+  Transform = {
+    Translation = {
+      Type = "GlobeTranslation",
+      Globe = earthAsset.Earth.Identifier,
+      Latitude = 0.0,
+      Longitude = 0.0,
+      Altitude = 100000000.0,
+      UseCamera = true
+    },
+    Rotation = {
+      Type = "GlobeRotation",
+      Globe = earthAsset.Earth.Identifier,
+      Latitude = 0.0,
+      Longitude = 0.0,
+      UseHeightmap = false,
+      UseCamera = true
+    }
+  },
+  GUI = {
+    Name = "Posición del Cenit",
+    Path = "/Cielo Nocturno/Sistemas de Coordenadas/Altitud-Azimut",
+    Hidden = true
+  }
+}
+
+local ZenithDot = {
+  Identifier = "ZenithDot",
+  Parent = ZenithPosition.Identifier,
+  Transform = {
+    Rotation = {
+      Type = "StaticRotation",
+      Rotation = { -math.pi, 0.0, 0.0 }
+    }
+  },
+  Renderable = {
+    Type = "RenderablePlaneImageLocal",
+    Enabled = asset.enabled,
+    Size = 1000000,
+    Origin = "Center",
+    Billboard = true,
+    Texture = textures .. "point3A.png",
+    BlendMode = "Additive"
+  },
+  GUI = {
+    Name = "Cenit",
+    Description = [[Una representación en forma de punto del Cenit Local, basada en la
+      posición actual de la cámara en un planeta. Usa las acciones proporcionadas para
+      mostrar o alternar el punto entre planetas. El valor predeterminado es la Tierra.]],
+    Path = "/Cielo Nocturno/Sistemas de Coordenadas/Altitud-Azimut"
+  }
+}
+
+local ShowZenith = {
+  Identifier = "os.nightsky.ShowZenith",
+  Name = "Mostrar cenit local",
+  Command = [[
+    local camera = openspace.navigation.getNavigationState()
+    openspace.setParent("ZenithPosition", camera.Anchor)
+    openspace.setPropertyValueSingle("Scene.ZenithPosition.Translation.Globe", camera.Anchor)
+    openspace.setPropertyValueSingle("Scene.ZenithPosition.Rotation.Globe", camera.Anchor)
+    openspace.fadeIn("Scene.ZenithDot.Renderable")
+  ]],
+  Documentation = "Muestra un punto para el cenit local",
+  GuiPath = "/Cielo Nocturno/Líneas y Cuadrículas/Mostrar y Ocultar",
+  IsLocal = false
+}
+
+local HideZenith = {
+  Identifier = "os.nightsky.HideZenith",
+  Name = "Ocultar cenit local",
+  Command = [[
+    openspace.fadeOut("Scene.ZenithDot.Renderable")
+  ]],
+  Documentation = "Oculta el punto para el cenit local",
+  GuiPath = "/Cielo Nocturno/Líneas y Cuadrículas/Mostrar y Ocultar",
+  IsLocal = false
+}
+
+local ToggleZenith = {
+  Identifier = "os.nightsky.ToggleZenith",
+  Name = "Alternar cenit local",
+  Command = [[
+    local camera = openspace.navigation.getNavigationState()
+    openspace.setParent("ZenithPosition", camera.Anchor)
+    openspace.setPropertyValueSingle("Scene.ZenithPosition.Translation.Globe", camera.Anchor)
+    openspace.setPropertyValueSingle("Scene.ZenithPosition.Rotation.Globe", camera.Anchor)
+    openspace.toggleFade("Scene.ZenithDot.Renderable")
+  ]],
+  Documentation = "Alterna el punto para el cenit local",
+  GuiPath = "/Cielo Nocturno/Líneas y Cuadrículas",
+  IsLocal = false
+}
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(ZenithPosition)
+  openspace.addSceneGraphNode(ZenithDot)
+  openspace.action.registerAction(ShowZenith)
+  openspace.action.registerAction(HideZenith)
+  openspace.action.registerAction(ToggleZenith)
+end)
+
+asset.onDeinitialize(function()
+  openspace.action.removeAction(ToggleZenith)
+  openspace.action.removeAction(HideZenith)
+  openspace.action.removeAction(ShowZenith)
+  openspace.removeSceneGraphNode(ZenithDot)
+  openspace.removeSceneGraphNode(ZenithPosition)
+end)
+
+asset.export(ZenithPosition)
+asset.export(ZenithDot)
+asset.export("ShowZenith", ShowZenith.Identifier)
+asset.export("HideZenith", HideZenith.Identifier)
+asset.export("ToggleZenith", ToggleZenith.Identifier)
+
+
+
+asset.meta = {
+  Name = "Cenit",
+  Description = [[Una representación en forma de punto del Cenit Local (basado en la
+    posición actual de la cámara), incluyendo acciones para alternar, ocultar y mostrarlo.]],
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "Licencia MIT"
+}

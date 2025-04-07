@@ -1,0 +1,39 @@
+local dataPath = asset.resource({
+  Name = "Archivos de Datos de Exoplanetas",
+  Type = "HttpSynchronization",
+  Identifier = "exoplanets_data",
+  Version = 6
+})
+
+local colormaps = asset.resource({
+  Name = "Tabla de Colores de Estrellas",
+  Type = "HttpSynchronization",
+  Identifier = "stars_colormap",
+  Version = 3
+})
+
+
+asset.onInitialize(function()
+  -- Establecer los archivos de datos predeterminados utilizados para la creación del sistema de exoplanetas
+  -- (Verificar si ya están configurados, para no sobrescribir valores establecidos en otro archivo)
+  local p1 = "Modules.Exoplanets.DataFolder"
+  if (openspace.propertyValue(p1) == "") then
+    openspace.setPropertyValueSingle(p1, dataPath)
+  end
+
+  local p2 = "Modules.Exoplanets.BvColormap"
+  if (openspace.propertyValue(p2) == "") then
+    openspace.setPropertyValueSingle(p2, colormaps .. "colorbv.cmap")
+  end
+end)
+
+asset.export("DataPath", dataPath)
+
+asset.meta = {
+  Name = "Datos de Exoplanetas",
+  Description = [[Los datos que se utilizan para los sistemas de exoplanetas. Los datos han sido
+    derivados del conjunto de datos 'Planetary Systems Composite Data' del Archivo de Exoplanetas de la NASA.]],
+  Author = "Equipo de OpenSpace",
+  URL = "https://exoplanetarchive.ipac.caltech.edu/docs/data.html",
+  License = "Licencia MIT"
+}

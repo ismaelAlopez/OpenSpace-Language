@@ -1,0 +1,101 @@
+local earthAsset = asset.require("scene/solarsystem/planets/earth/earth")
+local sunAsset = asset.require("scene/solarsystem/sun/transforms")
+
+
+
+local modelFolder = asset.resource({
+  Name = "Escala Rose Bowl",
+  Type = "HttpSynchronization",
+  Identifier = "scale_model_rose_bowl",
+  Version = 1
+})
+
+
+local Location = { 34.161318, -118.167623 }
+
+local ScaleModel = {
+  Identifier = "Scale_RoseBowl",
+  Parent = earthAsset.Earth.Identifier,
+  -- Note: Lat/Lon/Scale values come from alignment with Esri World Imagery 2D layer
+  Transform = {
+    Translation = {
+      Type = "GlobeTranslation",
+      Globe = earthAsset.Earth.Identifier,
+      Latitude = Location[1],
+      Longitude = Location[2],
+      Altitude = 0.0,
+      UseHeightmap = true
+    },
+    Rotation = {
+      Type = "GlobeRotation",
+      Globe = earthAsset.Earth.Identifier,
+      Latitude = Location[1],
+      Longitude = Location[2]
+    }
+  },
+  Renderable = {
+    Type = "RenderableModel",
+    GeometryFile = modelFolder .. "rose_bowl.gltf",
+    RotationVector = { 0.0, 98.68, 0.0 },
+    LightSources = { sunAsset.LightSource }
+  },
+  GUI = {
+    Name = "Rose Bowl",
+    Description = [[El estadio tiene capacidad para más de 92,000 personas, con 77 filas de asientos. 
+      Mide 880 pies (268 metros) desde el borde norte hasta el borde sur, y 695 pies 
+      (212 metros) de este a oeste. El área de césped es de 79,156 pies cuadrados (7354 
+      metros cuadrados).]],
+    Path = "/Objetos a Escala"
+  }
+}
+
+local UpdatePositionAction = {
+  Identifier = "os.scalemodels.DropRoseBowl",
+  Name = "Colocar Rose Bowl bajo la cámara",
+  Command = [[
+    openspace.globebrowsing.setNodePositionFromCamera("Scale_RoseBowl")
+  ]],
+  Documentation = "Actualiza la posición del Rose Bowl según la ubicación del globo de la cámara",
+  GuiPath = "/Objetos a Escala",
+  IsLocal = false
+}
+
+local ResetPositionAction = {
+  Identifier = "os.scalemodels.ResetRoseBowl",
+  Name = "Restablecer posición del Rose Bowl",
+  Command = [[
+    openspace.globebrowsing.setNodePosition("Scale_RoseBowl", "]] .. earthAsset.Earth.Identifier .. [[", ]] .. Location[1] .. "," .. Location[2] .. ")",
+  Documentation = "Restablece el Rose Bowl a su ubicación real",
+  GuiPath = "/Objetos a Escala",
+  IsLocal = false
+}
+
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(ScaleModel)
+
+  openspace.action.registerAction(UpdatePositionAction)
+  openspace.action.registerAction(ResetPositionAction)
+end)
+
+asset.onDeinitialize(function()
+  openspace.action.removeAction(ResetPositionAction)
+  openspace.action.removeAction(UpdatePositionAction)
+
+  openspace.removeSceneGraphNode(ScaleModel)
+end)
+
+asset.export(ScaleModel)
+asset.export("UpdatePositionAction", UpdatePositionAction.Identifier)
+asset.export("ResetPositionAction", ResetPositionAction.Identifier)
+
+
+asset.meta = {
+  Name = "Modelo a Escala - Estadio Rose Bowl",
+  Description = [[Un modelo a escala 1:1 del Estadio Rose Bowl. Por defecto, se coloca 
+    en su posición real en Pasadena, California. Pero el recurso también incluye acciones 
+    para moverlo a una posición bajo la cámara o devolverlo a su posición original.]],
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "Licencia MIT"
+}

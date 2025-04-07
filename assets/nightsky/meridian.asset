@@ -1,0 +1,131 @@
+local earthAsset = asset.require("scene/solarsystem/planets/earth/earth")
+
+
+
+local MeridianPosition = {
+  Identifier = "MeridianPosition",
+  Parent = earthAsset.Earth.Identifier,
+  Transform = {
+    Translation = {
+      Type = "GlobeTranslation",
+      Globe = earthAsset.Earth.Identifier,
+      Latitude = 0.0,
+      Longitude = 0.0,
+      Altitude = 0.0,
+      UseCamera = true
+    },
+    Rotation = {
+      Type = "GlobeRotation",
+      Globe = earthAsset.Earth.Identifier,
+      Latitude = 0.0,
+      Longitude = 0.0,
+      UseCamera = true
+    }
+  },
+  GUI = {
+    Name = "Posición del Meridiano Local",
+    Path = "/Cielo Nocturno/Sistemas de Coordenadas/Altitud-Azimut",
+    Hidden = true
+  }
+}
+
+local MeridianPlane = {
+  Identifier = "MeridianPlane",
+  Parent = MeridianPosition.Identifier,
+  Transform = {
+    Scale = {
+      Type = "StaticScale",
+      Scale = 1000000
+    }
+  },
+  Renderable = {
+    Type = "RenderableRadialGrid",
+    Opacity = 0.8,
+    Color = { 0.4, 0.8, 0.4 },
+    LineWidth = 6.0,
+    GridSegments = { 1, 1 },
+    Enabled = asset.enabled,
+    RenderBinMode = "PostDeferredTransparent"
+  },
+  GUI = {
+    Name = "Meridiano Local",
+    Description = [[Una representación en línea del Meridiano Local]],
+    Path = "/Cielo Nocturno/Sistemas de Coordenadas/Altitud-Azimut"
+  }
+}
+
+local ShowMeridian = {
+  Identifier = "os.nightsky.ShowMeridian",
+  Name = "Mostrar meridiano local",
+  Command = [[
+    local camera = openspace.navigation.getNavigationState()
+    openspace.setParent("MeridianPosition", camera.Anchor)
+    openspace.setPropertyValueSingle("Scene.MeridianPosition.Translation.Globe", camera.Anchor)
+    openspace.setPropertyValueSingle("Scene.MeridianPosition.Rotation.Globe", camera.Anchor)
+    openspace.fadeIn("Scene.MeridianPlane.Renderable")
+  ]],
+  Documentation = "Muestra una línea para el meridiano local",
+  GuiPath = "/Cielo Nocturno/Líneas y Cuadrículas/Mostrar y Ocultar",
+  IsLocal = false
+}
+
+local HideMeridian = {
+  Identifier = "os.nightsky.HideMeridian",
+  Name = "Ocultar meridiano local",
+  Command = [[
+    openspace.fadeOut("Scene.MeridianPlane.Renderable")
+  ]],
+  Documentation = "Oculta la línea del meridiano local",
+  GuiPath = "/Cielo Nocturno/Líneas y Cuadrículas/Mostrar y Ocultar",
+  IsLocal = false
+}
+
+
+local ToggleMeridian = {
+  Identifier = "os.nightsky.ToggleMeridian",
+  Name = "Alternar meridiano local",
+  Command = [[
+    local camera = openspace.navigation.getNavigationState()
+    openspace.setParent("MeridianPosition", camera.Anchor)
+    openspace.setPropertyValueSingle("Scene.MeridianPosition.Translation.Globe", camera.Anchor)
+    openspace.setPropertyValueSingle("Scene.MeridianPosition.Rotation.Globe", camera.Anchor)
+    openspace.toggleFade("Scene.MeridianPlane.Renderable")
+  ]],
+  Documentation = "Alterna la línea del meridiano local",
+  GuiPath = "/Cielo Nocturno/Líneas y Cuadrículas",
+  IsLocal = false
+}
+
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(MeridianPosition)
+  openspace.addSceneGraphNode(MeridianPlane)
+  openspace.action.registerAction(ShowMeridian)
+  openspace.action.registerAction(HideMeridian)
+  openspace.action.registerAction(ToggleMeridian)
+end)
+
+asset.onDeinitialize(function()
+  openspace.action.removeAction(ToggleMeridian)
+  openspace.action.removeAction(HideMeridian)
+  openspace.action.removeAction(ShowMeridian)
+  openspace.removeSceneGraphNode(MeridianPlane)
+  openspace.removeSceneGraphNode(MeridianPosition)
+end)
+
+asset.export(MeridianPosition)
+asset.export(MeridianPlane)
+asset.export("ShowMeridian", ShowMeridian.Identifier)
+asset.export("HideMeridian", HideMeridian.Identifier)
+asset.export("ToggleMeridian", ToggleMeridian.Identifier)
+
+
+
+asset.meta = {
+  Name = "Meridiano",
+  Description = [[Una representación en línea del Meridiano Local, incluyendo acciones
+    para alternar, ocultar y mostrarlo.]],
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "MIT license"
+}

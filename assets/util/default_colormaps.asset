@@ -1,0 +1,197 @@
+-- For detailed explanations about the categories and the color maps, please refer to
+-- source page from Matplotlib
+-- https://matplotlib.org/stable/users/explain/colors/colormaps.html
+
+
+-- Perceptually Uniform Sequental colormaps
+
+local uniform = asset.resource({
+  Name = "Mapas de Color Uniformemente Perceptuales",
+  Type = "HttpSynchronization",
+  Identifier = "default_colormaps_uniform",
+  Version = 1
+})
+
+local Uniform = {
+  Viridis = uniform .. "viridis.cmap",
+  Plasma = uniform .. "plasma.cmap",
+  Inferno = uniform .. "inferno.cmap",
+  Magma = uniform .. "magma.cmap",
+  Cividis = uniform .. "cividis.cmap"
+}
+asset.export("Uniform", Uniform)
+
+
+-- Mapas Secuenciales, donde el valor de luminosidad aumenta de forma monótona a través de los mapas de color
+
+local sequential = asset.resource({
+  Name = "Mapas de Color Secuenciales",
+  Type = "HttpSynchronization",
+  Identifier = "default_colormaps_sequential",
+  Version = 1
+})
+
+local Sequential = {
+  Greys = sequential .. "Greys.cmap",
+  Purples = sequential .. "Purples.cmap",
+  Blues = sequential .. "Blues.cmap",
+  Greens = sequential .. "Greens.cmap",
+  Oranges = sequential .. "Oranges.cmap",
+  Reds = sequential .. "Reds.cmap",
+  YlOrBr = sequential .. "YlOrBr.cmap",
+  YlOrRd = sequential .. "YlOrRd.cmap",
+  OrRd = sequential .. "OrRd.cmap",
+  PuRd = sequential .. "PuRd.cmap",
+  RdPu = sequential .. "RdPu.cmap",
+  BuPu = sequential .. "BuPu.cmap",
+  GnBu = sequential .. "GnBu.cmap",
+  PuBu = sequential .. "PuBu.cmap",
+  YlGnBu = sequential .. "YlGnBu.cmap",
+  PuBuGn = sequential .. "PuBuGn.cmap",
+  BuGn = sequential .. "BuGn.cmap",
+  YlGn = sequential .. "YlGn.cmap"
+}
+asset.export("Sequential", Sequential)
+
+
+-- Mapas de color secuenciales donde la luminosidad puede estabilizarse o subir y bajar
+
+local sequential2 = asset.resource({
+  Name = "Mapas de Color Secuenciales2",
+  Type = "HttpSynchronization",
+  Identifier = "default_colormaps_sequential2",
+  Version = 1
+})
+
+local Sequential2 = {
+  Binary = sequential2 .. "binary.cmap",
+  Gist_yarg = sequential2 .. "gist_yarg.cmap",
+  Gist_gray = sequential2 .. "gist_gray.cmap",
+  Gray = sequential2 .. "gray.cmap",
+  Bone = sequential2 .. "bone.cmap",
+  Pink = sequential2 .. "pink.cmap",
+  Spring = sequential2 .. "spring.cmap",
+  Summer = sequential2 .. "summer.cmap",
+  Autumn = sequential2 .. "autumn.cmap",
+  Winter = sequential2 .. "winter.cmap",
+  Cool = sequential2 .. "cool.cmap",
+  Wistia = sequential2 .. "Wistia.cmap",
+  Hot = sequential2 .. "hot.cmap",
+  Afmhot = sequential2 .. "afmhot.cmap",
+  Gist_heat = sequential2 .. "gist_heat.cmap",
+  Copper = sequential2 .. "copper.cmap"
+}
+asset.export("Sequential2", Sequential2)
+
+
+-- Diverging maps, with lightness monotonically increasing up to a maximum,
+-- followed by monotonically decreasing
+
+local diverging = asset.resource({
+  Name = "Mapas de Color Divergentes",
+  Type = "HttpSynchronization",
+  Identifier = "default_colormaps_diverging",
+  Version = 1
+})
+
+local Diverging = {
+  PiYG = diverging .. "PiYG.cmap",
+  PRGn = diverging .. "PRGn.cmap",
+  BrBG = diverging .. "BrBG.cmap",
+  PuOr = diverging .. "PuOr.cmap",
+  RdGy = diverging .. "RdGy.cmap",
+  RdBu = diverging .. "RdBu.cmap",
+  RdYlBu = diverging .. "RdYlBu.cmap",
+  RdYlGn = diverging .. "RdYlGn.cmap",
+  Spectral = diverging .. "Spectral.cmap",
+  Coolwarm = diverging .. "coolwarm.cmap",
+  Bwr = diverging .. "bwr.cmap",
+  Seismic = diverging .. "seismic.cmap"
+}
+asset.export("Diverging", Diverging)
+
+
+-- Mapas de color cíclicos, que comienzan y terminan en el mismo color, y se encuentran en un punto central simétrico en el medio
+
+local cyclic = asset.resource({
+  Name = "Mapas de Color Cíclicos",
+  Type = "HttpSynchronization",
+  Identifier = "default_colormaps_cyclic",
+  Version = 1
+})
+
+local Cyclic = {
+  Twilight = cyclic .. "twilight.cmap",
+  Twilight_shifted = cyclic .. "twilight_shifted.cmap",
+  Hsv = cyclic .. "hsv.cmap"
+}
+asset.export("Cyclic", Cyclic)
+
+
+-- Mapas de color cualitativos
+
+local qualitative = asset.resource({
+  Name = "Mapas de Color Cualitativos",
+  Type = "HttpSynchronization",
+  Identifier = "default_colormaps_qualitative",
+  Version = 1
+})
+
+local Qualitative = {
+  Pastel1 = qualitative .. "Pastel1.cmap",
+  Pastel2 = qualitative .. "Pastel2.cmap",
+  Paired = qualitative .. "Paired.cmap",
+  Accent = qualitative .. "Accent.cmap",
+  Dark2 = qualitative .. "Dark2.cmap",
+  Set1 = qualitative .. "Set1.cmap",
+  Set2 = qualitative .. "Set2.cmap",
+  Set3 = qualitative .. "Set3.cmap",
+  Tab10 = qualitative .. "tab10.cmap",
+  Tab20 = qualitative .. "tab20.cmap",
+  Tab20b = qualitative .. "tab20b.cmap",
+  Tab20c = qualitative .. "tab20c.cmap"
+}
+asset.export("Qualitative", Qualitative)
+
+
+-- Mapas de color misceláneos
+
+local misc = asset.resource({
+  Name = "Mapas de Color Misceláneos",
+  Type = "HttpSynchronization",
+  Identifier = "default_colormaps_misc",
+  Version = 1
+})
+
+local Misc = {
+  Flag = misc .. "flag.cmap",
+  Prism = misc .. "prism.cmap",
+  Ocean = misc .. "ocean.cmap",
+  Gist_earth = misc .. "gist_earth.cmap",
+  Terrain = misc .. "terrain.cmap",
+  Gist_stern = misc .. "gist_stern.cmap",
+  Gnuplot = misc .. "gnuplot.cmap",
+  Gnuplot2 = misc .. "gnuplot2.cmap",
+  CMRmap = misc .. "CMRmap.cmap",
+  Cubehelix = misc .. "cubehelix.cmap",
+  Brg = misc .. "brg.cmap",
+  Gist_rainbow = misc .. "gist_rainbow.cmap",
+  Rainbow = misc .. "rainbow.cmap",
+  Jet = misc .. "jet.cmap",
+  Turbo = misc .. "turbo.cmap",
+  Nipy_spectral = misc .. "nipy_spectral.cmap",
+  Gist_ncar = misc .. "gist_ncar.cmap"
+}
+asset.export("Misc", Misc)
+
+
+
+asset.meta = {
+  Name = "Mapas de Color Predeterminados",
+  Description = [[Cargar un conjunto de mapas de color predeterminados que se pueden usar en otros activos. Los
+    mapas de color se crean y categorizan en función de los de Matplotlib.
+    https://matplotlib.org/stable/users/explain/colors/colormaps.html]],
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "Licencia MIT"
+}

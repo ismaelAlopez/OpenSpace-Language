@@ -1,0 +1,97 @@
+local earthAsset = asset.require("scene/solarsystem/planets/earth/earth")
+local sunAsset = asset.require("scene/solarsystem/sun/transforms")
+
+
+
+local modelFolder = asset.resource({
+  Name = "Modelo a Escala Cientifico",
+  Type = "HttpSynchronization",
+  Identifier = "scale_model_scientist",
+  Version = 1
+})
+
+
+-- El modelo del científico está ubicado en el Laboratorio de Propulsión a Chorro en Pasadena por defecto
+local Location = { 34.201639, -118.171319, 0.78 }
+
+local ScaleModel = {
+  Identifier = "Scale_Scientist",
+  Parent = earthAsset.Earth.Identifier,
+  Transform = {
+    Translation = {
+      Type = "GlobeTranslation",
+      Globe = earthAsset.Earth.Identifier,
+      Latitude = Location[1],
+      Longitude = Location[2],
+      Altitude = Location[3],
+      UseHeightmap = true
+    },
+    Rotation = {
+      Type = "GlobeRotation",
+      Globe = earthAsset.Earth.Identifier,
+      Latitude = Location[1],
+      Longitude = Location[2]
+    }
+  },
+  Renderable = {
+    Type = "RenderableModel",
+    GeometryFile = modelFolder .. "scientist.gltf",
+    RotationVector = { 0.0, 90.0, 0.0 },
+    LightSources = { sunAsset.LightSource }
+  },
+  GUI = {
+    Name = "Científico",
+    Description = [[La altura promedio de un humano es un poco menos de 170 cm (5'7").]],
+    Path = "/Objetos a Escala"
+  }
+}
+
+local UpdatePositionAction = {
+  Identifier = "os.scalemodels.DropScientist",
+  Name = "Colocar Científico bajo la cámara",
+  Command = [[
+    openspace.globebrowsing.setNodePositionFromCamera("Scale_Scientist")
+  ]],
+  Documentation = "Actualiza la posición del Científico basado en la ubicación del globo de la cámara",
+  GuiPath = "/Objetos a Escala",
+  IsLocal = false
+}
+
+local ResetPositionAction = {
+  Identifier = "os.scalemodels.ResetScientist",
+  Name = "Restablecer posición del Científico",
+  Command = [[
+    openspace.globebrowsing.setNodePosition("Scale_Scientist", "]] .. earthAsset.Earth.Identifier .. [[", ]] .. Location[1] .. "," .. Location[2] .. ")",
+  Documentation = "Restablece el Científico a su ubicación inicial",
+  GuiPath = "/Objetos a Escala",
+  IsLocal = false
+}
+
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(ScaleModel)
+
+  openspace.action.registerAction(UpdatePositionAction)
+  openspace.action.registerAction(ResetPositionAction)
+end)
+
+asset.onDeinitialize(function()
+  openspace.action.removeAction(ResetPositionAction)
+  openspace.action.removeAction(UpdatePositionAction)
+
+  openspace.removeSceneGraphNode(ScaleModel)
+end)
+
+asset.export(ScaleModel)
+asset.export("UpdatePositionAction", UpdatePositionAction.Identifier)
+asset.export("ResetPositionAction", ResetPositionAction.Identifier)
+
+
+asset.meta = {
+  Name = "Modelo a Escala - Torre Eiffel",
+  Description = [[Un modelo a escala 1:1 de un científico humano, con acciones para moverlo
+    a una posición bajo la cámara, o de regreso a su ubicación inicial.]],
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "Licencia MIT"
+}

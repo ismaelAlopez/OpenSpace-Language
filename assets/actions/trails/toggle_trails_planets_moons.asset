@@ -1,0 +1,69 @@
+local FadeUpTrails = {
+  Identifier = "os.planetsmoons.FadeUpTrails",
+  Name = "Mostrar rastros de planetas y lunas",
+  Command = [[
+    openspace.setPropertyValue("{planetTrail_solarSystem}.Renderable.Fade", 1, 2)
+    openspace.setPropertyValue("{moonTrail_solarSystem}.Renderable.Fade", 1, 2)
+  ]],
+  Documentation = "Aumentar la visibilidad de todos los rastros de planetas y lunas en la escena",
+  GuiPath = "/Rastros",
+  IsLocal = false
+}
+
+local FadeDownTrails = {
+  Identifier = "os.planetsmoons.FadeDownTrails",
+  Name = "Ocultar rastros de planetas y lunas",
+  Command = [[
+    openspace.setPropertyValue("{planetTrail_solarSystem}.Renderable.Fade", 0, 2)
+    openspace.setPropertyValue("{moonTrail_solarSystem}.Renderable.Fade", 0, 2)
+  ]],
+  Documentation = "Reducir la visibilidad de todos los rastros de planetas y lunas en la escena",
+  GuiPath = "/Rastros",
+  IsLocal = false
+}
+
+local ToggleTrails = {
+  Identifier = "os.planetsmoons.ToggleTrails",
+  Name = "Alternar rastros de planetas y lunas",
+  Command = [[
+    local capList = openspace.property("{planetTrail_solarSystem}.Renderable.Fade")
+    local list = openspace.property("{moonTrail_solarSystem}.Renderable.Fade")
+    if (#capList == 0) and (#list == 0) then
+      openspace.printWarning("No hay rastros para alternar")
+    else
+      local prop
+      if (#capList > 0) then
+        prop = capList[1]
+      else
+        prop = list[1]
+      end
+      local currentFade = openspace.propertyValue(prop)
+      local newFade = 0
+      if currentFade < 1 then
+        newFade = 1
+      end
+      openspace.setPropertyValue("{planetTrail_solarSystem}.Renderable.Fade", newFade, 2)
+      openspace.setPropertyValue("{moonTrail_solarSystem}.Renderable.Fade", newFade, 2)
+    end
+  ]],
+  Documentation = "Alternar la visibilidad de los rastros de planetas y lunas en la escena",
+  GuiPath = "/Rastros",
+  IsLocal = false
+}
+
+
+asset.onInitialize(function()
+  openspace.action.registerAction(FadeUpTrails)
+  openspace.action.registerAction(FadeDownTrails)
+  openspace.action.registerAction(ToggleTrails)
+end)
+
+asset.onDeinitialize(function()
+  openspace.action.removeAction(ToggleTrails)
+  openspace.action.removeAction(FadeDownTrails)
+  openspace.action.removeAction(FadeUpTrails)
+end)
+
+asset.export("FadeUpTrails", FadeUpTrails.Identifier)
+asset.export("FadeDownTrails", FadeDownTrails.Identifier)
+asset.export("ToggleTrails", ToggleTrails.Identifier)

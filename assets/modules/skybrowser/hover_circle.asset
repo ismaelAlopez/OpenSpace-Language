@@ -1,0 +1,52 @@
+local transforms = asset.require("scene/solarsystem/sun/transforms")
+
+local imageFolder = asset.resource({
+  Name = "Imagen del Circulo de Hover",
+  Type = "HttpSynchronization",
+  Identifier = "misc_ring_image",
+  Version = 1
+})
+
+
+local circle = {
+  Identifier = "hoverCircle",
+  Parent = transforms.SolarSystemBarycenter.Identifier,
+  Renderable = {
+    Type = "RenderablePlaneImageLocal",
+    Size = 3.0E15,
+    Origin = "Center",
+    Billboard = true,
+    Texture = imageFolder .. "ring.png"
+  },
+  GUI = {
+    Name = "Círculo de Hover",
+    Description = [[Un marcador circular que muestra la posición en el cielo nocturno
+      del objeto sobre el que se pasa el cursor en la interfaz de usuario del navegador del cielo. 
+      El círculo aparecerá/desaparecerá dinámicamente, dependiendo de la interacción con los elementos en la interfaz de usuario]],
+    Path = "/NavegadorCielo",
+    Hidden = true
+  }
+}
+
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(circle)
+  openspace.skybrowser.setHoverCircle("hoverCircle")
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(circle)
+end)
+
+asset.export(circle)
+
+
+
+asset.meta = {
+  Name = "Círculo de Hover del Navegador del Cielo",
+  Description = [[Incluye un marcador circular que muestra la posición en el cielo nocturno
+    del objeto sobre el que se pasa el cursor en la interfaz de usuario del navegador del cielo]],
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "MIT license"
+}

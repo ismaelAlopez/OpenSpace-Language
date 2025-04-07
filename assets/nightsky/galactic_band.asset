@@ -1,0 +1,87 @@
+local transforms = asset.require("scene/solarsystem/sun/transforms")
+
+
+
+local GalacticLine = {
+  Identifier = "GalacticLine",
+  Parent = transforms.SolarSystemBarycenter.Name,
+  Transform = {
+    Scale = {
+      Type = "StaticScale",
+      Scale = 9.46377307652E18
+    }
+  },
+  Renderable = {
+    Type = "RenderableRadialGrid",
+    Opacity = 0.8,
+    Color = { 0.08, 0.40, 0.40 },
+    LineWidth = 4.0,
+    GridSegments = { 1, 1 },
+    Enabled = asset.enabled
+  },
+  GUI = {
+    Name = "Ecuador Galáctico",
+    Description = "Una representación en línea del plano del Ecuador Galáctico.",
+    Path = "/Cielo Nocturno/Sistemas de Coordenadas/Galáctico"
+  }
+}
+
+
+local ShowGalacticBand = {
+  Identifier = "os.nightsky.ShowGalacticBand",
+  Name = "Mostrar banda galáctica",
+  Command = [[
+  openspace.fadeIn("Scene.GalacticBand.Renderable")
+  ]],
+  Documentation = "Muestra la banda galáctica",
+  GuiPath = "/Cielo Nocturno/Líneas y Cuadrículas/Mostrar y Ocultar",
+  IsLocal = false
+}
+
+local HideGalacticBand = {
+  Identifier = "os.nightsky.HideGalacticBand",
+  Name = "Ocultar banda galáctica",
+  Command = [[
+  openspace.fadeOut("Scene.GalacticBand.Renderable")
+  ]],
+  Documentation = "Oculta la banda galáctica",
+  GuiPath = "/Cielo Nocturno/Líneas y Cuadrículas/Mostrar y Ocultar",
+  IsLocal = false
+}
+
+local ToggleGalacticBand = {
+  Identifier = "os.nightsky.ToggleGalacticBand",
+  Name = "Alternar línea del ecuador galáctico",
+  Command = "openspace.toggleFade('Scene.GalacticBand.Renderable')",
+  Documentation = "Alterna la visibilidad de la línea del ecuador galáctico",
+  GuiPath = "/Cielo Nocturno/Líneas y Cuadrículas",
+  IsLocal = false
+}
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(GalacticLine)
+  openspace.action.registerAction(ShowGalacticBand)
+  openspace.action.registerAction(HideGalacticBand)
+end)
+
+asset.onDeinitialize(function()
+  openspace.action.removeAction(HideGalacticBand)
+  openspace.action.removeAction(ShowGalacticBand)
+  openspace.removeSceneGraphNode(GalacticLine)
+end)
+
+asset.export(GalacticLine)
+asset.export("ShowGalacticBand", ShowGalacticBand.Identifier)
+asset.export("HideGalacticBand", HideGalacticBand.Identifier)
+
+
+
+asset.meta = {
+  Name = "Línea Galáctica",
+  Description = [[Una representación en línea del plano del Ecuador Galáctico, incluyendo acciones
+  para alternar, ocultar y mostrarlo.]],
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "Licencia MIT"
+}
+

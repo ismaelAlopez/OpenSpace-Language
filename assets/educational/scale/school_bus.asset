@@ -1,0 +1,93 @@
+local earthAsset = asset.require("scene/solarsystem/planets/earth/earth")
+local sunAsset = asset.require("scene/solarsystem/sun/transforms")
+
+
+local modelFolder = asset.resource({
+  Name = "Escala Autobus Escolar",
+  Type = "HttpSynchronization",
+  Identifier = "scale_model_school_bus",
+  Version = 1
+})
+
+local Location = { 40.780671, -73.971701, 0.78 }
+
+local ScaleModel = {
+  Identifier = "Scale_SchoolBus",
+  Parent = earthAsset.Earth.Identifier,
+  -- Note: Lat/Lon/Scale values come from alignment with Esri World Imagery 2D layer
+  Transform = {
+    Translation = {
+      Type = "GlobeTranslation",
+      Globe = earthAsset.Earth.Identifier,
+      Latitude = Location[1],
+      Longitude = Location[2],
+      Altitude = Location[3],
+      UseHeightmap = true
+    },
+    Rotation = {
+      Type = "GlobeRotation",
+      Globe = earthAsset.Earth.Identifier,
+      Latitude = Location[1],
+      Longitude = Location[2]
+    }
+  },
+  Renderable = {
+    Type = "RenderableModel",
+    GeometryFile = modelFolder .. "school_bus.gltf",
+    RotationVector = { 0.0, 90.0, 0.0 },
+    LightSources = { sunAsset.LightSource }
+  },
+  GUI = {
+    Name = "Autobús escolar",
+    Desription = [[La longitud promedio de un autobús escolar de tamaño completo en los EE. UU. es de más de 35 pies
+      (10.7 metros).]],
+    Path = "/Objetos a Escala"
+  }
+}
+
+local UpdatePositionAction = {
+  Identifier = "os.scalemodels.DropSchoolBus",
+  Name = "Colocar autobús escolar bajo la cámara",
+  Command = [[
+    openspace.globebrowsing.setNodePositionFromCamera("Scale_SchoolBus")
+  ]],
+  Documentation = "Actualiza la posición del autobús escolar según la ubicación del globo de la cámara",
+  GuiPath = "/Objetos a Escala",
+  IsLocal = false
+}
+
+local ResetPositionAction = {
+  Identifier = "os.scalemodels.ResetSchoolBus",
+  Name = "Restablecer posición del autobús escolar",
+  Command = [[
+    openspace.globebrowsing.setNodePosition("Scale_SchoolBus", "]] .. earthAsset.Earth.Identifier .. [[", ]] .. Location[1] .. "," .. Location[2] .. ")",
+  Documentation = "Restablece el autobús escolar a su ubicación inicial",
+  GuiPath = "/Objetos a Escala",
+  IsLocal = false
+}
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(ScaleModel)
+
+  openspace.action.registerAction(UpdatePositionAction)
+  openspace.action.registerAction(ResetPositionAction)
+end)
+
+asset.onDeinitialize(function()
+  openspace.action.removeAction(ResetPositionAction)
+  openspace.action.removeAction(UpdatePositionAction)
+  openspace.removeSceneGraphNode(ScaleModel)
+end)
+
+asset.export(ScaleModel)
+asset.export("UpdatePositionAction", UpdatePositionAction.Identifier)
+asset.export("ResetPositionAction", ResetPositionAction.Identifier)
+
+asset.meta = {
+  Name = "Modelo a Escala - Torre Eiffel",
+  Description = [[Un modelo a escala 1:1 de un autobús escolar de los EE. UU., con acciones para moverlo
+    a una posición bajo la cámara o devolverlo a su posición inicial.]],
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "Licencia MIT"
+}

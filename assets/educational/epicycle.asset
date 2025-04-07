@@ -1,0 +1,75 @@
+asset.require("scene/solarsystem/planets/mercury/trail_earth")
+asset.require("scene/solarsystem/planets/venus/trail_earth")
+asset.require("scene/solarsystem/planets/mars/trail_earth")
+asset.require("scene/solarsystem/planets/jupiter/trail_earth")
+asset.require("scene/solarsystem/planets/saturn/trail_earth")
+asset.require("scene/solarsystem/planets/uranus/trail_earth")
+asset.require("scene/solarsystem/planets/neptune/trail_earth")
+
+
+local FullCycleAction = {
+  Identifier = "os.epicycle.SetFull",
+  Name = "Establecer epiciclos completos",
+  Documentation = [[Desactiva EnableFade para todas las trayectorias de epiciclos 
+    para que muestren todo el período]],
+  Command = [[openspace.setPropertyValue("*TrailEarth.Renderable.Appearance.EnableFade", false)]],
+  GuiPath = "/Trayectorias/Epiciclo",
+  IsLocal = false
+}
+
+local FadedCycleAction = {
+  Identifier = "os.epicycle.SetFaded",
+  Name = "Establecer epiciclos atenuados",
+  Documentation = [[Activa EnableFade para todas las trayectorias de epiciclos 
+    para que coincidan con las trayectorias predeterminadas de los planetas]],
+  Command = [[openspace.setPropertyValue("*TrailEarth.Renderable.Appearance.EnableFade", true)]],
+  GuiPath = "/Trayectorias/Epiciclo",
+  IsLocal = false
+}
+
+local ShowCyclesAction = {
+  Identifier = "os.epicycle.ShowTrails",
+  Name = "Habilitar/Mostrar epicíclos",
+  Documentation = [[Habilita y muestra todas las trayectorias de epicíclos]],
+  Command = [[openspace.setPropertyValue("*TrailEarth.Renderable.Enabled", true);
+  openspace.setPropertyValue("*TrailEarth.Renderable.Fade", 1, 2);]],
+  GuiPath = "/Trayectorias/Epiciclo",
+  IsLocal = false
+}
+
+local FadeoutCyclesAction = {
+  Identifier = "os.epicycle.HideTrails",
+  Name = "Ocultar epicíclos",
+  Documentation = [[Oculta todas las trayectorias de epicíclos]],
+  Command = [[openspace.setPropertyValue("*TrailEarth.Renderable.Fade", 0, 2)]],
+  GuiPath = "/Trayectorias/Epiciclo",
+  IsLocal = false
+}
+
+asset.onInitialize(function()
+  openspace.action.registerAction(FullCycleAction)
+  openspace.action.registerAction(FadedCycleAction)
+  openspace.action.registerAction(ShowCyclesAction)
+  openspace.action.registerAction(FadeoutCyclesAction)
+end)
+
+asset.onDeinitialize(function()
+  openspace.action.removeAction(FadeoutCyclesAction)
+  openspace.action.removeAction(ShowCyclesAction)
+  openspace.action.removeAction(FadedCycleAction)
+  openspace.action.removeAction(FullCycleAction)
+end)
+
+asset.export("FullCycleAction", FullCycleAction.Identifier)
+asset.export("FadedCycleAction", FadedCycleAction.Identifier)
+asset.export("ShowCyclesAction", ShowCyclesAction.Identifier)
+asset.export("FadeoutCyclesAction", FadeoutCyclesAction.Identifier)
+
+asset.meta = {
+  Name = "Epiciclo",
+  Description = [[Este recurso incluye las trayectorias de los planetas desde la Tierra.
+    Además, proporciona algunas acciones para manipularlas.]],
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "Licencia MIT"
+}

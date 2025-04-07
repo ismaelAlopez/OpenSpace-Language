@@ -1,0 +1,114 @@
+local FadeUpTrails = {
+  Identifier = "os.FadeUpTrails",
+  Name = "Mostrar todos los rastros",
+  Command = [[
+    local capList = openspace.property("Scene.*Trail.Renderable.Fade")
+    for _,v in ipairs(capList) do
+      openspace.setPropertyValueSingle(v, 1, 2)
+    end
+    local list = openspace.property("Scene.*trail.Renderable.Fade")
+    for _,v in ipairs(list) do
+      openspace.setPropertyValueSingle(v, 1, 2)
+    end
+  ]],
+  Documentation = "Aumentar la opacidad de todos los rastros habilitados en la Escena",
+  GuiPath = "/Rastros",
+  IsLocal = false
+}
+
+local FadeDownTrails = {
+  Identifier = "os.FadeDownTrails",
+  Name = "Ocultar todos los rastros",
+  Command = [[
+    local capList = openspace.property("Scene.*Trail.Renderable.Fade")
+    for _,v in ipairs(capList) do
+      openspace.setPropertyValueSingle(v, 0, 2)
+    end
+    local list = openspace.property("Scene.*trail.Renderable.Fade")
+    for _,v in ipairs(list) do
+      openspace.setPropertyValueSingle(v, 0, 2)
+    end
+  ]],
+  Documentation = "Reducir la opacidad de todos los rastros habilitados en la Escena",
+  GuiPath = "/Rastros",
+  IsLocal = false
+}
+
+local ToggleTrails = {
+  Identifier = "os.ToggleTrails",
+  Name = "Alternar todos los rastros",
+  Command = [[
+    local capList = openspace.property("*Trail.Renderable.Fade")
+    local list = openspace.property("*trail.Renderable.Fade")
+    if (#capList == 0) and (#list == 0) then
+      openspace.printWarning("No hay rastros para alternar")
+    else
+      local prop
+      if #capList > 0 then
+        prop = capList[1]
+      else
+        prop = list[1]
+      end
+      local currentFade = openspace.propertyValue(prop)
+      local newFade = 0
+      if currentFade < 1 then
+        newFade = 1
+      end
+      openspace.setPropertyValue("Scene.*Trail.Renderable.Fade", newFade, 2)
+      openspace.setPropertyValue("Scene.*trail.Renderable.Fade", newFade, 2)
+      openspace.setPropertyValue("Scene.*TrailEarth.Renderable.Fade", newFade, 2)
+    end
+  ]],
+  Documentation = "Alternar la opacidad de todos los rastros en la Escena",
+  GuiPath = "/Rastros",
+  IsLocal = false
+}
+
+local ToggleTrailsInstant = {
+  Identifier = "os.ToggleTrailsInstant",
+  Name = "Alternar todos los rastros instantáneamente",
+  Command = [[
+    local capList = openspace.property("*Trail.Renderable.Fade")
+    local list = openspace.property("*trail.Renderable.Fade")
+    if (#capList == 0) and (#list == 0) then
+      openspace.printWarning("No hay rastros para alternar")
+    else
+      local prop
+      if #capList > 0 then
+        prop = capList[1]
+      else
+        prop = list[1]
+      end
+      local currentFade = openspace.propertyValue(prop)
+      local newFade = 0
+      if currentFade < 1 then
+        newFade = 1
+      end
+      openspace.setPropertyValue("Scene.*Trail.Renderable.Fade", newFade)
+      openspace.setPropertyValue("Scene.*trail.Renderable.Fade", newFade)
+    end
+  ]],
+  Documentation = "Alternar la opacidad instantáneamente de todos los rastros en la Escena",
+  GuiPath = "/Rastros",
+  IsLocal = false
+}
+
+
+asset.onInitialize(function()
+  openspace.action.registerAction(FadeUpTrails)
+  openspace.action.registerAction(FadeDownTrails)
+  openspace.action.registerAction(ToggleTrails)
+  openspace.action.registerAction(ToggleTrailsInstant)
+end)
+
+asset.onDeinitialize(function()
+  openspace.action.removeAction(ToggleTrailsInstant)
+  openspace.action.removeAction(ToggleTrails)
+  openspace.action.removeAction(FadeDownTrails)
+  openspace.action.removeAction(FadeUpTrails)
+end)
+
+asset.export("FadeUpTrails", FadeUpTrails.Identifier)
+asset.export("FadeDownTrails", FadeDownTrails.Identifier)
+asset.export("ToggleTrails", ToggleTrails.Identifier)
+asset.export("ToggleTrailsInstant", ToggleTrailsInstant.Identifier)

@@ -1,0 +1,121 @@
+local ToggleTrail = {
+  Identifier = "os.ToggleTrail",
+  Name = "Alternar rastro",
+  Command = [[
+    local node
+    if is_declared("args") then
+      node = args.Node
+    else
+      node = openspace.navigation.getNavigationState().Anchor
+    end
+
+    local trail
+    if openspace.hasSceneGraphNode(node .. "Trail") then
+      trail = node .. "Trail"
+    elseif openspace.hasSceneGraphNode(node .. "_trail") then
+      trail = node .. "_trail"
+    else
+      -- No trail found, so nothing more to do here
+      return
+    end
+
+    local visibility
+    if is_declared("args") then
+      if args.Transition == "Approaching" then
+        visibility = false
+      elseif args.Transition == "Exiting" then
+        visibility = true
+      else
+        return
+      end
+    else
+      visibility = not openspace.propertyValue("Scene." .. trail .. ".Renderable.Enabled")
+    end
+
+    if visibility then
+      openspace.setPropertyValueSingle("Scene." .. trail .. ".Renderable.Fade", 1.0, 1.0)
+    else
+      openspace.setPropertyValueSingle("Scene." .. trail .. ".Renderable.Fade", 0.0, 1.0)
+    end
+  ]],
+  Documentation = [[Alterna la visibilidad del rastro asociado a un nodo del grafo de escena.
+    Esta acción toma argumentos opcionales para 1) determinar qué rastro ocultar (como el
+    'Node') y 2) la dirección de transición (como 'After' y 'Before')]],
+  GuiPath = "/Rastros",
+  IsLocal = false
+}
+
+local HideTrail = {
+  Identifier = "os.HideTrail",
+  Name = "Ocultar rastro",
+  Command = [[
+    local node
+    if is_declared("args") then
+      node = args.Node
+    else
+      node = openspace.navigation.getNavigationState().Anchor
+    end
+
+    if openspace.hasSceneGraphNode(node .. "Trail") then
+      openspace.setPropertyValueSingle("Scene." .. node .. "Trail.Renderable.Fade", 0.0, 1.0)
+    elseif openspace.hasSceneGraphNode(node .. "_trail") then
+      openspace.setPropertyValueSingle("Scene." .. node .. "_trail.Renderable.Fade", 0.0, 1.0)
+    end
+  ]],
+  Documentation = [[Oculta el rastro asociado a un nodo del grafo de escena. Esta acción toma un
+    argumento opcional para determinar de quién ocultar el rastro. Si no se proporciona
+    ningún argumento, se utiliza el nodo de enfoque actual]],
+  GuiPath = "/Rastros",
+  IsLocal = false
+}
+
+local ShowTrail = {
+  Identifier = "os.ShowTrail",
+  Name = "Mostrar rastro",
+  Command = [[
+    local node
+    if is_declared("args") then
+      node = args.Node
+    else
+      node = openspace.navigation.getNavigationState().Anchor
+    end
+
+    if openspace.hasSceneGraphNode(node .. "Trail") then
+      openspace.setPropertyValueSingle("Scene." .. node .. "Trail.Renderable.Fade", 1.0, 1.0)
+    elseif openspace.hasSceneGraphNode(node .. "_trail") then
+      openspace.setPropertyValueSingle("Scene." .. node .. "_trail.Renderable.Fade", 1.0, 1.0)
+    end
+  ]],
+  Documentation = [[Muestra el rastro asociado a un nodo del grafo de escena. Esta acción toma un
+    argumento opcional para determinar de quién mostrar el rastro. Si no se proporciona
+    ningún argumento, se utiliza el nodo de enfoque actual]],
+  GuiPath = "/Rastros",
+  IsLocal = false
+}
+
+
+asset.onInitialize(function()
+  openspace.action.registerAction(ToggleTrail)
+  openspace.action.registerAction(HideTrail)
+  openspace.action.registerAction(ShowTrail)
+end)
+
+asset.onDeinitialize(function()
+  openspace.action.removeAction(ShowTrail)
+  openspace.action.removeAction(HideTrail)
+  openspace.action.removeAction(ToggleTrail)
+end)
+
+asset.export("ToggleTrail", ToggleTrail.Identifier)
+asset.export("HideTrail", HideTrail.Identifier)
+asset.export("ShowTrail", ShowTrail.Identifier)
+
+
+
+asset.meta = {
+  Name = "Acciones - Alternar rastros actuales",
+  Description = "Recurso que proporciona acciones para alternar rastros",
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "MIT license"
+}

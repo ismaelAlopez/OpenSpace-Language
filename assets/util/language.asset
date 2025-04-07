@@ -1,0 +1,15 @@
+-- This script is used to manage the language settings and translations
+-- It does not work properly 
+function SetLanguage(language)
+    local currentLanguage = language
+    print("Language set to " .. currentLanguage)
+    -- remove the english assets and add the spanish asset and vice versa
+    if currentLanguage == "es" then
+        print(openspace.asset.allAssets())
+        openspace.asset.remove("scene/solarsystem/planets/earth/earth.asset")
+        openspace.asset.add("scene/solarsystem/planets/earth/earthES.asset")
+    end
+end
+
+-- export the functions
+asset.export("SetLanguage", SetLanguage)

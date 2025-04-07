@@ -1,0 +1,219 @@
+local mercury = asset.require("scene/solarsystem/planets/mercury/transforms")
+local venus = asset.require("scene/solarsystem/planets/venus/transforms")
+local mars = asset.require("scene/solarsystem/planets/mars/transforms")
+local jupiter = asset.require("scene/solarsystem/planets/jupiter/transforms")
+local saturn = asset.require("scene/solarsystem/planets/saturn/transforms")
+
+
+
+local textures = asset.resource({
+  Name = "Texturas de Planetas del Cielo Nocturno",
+  Type = "HttpSynchronization",
+  Identifier = "texturas_planetas_cielo_nocturno",
+  Version = 1
+})
+
+
+local Mercury = {
+  Identifier = "NightSkyMercury",
+  Parent = mercury.MercuryBarycenter.Identifier,
+  Renderable = {
+    Type = "RenderablePlaneImageLocal",
+    Billboard = true,
+    Enabled = asset.enabled,
+    Size = 2439700 * 500,
+    Texture = textures .. "glare.png",
+    MultiplyColor = { 0.608, 0.604, 0.455 },
+    DimInAtmosphere = true,
+    RenderBinMode = "PostDeferredTransparent"
+  },
+  Tag = { "nightsky_billboard" },
+  GUI = {
+    Name = "Mercurio del Cielo Nocturno",
+    Description = [[Una versión de Mercurio para el cielo nocturno, haciéndolo visible como
+      un objeto brillante en el cielo (representación texturizada).]],
+    Path = "/Cielo Nocturno/Planetas"
+  }
+}
+
+local Venus = {
+  Identifier = "NightSkyVenus",
+  Parent = venus.VenusBarycenter.Identifier,
+  Renderable = {
+    Type = "RenderablePlaneImageLocal",
+    Enabled = asset.enabled,
+    Billboard = true,
+    Size = 6051900 * 700,
+    Texture = textures .. "glare.png",
+    MultiplyColor = { 1.0 , 0.992, 0.757 },
+    DimInAtmosphere = true,
+    RenderBinMode = "PostDeferredTransparent"
+  },
+  Tag = { "nightsky_billboard" },
+  GUI = {
+    Name = "Venus del Cielo Nocturno",
+    Description = [[Una versión de Venus para el cielo nocturno, haciéndolo visible como
+      un objeto brillante en el cielo (representación texturizada).]],
+    Path = "/Cielo Nocturno/Planetas"
+  }
+}
+
+local Mars = {
+  Identifier = "NightSkyMars",
+  Parent = mars.MarsBarycenter.Identifier,
+  Renderable = {
+    Type = "RenderablePlaneImageLocal",
+    Enabled = asset.enabled,
+    Billboard = true,
+    Size = 3396190 * 1000,
+    Texture = textures .. "glare.png",
+    MultiplyColor = { 0.756, 0.267, 0.054 },
+    DimInAtmosphere = true,
+    RenderBinMode = "PostDeferredTransparent"
+  },
+  Tag = { "nightsky_billboard" },
+  GUI = {
+    Name = "Marte del Cielo Nocturno",
+    Path = "/Cielo Nocturno/Planetas"
+  }
+}
+
+local Jupiter = {
+  Identifier = "NightSkyJupiter",
+  Parent = jupiter.JupiterBarycenter.Identifier,
+  Renderable = {
+    Type = "RenderablePlaneImageLocal",
+    Enabled = asset.enabled,
+    Billboard = true,
+    Size = 71492000 * 400,
+    Texture = textures .. "glare.png",
+    MultiplyColor = { 0.608, 0.604, 0.455 },
+    DimInAtmosphere = true,
+    RenderBinMode = "PostDeferredTransparent"
+  },
+  Tag = { "nightsky_billboard" },
+  GUI = {
+    Name = "Júpiter del Cielo Nocturno",
+    Description = [[Una versión de Júpiter para el cielo nocturno, haciéndolo visible como
+      un objeto brillante en el cielo (representación texturizada).]],
+    Path = "/Cielo Nocturno/Planetas"
+  }
+}
+
+local Saturn = {
+  Identifier = "NightSkySaturn",
+  Parent = saturn.SaturnBarycenter.Identifier,
+  Renderable = {
+    Type = "RenderablePlaneImageLocal",
+    Enabled = asset.enabled,
+    Billboard = true,
+    Size = 60268000 * 500,
+    Texture = textures .. "glare.png",
+    MultiplyColor = { 0.608, 0.604, 0.455 },
+    DimInAtmosphere = true,
+    RenderBinMode = "PostDeferredTransparent"
+  },
+  Tag = { "nightsky_billboard" },
+  GUI = {
+    Name = "Saturno del Cielo Nocturno",
+    Description = [[Una versión de Saturno para el cielo nocturno, haciéndolo visible como
+      un objeto brillante en el cielo (representación texturizada).]],
+    Path = "/Cielo Nocturno/Planetas"
+  }
+}
+
+local ShowNightSkyPlanets = {
+  Identifier = "os.nightsky.ShowNightSkyPlanets",
+  Name = "Mostrar planetas del cielo nocturno",
+  Command = [[
+    openspace.fadeIn("Scene.NightSkyMercury.Renderable")
+    openspace.fadeIn("Scene.NightSkyVenus.Renderable")
+    openspace.fadeIn("Scene.NightSkyMars.Renderable")
+    openspace.fadeIn("Scene.NightSkyJupiter.Renderable")
+    openspace.fadeIn("Scene.NightSkySaturn.Renderable")
+    openspace.setPropertyValueSingle("Scene.Moon.Scale.Scale", 2)
+  ]],
+  Documentation = "Muestra las versiones de los planetas del cielo nocturno (Nota: Aumenta la escala de la Luna)",
+  GuiPath = "/Cielo Nocturno/Planetas",
+  IsLocal = false
+}
+
+local HideNightSkyPlanets = {
+  Identifier = "os.nightsky.HideNightSkyPlanets",
+  Name = "Ocultar planetas del cielo nocturno",
+  Command = [[
+    openspace.fadeOut("Scene.NightSkyMercury.Renderable")
+    openspace.fadeOut("Scene.NightSkyVenus.Renderable")
+    openspace.fadeOut("Scene.NightSkyMars.Renderable")
+    openspace.fadeOut("Scene.NightSkyJupiter.Renderable")
+    openspace.fadeOut("Scene.NightSkySaturn.Renderable")
+    openspace.setPropertyValueSingle("Scene.Moon.Scale.Scale", 1)
+  ]],
+  Documentation = "Oculta las versiones de los planetas del cielo nocturno",
+  GuiPath = "/Cielo Nocturno/Planetas",
+  IsLocal = false
+}
+
+
+local ToggleNightSkyPlanets = {
+  Identifier = "os.nightsky.ToggleNightSkyPlanets",
+  Name = "Alternar planetas del cielo nocturno",
+  Command = [[
+    openspace.toggleFade("Scene.NightSkyMercury.Renderable")
+    openspace.toggleFade("Scene.NightSkyVenus.Renderable")
+    openspace.toggleFade("Scene.NightSkyMars.Renderable")
+    openspace.toggleFade("Scene.NightSkyJupiter.Renderable")
+    openspace.toggleFade("Scene.NightSkySaturn.Renderable")
+    local scale = openspace.propertyValue("Scene.Moon.Scale.Scale")
+    if (scale > 1) then
+      openspace.setPropertyValueSingle("Scene.Moon.Scale.Scale", 1.0)
+    else
+      openspace.setPropertyValueSingle("Scene.Moon.Scale.Scale", 2.0)
+    end
+  ]],
+  Documentation = "Alterna la visibilidad de las versiones de los planetas del cielo nocturno (Nota: Aumenta la escala de la Luna)",
+  GuiPath = "/Cielo Nocturno/Planetas",
+  IsLocal = false
+}
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(Mercury)
+  openspace.addSceneGraphNode(Venus)
+  openspace.addSceneGraphNode(Mars)
+  openspace.addSceneGraphNode(Jupiter)
+  openspace.addSceneGraphNode(Saturn)
+  openspace.action.registerAction(ShowNightSkyPlanets)
+  openspace.action.registerAction(HideNightSkyPlanets)
+  openspace.action.registerAction(ToggleNightSkyPlanets)
+end)
+
+asset.onDeinitialize(function()
+  openspace.action.removeAction(ToggleNightSkyPlanets)
+  openspace.action.removeAction(HideNightSkyPlanets)
+  openspace.action.removeAction(ShowNightSkyPlanets)
+  openspace.removeSceneGraphNode(Saturn)
+  openspace.removeSceneGraphNode(Jupiter)
+  openspace.removeSceneGraphNode(Mars)
+  openspace.removeSceneGraphNode(Venus)
+  openspace.removeSceneGraphNode(Mercury)
+end)
+
+asset.export(Mercury)
+asset.export(Venus)
+asset.export(Mars)
+asset.export(Jupiter)
+asset.export(Saturn)
+asset.export("ShowNightSkyPlanets", ShowNightSkyPlanets.Identifier)
+asset.export("HideNightSkyPlanets", HideNightSkyPlanets.Identifier)
+asset.export("ToggleNightSkyPlanets", ToggleNightSkyPlanets.Identifier)
+
+
+
+asset.meta = {
+  Name = "Planetas del Cielo Nocturno",
+  Description = [[Una colección de versiones de los planetas Mercurio, Venus,
+    Marte, Júpiter y Saturno para el cielo nocturno, incluyendo acciones para alternar, ocultar y mostrar.]],
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "Licencia MIT"
+}

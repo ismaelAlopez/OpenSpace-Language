@@ -1,0 +1,171 @@
+local earthAsset = asset.require("scene/solarsystem/planets/earth/earth")
+
+
+
+local textures = asset.resource({
+  Name = "Texturas de Direcciones Cardinales",
+  Type = "HttpSynchronization",
+  Identifier = "cardinal_directions_textures",
+  Version = 1
+})
+
+
+local CardinalDirectionsPosition = {
+  Identifier = "CardinalDirectionsPosition",
+  Parent = earthAsset.Earth.Identifier,
+  Transform = {
+    Translation = {
+      Type = "GlobeTranslation",
+      Globe = earthAsset.Earth.Identifier,
+      Latitude = 0.0,
+      Longitude = 0.0,
+      Altitude = 0.0,
+      UseCamera = true
+    },
+    Rotation = {
+      Type = "GlobeRotation",
+      Globe = earthAsset.Earth.Identifier,
+      Latitude = 0.0,
+      Longitude = 0.0,
+      UseCamera = true,
+      Angle = 270.0
+    }
+  },
+  GUI = {
+    Name = "Posición de Direcciones Cardinales",
+    Path = "/Cielo Nocturno",
+    Hidden = true
+  }
+}
+
+local CardinalDirectionSphere = {
+  Identifier = "CardinalDirectionSphere",
+  Parent = CardinalDirectionsPosition.Identifier,
+  Transform = {
+    Rotation = {
+      Type = "StaticRotation",
+      Rotation = { -math.pi / 2, 0.0, 0.0 }
+    }
+  },
+  Renderable = {
+    Type = "RenderableSphereImageLocal",
+    Enabled = asset.enabled,
+    Size = 50000,
+    Segments = 80,
+    Opacity = 0.9,
+    Texture = textures .. "nesw_red.png",
+    Orientation = "Inside",
+    MirrorTexture = true,
+    RenderBinMode = "PostDeferredTransparent"
+  },
+  GUI = {
+    Name = "Direcciones Cardinales",
+    Description = [[Una esfera texturizada que muestra las direcciones cardinales.
+      La esfera se coloca en la superficie del planeta y sigue los movimientos de la cámara.
+    ]],
+    Path = "/Cielo Nocturno"
+  }
+}
+
+local showCommand = [[
+  local lat, lon, alt = openspace.globebrowsing.geoPositionForCamera()
+  local camera = openspace.navigation.getNavigationState()
+  openspace.setParent("CardinalDirectionsPosition", camera.Anchor)
+  openspace.setPropertyValueSingle("Scene.CardinalDirectionsPosition.Translation.Globe", camera.Anchor)
+  openspace.setPropertyValueSingle("Scene.CardinalDirectionsPosition.Rotation.Globe", camera.Anchor)
+  openspace.fadeIn("Scene.CardinalDirectionSphere.Renderable")
+]]
+
+local ShowNeswBand = {
+Identifier = "os.nightsky.ShowNeswBand",
+  Name = "Mostrar direcciones cardinales (con líneas)",
+  Command = [[
+    openspace.setPropertyValueSingle("Scene.CardinalDirectionSphere.Renderable.Texture", "]] ..
+    textures:gsub("\\","/") .. [[nesw_lines_red.png")]] .. showCommand,
+  Documentation = "Muestra la esfera de direcciones cardinales con letras y un círculo con marcas de graduación",
+  GuiPath = "/Cielo Nocturno/Direcciones",
+  IsLocal = false
+}
+
+local ShowNeswBandSmall = {
+  Identifier = "os.nightsky.ShowNeswBandSmall",
+    Name = "Mostrar direcciones cardinales (pequeñas con líneas)",
+    Command = [[
+      openspace.setPropertyValueSingle("Scene.CardinalDirectionSphere.Renderable.Texture", "]] ..
+      textures:gsub("\\","/") .. [[nesw_lines_red_small.png")]] .. showCommand,
+    Documentation = "Muestra la esfera de direcciones cardinales con letras pequeñas y un círculo con marcas de graduación",
+    GuiPath = "/Cielo Nocturno/Direcciones",
+    IsLocal = false
+  }
+
+local ShowNeswLetters = {
+  Identifier = "os.nightsky.ShowNeswLetters",
+  Name = "Mostrar direcciones cardinales (solo letras)",
+  Command = [[
+    openspace.setPropertyValueSingle("Scene.CardinalDirectionSphere.Renderable.Texture","]] ..
+    textures:gsub("\\","/") .. [[nesw_red.png")]] .. showCommand,
+  Documentation = "Muestra la esfera de direcciones cardinales solo con letras",
+  GuiPath = "/Cielo Nocturno/Direcciones",
+  IsLocal = false
+}
+
+local ShowNeswLettersSmall = {
+  Identifier = "os.nightsky.ShowNeswLettersSmall",
+  Name = "Mostrar direcciones cardinales (letras pequeñas solamente)",
+  Command = [[
+    openspace.setPropertyValueSingle("Scene.CardinalDirectionSphere.Renderable.Texture","]] ..
+    textures:gsub("\\","/") .. [[nesw_red_small.png")]] .. showCommand,
+  Documentation = "Muestra la esfera de direcciones cardinales solo con letras pequeñas",
+  GuiPath = "/Cielo Nocturno/Direcciones",
+  IsLocal = false
+}
+
+local HideNesw = {
+  Identifier = "os.nightsky.HideNesw",
+  Name = "Ocultar direcciones cardinales",
+  Command = "openspace.fadeOut('Scene.CardinalDirectionSphere.Renderable')",
+  Documentation = "Oculta las direcciones cardinales",
+  GuiPath = "/Cielo Nocturno/Direcciones",
+  IsLocal = false
+}
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(CardinalDirectionsPosition)
+  openspace.addSceneGraphNode(CardinalDirectionSphere)
+  openspace.action.registerAction(ShowNeswBand)
+  openspace.action.registerAction(ShowNeswBandSmall)
+  openspace.action.registerAction(ShowNeswLetters)
+  openspace.action.registerAction(ShowNeswLettersSmall)
+  openspace.action.registerAction(HideNesw)
+end)
+
+asset.onDeinitialize(function()
+  openspace.action.removeAction(HideNesw)
+  openspace.action.removeAction(ShowNeswLettersSmall)
+  openspace.action.removeAction(ShowNeswLetters)
+  openspace.action.removeAction(ShowNeswBandSmall)
+  openspace.action.removeAction(ShowNeswBand)
+  openspace.removeSceneGraphNode(CardinalDirectionSphere)
+  openspace.removeSceneGraphNode(CardinalDirectionsPosition)
+end)
+
+asset.export(CardinalDirectionsPosition)
+asset.export(CardinalDirectionSphere)
+asset.export("ShowNeswBand", ShowNeswBand.Identifier)
+asset.export("ShowNeswBandSmall", ShowNeswBand.Identifier)
+asset.export("ShowNeswLetters", ShowNeswLetters.Identifier)
+asset.export("ShowNeswLettersSmall", ShowNeswLettersSmall.Identifier)
+asset.export("HideNesw", HideNesw.Identifier)
+
+
+
+asset.meta = {
+  Name = "Direcciones Cardinales",
+  Description = [[Agrega una esfera que muestra las direcciones cardinales, que sigue a la cámara
+    mientras navega por la superficie del planeta. También incluye acciones para cambiar la
+    textura de la esfera a diferentes estilos.
+  ]],
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "Licencia MIT"
+}

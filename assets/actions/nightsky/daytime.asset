@@ -1,0 +1,31 @@
+local EnableDimming = {
+  Identifier = "os.nightsky.EnableDimming",
+  Name = "Habilitar atenuación atmosférica",
+  Command = [[openspace.setPropertyValue("{daytime_hidden}.Renderable.DimInAtmosphere", true)]],
+  Documentation = "Establece que elementos como las estrellas y las constelaciones se oculten durante el día",
+  GuiPath = "/Cielo Nocturno/Día",
+  IsLocal = false
+}
+
+local DisableDimming = {
+  Identifier = "os.nightsky.DisableDimming",
+  Name = "Deshabilitar atenuación atmosférica",
+  Command = [[openspace.setPropertyValue("{daytime_hidden}.Renderable.DimInAtmosphere", false)]],
+  Documentation = "Establece que elementos como las estrellas y las constelaciones se muestren durante el día",
+  GuiPath = "/Cielo Nocturno/Día",
+  IsLocal = false
+}
+
+
+asset.onInitialize(function()
+  openspace.action.registerAction(EnableDimming)
+  openspace.action.registerAction(DisableDimming)
+end)
+
+asset.onDeinitialize(function()
+  openspace.action.removeAction(DisableDimming)
+  openspace.action.removeAction(EnableDimming)
+end)
+
+asset.export("EnableDimming", EnableDimming.Identifier)
+asset.export("EnableDimming", DisableDimming.Identifier)

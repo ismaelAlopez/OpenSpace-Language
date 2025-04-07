@@ -1,0 +1,100 @@
+local transforms = asset.require("scene/solarsystem/sun/transforms")
+
+
+
+local EquatorialRotationMatrix = {
+    -0.05487554,  0.4941095, -0.8676661,
+    -0.8734371,  -0.4448296, -0.1980764,
+    -0.483835,    0.7469823,  0.4559838
+}
+
+
+local EquatorialLine = {
+  Identifier = "EquatorialLine",
+  Parent = transforms.SolarSystemBarycenter.Name,
+  Transform = {
+    Rotation = {
+      Type = "StaticRotation",
+      Rotation = EquatorialRotationMatrix
+    },
+    Scale = {
+      Type = "StaticScale",
+      Scale = 7.5686E17
+    }
+  },
+  Renderable = {
+    Type = "RenderableRadialGrid",
+    Opacity = 0.8,
+    Color = { 0.6, 0.6, 0.2 },
+    LineWidth = 4.0,
+    GridSegments = { 1, 1 },
+    Enabled = asset.enabled
+  },
+  GUI = {
+    Name = "Ecuador Celeste",
+    Description = "Una representación en línea del plano ecuatorial.",
+    Path = "/Cielo Nocturno/Sistemas de Coordenadas/Ecuatorial"
+  }
+}
+
+local ShowEquatorialLine = {
+  Identifier = "os.nightsky.ShowEquatorialLine",
+  Name = "Mostrar línea ecuatorial",
+  Command = [[
+    openspace.fadeIn("Scene.EquatorialLine.Renderable")
+  ]],
+  Documentation = "Muestra la línea ecuatorial",
+  GuiPath = "/Cielo Nocturno/Líneas y Cuadrículas/Mostrar y Ocultar",
+  IsLocal = false
+}
+
+local HideEquatorialLine = {
+  Identifier = "os.nightsky.HideEquatorialLine",
+  Name = "Ocultar línea ecuatorial",
+  Command = [[
+    openspace.fadeOut("Scene.EquatorialLine.Renderable")
+  ]],
+  Documentation = "Oculta la línea ecuatorial",
+  GuiPath = "/Cielo Nocturno/Líneas y Cuadrículas/Mostrar y Ocultar",
+  IsLocal = false
+}
+
+local ToggleEquatorialLine = {
+  Identifier = "os.nightsky.ToggleEquatorialLine",
+  Name = "Alternar línea ecuatorial",
+  Command = "openspace.toggleFade('Scene.EquatorialLine.Renderable')",
+  Documentation = "Alterna la visibilidad de la línea ecuatorial",
+  GuiPath = "/Cielo Nocturno/Líneas y Cuadrículas",
+  IsLocal = false
+}
+
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(EquatorialLine)
+  openspace.action.registerAction(ShowEquatorialLine)
+  openspace.action.registerAction(HideEquatorialLine)
+  openspace.action.registerAction(ToggleEquatorialLine)
+end)
+
+asset.onDeinitialize(function()
+  openspace.action.removeAction(ToggleEquatorialLine)
+  openspace.action.removeAction(HideEquatorialLine)
+  openspace.action.removeAction(ShowEquatorialLine)
+  openspace.removeSceneGraphNode(EquatorialLine)
+end)
+
+asset.export(EquatorialLine)
+asset.export("ShowEquatorialLine", ShowEquatorialLine.Identifier)
+asset.export("HideEquatorialLine", HideEquatorialLine.Identifier)
+asset.export("ToggleEquatorialLine", ToggleEquatorialLine.Identifier)
+
+
+
+asset.meta = {
+  Name = "Línea Ecuatorial",
+  Description = [[Una representación en línea del plano ecuatorial, incluyendo acciones
+    para alternar, ocultar y mostrarla.]],
+  Author = "Equipo de OpenSpace",
+  URL = "http://openspaceproject.com",
+  License = "MIT license"
+}
