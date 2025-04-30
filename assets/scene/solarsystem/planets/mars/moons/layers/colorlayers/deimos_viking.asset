@@ -1,16 +1,20 @@
 local globe = asset.require("../../deimos_globe")
 
+
+
 local Layer = {
   Identifier = "Deimos_Global_Mosaic_USGS",
   Name = "Mosaico Global de Deimos [USGS]",
   Enabled = asset.enabled,
   ZIndex = 10,
   FilePath = "WMS:https://wms.wr.usgs.gov/cgi-bin/mapserv?map=/maps/mars/deimos_simp_cyl.map&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&LAYERS=Deimos_Simple_Cylindrical_Rasters&SRS=EPSG:4326&BBOX=-180,-90,360,90",
-  Description = [[Este mapa cilíndrico basado en Viking de Deimos fue creado por Philip
-    Stooke con la asistencia de Chris Jongkind y Megan Arntz. El control se basa en un
-    modelo de forma y mosaico de Peter Thomas y colegas de la Universidad de Cornell. Fecha
-    de lanzamiento 26 de octubre de 2001. (Descripción de la URL)]]
+  Description = [[Este mapa cilíndrico de Deimos basado en imágenes de Viking fue creado
+    por Philip Stooke con la asistencia de Chris Jongkind y Megan Arntz. El control se
+    basa en un modelo de forma y un mosaico realizado por Peter Thomas y colegas de la
+    Universidad de Cornell. Fecha de publicación: 26 de octubre de 2001. (Descripción
+    tomada del URL)]]
 }
+
 
 asset.onInitialize(function()
   openspace.globebrowsing.addLayer(globe.Deimos_Globe.Identifier, "ColorLayers", Layer)
@@ -21,6 +25,8 @@ asset.onDeinitialize(function()
 end)
 
 asset.export("layer", Layer)
+
+
 
 asset.meta = {
   Name = "Mosaico Global de Deimos [USGS]",

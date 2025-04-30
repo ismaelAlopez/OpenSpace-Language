@@ -10,11 +10,13 @@ asset.require("./colorlayers/ctx_mosaic_newyork", false)
 -- The New York server does not have this map, use the Utah server for now
 asset.require("./heightlayers/mola_utah", false)
 
+
+
 asset.meta = {
   Name = "Capas Predeterminadas de Marte (Nueva York)",
   Description = [[Las capas predeterminadas de Marte son: textura de Marte, CTX Blended, HiRISE,
     Conjunto Local de HiRISE, MOC WA Color, Viking MDIM, MOLA Pseudo Color, MOLA HRSC,
-    Themis IR Día, Themis IR Noche, CTX Mosaic, MDEM200M (3D), Conjunto Local de HiRISE DEM (3D),
+    Themis IR Day, Themis IR Night, CTX Mosaic, MDEM200M (3D), Conjunto Local DEM de HiRISE (3D),
     Elevación Mola (3D), Índices de Mosaico y Referencia de Tamaño.
 
     Capas cargadas solo desde el servidor de Nueva York

@@ -8,7 +8,7 @@ local coreKernels = asset.require("spice/core")
 
 
 local models = asset.resource({
-  Name = "Insight Models Chutes",
+  Name = "Modelos de Insight Paracaidas",
   Type = "HttpSynchronization",
   Identifier = "insight_models",
   Version = 2

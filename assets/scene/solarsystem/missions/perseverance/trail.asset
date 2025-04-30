@@ -27,7 +27,7 @@ local PerseveranceTrailSun = {
   },
   GUI = {
     Name = "Rastro de Perseverance (Sol)",
-    Path = "/Sistema Solar/Misiones/Perseverance"
+    Path = "/Sistema Solar/Misiones/Perseverancia"
   }
 }
 
@@ -49,7 +49,7 @@ local PerseveranceTrailMars = {
   },
   GUI = {
     Name = "Rastro de Perseverance (Marte)",
-    Path = "/Sistema Solar/Misiones/Perseverance"
+    Path = "/Sistema Solar/Misiones/Perseverancia"
   }
 }
 

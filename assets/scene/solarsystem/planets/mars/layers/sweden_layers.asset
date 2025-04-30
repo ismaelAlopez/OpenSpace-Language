@@ -9,8 +9,10 @@ asset.require("./colorlayers/ctx_mosaic_sweden", false)
 
 asset.require("./heightlayers/mola_sweden", false)
 
+
+
 asset.meta = {
-  Name = "Capas predeterminadas de Marte (Suecia)",
+  Name = "Capas Predeterminadas de Marte (Suecia)",
   Description = [[Las capas predeterminadas de Marte son: textura de Marte, CTX Blended, HiRISE,
     Conjunto Local de HiRISE, MOC WA Color, Viking MDIM, MOLA Pseudo Color, MOLA HRSC,
     Themis IR Día, Themis IR Noche, CTX Mosaic, MDEM200M (3D), Conjunto Local DEM de HiRISE (3D),
@@ -20,5 +22,5 @@ asset.meta = {
   ]],
   Author = "Equipo de OpenSpace",
   URL = "http://openspaceproject.com",
-  License = "MIT license"
+  License = "Licencia MIT"
 }

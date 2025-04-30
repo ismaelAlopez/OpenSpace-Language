@@ -2,6 +2,8 @@ local transforms = asset.require("../transforms")
 local kernels = asset.require("./kernels")
 local coreKernels = asset.require("spice/core")
 
+
+
 local PhobosGlobe = {
   Identifier = "Phobos_Globe",
   Parent = transforms.MarsBarycenter.Identifier,
@@ -25,11 +27,12 @@ local PhobosGlobe = {
   },
   Tag = { "moon_solarSystem", "moon_terrestrial", "moon_mars" },
   GUI = {
-    Name = "Phobos_Globe",
-    Path = "/Sistema Solar/Planetas/Marte/Lunas/Phobos",
+    Name = "Globo de Fobos",
+    Path = "/Sistema Solar/Planetas/Marte/Lunas/Fobos",
     Description = "Una de las dos lunas de Marte"
   }
 }
+
 
 asset.onInitialize(function()
   openspace.addSceneGraphNode(PhobosGlobe)
@@ -41,9 +44,10 @@ end)
 
 asset.export(PhobosGlobe)
 
+
 asset.meta = {
-  Name = "Globo de Phobos",
-  Description = "Globo renderizable para Phobos",
+  Name = "Globo de Fobos",
+  Description = "Globo renderizable para Fobos",
   Author = "Equipo de OpenSpace",
   URL = "http://openspaceproject.com",
   License = "MIT license"

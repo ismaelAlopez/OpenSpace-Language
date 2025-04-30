@@ -5,7 +5,7 @@ local coreKernels = asset.require("spice/core")
 
 
 local labelsPath = asset.resource({
-  Name = "Mars Labels",
+  Name = "Etiquetas de Marte",
   Type = "HttpSynchronization",
   Identifier = "mars_labels",
   Version = 1
@@ -60,7 +60,7 @@ local MarsLabel = {
   Renderable = {
     Type = "RenderableLabel",
     Enabled = false,
-    Text = "Marte",
+    Text = "Mars",
     FontSize = 70.0,
     Size = 8.50,
     MinMaxSize = { 1, 50 },
@@ -81,7 +81,7 @@ local MarsLabel = {
   GUI = {
     Name = "Etiqueta de Marte",
     Path = "/Sistema Solar/Planetas/Marte",
-    Description = "Etiqueta principal de Marte"
+    Description = "Etiqueta principal para Marte"
   }
 }
 
@@ -106,5 +106,5 @@ asset.meta = {
   Description = "Globo de Marte, y etiqueta principal del globo",
   Author = "Equipo de OpenSpace",
   URL = "http://openspaceproject.com",
-  License = "MIT license"
+  License = "Licencia MIT"
 }

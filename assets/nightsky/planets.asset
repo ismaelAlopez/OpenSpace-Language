@@ -9,7 +9,7 @@ local saturn = asset.require("scene/solarsystem/planets/saturn/transforms")
 local textures = asset.resource({
   Name = "Texturas de Planetas del Cielo Nocturno",
   Type = "HttpSynchronization",
-  Identifier = "texturas_planetas_cielo_nocturno",
+  Identifier = "night_sky_planet_textures",
   Version = 1
 })
 

@@ -9,6 +9,8 @@ asset.require("./heightlayers/hirisels", false)
 asset.require("./overlays/indices", false)
 asset.require("./overlays/size_reference", false)
 
+
+
 asset.meta = {
   Name = "Capas Base de Marte",
   Description = [[Las capas base de Marte son: Textura de Marte, CTX Blended, HiRISE,
@@ -17,5 +19,5 @@ asset.meta = {
   ]],
   Author = "Equipo de OpenSpace",
   URL = "http://openspaceproject.com",
-  License = "MIT license"
+  License = "Licencia MIT"
 }

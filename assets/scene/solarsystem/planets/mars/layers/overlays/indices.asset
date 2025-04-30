@@ -1,10 +1,13 @@
 local globe = asset.require("../../mars")
 
+
+
 local Layer = {
   Identifier = "Indices",
   Type = "TileIndexTileProvider",
   Enabled = asset.enabled
 }
+
 
 asset.onInitialize(function()
   openspace.globebrowsing.addLayer(globe.Mars.Identifier, "Overlays", Layer)
@@ -16,9 +19,11 @@ end)
 
 asset.export("layer", Layer)
 
+
+
 asset.meta = {
   Name = "Índices de Marte",
-  Description = "Este recurso proporciona una capa de índice de mosaico para el globo de Marte",
+  Description = "Este recurso proporciona una capa de índice de mosaicos para el globo de Marte",
   Author = "Equipo de OpenSpace",
   URL = "http://openspaceproject.com",
   License = "MIT license"

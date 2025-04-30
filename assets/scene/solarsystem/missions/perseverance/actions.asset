@@ -19,7 +19,7 @@ local Setup = {
     })
   ]],
   Documentation = "Configura el tiempo y las capas para el aterrizaje de Perseverance",
-  GuiPath = "/Misiones/Perseverance",
+  GuiPath = "/Misiones/Perseverancia",
   IsLocal = false
 }
 

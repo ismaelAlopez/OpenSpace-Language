@@ -1,13 +1,42 @@
 local globe = asset.require("../../phobos_globe")
 
+
+
+local maps = asset.resource({
+  Name = "Mapas de Phobos",
+  Type = "HttpSynchronization",
+  Identifier = "phobos_maps",
+  Version = 1
+})
+
+
 local Layer = {
-  Identifier = "Phobos_Global_Shaded_Relief_USGS",
-  Name = "Relieve Sombreado Global de Fobos [USGS]",
+  Identifier = "Viking_5m",
+  Name = "Viking 5m",
   Enabled = asset.enabled,
   ZIndex = 10,
-  FilePath = "WMS:https://wms.wr.usgs.gov/cgi-bin/mapserv?map=/maps/mars/phobos_simp_cyl.map&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&LAYERS=Phobos_Simple_Cylindrical_Rasters&SRS=EPSG:4326&BBOX=-180,-90,360,90",
-  Description = "Relieve sombreado de Fobos basado en Viking creado por USGS"
+  FilePath = maps .. "viking_5m.vrt",
+  Description = [[Este mosaico de Phobos fue creado compilando versiones actualizadas de
+    mosaicos de alta resolución de Viking y seleccionando las mejores imágenes de alta
+    resolución de otras naves espaciales para construir un mosaico completamente nuevo.
+    El proceso de compilación de este mosaico mejoró significativamente las áreas con
+    control deficiente. Donde las imágenes con iluminación inversa se encuentran, son
+    necesarios efectos artísticos para crear una apariencia satisfactoria, pero esto
+    solo afecta la apariencia y no la geometría del mapa. Este mosaico global tiene una
+    resolución de cinco metros por píxel (m).
+
+    Esta imagen fue además mejorada en color basándose en datos del Mars Reconnaissance
+    Orbiter: https://www.planetary.org/space-images/color-view-of-phobos-from-mars-reconnaissance-orbiter#:~:text=The%20color%20view%20shows%20that
+
+    Referencias:
+    Stooke, P. (2012). Stooke Small Bodies Maps V2.0. MULTI-SA-MULTI-6-STOOKEMAPS-V2.0.
+    NASA Planetary Data System. https://sbn.psi.edu/pds/resource/stookemaps.html
+
+    Simonelli, D. P., Thomas, P. C., Carcich, B. T., & Veverka, J. (1993). La generación
+    y uso de modelos de forma numéricos para objetos irregulares del sistema solar.
+    Icarus, 103, 49-61. https://doi.org/10.1006/icar.1993.1057]]
 }
+
 
 asset.onInitialize(function()
   openspace.globebrowsing.addLayer(globe.Phobos_Globe.Identifier, "ColorLayers", Layer)
@@ -17,11 +46,12 @@ asset.onDeinitialize(function()
   openspace.globebrowsing.deleteLayer(globe.Phobos_Globe.Identifier, "ColorLayers", Layer)
 end)
 
-asset.export("layer", Layer)
+asset.export(Layer)
+
 
 asset.meta = {
-  Name = "Relieve Sombreado Global de Fobos [USGS]",
-  Author = "USGS/NASA",
-  URL = "https://astrowebmaps.wr.usgs.gov/webmapatlas/Layers/maps.html",
-  License = "NASA/PDS"
+  Name = "Mosaico Global Viking de Phobos 5m",
+  Author = "Equipo de OpenSpace",
+  URL = "https://astrogeology.usgs.gov/search/map/phobos_viking_global_mosaic_5m",
+  License = "Por favor cite a los autores"
 }

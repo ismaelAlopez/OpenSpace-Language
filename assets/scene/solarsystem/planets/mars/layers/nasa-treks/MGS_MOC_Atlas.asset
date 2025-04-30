@@ -6,15 +6,18 @@
 
 local globeIdentifier = asset.require("scene/solarsystem//planets/mars/mars").Mars.Identifier
 
+
+
 local treks_msss_atlas_simp_clon = {
   Identifier = "msss_atlas_simp_clon",
-  Name = [[MGS MOC Atlas, Global Color Mosaic]],
+  Name = [[Atlas MGS MOC, Mosaico Global de Color]],
   ZIndex = 50,
   FilePath = asset.resource("MGS_MOC_Atlas/Global_Color_Mosaic.vrt"),
-  Description = [[This data was acquired using the Mars Orbiter Camera instrument aboard NASA's Mars Global Surveyor spacecraft (MGS). MGS was launched on November 7, 1996 and arrived at Mars on September 11, 1997. It maintained a circular polar orbit, completing an orbital revolution every 117.65 minutes at an average altitude of 378 km (235 mi). Until November 2, 2006, MGS characterized and mapped Mars' surface features, properties, topography, composition, and processes, as well as studied Mars' weather and atmospheric structure.
+  Description = [[Estos datos fueron adquiridos utilizando el instrumento Mars Orbiter Camera a bordo de la nave espacial Mars Global Surveyor (MGS) de la NASA. MGS fue lanzada el 7 de noviembre de 1996 y llegó a Marte el 11 de septiembre de 1997. Mantuvo una órbita polar circular, completando una revolución orbital cada 117.65 minutos a una altitud promedio de 378 km (235 mi). Hasta el 2 de noviembre de 2006, MGS caracterizó y cartografió las características de la superficie de Marte, sus propiedades, topografía, composición y procesos, además de estudiar el clima y la estructura atmosférica de Marte.
 
-The Mars Orbiter Camera (MOC) consisted of 3 instruments. A black-and-white narrow angle camera captured high resolution images (typically 1.5 to 12 m per pixel) and red and blue wide angle cameras for context (240 m per pixel) and daily global imaging (7.5 km per pixel). This mosaic was assembled from Wide Angle red images (primarily those acquired in May-June 1999) from the Mars Orbiter Camera.]]
+La Mars Orbiter Camera (MOC) consistía en 3 instrumentos. Una cámara de ángulo estrecho en blanco y negro capturó imágenes de alta resolución (típicamente de 1.5 a 12 m por píxel) y cámaras de ángulo ancho en rojo y azul para contexto (240 m por píxel) e imágenes globales diarias (7.5 km por píxel). Este mosaico fue ensamblado a partir de imágenes de ángulo ancho en rojo (principalmente aquellas adquiridas en mayo-junio de 1999) de la Mars Orbiter Camera.]]
 }
+
 
 asset.onInitialize(function()
   openspace.globebrowsing.addLayer(globeIdentifier, "ColorLayers", treks_msss_atlas_simp_clon)
@@ -27,10 +30,11 @@ end)
 asset.export("msss_atlas_simp_clon", treks_msss_atlas_simp_clon)
 
 
+
 asset.meta = {
-  Name = [[NASA Treks Layers for Mars MGS_MOC_Atlas]],
+  Name = [[Capas de NASA Treks para Marte MGS_MOC_Atlas]],
   Author = "NASA/Treks",
   URL = "https://trek.nasa.gov/mars",
   License = "NASA/Treks",
-  Description = [[MGS_MOC_Atlas layers from NASA/Treks for Mars]]
+  Description = [[Capas MGS_MOC_Atlas de NASA/Treks para Marte]]
 }

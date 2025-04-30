@@ -2,6 +2,8 @@ local transforms = asset.require("../transforms")
 local kernels = asset.require("./kernels")
 local coreKernels = asset.require("spice/core")
 
+
+
 local DeimosGlobe = {
   Identifier = "Deimos_Globe",
   Parent = transforms.MarsBarycenter.Identifier,
@@ -25,11 +27,12 @@ local DeimosGlobe = {
   },
   Tag = { "moon_solarSystem", "moon_terrestrial", "moon_mars" },
   GUI = {
-    Name = "Deimos_Globe",
+    Name = "Globo_Deimos",
     Path = "/Sistema Solar/Planetas/Marte/Lunas/Deimos",
     Description = "Una de las dos lunas de Marte"
   }
 }
+
 
 asset.onInitialize(function()
   openspace.addSceneGraphNode(DeimosGlobe)
@@ -40,6 +43,8 @@ asset.onDeinitialize(function()
 end)
 
 asset.export(DeimosGlobe)
+
+
 
 asset.meta = {
   Name = "Globo de Deimos",

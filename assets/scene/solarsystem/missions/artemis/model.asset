@@ -2,7 +2,7 @@ local sun = asset.require("scene/solarsystem/sun/transforms")
 local transforms = asset.require("./transforms")
 
 local models = asset.resource({
-  Name = "Artemis Models",
+  Name = "Modelo Artemis",
   Type = "HttpSynchronization",
   Identifier = "artemis_1_models",
   Version = 1

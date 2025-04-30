@@ -1,5 +1,7 @@
 local globe = asset.require("../../mars")
 
+
+
 local Layer = {
   Identifier = "CTX_Mosaic_Utah",
   Name = "Mosaico CTX [Utah]",
@@ -8,6 +10,7 @@ local Layer = {
   FilePath = asset.resource("ctx_mosaic_utah.wms"),
   BlendMode = "Color"
 }
+
 
 asset.onInitialize(function()
   openspace.globebrowsing.addLayer(globe.Mars.Identifier, "ColorLayers", Layer)
@@ -19,11 +22,13 @@ end)
 
 asset.export("layer", Layer)
 
+
+
 asset.meta = {
   Name = "Mosaico CTX [Utah]",
-  Description = [[Capa de mosaico CTX para el globo de Marte. Esta capa es servida desde los
+  Description = [[Capa de mosaico CTX para el globo de Marte. Esta capa se sirve desde los
     servidores de OpenSpace en Utah]],
   Author = "Equipo de OpenSpace",
   URL = "http://openspaceproject.com",
-  License = "MIT license"
+  License = "Licencia MIT"
 }

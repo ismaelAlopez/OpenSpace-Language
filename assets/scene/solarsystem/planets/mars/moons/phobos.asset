@@ -4,12 +4,15 @@ local sun = asset.require("scene/solarsystem/sun/transforms")
 local kernels = asset.require("./kernels")
 local coreKernels = asset.require("spice/core")
 
+
+
 local model = asset.resource({
-  Name = "Phobos Model",
+  Name = "Modelo de Phobos",
   Type = "HttpSynchronization",
   Identifier = "phobos_model",
   Version = 1
 })
+
 
 local Phobos = {
   Identifier = "Phobos",
@@ -75,7 +78,7 @@ local PhobosLabel = {
   Renderable = {
     Type = "RenderableLabel",
     Enabled = false,
-    Text = "Fobos",
+    Text = "Phobos",
     FontSize = 70.0,
     Size = 5.0,
     MinMaxSize = { 1, 25 },
@@ -94,6 +97,7 @@ local PhobosLabel = {
   }
 }
 
+
 asset.onInitialize(function()
   openspace.addSceneGraphNode(Phobos)
   openspace.addSceneGraphNode(PhobosTrail)
@@ -109,10 +113,12 @@ end)
 asset.export(Phobos)
 asset.export(PhobosTrail)
 
+
+
 asset.meta = {
   Name = "Fobos",
-  Description = "Modelo renderizable y Rastropara Fobos",
+  Description = "Modelo renderizable y rastro para Fobos",
   Author = "Equipo de OpenSpace",
   URL = "http://openspaceproject.com",
-  License = "MIT license"
+  License = "Licencia MIT"
 }

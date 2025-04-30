@@ -1,23 +1,26 @@
 local globe = asset.require("../../mars")
 
+
+
 local Layer = {
   Identifier = "Themis_IR_Day_Sweden",
-  Name = "Themis IR Día [Suecia]",
+  Name = "Themis IR Dia [Suecia]",
   Enabled = asset.enabled,
   ZIndex = 50,
   FilePath = asset.resource("themis_ir_day_sweden.wms"),
   BlendMode = "Color",
   Description = [[Este mosaico representa el Sistema de Imágenes de Emisión Térmica (THEMIS)
-    -mosaico infrarrojo (IR) diurno de 100 metros/píxel (versión 12) lanzado en el verano
+    - mosaico infrarrojo (IR) diurno de 100 metros/píxel (versión 12) lanzado en el verano
     de 2014 por la Universidad Estatal de Arizona. Los valores representan solo una representación visual
-    de las temperaturas diurnas. Los valores originales se han estirado y mezclado para
-    hacer un mosaico más homogéneo. <br><br> Referencia: * Edwards, C. S., K. J. Nowicki,
-    P. R. Christensen, J. Hill, N. Gorelick, y K. Murray (2011), Mosaico de
-    conjuntos de datos de imágenes planetarias globales: 1. Técnicas y procesamiento de datos para el
-    Sistema de Imágenes de Emisión Térmica (THEMIS) datos multiespectrales, J. Geophys. Res., 116,
+    de las temperaturas diurnas. Los valores originales han sido estirados y combinados para
+    crear un mosaico más uniforme. <br><br> Referencia: * Edwards, C. S., K. J. Nowicki,
+    P. R. Christensen, J. Hill, N. Gorelick, y K. Murray (2011), Creación de mosaicos de
+    conjuntos de datos de imágenes planetarias globales: 1. Técnicas y procesamiento de datos para el Sistema de
+    Imágenes de Emisión Térmica (THEMIS) datos multiespectrales, J. Geophys. Res., 116,
     E10008, doi:10.1029/2010JE003755. http://dx.doi.org/10.1029/2010JE003755
-    (Descripción de la URL)]]
+    (Descripción del URL)]]
 }
+
 
 asset.onInitialize(function()
   openspace.globebrowsing.addLayer(globe.Mars.Identifier, "ColorLayers", Layer)
@@ -29,10 +32,12 @@ end)
 
 asset.export("layer", Layer)
 
+
+
 asset.meta = {
   Name = "Themis IR Día [Suecia]",
-  Description = [[Capa diurna de Themis para Marte. Este mapa está alojado en el servidor de OpenSpace
-    en Suecia]],
+  Description = [[Capa diurna de Themis para Marte. Este mapa está alojado en el servidor
+    de OpenSpace en Suecia]],
   Author = "USGS",
   URL = "https://astrogeology.usgs.gov/search/map/Mars/Odyssey/THEMIS-IR-Mosaic-ASU/" ..
     "Mars_MO_THEMIS-IR-Day_mosaic_global_100m_v12",

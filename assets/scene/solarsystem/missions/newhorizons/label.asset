@@ -2,7 +2,7 @@ local NewHorizonsModel = asset.require("./model")
 
 
 local models = asset.resource({
-  Name = "New Horizons Model",
+  Name = "Modelo de New Horizons",
   Type = "HttpSynchronization",
   Identifier = "newhorizons_model",
   Version = 2

@@ -5,7 +5,7 @@ local coreKernels = asset.require("spice/core")
 
 
 local models = asset.resource({
-  Name = "Bennu Models",
+  Name = "Modelo de Bennu",
   Type = "HttpSynchronization",
   Identifier = "bennu_models",
   Version = 2

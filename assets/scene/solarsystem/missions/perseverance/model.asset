@@ -1,3 +1,58 @@
+local trail = asset.require("./trail")
+local marsTransforms = asset.require("scene/solarsystem/planets/mars/transforms")
+local sun = asset.require("scene/solarsystem/sun/transforms")
+local kernels = asset.require("./kernels")
+local coreKernels = asset.require("spice/core")
+
+local models = asset.resource({
+  Name = "Modelo Perseverancia",
+  Type = "HttpSynchronization",
+  Identifier = "perseverance_models",
+  Version = 2
+})
+
+local TranslationKeyframes = {
+  ["1850 JAN 01 00:00:00"] = {
+    Type = "SpiceTranslation",
+    Target = kernels.ID.Perseverance,
+    Observer = kernels.ID.Mars,
+    Frame = kernels.Frame.Mars,
+    FixedDate = "2020 JUL 17 13:56:43"
+  },
+  ["2020 JUL 17 13:56:42"] = {
+    Type = "SpiceTranslation",
+    Target = kernels.ID.Perseverance,
+    Observer = kernels.ID.Mars,
+    Frame = kernels.Frame.Mars,
+    FixedDate = "2020 JUL 17 13:56:43"
+  },
+  ["2020 JUL 17 13:56:43"] = {
+    Type = "SpiceTranslation",
+    Target = kernels.ID.Perseverance,
+    Observer = kernels.ID.Mars,
+    Frame = kernels.Frame.Mars
+  },
+  ["2020 JUL 17 13:56:44"] = {
+    Type = "SpiceTranslation",
+    Target = kernels.ID.Perseverance,
+    Observer = kernels.ID.Mars,
+    Frame = kernels.Frame.Mars
+  },
+  ["2021 FEB 18 20:43:48"] = {
+    Type = "SpiceTranslation",
+    Target = kernels.ID.Perseverance,
+    Observer = kernels.ID.Mars,
+    Frame = kernels.Frame.Mars
+  },
+  ["2021 FEB 18 20:43:49"] = {
+    Type = "SpiceTranslation",
+    Target = kernels.ID.Perseverance,
+    Observer = kernels.ID.Mars,
+    Frame = kernels.Frame.Mars,
+    FixedDate = "2021 FEB 18 20:43:48"
+  }
+}
+
 local PerseveranceNode = {
   Identifier = "PerseveranceNode",
   Parent = marsTransforms.MarsBarycenter.Identifier,
@@ -69,3 +124,22 @@ local Body = {
     Path = "/Sistema Solar/Misiones/Perseverancia/Modelo"
   }
 }
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(PerseveranceNode)
+  openspace.addSceneGraphNode(Perseverance)
+  openspace.addSceneGraphNode(PerseveranceModel)
+  openspace.addSceneGraphNode(Body)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(Body)
+  openspace.removeSceneGraphNode(PerseveranceModel)
+  openspace.removeSceneGraphNode(Perseverance)
+  openspace.removeSceneGraphNode(PerseveranceNode)
+end)
+
+asset.export(PerseveranceNode)
+asset.export(Perseverance)
+asset.export(PerseveranceModel)
+asset.export(Body)

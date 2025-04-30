@@ -1,6 +1,8 @@
 local transforms = asset.require("scene/solarsystem/planets/earth/transforms")
 local coreKernels = asset.require("spice/core")
 
+
+
 local MarsTrailEarth = {
   Identifier = "MarsTrailEarth",
   Parent = transforms.EarthBarycenter.Identifier,
@@ -24,6 +26,7 @@ local MarsTrailEarth = {
   }
 }
 
+
 asset.onInitialize(function()
   openspace.addSceneGraphNode(MarsTrailEarth)
 end)
@@ -34,10 +37,12 @@ end)
 
 asset.export(MarsTrailEarth)
 
+
+
 asset.meta = {
   Name = "Rastro de Marte desde la Tierra",
-  Description = "Rastro de Marte, con la Tierra como observador SPICE",
+  Description = "Rastro de Marte, vinculado a la Tierra con la Tierra como observador SPICE",
   Author = "Equipo de OpenSpace",
   URL = "http://openspaceproject.com",
-  License = "MIT license"
+  License = "Licencia MIT"
 }

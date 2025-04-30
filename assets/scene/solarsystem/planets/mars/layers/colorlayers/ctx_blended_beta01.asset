@@ -1,5 +1,7 @@
 local globe = asset.require("../../mars")
 
+
+
 local Layer = {
   Identifier = "CTX_blended_01",
   Name = "CTX Mezclado beta01",
@@ -11,8 +13,25 @@ local Layer = {
     Gamma = 2.14,
     Multiplier = 1.54
   },
-  Description = [[Este producto contiene datos CTX a través del lanzamiento 45 de MRO, fase de misión CTX J21 (1 de diciembre de 2017). El mosaico está compuesto por 74,196 imágenes CTX separadas de 95,106 disponibles (78.0%). Las órbitas no incluidas fueron (1) baja señal/ruido (aumento de la opacidad atmosférica), o (2) cobertura redundante (objetivos estereoscópicos, detección de cambios, etc.). Con las imágenes de baja calidad eliminadas, el mosaico cubre el 97.3% de Marte. El mosaico cubre de 88°S a 88°N. Todos los datos se remuestrean a 5.0 m/px, incluyendo 2,334 órbitas (3.14%) que tienen una resolución nativa más alta que 5.0 m/px, aunque ninguna imagen tiene una resolución mayor a 4.93 m/px. El planeta se dividió en 3,960 mosaicos de 4°x4°, que no están mezclados entre sí en esta versión. Como describimos a continuación, cada píxel se puede rastrear hasta su órbita anfitriona a través de mapas de costuras vectorizados que se proporcionan con cada mosaico. Estos mapas de costuras proporcionan documentación espacial píxel por píxel de las costuras de las imágenes, para evitar la interpretación errónea de las costuras como posibles formas de relieve y para proporcionar acceso instantáneo a los datos originales. Un mosaico CTX completamente sin costuras es actualmente inviable, por lo que se requieren mapas de costuras para evitar interpretaciones erróneas. (Descripción de URL)]]
+  Description = [[Este producto contiene datos CTX a través del lanzamiento 45 de MRO, fase
+    de misión CTX J21 (1 de diciembre de 2017). El mosaico está compuesto por 74,196
+    imágenes CTX separadas de un total de 95,106 disponibles (78.0%). Las órbitas no
+    incluidas fueron (1) baja señal/ruido (mayor opacidad atmosférica), o (2) cobertura
+    redundante (objetivos estéreo, detección de cambios, etc.). Con las imágenes de baja
+    calidad eliminadas, el mosaico cubre el 97.3% de Marte. El mosaico cubre desde 88°S
+    hasta 88°N. Todos los datos están remuestreados a 5.0 m/px, incluyendo 2,334 órbitas
+    (3.14%) que tienen una resolución nativa más alta que 5.0 m/px, aunque ninguna imagen
+    tiene una resolución mayor a 4.93 m/px. El planeta se dividió en 3,960 mosaicos de
+    4°x4°, que no están mezclados entre sí en esta versión. Como describimos a
+    continuación, cada píxel puede rastrearse hasta su órbita de origen a través de mapas
+    vectorizados de costuras que se proporcionan con cada mosaico. Estos mapas de costuras
+    proporcionan documentación espacial píxel por píxel de las costuras de las imágenes,
+    para evitar la interpretación errónea de costuras como posibles formas del terreno y
+    para proporcionar acceso instantáneo a los datos originales. Un mosaico CTX
+    completamente sin costuras es actualmente inviable, por lo que se requieren mapas de
+    costuras para evitar interpretaciones erróneas. (Descripción del URL)]]
 }
+
 
 asset.onInitialize(function()
   openspace.globebrowsing.addLayer(globe.Mars.Identifier, "ColorLayers", Layer)
@@ -24,10 +43,13 @@ end)
 
 asset.export("layer", Layer)
 
+
+
 asset.meta = {
   Name = "CTX Mezclado beta01",
-  Description = [[Nuevo mapa CTX mezclado para Marte del laboratorio Murray de CalTech. Este mapa está alojado por ESRI]],
-  Author = "Caltech Murray Lab",
+  Description = [[Nuevo mapa CTX mezclado para Marte del laboratorio Murray de CalTech. Este mapa está
+    alojado por ESRI]],
+  Author = "Laboratorio Murray de Caltech",
   URL = "http://murray-lab.caltech.edu/CTX/",
   License = "Esri Master License Agreement"
 }

@@ -1,5 +1,7 @@
 local globe = asset.require("../../mars")
 
+
+
 local Layer = {
   Identifier = "Viking_MDIM_NewYork",
   Name = "Viking MDIM [Nueva York]",
@@ -8,24 +10,27 @@ local Layer = {
   FilePath = asset.resource("viking_mdim_newyork.wms"),
   Description = [[Este mapa global de imágenes de Marte tiene una resolución de 256 píxeles/grado
     (escala aproximadamente 232 metros por píxel (m) en el ecuador). El mosaico
-    coloreado fue completado por NASA AMES, que deformó el mosaico coloreado original
-    de Viking y lo mezcló sobre el último Modelo Digital de Imágenes de Marte
-    (MDIM 2.1) en blanco y negro. Se estima que la precisión posicional de las características
-    en MDIM 2.1 es de aproximadamente un píxel (200 m), en comparación con 3 km para MDIM 2.0
-    lanzado en 2001 y >6 km para MDIM 1.0 lanzado en 1991. Además de un control geodésico
-    relativamente impreciso, los mosaicos anteriores se vieron afectados por definiciones
-    cambiantes de parámetros cartográficos (como la definición de longitud cero),
-    resultando en un desplazamiento de longitud general de hasta 0.2° entre los primeros MDIMs
-    y otros conjuntos de datos. El nuevo mosaico utiliza las definiciones más recientes del
-    sistema de coordenadas para Marte. Estas definiciones han sido ampliamente adoptadas por
-    misiones de la NASA y otros usuarios de datos planetarios y es probable que permanezcan en
-    uso durante una década o más. Como resultado, MDIM 2.1 no solo se registra con precisión
-    con datos de misiones actuales como Mars Global Surveyor (MGS) y 2001 Mars Odyssey, sino que
-    también servirá como un mapa base preciso sobre el cual se pueden trazar datos de misiones
-    futuras. (Descripción de la URL). <br><br> Referencias: Williams, D. R. (2018). Misión Viking
-    a Marte. https://nssdc.gsfc.nasa.gov/planetary/viking.html Referencias adicionales disponibles
-    aquí: http://astrogeology.usgs.gov/maps/mdim-2-1]]
+    en color fue completado por NASA AMES, que deformó el mosaico original en color
+    de Viking y lo combinó con el último Modelo de Imagen Digital de Marte
+    (MDIM 2.1) en blanco y negro. Se estima que la precisión posicional de las
+    características en MDIM 2.1 es de aproximadamente un píxel (200 m), en comparación
+    con 3 km para MDIM 2.0 lanzado en 2001 y >6 km para MDIM 1.0 lanzado en 1991.
+    Además de un control geodésico relativamente impreciso, los mosaicos anteriores
+    se vieron afectados por cambios en las definiciones de parámetros cartográficos
+    (como la definición de longitud cero), lo que resultó en un desplazamiento
+    longitudinal general de hasta 0.2° entre los primeros MDIM y otros conjuntos
+    de datos. El nuevo mosaico utiliza las definiciones más recientes del sistema
+    de coordenadas para Marte. Estas definiciones han sido ampliamente adoptadas
+    por las misiones de la NASA y otros usuarios de datos planetarios y es probable
+    que sigan en uso durante una década o más. Como resultado, MDIM 2.1 no solo se
+    registra con precisión con datos de misiones actuales como Mars Global Surveyor
+    (MGS) y 2001 Mars Odyssey, sino que también servirá como un mapa base preciso
+    sobre el cual se pueden trazar datos de futuras misiones.
+    (Descripción del URL). <br><br> Referencias: Williams, D. R. (2018). Misión
+    Viking a Marte. https://nssdc.gsfc.nasa.gov/planetary/viking.html Referencias
+    adicionales disponibles aquí: http://astrogeology.usgs.gov/maps/mdim-2-1]]
 }
+
 
 asset.onInitialize(function()
   openspace.globebrowsing.addLayer(globe.Mars.Identifier, "ColorLayers", Layer)
@@ -37,10 +42,12 @@ end)
 
 asset.export("layer", Layer)
 
+
+
 asset.meta = {
   Name = "Viking MDIM [Nueva York]",
-  Description = [[Capa de imagen alternativa para Marte. Este mapa está alojado en el servidor de OpenSpace
-    en Nueva York]],
+  Description = [[Capa de imagen alternativa para Marte. Este mapa está alojado en el
+    servidor de OpenSpace en Nueva York]],
   Author = "USGS",
   URL = "https://astrogeology.usgs.gov/search/map/Mars/Viking/MDIM21/" ..
     "Mars_Viking_MDIM21_ClrMosaic_global_232m",

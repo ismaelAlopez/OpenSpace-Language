@@ -13,14 +13,14 @@ local models = asset.resource({
 })
 
 local images = asset.resource({
-  Name = "Imágenes de Bennu Aproximación",
+  Name = "Imagenes de Bennu Aproximacion",
   Type = "HttpSynchronization",
   Identifier = "osirisrex_bennu_images_approach",
   Version = 1
 })
 
 local imagesA = asset.resource({
-  Name = "Imágenes de Bennu A",
+  Name = "Imagenes de Bennu A",
   Type = "HttpSynchronization",
   Identifier = "osirisrex_bennu_images_orbit_a",
   Version = 1

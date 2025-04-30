@@ -6,7 +6,7 @@ local coreKernels = asset.require("spice/core")
 
 
 local textures = asset.resource({
-  Name = "Charon Textures",
+  Name = "Texturas de Caronte",
   Type = "HttpSynchronization",
   Identifier = "charon_textures",
   Version = 3

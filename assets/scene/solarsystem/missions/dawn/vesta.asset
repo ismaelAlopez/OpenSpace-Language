@@ -12,7 +12,7 @@ local textures = asset.resource({
 })
 
 local images = asset.resource({
-  Name = "Imágenes de Vesta",
+  Name = "Imagenes de Vesta",
   Type = "HttpSynchronization",
   Identifier = "vesta_images",
   Version = 1

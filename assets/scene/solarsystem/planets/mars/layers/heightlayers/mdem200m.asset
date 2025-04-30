@@ -4,16 +4,18 @@ local globe = asset.require("../../mars")
 
 local Layer = {
   Identifier = "MDEM200M",
-  Name = "HRSC MOLA DEM Combinado Global 200m v2",
+  Name = "HRSC MOLA Mezcla DEM Global 200m v2",
   Enabled = asset.enabled,
   ZIndex = 20,
   FilePath = asset.resource("mdem200m.wms"),
   TilePixelSize = 129,
-  Description = [[Combinación de datos derivados del Altímetro Láser del Orbitador de Marte
+  Description = [[Mezcla de datos derivados del Altímetro Láser Orbital de Marte
     (MOLA, un instrumento a bordo de la nave espacial Mars Global Surveyor de la NASA), y datos derivados
-    de la Cámara Estéreo de Alta Resolución (HRSC, un instrumento a bordo de la nave espacial Mars Express de la Agencia Espacial Europea). La precisión promedio es de ~100 metros en posición horizontal y la incertidumbre de elevación es de al menos ±3 m. Esta capa de elevación en mosaico,
-    alojada por ESRI, se pone a disposición utilizando compresión LERC sin pérdida.
-    (Descripción de la URL)]]
+    de la Cámara Estéreo de Alta Resolución (HRSC, un instrumento a bordo de la nave espacial Mars Express
+    de la Agencia Espacial Europea). La precisión promedio es de ~100 metros en posición horizontal y la
+    incertidumbre de elevación es al menos ±3 m. Esta capa de elevación en mosaico, alojada por ESRI, se
+    pone a disposición utilizando compresión sin pérdida LERC.
+    (Descripción tomada de la URL)]]
 }
 
 
@@ -30,10 +32,11 @@ asset.export("layer", Layer)
 
 
 asset.meta = {
-  Name = "HRSC MOLA DEM Combinado Global 200m v2 de Marte",
-  Description = "DEM Combinado HRSC MOLA de Marte alojado por ESRI",
+  Name = "DEM Mezclado Global de Marte HRSC MOLA 200m v2",
+  Description = "DEM Mezclado de Marte HRSC MOLA alojado por ESRI",
   Author = "esri_astro",
   URL = "https://www.arcgis.com/home/item.html?id=225adad86379474ebc3d51a74573c99b",
   License = "Esri Master License Agreement"
 }
+
 

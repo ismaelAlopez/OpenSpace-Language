@@ -1,9 +1,8 @@
 local coreKernels = asset.require("spice/core")
 
 
-
 local kernels = asset.resource({
-  Name = "Mars Spice Kernels",
+  Name = "Kernels de Marte",
   Type = "HttpSynchronization",
   Identifier = "mars_kernels",
   Version = 1

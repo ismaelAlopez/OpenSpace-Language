@@ -1,6 +1,8 @@
 local transforms = asset.require("scene/solarsystem/sun/transforms")
 local coreKernels = asset.require("spice/core")
 
+
+
 local MarsBarycenterTrail = {
   Identifier = "MarsBarycenterTrail",
   Parent = transforms.SolarSystemBarycenter.Identifier,
@@ -20,9 +22,10 @@ local MarsBarycenterTrail = {
   GUI = {
     Name = "Rastro del Baricentro de Marte",
     Path = "/Sistema Solar/Planetas/Marte",
-    Description = "Rastro del Baricentro de Marte observado por el Sol"
+    Description = "Rastro del Baricentro de Marte observado desde el Sol"
   }
 }
+
 
 asset.onInitialize(function()
   openspace.addSceneGraphNode(MarsBarycenterTrail)
@@ -33,6 +36,8 @@ asset.onDeinitialize(function()
 end)
 
 asset.export(MarsBarycenterTrail)
+
+
 
 asset.meta = {
   Name = "Rastro de Marte",

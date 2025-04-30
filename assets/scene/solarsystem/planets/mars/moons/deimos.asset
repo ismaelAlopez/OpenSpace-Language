@@ -4,12 +4,15 @@ local sun = asset.require("scene/solarsystem/sun/transforms")
 local kernels = asset.require("./kernels")
 local coreKernels = asset.require("spice/core")
 
+
+
 local model = asset.resource({
-  Name = "Modelo de Deimos",
+  Name = "Deimos Model",
   Type = "HttpSynchronization",
   Identifier = "deimos_model",
   Version = 1
 })
+
 
 local Deimos = {
   Identifier = "Deimos",
@@ -90,9 +93,10 @@ local DeimosLabel = {
   GUI = {
     Name = "Etiqueta de Deimos",
     Path = "/Sistema Solar/Planetas/Marte/Lunas/Deimos",
-    Description = "Etiqueta para la luna Deimos de Marte"
+    Description = "Etiqueta para la luna de Marte, Deimos"
   }
 }
+
 
 asset.onInitialize(function()
   openspace.addSceneGraphNode(Deimos)
@@ -109,10 +113,12 @@ end)
 asset.export(Deimos)
 asset.export(DeimosTrail)
 
+
+
 asset.meta = {
   Name = "Deimos",
-  Description = "Modelo renderizable y Rastropara Deimos",
+  Description = "Modelo renderizable y rastro para Deimos",
   Author = "Equipo de OpenSpace",
   URL = "http://openspaceproject.com",
-  License = "MIT license"
+  License = "Licencia MIT"
 }

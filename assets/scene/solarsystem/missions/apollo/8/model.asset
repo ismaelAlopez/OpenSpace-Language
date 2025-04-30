@@ -6,7 +6,7 @@ local coreKernels = asset.require("spice/core")
 
 
 local models = asset.resource({
-  Name = "Modelos Apollo",
+  Name = "Modelos Apolo",
   Type = "HttpSynchronization",
   Identifier = "apollo_models",
   Version = 4

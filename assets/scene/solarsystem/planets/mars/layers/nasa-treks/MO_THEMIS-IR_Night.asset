@@ -6,13 +6,16 @@
 
 local globeIdentifier = asset.require("scene/solarsystem//planets/mars/mars").Mars.Identifier
 
+
+
 local treks_THEMIS_NightIR_ControlledMosaics_100m_v2_oct2018 = {
   Identifier = "THEMIS_NightIR_ControlledMosaics_100m_v2_oct2018",
-  Name = [[MO THEMIS-IR Night, Global Mosaic]],
+  Name = [[MO THEMIS-IR Noche, Mosaico Global]],
   ZIndex = 50,
   FilePath = asset.resource("MO_THEMIS-IR_Night/Global_Mosaic.vrt"),
-  Description = [[This data was acquired using the Thermal Emission Imaging System instrument aboard NASA's Mars Odyssey spacecraft. Odyssey was launched on April 7, 2001 and arrived at Mars on October 24, 2001. It maintains a polar orbit around Mars with an altitude of about 3,800 km or 2,400 miles. Odyssey's mission includes studying the mineralogy of Mars' surface (especially looking at minerals formed in the presence of water), detecting water and shallow buried ice, and studying the radiation environment. The Thermal Emission Imaging System (THEMIS) instrument is a camera system that gathers data in infrared and visible light. The infrared images sample nine different wavelengths allowing spectra to be constructed and compositions of imaged surfaces to be inferred. Daytime infrared Themis images typically emphasize topography, with warmer sunward slopes being brighter than cooler shaded slopes. Nighttime Themis images emphasize differences in thermal inertia between areas being observed, giving insights into the physical characteristics of the surfaces. This map is a THEMIS nighttime infrared map. The 2017 release featured preliminary geodetically controlled mosaics tied to a known coordinate system (USGS Viking Orbiter MDIM 2.1), spatially adjusted to align feature boundaries, and orthoprojected at 100 m/pixel scale. Further adjustments have been processed for the 2018 release of this final mosaic.]]
+  Description = [[Estos datos fueron adquiridos utilizando el instrumento Thermal Emission Imaging System a bordo de la nave espacial Mars Odyssey de la NASA. Odyssey fue lanzada el 7 de abril de 2001 y llegó a Marte el 24 de octubre de 2001. Mantiene una órbita polar alrededor de Marte con una altitud de aproximadamente 3,800 km o 2,400 millas. La misión de Odyssey incluye estudiar la mineralogía de la superficie de Marte (especialmente buscando minerales formados en presencia de agua), detectar agua y hielo enterrado poco profundo, y estudiar el entorno de radiación. El instrumento Thermal Emission Imaging System (THEMIS) es un sistema de cámaras que recopila datos en luz infrarroja y visible. Las imágenes infrarrojas muestrean nueve longitudes de onda diferentes, lo que permite construir espectros e inferir las composiciones de las superficies observadas. Las imágenes diurnas infrarrojas de THEMIS típicamente enfatizan la topografía, con pendientes soleadas más cálidas siendo más brillantes que las pendientes sombreadas más frías. Las imágenes nocturnas de THEMIS enfatizan las diferencias en la inercia térmica entre las áreas observadas, proporcionando información sobre las características físicas de las superficies. Este mapa es un mapa infrarrojo nocturno de THEMIS. El lanzamiento de 2017 presentó mosaicos preliminares geodésicamente controlados vinculados a un sistema de coordenadas conocido (USGS Viking Orbiter MDIM 2.1), ajustados espacialmente para alinear los límites de las características y ortoproyectados a una escala de 100 m/píxel. Se han realizado ajustes adicionales para el lanzamiento de 2018 de este mosaico final.]]
 }
+
 
 asset.onInitialize(function()
   openspace.globebrowsing.addLayer(globeIdentifier, "ColorLayers", treks_THEMIS_NightIR_ControlledMosaics_100m_v2_oct2018)
@@ -23,6 +26,7 @@ asset.onDeinitialize(function()
 end)
 
 asset.export("THEMIS_NightIR_ControlledMosaics_100m_v2_oct2018", treks_THEMIS_NightIR_ControlledMosaics_100m_v2_oct2018)
+
 
 
 asset.meta = {

@@ -67,7 +67,7 @@ local Shortcuts = {
     ]],
     Documentation = "Cambiar la hora para el lanzamiento de Perseverance",
     Name = "Hora de lanzamiento de Perseverance",
-    GuiPath = "/Misiones/Perseverance",
+    GuiPath = "/Misiones/Perseverancia",
     Local = false
   },
   {
@@ -77,7 +77,7 @@ local Shortcuts = {
     ]],
     Documentation = "Cambiar la hora para cuando Perseverance haya aterrizado",
     Name = "Hora de aterrizaje de Perseverance",
-    GuiPath = "/Misiones/Perseverance",
+    GuiPath = "/Misiones/Perseverancia",
     Local = false
   }
 }

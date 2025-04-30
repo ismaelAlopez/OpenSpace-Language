@@ -1,5 +1,5 @@
 local data = asset.resource({
-  Name = "Apollo Kernels",
+  Name = "Apolo Kernels",
   Type = "HttpSynchronization",
   Identifier = "apollo_spice",
   Version = 1

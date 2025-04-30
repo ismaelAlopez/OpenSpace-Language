@@ -1,5 +1,7 @@
 local globe = asset.require("../../mars")
 
+
+
 local Layer = {
   Identifier = "Size_Reference",
   Name = "Referencia de Tamaño",
@@ -7,6 +9,7 @@ local Layer = {
   Type = "SizeReferenceTileProvider",
   Radii = globe.Mars.Renderable.Radii
 }
+
 
 asset.onInitialize(function()
   openspace.globebrowsing.addLayer(globe.Mars.Identifier, "Overlays", Layer)
@@ -18,9 +21,11 @@ end)
 
 asset.export("layer", Layer)
 
+
+
 asset.meta = {
   Name = "Referencia de Tamaño de Marte",
-  Description = "Este asset proporciona una capa de referencia de tamaño para el globo de Marte",
+  Description = "Este recurso proporciona una capa de referencia de tamaño para el globo de Marte",
   Author = "Equipo de OpenSpace",
   URL = "http://openspaceproject.com",
   License = "MIT license"

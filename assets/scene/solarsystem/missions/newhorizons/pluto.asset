@@ -6,28 +6,28 @@ local coreKernels = asset.require("spice/core")
 
 
 local assets = asset.resource({
-  Name = "Recursos de Plutón",
+  Name = "Recursos de Pluton",
   Type = "HttpSynchronization",
   Identifier = "newhorizons_plutoencounter_pluto_assets",
   Version = 1
 })
 
 local encounterTextures = asset.resource({
-  Name = "Texturas del Encuentro con Plutón",
+  Name = "Texturas del Encuentro con Pluton",
   Type = "HttpSynchronization",
   Identifier = "newhorizons_plutoencounter_pluto_textures",
   Version = 4
 })
 
 local textures = asset.resource({
-  Name = "Texturas de Plutón",
+  Name = "Texturas de Pluton",
   Type = "HttpSynchronization",
   Identifier = "pluto_textures",
   Version = 5
 })
 
 local images = asset.resource({
-  Name = "Imágenes de Plutón",
+  Name = "Imágenes de Pluton",
   Type = "HttpSynchronization",
   Identifier = "newhorizons_plutoencounter_pluto_images",
   Version = 2

@@ -1,5 +1,7 @@
 local globe = asset.require("../../mars")
 
+
+
 local Layer = {
   Identifier = "MOC_WA_Color_LiU",
   Name = "MOC WA Color [Suecia]",
@@ -11,10 +13,11 @@ local Layer = {
     Multiplier = 1.07
   },
   Description = [[Este mapa es una versión AMNH del mosaico global producido por la
-    Cámara de ángulo Ancho del Mars Global Surveyor. Esta versión tiene color añadido y las
+    Cámara de Ángulo Ancho del Mars Global Surveyor. Esta versión tiene color añadido y las
     sombras atenuadas basadas en el MOLA DTM. Referencia de datos:
     https://www.jpl.nasa.gov/spaceimages/details.php?id=PIA03467]]
 }
+
 
 asset.onInitialize(function()
   openspace.globebrowsing.addLayer(globe.Mars.Identifier, "ColorLayers", Layer)
@@ -26,9 +29,11 @@ end)
 
 asset.export("layer", Layer)
 
+
+
 asset.meta = {
   Name = "MOC WA Color [Suecia]",
-  Description = [[Capa principal del mapa de color para Marte. Este mapa está alojado
+  Description = [[Capa principal del mapa de color de Marte. Este mapa está alojado
     en el servidor de OpenSpace en Suecia]],
   Author = "Equipo de OpenSpace",
   URL = "http://www.openspaceproject.com",

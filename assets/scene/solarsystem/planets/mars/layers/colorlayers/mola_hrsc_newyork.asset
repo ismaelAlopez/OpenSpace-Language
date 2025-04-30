@@ -1,16 +1,19 @@
 local globe = asset.require("../../mars")
 
+
+
 local Layer = {
   Identifier = "MOLA_HRSC_NewYork",
   Name = "MOLA HRSC [Nueva York]",
   Enabled = asset.enabled,
   ZIndex = 10,
   FilePath = asset.resource("mola_hrsc_newyork.wms"),
-  Description = [[Esta capa de mapa está coloreada basada en datos de elevación de MOLA y HRSC.
-    En comparación con MOLA Psuedo Color, esta capa no tiene sombreado de terreno, lo cual es
-    adecuado para usar cuando se combina con otras capas. Referencia de datos:
+  Description = [[Esta capa de mapa es un dato de elevación coloreado basado en MOLA y HRSC.
+    En comparación con MOLA Psuedo Color, esta capa no tiene sombreado de terreno, lo que es
+    adecuado para usar en combinación con otras capas. Referencia de datos:
     https://astrogeology.usgs.gov/search/map/Mars/Topography/HRSC_MOLA_Blend/Mars_HRSC_MOLA_BlendDEM_Global_200mp_v2]]
 }
+
 
 asset.onInitialize(function()
   openspace.globebrowsing.addLayer(globe.Mars.Identifier, "ColorLayers", Layer)
@@ -22,10 +25,12 @@ end)
 
 asset.export("layer", Layer)
 
+
+
 asset.meta = {
   Name = "MOLA HRSC [Nueva York]",
-  Description = [[Datos de elevación coloreados para Marte. Este mapa está alojado en el servidor de OpenSpace
-    en Nueva York]],
+  Description = [[Datos de elevación coloreados para Marte. Este mapa está alojado en el
+    servidor de OpenSpace en Nueva York]],
   Author = "Equipo de OpenSpace",
   URL = "http://www.openspaceproject.com",
   License = "NASA/PDS"

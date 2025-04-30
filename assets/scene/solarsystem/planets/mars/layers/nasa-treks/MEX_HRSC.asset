@@ -6,21 +6,24 @@
 
 local globeIdentifier = asset.require("scene/solarsystem//planets/mars/mars").Mars.Identifier
 
+
+
 local treks_hrsc_dem_martian_east = {
   Identifier = "hrsc_dem_martian_east",
-  Name = [[MEX HRSC, Martian Path Eastern Section DEM]],
+  Name = [[MEX HRSC, Sección Este del Camino Marciano DEM]],
   ZIndex = 50,
   FilePath = asset.resource("MEX_HRSC/Martian_Path_Eastern_Section_DEM.vrt"),
-  Description = [[This layer is a greyscale mosaic assembled using data from the High Resolution Stereo Camera aboard the European Space Agency's Mars Express orbiter. HRSC is being used to obtain color and stereo images that will map 100% of Mars' surface at resolution better than 30 m/pixel, and 50% of the surface at better than 15 m/pixel. Each of the nine CCD lines of HRSC, a linescan imager (pushbroom camera), contains 5184 pixels. The channels consist of red, green, blue, near-infrared, three stereo channels (backward, nadir, and forward) and two photometric channels. The digital elevation model used for this layer is a combination of data derived from the HRSC and the Mars Orbiter Laser Altimeter.]]
+  Description = [[Esta capa es un mosaico en escala de grises ensamblado utilizando datos de la Cámara Estéreo de Alta Resolución a bordo del orbitador Mars Express de la Agencia Espacial Europea. HRSC se utiliza para obtener imágenes en color y estéreo que mapearán el 100% de la superficie de Marte con una resolución mejor que 30 m/píxel, y el 50% de la superficie con una resolución mejor que 15 m/píxel. Cada una de las nueve líneas CCD de HRSC, una cámara de barrido lineal (cámara de empuje), contiene 5184 píxeles. Los canales consisten en rojo, verde, azul, infrarrojo cercano, tres canales estéreo (hacia atrás, nadir y hacia adelante) y dos canales fotométricos. El modelo digital de elevación utilizado para esta capa es una combinación de datos derivados de la HRSC y el Altímetro Láser del Orbitador de Marte.]]
 }
 
 local treks_MC11E11_HRDTMAR_DA5 = {
   Identifier = "MC11E11_HRDTMAR_DA5",
-  Name = [[MEX HRSC, Martian Path MC11 Quad DEM]],
+  Name = [[MEX HRSC, Camino Marciano Cuadrante MC11 DEM]],
   ZIndex = 50,
   FilePath = asset.resource("MEX_HRSC/Martian_Path_MC11_Quad_DEM.vrt"),
-  Description = [[This layer is a greyscale mosaic assembled using data from the High Resolution Stereo Camera aboard the European Space Agency's Mars Express orbiter. HRSC is being used to obtain color and stereo images that will map 100% of Mars' surface at resolution better than 30 m/pixel, and 50% of the surface at better than 15 m/pixel. Each of the nine CCD lines of HRSC, a linescan imager (pushbroom camera), contains 5184 pixels. The channels consist of red, green, blue, near-infrared, three stereo channels (backward, nadir, and forward) and two photometric channels. The digital elevation model used for this layer is a combination of data derived from the HRSC and the Mars Orbiter Laser Altimeter.]]
+  Description = [[Esta capa es un mosaico en escala de grises ensamblado utilizando datos de la Cámara Estéreo de Alta Resolución a bordo del orbitador Mars Express de la Agencia Espacial Europea. HRSC se utiliza para obtener imágenes en color y estéreo que mapearán el 100% de la superficie de Marte con una resolución mejor que 30 m/píxel, y el 50% de la superficie con una resolución mejor que 15 m/píxel. Cada una de las nueve líneas CCD de HRSC, una cámara de barrido lineal (cámara de empuje), contiene 5184 píxeles. Los canales consisten en rojo, verde, azul, infrarrojo cercano, tres canales estéreo (hacia atrás, nadir y hacia adelante) y dos canales fotométricos. El modelo digital de elevación utilizado para esta capa es una combinación de datos derivados de la HRSC y el Altímetro Láser del Orbitador de Marte.]]
 }
+
 
 asset.onInitialize(function()
   openspace.globebrowsing.addLayer(globeIdentifier, "ColorLayers", treks_hrsc_dem_martian_east)
@@ -36,10 +39,11 @@ asset.export("hrsc_dem_martian_east", treks_hrsc_dem_martian_east)
 asset.export("MC11E11_HRDTMAR_DA5", treks_MC11E11_HRDTMAR_DA5)
 
 
+
 asset.meta = {
-  Name = [[NASA Treks Layers for Mars MEX_HRSC]],
+  Name = [[Capas de NASA Treks para Marte MEX_HRSC]],
   Author = "NASA/Treks",
   URL = "https://trek.nasa.gov/mars",
   License = "NASA/Treks",
-  Description = [[MEX_HRSC layers from NASA/Treks for Mars]]
+  Description = [[Capas MEX_HRSC de NASA/Treks para Marte]]
 }

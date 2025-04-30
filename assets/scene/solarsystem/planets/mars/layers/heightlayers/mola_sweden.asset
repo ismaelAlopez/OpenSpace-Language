@@ -1,28 +1,30 @@
 local globe = asset.require("../../mars")
 
+
+
 local Layer = {
   Identifier = "Mola_Europe",
-  Name = "Mola Elevación [Suecia]",
+  Name = "Elevacion Mola [Suecia]",
   Enabled = asset.enabled,
   ZIndex = 10,
   FilePath = asset.resource("mola_sweden.wms"),
   TilePixelSize = 360,
   Description = [[Este modelo digital de elevación (DEM) se basa en datos del Altímetro
-    Láser del Orbitador de Marte (MOLA; Smith et al., 2001), un instrumento en la
-    nave espacial Mars Global Surveyor (MGS) de la NASA (Albee et al., 2001). El DEM
-    de MOLA representa más de 600 millones de mediciones recopiladas entre 1999 y
-    2001, ajustadas para consistencia (Neumann et al., 2001; Neumann, Smith & Zuber,
-    2003) y convertidas a radios planetarios. Estas se han convertido a elevaciones
-    sobre el areoide según lo determinado por una solución del campo gravitatorio
-    marciano GMM-2B (Lemoine et al., 2001), truncada a grado y orden 50, y orientada
-    según los estándares actuales. La precisión promedio de cada punto es
-    originalmente ~100 metros en posición horizontal y ~1 metro en radio (Neumann et
-    al., 2001). Sin embargo, la incertidumbre total de elevación es al menos ±3 m
-    debido al error global en el areoide (±1.8 metros; Neumann et al., 2001) e
-    incertidumbres regionales en su forma (Neumann, 2002). La resolución de píxeles
-    es de 463 metros por píxel (m). (Descripción de URL). Referencia de datos: (Ver
-    URL)]]
+    Láser Orbital de Marte (MOLA; Smith et al., 2001), un instrumento en la nave
+    espacial Mars Global Surveyor (MGS) de la NASA (Albee et al., 2001). El DEM de
+    MOLA representa más de 600 millones de mediciones recopiladas entre 1999 y 2001,
+    ajustadas para consistencia (Neumann et al., 2001; Neumann, Smith & Zuber, 2003)
+    y convertidas a radios planetarios. Estas se han convertido a elevaciones sobre
+    el areoide determinado a partir de una solución del campo gravitatorio marciano
+    GMM-2B (Lemoine et al., 2001), truncada al grado y orden 50, y orientada según
+    los estándares actuales. La precisión promedio de cada punto es originalmente de
+    ~100 metros en posición horizontal y ~1 metro en radio (Neumann et al., 2001).
+    Sin embargo, la incertidumbre total de elevación es al menos ±3 m debido al error
+    global en el areoide (±1.8 metros; Neumann et al., 2001) e incertidumbres
+    regionales en su forma (Neumann, 2002). La resolución de píxeles es de 463 metros
+    por píxel (m). (Descripción tomada de la URL). Referencia de datos: (Ver URL)]]
 }
+
 
 asset.onInitialize(function()
   openspace.globebrowsing.addLayer(globe.Mars.Identifier, "HeightLayers", Layer)
@@ -34,11 +36,13 @@ end)
 
 asset.export("layer", Layer)
 
+
+
 asset.meta = {
-  Name = "Mola Elevación [Suecia]",
+  Name = "Elevación Mola [Suecia]",
   Author = "USGS",
-  Description = [[Capa de elevación global para Marte. Esta capa está alojada en el
-    servidor OpenSpace en Suecia]],
+  Description = [[Capa global de elevación para Marte. Esta capa está alojada en el
+    servidor de OpenSpace en Suecia]],
   URL = "https://astrogeology.usgs.gov/search/map/Mars/GlobalSurveyor/MOLA/" ..
     "Mars_MGS_MOLA_DEM_mosaic_global_463m",
   License = "NASA/PDS"

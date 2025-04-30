@@ -1,0 +1,52 @@
+local globe = asset.require("../../phobos_globe")
+
+
+
+local maps = asset.resource({
+  Name = "Mapas de Phobos",
+  Type = "HttpSynchronization",
+  Identifier = "phobos_maps",
+  Version = 1
+})
+
+
+local Layer = {
+  Identifier = "Mars_Express_HRSC_100m",
+  Name = "Mars Express HRSC 100m",
+  Enabled = asset.enabled,
+  ZIndex = 10,
+  FilePath = maps .. "mex_hrsc_100m_dem.vrt",
+  Description = [[Imágenes de la Cámara Estéreo de Alta Resolución (HRSC) de la Agencia Espacial Europea
+    a bordo del Mars Express se utilizaron para obtener coordenadas tridimensionales de
+    puntos de la superficie de Fobos. Como actualmente la HRSC no pudo obtener una cobertura global,
+    los datos fueron complementados con imágenes del orbitador Viking para proporcionar el
+    modelo digital de elevación (DEM) globalmente (Willner et al., 2010). La resolución de este DEM
+    es de 100 metros por píxel (m).
+
+    La investigación que condujo a los productos de datos recibió financiación del Séptimo Programa
+    Marco de la Comunidad Europea ([FP7/2007-2013]) bajo el acuerdo de subvención número
+    263466 para el programa FP7-ESPaCE.
+
+    Willner, K., Oberst, J., Hussmann, H., Giese, B., Hoffman, H., Matz, K.-D.,
+    Roatsch, T., & Duxbury, T. (2010). Red de puntos de control de Fobos, rotación y forma.
+    Earth and Planetary Science Letters, 294(3–4), 541-546.
+    https://doi.org/10.1016/j.epsl.2009.07.033]]
+}
+
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(globe.Phobos_Globe.Identifier, "HeightLayers", Layer)
+end)
+
+asset.onDeinitialize(function()
+  openspace.globebrowsing.deleteLayer(globe.Phobos_Globe.Identifier, "HeightLayers", Layer)
+end)
+
+
+
+asset.meta = {
+  Name = "Modelo Digital de Elevación Global 100m de Phobos Mars Express HRSC",
+  Author = "Equipo de OpenSpace",
+  URL = "https://astrogeology.usgs.gov/search/map/phobos_mars_express_hrsc_dem_global_100m",
+  License = "Please cite authors"
+}

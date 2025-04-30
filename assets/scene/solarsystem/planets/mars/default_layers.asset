@@ -3,12 +3,15 @@ asset.require("./layers/utah_layers", true)
 asset.require("./layers/sweden_layers", false)
 asset.require("./layers/newyork_layers", false)
 
+
+
 asset.meta = {
   Name = "Capas Predeterminadas de Marte",
-  Description = [[Las capas predeterminadas de Marte son: Textura de Marte, CTX Blended, HiRISE,
-    Conjunto Local de HiRISE, MOC WA Color, Viking MDIM, MOLA Pseudo Color, MOLA HRSC,
-    Themis IR Día, Themis IR Noche, CTX Mosaic, MDEM200M (3D), Conjunto Local de HiRISE DEM (3D),
-    Elevación Mola (3D), Índices de Mosaico y Referencia de Tamaño.
+  Description = [[Las capas predeterminadas de Marte son: textura de Marte, CTX Blended, HiRISE,
+    HiRISE Local Set, MOC WA Color, Viking MDIM, MOLA Pseudo Color, MOLA HRSC,
+    Themis IR Day, Themis IR Night, CTX Mosaic, MDEM200M (3D), HiRISE Local Set DEM (3D),
+    Mola Elevation (3D), Tile Indicies, y Referencia de Tamaño.
+
 
     Capas cargadas desde todos los servidores
   ]],

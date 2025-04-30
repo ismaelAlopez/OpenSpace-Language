@@ -6,28 +6,28 @@ asset.require("scene/solarsystem/planets/earth/moon/default_layers")
 
 
 local heightmaps = asset.resource({
-  Name = "Mapas de Altura de Exploración Global de Apollo",
+  Name = "Mapas de Altura de Exploracion Global de Apollo",
   Type = "HttpSynchronization",
   Identifier = "apollo_globebrowsing_heightmaps",
   Version = 1
 })
 
 local basemaps = asset.resource({
-  Name = "Mapas Base de Exploración Global de Apollo",
+  Name = "Mapas Base de Exploracion Global de Apollo",
   Type = "HttpSynchronization",
   Identifier = "apollo_globebrowsing_basemaps",
   Version = 1
 })
 
 local naclighting = asset.resource({
-  Name = "Iluminación NAC de Exploración Global de Apollo",
+  Name = "Iluminación NAC de Exploracion Global de Apollo",
   Type = "HttpSynchronization",
   Identifier = "apollo_globebrowsing_naclighting",
   Version = 1
 })
 
 local stations = asset.resource({
-  Name = "Estaciones de Exploración Global de Apollo 17",
+  Name = "Estaciones de Exploracion Global de Apollo 17",
   Type = "HttpSynchronization",
   Identifier = "apollo_17_stations",
   Version = 1

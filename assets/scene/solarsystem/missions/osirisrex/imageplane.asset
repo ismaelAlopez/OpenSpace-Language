@@ -4,7 +4,7 @@ local kernels = asset.require("./kernels")
 
 
 local textures = asset.resource({
-  Name = "Bennu Textures",
+  Name = "Texturas de Bennu",
   Type = "HttpSynchronization",
   Identifier = "bennu_textures",
   Version = 1

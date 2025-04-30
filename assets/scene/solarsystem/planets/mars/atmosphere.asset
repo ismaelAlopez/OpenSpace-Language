@@ -1,5 +1,7 @@
 local transforms = asset.require("./mars")
 
+
+
 local Atmosphere = {
   Identifier = "MarsAtmosphere",
   Parent = transforms.Mars.Identifier,
@@ -50,6 +52,7 @@ local Atmosphere = {
   }
 }
 
+
 asset.onInitialize(function()
   openspace.addSceneGraphNode(Atmosphere)
 end)
@@ -60,9 +63,11 @@ end)
 
 asset.export(Atmosphere)
 
+
+
 asset.meta = {
   Name = "Atmósfera de Marte",
-  Description = "RenderableAtmosphere para Marte",
+  Description = "Atmósfera renderizable para Marte",
   Author = "Equipo de OpenSpace",
   URL = "http://openspaceproject.com",
   License = "MIT license"

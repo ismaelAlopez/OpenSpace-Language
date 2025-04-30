@@ -4,23 +4,25 @@ local globe = asset.require("../../mars")
 
 local Layer = {
   Identifier = "HiRISE-LS",
-  Name = "HiRISE Local Set",
+  Name = "Conjunto Local HiRISE",
   Enabled = asset.enabled,
   ZIndex = 70,
   FilePath = asset.resource("hirisels.vrt"),
   BlendMode = "Color",
-  Description = [[HiRISE (High Resolution Imaging Science Experiment) is the most
-    powerful camera ever sent to another planet, one of six instruments onboard the
-    Mars Reconnaissance Orbiter. We launched in 2005, arrived at Mars in 2006 and have
-    been imaging ever since. Our camera's high resolution capability (imaging up to 30
-    centimeters per pixel) remains unprecedented for any existing orbiter in the study
-    of the Red Planet, as well as being an indispensable instrument for helping to
-    select landing sites for robotic and future human exploration. In the past decade,
-    we've also imaged avalanches in progress, and discovered dark flows that may or
-    may not be briny seeps. Hundreds of science papers have been published with our
-    data. (Description from URL). This map contains a subet set of the HiRISE
-    imagaery, only containing locations where a corresponding HiRISE digital terrain
-    model (DTM) was available as of 2018]]
+  Description = [[HiRISE (High Resolution Imaging Science Experiment) es la cámara más
+    poderosa jamás enviada a otro planeta, uno de los seis instrumentos a bordo del
+    Mars Reconnaissance Orbiter. Lanzamos en 2005, llegamos a Marte en 2006 y hemos
+    estado capturando imágenes desde entonces. La capacidad de alta resolución de
+    nuestra cámara (imágenes de hasta 30 centímetros por píxel) sigue siendo
+    inigualable para cualquier orbitador existente en el estudio del Planeta Rojo,
+    además de ser un instrumento indispensable para ayudar a seleccionar sitios de
+    aterrizaje para la exploración robótica y futura exploración humana. En la última
+    década, también hemos capturado imágenes de avalanchas en progreso y descubierto
+    flujos oscuros que pueden o no ser filtraciones salinas. Cientos de artículos
+    científicos se han publicado con nuestros datos. (Descripción tomada del URL).
+    Este mapa contiene un subconjunto de las imágenes de HiRISE, que solo incluye
+    ubicaciones donde un modelo digital del terreno (DTM) correspondiente de HiRISE
+    estaba disponible hasta 2018]]
 }
 
 
@@ -37,9 +39,9 @@ asset.export("layer", Layer)
 
 
 asset.meta = {
-  Name = "HiRISE Local Set",
-  Description = [[HiRISE layer for images with corresponding DEMs. This map is hosted by
-    ESRI]],
+  Name = "Conjunto Local HiRISE",
+  Description = [[Capa HiRISE para imágenes con DEMs correspondientes. Este mapa está
+    alojado por ESRI]],
   Author = "USGS",
   URL = "https://www.uahirise.org",
   License = "Esri Master License Agreement"
