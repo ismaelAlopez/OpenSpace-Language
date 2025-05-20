@@ -8,18 +8,18 @@ local globeIdentifier = asset.require("scene/solarsystem//planets/earth/moon/moo
 
 local treks_LRO_NAC_AvgMosaic_NPole855_1mp_EQ = {
   Identifier = "LRO_NAC_AvgMosaic_NPole855_1mp_EQ",
-  Name = [[LRO LROC NAC Image Mosaic, N Pole, Avg Merge]],
+  Name = [[Mosaico de Imágenes LRO LROC NAC, Polo Norte, Promedio Combinado]],
   ZIndex = 50,
   FilePath = asset.resource("LRO_LROC_NAC_Image_Mosaic/N_Pole.vrt"),
-  Description = [[This is a visible image mosaic generated using Lunar Reconnaissance Orbiter Camera (LROC) Narrow Angle Camera (NAC) images from the Lunar Reconnaissance Orbiter mission. The images were orthorectified using LRO's Lunar Orbiter Laser Altimeter (LOLA) polar 5 meter/pixel DEM. The mosaic is generated at half the resolution at which the individual LROC NAC images were gathered, which is approximately 0.5 meters/pixel. The mosaic was registered horizontally to the LOLA global DEM.]]
+  Description = [[Este es un mosaico de imágenes visibles generado utilizando imágenes de la Cámara de Ángulo Estrecho (NAC) del Orbitador de Reconocimiento Lunar (LRO) de la misión Lunar Reconnaissance Orbiter. Las imágenes fueron ortorrectificadas utilizando el modelo digital de elevación (DEM) polar de 5 metros/píxel del Altímetro Láser del Orbitador Lunar (LOLA) del LRO. El mosaico se generó a la mitad de la resolución a la que se capturaron las imágenes individuales de LROC NAC, que es aproximadamente 0.5 metros/píxel. El mosaico fue registrado horizontalmente al DEM global de LOLA.]]
 }
 
 local treks_LRO_NAC_AvgMosaic_SPole855_1mp_EQ = {
   Identifier = "LRO_NAC_AvgMosaic_SPole855_1mp_EQ",
-  Name = [[LRO LROC NAC Image Mosaic, S Pole, Avg Merge]],
+  Name = [[Mosaico de Imágenes LRO LROC NAC, Polo Sur, Promedio Combinado]],
   ZIndex = 50,
   FilePath = asset.resource("LRO_LROC_NAC_Image_Mosaic/S_Pole.vrt"),
-  Description = [[This is a visible image mosaic generated using Lunar Reconnaissance Orbiter Camera (LROC) Narrow Angle Camera (NAC) images from the Lunar Reconnaissance Orbiter mission. The images were orthorectified using LRO's Lunar Orbiter Laser Altimeter (LOLA) polar 5 meter/pixel DEM. The mosaic is generated at half the resolution at which the individual LROC NAC images were gathered, which is approximately 0.5 meters/pixel. The mosaic was registered horizontally to the LOLA global DEM.]]
+  Description = [[Este es un mosaico de imágenes visibles generado utilizando imágenes de la Cámara de Ángulo Estrecho (NAC) del Orbitador de Reconocimiento Lunar (LRO) de la misión Lunar Reconnaissance Orbiter. Las imágenes fueron ortorrectificadas utilizando el modelo digital de elevación (DEM) polar de 5 metros/píxel del Altímetro Láser del Orbitador Lunar (LOLA) del LRO. El mosaico se generó a la mitad de la resolución a la que se capturaron las imágenes individuales de LROC NAC, que es aproximadamente 0.5 metros/píxel. El mosaico fue registrado horizontalmente al DEM global de LOLA.]]
 }
 
 asset.onInitialize(function()
@@ -37,9 +37,9 @@ asset.export("LRO_NAC_AvgMosaic_SPole855_1mp_EQ", treks_LRO_NAC_AvgMosaic_SPole8
 
 
 asset.meta = {
-  Name = [[NASA Treks Layers for Moon LRO_LROC_NAC_Image_Mosaic]],
+  Name = [[Capas de NASA Treks para el Mosaico de Imágenes LRO_LROC_NAC de la Luna]],
   Author = "NASA/Treks",
   URL = "https://trek.nasa.gov/moon",
   License = "NASA/Treks",
-  Description = [[LRO_LROC_NAC_Image_Mosaic layers from NASA/Treks for Moon]]
+  Description = [[Capas LRO_LROC_NAC_Image_Mosaic de NASA/Treks para la Luna]]
 }

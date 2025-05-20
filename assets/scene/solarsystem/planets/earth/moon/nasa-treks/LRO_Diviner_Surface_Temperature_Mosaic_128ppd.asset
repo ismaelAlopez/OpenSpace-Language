@@ -8,7 +8,7 @@ local globeIdentifier = asset.require("scene/solarsystem//planets/earth/moon/moo
 
 local treks_LRO_DIVINER_ClrRockFreeSurfaceTemp_Global_128ppd = {
   Identifier = "LRO_DIVINER_ClrRockFreeSurfaceTemp_Global_128ppd",
-  Name = [[LRO Diviner Surface Temperature Mosaic 128ppd, Colorized]],
+  Name = [[Mosaico de Temperatura Superficial de LRO Diviner 128ppd, Colorizado]],
   ZIndex = 50,
   FilePath = asset.resource("LRO_Diviner_Surface_Temperature_Mosaic_128ppd/Colorized.vrt"),
   Description = [[]]
@@ -26,9 +26,9 @@ asset.export("LRO_DIVINER_ClrRockFreeSurfaceTemp_Global_128ppd", treks_LRO_DIVIN
 
 
 asset.meta = {
-  Name = [[NASA Treks Layers for Moon LRO_Diviner_Surface_Temperature_Mosaic_128ppd]],
+  Name = [[Capas de NASA Treks para la Luna LRO_Diviner_Surface_Temperature_Mosaic_128ppd]],
   Author = "NASA/Treks",
   URL = "https://trek.nasa.gov/moon",
   License = "NASA/Treks",
-  Description = [[LRO_Diviner_Surface_Temperature_Mosaic_128ppd layers from NASA/Treks for Moon]]
+  Description = [[Capas LRO_Diviner_Surface_Temperature_Mosaic_128ppd de NASA/Treks para la Luna]]
 }

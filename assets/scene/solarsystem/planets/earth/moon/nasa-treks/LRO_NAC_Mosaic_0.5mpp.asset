@@ -8,10 +8,23 @@ local globeIdentifier = asset.require("scene/solarsystem//planets/earth/moon/moo
 
 local treks_LRO_NAC_Mosaic_50cmpp_VonKarman_v2 = {
   Identifier = "LRO_NAC_Mosaic_50cmpp_VonKarman_v2",
-  Name = [[LRO NAC Mosaic 0.5mpp, Von Karman]],
+  Name = [[Mosaico LRO NAC 0.5mpp, Von Karman]],
   ZIndex = 50,
   FilePath = asset.resource("LRO_NAC_Mosaic_0.5mpp/Von_Karman.vrt"),
-  Description = [[This is an orthorectified NAC mosaic of the Von Karman Crater region for the south pole of the Moon. This mosaic includes a total of 370 orthorectified NAC images: 252 sampled at 0.5 m/px and 118 sampled at 1 m/px. NAC orthoimages have been constructed from EDRs downloaded from the Planetary Data System (PDS) and subsequent USGS-ISIS processing. This mosaic has been coaligned to Chang'e-2 20 m/px DEM which has been coaligned to the USGS 59 m/px LOLA-SELENE DEM using ENVI (v5.6.2) patented auto-coreg. Most of the area used stereo-photogrammetrically processing of LROC-NAC stereo-pairs with the UCL CASPGO 3D mapping system, CASP-GO is described in Tao, Y., Muller, J.-P. et al. (2018) Massive Stereo-based DTM Production for Mars on Cloud Computers. Planetary Space Science 154, 30-58 (2018). doi: 10.1016/j.pss.2018.02.012 and CASP-GO is now integrated into ASP (https://stereopipeline.readthedocs.io/en/latest/experimental.html?highlight=casp-go#the-casp-go-stereo-processing-system) as part of the NASA PDART program. Individual NAC orthoimages mosaicked together using ArcGIS Pro (v2.9.2). A color balancing algorithm has been applied to roughly correct for color differences at the seams of NAC images. This data has been made available by and should be credited to: Yu Tao and Jan-Peter Muller, Imaging Group, Mullard Space Science Laboratory, University College London.]]
+  Description = [[Este es un mosaico NAC ortorrectificado de la región del Cráter Von Karman para el polo sur 
+  de la Luna. Este mosaico incluye un total de 370 imágenes NAC ortorrectificadas: 252 muestreadas a 0.5 m/px y
+  118 muestreadas a 1 m/px. Las ortoimágenes NAC se han construido a partir de EDRs descargados del Sistema de 
+  Datos Planetarios (PDS) y el posterior procesamiento USGS-ISIS. Este mosaico ha sido coalineado con el 
+  DEM Chang'e-2 de 20 m/px, que ha sido coalineado con el DEM LOLA-SELENE de 59 m/px del USGS utilizando el
+  auto-coreg patentado de ENVI (v5.6.2). La mayor parte del área utilizó procesamiento estereofotogramétrico de 
+  pares estéreo LROC-NAC con el sistema de mapeo 3D CASPGO de UCL. CASP-GO se describe en Tao, Y., Muller, J.-P. 
+  et al. (2018) Producción masiva de DTM basada en estéreo para Marte en computadoras en la nube. Planetary 
+  Space Science 154, 30-58 (2018). doi: 10.1016/j.pss.2018.02.012 y CASP-GO ahora está integrado en ASP 
+  (https://stereopipeline.readthedocs.io/en/latest/experimental.html?highlight=casp-go#the-casp-go-stereo-processing-system) 
+  como parte del programa NASA PDART. Imágenes NAC individuales mosaiqueadas juntas utilizando ArcGIS Pro 
+  (v2.9.2). Se ha aplicado un algoritmo de balance de color para corregir aproximadamente las diferencias 
+  de color en las uniones de las imágenes NAC. Estos datos han sido proporcionados y deben ser acreditados a: 
+  Yu Tao y Jan-Peter Muller, Imaging Group, Mullard Space Science Laboratory, University College London.]]
 }
 
 asset.onInitialize(function()
@@ -26,9 +39,9 @@ asset.export("LRO_NAC_Mosaic_50cmpp_VonKarman_v2", treks_LRO_NAC_Mosaic_50cmpp_V
 
 
 asset.meta = {
-  Name = [[NASA Treks Layers for Moon LRO_NAC_Mosaic_0.5mpp]],
+  Name = [[Capas de NASA Treks para la Luna LRO_NAC_Mosaic_0.5mpp]],
   Author = "NASA/Treks",
   URL = "https://trek.nasa.gov/moon",
   License = "NASA/Treks",
-  Description = [[LRO_NAC_Mosaic_0.5mpp layers from NASA/Treks for Moon]]
+  Description = [[Capas LRO_NAC_Mosaic_0.5mpp de NASA/Treks para la Luna]]
 }

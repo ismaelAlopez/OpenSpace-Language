@@ -8,7 +8,7 @@ local globeIdentifier = asset.require("scene/solarsystem//planets/earth/moon/moo
 
 local treks_ApolloZone_MetricCam_ClrShade_Global_1024ppd = {
   Identifier = "ApolloZone_MetricCam_ClrShade_Global_1024ppd",
-  Name = [[Apollo Zone Metric Cam DEM, ColorHillshade]],
+  Name = [[Zona Apollo Cámara Métrica DEM, Sombreado de Colores]],
   ZIndex = 50,
   FilePath = asset.resource("Apollo_Zone_Metric_Cam_DEM/ColorHillshade.vrt"),
   Description = [[]]
@@ -26,9 +26,9 @@ asset.export("ApolloZone_MetricCam_ClrShade_Global_1024ppd", treks_ApolloZone_Me
 
 
 asset.meta = {
-  Name = [[NASA Treks Layers for Moon Apollo_Zone_Metric_Cam_DEM]],
+  Name = [[Capas de NASA Treks para la Luna Apollo_Zone_Metric_Cam_DEM]],
   Author = "NASA/Treks",
   URL = "https://trek.nasa.gov/moon",
   License = "NASA/Treks",
-  Description = [[Apollo_Zone_Metric_Cam_DEM layers from NASA/Treks for Moon]]
+  Description = [[Capas Apollo_Zone_Metric_Cam_DEM de NASA/Treks para la Luna]]
 }

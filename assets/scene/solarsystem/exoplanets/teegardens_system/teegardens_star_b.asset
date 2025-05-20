@@ -1,0 +1,97 @@
+asset.require("./teegarden_star")
+-- local transforms = asset.require("./transforms")
+
+-- temporary
+local blueMarbleFolder = asset.resource({
+    Name = "Texturas de la Tierra",
+    Type = "HttpSynchronization",
+    Identifier = "earth_textures",
+    Version = 2
+})
+
+local TeegardensStarBTexture = {
+    Identifier = "Blue_Marble",
+    Name = "Canica Azul",
+    Enabled = asset.enabled,
+    ZIndex = 5,
+    FilePath = blueMarbleFolder .. "earth_bluemarble.jpg", -- temporary
+    Description = "Imagen de la Tierra de Blue Marble Next Generation",
+    CacheSettings = { Enabled = false }
+}
+--
+
+local TeeGradensStarB = {
+    Identifier = "TeeGradensStarB",
+    Parent = "TeegardenStar",
+    PerformShading = false,
+    Transform = {
+        Translation = {
+            Type = "StaticTranslation",
+            Position = {0.0252 * 1.496e11, 0.0, 0.0} -- 0.0252 UA en metros
+        },
+        Rotation = {
+            Type = "StaticRotation",
+            Rotation = {0.0, 0.0, 0.0, 1.0}
+        }
+    },
+    Renderable = {
+        Type = "RenderableGlobe",
+        Radii = {6689550.0, 6689550.0, 6689550.0},
+        PerformShading = false
+    },
+    ApproachFactor = 50.0,
+    Tag = { "exoplanet", "Teegardens_star" },
+    GUI = {
+        Name = "Teegarden's Star b",
+        Path = "/Sistema Solar/Exoplanetas/Sistema Teegardens/Teegarden's Star b"
+    }
+}
+
+local TeegardensStarBLabel = {
+    Identifier = "TeegardensStarBLabel",
+    Parent = TeeGradensStarB.Identifier,
+    Renderable = {
+        Type = "RenderableLabel",
+        Enabled = false,
+        Text = "Teegardens Star b",
+        FontSize = 70.0,
+        Size = 8.50,
+        MinMaxSize = {1, 50},
+        OrientationOption = "Camera View Direction",
+        BlendMode = "Additive",
+        EnableFading = true,
+        FadeUnit = "au",
+        FadeDistances = {1.5, 30.0},
+        FadeWidths = {1.0, 40.0},
+        Color = {1.0, 1.0, 1.0}
+    },
+    Tag = { "exoplanet_label" },
+    GUI = {
+        Name = "Teegardens Star b Label",
+        Path = "/Sistema Solar/Exoplanetas/Sistema Teegardens/Teegarden's Star b",
+    }
+}
+
+asset.onInitialize(function()
+    openspace.addSceneGraphNode(TeeGradensStarB)
+    openspace.addSceneGraphNode(TeegardensStarBLabel)
+    openspace.globebrowsing.addLayer(TeeGradensStarB.Identifier, "ColorLayers", TeegardensStarBTexture)
+end)
+
+asset.onDeinitialize(function()
+    openspace.removeSceneGraphNode(TeeGradensStarB)
+    openspace.removeSceneGraphNode(TeegardensStarBLabel)
+    openspace.globebrowsing.deleteLayer(TeeGradensStarB.Identifier, "ColorLayers", TeegardensStarBTexture)
+end)
+
+asset.export(TeeGradensStarB)
+asset.export(TeegardensStarBLabel)
+asset.export(TeegardensStarBTexture)
+
+asset.meta = {
+    Name = "Teegradens Star b",
+    Description = "Teegradens Star",
+    Author = "Planetary Habitability Laboratory",
+    URL = "https://phl.upr.edu/projects/Teegardens-star/",
+    License = "CC BY-NC-SA 4.0"
+}

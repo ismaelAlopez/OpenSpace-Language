@@ -1,5 +1,5 @@
 local data = asset.resource({
-  Name = "Total Eclipse Paths",
+  Name = "Rutas de Eclipse Total",
   Type = "HttpSynchronization",
   Identifier = "earth-eclipse-path-total",
   Version = 1

@@ -8,7 +8,7 @@ local globeIdentifier = asset.require("scene/solarsystem//planets/earth/moon/moo
 
 local treks_LRO_NAC_Mosaic_17S173E_50cmp = {
   Identifier = "LRO_NAC_Mosaic_17S173E_50cmp",
-  Name = [[LRO LROC Image Mosaic, Aitken Crater]],
+  Name = [[Mosaico de Imagen LRO LROC, Cráter Aitken]],
   ZIndex = 50,
   FilePath = asset.resource("LRO_LROC_Image_Mosaic/Aitken_Crater.vrt"),
   Description = [[]]
@@ -16,7 +16,7 @@ local treks_LRO_NAC_Mosaic_17S173E_50cmp = {
 
 local treks_LRO_NAC_Mosaic_13S358E_50cmp = {
   Identifier = "LRO_NAC_Mosaic_13S358E_50cmp",
-  Name = [[LRO LROC Image Mosaic, Alphonsus]],
+  Name = [[Mosaico de Imagen LRO LROC, Alphonsus]],
   ZIndex = 50,
   FilePath = asset.resource("LRO_LROC_Image_Mosaic/Alphonsus.vrt"),
   Description = [[]]
@@ -24,7 +24,7 @@ local treks_LRO_NAC_Mosaic_13S358E_50cmp = {
 
 local treks_LRO_NAC_Mosaic_26N004E_50cmp = {
   Identifier = "LRO_NAC_Mosaic_26N004E_50cmp",
-  Name = [[LRO LROC Image Mosaic, Apollo 15]],
+  Name = [[Mosaico de Imagen LRO LROC, Apolo 15]],
   ZIndex = 50,
   FilePath = asset.resource("LRO_LROC_Image_Mosaic/Apollo_15.vrt"),
   Description = [[]]
@@ -32,7 +32,7 @@ local treks_LRO_NAC_Mosaic_26N004E_50cmp = {
 
 local treks_LRO_NAC_Mosaic_09S015E_50cmp = {
   Identifier = "LRO_NAC_Mosaic_09S015E_50cmp",
-  Name = [[LRO LROC Image Mosaic, Apollo 16]],
+  Name = [[Mosaico de Imagen LRO LROC, Apolo 16]],
   ZIndex = 50,
   FilePath = asset.resource("LRO_LROC_Image_Mosaic/Apollo_16.vrt"),
   Description = [[]]
@@ -40,7 +40,7 @@ local treks_LRO_NAC_Mosaic_09S015E_50cmp = {
 
 local treks_LRO_NAC_Mosaic_25N311E_50cmp = {
   Identifier = "LRO_NAC_Mosaic_25N311E_50cmp",
-  Name = [[LRO LROC Image Mosaic, Aristarchus 1]],
+  Name = [[Mosaico de Imagen LRO LROC, Aristarchus 1]],
   ZIndex = 50,
   FilePath = asset.resource("LRO_LROC_Image_Mosaic/Aristarchus_1.vrt"),
   Description = [[]]
@@ -48,7 +48,7 @@ local treks_LRO_NAC_Mosaic_25N311E_50cmp = {
 
 local treks_LRO_NAC_Mosaic_28N307E_50cmp = {
   Identifier = "LRO_NAC_Mosaic_28N307E_50cmp",
-  Name = [[LRO LROC Image Mosaic, Aristarchus 2]],
+  Name = [[Mosaico de Imagen LRO LROC, Aristarchus 2]],
   ZIndex = 50,
   FilePath = asset.resource("LRO_LROC_Image_Mosaic/Aristarchus_2.vrt"),
   Description = [[]]
@@ -56,7 +56,7 @@ local treks_LRO_NAC_Mosaic_28N307E_50cmp = {
 
 local treks_LRO_NAC_Mosaic_19S070E_50cmp = {
   Identifier = "LRO_NAC_Mosaic_19S070E_50cmp",
-  Name = [[LRO LROC Image Mosaic, Balmer Basin]],
+  Name = [[Mosaico de Imagen LRO LROC, Cuenca Balmer]],
   ZIndex = 50,
   FilePath = asset.resource("LRO_LROC_Image_Mosaic/Balmer_Basin.vrt"),
   Description = [[]]
@@ -64,7 +64,7 @@ local treks_LRO_NAC_Mosaic_19S070E_50cmp = {
 
 local treks_LRO_NAC_Mosaic_61N099E_50cmp = {
   Identifier = "LRO_NAC_Mosaic_61N099E_50cmp",
-  Name = [[LRO LROC Image Mosaic, Compton Belkovich Th Anomaly]],
+  Name = [[Mosaico de Imagen LRO LROC, Anomalía Th de Compton Belkovich]],
   ZIndex = 50,
   FilePath = asset.resource("LRO_LROC_Image_Mosaic/Compton_Belkovich_Th_Anomaly.vrt"),
   Description = [[]]
@@ -72,7 +72,7 @@ local treks_LRO_NAC_Mosaic_61N099E_50cmp = {
 
 local treks_LRO_NAC_Mosaic_02S317E_50cmp = {
   Identifier = "LRO_NAC_Mosaic_02S317E_50cmp",
-  Name = [[LRO LROC Image Mosaic, Flamsteed Crater]],
+  Name = [[Mosaico de Imagen LRO LROC, Cráter Flamsteed]],
   ZIndex = 50,
   FilePath = asset.resource("LRO_LROC_Image_Mosaic/Flamsteed_Crater.vrt"),
   Description = [[]]
@@ -80,7 +80,7 @@ local treks_LRO_NAC_Mosaic_02S317E_50cmp = {
 
 local treks_LRO_NAC_Mosaic_36N320E_50cmp = {
   Identifier = "LRO_NAC_Mosaic_36N320E_50cmp",
-  Name = [[LRO LROC Image Mosaic, Gruithuisen Domes]],
+  Name = [[Mosaico de Imagen LRO LROC, Domos Gruithuisen]],
   ZIndex = 50,
   FilePath = asset.resource("LRO_LROC_Image_Mosaic/Gruithuisen_Domes.vrt"),
   Description = [[]]
@@ -88,7 +88,7 @@ local treks_LRO_NAC_Mosaic_36N320E_50cmp = {
 
 local treks_LRO_NAC_Mosaic_00N234E_50cmp = {
   Identifier = "LRO_NAC_Mosaic_00N234E_50cmp",
-  Name = [[LRO LROC Image Mosaic, Hertzsprung]],
+  Name = [[Mosaico de Imagen LRO LROC, Hertzsprung]],
   ZIndex = 50,
   FilePath = asset.resource("LRO_LROC_Image_Mosaic/Hertzsprung.vrt"),
   Description = [[]]
@@ -96,7 +96,7 @@ local treks_LRO_NAC_Mosaic_00N234E_50cmp = {
 
 local treks_LRO_NAC_Mosaic_08N332E_50cmp = {
   Identifier = "LRO_NAC_Mosaic_08N332E_50cmp",
-  Name = [[LRO LROC Image Mosaic, Hortensius Domes]],
+  Name = [[Mosaico de Imagen LRO LROC, Domos Hortensius]],
   ZIndex = 50,
   FilePath = asset.resource("LRO_LROC_Image_Mosaic/Hortensius_Domes.vrt"),
   Description = [[]]
@@ -104,7 +104,7 @@ local treks_LRO_NAC_Mosaic_08N332E_50cmp = {
 
 local treks_LRO_NAC_Mosaic_55N077E_50cmp = {
   Identifier = "LRO_NAC_Mosaic_55N077E_50cmp",
-  Name = [[LRO LROC Image Mosaic, Humboldtianum Basin]],
+  Name = [[Mosaico de Imagen LRO LROC, Cuenca Humboldtianum]],
   ZIndex = 50,
   FilePath = asset.resource("LRO_LROC_Image_Mosaic/Humboldtianum_Basin.vrt"),
   Description = [[]]
@@ -112,7 +112,7 @@ local treks_LRO_NAC_Mosaic_55N077E_50cmp = {
 
 local treks_LRO_NAC_Mosaic_19N005E_50cmp = {
   Identifier = "LRO_NAC_Mosaic_19N005E_50cmp",
-  Name = [[LRO LROC Image Mosaic, Ina D-Caldera]],
+  Name = [[Mosaico de Imagen LRO LROC, Caldera Ina D]],
   ZIndex = 50,
   FilePath = asset.resource("LRO_LROC_Image_Mosaic/Ina_D-Caldera.vrt"),
   Description = [[]]
@@ -120,7 +120,7 @@ local treks_LRO_NAC_Mosaic_19N005E_50cmp = {
 
 local treks_LRO_NAC_Mosaic_06N120E_50cmp = {
   Identifier = "LRO_NAC_Mosaic_06N120E_50cmp",
-  Name = [[LRO LROC Image Mosaic, King Crater]],
+  Name = [[Mosaico de Imagen LRO LROC, Cráter King]],
   ZIndex = 50,
   FilePath = asset.resource("LRO_LROC_Image_Mosaic/King_Crater.vrt"),
   Description = [[]]
@@ -128,7 +128,7 @@ local treks_LRO_NAC_Mosaic_06N120E_50cmp = {
 
 local treks_LRO_NAC_Mosaic_32N292E_50cmp = {
   Identifier = "LRO_NAC_Mosaic_32N292E_50cmp",
-  Name = [[LRO LROC Image Mosaic, Lichtenberg Crater]],
+  Name = [[Mosaico de Imagen LRO LROC, Cráter Lichtenberg]],
   ZIndex = 50,
   FilePath = asset.resource("LRO_LROC_Image_Mosaic/Lichtenberg_Crater.vrt"),
   Description = [[]]
@@ -136,7 +136,7 @@ local treks_LRO_NAC_Mosaic_32N292E_50cmp = {
 
 local treks_LRO_NAC_Mosaic_36S164E_70cmp = {
   Identifier = "LRO_NAC_Mosaic_36S164E_70cmp",
-  Name = [[LRO LROC Image Mosaic, Mare Ingenii]],
+  Name = [[Mosaico de Imagen LRO LROC, Mare Ingenii]],
   ZIndex = 50,
   FilePath = asset.resource("LRO_LROC_Image_Mosaic/Mare_Ingenii.vrt"),
   Description = [[]]
@@ -144,7 +144,7 @@ local treks_LRO_NAC_Mosaic_36S164E_70cmp = {
 
 local treks_LRO_NAC_Mosaic_26N150E_50cmp = {
   Identifier = "LRO_NAC_Mosaic_26N150E_50cmp",
-  Name = [[LRO LROC Image Mosaic, Mare Moscoviense]],
+  Name = [[Mosaico de Imagen LRO LROC, Mare Moscoviense]],
   ZIndex = 50,
   FilePath = asset.resource("LRO_LROC_Image_Mosaic/Mare_Moscoviense.vrt"),
   Description = [[]]
@@ -152,7 +152,7 @@ local treks_LRO_NAC_Mosaic_26N150E_50cmp = {
 
 local treks_LRO_NAC_Mosaic_02N085E_50cmp = {
   Identifier = "LRO_NAC_Mosaic_02N085E_50cmp",
-  Name = [[LRO LROC Image Mosaic, Mare Smythii]],
+  Name = [[Mosaico de Imagen LRO LROC, Mare Smythii]],
   ZIndex = 50,
   FilePath = asset.resource("LRO_LROC_Image_Mosaic/Mare_Smythii.vrt"),
   Description = [[]]
@@ -160,7 +160,7 @@ local treks_LRO_NAC_Mosaic_02N085E_50cmp = {
 
 local treks_LRO_NAC_Mosaic_07N022E_50cmp = {
   Identifier = "LRO_NAC_Mosaic_07N022E_50cmp",
-  Name = [[LRO LROC Image Mosaic, Mare Tranquillitatis]],
+  Name = [[Mosaico de Imagen LRO LROC, Mare Tranquillitatis]],
   ZIndex = 50,
   FilePath = asset.resource("LRO_LROC_Image_Mosaic/Mare_Tranquillitatis.vrt"),
   Description = [[]]
@@ -168,7 +168,7 @@ local treks_LRO_NAC_Mosaic_07N022E_50cmp = {
 
 local treks_LRO_NAC_Mosaic_14N304E_50cmp = {
   Identifier = "LRO_NAC_Mosaic_14N304E_50cmp",
-  Name = [[LRO LROC Image Mosaic, Marius Hills]],
+  Name = [[Mosaico de Imagen LRO LROC, Colinas Marius]],
   ZIndex = 50,
   FilePath = asset.resource("LRO_LROC_Image_Mosaic/Marius_Hills.vrt"),
   Description = [[]]
@@ -176,7 +176,7 @@ local treks_LRO_NAC_Mosaic_14N304E_50cmp = {
 
 local treks_LRO_NAC_Mosaic_16S041E_50cmp = {
   Identifier = "LRO_NAC_Mosaic_16S041E_50cmp",
-  Name = [[LRO LROC Image Mosaic, Montes Pyrenaeus]],
+  Name = [[Mosaico de Imagen LRO LROC, Montes Pirineos]],
   ZIndex = 50,
   FilePath = asset.resource("LRO_LROC_Image_Mosaic/Montes_Pyrenaeus.vrt"),
   Description = [[]]
@@ -184,7 +184,7 @@ local treks_LRO_NAC_Mosaic_16S041E_50cmp = {
 
 local treks_LRO_NAC_Mosaic_05N000E_50cmp = {
   Identifier = "LRO_NAC_Mosaic_05N000E_50cmp",
-  Name = [[LRO LROC Image Mosaic, Murchison Crater]],
+  Name = [[Mosaico de Imagen LRO LROC, Cráter Murchison]],
   ZIndex = 50,
   FilePath = asset.resource("LRO_LROC_Image_Mosaic/Murchison_Crater.vrt"),
   Description = [[]]
@@ -192,7 +192,7 @@ local treks_LRO_NAC_Mosaic_05N000E_50cmp = {
 
 local treks_LRO_NAC_Mosaic_26S265E_50cmp = {
   Identifier = "LRO_NAC_Mosaic_26S265E_50cmp",
-  Name = [[LRO LROC Image Mosaic, Orientale 1]],
+  Name = [[Mosaico de Imagen LRO LROC, Orientale 1]],
   ZIndex = 50,
   FilePath = asset.resource("LRO_LROC_Image_Mosaic/Orientale_1.vrt"),
   Description = [[]]
@@ -200,7 +200,7 @@ local treks_LRO_NAC_Mosaic_26S265E_50cmp = {
 
 local treks_LRO_NAC_Mosaic_07N301E_50cmp = {
   Identifier = "LRO_NAC_Mosaic_07N301E_50cmp",
-  Name = [[LRO LROC Image Mosaic, Reiner Gamma]],
+  Name = [[Mosaico de Imagen LRO LROC, Reiner Gamma]],
   ZIndex = 50,
   FilePath = asset.resource("LRO_LROC_Image_Mosaic/Reiner_Gamma.vrt"),
   Description = [[]]
@@ -208,7 +208,7 @@ local treks_LRO_NAC_Mosaic_07N301E_50cmp = {
 
 local treks_LRO_NAC_Mosaic_03S286E_50cmp = {
   Identifier = "LRO_NAC_Mosaic_03S286E_50cmp",
-  Name = [[LRO LROC Image Mosaic, Riccioli Crater]],
+  Name = [[Mosaico de Imagen LRO LROC, Cráter Riccioli]],
   ZIndex = 50,
   FilePath = asset.resource("LRO_LROC_Image_Mosaic/Riccioli_Crater.vrt"),
   Description = [[]]
@@ -216,7 +216,7 @@ local treks_LRO_NAC_Mosaic_03S286E_50cmp = {
 
 local treks_LRO_NAC_Mosaic_13N356E_50cmp = {
   Identifier = "LRO_NAC_Mosaic_13N356E_50cmp",
-  Name = [[LRO LROC Image Mosaic, Rima Bode]],
+  Name = [[Mosaico de Imagen LRO LROC, Rima Bode]],
   ZIndex = 50,
   FilePath = asset.resource("LRO_LROC_Image_Mosaic/Rima_Bode.vrt"),
   Description = [[]]
@@ -224,7 +224,7 @@ local treks_LRO_NAC_Mosaic_13N356E_50cmp = {
 
 local treks_LRO_NAC_Mosaic_27N318E_50cmp = {
   Identifier = "LRO_NAC_Mosaic_27N318E_50cmp",
-  Name = [[LRO LROC Image Mosaic, Rimae Prinz]],
+  Name = [[Mosaico de Imagen LRO LROC, Rimae Prinz]],
   ZIndex = 50,
   FilePath = asset.resource("LRO_LROC_Image_Mosaic/Rimae_Prinz.vrt"),
   Description = [[]]
@@ -232,7 +232,7 @@ local treks_LRO_NAC_Mosaic_27N318E_50cmp = {
 
 local treks_LRO_NAC_Mosaic_60S200E_50cmp = {
   Identifier = "LRO_NAC_Mosaic_60S200E_50cmp",
-  Name = [[LRO LROC Image Mosaic, South Pole-Aitken Basin Interior]],
+  Name = [[Mosaico de Imagen LRO LROC, Interior de la Cuenca Polo Sur-Aitken]],
   ZIndex = 50,
   FilePath = asset.resource("LRO_LROC_Image_Mosaic/South_Pole-Aitken_Basin_Interior.vrt"),
   Description = [[]]
@@ -240,7 +240,7 @@ local treks_LRO_NAC_Mosaic_60S200E_50cmp = {
 
 local treks_LRO_NAC_Mosaic_51S171E_60cmp = {
   Identifier = "LRO_NAC_Mosaic_51S171E_60cmp",
-  Name = [[LRO LROC Image Mosaic, South Pole-Aitken Rim]],
+  Name = [[Mosaico de Imagen LRO LROC, Borde de la Cuenca Polo Sur-Aitken]],
   ZIndex = 50,
   FilePath = asset.resource("LRO_LROC_Image_Mosaic/South_Pole-Aitken_Rim.vrt"),
   Description = [[]]
@@ -248,7 +248,7 @@ local treks_LRO_NAC_Mosaic_51S171E_60cmp = {
 
 local treks_LRO_NAC_Mosaic_02S167E_50cmp = {
   Identifier = "LRO_NAC_Mosaic_02S167E_50cmp",
-  Name = [[LRO LROC Image Mosaic, Stratton (Dewar)]],
+  Name = [[Mosaico de Imagen LRO LROC, Stratton (Dewar)]],
   ZIndex = 50,
   FilePath = asset.resource("LRO_LROC_Image_Mosaic/Stratton_Dewar.vrt"),
   Description = [[]]
@@ -256,7 +256,7 @@ local treks_LRO_NAC_Mosaic_02S167E_50cmp = {
 
 local treks_LRO_NAC_Mosaic_20N010E_60cmp = {
   Identifier = "LRO_NAC_Mosaic_20N010E_60cmp",
-  Name = [[LRO LROC Image Mosaic, Sulpicius Gallus]],
+  Name = [[Mosaico de Imagen LRO LROC, Sulpicius Gallus]],
   ZIndex = 50,
   FilePath = asset.resource("LRO_LROC_Image_Mosaic/Sulpicius_Gallus.vrt"),
   Description = [[]]
@@ -264,7 +264,7 @@ local treks_LRO_NAC_Mosaic_20N010E_60cmp = {
 
 local treks_LRO_NAC_Mosaic_19S129E_50cmp = {
   Identifier = "LRO_NAC_Mosaic_19S129E_50cmp",
-  Name = [[LRO LROC Image Mosaic, Tsiolkovskiy Crater]],
+  Name = [[Mosaico de Imagen LRO LROC, Cráter Tsiolkovskiy]],
   ZIndex = 50,
   FilePath = asset.resource("LRO_LROC_Image_Mosaic/Tsiolkovskiy_Crater.vrt"),
   Description = [[]]
@@ -272,7 +272,7 @@ local treks_LRO_NAC_Mosaic_19S129E_50cmp = {
 
 local treks_LRO_NAC_Mosaic_43S349E_50cmp = {
   Identifier = "LRO_NAC_Mosaic_43S349E_50cmp",
-  Name = [[LRO LROC Image Mosaic, Tycho Crater]],
+  Name = [[Mosaico de Imagen LRO LROC, Cráter Tycho]],
   ZIndex = 50,
   FilePath = asset.resource("LRO_LROC_Image_Mosaic/Tycho_Crater.vrt"),
   Description = [[]]
@@ -389,9 +389,9 @@ asset.export("LRO_NAC_Mosaic_43S349E_50cmp", treks_LRO_NAC_Mosaic_43S349E_50cmp)
 
 
 asset.meta = {
-  Name = [[NASA Treks Layers for Moon LRO_LROC_Image_Mosaic]],
+  Name = [[Capas de NASA Treks para el mosaico de imágenes LRO_LROC de la Luna]],
   Author = "NASA/Treks",
   URL = "https://trek.nasa.gov/moon",
   License = "NASA/Treks",
-  Description = [[LRO_LROC_Image_Mosaic layers from NASA/Treks for Moon]]
+  Description = [[Capas del mosaico de imágenes LRO_LROC de NASA/Treks para la Luna]]
 }

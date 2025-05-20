@@ -3,7 +3,7 @@ local globe = asset.require("../earth")
 
 
 local texturesPath = asset.resource({
-  Name = "5000 Years of Total Solar Eclipses",
+  Name = "5000 years de Eclipses Solares Totales",
   Type = "HttpSynchronization",
   Identifier = "earth_eclipse_5000_years",
   Version = 1

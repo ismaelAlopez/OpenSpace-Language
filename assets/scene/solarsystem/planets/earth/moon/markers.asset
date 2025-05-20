@@ -1,7 +1,7 @@
 local transforms = asset.require("./moon")
 
 local texturesPath = asset.resource({
-  Name = "Moon Textures",
+  Name = "Texturas de la Luna",
   Type = "HttpSynchronization",
   Identifier = "moon_textures",
   Version = 3

@@ -8,7 +8,7 @@ local globeIdentifier = asset.require("scene/solarsystem//planets/earth/moon/moo
 
 local treks_Apollo16_MetricCam_ClrConf_Global_1024ppd = {
   Identifier = "Apollo16_MetricCam_ClrConf_Global_1024ppd",
-  Name = [[Apollo 16 Metric Cam DEM, Colorized Confidence]],
+  Name = [[Apollo 16 Cámara Métrica DEM, Confianza Colorizada]],
   ZIndex = 50,
   FilePath = asset.resource("Apollo_16_Metric_Cam_DEM/Colorized_Confidence.vrt"),
   Description = [[]]
@@ -16,7 +16,7 @@ local treks_Apollo16_MetricCam_ClrConf_Global_1024ppd = {
 
 local treks_Apollo16_MetricCam_Gray_Global_1024ppd = {
   Identifier = "Apollo16_MetricCam_Gray_Global_1024ppd",
-  Name = [[Apollo 16 Metric Cam DEM, Grayscale]],
+  Name = [[Apollo 16 Cámara Métrica DEM, Escala de Grises]],
   ZIndex = 50,
   FilePath = asset.resource("Apollo_16_Metric_Cam_DEM/Grayscale.vrt"),
   Description = [[]]
@@ -24,7 +24,7 @@ local treks_Apollo16_MetricCam_Gray_Global_1024ppd = {
 
 local treks_Apollo16_MetricCam_Shade_Global_1024ppd = {
   Identifier = "Apollo16_MetricCam_Shade_Global_1024ppd",
-  Name = [[Apollo 16 Metric Cam DEM, Hillshade]],
+  Name = [[Apollo 16 Cámara Métrica DEM, Sombreado]],
   ZIndex = 50,
   FilePath = asset.resource("Apollo_16_Metric_Cam_DEM/Hillshade.vrt"),
   Description = [[]]
@@ -48,9 +48,9 @@ asset.export("Apollo16_MetricCam_Shade_Global_1024ppd", treks_Apollo16_MetricCam
 
 
 asset.meta = {
-  Name = [[NASA Treks Layers for Moon Apollo_16_Metric_Cam_DEM]],
+  Name = [[Capas de NASA Treks para la Luna Apollo_16_Metric_Cam_DEM]],
   Author = "NASA/Treks",
   URL = "https://trek.nasa.gov/moon",
   License = "NASA/Treks",
-  Description = [[Apollo_16_Metric_Cam_DEM layers from NASA/Treks for Moon]]
+  Description = [[Capas Apollo_16_Metric_Cam_DEM de NASA/Treks para la Luna]]
 }

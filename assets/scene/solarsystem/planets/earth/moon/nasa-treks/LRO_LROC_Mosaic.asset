@@ -8,7 +8,7 @@ local globeIdentifier = asset.require("scene/solarsystem//planets/earth/moon/moo
 
 local treks_LRO_NAC_Mosaic_03N280E_70cm = {
   Identifier = "LRO_NAC_Mosaic_03N280E_70cm",
-  Name = [[LRO LROC Mosaic, Fresh Crater East of Lents]],
+  Name = [[LRO LROC Mosaico, Cráter Fresco al Este de Lents]],
   ZIndex = 50,
   FilePath = asset.resource("LRO_LROC_Mosaic/Fresh_Crater_East_of_Lents.vrt"),
   Description = [[]]
@@ -26,9 +26,9 @@ asset.export("LRO_NAC_Mosaic_03N280E_70cm", treks_LRO_NAC_Mosaic_03N280E_70cm)
 
 
 asset.meta = {
-  Name = [[NASA Treks Layers for Moon LRO_LROC_Mosaic]],
+  Name = [[Capas de NASA Treks para la Luna LRO_LROC_Mosaic]],
   Author = "NASA/Treks",
   URL = "https://trek.nasa.gov/moon",
   License = "NASA/Treks",
-  Description = [[LRO_LROC_Mosaic layers from NASA/Treks for Moon]]
+  Description = [[Capas LRO_LROC_Mosaic de NASA/Treks para la Luna]]
 }

@@ -2,14 +2,14 @@ asset.require("scene/solarsystem/heliosphere/2012/reset_loop_action")
 local transforms = asset.require("scene/solarsystem/planets/earth/magnetosphere/transforms_magnetosphere")
 
 local transferFunctions = asset.resource({
-  Name = "Funciones de Transferencia de Líneas de Campo",
+  Name = "Funciones de Transferencia de Lineas de Campo",
   Type = "HttpSynchronization",
   Identifier = "sun_earth_event_july_2012-fieldlines_transferfunctions",
   Version = 2
 })
 
 local fieldlineData = asset.resource({
-  Name = "Datos de Líneas de Campo BATSRUS",
+  Name = "Datos de Lineas de Campo BATSRUS",
   Type = "HttpSynchronization",
   Identifier = "sun_earth_event_july_2012-batsrus",
   Version = 1,

@@ -1,0 +1,68 @@
+-- local transforms = asset.require("scene/solarsystem/sun/transforms")
+local coreKernels = asset.require("spice/core")
+
+local TeegardenStarBBarycenter = {
+    Identifier = "TeegardenStarBarycenter",
+    Parent = coreKernels.ID.SolarSystemBarycenter,
+    Transform = {
+        Translation = {
+            Type = "StaticTranslation",
+            Target = coreKernels.ID.TeegardensStarBarycenter,
+            Observer = coreKernels.ID.SolarSystemBarycenter
+        }
+    },
+    GUI = {
+        Name = "Baricentro de Teegarden Star",
+        Path = "/Sistema Solar/Exoplanetas/Sistema Teegardens/Teegardens Star b",
+        Hidden = true
+    }
+}
+
+local TeegardenStarBCenter = {
+    Identifier = "TeegardenStarBCenter",
+    Parent = TeegardenStarBarycenter.Identifier,
+    Transform = {
+        Translation = {
+            Type = "StaticTranslation",
+            Target = coreKernels.ID.TeegardensStarB,
+            Observer = coreKernels.ID.TeegardensStarBarycenter
+        }
+    },
+    GUI = {
+        Name = "Centro de Teegarden Star b",
+        Path = "/Sistema Solar/Exoplanetas/Sistema Teegardens/Teegardens Star b",
+        Hidden = true
+    }
+}
+
+local TeegardenStarBIAU = {
+    Identifier = "TeegardenStarIAU",
+    Parent = TeegardenStarBCenter.Identifier,
+    Transform = {
+        Rotation = {
+            Type = "SpiceRotation",
+            SourceFrame = coreKernels.Frame.J2000,
+            DestinationFrame = coreKernels.Frame.Galactic
+        }
+    },
+    GUI = {
+        Name = "Teegarden Star IAU",
+        Path = "/Sistema Solar/Exoplanetas/Sistema Teegardens/Teegardens Star b",
+        Hidden = true
+    }
+}
+
+assert.onInitialize(function()
+    openspace.addSceneGraphNode(TeegardenStarBarycenter)
+    openspace.addSceneGraphNode(TeegardenStarBCenter)
+    openspace.addSceneGraphNode(TeegardenStarIAU)
+end)
+assert.onDeinitialize(function()
+    openspace.removeSceneGraphNode(TeegardenStarBarycenter)
+    openspace.removeSceneGraphNode(TeegardenStarBCenter)
+    openspace.removeSceneGraphNode(TeegardenStarIAU)
+end)
+
+asset.export(TeegardenStarBarycenter)
+asset.export(TeegardenStarBCenter)
+asset.export(TeegardenStarIAU)

@@ -8,7 +8,7 @@ local globeIdentifier = asset.require("scene/solarsystem//planets/earth/moon/moo
 
 local treks_LRO_Diviner_CF_Filled_Global_8ppd = {
   Identifier = "LRO_Diviner_CF_Filled_Global_8ppd",
-  Name = [[LRO Diviner CF Mosaic, Filled]],
+  Name = [[LRO Diviner CF Mosaico, Relleno]],
   ZIndex = 50,
   FilePath = asset.resource("LRO_Diviner_CF_Mosaic/Filled.vrt"),
   Description = [[]]
@@ -26,9 +26,9 @@ asset.export("LRO_Diviner_CF_Filled_Global_8ppd", treks_LRO_Diviner_CF_Filled_Gl
 
 
 asset.meta = {
-  Name = [[NASA Treks Layers for Moon LRO_Diviner_CF_Mosaic]],
+  Name = [[Capas de NASA Treks para la Luna LRO_Diviner_CF_Mosaic]],
   Author = "NASA/Treks",
   URL = "https://trek.nasa.gov/moon",
   License = "NASA/Treks",
-  Description = [[LRO_Diviner_CF_Mosaic layers from NASA/Treks for Moon]]
+  Description = [[Capas LRO_Diviner_CF_Mosaic de NASA/Treks para la Luna]]
 }

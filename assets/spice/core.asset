@@ -36,6 +36,8 @@ local ID = {
   UranusBarycenter = "URANUS BARYCENTER",
   Venus = "VENUS",
   VenusBarycenter = "VENUS BARYCENTER",
+  TeengardensStarB = "TEENGARDENS STAR B",
+  TeegardensStarBarycenter = "TEENGARDENS STAR BARYCENTER",
 }
 
 -- The following frames are provided as built-in reference frames by SPICE itself. See
@@ -161,7 +163,12 @@ local Frame = {
   Titania = "IAU_TITANIA",
   Triton = "IAU_TRITON",
   Umbriel = "IAU_UMBRIEL",
-  Vesta = "IAU_VESTA"
+  Vesta = "IAU_VESTA",
+
+  -- exoplanetary bodies
+  teegardens_star_b = "IAU_TEEGARDENS_STAR_B",
+  
+  
 }
 
 

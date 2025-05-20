@@ -3,7 +3,7 @@ local transforms = asset.require("./transforms_magnetosphere")
 local transferFunction = asset.resource("CMR-illuminance2.txt")
 
 local fieldlinesDirectory = asset.resource({
-  Name = "Magnetosphere 2012 event",
+  Name = "Evento de la magnetosfera 2012",
   Type = "HttpSynchronization",
   Identifier = "magnetosphere_2012_event",
   Version = 1

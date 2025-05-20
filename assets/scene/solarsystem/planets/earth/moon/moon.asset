@@ -6,7 +6,7 @@ local coreKernels = asset.require("spice/core")
 
 
 local labelsPath = asset.resource({
-  Name = "Moon Labels",
+  Name = "Etiquetas de la Luna",
   Type = "HttpSynchronization",
   Identifier = "moon_labels",
   Version = 1

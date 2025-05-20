@@ -8,7 +8,7 @@ local globeIdentifier = asset.require("scene/solarsystem//planets/earth/moon/moo
 
 local treks_LRO_WACGLD100_Gray_79S79N_256ppd = {
   Identifier = "LRO_WACGLD100_Gray_79S79N_256ppd",
-  Name = [[LRO WAC-GLD100 DEM, Grayscale]],
+  Name = [[LRO WAC-GLD100 DEM, Escala de Grises]],
   ZIndex = 50,
   FilePath = asset.resource("LRO_WAC-GLD100_DEM/Grayscale.vrt"),
   Description = [[]]
@@ -26,9 +26,9 @@ asset.export("LRO_WACGLD100_Gray_79S79N_256ppd", treks_LRO_WACGLD100_Gray_79S79N
 
 
 asset.meta = {
-  Name = [[NASA Treks Layers for Moon LRO_WAC-GLD100_DEM]],
+  Name = [[Capas de NASA Treks para la Luna LRO_WAC-GLD100_DEM]],
   Author = "NASA/Treks",
   URL = "https://trek.nasa.gov/moon",
   License = "NASA/Treks",
-  Description = [[LRO_WAC-GLD100_DEM layers from NASA/Treks for Moon]]
+  Description = [[Capas LRO_WAC-GLD100_DEM de NASA/Treks para la Luna]]
 }

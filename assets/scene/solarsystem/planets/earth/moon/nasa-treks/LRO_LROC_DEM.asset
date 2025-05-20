@@ -8,7 +8,7 @@ local globeIdentifier = asset.require("scene/solarsystem//planets/earth/moon/moo
 
 local treks_LRO_NAC_ClrRoughness_15m_17S173E_150cmp = {
   Identifier = "LRO_NAC_ClrRoughness_15m_17S173E_150cmp",
-  Name = [[LRO LROC DEM, Aitken Crater, 15m Color Roughness]],
+  Name = [[LRO LROC DEM, Cráter Aitken, Rugosidad de Color 15m]],
   ZIndex = 50,
   FilePath = asset.resource("LRO_LROC_DEM/Aitken_Crater.vrt"),
   Description = [[]]
@@ -16,7 +16,7 @@ local treks_LRO_NAC_ClrRoughness_15m_17S173E_150cmp = {
 
 local treks_LRO_NAC_ClrRoughness_15m_13S358E_2mp = {
   Identifier = "LRO_NAC_ClrRoughness_15m_13S358E_2mp",
-  Name = [[LRO LROC DEM, Alphonsus Crater, 15m Color Roughness]],
+  Name = [[LRO LROC DEM, Cráter Alphonsus, Rugosidad de Color 15m]],
   ZIndex = 50,
   FilePath = asset.resource("LRO_LROC_DEM/Alphonsus_Crater.vrt"),
   Description = [[]]
@@ -24,7 +24,7 @@ local treks_LRO_NAC_ClrRoughness_15m_13S358E_2mp = {
 
 local treks_LRO_NAC_ClrShade_13S358E_200cmp = {
   Identifier = "LRO_NAC_ClrShade_13S358E_200cmp",
-  Name = [[LRO LROC DEM, Alphonsus, ColorHillshade]],
+  Name = [[LRO LROC DEM, Alphonsus, Sombreado de Color]],
   ZIndex = 50,
   FilePath = asset.resource("LRO_LROC_DEM/Alphonsus.vrt"),
   Description = [[]]
@@ -32,7 +32,7 @@ local treks_LRO_NAC_ClrShade_13S358E_200cmp = {
 
 local treks_LRO_NAC_ClrRoughness_15m_73N350E_150cmp = {
   Identifier = "LRO_NAC_ClrRoughness_15m_73N350E_150cmp",
-  Name = [[LRO LROC DEM, Anaxagoras Crater, 15m Color Roughness]],
+  Name = [[LRO LROC DEM, Cráter Anaxágoras, Rugosidad de Color 15m]],
   ZIndex = 50,
   FilePath = asset.resource("LRO_LROC_DEM/Anaxagoras_Crater.vrt"),
   Description = [[]]
@@ -40,7 +40,7 @@ local treks_LRO_NAC_ClrRoughness_15m_73N350E_150cmp = {
 
 local treks_LRO_NAC_ClrRoughness_15m_26N004E_150cmp = {
   Identifier = "LRO_NAC_ClrRoughness_15m_26N004E_150cmp",
-  Name = [[LRO LROC DEM, Apollo 15, 15m Color Roughness]],
+  Name = [[LRO LROC DEM, Apolo 15, Rugosidad de Color 15m]],
   ZIndex = 50,
   FilePath = asset.resource("LRO_LROC_DEM/Apollo_15.vrt"),
   Description = [[]]
@@ -48,7 +48,7 @@ local treks_LRO_NAC_ClrRoughness_15m_26N004E_150cmp = {
 
 local treks_LRO_NAC_ClrRoughness_15m_09S015E_150cmp = {
   Identifier = "LRO_NAC_ClrRoughness_15m_09S015E_150cmp",
-  Name = [[LRO LROC DEM, Apollo 16, 15m Color Roughness]],
+  Name = [[LRO LROC DEM, Apolo 16, Rugosidad de Color 15m]],
   ZIndex = 50,
   FilePath = asset.resource("LRO_LROC_DEM/Apollo_16.vrt"),
   Description = [[]]
@@ -56,7 +56,7 @@ local treks_LRO_NAC_ClrRoughness_15m_09S015E_150cmp = {
 
 local treks_LRO_NAC_ClrRoughness_15m_37S206E_150cmp = {
   Identifier = "LRO_NAC_ClrRoughness_15m_37S206E_150cmp",
-  Name = [[LRO LROC DEM, Apollo Basin, 15m Color Roughness]],
+  Name = [[LRO LROC DEM, Cuenca Apolo, Rugosidad de Color 15m]],
   ZIndex = 50,
   FilePath = asset.resource("LRO_LROC_DEM/Apollo_Basin.vrt"),
   Description = [[]]
@@ -64,7 +64,7 @@ local treks_LRO_NAC_ClrRoughness_15m_37S206E_150cmp = {
 
 local treks_LRO_NAC_ClrRoughness_15m_25N311E_2mp = {
   Identifier = "LRO_NAC_ClrRoughness_15m_25N311E_2mp",
-  Name = [[LRO LROC DEM, Aristarchus 1, 15m Color Roughness]],
+  Name = [[LRO LROC DEM, Aristarchus 1, Rugosidad de Color 15m]],
   ZIndex = 50,
   FilePath = asset.resource("LRO_LROC_DEM/Aristarchus_1.vrt"),
   Description = [[]]
@@ -72,7 +72,7 @@ local treks_LRO_NAC_ClrRoughness_15m_25N311E_2mp = {
 
 local treks_LRO_NAC_ClrRoughness_15m_28N307E_150cmp = {
   Identifier = "LRO_NAC_ClrRoughness_15m_28N307E_150cmp",
-  Name = [[LRO LROC DEM, Aristarchus 2, 15m Color Roughness]],
+  Name = [[LRO LROC DEM, Aristarchus 2, Rugosidad de Color 15m]],
   ZIndex = 50,
   FilePath = asset.resource("LRO_LROC_DEM/Aristarchus_2.vrt"),
   Description = [[]]
@@ -80,7 +80,7 @@ local treks_LRO_NAC_ClrRoughness_15m_28N307E_150cmp = {
 
 local treks_LRO_NAC_ClrRoughness_15m_19S070E_150cmp = {
   Identifier = "LRO_NAC_ClrRoughness_15m_19S070E_150cmp",
-  Name = [[LRO LROC DEM, Balmer Basin, 15m Color Roughness]],
+  Name = [[LRO LROC DEM, Cuenca Balmer, Rugosidad de Color 15m]],
   ZIndex = 50,
   FilePath = asset.resource("LRO_LROC_DEM/Balmer_Basin.vrt"),
   Description = [[]]
@@ -88,7 +88,7 @@ local treks_LRO_NAC_ClrRoughness_15m_19S070E_150cmp = {
 
 local treks_LRO_NAC_ClrRoughness_15m_20S337E_400cmp = {
   Identifier = "LRO_NAC_ClrRoughness_15m_20S337E_400cmp",
-  Name = [[LRO LROC DEM, Bullialdus Crater, 15m Color Roughness]],
+  Name = [[LRO LROC DEM, Cráter Bullialdus, Rugosidad de Color 15m]],
   ZIndex = 50,
   FilePath = asset.resource("LRO_LROC_DEM/Bullialdus_Crater.vrt"),
   Description = [[]]
@@ -96,7 +96,7 @@ local treks_LRO_NAC_ClrRoughness_15m_20S337E_400cmp = {
 
 local treks_LRO_NAC_ClrShade_61N099E_150cmp = {
   Identifier = "LRO_NAC_ClrShade_61N099E_150cmp",
-  Name = [[LRO LROC DEM, Compton Belkovich Th Anomaly, ColorHillshade]],
+  Name = [[LRO LROC DEM, Anomalía Th de Compton Belkovich, Sombreado de Color]],
   ZIndex = 50,
   FilePath = asset.resource("LRO_LROC_DEM/Compton_Belkovich_Th_Anomaly.vrt"),
   Description = [[]]
@@ -104,7 +104,7 @@ local treks_LRO_NAC_ClrShade_61N099E_150cmp = {
 
 local treks_LRO_NAC_ClrRoughness_15m_26N178E_150cmp = {
   Identifier = "LRO_NAC_ClrRoughness_15m_26N178E_150cmp",
-  Name = [[LRO LROC DEM, Dante Crater, 15m Color Roughness]],
+  Name = [[LRO LROC DEM, Cráter Dante, Rugosidad de Color 15m]],
   ZIndex = 50,
   FilePath = asset.resource("LRO_LROC_DEM/Dante_Crater.vrt"),
   Description = [[]]
@@ -112,7 +112,7 @@ local treks_LRO_NAC_ClrRoughness_15m_26N178E_150cmp = {
 
 local treks_LRO_NAC_ClrShade_02S317E_150cmp = {
   Identifier = "LRO_NAC_ClrShade_02S317E_150cmp",
-  Name = [[LRO LROC DEM, Flamsteed Crater, ColorHillshade]],
+  Name = [[LRO LROC DEM, Cráter Flamsteed, Sombreado de Color]],
   ZIndex = 50,
   FilePath = asset.resource("LRO_LROC_DEM/Flamsteed_Crater.vrt"),
   Description = [[]]
@@ -120,7 +120,7 @@ local treks_LRO_NAC_ClrShade_02S317E_150cmp = {
 
 local treks_LRO_NAC_ClrShade_03N280E_2m = {
   Identifier = "LRO_NAC_ClrShade_03N280E_2m",
-  Name = [[LRO LROC DEM, Fresh Crater East of Lents, ColorHillshade]],
+  Name = [[LRO LROC DEM, Cráter Fresco al Este de Lents, Sombreado de Color]],
   ZIndex = 50,
   FilePath = asset.resource("LRO_LROC_DEM/Fresh_Crater_East_of_Lents.vrt"),
   Description = [[]]
@@ -128,7 +128,7 @@ local treks_LRO_NAC_ClrShade_03N280E_2m = {
 
 local treks_LRO_NAC_ClrRoughness_15m_36N320E_2mp = {
   Identifier = "LRO_NAC_ClrRoughness_15m_36N320E_2mp",
-  Name = [[LRO LROC DEM, Gruithuisen Domes, 15m Color Roughness]],
+  Name = [[LRO LROC DEM, Domos de Gruithuisen, Rugosidad de Color 15m]],
   ZIndex = 50,
   FilePath = asset.resource("LRO_LROC_DEM/Gruithuisen_Domes.vrt"),
   Description = [[]]
@@ -136,7 +136,7 @@ local treks_LRO_NAC_ClrRoughness_15m_36N320E_2mp = {
 
 local treks_LRO_NAC_ClrRoughness_15m_00N234E_150cmp = {
   Identifier = "LRO_NAC_ClrRoughness_15m_00N234E_150cmp",
-  Name = [[LRO LROC DEM, Hertzsprung, 15m Color Roughness]],
+  Name = [[LRO LROC DEM, Hertzsprung, Rugosidad de Color 15m]],
   ZIndex = 50,
   FilePath = asset.resource("LRO_LROC_DEM/Hertzsprung.vrt"),
   Description = [[]]
@@ -144,7 +144,7 @@ local treks_LRO_NAC_ClrRoughness_15m_00N234E_150cmp = {
 
 local treks_LRO_NAC_ClrRoughness_15m_08N332E_2mp = {
   Identifier = "LRO_NAC_ClrRoughness_15m_08N332E_2mp",
-  Name = [[LRO LROC DEM, Hortensius Domes, 15m Color Roughness]],
+  Name = [[LRO LROC DEM, Domos de Hortensius, Rugosidad de Color 15m]],
   ZIndex = 50,
   FilePath = asset.resource("LRO_LROC_DEM/Hortensius_Domes.vrt"),
   Description = [[]]
@@ -152,7 +152,7 @@ local treks_LRO_NAC_ClrRoughness_15m_08N332E_2mp = {
 
 local treks_LRO_NAC_ClrShade_55N077E_200cmp = {
   Identifier = "LRO_NAC_ClrShade_55N077E_200cmp",
-  Name = [[LRO LROC DEM, Humboldtianum Basin, ColorHillshade]],
+  Name = [[LRO LROC DEM, Cuenca Humboldtianum, Sombreado de Color]],
   ZIndex = 50,
   FilePath = asset.resource("LRO_LROC_DEM/Humboldtianum_Basin.vrt"),
   Description = [[]]
@@ -160,7 +160,7 @@ local treks_LRO_NAC_ClrShade_55N077E_200cmp = {
 
 local treks_LRO_NAC_ClrShade_19N005E_2mp = {
   Identifier = "LRO_NAC_ClrShade_19N005E_2mp",
-  Name = [[LRO LROC DEM, Ina (D-Caldera), ColorHillshade]],
+  Name = [[LRO LROC DEM, Ina (D-Caldera), Sombreado de Color]],
   ZIndex = 50,
   FilePath = asset.resource("LRO_LROC_DEM/Ina_D-Caldera.vrt"),
   Description = [[]]
@@ -168,7 +168,7 @@ local treks_LRO_NAC_ClrShade_19N005E_2mp = {
 
 local treks_LRO_NAC_ClrRoughness_15m_06N120E_200cmp = {
   Identifier = "LRO_NAC_ClrRoughness_15m_06N120E_200cmp",
-  Name = [[LRO LROC DEM, King Crater, 15m Color Roughness]],
+  Name = [[LRO LROC DEM, Cráter King, Rugosidad de Color 15m]],
   ZIndex = 50,
   FilePath = asset.resource("LRO_LROC_DEM/King_Crater.vrt"),
   Description = [[]]
@@ -176,7 +176,7 @@ local treks_LRO_NAC_ClrRoughness_15m_06N120E_200cmp = {
 
 local treks_LRO_NAC_ClrRoughness_15m_32N292E_2mp = {
   Identifier = "LRO_NAC_ClrRoughness_15m_32N292E_2mp",
-  Name = [[LRO LROC DEM, Lichtenberg Crater, 15m Color Roughness]],
+  Name = [[LRO LROC DEM, Cráter Lichtenberg, Rugosidad de Color 15m]],
   ZIndex = 50,
   FilePath = asset.resource("LRO_LROC_DEM/Lichtenberg_Crater.vrt"),
   Description = [[]]
@@ -184,7 +184,7 @@ local treks_LRO_NAC_ClrRoughness_15m_32N292E_2mp = {
 
 local treks_LRO_NAC_ClrRoughness_15m_10N58E_150cmp = {
   Identifier = "LRO_NAC_ClrRoughness_15m_10N58E_150cmp",
-  Name = [[LRO LROC DEM, Mare Crisium, 15m Color Roughness]],
+  Name = [[LRO LROC DEM, Mare Crisium, Rugosidad de Color 15m]],
   ZIndex = 50,
   FilePath = asset.resource("LRO_LROC_DEM/Mare_Crisium.vrt"),
   Description = [[]]
@@ -192,7 +192,7 @@ local treks_LRO_NAC_ClrRoughness_15m_10N58E_150cmp = {
 
 local treks_LRO_NAC_ClrShade_36S164E_2mp = {
   Identifier = "LRO_NAC_ClrShade_36S164E_2mp",
-  Name = [[LRO LROC DEM, Mare Ingenii, ColorHillshade]],
+  Name = [[LRO LROC DEM, Mare Ingenii, Sombreado de Color]],
   ZIndex = 50,
   FilePath = asset.resource("LRO_LROC_DEM/Mare_Ingenii.vrt"),
   Description = [[]]
@@ -200,7 +200,7 @@ local treks_LRO_NAC_ClrShade_36S164E_2mp = {
 
 local treks_LRO_NAC_ClrShade_26N150E_200cmp = {
   Identifier = "LRO_NAC_ClrShade_26N150E_200cmp",
-  Name = [[LRO LROC DEM, Mare Moscoviense, ColorHillshade]],
+  Name = [[LRO LROC DEM, Mare Moscoviense, Sombreado de Color]],
   ZIndex = 50,
   FilePath = asset.resource("LRO_LROC_DEM/Mare_Moscoviense.vrt"),
   Description = [[]]
@@ -208,7 +208,7 @@ local treks_LRO_NAC_ClrShade_26N150E_200cmp = {
 
 local treks_LRO_NAC_ClrShade_02N085E_150cmp = {
   Identifier = "LRO_NAC_ClrShade_02N085E_150cmp",
-  Name = [[LRO LROC DEM, Mare Smythii, ColorHillshade]],
+  Name = [[LRO LROC DEM, Mare Smythii, Sombreado de Color]],
   ZIndex = 50,
   FilePath = asset.resource("LRO_LROC_DEM/Mare_Smythii.vrt"),
   Description = [[]]
@@ -216,7 +216,7 @@ local treks_LRO_NAC_ClrShade_02N085E_150cmp = {
 
 local treks_LRO_NAC_ClrShade_07N022E_150cmp = {
   Identifier = "LRO_NAC_ClrShade_07N022E_150cmp",
-  Name = [[LRO LROC DEM, Mare Tranquillitatis, ColorHillshade]],
+  Name = [[LRO LROC DEM, Mare Tranquillitatis, Sombreado de Color]],
   ZIndex = 50,
   FilePath = asset.resource("LRO_LROC_DEM/Mare_Tranquillitatis.vrt"),
   Description = [[]]
@@ -224,7 +224,7 @@ local treks_LRO_NAC_ClrShade_07N022E_150cmp = {
 
 local treks_LRO_NAC_ClrShade_14N304E_2mp = {
   Identifier = "LRO_NAC_ClrShade_14N304E_2mp",
-  Name = [[LRO LROC DEM, Marius Hills, ColorHillshade]],
+  Name = [[LRO LROC DEM, Colinas de Marius, Sombreado de Color]],
   ZIndex = 50,
   FilePath = asset.resource("LRO_LROC_DEM/Marius_Hills.vrt"),
   Description = [[]]
@@ -232,7 +232,7 @@ local treks_LRO_NAC_ClrShade_14N304E_2mp = {
 
 local treks_LRO_NAC_ClrRoughness_15m_16S041E_150cmp = {
   Identifier = "LRO_NAC_ClrRoughness_15m_16S041E_150cmp",
-  Name = [[LRO LROC DEM, Montes Pyrenaeus, 15m Color Roughness]],
+  Name = [[LRO LROC DEM, Montes Pirineos, Rugosidad de Color 15m]],
   ZIndex = 50,
   FilePath = asset.resource("LRO_LROC_DEM/Montes_Pyrenaeus.vrt"),
   Description = [[]]
@@ -240,7 +240,7 @@ local treks_LRO_NAC_ClrRoughness_15m_16S041E_150cmp = {
 
 local treks_LRO_NAC_ClrShade_05N000E_150cmp = {
   Identifier = "LRO_NAC_ClrShade_05N000E_150cmp",
-  Name = [[LRO LROC DEM, Murchison Crater, ColorHillshade]],
+  Name = [[LRO LROC DEM, Cráter Murchison, Sombreado de Color]],
   ZIndex = 50,
   FilePath = asset.resource("LRO_LROC_DEM/Murchison_Crater.vrt"),
   Description = [[]]
@@ -248,7 +248,7 @@ local treks_LRO_NAC_ClrShade_05N000E_150cmp = {
 
 local treks_LRO_NAC_ClrRoughness_15m_26S265E_200cmp = {
   Identifier = "LRO_NAC_ClrRoughness_15m_26S265E_200cmp",
-  Name = [[LRO LROC DEM, Orientale 1, 15m Color Roughness]],
+  Name = [[LRO LROC DEM, Orientale 1, Rugosidad de Color 15m]],
   ZIndex = 50,
   FilePath = asset.resource("LRO_LROC_DEM/Orientale_1.vrt"),
   Description = [[]]
@@ -256,7 +256,7 @@ local treks_LRO_NAC_ClrRoughness_15m_26S265E_200cmp = {
 
 local treks_LRO_NAC_ClrRoughness_15m_53N354E_150cmp = {
   Identifier = "LRO_NAC_ClrRoughness_15m_53N354E_150cmp",
-  Name = [[LRO LROC DEM, Plato Ejecta, 15m Color Roughness]],
+  Name = [[LRO LROC DEM, Eyecta de Plato, Rugosidad de Color 15m]],
   ZIndex = 50,
   FilePath = asset.resource("LRO_LROC_DEM/Plato_Ejecta.vrt"),
   Description = [[]]
@@ -264,7 +264,7 @@ local treks_LRO_NAC_ClrRoughness_15m_53N354E_150cmp = {
 
 local treks_LRO_NAC_ClrShade_07N301E_2mp = {
   Identifier = "LRO_NAC_ClrShade_07N301E_2mp",
-  Name = [[LRO LROC DEM, Reiner Gamma, ColorHillshade]],
+  Name = [[LRO LROC DEM, Reiner Gamma, Sombreado de Color]],
   ZIndex = 50,
   FilePath = asset.resource("LRO_LROC_DEM/Reiner_Gamma.vrt"),
   Description = [[]]
@@ -272,7 +272,7 @@ local treks_LRO_NAC_ClrShade_07N301E_2mp = {
 
 local treks_LRO_NAC_ClrShade_03S286E_150cmp = {
   Identifier = "LRO_NAC_ClrShade_03S286E_150cmp",
-  Name = [[LRO LROC DEM, Riccioli Crater, ColorHillshade]],
+  Name = [[LRO LROC DEM, Cráter Riccioli, Sombreado de Color]],
   ZIndex = 50,
   FilePath = asset.resource("LRO_LROC_DEM/Riccioli_Crater.vrt"),
   Description = [[]]
@@ -280,7 +280,7 @@ local treks_LRO_NAC_ClrShade_03S286E_150cmp = {
 
 local treks_LRO_NAC_ClrShade_13N356E_150cmp = {
   Identifier = "LRO_NAC_ClrShade_13N356E_150cmp",
-  Name = [[LRO LROC DEM, Rima Bode, ColorHillshade]],
+  Name = [[LRO LROC DEM, Rima Bode, Sombreado de Color]],
   ZIndex = 50,
   FilePath = asset.resource("LRO_LROC_DEM/Rima_Bode.vrt"),
   Description = [[]]
@@ -288,7 +288,7 @@ local treks_LRO_NAC_ClrShade_13N356E_150cmp = {
 
 local treks_LRO_NAC_ClrShade_27N318E_150cmp = {
   Identifier = "LRO_NAC_ClrShade_27N318E_150cmp",
-  Name = [[LRO LROC DEM, Rimae Prinz, ColorHillshade]],
+  Name = [[LRO LROC DEM, Rimae Prinz, Sombreado de Color]],
   ZIndex = 50,
   FilePath = asset.resource("LRO_LROC_DEM/Rimae_Prinz.vrt"),
   Description = [[]]
@@ -296,7 +296,7 @@ local treks_LRO_NAC_ClrShade_27N318E_150cmp = {
 
 local treks_LRO_NAC_ClrRoughness_15m_60S200E_150cmp = {
   Identifier = "LRO_NAC_ClrRoughness_15m_60S200E_150cmp",
-  Name = [[LRO LROC DEM, South Pole-Aitken Basin Interior, 15m Color Roughness]],
+  Name = [[LRO LROC DEM, Interior de la Cuenca del Polo Sur-Aitken, Rugosidad de Color 15m]],
   ZIndex = 50,
   FilePath = asset.resource("LRO_LROC_DEM/South_Pole-Aitken_Basin_Interior.vrt"),
   Description = [[]]
@@ -304,7 +304,7 @@ local treks_LRO_NAC_ClrRoughness_15m_60S200E_150cmp = {
 
 local treks_LRO_NAC_ClrShade_51S171E_2mp = {
   Identifier = "LRO_NAC_ClrShade_51S171E_2mp",
-  Name = [[LRO LROC DEM, South Pole-Aitken Rim, ColorHillshade]],
+  Name = [[LRO LROC DEM, Borde del Polo Sur-Aitken, Sombreado de Color]],
   ZIndex = 50,
   FilePath = asset.resource("LRO_LROC_DEM/South_Pole-Aitken_Rim.vrt"),
   Description = [[]]
@@ -312,7 +312,7 @@ local treks_LRO_NAC_ClrShade_51S171E_2mp = {
 
 local treks_LRO_NAC_ClrRoughness_15m_02S167E_150cmp = {
   Identifier = "LRO_NAC_ClrRoughness_15m_02S167E_150cmp",
-  Name = [[LRO LROC DEM, Stratton (Dewar) High Fe Anomaly, 15m Color Roughness]],
+  Name = [[LRO LROC DEM, Anomalía Alta en Fe de Stratton (Dewar), Rugosidad de Color 15m]],
   ZIndex = 50,
   FilePath = asset.resource("LRO_LROC_DEM/Stratton_Dewar_High_Fe_Anomaly.vrt"),
   Description = [[]]
@@ -320,7 +320,7 @@ local treks_LRO_NAC_ClrRoughness_15m_02S167E_150cmp = {
 
 local treks_LRO_NAC_ClrShade_02S167E_150cmp = {
   Identifier = "LRO_NAC_ClrShade_02S167E_150cmp",
-  Name = [[LRO LROC DEM, Stratton (Dewar), ColorHillshade]],
+  Name = [[LRO LROC DEM, Stratton (Dewar), Sombreado de Color]],
   ZIndex = 50,
   FilePath = asset.resource("LRO_LROC_DEM/Stratton_Dewar.vrt"),
   Description = [[]]
@@ -328,7 +328,7 @@ local treks_LRO_NAC_ClrShade_02S167E_150cmp = {
 
 local treks_LRO_NAC_ClrRoughness_15m_20N010E_2mp = {
   Identifier = "LRO_NAC_ClrRoughness_15m_20N010E_2mp",
-  Name = [[LRO LROC DEM, Sulpicius Gallus, 15m Color Roughness]],
+  Name = [[LRO LROC DEM, Sulpicius Gallus, Rugosidad de Color 15m]],
   ZIndex = 50,
   FilePath = asset.resource("LRO_LROC_DEM/Sulpicius_Gallus.vrt"),
   Description = [[]]
@@ -336,7 +336,7 @@ local treks_LRO_NAC_ClrRoughness_15m_20N010E_2mp = {
 
 local treks_LRO_NAC_ClrRoughness_15m_19S129E_150cmp = {
   Identifier = "LRO_NAC_ClrRoughness_15m_19S129E_150cmp",
-  Name = [[LRO LROC DEM, Tsiolkovskiy Crater, 15m Color Roughness]],
+  Name = [[LRO LROC DEM, Cráter Tsiolkovskiy, Rugosidad de Color 15m]],
   ZIndex = 50,
   FilePath = asset.resource("LRO_LROC_DEM/Tsiolkovskiy_Crater.vrt"),
   Description = [[]]
@@ -344,7 +344,7 @@ local treks_LRO_NAC_ClrRoughness_15m_19S129E_150cmp = {
 
 local treks_LRO_NAC_ClrRoughness_15m_43S349E_150cmp = {
   Identifier = "LRO_NAC_ClrRoughness_15m_43S349E_150cmp",
-  Name = [[LRO LROC DEM, Tycho Crater, 15m Color Roughness]],
+  Name = [[LRO LROC DEM, Cráter Tycho, Rugosidad de Color 15m]],
   ZIndex = 50,
   FilePath = asset.resource("LRO_LROC_DEM/Tycho_Crater.vrt"),
   Description = [[]]
@@ -488,9 +488,9 @@ asset.export("LRO_NAC_ClrRoughness_15m_43S349E_150cmp", treks_LRO_NAC_ClrRoughne
 
 
 asset.meta = {
-  Name = [[NASA Treks Layers for Moon LRO_LROC_DEM]],
+  Name = [[Capas de NASA Treks para la Luna LRO_LROC_DEM]],
   Author = "NASA/Treks",
   URL = "https://trek.nasa.gov/moon",
   License = "NASA/Treks",
-  Description = [[LRO_LROC_DEM layers from NASA/Treks for Moon]]
+  Description = [[Capas LRO_LROC_DEM de NASA/Treks para la Luna]]
 }

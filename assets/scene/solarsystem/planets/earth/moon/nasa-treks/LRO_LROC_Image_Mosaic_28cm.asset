@@ -8,7 +8,7 @@ local globeIdentifier = asset.require("scene/solarsystem//planets/earth/moon/moo
 
 local treks_apollo14_28cm_mosaic_byte_geo_1_2_highContrast = {
   Identifier = "apollo14_28cm_mosaic_byte_geo_1_2_highContrast",
-  Name = [[LRO LROC Image Mosaic 28cm, Apollo 14]],
+  Name = [[Mosaico de Imagen LRO LROC 28cm, Apolo 14]],
   ZIndex = 50,
   FilePath = asset.resource("LRO_LROC_Image_Mosaic_28cm/Apollo_14.vrt"),
   Description = [[]]
@@ -26,9 +26,9 @@ asset.export("apollo14_28cm_mosaic_byte_geo_1_2_highContrast", treks_apollo14_28
 
 
 asset.meta = {
-  Name = [[NASA Treks Layers for Moon LRO_LROC_Image_Mosaic_28cm]],
+  Name = [[Capas de NASA Treks para la Luna LRO_LROC_Image_Mosaic_28cm]],
   Author = "NASA/Treks",
   URL = "https://trek.nasa.gov/moon",
   License = "NASA/Treks",
-  Description = [[LRO_LROC_Image_Mosaic_28cm layers from NASA/Treks for Moon]]
+  Description = [[Capas LRO_LROC_Image_Mosaic_28cm de NASA/Treks para la Luna]]
 }

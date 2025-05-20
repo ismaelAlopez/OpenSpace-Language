@@ -8,18 +8,18 @@ local globeIdentifier = asset.require("scene/solarsystem//planets/earth/moon/moo
 
 local treks_NAC_POLE_PSR_NORTH_STRETCH_EQ = {
   Identifier = "NAC_POLE_PSR_NORTH_STRETCH_EQ",
-  Name = [[LRO NAC PSR Mosaic 20mpp, N Pole]],
+  Name = [[Mosaico PSR NAC LRO 20mpp, Polo Norte]],
   ZIndex = 50,
   FilePath = asset.resource("LRO_NAC_PSR_Mosaic_20mpp/N_Pole.vrt"),
-  Description = [[This is an uncontrolled mosaic generated from images taken by the Narrow Angle Camera (NAC) onboard the Lunar Reconnaissance Orbiter (LRO) for the North Pole region of the Moon. The NAC mosaics have been trimmed to the Permanently Shadowed Region (PSR) shapefile, providing visible NAC image coverage of the PSRs only. Acquisition of NAC PSR observations were optimized over several campaigns to maximize signal-to-noise ratio (SNR), resulting in a comprehensive dataset that is systematically reviewed and analyzed. Observations are acquired at a variety of pixel scales (2 to 20 m/px). The final PSR mosaics are assembled from re-sampled images to 20 m/px, and ordering of images is based on image quality and areal coverage of individual PSRs. A total of 550 NAC images were used to create a North Pole PSR mosaic at 20 m/px, 90&deg; to 80&deg; latitude, and -180&deg; to 180&deg; longitude. This mosaic has been merged with the existing LROC NAC North Pole RDR product to replace over-saturated illuminated polar areas.]]
+  Description = [[Este es un mosaico no controlado generado a partir de imágenes tomadas por la Cámara de Ángulo Estrecho (NAC) a bordo del Orbitador de Reconocimiento Lunar (LRO) para la región del Polo Norte de la Luna. Los mosaicos NAC se han recortado al archivo de forma de la Región Permanentemente en Sombra (PSR), proporcionando cobertura visible de imágenes NAC solo de las PSR. La adquisición de observaciones NAC PSR se optimizó durante varias campañas para maximizar la relación señal-ruido (SNR), lo que resultó en un conjunto de datos integral que se revisa y analiza sistemáticamente. Las observaciones se adquieren a una variedad de escalas de píxeles (2 a 20 m/px). Los mosaicos PSR finales se ensamblan a partir de imágenes re-muestreadas a 20 m/px, y el orden de las imágenes se basa en la calidad de la imagen y la cobertura aérea de las PSR individuales. Se utilizaron un total de 550 imágenes NAC para crear un mosaico PSR del Polo Norte a 20 m/px, de 90&deg; a 80&deg; de latitud, y de -180&deg; a 180&deg; de longitud. Este mosaico se ha fusionado con el producto RDR del Polo Norte NAC LROC existente para reemplazar las áreas polares iluminadas sobresaturadas.]]
 }
 
 local treks_NAC_POLE_PSR_SOUTH_STRETCH_EQ = {
   Identifier = "NAC_POLE_PSR_SOUTH_STRETCH_EQ",
-  Name = [[LRO NAC PSR Mosaic 20mpp, S Pole]],
+  Name = [[Mosaico PSR NAC LRO 20mpp, Polo Sur]],
   ZIndex = 50,
   FilePath = asset.resource("LRO_NAC_PSR_Mosaic_20mpp/S_Pole.vrt"),
-  Description = [[This is an uncontrolled mosaic generated from images taken by the Narrow Angle Camera (NAC) onboard the Lunar Reconnaissance Orbiter (LRO) for the South Pole region of the Moon. The NAC mosaics have been trimmed to the Permanently Shadowed Region (PSR) shapefile, providing visible NAC image coverage of the PSRs only. Acquisition of NAC PSR observations were optimized over several campaigns to maximize signal-to-noise ratio (SNR), resulting in a comprehensive dataset that is systematically reviewed and analyzed. Observations are acquired at a variety of pixel scales (2 to 20 m/px). The final PSR mosaics are assembled from re-sampled images to 20 m/px, and ordering of images is based on image quality and areal coverage of individual PSRs. A total of 550 NAC images were used to create a South Pole PSR mosaic at 20 m/px, 90&deg; to 80&deg; latitude, and -180&deg; to 180&deg; longitude. This mosaic has been merged with the existing LROC NAC South Pole RDR product to replace over-saturated illuminated polar areas.]]
+  Description = [[Este es un mosaico no controlado generado a partir de imágenes tomadas por la Cámara de Ángulo Estrecho (NAC) a bordo del Orbitador de Reconocimiento Lunar (LRO) para la región del Polo Sur de la Luna. Los mosaicos NAC se han recortado al archivo de forma de la Región Permanentemente en Sombra (PSR), proporcionando cobertura visible de imágenes NAC solo de las PSR. La adquisición de observaciones NAC PSR se optimizó durante varias campañas para maximizar la relación señal-ruido (SNR), lo que resultó en un conjunto de datos integral que se revisa y analiza sistemáticamente. Las observaciones se adquieren a una variedad de escalas de píxeles (2 a 20 m/px). Los mosaicos PSR finales se ensamblan a partir de imágenes re-muestreadas a 20 m/px, y el orden de las imágenes se basa en la calidad de la imagen y la cobertura aérea de las PSR individuales. Se utilizaron un total de 550 imágenes NAC para crear un mosaico PSR del Polo Sur a 20 m/px, de 90&deg; a 80&deg; de latitud, y de -180&deg; a 180&deg; de longitud. Este mosaico se ha fusionado con el producto RDR del Polo Sur NAC LROC existente para reemplazar las áreas polares iluminadas sobresaturadas.]]
 }
 
 asset.onInitialize(function()
@@ -37,9 +37,9 @@ asset.export("NAC_POLE_PSR_SOUTH_STRETCH_EQ", treks_NAC_POLE_PSR_SOUTH_STRETCH_E
 
 
 asset.meta = {
-  Name = [[NASA Treks Layers for Moon LRO_NAC_PSR_Mosaic_20mpp]],
+  Name = [[Capas NASA Treks para la Luna LRO_NAC_PSR_Mosaic_20mpp]],
   Author = "NASA/Treks",
   URL = "https://trek.nasa.gov/moon",
   License = "NASA/Treks",
-  Description = [[LRO_NAC_PSR_Mosaic_20mpp layers from NASA/Treks for Moon]]
+  Description = [[Capas LRO_NAC_PSR_Mosaic_20mpp de NASA/Treks para la Luna]]
 }

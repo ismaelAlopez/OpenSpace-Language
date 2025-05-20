@@ -24,10 +24,9 @@ asset.onDeinitialize(function()
 end)
 
 
-
 asset.meta = {
   Name = "Total 2008-08-01",
-  Description = "Total eclipse map for 2008-08-01",
+  Description = "Mapa del eclipse total para 2008-08-01",
   Author = "Equipo de OpenSpace",
   URL = "http://openspaceproject.com",
   License = "MIT license"

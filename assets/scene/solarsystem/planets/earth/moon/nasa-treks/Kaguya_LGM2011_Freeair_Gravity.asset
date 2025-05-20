@@ -8,7 +8,7 @@ local globeIdentifier = asset.require("scene/solarsystem//planets/earth/moon/moo
 
 local treks_Kaguya_LGM2011_FreeairGravity_Colorized_Global_mgal3m_20ppd = {
   Identifier = "Kaguya_LGM2011_FreeairGravity_Colorized_Global_mgal3m_20ppd",
-  Name = [[Kaguya LGM2011 Freeair Gravity, Colorized]],
+  Name = [[Kaguya LGM2011 Gravedad Libre, Colorizado]],
   ZIndex = 50,
   FilePath = asset.resource("Kaguya_LGM2011_Freeair_Gravity/Colorized.vrt"),
   Description = [[]]
@@ -16,7 +16,7 @@ local treks_Kaguya_LGM2011_FreeairGravity_Colorized_Global_mgal3m_20ppd = {
 
 local treks_Kaguya_LGM2011_FreeairGravity_Gray_Global_mgal3m_20ppd = {
   Identifier = "Kaguya_LGM2011_FreeairGravity_Gray_Global_mgal3m_20ppd",
-  Name = [[Kaguya LGM2011 Freeair Gravity, Greyscale]],
+  Name = [[Kaguya LGM2011 Gravedad Libre, Escala de Grises]],
   ZIndex = 50,
   FilePath = asset.resource("Kaguya_LGM2011_Freeair_Gravity/Greyscale.vrt"),
   Description = [[]]
@@ -37,9 +37,9 @@ asset.export("Kaguya_LGM2011_FreeairGravity_Gray_Global_mgal3m_20ppd", treks_Kag
 
 
 asset.meta = {
-  Name = [[NASA Treks Layers for Moon Kaguya_LGM2011_Freeair_Gravity]],
+  Name = [[Capas de NASA Treks para la Luna Kaguya_LGM2011_Gravedad_Libre]],
   Author = "NASA/Treks",
   URL = "https://trek.nasa.gov/moon",
   License = "NASA/Treks",
-  Description = [[Kaguya_LGM2011_Freeair_Gravity layers from NASA/Treks for Moon]]
+  Description = [[Capas de Kaguya_LGM2011_Gravedad_Libre de NASA/Treks para la Luna]]
 }

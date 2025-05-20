@@ -8,10 +8,10 @@ local globeIdentifier = asset.require("scene/solarsystem//planets/earth/moon/moo
 
 local treks_20200415_lacusmortis_orthomos_filled_8bit_lzw = {
   Identifier = "20200415_lacusmortis_orthomos_filled_8bit_lzw",
-  Name = [[LRO NAC Mosaic, Lacus Mortis, Extended Version]],
+  Name = [[Mosaico NAC de LRO, Lacus Mortis, Versión Extendida]],
   ZIndex = 50,
   FilePath = asset.resource("LRO_NAC_Mosaic/Lacus_Mortis.vrt"),
-  Description = [[This is an orthoimage mosaic produced by combining LROC NAC images, for the southwestern area of Lacus Mortis, including Rimae Bürg and the Lacus Mortis Pit. The images are projected onto a DEM mosaic produced by stereo reconstructions in which each of the images is paired with another LROC NAC.]]
+  Description = [[Este es un mosaico ortoimagen producido combinando imágenes LROC NAC, para el área suroeste de Lacus Mortis, incluyendo Rimae Bürg y el Pozo de Lacus Mortis. Las imágenes están proyectadas sobre un mosaico DEM producido por reconstrucciones estereoscópicas en las que cada una de las imágenes se empareja con otra LROC NAC.]]
 }
 
 asset.onInitialize(function()
@@ -26,9 +26,9 @@ asset.export("20200415_lacusmortis_orthomos_filled_8bit_lzw", treks_20200415_lac
 
 
 asset.meta = {
-  Name = [[NASA Treks Layers for Moon LRO_NAC_Mosaic]],
+  Name = [[Capas de NASA Treks para el mosaico LRO_NAC de la Luna]],
   Author = "NASA/Treks",
   URL = "https://trek.nasa.gov/moon",
   License = "NASA/Treks",
-  Description = [[LRO_NAC_Mosaic layers from NASA/Treks for Moon]]
+  Description = [[Capas LRO_NAC_Mosaic de NASA/Treks para la Luna]]
 }

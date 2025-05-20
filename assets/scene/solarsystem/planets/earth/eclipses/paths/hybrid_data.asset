@@ -1,5 +1,5 @@
 local data = asset.resource({
-  Name = "Hybrid Eclipse Paths",
+  Name = "Rutas de Eclipses Hibridos",
   Type = "HttpSynchronization",
   Identifier = "earth-eclipse-path-hybrid",
   Version = 1

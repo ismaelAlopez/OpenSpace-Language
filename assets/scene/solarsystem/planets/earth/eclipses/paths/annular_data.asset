@@ -1,5 +1,5 @@
 local data = asset.resource({
-  Name = "Annular Eclipse Paths",
+  Name = "Rutas de Eclipses Anulares",
   Type = "HttpSynchronization",
   Identifier = "earth-eclipse-path-annular",
   Version = 1

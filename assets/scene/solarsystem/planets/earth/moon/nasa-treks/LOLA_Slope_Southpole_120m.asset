@@ -8,10 +8,10 @@ local globeIdentifier = asset.require("scene/solarsystem//planets/earth/moon/moo
 
 local treks_LRO_LOLA_ClrSlope_SPole75S_120m_EQ = {
   Identifier = "LRO_LOLA_ClrSlope_SPole75S_120m_EQ",
-  Name = [[LOLA Slope Southpole 120m, Colorized]],
+  Name = [[Pendiente LOLA Polo Sur 120m, Colorizado]],
   ZIndex = 50,
   FilePath = asset.resource("LOLA_Slope_Southpole_120m/Colorized.vrt"),
-  Description = [[This is a colorized map of the original south polar surface slope of the Moon at a resolution of 16 m/pix by 16 m/pix, based on altimetry data acquired by the LOLA instrument. The LOLA Laser 1 and 2 data through mission phase LRO_SM_17 are the source for this data set. The bi-directional slope was calculated from a plane fit to three successive laser shots requiring n=5 to 15 profile returns. Depending on orbital velocity, probability of detection, and spacecraft altitude, the slope baseline may vary from 30 to 120 meters.]]
+  Description = [[Este es un mapa colorizado de la pendiente superficial polar sur original de la Luna a una resolución de 16 m/pix por 16 m/pix, basado en datos altimétricos adquiridos por el instrumento LOLA. Los datos de los Láseres 1 y 2 de LOLA hasta la fase de misión LRO_SM_17 son la fuente de este conjunto de datos. La pendiente bidireccional se calculó a partir de un ajuste de plano a tres disparos láser sucesivos que requieren de n=5 a 15 retornos de perfil. Dependiendo de la velocidad orbital, la probabilidad de detección y la altitud de la nave espacial, la línea base de la pendiente puede variar de 30 a 120 metros.]]
 }
 
 asset.onInitialize(function()
@@ -26,9 +26,9 @@ asset.export("LRO_LOLA_ClrSlope_SPole75S_120m_EQ", treks_LRO_LOLA_ClrSlope_SPole
 
 
 asset.meta = {
-  Name = [[NASA Treks Layers for Moon LOLA_Slope_Southpole_120m]],
+  Name = [[Capas de NASA Treks para la Luna LOLA_Slope_Southpole_120m]],
   Author = "NASA/Treks",
   URL = "https://trek.nasa.gov/moon",
   License = "NASA/Treks",
-  Description = [[LOLA_Slope_Southpole_120m layers from NASA/Treks for Moon]]
+  Description = [[Capas LOLA_Slope_Southpole_120m de NASA/Treks para la Luna]]
 }
