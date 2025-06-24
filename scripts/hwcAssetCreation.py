@@ -49,8 +49,8 @@ FULL_EXOPLANET_DATA_HWC_columns = [
     "S_DISTANCE",           # Distance of the star
     "P_RADIUS",             # Planetary radius
     "P_DISCOVERY_FACILITY", # Discovery facility
-    "P_TYPE_TEMP",        # Host star temperature
-    "P_DISTANCE"           # Distance of the exoplanet
+    "P_TYPE_TEMP",          # Host star temperature
+    "P_DISTANCE"            # Distance of the exoplanet
 
 ]
 data_full = pd.read_csv(FULL_EXOPLANET_DATA_HWC, usecols=FULL_EXOPLANET_DATA_HWC_columns)
@@ -164,7 +164,7 @@ local {identifier} = {{
     ApproachFactor = 50.0,
     GUI = {{
         Name = "Estrella_{name}",
-        Path = "/Vía Láctea/Exoplanetas/Sistemas de Exoplanetas/Estrella_{name}"
+        Path = "/Vía Láctea/Catalogo de Planetas Habitables/Sistemas de Exoplanetas/Estrella_{name}"
     }}
 }}
 
@@ -187,7 +187,7 @@ local {identifier}_label = {{
     }},
     GUI = {{
         Name = "Etiqueta de Estrella {name}",
-        Path = "/Vía Láctea/Exoplanetas/Sistemas de Exoplanetas/Estrella_{name}"
+        Path = "/Vía Láctea/Catalogo de Planetas Habitables/Sistemas de Exoplanetas/Estrella_{name}"
     }}
 }}
 asset.onInitialize(function()
@@ -234,7 +234,7 @@ local {identifier}_texture = {{
     Name = "Textura de {name}",
     Enabled = true,
     ZIndex = 5,
-    FilePath = textures .. "{temperature}.jpg",  -- Use the temperature to select the texture
+    FilePath = textures .. "{temperature}",  -- Use the temperature to select the texture
     CacheSettings = {{ Enabled = false }}
 }}
 
@@ -256,7 +256,7 @@ local {identifier} = {{
     ApproachFactor = 50.0,
     GUI = {{
         Name = "{name}",
-        Path = "/Vía Láctea/Exoplanetas/Sistemas de Exoplanetas/{name}"
+        Path = "/Vía Láctea/Catalogo de Planetas Habitables/Sistemas de Exoplanetas/{name}"
     }},
 }}
 
@@ -279,7 +279,7 @@ local {identifier}_label = {{
     }},
     GUI = {{
         Name = "Etiqueta de {name}",
-        Path = "/Vía Láctea/Exoplanetas/Sistemas de Exoplanetas/{name}"
+        Path = "/Vía Láctea/Catalogo de Planetas Habitables/Sistemas de Exoplanetas/{name}"
     }},
 }}
 
@@ -363,7 +363,7 @@ planet_offset = 1e10 # Offset to avoid overlap in positions
 for i, row in exoplanetData.iterrows():
     name = row["Name"]
     star = row["Star"]
-    temp = row["P_TYPE_TEMP"]
+    temp = row["<i>T<sub>surf</sub></i><br>(K)"] if pd.notnull(row["<i>T<sub>surf</sub></i><br>(K)"]) else 0.0
     # get the radii and distances, using default values if not available
     ra = row["S_RA"] if pd.notnull(row["S_RA"]) else 0.0
     dec = row["S_DEC"] if pd.notnull(row["S_DEC"]) else 0.0
@@ -378,12 +378,14 @@ for i, row in exoplanetData.iterrows():
     x, y, z = toMeters(ra, dec, exoplanetDistance) # This commented to have the of the exoplanet close to the star
 
     # Choose the texture based on the equilibrium temperature
-    if temp == "warm":
-        exoplanetTexture = colors["warm"]
-    elif temp == "hot":
-        exoplanetTexture = colors["hot"]
-    elif temp == "cold":
+    if temp < 240:
         exoplanetTexture = colors["cold"]
+    elif temp >= 240 and temp <= 370:
+        exoplanetTexture = colors["warm"]
+    elif temp > 370:
+        exoplanetTexture = colors["hot"]
+    else:
+        exoplanetTexture = "unknown.jpg"
 
     exoplanet_content = PLANET_TEMPLATE.format(
         assetRequire=starIdentifier,
@@ -395,7 +397,7 @@ for i, row in exoplanetData.iterrows():
         y=y,
         z=z,
         # name of the texture file for the exoplanet
-        temperature=temp,
+        temperature= exoplanetTexture,
         # Add the additional parameters if they exist, it is use for the asset.meta
         detection = row["Detection Method"] if pd.notnull(row["Detection Method"]) else "Unknown",
         discovery_facility = row["P_DISCOVERY_FACILITY"] if pd.notnull(row["P_DISCOVERY_FACILITY"]) else "Unknown",
