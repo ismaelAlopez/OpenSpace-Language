@@ -5,6 +5,8 @@
 # It will use the NASA Exoplanet Archive to fetch additional parameters for the host stars of the exoplanets.
 # This script requires the following Python packages:
 # pandas, numpy, requests, io, os, glob, and StringIO.
+# Author: Ismael A. Lopez Perez
+# In collaboration with PHL (Planetary Habitability Laboratory) and OpenSpace
 
 import pandas as pd
 import os

@@ -1,3 +1,11 @@
+# This script is used to parse the speck and label files for exoplanets
+# It filters the exoplanets based on the names in the CSV file 
+# and writes the filtered data to new speck and label files.
+# Usage: python speckParser.py
+# Author: Ismael A. Lopez Perez
+# In colaboration with PHL (Planetary Habitability Laboratory) and OpenSpace
+# URL: https://phl.upr.edu/hwc
+
 import pandas
 import re
 

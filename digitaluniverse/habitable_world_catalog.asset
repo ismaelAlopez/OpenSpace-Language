@@ -40,14 +40,11 @@ local Object = {
   GUI = {
     Name = "Exoplanetas",
     Path = "/Vía Láctea/Catalogo de Planetas Habitables",
-    Description = [[Los planetas extrasolares, o exoplanetas, son un fenómeno relativamente
-      nuevo en la astronomía: no se disponía de evidencia observacional hasta 1995. A simple
-      vista, los exoplanetas se pierden en el resplandor de su estrella anfitriona. Se requieren
-      técnicas no convencionales para inferirlos u observarlos. Aquí, los sistemas de exoplanetas
-      están representados por un anillo azul centrado en cada estrella anfitriona. El anillo no
-      pretende significar una órbita, sino servir solo como un marcador. Las etiquetas enumeran
-      el nombre de la estrella anfitriona y, si hay más de un planeta, enumerarán el número de
-      planetas entre paréntesis. Censo: 5,589 planetas en 4,139 sistemas.]]
+    Description = [[
+      Catálogo de Planetas Habitables (HWC) es un catálogo de exoplanetas que son potencialmente habitables, basado en datos del catálogo de exoplanetas de la NASA.
+      El catálogo incluye información sobre la distancia, el tamaño y la temperatura de los planetas, así como su ubicación en la galaxia.
+      El catálogo se actualiza periódicamente con nuevos descubrimientos y datos. Este solo muetra 70 de los más de 5000 exoplanetas descubiertos hasta la fecha.
+    ]],
   }
 }
 
@@ -67,7 +64,7 @@ asset.export(Object)
 asset.meta = {
   Name = "Catálogo de Planetas Habitables",
   Description = Object.GUI.Description,
-  Author = "Brian Abbott, Zack Reeves (AMNH)",
-  URL = "https://www.amnh.org/research/hayden-planetarium/digital-universe",
-  License = "AMNH Digital Universe"
+  Author = "Planetary Habitability Laboratory (PHL)",
+  URL = "https://phl.upr.edu/hwc",
+  Version = 1,
 }
