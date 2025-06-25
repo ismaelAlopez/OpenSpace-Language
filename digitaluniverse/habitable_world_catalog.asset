@@ -65,6 +65,5 @@ asset.meta = {
   Name = "Catálogo de Planetas Habitables",
   Description = Object.GUI.Description,
   Author = "Planetary Habitability Laboratory (PHL)",
-  URL = "https://phl.upr.edu/hwc",
-  Version = 1,
+  URL = "https://phl.upr.edu/hwc"
 }

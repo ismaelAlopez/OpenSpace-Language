@@ -199,9 +199,9 @@ asset.onInitialize(function()
 end)
 
 asset.onDeinitialize(function()
-    openspace.removeSceneGraphNode({identifier})
-    openspace.removeSceneGraphNode({identifier}_label)
     openspace.globebrowsing.deleteLayer({identifier}.Identifier, "ColorLayers", {identifier}_texture)
+    openspace.removeSceneGraphNode({identifier}_label)
+    openspace.removeSceneGraphNode({identifier})
 end)
 
 asset.export({identifier})
@@ -297,8 +297,8 @@ asset.onDeinitialize(function()
     openspace.globebrowsing.deleteLayer({identifier}.Identifier, "ColorLayers", {identifier}_texture)
     openspace.globebrowsing.deleteLayer({identifier}.Identifier, "ColorLayers", {identifier}_detail)
 
-    openspace.removeSceneGraphNode({identifier})
     openspace.removeSceneGraphNode({identifier}_label)
+    openspace.removeSceneGraphNode({identifier})
 end)
 
 asset.export({identifier})
